@@ -1,0 +1,361 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Ceriyo.MainWindow"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:dtos="clr-namespace:Ceriyo.Data.Enumerations;assembly=Ceriyo.Data"
+    Title="Winter Engine - Server" Height="384" Width="528" ResizeMode="NoResize">
+    <Window.Resources>
+        <ObjectDataProvider MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}"
+                        x:Key="GameTypes">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="dtos:GameTypeEnum" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}"
+                            x:Key="PVPTypes">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="dtos:PVPTypeEnum" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <Grid Margin="0,0,0,0">
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="Details">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="453*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Server Name:" 
+                           HorizontalAlignment="Left" 
+                           Margin="6,6,0,0" 
+                           VerticalAlignment="Top" 
+                           RenderTransformOrigin="0.105,1.962" 
+                           Grid.ColumnSpan="2"/>
+                    <Label Content="Max Level:" 
+                           HorizontalAlignment="Left" 
+                           Margin="280,116,0,0" 
+                           VerticalAlignment="Top" 
+                           RenderTransformOrigin="0.263,-0.077" 
+                           Grid.Column="1"/>
+                    <Label Content="Players:" 
+                           HorizontalAlignment="Left" 
+                           Margin="5,68,0,0" 
+                           VerticalAlignment="Top"/>
+                    <Button x:Name="buttonBanAccount" 
+                            Content="Ban Account" 
+                            HorizontalAlignment="Left" 
+                            Margin="6,228,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="81"  
+                            IsEnabled="False" 
+                            Grid.ColumnSpan="2"/>
+                    <Button x:Name="buttonBootPlayer" 
+                            Content="Boot" 
+                            HorizontalAlignment="Left" 
+                            Margin="31,228,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="81" 
+                            RenderTransformOrigin="0.5,0.5"  
+                            IsEnabled="False" 
+                            Grid.Column="1"/>
+                    <Label Content="Server Message:" 
+                           HorizontalAlignment="Left" 
+                           Margin="6,255,0,0" 
+                           VerticalAlignment="Top" 
+                           Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="textBoxServerMessage" 
+                             HorizontalAlignment="Left" 
+                             Height="23" 
+                             Margin="42,258,0,0" 
+                             TextWrapping="Wrap" 
+                             VerticalAlignment="Top" 
+                             Width="300" MaxLength="254" 
+                             IsEnabled="False" 
+                             Text=""
+                             Grid.Column="1"/>
+                    <Button x:Name="buttonSendMessage" 
+                            Content="Send Message" 
+                            HorizontalAlignment="Left" 
+                            Margin="347,259,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="90" 
+                            Grid.Column="1" 
+                            IsEnabled="False"/>
+                    <TextBox x:Name="textBoxServerName" 
+                             HorizontalAlignment="Left" 
+                             Height="23" Margin="42,9,0,0" 
+                             TextWrapping="Wrap" 
+                             VerticalAlignment="Top" 
+                             Width="227" 
+                             MaxLength="32" 
+                             Text="{Binding ServerSettings.Name}"
+                             Grid.Column="1" />
+                    <Label Content="IP Address:" 
+                           HorizontalAlignment="Left" 
+                           Margin="274,6,0,0" 
+                           VerticalAlignment="Top" 
+                           Grid.Column="1"/>
+                    <Label x:Name="labelIPAddress" 
+                           Content="{Binding ServerIPAddress}" 
+                           HorizontalAlignment="Left" 
+                           Margin="357,6,0,0" 
+                           VerticalAlignment="Top" 
+                           Grid.Column="1"/>
+                    <Label Content="Server Status:" 
+                           HorizontalAlignment="Left"
+                           Margin="6,286,0,0" 
+                           VerticalAlignment="Top" 
+                           Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="textBoxServerStatus" 
+                             HorizontalAlignment="Left" 
+                             Height="23" Margin="42,286,0,0" 
+                             TextWrapping="Wrap"
+                             VerticalAlignment="Top" 
+                             Width="206" 
+                             IsReadOnly="True" 
+                             Text="{Binding ServerStatusMessage}" 
+                             IsEnabled="False" 
+                             Grid.Column="1"/>
+                    <Button x:Name="buttonStartStop" 
+                            Content="Start Server" 
+                            HorizontalAlignment="Left" 
+                            Margin="347,287,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="90" 
+                            Grid.Column="1" 
+                            IsEnabled="False"/>
+                    <xctk:IntegerUpDown x:Name="numericMaxLevel" 
+                                        HorizontalAlignment="Left" 
+                                        Margin="357,122,0,0" 
+                                        VerticalAlignment="Top"    
+                                        RenderTransformOrigin="-1.829,-0.55" 
+                                        Width="80" 
+                                        Maximum="{Binding ModuleMaxLevel}" 
+                                        Minimum="1" 
+                                        DefaultValue="1"
+                                        Value="{Binding ServerSettings.MaxLevel}"
+                                        Grid.Column="1" 
+                                        />
+                    <ListBox x:Name="listBoxPlayers" 
+                             HorizontalAlignment="Left" 
+                             Height="124" 
+                             Margin="5,99,0,0" 
+                             VerticalAlignment="Top" 
+                             Width="172" 
+                             ItemsSource="{Binding ConnectedUsernames}"
+                             Grid.ColumnSpan="2" />
+                    <ListBox x:Name="listBoxGameType" 
+                             HorizontalAlignment="Left" 
+                             Height="101" 
+                             Margin="117,99,0,0" 
+                             VerticalAlignment="Top" 
+                             Width="143"
+                		     ItemsSource="{Binding Source={StaticResource GameTypes}}" 
+                             SelectedItem="{Binding ServerSettings.GameType}"
+                             Grid.Column="1" 
+                             SelectedIndex="0"/>
+                    <Label Content="Max Players:" 
+                           HorizontalAlignment="Left"
+                           Margin="270,90,0,0" 
+                           VerticalAlignment="Top" 
+                           RenderTransformOrigin="0.263,-0.077" 
+                           Grid.Column="1"/>
+                    <xctk:IntegerUpDown x:Name="numericMaxPlayers"
+                                        HorizontalAlignment="Left" 
+                                        Margin="357,96,0,0" 
+                                        VerticalAlignment="Top" 
+                                        RenderTransformOrigin="-1.829,-0.55" 
+                                        Width="80" 
+                                        Minimum="1" 
+                                        Maximum="99" 
+                                        DefaultValue="20" 
+                                        Value="{Binding ServerSettings.MaxPlayers}" 
+                                        Grid.Column="1" 
+                                        />
+                    <Label Content="Game Type:" 
+                           HorizontalAlignment="Left" 
+                           Margin="117,68,0,0" 
+                           VerticalAlignment="Top" 
+                           RenderTransformOrigin="3.04,0.538" 
+                           Grid.Column="1"/>
+                    <Label Content="Module:" 
+                           HorizontalAlignment="Left" 
+                           Margin="6,37,0,0" 
+                           VerticalAlignment="Top"/>
+                    <Label Content="PVP:" 
+                           HorizontalAlignment="Left" 
+                           Margin="307,66,0,0" 
+                           VerticalAlignment="Top" 
+                           Grid.Column="1"/>
+                    <ComboBox x:Name="comboBoxPVPType" 
+                              HorizontalAlignment="Left" 
+                              Margin="357,68,0,0" 
+                              VerticalAlignment="Top" 
+                              Width="80"
+                		      ItemsSource="{Binding Source={StaticResource PVPTypes}}" 
+                              SelectedItem="{Binding ServerSettings.PVPSetting}"
+                              Grid.Column="1" 
+                              SelectedIndex="0"/>
+                    <TextBox x:Name="textBoxGMPassword" 
+                             HorizontalAlignment="Left" 
+                             Height="23" 
+                             Margin="265,230,0,0" 
+                             TextWrapping="Wrap" 
+                             VerticalAlignment="Top" 
+                             Width="172" 
+                             MaxLength="32" 
+                             Text="{Binding ServerSettings.GMPassword}"
+                             Grid.Column="1" />
+                    <Label Content="GM Password:" 
+                           HorizontalAlignment="Left"
+                           Margin="175,228,0,0" 
+                           VerticalAlignment="Top" 
+                           Grid.Column="1"/>
+                    <Label Content="Player Password:" 
+                           HorizontalAlignment="Left"
+                           Margin="162,201,0,0" 
+                           VerticalAlignment="Top"
+                           Grid.Column="1"/>
+                    <TextBox x:Name="textBoxPlayerPassword"
+                             HorizontalAlignment="Left"
+                             Height="23"
+                             Margin="265,204,0,0" 
+                             TextWrapping="Wrap" 
+                             VerticalAlignment="Top" 
+                             Width="172" 
+                             MaxLength="32"
+                             Grid.Column="1" 
+                             Text="{Binding ServerSettings.PlayerPassword}" />
+                    <TextBox x:Name="textBoxModuleFileName"
+                             HorizontalAlignment="Left" 
+                             Height="23" Margin="42,37,0,0"
+                             TextWrapping="Wrap" 
+                             VerticalAlignment="Top" 
+                             Width="147"
+                             MaxLength="32" 
+                             IsReadOnly="True"
+                             IsEnabled="False" 
+                             Text="{Binding ModuleFileName}"
+                             Grid.Column="1"/>
+                    <Button x:Name="buttonBrowse" 
+                            Content="Browse" 
+                            HorizontalAlignment="Left" 
+                            Margin="194,37,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="75"  
+                            Grid.Column="1"/>
+                    <Label Content="Port:" 
+                           Grid.Column="1" 
+                           HorizontalAlignment="Left" 
+                           Margin="307,37,0,0" 
+                           VerticalAlignment="Top"/>
+                    <xctk:IntegerUpDown x:Name="numericPort" 
+                                        Grid.Column="1" 
+                                        HorizontalAlignment="Left" 
+                                        Margin="357,39,0,0" 
+                                        VerticalAlignment="Top" 
+                                        Width="80" 
+                                        Minimum="1" 
+                                        Maximum="65535" 
+                                        Value="{Binding ServerSettings.PortNumber}"
+                                         />
+                    <CheckBox x:Name="checkBoxAllowCharacterDeletion" 
+                              Content="Allow Character Deletion" 
+                              Grid.Column="1" 
+                              HorizontalAlignment="Left" 
+                              Margin="274,162,0,0" 
+                              VerticalAlignment="Top" 
+                              IsChecked="{Binding ServerSettings.AllowCharacterDeletion}" />
+                    <CheckBox x:Name="checkBoxAllowFileAutoDownload" 
+                              Content="Allow File Auto-Download" 
+                              Grid.Column="1" 
+                              HorizontalAlignment="Left"
+                              Margin="274,183,0,0" 
+                              VerticalAlignment="Top"
+                              IsChecked="{Binding ServerSettings.AllowFileAutoDownload}" />
+                    <Button x:Name="buttonSaveSettings"
+                            Content="Save Settings" 
+                            Grid.Column="1" 
+                            HorizontalAlignment="Left" 
+                            Margin="253,287,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="87" 
+                             />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Description">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="textBoxDescription"
+                             HorizontalAlignment="Stretch" 
+                             TextWrapping="Wrap" 
+                             VerticalAlignment="Stretch" 
+                             Margin="0,42,0,157" 
+                             Text="{Binding ServerSettings.Description}"
+                             MaxLength="255"/>
+                    <TextBox x:Name="textBoxAnnouncement"
+                             HorizontalAlignment="Stretch" 
+                             TextWrapping="Wrap" 
+                             VerticalAlignment="Stretch" 
+                             Margin="0,199,0,0" 
+                             Text="{Binding ServerSettings.Announcement}"
+                             MaxLength="255" />
+                    <Label Content="Server Description:" 
+                           HorizontalAlignment="Left" 
+                           Margin="10,11,0,0" 
+                           VerticalAlignment="Top"/>
+                    <Label Content="Server Announcement:"
+                           HorizontalAlignment="Left" 
+                           Margin="10,172,0,0" 
+                           VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Player Blacklist">
+                <Grid Background="#FFE5E5E5">
+                    <Grid HorizontalAlignment="Left" 
+                          Height="324" 
+                          VerticalAlignment="Top" 
+                          Width="512"/>
+                    <ListBox Name="listBoxBlacklist" 
+                             HorizontalAlignment="Left"
+                             Height="251"
+                             Margin="10,10,0,0" 
+                             VerticalAlignment="Top" 
+                             ItemsSource="{Binding ServerSettings.BannedUserAccounts}"
+                             SelectionMode="Extended"
+                             Width="492"/>
+                    <TextBox Name="textBoxBlacklistUsername" 
+                             HorizontalAlignment="Left"
+                             Height="23" Margin="10,292,0,0" 
+                             TextWrapping="Wrap" 
+                             Text="{Binding BlackListUserName}" 
+                             VerticalAlignment="Top" 
+                             Width="379"/>
+                    <Button Name="buttonAddToBlacklist" 
+                            Content="Add to Blacklist" 
+                            HorizontalAlignment="Left"
+                            Margin="394,292,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="108" />
+                    <Button Name="buttonRemoveSelectedBlacklist"
+                            Content="Remove Selected" 
+                            HorizontalAlignment="Left" 
+                            Margin="394,266,0,0"
+                            VerticalAlignment="Top" 
+                            Width="108" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Log">
+                <ScrollViewer>
+                    <ListBox Name="listBoxLog" 
+                             HorizontalAlignment="Stretch" 
+                             VerticalAlignment="Stretch"
+                             ItemsSource="{Binding LogMessages}"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
