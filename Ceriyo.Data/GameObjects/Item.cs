@@ -5,12 +5,10 @@ using System.Text;
 
 namespace Ceriyo.Data.GameObjects
 {
-    public class GameModule : IGameObject
+    public class Item : IGameObject
     {
         public string Name { get; set; }
         public string Tag { get; set; }
         public string Resref { get; set; }
-
-        
     }
 }
