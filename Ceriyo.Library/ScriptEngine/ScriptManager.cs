@@ -30,19 +30,13 @@ namespace Ceriyo.Library.ScriptEngine
         /// <summary>
         /// Executes a script from the engine scripts folder
         /// </summary>
-        public object[] RunScript(string scriptName, object self, params string[] resultParameterName)
+        public object RunScript(string scriptName, object self)
         {
             scriptName += ScriptFileExtension;
-            object[] result = new string[resultParameterName.Length];
             string filePath = FileManager.RelativeDirectory + @"Content/" + _engineScriptDirectory + "/" + scriptName;
             string script = File.ReadAllText(filePath) + "Main();";
             this.JSContext.SetParameter("self", self);
-            this.JSContext.Run(script);
-
-            for (int x = 0; x < resultParameterName.Length; x++)
-            {
-                result[x] = this.JSContext.GetParameter(resultParameterName[x]);
-            }
+            object result = this.JSContext.Run(script);
 
             return result;
         }
@@ -50,18 +44,11 @@ namespace Ceriyo.Library.ScriptEngine
         /// <summary>
         /// Executes a script located in a game module.
         /// </summary>
-        public object[] RunScript(GameModule module, object self, params string[] resultParameterName)
+        public object RunScript(GameModule module, object self, params string[] resultParameterName)
         {
-            object[] result = new object[resultParameterName.Length];
             string script = ""; // TODO: Load script from module
             this.JSContext.SetParameter("self", self);
-            this.JSContext.Run(script);
-
-            for (int x = 0; x < resultParameterName.Length; x++)
-            {
-                result[x] = this.JSContext.GetParameter(resultParameterName[x]);
-            }
-
+            object result = this.JSContext.Run(script);
             return result;
         }
 

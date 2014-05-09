@@ -36,8 +36,8 @@ namespace Ceriyo.Entities
 
 		private void CustomInitialize()
 		{
-            //Map map = new Map("Tilesets/grassland_tiles", 4, 7, 3);
-            //MapBatch = new MapDrawableBatch(map);
+            Map map = new Map("Tilesets/grassland_tiles", 4, 7, 3);
+            MapBatch = new MapDrawableBatch(map);
 
             Player player = new Player();
             player.Name = "newname";
@@ -45,7 +45,9 @@ namespace Ceriyo.Entities
             player.Resref = "newresref";
 
             ScriptManager manager = new ScriptManager();
-            manager.RunScript("testscript", player);
+            object test = manager.RunScript("testscript", player);
+
+
 
 		}
 
