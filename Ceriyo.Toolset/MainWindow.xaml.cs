@@ -21,7 +21,7 @@ namespace Ceriyo.Toolset
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ToolsetGame Game { get; set; }
+        private AreaEditorGame AreaEditorGame { get; set; }
         private ToolsetVM Model { get; set; }
 
         public MainWindow()
@@ -45,7 +45,7 @@ namespace Ceriyo.Toolset
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Game = new ToolsetGame(gameControl);
+            AreaEditorGame = new AreaEditorGame(gameControl);
         }
 
 

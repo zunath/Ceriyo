@@ -10,6 +10,7 @@ namespace Ceriyo.Data.GameObjects
         public string Name { get; set; }
         public string Tag { get; set; }
         public string Resref { get; set; }
+        public string WorkingDirectory { get { throw new NotSupportedException(); } }
 
         public GameModule()
         { 

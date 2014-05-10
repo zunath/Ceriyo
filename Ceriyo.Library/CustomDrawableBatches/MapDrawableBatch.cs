@@ -29,7 +29,7 @@ namespace Ceriyo.Library.CustomDrawableBatches
             this._sourceRectangle = new Rectangle(0, 0, TileWidth, TileHeight);
 
             this.DrawableArea = area;
-            this.MapTexture = FlatRedBallServices.Load<Texture2D>(FileManager.RelativeDirectory + @"Content/" + area.FilePath);
+            this.MapTexture = FlatRedBallServices.Load<Texture2D>(FileManager.RelativeDirectory + @"Content/" + area.TextureFilePath);
             this.TileSprites = new SpriteList();
 
             int capacity = area.MapWidth * area.MapHeight;

@@ -151,7 +151,6 @@
     <Compile Include="Components\MenuBarComponent.xaml.cs">
       <DependentUpon>MenuBarComponent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ToolsetGame.cs" />
     <Compile Include="Windows\LoadModuleWindow.xaml.cs">
       <DependentUpon>LoadModuleWindow.xaml</DependentUpon>
     </Compile>

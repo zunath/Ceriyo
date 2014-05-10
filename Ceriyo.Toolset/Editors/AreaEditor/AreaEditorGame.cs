@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ceriyo.Library.CustomDrawableBatches;
 using FlatRedBall;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,9 +11,12 @@ namespace Ceriyo.Toolset
 {
     class AreaEditorGame : FlatRedBallGameBase
     {
+        private MapDrawableBatch AreaBatch { get; set; }
+
         public AreaEditorGame(FlatRedBallControl frbControl)
             : base(frbControl)
         {
+
         }
 
         protected override void Initialize()
@@ -21,7 +25,6 @@ namespace Ceriyo.Toolset
 
             SpriteManager.Camera.UsePixelCoordinates();
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
-
 
         }
 

@@ -150,14 +150,14 @@ namespace Ceriyo.Data
             string output = "";
             FileManager.XmlSerialize<GameModule>(module, out output);
 
-            zip.AddEntry("Manifest.xml", output);
+            zip.AddEntry("Manifest" + EnginePaths.DataExtension, output);
         }
 
         private static GameModule GetManifest(string zipFilePath)
         {
             using (ZipFile zip = new ZipFile(zipFilePath))
             {
-                ZipEntry entry = zip["Manifest.xml"];
+                ZipEntry entry = zip["Manifest" + EnginePaths.DataExtension];
                 MemoryStream stream = new MemoryStream();
                 entry.Extract(stream);
                 string text = Encoding.ASCII.GetString(stream.ToArray());

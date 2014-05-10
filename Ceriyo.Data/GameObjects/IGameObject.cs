@@ -10,5 +10,6 @@ namespace Ceriyo.Data.GameObjects
         string Name { get; set; }
         string Tag { get; set; }
         string Resref { get; set; }
+        string WorkingDirectory { get; }
     }
 }

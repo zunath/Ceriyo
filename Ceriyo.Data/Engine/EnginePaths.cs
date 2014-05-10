@@ -8,6 +8,11 @@ namespace Ceriyo.Data
 {
     public static class EnginePaths
     {
+        public static string DataExtension
+        {
+            get { return ".xml"; }
+        }
+
         public static string ModulesDirectory
         {
             get { return FileManager.RelativeDirectory + @"Content/Modules/"; }

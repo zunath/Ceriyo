@@ -6,13 +6,13 @@ using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.EventArguments
 {
-    public class AreaEventArgs : EventArgs
+    public class GameObjectEventArgs : EventArgs
     {
-        public Area Area { get; set; }
+        public IGameObject GameObject { get; set; }
 
-        public AreaEventArgs(Area area)
+        public GameObjectEventArgs(IGameObject gameObject)
         {
-            this.Area = area;
+            this.GameObject = gameObject;
         }
     }
 }

@@ -12,15 +12,16 @@ namespace Ceriyo.Data.GameObjects
         public string Resref { get; set; }
         public int MapWidth { get; private set; }
         public int MapHeight { get; private set; }
-        public string FilePath { get; private set; }
+        public string TextureFilePath { get; private set; }
         public List<Tile[,]> MapTiles { get; private set; }
         public int LayerCount { get; private set; }
+        public string WorkingDirectory { get { return WorkingPaths.AreasDirectory; } }
 
         public Area(
             string name,
             string tag,
             string resref,
-            string filePath, 
+            string textureFilePath, 
             int tilesWide, 
             int tilesHigh, 
             int numberOfLayers)
@@ -28,7 +29,7 @@ namespace Ceriyo.Data.GameObjects
             this.Name = name;
             this.Tag = tag;
             this.Resref = resref;
-            this.FilePath = filePath;
+            this.TextureFilePath = textureFilePath;
             this.MapWidth = tilesWide;
             this.MapHeight = tilesHigh;
             this.LayerCount = numberOfLayers;

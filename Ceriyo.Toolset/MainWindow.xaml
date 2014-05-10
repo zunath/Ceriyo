@@ -6,8 +6,10 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -17,27 +19,40 @@
             <RowDefinition Height="*"></RowDefinition>
 
         </Grid.RowDefinitions>
-        <DockPanel Grid.ColumnSpan="4">
+        <DockPanel Grid.ColumnSpan="6">
             <MenuBar:MenuBarComponent x:Name="menuBar" VerticalAlignment="Top" DockPanel.Dock="Top"/>
         </DockPanel>
-        <MenuBar:AreaSelectionControl 
-            x:Name="areaSelection" 
-            HorizontalAlignment="Left" 
-            Margin="10,42,0,1" 
-            VerticalAlignment="Stretch" 
-            Width="178"
-            Grid.Column="0"
-            Grid.Row="1"
-            />
-        <Label
-            Content="Areas:" Margin="10,10,127,141" Grid.Row="1"/>
         <Label
         	Content="Conversations:" Margin="10,10,97,141" Grid.Row="2"/>
         <Label
         	Content="Scripts:" Margin="10,10,127,141" Grid.Row="3"/>
 
-        <DockPanel
+        <GridSplitter
             Grid.Column="1"
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            Width="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Stretch"
+            Background="Gray"
+            ShowsPreview="True">
+
+        </GridSplitter>
+
+        <GridSplitter
+            Grid.Column="4"
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            Width="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Stretch"
+            Background="Gray"
+            ShowsPreview="True">
+
+        </GridSplitter>
+
+        <DockPanel
+            Grid.Column="2"
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Grid.RowSpan="3">
@@ -48,6 +63,16 @@
 
 
         </DockPanel>
+
+            <MenuBar:AreaSelectionControl 
+                x:Name="areaSelection"
+                HorizontalAlignment="Stretch" 
+                Grid.Row="1" 
+                Grid.Column="0" 
+                VerticalAlignment="Stretch"
+                Width="Auto"
+                Height="Auto"
+                />
 
         <!--<local:FlatRedBallControl HorizontalAlignment="Left" Height="120" Margin="195,88,0,0" VerticalAlignment="Top" Width="120" x:Name="flatRedBallControl"/>-->
 
