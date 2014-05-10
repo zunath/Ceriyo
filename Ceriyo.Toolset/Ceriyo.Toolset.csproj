@@ -154,8 +154,20 @@
     <Compile Include="Windows\LoadModuleWindow.xaml.cs">
       <DependentUpon>LoadModuleWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\NewModuleWindow.xaml.cs">
-      <DependentUpon>NewModuleWindow.xaml</DependentUpon>
+    <Compile Include="Windows\EditAreaWindow.xaml.cs">
+      <DependentUpon>EditAreaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditCreatureWindow.xaml.cs">
+      <DependentUpon>EditCreatureWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditItemWindow.xaml.cs">
+      <DependentUpon>EditItemWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditModuleWindow.xaml.cs">
+      <DependentUpon>EditModuleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditPlaceableWindow.xaml.cs">
+      <DependentUpon>EditPlaceableWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Components\AreaSelectionControl.xaml">
       <SubType>Designer</SubType>
@@ -221,9 +233,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\NewModuleWindow.xaml">
+    <Page Include="Windows\EditAreaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditCreatureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditItemWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditModuleWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\EditPlaceableWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

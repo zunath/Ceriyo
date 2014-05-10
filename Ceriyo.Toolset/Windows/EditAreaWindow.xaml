@@ -1,0 +1,168 @@
+﻿<Window x:Class="Ceriyo.Toolset.Windows.EditAreaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="NewAreaWindow" Height="500" Width="400">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DockPanel>
+            <TabControl HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" Width="Auto">
+                <TabItem Header="Details">
+                    <Grid Background="#FFE5E5E5">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Border BorderBrush="Gray" Grid.Column="0" Grid.Row="0"></Border>
+                        <Label Content="Name:" 
+                               HorizontalAlignment="Left" 
+                               Margin="10,10,0,0" 
+                               VerticalAlignment="Top"/>
+                        <Label Content="Tag:" 
+                               HorizontalAlignment="Left" 
+                               Margin="22,41,0,0" 
+                               VerticalAlignment="Top"/>
+                        <Label Content="Resref:" 
+                               HorizontalAlignment="Left" 
+                               Margin="9,72,0,0" 
+                               VerticalAlignment="Top"/>
+                        <TextBox Name="txtName" 
+                                 HorizontalAlignment="Left" 
+                                 Height="23" 
+                                 Margin="8,13,0,0" 
+                                 TextWrapping="Wrap" 
+                                 Text="{Binding Name}" 
+                                 VerticalAlignment="Top" 
+                                 Width="294"
+                                 Grid.Column="1"/>
+                        <TextBox Name="txtTag" 
+                                 HorizontalAlignment="Left" 
+                                 Height="23" 
+                                 Margin="8,44,0,0" 
+                                 TextWrapping="Wrap" 
+                                 Text="{Binding Tag}" 
+                                 VerticalAlignment="Top" 
+                                 Width="294"
+                                 Grid.Column="1"/>
+                        <TextBox Name="txtResref" 
+                                 HorizontalAlignment="Left" 
+                                 Height="23" 
+                                 Margin="8,75,0,0" 
+                                 TextWrapping="Wrap" 
+                                 Text="{Binding Resref}" 
+                                 VerticalAlignment="Top" 
+                                 Width="294"
+                                 Grid.Column="1"/>
+                        <Label Content="Area Size:" HorizontalAlignment="Left" Margin="-1,49,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+                        <xctk:IntegerUpDown Name="numWidth"
+                                            Grid.Column="1" 
+                                            HorizontalAlignment="Left" 
+                                            Margin="10,55,0,0" 
+                                            Grid.Row="1" 
+                                            VerticalAlignment="Top" 
+                                            Value="{Binding Width}"
+                                            Text="{Binding Width}"
+                                            Width="71" RenderTransformOrigin="1.272,0.717"/>
+
+                        <xctk:IntegerUpDown Name="numHeight"
+                                            Grid.Column="1" 
+                                            HorizontalAlignment="Left" 
+                                            Margin="162,55,0,0" 
+                                            Grid.Row="1" 
+                                            VerticalAlignment="Top" 
+                                            Value="{Binding Height}"
+                                            Text="{Binding Height}"
+                                            Width="71"/>
+                        <Label Content="Width" 
+                               Grid.Column="1" 
+                               HorizontalAlignment="Left" 
+                               Margin="86,51,0,0" 
+                               Grid.Row="1" 
+                               VerticalAlignment="Top" RenderTransformOrigin="0.706,2.064"/>
+                        <Label Content="Height" 
+                        	Grid.Column="1" 
+                        	HorizontalAlignment="Left" 
+                        	Margin="238,51,0,0" 
+                        	Grid.Row="1" 
+                        	VerticalAlignment="Top" RenderTransformOrigin="0.021,0.641"/>
+                        <Label Content="Tileset:"
+                               HorizontalAlignment="Left" 
+                               Margin="8,10,0,0" 
+                               Grid.Row="1" 
+                               VerticalAlignment="Top"/>
+                        <ComboBox Name="ddlTileset" 
+                                  Grid.Column="1" 
+                                  HorizontalAlignment="Left" 
+                                  Margin="10,14,0,0" 
+                                  Grid.Row="1" 
+                                  VerticalAlignment="Top" 
+                                  ItemsSource="{Binding Tilesets}"
+                                  Width="292"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Music">
+                    <Grid Background="#FFE5E5E5">
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Scripts">
+                    <Grid Background="#FFE5E5E5">
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Variables">
+                    <Grid Background="#FFE5E5E5">
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Description">
+                    <Grid Background="#FFE5E5E5">
+                        <DockPanel>
+                            <TextBlock Name="txtDescription" 
+                                       HorizontalAlignment="Stretch" 
+                                       VerticalAlignment="Stretch"
+                                       Text="{Binding Description}">
+                            </TextBlock>
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Comments">
+                    <Grid Background="#FFE5E5E5">
+                        <DockPanel>
+                            <TextBlock Name="txtComments" 
+                                       HorizontalAlignment="Stretch" 
+                                       VerticalAlignment="Stretch"
+                                       Text="{Binding Comments}">
+                            </TextBlock>
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+        <Button Content="Save" 
+                HorizontalAlignment="Left" 
+                Margin="118,8,0,0" 
+                Grid.Row="1" 
+                VerticalAlignment="Top" 
+                Width="75"/>
+        <Button Content="Cancel" 
+                HorizontalAlignment="Left" 
+                Margin="198,8,0,0" 
+                Grid.Row="1" 
+                VerticalAlignment="Top" 
+                Width="75"/>
+
+    </Grid>
+</Window>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data.Enumerations;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -10,12 +11,16 @@ namespace Ceriyo.Data.GameObjects
         public string Name { get; set; }
         public string Tag { get; set; }
         public string Resref { get; set; }
+        public string Description { get; set; }
+        public string Comments { get; set; }
         public int MapWidth { get; private set; }
         public int MapHeight { get; private set; }
         public string TextureFilePath { get; private set; }
         public List<Tile[,]> MapTiles { get; private set; }
         public int LayerCount { get; private set; }
         public string WorkingDirectory { get { return WorkingPaths.AreasDirectory; } }
+        public IList<LocalVariable> LocalVariables { get; set; }
+        public IDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
 
         public Area(
             string name,

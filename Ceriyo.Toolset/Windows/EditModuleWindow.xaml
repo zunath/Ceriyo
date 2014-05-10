@@ -1,4 +1,4 @@
-﻿<Window x:Class="Ceriyo.Toolset.Windows.NewModuleWindow"
+﻿<Window x:Class="Ceriyo.Toolset.Windows.EditModuleWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="NewObjectWindow" Height="223" Width="282" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" WindowStyle="SingleBorderWindow">

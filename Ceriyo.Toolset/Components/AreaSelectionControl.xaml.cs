@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -103,6 +104,14 @@ namespace Ceriyo.Toolset.Components
                 {
                     throw ex;
                 }
+            }
+        }
+
+        private void lbAreas_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lbAreas.SelectedItem != null)
+            {
+                btnOpen.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
     }

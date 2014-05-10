@@ -16,5 +16,51 @@ namespace Ceriyo.Data
         {
             get { return 32; }
         }
+
+        public static int NameMaxLength
+        {
+            get { return 32; }
+        }
+
+        public static int TagMaxLength
+        {
+            get { return 32; }
+        }
+
+        public static int ResrefMaxLength
+        {
+            get { return 32; }
+        }
+
+        public static int DescriptionMaxLength
+        {
+            get { return 2048; }
+        }
+
+        public static int CommentsMaxLength
+        {
+            get { return 2048; }
+        }
+
+        public static int AreaMaxWidth
+        {
+            get { return 32; }
+        }
+
+        public static int AreaMaxHeight
+        {
+            get { return 32; }
+        }
+
+        public static int AreaMaxLayers
+        {
+            get { return 4; }
+        }
+
+        public static int MaxLevel
+        {
+            get { return 99; }
+        }
+
     }
 }

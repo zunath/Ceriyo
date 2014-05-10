@@ -22,18 +22,21 @@ namespace Ceriyo.Toolset.Windows
     /// <summary>
     /// Interaction logic for NewModuleWindow.xaml
     /// </summary>
-    public partial class NewModuleWindow : Window
+    public partial class EditModuleWindow : Window
     {
-        public NewModuleWindow()
+        public EditModuleWindow()
         {
             InitializeComponent();
         }
 
-        public NewModuleWindow(string title)
+        public EditModuleWindow(string title)
         {
             InitializeComponent();
             this.Title = title;
             txtName.Focus();
+            txtName.MaxLength = EngineConstants.NameMaxLength;
+            txtTag.MaxLength = EngineConstants.TagMaxLength;
+            txtResref.MaxLength = EngineConstants.ResrefMaxLength;
         }
 
         private void btnCreateModule_Click(object sender, RoutedEventArgs e)

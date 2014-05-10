@@ -84,6 +84,7 @@
     <Compile Include="Enumerations\FileOperationResultTypeEnum.cs" />
     <Compile Include="Enumerations\NetworkAgentRoleEnum.cs" />
     <Compile Include="Enumerations\PVPTypeEnum.cs" />
+    <Compile Include="Enumerations\ScriptEventTypeEnum.cs" />
     <Compile Include="EventArguments\AreaEventArgs.cs" />
     <Compile Include="EventArguments\ConnectionStatusEventArgs.cs" />
     <Compile Include="EventArguments\GameModuleEventArgs.cs" />
@@ -94,11 +95,13 @@
     <Compile Include="GameObjects\GameModule.cs" />
     <Compile Include="GameObjects\IGameObject.cs" />
     <Compile Include="GameObjects\Item.cs" />
+    <Compile Include="GameObjects\LocalVariable.cs" />
     <Compile Include="GameObjects\Placeable.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\Tile.cs" />
     <Compile Include="Engine\ModuleDataManager.cs" />
     <Compile Include="Engine\ModulePaths.cs" />
+    <Compile Include="GameObjects\Tileset.cs" />
     <Compile Include="Packets\PacketBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\GameSettings.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="ViewModels\AreaSelectionVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\LoadModuleVM.cs" />
+    <Compile Include="ViewModels\EditAreaVM.cs" />
     <Compile Include="ViewModels\ToolsetVM.cs" />
   </ItemGroup>
   <ItemGroup />
