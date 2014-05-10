@@ -59,6 +59,9 @@
     <Reference Include="FlatRedBall.Content">
       <HintPath>..\Ceriyo\Ceriyo\Libraries\Xna4Pc\FlatRedBall.Content.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
@@ -66,6 +69,7 @@
       <HintPath>..\Ceriyo\Ceriyo\Libraries\Javascript.NET\Noesis.Javascript.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -104,8 +108,82 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\AreaSelectionControl.xaml.cs">
+      <DependentUpon>AreaSelectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ConversationSelectionControl.xaml.cs">
+      <DependentUpon>ConversationSelectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ExportResourcePackControl.xaml.cs">
+      <DependentUpon>ExportResourcePackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ImportResourcePackControl.xaml.cs">
+      <DependentUpon>ImportResourcePackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ManageResourcePackControl.xaml.cs">
+      <DependentUpon>ManageResourcePackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ModulePropertiesControl.xaml.cs">
+      <DependentUpon>ModulePropertiesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PaintObjectsControl.xaml.cs">
+      <DependentUpon>PaintObjectsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ScriptSelectionControl.xaml.cs">
+      <DependentUpon>ScriptSelectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Editors\AreaEditor\AreaEditorGame.cs" />
+    <Compile Include="Components\CreateObjectComponent.xaml.cs">
+      <DependentUpon>CreateObjectComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\MenuBarComponent.xaml.cs">
+      <DependentUpon>MenuBarComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ToolsetGame.cs" />
-    <Page Include="FlatRedBallControl.xaml">
+    <Compile Include="Windows\NewModuleWindow.xaml.cs">
+      <DependentUpon>NewModuleWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Components\AreaSelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ConversationSelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\CreateObjectComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ExportResourcePackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\FlatRedBallControl\FlatRedBallControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ImportResourcePackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ManageResourcePackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\MenuBarComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ModulePropertiesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\PaintObjectsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ScriptSelectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,14 +195,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FlatRedBallControl.xaml.cs">
+    <Compile Include="Components\FlatRedBallControl\FlatRedBallControl.xaml.cs">
       <DependentUpon>FlatRedBallControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FlatRedBallGameBase.cs" />
+    <Compile Include="Components\FlatRedBallControl\FlatRedBallGameBase.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\NewModuleWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -160,6 +242,18 @@
       <Project>{f9ab9dd8-a342-4d58-bbb9-e15184e7f522}</Project>
       <Name>Ceriyo.Library</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Editors\AbilityEditor\" />
+    <Folder Include="Editors\AnimationEditor\" />
+    <Folder Include="Editors\CharacterClassEditor\" />
+    <Folder Include="Editors\ConversationEditor\" />
+    <Folder Include="Editors\CreatureEditor\" />
+    <Folder Include="Editors\ItemEditor\" />
+    <Folder Include="Editors\PlaceableEditor\" />
+    <Folder Include="Editors\ScriptEditor\" />
+    <Folder Include="Editors\SkillEditor\" />
+    <Folder Include="Editors\TilesetEditor\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

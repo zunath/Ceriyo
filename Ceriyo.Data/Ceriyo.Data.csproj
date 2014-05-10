@@ -48,6 +48,15 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FlatRedBall">
+      <HintPath>..\Ceriyo\Ceriyo\Libraries\Xna4Pc\FlatRedBall.dll</HintPath>
+    </Reference>
+    <Reference Include="FlatRedBall.Content">
+      <HintPath>..\Ceriyo\Ceriyo\Libraries\Xna4Pc\FlatRedBall.Content.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Enumerations\GameTypeEnum.cs" />
     <Compile Include="Enumerations\PVPTypeEnum.cs" />
+    <Compile Include="GameObjects\Area.cs" />
     <Compile Include="GameObjects\CharacterClass.cs" />
     <Compile Include="GameObjects\Conversation.cs" />
     <Compile Include="GameObjects\Creature.cs" />
@@ -70,9 +80,16 @@
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\Tile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\GameSettings.cs" />
+    <Compile Include="Settings\ServerSettings.cs" />
+    <Compile Include="Settings\ToolsetSettings.cs" />
+    <Compile Include="ViewModels\AreaSelectionVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Packets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

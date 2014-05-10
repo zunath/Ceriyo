@@ -35,7 +35,7 @@ namespace Ceriyo.Screens
 		static bool HasBeenLoadedWithGlobalContentManager = false;
 		#endif
 		
-		private Ceriyo.Entities.Area AreaInstance;
+		private Ceriyo.Entities.AreaEntity AreaInstance;
 
 		public BaseScreen()
 			: base("BaseScreen")
@@ -46,7 +46,7 @@ namespace Ceriyo.Screens
         {
 			// Generated Initialize
 			LoadStaticContent(ContentManagerName);
-			AreaInstance = new Ceriyo.Entities.Area(ContentManagerName, false);
+			AreaInstance = new Ceriyo.Entities.AreaEntity(ContentManagerName, false);
 			AreaInstance.Name = "AreaInstance";
 			
 			
@@ -151,7 +151,7 @@ namespace Ceriyo.Screens
 				throw new Exception("This type has been loaded with a Global content manager, then loaded with a non-global.  This can lead to a lot of bugs");
 			}
 			#endif
-			Ceriyo.Entities.Area.LoadStaticContent(contentManagerName);
+			Ceriyo.Entities.AreaEntity.LoadStaticContent(contentManagerName);
 			CustomLoadStaticContent(contentManagerName);
 		}
 		[System.Obsolete("Use GetFile instead")]

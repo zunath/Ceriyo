@@ -11,26 +11,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ceriyo.Toolset.Windows;
 
-namespace Ceriyo.Toolset
+namespace Ceriyo.Toolset.Components
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MenuBarComponent.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuBarComponent : UserControl
     {
-        private ToolsetGame _game;
-
-        public MainWindow()
+        public MenuBarComponent()
         {
             InitializeComponent();
-
-            Loaded += MainWindow_Loaded;
         }
 
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void NewModule_Click(object sender, RoutedEventArgs e)
         {
-            //_game = new ToolsetGame(flatRedBallControl);
+            NewModuleWindow modWindow = new NewModuleWindow("New Module");
+            modWindow.ShowDialog();
         }
     }
 }

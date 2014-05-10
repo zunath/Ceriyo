@@ -12,25 +12,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ceriyo.Toolset
+namespace Ceriyo.Toolset.Components
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ManageResourcePackControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ManageResourcePackControl : UserControl
     {
-        private ToolsetGame _game;
-
-        public MainWindow()
+        public ManageResourcePackControl()
         {
             InitializeComponent();
-
-            Loaded += MainWindow_Loaded;
-        }
-
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            //_game = new ToolsetGame(flatRedBallControl);
         }
     }
 }

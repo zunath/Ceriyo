@@ -20,7 +20,7 @@
           <SourceType>Entity</SourceType>
           <SourceFile />
           <SourceName />
-          <SourceClassType>Entities\Area</SourceClassType>
+          <SourceClassType>Entities\AreaEntity</SourceClassType>
           <InstanceName>AreaInstance</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
@@ -66,7 +66,47 @@
           <Type>float</Type>
         </CustomVariable>
       </CustomVariables>
-      <Name>Entities\Area</Name>
+      <Name>Entities\AreaEntity</Name>
+      <Is2D>true</Is2D>
+    </EntitySave>
+    <EntitySave>
+      <Tags>
+        <string>GLUE</string>
+      </Tags>
+      <Source>GLUE</Source>
+      <CustomVariables>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>X</Name>
+          <Type>float</Type>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>Y</Name>
+          <Type>float</Type>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>Z</Name>
+          <Type>float</Type>
+        </CustomVariable>
+      </CustomVariables>
+      <Name>Entities\MapEntity</Name>
       <Is2D>true</Is2D>
     </EntitySave>
   </Entities>

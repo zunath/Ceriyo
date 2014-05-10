@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Ceriyo.Toolset.Components.MenuBarComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New Module" Click="NewModule_Click"></MenuItem>
+                <MenuItem Header="Open Module"></MenuItem>
+                <MenuItem Header="Close Module"></MenuItem>
+                <MenuItem Header="Save"></MenuItem>
+                <MenuItem Header="Save As..."></MenuItem>
+                <MenuItem Header="Import"></MenuItem>
+                <MenuItem Header="Export"></MenuItem>
+                <MenuItem Header="Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Undo"></MenuItem>
+                <MenuItem Header="Redo"></MenuItem>
+                <MenuItem Header="Copy"></MenuItem>
+                <MenuItem Header="Cut"></MenuItem>
+                <MenuItem Header="Paste"></MenuItem>
+                <MenuItem Header="Module Properties"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Content">
+                <MenuItem Header="Manage Content Packages"></MenuItem>
+                <MenuItem Header="Build Module"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About"></MenuItem>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</UserControl>

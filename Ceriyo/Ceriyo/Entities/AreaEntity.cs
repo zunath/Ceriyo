@@ -30,7 +30,7 @@ using Ceriyo.Library.ScriptEngine;
 
 namespace Ceriyo.Entities
 {
-	public partial class Area
+	public partial class AreaEntity
 	{
         MapDrawableBatch MapBatch;
 

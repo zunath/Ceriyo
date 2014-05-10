@@ -33,7 +33,7 @@ using Model = Microsoft.Xna.Framework.Graphics.Model;
 
 namespace Ceriyo.Entities
 {
-	public partial class Area : PositionedObject, IDestroyable
+	public partial class AreaEntity : PositionedObject, IDestroyable
 	{
         // This is made global so that static lazy-loaded content can access it.
         public static string ContentManagerName
@@ -52,19 +52,19 @@ namespace Ceriyo.Entities
 		
 		protected Layer LayerProvidedByContainer = null;
 
-        public Area()
+        public AreaEntity()
             : this(FlatRedBall.Screens.ScreenManager.CurrentScreen.ContentManagerName, true)
         {
 
         }
 
-        public Area(string contentManagerName) :
+        public AreaEntity(string contentManagerName) :
             this(contentManagerName, true)
         {
         }
 
 
-        public Area(string contentManagerName, bool addToManagers) :
+        public AreaEntity(string contentManagerName, bool addToManagers) :
 			base()
 		{
 			// Don't delete this:
@@ -171,7 +171,7 @@ namespace Ceriyo.Entities
 				{
 					if (!mRegisteredUnloads.Contains(ContentManagerName) && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 					{
-						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("AreaStaticUnload", UnloadStaticContent);
+						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("AreaEntityStaticUnload", UnloadStaticContent);
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
@@ -182,7 +182,7 @@ namespace Ceriyo.Entities
 				{
 					if (!mRegisteredUnloads.Contains(ContentManagerName) && ContentManagerName != FlatRedBallServices.GlobalContentManager)
 					{
-						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("AreaStaticUnload", UnloadStaticContent);
+						FlatRedBallServices.GetContentManagerByName(ContentManagerName).AddUnloadMethod("AreaEntityStaticUnload", UnloadStaticContent);
 						mRegisteredUnloads.Add(ContentManagerName);
 					}
 				}
