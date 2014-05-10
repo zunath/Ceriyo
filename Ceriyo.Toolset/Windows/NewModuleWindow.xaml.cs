@@ -40,12 +40,7 @@ namespace Ceriyo.Toolset.Windows
         {
             try
             {
-                if (Directory.Exists(EnginePaths.WorkingDirectory))
-                {
-                    Directory.Delete(EnginePaths.WorkingDirectory);
-                }
-
-                Directory.CreateDirectory(EnginePaths.WorkingDirectory);
+                ModuleDataManager.CreateModule(txtName.Text, txtTag.Text, txtResref.Text);
             }
             catch
             {

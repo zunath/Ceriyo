@@ -9,7 +9,7 @@ namespace Ceriyo.Data
     {
         public static string ModuleExtension
         {
-            get { return "cmod"; }
+            get { return ".cmod"; }
         }
 
         public static string MapsDirectory
