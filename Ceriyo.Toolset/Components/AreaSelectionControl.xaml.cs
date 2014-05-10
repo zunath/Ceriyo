@@ -13,7 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ceriyo.Data;
+using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
+using FlatRedBall.IO;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -23,13 +26,15 @@ namespace Ceriyo.Toolset.Components
     public partial class AreaSelectionControl : UserControl
     {
         protected AreaSelectionVM Model { get; set; }
-        
+        public event EventHandler<AreaEventArgs> OnAreaOpen;
+
         public AreaSelectionControl()
         {
             InitializeComponent();
             this.Model = new AreaSelectionVM();
-
             this.Loaded += LoadWindow;
+
+            SetDataContexts();
         }
 
         private void LoadWindow(object sender, RoutedEventArgs e)
@@ -44,7 +49,12 @@ namespace Ceriyo.Toolset.Components
 
         public void Populate()
         {
-
+            Model.Areas.Clear();
+            string[] areaFiles = Directory.GetFiles(WorkingPaths.AreasDirectory);
+            foreach (string area in areaFiles)
+            {
+                Model.Areas.Add(FileManager.XmlDeserialize<Area>(area));
+            }
         }
     }
 }

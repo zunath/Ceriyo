@@ -40,11 +40,12 @@ namespace Ceriyo.Toolset
         private void menuBar_OnOpenModule(object sender, GameModuleEventArgs e)
         {
             Model.Module = e.Module;
+            areaSelection.Populate();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //_game = new ToolsetGame(flatRedBallControl);
+            Game = new ToolsetGame(gameControl);
         }
 
 

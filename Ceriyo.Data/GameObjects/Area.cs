@@ -16,8 +16,18 @@ namespace Ceriyo.Data.GameObjects
         public List<Tile[,]> MapTiles { get; private set; }
         public int LayerCount { get; private set; }
 
-        public Area(string filePath, int tilesWide, int tilesHigh, int numberOfLayers)
+        public Area(
+            string name,
+            string tag,
+            string resref,
+            string filePath, 
+            int tilesWide, 
+            int tilesHigh, 
+            int numberOfLayers)
         {
+            this.Name = name;
+            this.Tag = tag;
+            this.Resref = resref;
             this.FilePath = filePath;
             this.MapWidth = tilesWide;
             this.MapHeight = tilesHigh;

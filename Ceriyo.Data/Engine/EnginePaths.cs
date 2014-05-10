@@ -33,5 +33,9 @@ namespace Ceriyo.Data
             get { return FileManager.RelativeDirectory + @"Content/logs/"; }
         }
 
+        public static string SettingsDirectory
+        {
+            get { return FileManager.RelativeDirectory + @"Content/Settings/"; }
+        }
     }
 }

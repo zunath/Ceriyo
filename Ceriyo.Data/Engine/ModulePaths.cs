@@ -12,9 +12,9 @@ namespace Ceriyo.Data
             get { return ".cmod"; }
         }
 
-        public static string MapsDirectory
+        public static string AreasDirectory
         {
-            get { return "/Data/Maps/"; }
+            get { return "/Data/Areas/"; }
         }
 
         public static string CharacterClassesDirectory

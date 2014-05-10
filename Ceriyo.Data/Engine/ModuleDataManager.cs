@@ -89,6 +89,7 @@ namespace Ceriyo.Data
                         using (ZipFile zip = new ZipFile(path))
                         {
                             AddDirectories(zip);
+                            zip.Save();
 
                             zip.ExtractAll(EnginePaths.WorkingDirectory);
                         }
@@ -125,9 +126,9 @@ namespace Ceriyo.Data
             {
                 zip.AddDirectoryByName(ModulePaths.ItemsDirectory);
             }
-            if (zip[ModulePaths.MapsDirectory] == null)
+            if (zip[ModulePaths.AreasDirectory] == null)
             {
-                zip.AddDirectoryByName(ModulePaths.MapsDirectory);
+                zip.AddDirectoryByName(ModulePaths.AreasDirectory);
             }
             if (zip[ModulePaths.PlaceablesDirectory] == null)
             {

@@ -36,7 +36,7 @@ namespace Ceriyo.Entities
 
 		private void CustomInitialize()
 		{
-            Area area = new Area("Tilesets/grassland_tiles", 4, 7, 3);
+            Area area = new Area("name", "tag", "resref", "Tilesets/grassland_tiles", 4, 7, 3);
             MapBatch = new MapDrawableBatch(area);
 
             Player player = new Player();

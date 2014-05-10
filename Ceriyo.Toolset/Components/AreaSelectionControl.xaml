@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <DockPanel>
-            <ListBox Name="lbAreas" Width="Auto" Height="Auto">
+            <ListBox Name="lbAreas" Width="Auto" Height="Auto" ItemsSource="{Binding Areas}" DisplayMemberPath="Name">
             </ListBox>
         </DockPanel>
     </Grid>
