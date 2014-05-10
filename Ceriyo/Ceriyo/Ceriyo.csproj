@@ -65,6 +65,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\Xna4Pc\FlatRedBall.dll</HintPath>
     </Reference>
+    <Reference Include="Lidgren.Network, Version=2012.1.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Lidgren\Lidgren.Network.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -123,7 +127,11 @@
   <ItemGroup>
     <Compile Include="Entities\AreaEntity.cs" />
     <Compile Include="Entities\AreaEntity.Generated.cs">
-      <DependentUpon>areaentity.cs</DependentUpon>
+      <DependentUpon>AreaEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PlayerEntity.cs" />
+    <Compile Include="Entities\PlayerEntity.Generated.cs">
+      <DependentUpon>PlayerEntity.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalContent.Generated.cs" />
     <Compile Include="Performance\IEntityFactory.Generated.cs" />
@@ -144,6 +152,8 @@
     <Content Include="Libraries\Javascript.NET\msvcp100.dll" />
     <Content Include="Libraries\Javascript.NET\msvcr100.dll" />
     <Content Include="Libraries\Javascript.NET\Noesis.Javascript.dll" />
+    <Content Include="Libraries\Lidgren\Lidgren.Network.dll" />
+    <Content Include="Libraries\Lidgren\Lidgren.Network.pdb" />
     <Content Include="Libraries\Xna4Pc\FlatRedBall.Content.dll" />
     <None Include="app.config" />
     <None Include="packages.config" />
