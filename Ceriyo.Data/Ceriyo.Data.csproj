@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Engine\EngineConstants.cs" />
     <Compile Include="Engine\EnginePaths.cs" />
+    <Compile Include="Engine\WorkingPaths.cs" />
     <Compile Include="Enumerations\GameTypeEnum.cs" />
     <Compile Include="Enumerations\FileOperationResultTypeEnum.cs" />
     <Compile Include="Enumerations\NetworkAgentRoleEnum.cs" />

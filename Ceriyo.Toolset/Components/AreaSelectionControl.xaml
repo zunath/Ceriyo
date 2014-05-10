@@ -6,8 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <ListBox Name="lbAreas"
-                 ItemsSource="{Binding Areas}">
-        </ListBox>
+        <DockPanel>
+            <ListBox Name="lbAreas" Width="Auto" Height="Auto">
+            </ListBox>
+        </DockPanel>
     </Grid>
 </UserControl>

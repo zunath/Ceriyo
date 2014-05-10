@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ceriyo.Data;
 using Ceriyo.Data.ViewModels;
 
 namespace Ceriyo.Toolset.Components
@@ -21,7 +23,7 @@ namespace Ceriyo.Toolset.Components
     public partial class AreaSelectionControl : UserControl
     {
         protected AreaSelectionVM Model { get; set; }
-
+        
         public AreaSelectionControl()
         {
             InitializeComponent();
@@ -38,6 +40,11 @@ namespace Ceriyo.Toolset.Components
         private void SetDataContexts()
         {
             lbAreas.DataContext = Model;
+        }
+
+        public void Populate()
+        {
+
         }
     }
 }

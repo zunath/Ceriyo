@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.ViewModels;
 
 namespace Ceriyo.Toolset
@@ -33,7 +34,12 @@ namespace Ceriyo.Toolset
         private void SetUpEvents()
         {
             Loaded += MainWindow_Loaded;
-            
+            menuBar.OnOpenModule += menuBar_OnOpenModule;
+        }
+
+        private void menuBar_OnOpenModule(object sender, GameModuleEventArgs e)
+        {
+            Model.Module = e.Module;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

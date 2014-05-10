@@ -15,24 +15,24 @@ namespace Ceriyo.Library.CustomDrawableBatches
 {
     public class MapDrawableBatch: PositionedObject, IDrawableBatch
     {
-        private Map DrawableMap { get; set; }
+        private Area DrawableArea { get; set; }
         private Texture2D MapTexture { get; set; }
         private SpriteList TileSprites { get; set; }
         private int TileWidth { get; set; }
         private int TileHeight { get; set; }
         private Rectangle _sourceRectangle;
 
-        public MapDrawableBatch(Map map)
+        public MapDrawableBatch(Area area)
         {
             this.TileWidth = EngineConstants.TilePixelWidth;
             this.TileHeight = EngineConstants.TilePixelHeight;
             this._sourceRectangle = new Rectangle(0, 0, TileWidth, TileHeight);
 
-            this.DrawableMap = map;
-            this.MapTexture = FlatRedBallServices.Load<Texture2D>(FileManager.RelativeDirectory + @"Content/" + map.FilePath);
+            this.DrawableArea = area;
+            this.MapTexture = FlatRedBallServices.Load<Texture2D>(FileManager.RelativeDirectory + @"Content/" + area.FilePath);
             this.TileSprites = new SpriteList();
 
-            int capacity = map.MapWidth * map.MapHeight;
+            int capacity = area.MapWidth * area.MapHeight;
             for (int current = 1; current <= capacity; current++)
             {
                 this.TileSprites.Add(new Sprite());
@@ -77,7 +77,7 @@ namespace Ceriyo.Library.CustomDrawableBatches
 
         private void LoadMap()
         {
-            foreach (Tile[,] layer in DrawableMap.MapTiles)
+            foreach (Tile[,] layer in DrawableArea.MapTiles)
             {
                 int listIndex = 0;
                 int xBound = layer.GetUpperBound(0);
