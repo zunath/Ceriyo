@@ -14,6 +14,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Ceriyo.Data;
 using FlatRedBall.IO;
 
 namespace Ceriyo.Toolset.Windows
@@ -37,16 +38,14 @@ namespace Ceriyo.Toolset.Windows
 
         private void btnCreateModule_Click(object sender, RoutedEventArgs e)
         {
-            string folder = FileManager.RelativeDirectory + @"Content/" + ConfigurationManager.AppSettings["ToolsetFolder_WorkingDirectory"];
-
             try
             {
-                if (Directory.Exists(folder))
+                if (Directory.Exists(EnginePaths.WorkingDirectory))
                 {
-                    Directory.Delete(folder);
+                    Directory.Delete(EnginePaths.WorkingDirectory);
                 }
 
-                Directory.CreateDirectory(folder);
+                Directory.CreateDirectory(EnginePaths.WorkingDirectory);
             }
             catch
             {

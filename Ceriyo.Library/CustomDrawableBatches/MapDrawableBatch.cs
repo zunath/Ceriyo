@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data;
 using Ceriyo.Data.GameObjects;
 using FlatRedBall;
 using FlatRedBall.Graphics;
@@ -23,8 +24,8 @@ namespace Ceriyo.Library.CustomDrawableBatches
 
         public MapDrawableBatch(Map map)
         {
-            this.TileWidth = Convert.ToInt32(ConfigurationManager.AppSettings["TileWidth"]);
-            this.TileHeight = Convert.ToInt32(ConfigurationManager.AppSettings["TileHeight"]);
+            this.TileWidth = EngineConstants.TilePixelWidth;
+            this.TileHeight = EngineConstants.TilePixelHeight;
             this._sourceRectangle = new Rectangle(0, 0, TileWidth, TileHeight);
 
             this.DrawableMap = map;

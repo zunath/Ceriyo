@@ -73,6 +73,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\EngineConstants.cs" />
+    <Compile Include="Engine\EnginePaths.cs" />
     <Compile Include="Enumerations\GameTypeEnum.cs" />
     <Compile Include="Enumerations\NetworkAgentRoleEnum.cs" />
     <Compile Include="Enumerations\PVPTypeEnum.cs" />
@@ -88,6 +90,8 @@
     <Compile Include="GameObjects\Placeable.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\Tile.cs" />
+    <Compile Include="Engine\ModuleDataManager.cs" />
+    <Compile Include="Engine\ModulePaths.cs" />
     <Compile Include="Packets\PacketBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\GameSettings.cs" />

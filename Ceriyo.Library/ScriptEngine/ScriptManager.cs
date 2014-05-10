@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data;
 using Ceriyo.Data.GameObjects;
 using FlatRedBall.IO;
 using Noesis.Javascript;
@@ -33,7 +34,7 @@ namespace Ceriyo.Library.ScriptEngine
         public object RunScript(string scriptName, object self)
         {
             scriptName += ScriptFileExtension;
-            string filePath = FileManager.RelativeDirectory + @"Content/" + _engineScriptDirectory + "/" + scriptName;
+            string filePath = EnginePaths.ScriptsDirectory + scriptName;
             string script = File.ReadAllText(filePath) + "Main();";
             this.JSContext.SetParameter("self", self);
             object result = this.JSContext.Run(script);

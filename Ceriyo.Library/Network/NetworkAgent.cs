@@ -14,6 +14,7 @@ namespace Ceriyo.Library.Network
     class NetworkAgent
     {
         private const string PacketEncryptionKey = "secretpassword";
+        private const string ApplicationIdentifier = "D7434CF5-4108-4654-9C52-AA5217D4104D";
 
         public event EventHandler<ConnectionStatusEventArgs> OnConnected;
         public event EventHandler<ConnectionStatusEventArgs> OnDisconnecting;
@@ -35,14 +36,11 @@ namespace Ceriyo.Library.Network
             }
         }
 
-        /// <summary>
-        /// Customize appIdentifier. Note: Client and server appIdentifier must be the same.
-        /// </summary>
-        public NetworkAgent(NetworkAgentRoleEnum role, string tag, int customPort)
+        public NetworkAgent(NetworkAgentRoleEnum role, int port = 5121)
         {
             Role = role;
-            Configuration = new NetPeerConfiguration(tag);
-            Port = customPort;
+            Configuration = new NetPeerConfiguration(ApplicationIdentifier);
+            Port = port;
 
             Initialize();
         }
