@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Toolset.Windows;
 
 namespace Ceriyo.Toolset.Components
@@ -20,6 +21,8 @@ namespace Ceriyo.Toolset.Components
     /// </summary>
     public partial class MenuBarComponent : UserControl
     {
+        public event EventHandler<GameModuleEventArgs> OnOpenModule;
+
         public MenuBarComponent()
         {
             InitializeComponent();
@@ -30,5 +33,21 @@ namespace Ceriyo.Toolset.Components
             NewModuleWindow modWindow = new NewModuleWindow("New Module");
             modWindow.ShowDialog();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            LoadModuleWindow loadWindow = new LoadModuleWindow();
+            loadWindow.OnOpenModule += OpenModuleFinished;
+            loadWindow.ShowDialog();
+        }
+
+        private void OpenModuleFinished(object sender, GameModuleEventArgs e)
+        {
+            if(OnOpenModule != null)
+            {
+                OnOpenModule(sender, e);
+            }
+        }
+
     }
 }

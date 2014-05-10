@@ -144,6 +144,9 @@
       <DependentUpon>MenuBarComponent.xaml</DependentUpon>
     </Compile>
     <Compile Include="ToolsetGame.cs" />
+    <Compile Include="Windows\LoadModuleWindow.xaml.cs">
+      <DependentUpon>LoadModuleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NewModuleWindow.xaml.cs">
       <DependentUpon>NewModuleWindow.xaml</DependentUpon>
     </Compile>
@@ -207,6 +210,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\LoadModuleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\NewModuleWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

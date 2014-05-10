@@ -38,13 +38,9 @@ namespace Ceriyo.Toolset.Windows
 
         private void btnCreateModule_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                ModuleDataManager.CreateModule(txtName.Text, txtTag.Text, txtResref.Text);
-            }
-            catch
-            {
-            }
+            ModuleDataManager.CreateModule(txtName.Text, txtTag.Text, txtResref.Text);
+            ModuleDataManager.LoadModule(txtResref.Text);
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

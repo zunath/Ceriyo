@@ -83,6 +83,7 @@
     <Compile Include="Enumerations\NetworkAgentRoleEnum.cs" />
     <Compile Include="Enumerations\PVPTypeEnum.cs" />
     <Compile Include="EventArguments\ConnectionStatusEventArgs.cs" />
+    <Compile Include="EventArguments\GameModuleEventArgs.cs" />
     <Compile Include="GameObjects\Area.cs" />
     <Compile Include="GameObjects\CharacterClass.cs" />
     <Compile Include="GameObjects\Conversation.cs" />
@@ -102,6 +103,9 @@
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />
     <Compile Include="ViewModels\AreaSelectionVM.cs" />
+    <Compile Include="ViewModels\BaseVM.cs" />
+    <Compile Include="ViewModels\LoadModuleVM.cs" />
+    <Compile Include="ViewModels\ToolsetVM.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

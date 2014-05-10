@@ -6,7 +6,7 @@
     <Grid>
         <DockPanel>
 
-            <MenuBar:MenuBarComponent VerticalAlignment="Top"/>
+            <MenuBar:MenuBarComponent x:Name="menuBar" VerticalAlignment="Top"/>
             
 
         </DockPanel>

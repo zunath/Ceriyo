@@ -31,11 +31,12 @@ namespace Ceriyo.Data
                 }
                 else
                 {
-                    GameModule module = new GameModule();
+                    GameModule module = new GameModule(name, tag, resref);
 
                     using (ZipFile zip = new ZipFile(path))
                     {
                         AddDirectories(zip);
+                        AddManifest(zip, module);
 
                         zip.Save();
                     }
@@ -58,6 +59,11 @@ namespace Ceriyo.Data
 
             try
             {
+                if (!Directory.Exists(EnginePaths.WorkingDirectory))
+                {
+                    Directory.CreateDirectory(EnginePaths.WorkingDirectory);
+                }
+
                 string path = EnginePaths.ModulesDirectory + resref + ModulePaths.ModuleExtension;
                 if (!File.Exists(path))
                 {
@@ -86,9 +92,9 @@ namespace Ceriyo.Data
 
                             zip.ExtractAll(EnginePaths.WorkingDirectory);
                         }
-                    }
 
-                    result = FileOperationResultTypeEnum.Success;
+                        result = FileOperationResultTypeEnum.Success;
+                    }
                 }
             }
             catch
@@ -101,15 +107,75 @@ namespace Ceriyo.Data
 
         private static void AddDirectories(ZipFile zip)
         {
-            zip.AddDirectoryByName(ModulePaths.CharacterClassesDirectory);
-            zip.AddDirectoryByName(ModulePaths.ConversationsDirectory);
-            zip.AddDirectoryByName(ModulePaths.CreaturesDirectory);
-            zip.AddDirectoryByName(ModulePaths.ItemsDirectory);
-            zip.AddDirectoryByName(ModulePaths.MapsDirectory);
-            zip.AddDirectoryByName(ModulePaths.PlaceablesDirectory);
-            zip.AddDirectoryByName(ModulePaths.ScriptsDirectory);
-            zip.AddDirectoryByName(ModulePaths.TilesetsDirectory);
+            if (zip[ModulePaths.CharacterClassesDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.CharacterClassesDirectory);
+            }
 
+            if (zip[ModulePaths.ConversationsDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.ConversationsDirectory);
+            }
+
+            if (zip[ModulePaths.CreaturesDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.CreaturesDirectory);
+            }
+            if (zip[ModulePaths.ItemsDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.ItemsDirectory);
+            }
+            if (zip[ModulePaths.MapsDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.MapsDirectory);
+            }
+            if (zip[ModulePaths.PlaceablesDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.PlaceablesDirectory);
+            }
+            if (zip[ModulePaths.ScriptsDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.ScriptsDirectory);
+            }
+            if (zip[ModulePaths.TilesetsDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.TilesetsDirectory);
+            }
+
+        }
+
+        private static void AddManifest(ZipFile zip, GameModule module)
+        {
+            string output = "";
+            FileManager.XmlSerialize<GameModule>(module, out output);
+
+            zip.AddEntry("Manifest.xml", output);
+        }
+
+        private static GameModule GetManifest(string zipFilePath)
+        {
+            using (ZipFile zip = new ZipFile(zipFilePath))
+            {
+                ZipEntry entry = zip["Manifest.xml"];
+                MemoryStream stream = new MemoryStream();
+                entry.Extract(stream);
+                string text = Encoding.ASCII.GetString(stream.ToArray());
+                return FileManager.XmlDeserializeFromString<GameModule>(text);
+            }
+        }
+
+        public static IList<GameModule> GetModules()
+        {
+            List<GameModule> modules = new List<GameModule>();
+
+            string[] filePaths = Directory.GetFiles(EnginePaths.ModulesDirectory);
+            foreach (string file in filePaths)
+            {
+                GameModule deserialized = GetManifest(file);
+                modules.Add(deserialized);
+            }
+
+            return modules;
         }
 
     }

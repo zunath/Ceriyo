@@ -7,9 +7,8 @@ using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.ViewModels
 {
-    public class AreaSelectionVM : INotifyPropertyChanged
+    public class AreaSelectionVM : BaseVM
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         private BindingList<Area> _areas;
 
         public BindingList<Area> Areas
@@ -26,15 +25,5 @@ namespace Ceriyo.Data.ViewModels
         {
             this._areas = new BindingList<Area>();
         }
-
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
     }
 }

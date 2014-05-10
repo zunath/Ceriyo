@@ -11,6 +11,23 @@ namespace Ceriyo.Data.GameObjects
         public string Tag { get; set; }
         public string Resref { get; set; }
 
-        
+        public GameModule()
+        { 
+        }
+
+        public GameModule(string name, string tag, string resref)
+        {
+            this.Name = name;
+            this.Tag = tag;
+            this.Resref = resref;
+        }
+
+        public string ListBoxName
+        {
+            get
+            {
+                return Name + " (" + Resref + ModulePaths.ModuleExtension + ")";
+            }
+        }
     }
 }

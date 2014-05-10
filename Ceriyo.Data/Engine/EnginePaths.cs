@@ -28,5 +28,10 @@ namespace Ceriyo.Data
             get { return FileManager.RelativeDirectory + @"Content/temp/"; }
         }
 
+        public static string LogsDirectory
+        {
+            get { return FileManager.RelativeDirectory + @"Content/logs/"; }
+        }
+
     }
 }
