@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace Ceriyo.Data.ViewModels
         private int _width;
         private int _height;
         private BindingList<string> _scripts;
-        private BindingList<LocalVariable> _localVariables;
+        private ObservableCollection<LocalVariable> _localVariables;
         private BindingList<Tileset> _tilesets;
         private string _description;
         private string _comments;
@@ -100,7 +101,7 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        public BindingList<LocalVariable> LocalVariables
+        public ObservableCollection<LocalVariable> LocalVariables
         {
             get
             {
@@ -196,7 +197,7 @@ namespace Ceriyo.Data.ViewModels
             this.Width = EngineConstants.AreaMinWidth;
             this.Height = EngineConstants.AreaMinHeight;
             this.Scripts = new BindingList<string>();
-            this.LocalVariables = new BindingList<LocalVariable>();
+            this.LocalVariables = new ObservableCollection<LocalVariable>();
             this.Tilesets = new BindingList<Tileset>();
             this.Description = "";
             this.Comments = "";

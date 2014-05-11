@@ -74,9 +74,9 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public static IList<IGameObject> GetAllGameObjects(string folderName)
+        public static List<IGameObject> GetAllGameObjects(string folderName, Type gameObjectType)
         {
-            IList<IGameObject> gameObjects = new List<IGameObject>();
+            List<IGameObject> gameObjects = new List<IGameObject>();
 
             try
             {
@@ -85,7 +85,7 @@ namespace Ceriyo.Data
 
                 foreach (string file in files)
                 {
-                    IGameObject gameObject = FileManager.XmlDeserialize<IGameObject>(file);
+                    IGameObject gameObject = FileManager.XmlDeserialize(gameObjectType, file) as IGameObject;
                     gameObjects.Add(gameObject);
                 }
             }
@@ -97,9 +97,9 @@ namespace Ceriyo.Data
             return gameObjects;
         }
 
-        public static IList<string> GetAllScriptNames()
+        public static List<string> GetAllScriptNames()
         {
-            IList<string> scripts = new List<string>();
+            List<string> scripts = new List<string>();
 
             try
             {

@@ -9,5 +9,9 @@ namespace Ceriyo.Data.GameObjects
     {
         public string Name { get; set; }
         public string Value { get; set; }
+
+        public LocalVariable()
+        {
+        }
     }
 }

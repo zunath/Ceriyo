@@ -63,7 +63,14 @@ namespace Ceriyo.Toolset.Components
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             EditAreaWindow window = new EditAreaWindow();
+            window.OnSaveArea += OnSaveArea;
             window.ShowDialog();
+        }
+
+        private void OnSaveArea(object sender, GameObjectEventArgs e)
+        {
+            List<IGameObject> areas = WorkingDataManager.GetAllGameObjects(ModulePaths.AreasDirectory, typeof(Area));
+            areas = Model.Areas.Union(areas).ToList();
         }
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)

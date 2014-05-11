@@ -39,8 +39,12 @@ namespace Ceriyo.Toolset.Windows
 
         private void InitializeModel()
         {
-            Model.Tilesets = WorkingDataManager.GetAllGameObjects(ModulePaths.TilesetsDirectory) as BindingList<Tileset>;
-            Model.Scripts = WorkingDataManager.GetAllScriptNames() as BindingList<string>;
+            //Model.Tilesets = WorkingDataManager.GetAllGameObjects(ModulePaths.TilesetsDirectory);
+            List<string> scriptNames = WorkingDataManager.GetAllScriptNames();
+            foreach (string script in scriptNames)
+            {
+                Model.Scripts.Add(script);
+            }
         }
 
         private void InitializeModel(Area area)

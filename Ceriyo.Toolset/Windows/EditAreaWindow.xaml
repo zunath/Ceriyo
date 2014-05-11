@@ -1,15 +1,16 @@
-﻿<Window x:Class="Ceriyo.Toolset.Windows.EditAreaWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:val="clr-namespace:Ceriyo.Toolset.ValidationRules"
         xmlns:eng="clr-namespace:Ceriyo.Data"
+        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid" x:Class="Ceriyo.Toolset.Windows.EditAreaWindow"
         Title="Area Properties" Height="500" Width="400" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterOwner">
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
         <DockPanel>
@@ -18,206 +19,197 @@
                     <Grid Background="#FFE5E5E5">
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Border BorderBrush="Gray" Grid.Column="0" Grid.Row="0"></Border>
+                        <Border BorderBrush="Gray" Grid.Column="0" Grid.Row="0"/>
                         <Label Content="Name:" 
-                               HorizontalAlignment="Left" 
-                               Margin="10,10,0,0" 
-                               VerticalAlignment="Top"/>
+							HorizontalAlignment="Left" 
+							Margin="10,10,0,0" 
+							VerticalAlignment="Top"/>
                         <Label Content="Tag:" 
-                               HorizontalAlignment="Left" 
-                               Margin="22,41,0,0" 
-                               VerticalAlignment="Top"/>
+							HorizontalAlignment="Left" 
+							Margin="22,41,0,0" 
+							VerticalAlignment="Top"/>
                         <Label Content="Resref:" 
-                               HorizontalAlignment="Left" 
-                               Margin="9,72,0,0" 
-                               VerticalAlignment="Top"/>
-                        <TextBox Name="txtName" 
-                                 HorizontalAlignment="Left" 
-                                 Height="23" 
-                                 Margin="8,13,0,0" 
-                                 TextWrapping="Wrap" 
-                                 VerticalAlignment="Top" 
-                                 Width="294"                                 
-                                 Grid.Column="1">
-                            <TextBox.Text>
-                                <Binding Path="Name" 
-                                         UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <val:NameLengthRule></val:NameLengthRule>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
+							HorizontalAlignment="Left" 
+							Margin="9,72,0,0" 
+							VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtName" 
+							HorizontalAlignment="Left" 
+							Height="23" 
+							Margin="8,13,0,0" 
+							TextWrapping="Wrap" 
+							VerticalAlignment="Top" 
+							Width="294"                                 
+							Grid.Column="1">
+                            <Binding Path="Name" 
+								UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:NameLengthRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
                         </TextBox>
-                        <TextBox Name="txtTag" 
-                                 HorizontalAlignment="Left" 
-                                 Height="23" 
-                                 Margin="8,44,0,0" 
-                                 TextWrapping="Wrap" 
-                                 VerticalAlignment="Top" 
-                                 Width="294"
-                                 Grid.Column="1">
-                            <TextBox.Text>
-                                <Binding Path="Tag" 
-                                         UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <val:NameLengthRule></val:NameLengthRule>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
+                        <TextBox x:Name="txtTag" 
+							HorizontalAlignment="Left" 
+							Height="23" 
+							Margin="8,44,0,0" 
+							TextWrapping="Wrap" 
+							VerticalAlignment="Top" 
+							Width="294"
+							Grid.Column="1">
+                            <Binding Path="Tag" 
+								UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:NameLengthRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
                         </TextBox>
-                        <TextBox Name="txtResref" 
-                                 HorizontalAlignment="Left" 
-                                 Height="23" 
-                                 Margin="8,75,0,0" 
-                                 TextWrapping="Wrap" 
-                                 VerticalAlignment="Top" 
-                                 Width="294"
-                                 Grid.Column="1">
-                            <TextBox.Text>
-                                <Binding Path="Resref" 
-                                         UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <val:ResrefLengthRule></val:ResrefLengthRule>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
+                        <TextBox x:Name="txtResref" 
+							HorizontalAlignment="Left" 
+							Height="23" 
+							Margin="8,75,0,0" 
+							TextWrapping="Wrap" 
+							VerticalAlignment="Top" 
+							Width="294"
+							Grid.Column="1">
+                            <Binding Path="Resref" 
+								UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:ResrefLengthRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
                         </TextBox>
                         <Label Content="Area Size:" HorizontalAlignment="Left" Margin="-1,49,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-                        <xctk:IntegerUpDown Name="numWidth"
-                                            Grid.Column="1" 
-                                            HorizontalAlignment="Left" 
-                                            Margin="10,55,0,0" 
-                                            Grid.Row="1" 
-                                            VerticalAlignment="Top"
-                                            Width="71" RenderTransformOrigin="1.272,0.717">
+                        <xctk:IntegerUpDown x:Name="numWidth"
+							Grid.Column="1" 
+							HorizontalAlignment="Left" 
+							Margin="10,55,0,0" 
+							Grid.Row="1" 
+							VerticalAlignment="Top"
+							Width="71" RenderTransformOrigin="1.272,0.717">
                             <xctk:IntegerUpDown.Text>
                                 <Binding Path="Width">
                                     <Binding.ValidationRules>
-                                        <val:AreaWidthRule></val:AreaWidthRule>
+                                        <val:AreaWidthRule/>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </xctk:IntegerUpDown.Text>
                             <xctk:IntegerUpDown.Value>
                                 <Binding Path="Width">
                                     <Binding.ValidationRules>
-                                        <val:AreaWidthRule></val:AreaWidthRule>
+                                        <val:AreaWidthRule/>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </xctk:IntegerUpDown.Value>
                         </xctk:IntegerUpDown>
 
-                        <xctk:IntegerUpDown Name="numHeight"
-                                            Grid.Column="1" 
-                                            HorizontalAlignment="Left" 
-                                            Margin="162,55,0,0" 
-                                            Grid.Row="1" 
-                                            VerticalAlignment="Top"
-                                            Width="71">
+                        <xctk:IntegerUpDown x:Name="numHeight"
+							Grid.Column="1" 
+							HorizontalAlignment="Left" 
+							Margin="162,55,0,0" 
+							Grid.Row="1" 
+							VerticalAlignment="Top"
+							Width="71">
                             <xctk:IntegerUpDown.Text>
                                 <Binding Path="Height">
                                     <Binding.ValidationRules>
-                                        <val:AreaHeightRule></val:AreaHeightRule>
+                                        <val:AreaHeightRule/>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </xctk:IntegerUpDown.Text>
                             <xctk:IntegerUpDown.Value>
                                 <Binding Path="Height">
                                     <Binding.ValidationRules>
-                                        <val:AreaHeightRule></val:AreaHeightRule>
+                                        <val:AreaHeightRule/>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </xctk:IntegerUpDown.Value>
                         </xctk:IntegerUpDown>
                         <Label Content="Width" 
-                               Grid.Column="1" 
-                               HorizontalAlignment="Left" 
-                               Margin="86,51,0,0" 
-                               Grid.Row="1" 
-                               VerticalAlignment="Top" RenderTransformOrigin="0.706,2.064"/>
+							Grid.Column="1" 
+							HorizontalAlignment="Left" 
+							Margin="86,51,0,0" 
+							Grid.Row="1" 
+							VerticalAlignment="Top" RenderTransformOrigin="0.706,2.064"/>
                         <Label Content="Height" 
-                        	Grid.Column="1" 
-                        	HorizontalAlignment="Left" 
-                        	Margin="238,51,0,0" 
-                        	Grid.Row="1" 
-                        	VerticalAlignment="Top" RenderTransformOrigin="0.021,0.641"/>
+							Grid.Column="1" 
+							HorizontalAlignment="Left" 
+							Margin="238,51,0,0" 
+							Grid.Row="1" 
+							VerticalAlignment="Top" RenderTransformOrigin="0.021,0.641"/>
                         <Label Content="Tileset:"
-                               HorizontalAlignment="Left" 
-                               Margin="8,10,0,0" 
-                               Grid.Row="1" 
-                               VerticalAlignment="Top"/>
-                        <ComboBox Name="ddlTileset" 
-                                  Grid.Column="1" 
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,14,0,0" 
-                                  Grid.Row="1" 
-                                  VerticalAlignment="Top" 
-                                  ItemsSource="{Binding Tilesets}"
-                                  Width="292"/>
+							HorizontalAlignment="Left" 
+							Margin="8,10,0,0" 
+							Grid.Row="1" 
+							VerticalAlignment="Top"/>
+                        <ComboBox x:Name="ddlTileset" 
+							Grid.Column="1" 
+							HorizontalAlignment="Left" 
+							Margin="10,14,0,0" 
+							Grid.Row="1" 
+							VerticalAlignment="Top" 
+							ItemsSource="{Binding Tilesets}"
+							Width="292"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Music">
-                    <Grid Background="#FFE5E5E5">
-
-                    </Grid>
+                    <Grid Background="#FFE5E5E5"/>
                 </TabItem>
                 <TabItem Header="Scripts">
                     <Grid Background="#FFE5E5E5">
                         <Label Content="OnAreaEnter:" 
-                    		HorizontalAlignment="Left" 
-                    		Margin="10,10,0,0" 
-                    		VerticalAlignment="Top"/>
+							HorizontalAlignment="Left" 
+							Margin="10,10,0,0" 
+							VerticalAlignment="Top"/>
                         <ComboBox x:Name="cboOnAreaEnter" 
-                    		HorizontalAlignment="Left" 
-                    		Height="23" 
-                    		Margin="106,13,0,0" 
-                    		VerticalAlignment="Top" 
-                            ItemsSource="{Binding Scripts}"
-                            SelectedValue="{Binding OnAreaEnterScript}"
-                    		Width="266">
-                        </ComboBox>
+							HorizontalAlignment="Left" 
+							Height="23" 
+							Margin="106,13,0,0" 
+							VerticalAlignment="Top" 
+							ItemsSource="{Binding Scripts}"
+							SelectedValue="{Binding OnAreaEnterScript}"
+							Width="266"/>
                         <Label Content="OnAreaExit:" 
-                        	HorizontalAlignment="Left" 
-                        	Margin="19,41,0,0" 
-                        	VerticalAlignment="Top"/>
+							HorizontalAlignment="Left" 
+							Margin="19,41,0,0" 
+							VerticalAlignment="Top"/>
                         <ComboBox x:Name="cboOnAreaExit" 
-                        	HorizontalAlignment="Left" 
-                        	Height="23" 
-                        	Margin="106,41,0,0" 
-                        	VerticalAlignment="Top" 
-                        	ItemsSource="{Binding Scripts}"
-                        	SelectedValue="{Binding OnAreaExitScript}"
-                        	Width="266"/>
+							HorizontalAlignment="Left" 
+							Height="23" 
+							Margin="106,41,0,0" 
+							VerticalAlignment="Top" 
+							ItemsSource="{Binding Scripts}"
+							SelectedValue="{Binding OnAreaExitScript}"
+							Width="266"/>
                         <Label Content="OnHeartbeat:" 
-                        	HorizontalAlignment="Left" 
-                        	Margin="10,69,0,0" 
-                        	VerticalAlignment="Top"/>
+							HorizontalAlignment="Left" 
+							Margin="10,69,0,0" 
+							VerticalAlignment="Top"/>
                         <ComboBox x:Name="cboOnAreaHeartbeat" 
-                        	HorizontalAlignment="Left" 
-                        	Height="23" 
-                        	Margin="106,69,0,0" 
-                        	VerticalAlignment="Top" 
-                        	ItemsSource="{Binding Scripts}"
-                        	SelectedValue="{Binding OnAreaHeartbeatScript}"
-                        	Width="266"/>
+							HorizontalAlignment="Left" 
+							Height="23" 
+							Margin="106,69,0,0" 
+							VerticalAlignment="Top" 
+							ItemsSource="{Binding Scripts}"
+							SelectedValue="{Binding OnAreaHeartbeatScript}"
+							Width="266"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Variables">
                     <Grid Background="#FFE5E5E5">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="0"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        
-                        
+
+
                         <DockPanel Grid.Row="1">
                             <DataGrid Name="dgLocalVariables" 
                                       ItemsSource="{Binding LocalVariables}"
@@ -225,12 +217,8 @@
                                       HorizontalAlignment="Stretch"
                                       Width="Auto"
                                       Height="Auto"
-                                      CanUserAddRows="True"
-                                      AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
-                                    <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="*"></DataGridTextColumn>
-                                </DataGrid.Columns>
+                                      ColumnWidth="*"
+                                      CanUserAddRows="True">
                             </DataGrid>
                         </DockPanel>
 
@@ -239,15 +227,14 @@
                 <TabItem Header="Description">
                     <Grid Background="#FFE5E5E5">
                         <DockPanel>
-                            <TextBox Name="txtDescription" 
-                                       HorizontalAlignment="Stretch" 
-                                       VerticalAlignment="Stretch"
-                                     AcceptsReturn="True"
-                                     TextWrapping="Wrap"
-                                       Width="Auto"
-                                       Height="Auto"
-                                       Text="{Binding Description}">
-                            </TextBox>
+                            <TextBox x:Name="txtDescription" 
+								HorizontalAlignment="Stretch" 
+								VerticalAlignment="Stretch"
+								AcceptsReturn="True"
+								TextWrapping="Wrap"
+								Width="Auto"
+								Height="Auto"
+								Text="{Binding Description}"/>
 
                         </DockPanel>
                     </Grid>
@@ -255,32 +242,31 @@
                 <TabItem Header="Comments">
                     <Grid Background="#FFE5E5E5">
                         <DockPanel>
-                            <TextBox Name="txtComments" 
-                                     TextWrapping="Wrap"
-                                     AcceptsReturn="True"
-                                       HorizontalAlignment="Stretch" 
-                                       VerticalAlignment="Stretch"
-                                       Text="{Binding Comments}">
-                            </TextBox>
+                            <TextBox x:Name="txtComments" 
+								TextWrapping="Wrap"
+								AcceptsReturn="True"
+								HorizontalAlignment="Stretch" 
+								VerticalAlignment="Stretch"
+								Text="{Binding Comments}"/>
                         </DockPanel>
                     </Grid>
                 </TabItem>
             </TabControl>
         </DockPanel>
-        <Button Name="btnSave"
-                Content="Save" 
-                HorizontalAlignment="Left" 
-                Margin="118,8,0,0" 
-                Grid.Row="1" 
-                VerticalAlignment="Top" 
-                Width="75" Click="btnSave_Click"/>
-        <Button Name="btnCancel"
-                Content="Cancel" 
-                HorizontalAlignment="Left" 
-                Margin="198,8,0,0" 
-                Grid.Row="1" 
-                VerticalAlignment="Top" 
-                Width="75" Click="btnCancel_Click"/>
+        <Button x:Name="btnSave"
+			Content="Save" 
+			HorizontalAlignment="Left" 
+			Margin="118,8,0,0" 
+			Grid.Row="1" 
+			VerticalAlignment="Top" 
+			Width="75" Click="btnSave_Click"/>
+        <Button x:Name="btnCancel"
+			Content="Cancel" 
+			HorizontalAlignment="Left" 
+			Margin="198,8,0,0" 
+			Grid.Row="1" 
+			VerticalAlignment="Top" 
+			Width="75" Click="btnCancel_Click"/>
 
     </Grid>
 </Window>
