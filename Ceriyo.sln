@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Server", "Ceriyo.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Library", "Ceriyo.Library\Ceriyo.Library.csproj", "{F9AB9DD8-A342-4D58-BBB9-E15184E7F522}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Entities", "Ceriyo.Entities\Ceriyo.Entities.csproj", "{7AF76229-44CD-410A-AC56-2160A22ADEF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,26 @@ Global
 		{F9AB9DD8-A342-4D58-BBB9-E15184E7F522}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F9AB9DD8-A342-4D58-BBB9-E15184E7F522}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F9AB9DD8-A342-4D58-BBB9-E15184E7F522}.Release|x86.ActiveCfg = Release|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.DebugProfile|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.DebugProfile|Any CPU.Build.0 = Debug|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.DebugProfile|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.DebugProfile|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.DebugProfile|x86.ActiveCfg = Debug|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Profile|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Profile|Any CPU.Build.0 = Release|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Profile|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Profile|Mixed Platforms.Build.0 = Release|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Profile|x86.ActiveCfg = Release|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7AF76229-44CD-410A-AC56-2160A22ADEF9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

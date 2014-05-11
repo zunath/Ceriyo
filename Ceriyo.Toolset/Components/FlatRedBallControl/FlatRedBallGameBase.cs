@@ -103,7 +103,6 @@ namespace Ceriyo.Toolset
         protected readonly Int32 RenderHeight;
         protected readonly Int32 RenderWidth;
         private readonly IntPtr _windowHandle;
-        protected GraphicsDeviceManager GraphicsDeviceManager;
         protected Boolean IsRenderingPaused;
         private DispatcherTimer _timer;
 

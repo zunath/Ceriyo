@@ -1,22 +1,9 @@
-using System;
-using System.Collections.Generic;
 
 using FlatRedBall;
-using FlatRedBall.Graphics;
-using FlatRedBall.Utilities;
 using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
+using Ceriyo.Entities.Screens;
 
-#if !FRB_MDX
-using System.Linq;
-
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-#endif
 
 namespace Ceriyo
 {
@@ -45,7 +32,7 @@ namespace Ceriyo
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 			GlobalContent.Initialize();
 
-			FlatRedBall.Screens.ScreenManager.Start(typeof(Ceriyo.Screens.BaseScreen));
+			ScreenManager.Start(typeof(GameScreen));
 
             base.Initialize();
 

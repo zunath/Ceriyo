@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data.GameObjects;
-using Ceriyo.Library.CustomDrawableBatches;
+using Ceriyo.Entities;
+using Ceriyo.Entities.Screens;
 using FlatRedBall;
+using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -27,7 +29,7 @@ namespace Ceriyo.Toolset.GameComponents
             SpriteManager.Camera.UsePixelCoordinates();
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
 
-            AreaBatch = new MapDrawableBatch(new Area("test", "test", "test", 10, 10, 4));
+            ScreenManager.Start(typeof(AreaEditorScreen));
         }
 
         protected override void Update(GameTime gameTime)

@@ -11,7 +11,7 @@ using FlatRedBall.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Library.CustomDrawableBatches
+namespace Ceriyo.Entities
 {
     public class MapDrawableBatch: PositionedObject, IDrawableBatch
     {

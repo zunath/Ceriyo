@@ -299,6 +299,10 @@
       <Project>{26e4c8b8-a8c4-4b77-bec7-e6149473eefb}</Project>
       <Name>Ceriyo.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ceriyo.Entities\Ceriyo.Entities.csproj">
+      <Project>{7af76229-44cd-410a-ac56-2160a22adef9}</Project>
+      <Name>Ceriyo.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ceriyo.Library\Ceriyo.Library.csproj">
       <Project>{f9ab9dd8-a342-4d58-bbb9-e15184e7f522}</Project>
       <Name>Ceriyo.Library</Name>
