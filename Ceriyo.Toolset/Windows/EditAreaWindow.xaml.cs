@@ -38,6 +38,7 @@ namespace Ceriyo.Toolset.Windows
         private void InitializeModel()
         {
             Model.Tilesets = WorkingDataManager.GetAllGameObjects(ModulePaths.TilesetsDirectory) as List<Tileset>;
+            Model.Scripts = WorkingDataManager.GetAllScriptNames() as List<string>;
             
         }
 
@@ -64,6 +65,7 @@ namespace Ceriyo.Toolset.Windows
             txtResref.MaxLength = EngineConstants.ResrefMaxLength;
             txtDescription.MaxLength = EngineConstants.DescriptionMaxLength;
             txtComments.MaxLength = EngineConstants.CommentsMaxLength;
+            
             numHeight.Maximum = EngineConstants.AreaMaxHeight;
             numWidth.Maximum = EngineConstants.AreaMaxWidth;
             numHeight.Minimum = EngineConstants.AreaMinHeight;
@@ -81,6 +83,10 @@ namespace Ceriyo.Toolset.Windows
             ddlTileset.DataContext = Model;
             numHeight.DataContext = Model;
             numWidth.DataContext = Model;
+
+            cboOnAreaEnter.DataContext = Model;
+            cboOnAreaExit.DataContext = Model;
+            cboOnAreaHeartbeat.DataContext = Model;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

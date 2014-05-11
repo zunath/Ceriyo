@@ -97,5 +97,26 @@ namespace Ceriyo.Data
             return gameObjects;
         }
 
+        public static IList<string> GetAllScriptNames()
+        {
+            IList<string> scripts = new List<string>();
+
+            try
+            {
+                string[] scriptNames = Directory.GetFiles(WorkingPaths.ScriptsDirectory, "*.js");
+                foreach (string name in scriptNames)
+                {
+                    scripts.Add(Path.GetFileNameWithoutExtension(name));
+                }
+
+            }
+            catch
+            {
+                scripts = null;
+            }
+
+            return scripts;
+        }
+
     }
 }

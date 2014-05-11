@@ -4,7 +4,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:val="clr-namespace:Ceriyo.Toolset.ValidationRules"
         xmlns:eng="clr-namespace:Ceriyo.Data"
-        Title="NewAreaWindow" Height="500" Width="400">
+        Title="Area Properties" Height="500" Width="400" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterOwner">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -171,7 +171,43 @@
                 </TabItem>
                 <TabItem Header="Scripts">
                     <Grid Background="#FFE5E5E5">
-
+                        <Label Content="OnAreaEnter:" 
+                    		HorizontalAlignment="Left" 
+                    		Margin="10,10,0,0" 
+                    		VerticalAlignment="Top"/>
+                        <ComboBox x:Name="cboOnAreaEnter" 
+                    		HorizontalAlignment="Left" 
+                    		Height="23" 
+                    		Margin="106,13,0,0" 
+                    		VerticalAlignment="Top" 
+                            ItemsSource="{Binding Scripts}"
+                            SelectedValue="{Binding AreaOnEnterScript}"
+                    		Width="266">
+                        </ComboBox>
+                        <Label Content="OnAreaExit:" 
+                        	HorizontalAlignment="Left" 
+                        	Margin="19,41,0,0" 
+                        	VerticalAlignment="Top"/>
+                        <ComboBox x:Name="cboOnAreaExit" 
+                        	HorizontalAlignment="Left" 
+                        	Height="23" 
+                        	Margin="106,41,0,0" 
+                        	VerticalAlignment="Top" 
+                        	ItemsSource="{Binding Scripts}"
+                        	SelectedValue="{Binding OnAreaExitScript}"
+                        	Width="266"/>
+                        <Label Content="OnHeartbeat:" 
+                        	HorizontalAlignment="Left" 
+                        	Margin="10,69,0,0" 
+                        	VerticalAlignment="Top"/>
+                        <ComboBox x:Name="cboOnAreaHeartbeat" 
+                        	HorizontalAlignment="Left" 
+                        	Height="23" 
+                        	Margin="106,69,0,0" 
+                        	VerticalAlignment="Top" 
+                        	ItemsSource="{Binding Scripts}"
+                        	SelectedValue="{Binding AreaOnHeartbeatScript}"
+                        	Width="266"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Variables">
