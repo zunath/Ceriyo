@@ -23,6 +23,7 @@ namespace Ceriyo.Data.GameObjects
         public BindingList<LocalVariable> LocalVariables { get; set; }
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
         public BindingList<MapTile> MapTiles { get; set; }
+        public string CategoryName { get { return "Area"; } }
 
         [XmlIgnore]
         public List<Tile[,]> Tiles

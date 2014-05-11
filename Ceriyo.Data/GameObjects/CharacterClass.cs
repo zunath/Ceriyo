@@ -22,5 +22,7 @@ namespace Ceriyo.Data.GameObjects
             get { throw new NotSupportedException(); }
             set { throw new NotSupportedException(); }
         }
+        public string CategoryName { get { return "Class"; } }
+
     }
 }

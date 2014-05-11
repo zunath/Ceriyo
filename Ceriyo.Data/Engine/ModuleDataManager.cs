@@ -113,9 +113,9 @@ namespace Ceriyo.Data
                 zip.AddDirectoryByName(ModulePaths.CharacterClassesDirectory);
             }
 
-            if (zip[ModulePaths.ConversationsDirectory] == null)
+            if (zip[ModulePaths.DialogsDirectory] == null)
             {
-                zip.AddDirectoryByName(ModulePaths.ConversationsDirectory);
+                zip.AddDirectoryByName(ModulePaths.DialogsDirectory);
             }
 
             if (zip[ModulePaths.CreaturesDirectory] == null)

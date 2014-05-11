@@ -17,9 +17,9 @@ namespace Ceriyo.Data
             get { return EnginePaths.WorkingDirectory + ModulePaths.CharacterClassesDirectory; }
         }
 
-        public static string ConversationsDirectory
+        public static string DialogsDirectory
         {
-            get { return EnginePaths.WorkingDirectory + ModulePaths.ConversationsDirectory; }
+            get { return EnginePaths.WorkingDirectory + ModulePaths.DialogsDirectory; }
         }
 
         public static string CreaturesDirectory

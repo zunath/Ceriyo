@@ -1,8 +1,9 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:Ceriyo.Toolset" xmlns:MenuBar="clr-namespace:Ceriyo.Toolset.Components" x:Class="Ceriyo.Toolset.MainWindow"
-    Title="MainWindow" Height="600" Width="800" MinHeight="600" MinWidth="800">
+        xmlns:local="clr-namespace:Ceriyo.Toolset" xmlns:Comp="clr-namespace:Ceriyo.Toolset.Components" x:Class="Ceriyo.Toolset.MainWindow"
+    Title="MainWindow" Height="600" Width="800" MinHeight="600" MinWidth="800"
+    Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -20,7 +21,7 @@
 
         </Grid.RowDefinitions>
         <DockPanel Grid.ColumnSpan="6">
-            <MenuBar:MenuBarComponent x:Name="menuBar" VerticalAlignment="Top" DockPanel.Dock="Top"/>
+            <Comp:MenuBarComponent x:Name="menuBar" VerticalAlignment="Top" DockPanel.Dock="Top"/>
         </DockPanel>
         <Label
         	Content="Conversations:" Margin="10,10,97,141" Grid.Row="2"/>
@@ -64,16 +65,26 @@
 
         </DockPanel>
 
-            <MenuBar:AreaSelectionControl 
-                x:Name="areaSelection"
-                HorizontalAlignment="Stretch" 
-                Grid.Row="1" 
-                Grid.Column="0" 
-                VerticalAlignment="Stretch"
-                Width="Auto"
-                Height="Auto"
-                />
+        <Comp:AreaSelectionControl 
+            x:Name="areaSelection"
+            HorizontalAlignment="Stretch" 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            />
 
+        <Comp:DialogSelectionControl
+            x:Name="dialogSelection"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Grid.Row="2"
+            Grid.Column="0"
+            Width="Auto"
+            Height="Auto"
+            />
+        
         <!--<local:FlatRedBallControl HorizontalAlignment="Left" Height="120" Margin="195,88,0,0" VerticalAlignment="Top" Width="120" x:Name="flatRedBallControl"/>-->
 
     </Grid>

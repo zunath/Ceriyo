@@ -22,9 +22,9 @@ namespace Ceriyo.Data
             get { return "/Data/CharacterClasses/"; }
         }
 
-        public static string ConversationsDirectory
+        public static string DialogsDirectory
         {
-            get { return "/Data/Conversations/"; }
+            get { return "/Data/Dialogs/"; }
         }
 
         public static string CreaturesDirectory

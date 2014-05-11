@@ -24,13 +24,8 @@ namespace Ceriyo.Toolset.Windows
         {
             InitializeComponent();
             Model = new EditAreaVM();
-            InitializeModel();
             SetDataContexts();
             SetLimits();
-        }
-
-        private void InitializeModel()
-        {
         }
 
         private void PopulateModel(Area area)
@@ -44,6 +39,7 @@ namespace Ceriyo.Toolset.Windows
             Model.Resref = area.Resref;
             Model.Tag = area.Tag;
             Model.Width = area.MapWidth;
+            Model.LocalVariables = area.LocalVariables;
 
             if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnAreaEnter))
             {

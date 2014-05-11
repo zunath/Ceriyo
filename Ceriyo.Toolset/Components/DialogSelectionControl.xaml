@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Ceriyo.Toolset.Components.AreaSelectionControl"
+﻿<UserControl x:Class="Ceriyo.Toolset.Components.DialogSelectionControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,33 +10,32 @@
             <ColumnDefinition Width="50"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <DockPanel Grid.Row="1"
                    Grid.Column="0"
                    Grid.ColumnSpan="2">
-            <ListBox Name="lbAreas" 
-                     ItemsSource="{Binding Areas}" 
+            <ListBox Name="lbDialogs" 
+                     ItemsSource="{Binding Dialogs}" 
                      DisplayMemberPath="Name" 
                      SelectionMode="Single" 
                      MouseDoubleClick="DoubleClickItem">
                 <ListBox.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Name="miNewArea" Header="New" Click="ContextMenuNew"></MenuItem>
-                        <MenuItem Name="miOpenArea" Header="Open" Click="ContextMenuOpen"></MenuItem>
+                        <MenuItem Name="miNewDialog" Header="New" Click="ContextMenuNew"></MenuItem>
+                        <MenuItem Name="miOpenDialog" Header="Open" Click="ContextMenuOpen"></MenuItem>
                         <Separator />
-                        <MenuItem Name="miEditArea" Header="Properties..." Click="ContextMenuEdit"></MenuItem>
-                        <MenuItem Name="miDeleteArea" Header="Delete" Click="ContextMenuDelete"></MenuItem>
+                        <MenuItem Name="miDeleteDialog" Header="Delete" Click="ContextMenuDelete"></MenuItem>
                     </ContextMenu>
                 </ListBox.ContextMenu>
             </ListBox>
         </DockPanel>
-        
-        <Label Grid.Row="0" Grid.Column="0" Content="Areas:">
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Dialogs:">
         </Label>
 
         <Button 

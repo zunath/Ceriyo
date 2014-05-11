@@ -123,8 +123,8 @@
     <Compile Include="Components\AreaSelectionControl.xaml.cs">
       <DependentUpon>AreaSelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\ConversationSelectionControl.xaml.cs">
-      <DependentUpon>ConversationSelectionControl.xaml</DependentUpon>
+    <Compile Include="Components\DialogSelectionControl.xaml.cs">
+      <DependentUpon>DialogSelectionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\ExportResourcePackControl.xaml.cs">
       <DependentUpon>ExportResourcePackControl.xaml</DependentUpon>
@@ -158,6 +158,9 @@
     <Compile Include="ValidationRules\TextLengthRule.cs" />
     <Compile Include="ValidationRules\AreaHeightRule.cs" />
     <Compile Include="ValidationRules\AreaWidthRule.cs" />
+    <Compile Include="Windows\EditDialogWindow.xaml.cs">
+      <DependentUpon>EditDialogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\LoadModuleWindow.xaml.cs">
       <DependentUpon>LoadModuleWindow.xaml</DependentUpon>
     </Compile>
@@ -180,7 +183,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Components\ConversationSelectionControl.xaml">
+    <Page Include="Components\DialogSelectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,6 +239,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\EditDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\LoadModuleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

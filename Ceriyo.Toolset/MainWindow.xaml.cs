@@ -53,6 +53,11 @@ namespace Ceriyo.Toolset
             AreaEditorGame = new AreaEditorGame(gameControl);
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
 
     }
 }

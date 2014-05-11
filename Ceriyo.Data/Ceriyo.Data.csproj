@@ -91,7 +91,7 @@
     <Compile Include="Extensions\SerializableDictionary.cs" />
     <Compile Include="GameObjects\Area.cs" />
     <Compile Include="GameObjects\CharacterClass.cs" />
-    <Compile Include="GameObjects\Conversation.cs" />
+    <Compile Include="GameObjects\Dialog.cs" />
     <Compile Include="GameObjects\Creature.cs" />
     <Compile Include="GameObjects\GameModule.cs" />
     <Compile Include="GameObjects\IGameObject.cs" />
@@ -111,6 +111,8 @@
     <Compile Include="Settings\ToolsetSettings.cs" />
     <Compile Include="ViewModels\AreaSelectionVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
+    <Compile Include="ViewModels\DialogSelectionVM.cs" />
+    <Compile Include="ViewModels\EditDialogVM.cs" />
     <Compile Include="ViewModels\LoadModuleVM.cs" />
     <Compile Include="ViewModels\EditAreaVM.cs" />
     <Compile Include="ViewModels\ToolsetVM.cs" />

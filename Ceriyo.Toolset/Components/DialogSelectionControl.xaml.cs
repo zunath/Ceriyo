@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -20,94 +19,92 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Toolset.Windows;
-using FlatRedBall.IO;
 
 namespace Ceriyo.Toolset.Components
 {
     /// <summary>
-    /// Interaction logic for AreaSelectionControl.xaml
+    /// Interaction logic for ConversationSelectionControl.xaml
     /// </summary>
-    public partial class AreaSelectionControl : UserControl
+    public partial class DialogSelectionControl : UserControl
     {
-        protected AreaSelectionVM Model { get; set; }
-        public event EventHandler<GameObjectEventArgs> OnAreaOpen;
-        private EditAreaWindow EditPropertiesWindow { get; set; }
+        protected DialogSelectionVM Model { get; set; }
+        private EditDialogWindow EditPropertiesWindow { get; set; }
 
-        public AreaSelectionControl()
+        public DialogSelectionControl()
         {
             InitializeComponent();
-            InitializeModel();    
+            InitializeModel();
             SetDataContexts();
-            EditPropertiesWindow = new EditAreaWindow();
-            EditPropertiesWindow.OnSaveArea += OnSaveArea;
+            EditPropertiesWindow = new EditDialogWindow();
+
         }
 
         private void InitializeModel()
         {
-            this.Model = new AreaSelectionVM();
-            Model.Areas = WorkingDataManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory) as BindingList<Area>;
+            this.Model = new DialogSelectionVM();
+            Model.Dialogs = WorkingDataManager.GetAllGameObjects<Dialog>(ModulePaths.DialogsDirectory) as BindingList<Dialog>;
         }
 
         private void SetDataContexts()
         {
-            lbAreas.DataContext = Model;
+            lbDialogs.DataContext = Model;
         }
 
         private void Create(object sender, RoutedEventArgs e)
         {
-            Area area = new Area();
-            EditPropertiesWindow.Open(area, false);
+            Dialog dialog = new Dialog();
+            EditPropertiesWindow.Open(dialog, false);
         }
 
-        private void OnSaveArea(object sender, GameObjectEventArgs e)
+        private void Save(object sender, GameObjectEventArgs e)
         {
-            Area area = Model.Areas.SingleOrDefault(x => x.Resref == e.GameObject.Resref);
-            
-            if (area == null)
+            Dialog dialog = Model.Dialogs.SingleOrDefault(x => x.Resref == e.GameObject.Resref);
+
+            if (dialog == null)
             {
-                Model.Areas.Add(e.GameObject as Area);
+                Model.Dialogs.Add(e.GameObject as Dialog);
             }
             else
             {
-                int index = Model.Areas.IndexOf(area);
-                Model.Areas[index] = e.GameObject as Area;
+                int index = Model.Dialogs.IndexOf(dialog);
+                Model.Dialogs[index] = e.GameObject as Dialog;
             }
         }
 
         private void Open(object sender, RoutedEventArgs e)
         {
-            Area area = lbAreas.SelectedItem as Area;
+            Dialog dialog = lbDialogs.SelectedItem as Dialog;
 
-            if (OnAreaOpen != null)
+            if (lbDialogs.SelectedItem != null)
             {
-                OnAreaOpen(this, new GameObjectEventArgs(area));
+                EditPropertiesWindow.Open(dialog, true);
             }
         }
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            Area area = lbAreas.SelectedItem as Area;
-            if (area != null)
+            Dialog dialog = lbDialogs.SelectedItem as Dialog;
+
+            if (dialog != null)
             {
                 try
                 {
-                    if (MessageBox.Show("Are you sure you want to delete the area " + area.Name + " ?", "Delete Area?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Are you sure you want to delete the dialog " + dialog.Name + " ?", "Delete Dialog?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
-                        FileOperationResultTypeEnum result = WorkingDataManager.DeleteGameObjectFile(area);
+                        FileOperationResultTypeEnum result = WorkingDataManager.DeleteGameObjectFile(dialog);
 
                         if (result == FileOperationResultTypeEnum.Success)
                         {
-                            Model.Areas.Remove(area);
+                            Model.Dialogs.Remove(dialog);
                         }
                         else if (result == FileOperationResultTypeEnum.FileDoesNotExist)
                         {
-                            MessageBox.Show("Unable to delete area. File does not exist.", "Unable to delete area", MessageBoxButton.OK);
+                            MessageBox.Show("Unable to delete dialog. File does not exist.", "Unable to delete dialog", MessageBoxButton.OK);
                         }
                         else if (result == FileOperationResultTypeEnum.Failure)
                         {
-                            MessageBox.Show("Unable to delete area. Deletion failed.", "Unable to delete area", MessageBoxButton.OK);
+                            MessageBox.Show("Unable to delete dialog. Deletion failed.", "Unable to delete dialog", MessageBoxButton.OK);
                         }
-
                     }
                 }
                 catch (Exception ex)
@@ -117,9 +114,9 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
-        private void DoubleClickItem(object sender, MouseButtonEventArgs e)
+        private void DoubleClickItem(object sender, RoutedEventArgs e)
         {
-            if (lbAreas.SelectedItem != null)
+            if (lbDialogs.SelectedItem != null)
             {
                 btnOpen.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
@@ -127,7 +124,7 @@ namespace Ceriyo.Toolset.Components
 
         private void ContextMenuNew(object sender, RoutedEventArgs e)
         {
-            if (lbAreas.SelectedItem != null)
+            if (lbDialogs.SelectedItem != null)
             {
                 btnCreate.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
@@ -135,28 +132,19 @@ namespace Ceriyo.Toolset.Components
 
         private void ContextMenuOpen(object sender, RoutedEventArgs e)
         {
-            if (lbAreas.SelectedItem != null)
+            if (lbDialogs.SelectedItem != null)
             {
                 btnOpen.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
 
-        private void ContextMenuEdit(object sender, RoutedEventArgs e)
-        {
-            Area area = lbAreas.SelectedItem as Area;
-
-            if (lbAreas.SelectedItem != null)
-            {
-                EditPropertiesWindow.Open(area, true);
-            }
-        }
-
         private void ContextMenuDelete(object sender, RoutedEventArgs e)
         {
-            if (lbAreas.SelectedItem != null)
+            if (lbDialogs.SelectedItem != null)
             {
                 btnDelete.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
+
     }
 }
