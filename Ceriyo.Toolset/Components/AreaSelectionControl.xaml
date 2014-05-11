@@ -26,11 +26,11 @@
                      MouseDoubleClick="DoubleClickItem">
                 <ListBox.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Name="miNewArea" Header="New" Click="ContextMenuNew"></MenuItem>
-                        <MenuItem Name="miOpenArea" Header="Open" Click="ContextMenuOpen"></MenuItem>
+                        <MenuItem Name="miNew" Header="New" Click="ContextMenuNew"></MenuItem>
+                        <MenuItem Name="miOpen" Header="Open" Click="ContextMenuOpen"></MenuItem>
                         <Separator />
-                        <MenuItem Name="miEditArea" Header="Properties..." Click="ContextMenuEdit"></MenuItem>
-                        <MenuItem Name="miDeleteArea" Header="Delete" Click="ContextMenuDelete"></MenuItem>
+                        <MenuItem Name="miEdit" Header="Properties..." Click="ContextMenuEdit"></MenuItem>
+                        <MenuItem Name="miDelete" Header="Delete" Click="ContextMenuDelete"></MenuItem>
                     </ContextMenu>
                 </ListBox.ContextMenu>
             </ListBox>

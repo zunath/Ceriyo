@@ -48,7 +48,6 @@ namespace Ceriyo.Entities
             object test = manager.RunScript("testscript", player);
 
 
-
 		}
 
 		private void CustomActivity()

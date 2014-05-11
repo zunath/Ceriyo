@@ -11,10 +11,13 @@
                 <MenuItem Header="New Module" Click="NewModule_Click"></MenuItem>
                 <MenuItem Header="Open Module" Click="MenuItem_Click"></MenuItem>
                 <MenuItem Header="Close Module"></MenuItem>
+                <Separator></Separator>
                 <MenuItem Header="Save"></MenuItem>
                 <MenuItem Header="Save As..."></MenuItem>
+                <Separator></Separator>
                 <MenuItem Header="Import"></MenuItem>
                 <MenuItem Header="Export"></MenuItem>
+                <Separator></Separator>
                 <MenuItem Name="miExit" Header="Exit" Click="miExit_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Edit">
@@ -23,6 +26,7 @@
                 <MenuItem Header="Copy"></MenuItem>
                 <MenuItem Header="Cut"></MenuItem>
                 <MenuItem Header="Paste"></MenuItem>
+                <Separator></Separator>
                 <MenuItem Header="Module Properties"></MenuItem>
             </MenuItem>
             <MenuItem Header="Content">

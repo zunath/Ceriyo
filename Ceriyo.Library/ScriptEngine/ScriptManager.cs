@@ -14,7 +14,6 @@ namespace Ceriyo.Library.ScriptEngine
     public class ScriptManager
     {
         private string _engineScriptDirectory;
-        private const string ScriptFileExtension = ".js";
         private const string JavascriptObjectName = "app";
         private const string JavascriptSelfName = "self";
         private JavascriptContext JSContext { get; set; }
@@ -33,7 +32,7 @@ namespace Ceriyo.Library.ScriptEngine
         /// </summary>
         public object RunScript(string scriptName, object self)
         {
-            scriptName += ScriptFileExtension;
+            scriptName += EnginePaths.ScriptExtension;
             string filePath = EnginePaths.ScriptsDirectory + scriptName;
             string script = File.ReadAllText(filePath) + "Main();";
             this.JSContext.SetParameter("self", self);

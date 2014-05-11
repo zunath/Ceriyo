@@ -13,6 +13,11 @@ namespace Ceriyo.Data
             get { return ".xml"; }
         }
 
+        public static string ScriptExtension
+        {
+            get { return ".js"; }
+        }
+
         public static string ModulesDirectory
         {
             get { return FileManager.RelativeDirectory + @"Content/Modules/"; }

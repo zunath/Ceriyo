@@ -88,6 +88,7 @@
     <Compile Include="EventArguments\GameObjectEventArgs.cs" />
     <Compile Include="EventArguments\ConnectionStatusEventArgs.cs" />
     <Compile Include="EventArguments\GameModuleEventArgs.cs" />
+    <Compile Include="EventArguments\ScriptEventArgs.cs" />
     <Compile Include="Extensions\SerializableDictionary.cs" />
     <Compile Include="GameObjects\Area.cs" />
     <Compile Include="GameObjects\CharacterClass.cs" />
@@ -96,6 +97,8 @@
     <Compile Include="GameObjects\GameModule.cs" />
     <Compile Include="GameObjects\IGameObject.cs" />
     <Compile Include="GameObjects\Item.cs" />
+    <Compile Include="GameObjects\LevelChart.cs" />
+    <Compile Include="GameObjects\LevelChartItem.cs" />
     <Compile Include="GameObjects\LocalVariable.cs" />
     <Compile Include="GameObjects\MapTile.cs" />
     <Compile Include="GameObjects\Placeable.cs" />
@@ -115,6 +118,7 @@
     <Compile Include="ViewModels\EditDialogVM.cs" />
     <Compile Include="ViewModels\LoadModuleVM.cs" />
     <Compile Include="ViewModels\EditAreaVM.cs" />
+    <Compile Include="ViewModels\ScriptSelectionVM.cs" />
     <Compile Include="ViewModels\ToolsetVM.cs" />
   </ItemGroup>
   <ItemGroup />

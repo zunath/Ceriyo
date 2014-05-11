@@ -179,6 +179,9 @@
     <Compile Include="Windows\EditPlaceableWindow.xaml.cs">
       <DependentUpon>EditPlaceableWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ScriptEditorWindow.xaml.cs">
+      <DependentUpon>ScriptEditorWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Components\AreaSelectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -264,6 +267,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\EditPlaceableWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ScriptEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

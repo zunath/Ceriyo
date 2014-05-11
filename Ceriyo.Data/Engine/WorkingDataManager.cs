@@ -119,6 +119,31 @@ namespace Ceriyo.Data
             return scripts;
         }
 
+        public static FileOperationResultTypeEnum DeleteScript(string scriptName)
+        {
+            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+
+            try
+            {
+                string path = WorkingPaths.ScriptsDirectory + scriptName + EnginePaths.ScriptExtension;
+                if (!File.Exists(path))
+                {
+                    result = FileOperationResultTypeEnum.FileDoesNotExist;
+                }
+                else
+                {
+                    File.Delete(path);
+                    result = FileOperationResultTypeEnum.Success;
+                }
+            }
+            catch
+            {
+                result = FileOperationResultTypeEnum.Failure;
+            }
+
+            return result;
+        }
+
         public static bool DoesGameObjectExist(IGameObject gameObject)
         {
             string path = gameObject.WorkingDirectory + gameObject.Resref + EnginePaths.DataExtension;
