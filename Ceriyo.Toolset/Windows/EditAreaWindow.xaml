@@ -2,6 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:val="clr-namespace:Ceriyo.Toolset.ValidationRules"
+        xmlns:eng="clr-namespace:Ceriyo.Data"
         Title="NewAreaWindow" Height="500" Width="400">
     <Grid>
 
@@ -43,48 +45,98 @@
                                  Height="23" 
                                  Margin="8,13,0,0" 
                                  TextWrapping="Wrap" 
-                                 Text="{Binding Name}" 
                                  VerticalAlignment="Top" 
-                                 Width="294"
-                                 Grid.Column="1"/>
+                                 Width="294"                                 
+                                 Grid.Column="1">
+                            <TextBox.Text>
+                                <Binding Path="Name" 
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:NameLengthVR></val:NameLengthVR>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <TextBox Name="txtTag" 
                                  HorizontalAlignment="Left" 
                                  Height="23" 
                                  Margin="8,44,0,0" 
                                  TextWrapping="Wrap" 
-                                 Text="{Binding Tag}" 
                                  VerticalAlignment="Top" 
                                  Width="294"
-                                 Grid.Column="1"/>
+                                 Grid.Column="1">
+                            <TextBox.Text>
+                                <Binding Path="Tag" 
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:NameLengthVR></val:NameLengthVR>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <TextBox Name="txtResref" 
                                  HorizontalAlignment="Left" 
                                  Height="23" 
                                  Margin="8,75,0,0" 
                                  TextWrapping="Wrap" 
-                                 Text="{Binding Resref}" 
                                  VerticalAlignment="Top" 
                                  Width="294"
-                                 Grid.Column="1"/>
+                                 Grid.Column="1">
+                            <TextBox.Text>
+                                <Binding Path="Resref" 
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:ResrefLengthVR></val:ResrefLengthVR>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label Content="Area Size:" HorizontalAlignment="Left" Margin="-1,49,0,0" Grid.Row="1" VerticalAlignment="Top"/>
                         <xctk:IntegerUpDown Name="numWidth"
                                             Grid.Column="1" 
                                             HorizontalAlignment="Left" 
                                             Margin="10,55,0,0" 
                                             Grid.Row="1" 
-                                            VerticalAlignment="Top" 
-                                            Value="{Binding Width}"
-                                            Text="{Binding Width}"
-                                            Width="71" RenderTransformOrigin="1.272,0.717"/>
+                                            VerticalAlignment="Top"
+                                            Width="71" RenderTransformOrigin="1.272,0.717">
+                            <xctk:IntegerUpDown.Text>
+                                <Binding Path="Width">
+                                    <Binding.ValidationRules>
+                                        <val:AreaWidthVR></val:AreaWidthVR>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </xctk:IntegerUpDown.Text>
+                            <xctk:IntegerUpDown.Value>
+                                <Binding Path="Width">
+                                    <Binding.ValidationRules>
+                                        <val:AreaWidthVR></val:AreaWidthVR>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </xctk:IntegerUpDown.Value>
+                        </xctk:IntegerUpDown>
 
                         <xctk:IntegerUpDown Name="numHeight"
                                             Grid.Column="1" 
                                             HorizontalAlignment="Left" 
                                             Margin="162,55,0,0" 
                                             Grid.Row="1" 
-                                            VerticalAlignment="Top" 
-                                            Value="{Binding Height}"
-                                            Text="{Binding Height}"
-                                            Width="71"/>
+                                            VerticalAlignment="Top"
+                                            Width="71">
+                            <xctk:IntegerUpDown.Text>
+                                <Binding Path="Height">
+                                    <Binding.ValidationRules>
+                                        <val:AreaHeightVR></val:AreaHeightVR>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </xctk:IntegerUpDown.Text>
+                            <xctk:IntegerUpDown.Value>
+                                <Binding Path="Height">
+                                    <Binding.ValidationRules>
+                                        <val:AreaHeightVR></val:AreaHeightVR>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </xctk:IntegerUpDown.Value>
+                        </xctk:IntegerUpDown>
                         <Label Content="Width" 
                                Grid.Column="1" 
                                HorizontalAlignment="Left" 
@@ -130,22 +182,29 @@
                 <TabItem Header="Description">
                     <Grid Background="#FFE5E5E5">
                         <DockPanel>
-                            <TextBlock Name="txtDescription" 
+                            <TextBox Name="txtDescription" 
                                        HorizontalAlignment="Stretch" 
                                        VerticalAlignment="Stretch"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"
+                                       Width="Auto"
+                                       Height="Auto"
                                        Text="{Binding Description}">
-                            </TextBlock>
+                            </TextBox>
+
                         </DockPanel>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Comments">
                     <Grid Background="#FFE5E5E5">
                         <DockPanel>
-                            <TextBlock Name="txtComments" 
+                            <TextBox Name="txtComments" 
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True"
                                        HorizontalAlignment="Stretch" 
                                        VerticalAlignment="Stretch"
                                        Text="{Binding Comments}">
-                            </TextBlock>
+                            </TextBox>
                         </DockPanel>
                     </Grid>
                 </TabItem>
@@ -162,7 +221,7 @@
                 Margin="198,8,0,0" 
                 Grid.Row="1" 
                 VerticalAlignment="Top" 
-                Width="75"/>
+                Width="75" Click="Button_Click"/>
 
     </Grid>
 </Window>

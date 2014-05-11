@@ -10,6 +10,7 @@ namespace Ceriyo.Data.ViewModels
     public class AreaSelectionVM : BaseVM
     {
         private BindingList<Area> _areas;
+        private bool _isAreaLoaded;
 
         public BindingList<Area> Areas
         {
@@ -21,9 +22,20 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public bool IsAreaLoaded
+        {
+            get { return _isAreaLoaded; }
+            set
+            {
+                _isAreaLoaded = value;
+                OnPropertyChanged("IsAreaLoaded");
+            }
+        }
+
         public AreaSelectionVM()
         {
             this._areas = new BindingList<Area>();
+            this._isAreaLoaded = false;
         }
     }
 }

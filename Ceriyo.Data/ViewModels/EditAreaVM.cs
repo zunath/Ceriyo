@@ -14,8 +14,9 @@ namespace Ceriyo.Data.ViewModels
         public int Width { get; set; }
         public int Height { get; set; }
 
-        IList<string> Scripts { get; set; }
-        IList<LocalVariable> LocalVariables { get; set; }
+        public IList<string> Scripts { get; set; }
+        public IList<LocalVariable> LocalVariables { get; set; }
+        public IList<Tileset> Tilesets { get; set; }
         public string Description { get; set; }
         public string Comments { get; set; }
         public string OnAreaEnterScript { get; set; }
@@ -25,6 +26,19 @@ namespace Ceriyo.Data.ViewModels
 
         public EditAreaVM()
         {
+            this.Name = "";
+            this.Tag = "";
+            this.Resref = "";
+            this.Width = EngineConstants.AreaMinWidth;
+            this.Height = EngineConstants.AreaMinHeight;
+            this.Scripts = new List<string>();
+            this.LocalVariables = new List<LocalVariable>();
+            this.Tilesets = new List<Tileset>();
+            this.Description = "";
+            this.Comments = "";
+            this.OnAreaEnterScript = "";
+            this.OnAreaExitScript = "";
+            this.OnAreaHeartbeatScript = "";
         }
     }
 }

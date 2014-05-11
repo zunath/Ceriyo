@@ -18,6 +18,7 @@ using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
+using Ceriyo.Toolset.Windows;
 using FlatRedBall.IO;
 
 namespace Ceriyo.Toolset.Components
@@ -61,7 +62,8 @@ namespace Ceriyo.Toolset.Components
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-
+            EditAreaWindow window = new EditAreaWindow();
+            window.ShowDialog();
         }
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)

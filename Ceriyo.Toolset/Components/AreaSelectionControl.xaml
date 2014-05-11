@@ -19,7 +19,20 @@
         <DockPanel Grid.Row="1"
                    Grid.Column="0"
                    Grid.ColumnSpan="2">
-            <ListBox Name="lbAreas" ItemsSource="{Binding Areas}" DisplayMemberPath="Name" SelectionMode="Single" MouseDoubleClick="lbAreas_MouseDoubleClick">
+            <ListBox Name="lbAreas" 
+                     ItemsSource="{Binding Areas}" 
+                     DisplayMemberPath="Name" 
+                     SelectionMode="Single" 
+                     MouseDoubleClick="lbAreas_MouseDoubleClick">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Name="miNewArea" Header="New"></MenuItem>
+                        <MenuItem Name="miOpenArea" Header="Open"></MenuItem>
+                        <Separator />
+                        <MenuItem Name="miEditArea" Header="Properties..."></MenuItem>
+                        <MenuItem Name="miDeleteArea" Header="Delete"></MenuItem>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
             </ListBox>
         </DockPanel>
         

@@ -151,6 +151,13 @@
     <Compile Include="Components\MenuBarComponent.xaml.cs">
       <DependentUpon>MenuBarComponent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValidationRules\NameLengthVR.cs" />
+    <Compile Include="ValidationRules\NumericAmountVR.cs" />
+    <Compile Include="ValidationRules\ResrefLengthVR.cs" />
+    <Compile Include="ValidationRules\TagLengthVR.cs" />
+    <Compile Include="ValidationRules\TextLengthVR.cs" />
+    <Compile Include="ValidationRules\AreaHeightVR.cs" />
+    <Compile Include="ValidationRules\AreaWidthVR.cs" />
     <Compile Include="Windows\LoadModuleWindow.xaml.cs">
       <DependentUpon>LoadModuleWindow.xaml</DependentUpon>
     </Compile>

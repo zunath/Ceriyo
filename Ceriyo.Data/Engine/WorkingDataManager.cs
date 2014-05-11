@@ -80,5 +80,29 @@ namespace Ceriyo.Data
 
             return result;
         }
+
+        public static IList<IGameObject> GetAllGameObjects(string folderName)
+        {
+            IList<IGameObject> gameObjects = new List<IGameObject>();
+
+            try
+            {
+                string path = EnginePaths.WorkingDirectory + folderName + "/";
+                string[] files = Directory.GetFiles(path);
+
+                foreach (string file in files)
+                {
+                    IGameObject gameObject = FileManager.XmlDeserialize<IGameObject>(file);
+                    gameObjects.Add(gameObject);
+                }
+            }
+            catch
+            {
+                gameObjects = null;
+            }
+
+            return gameObjects;
+        }
+
     }
 }

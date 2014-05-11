@@ -47,9 +47,19 @@ namespace Ceriyo.Data
             get { return 32; }
         }
 
+        public static int AreaMinWidth
+        {
+            get { return 2; }
+        }
+
         public static int AreaMaxHeight
         {
             get { return 32; }
+        }
+
+        public static int AreaMinHeight
+        {
+            get { return 2; }
         }
 
         public static int AreaMaxLayers
