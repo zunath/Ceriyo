@@ -11,23 +11,16 @@ namespace Ceriyo.Data
 {
     public static class WorkingDataManager
     {
-        public static FileOperationResultTypeEnum CreateGameObjectFile(IGameObject gameObject)
+        public static FileOperationResultTypeEnum SaveGameObjectFile(IGameObject gameObject)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 
             try
             {
                 string filePath = gameObject.WorkingDirectory + gameObject.Resref + EnginePaths.DataExtension;
+                FileManager.XmlSerialize(gameObject.GetType(), gameObject, filePath);
 
-                if (File.Exists(filePath))
-                {
-                    result = FileOperationResultTypeEnum.FileExists;
-                }
-                else
-                {
-                    FileManager.XmlSerialize(gameObject.GetType(), gameObject, filePath);
-                    result = FileOperationResultTypeEnum.Success;
-                }
+                result = FileOperationResultTypeEnum.Success;
             }
             catch
             {

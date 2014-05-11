@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 
@@ -23,6 +15,7 @@ namespace Ceriyo.Toolset.Windows
     public partial class EditAreaWindow : Window
     {
         private EditAreaVM Model { get; set; }
+        public event EventHandler<GameObjectEventArgs> OnSaveArea;
 
         public EditAreaWindow()
         {
@@ -90,9 +83,38 @@ namespace Ceriyo.Toolset.Windows
             numWidth.DataContext = Model;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            Area area = new Area(Model.Name, Model.Tag, Model.Resref, Model.Width, Model.Height, EngineConstants.AreaMaxLayers);
+            area.Comments = Model.Comments;
+            area.Description = Model.Description;
+            area.LocalVariables = Model.LocalVariables;
+            area.Scripts.Add(ScriptEventTypeEnum.OnAreaEnter, Model.OnAreaEnterScript);
+            area.Scripts.Add(ScriptEventTypeEnum.OnAreaExit, Model.OnAreaExitScript);
+            area.Scripts.Add(ScriptEventTypeEnum.OnHeartbeat, Model.OnAreaHeartbeatScript);
+
+            FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(area);
+
+            if (result == FileOperationResultTypeEnum.Success)
+            {
+                if (OnSaveArea != null)
+                {
+                    OnSaveArea(this, new GameObjectEventArgs(area));
+                }
+
+                this.Close();
+            }
+            else if (result == FileOperationResultTypeEnum.Failure)
+            {
+                MessageBox.Show("Could not save area.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
         }
     }
 }

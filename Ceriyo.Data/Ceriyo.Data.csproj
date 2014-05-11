@@ -88,6 +88,7 @@
     <Compile Include="EventArguments\AreaEventArgs.cs" />
     <Compile Include="EventArguments\ConnectionStatusEventArgs.cs" />
     <Compile Include="EventArguments\GameModuleEventArgs.cs" />
+    <Compile Include="Extensions\SerializableDictionary.cs" />
     <Compile Include="GameObjects\Area.cs" />
     <Compile Include="GameObjects\CharacterClass.cs" />
     <Compile Include="GameObjects\Conversation.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="GameObjects\IGameObject.cs" />
     <Compile Include="GameObjects\Item.cs" />
     <Compile Include="GameObjects\LocalVariable.cs" />
+    <Compile Include="GameObjects\MapTile.cs" />
     <Compile Include="GameObjects\Placeable.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\Tile.cs" />

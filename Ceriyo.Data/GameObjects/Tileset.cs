@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.Extensions;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -14,8 +15,8 @@ namespace Ceriyo.Data.GameObjects
         public string Description { get; set; }
         public string Comments { get; set; }
         public string WorkingDirectory { get { return WorkingPaths.TilesetsDirectory; } }
-        public IList<LocalVariable> LocalVariables { get; set; }
-        public IDictionary<ScriptEventTypeEnum, string> Scripts
+        public List<LocalVariable> LocalVariables { get; set; }
+        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts
         {
             get { throw new NotSupportedException(); }
             set { throw new NotSupportedException(); }

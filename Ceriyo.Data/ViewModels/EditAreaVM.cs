@@ -14,9 +14,9 @@ namespace Ceriyo.Data.ViewModels
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public IList<string> Scripts { get; set; }
-        public IList<LocalVariable> LocalVariables { get; set; }
-        public IList<Tileset> Tilesets { get; set; }
+        public List<string> Scripts { get; set; }
+        public List<LocalVariable> LocalVariables { get; set; }
+        public List<Tileset> Tilesets { get; set; }
         public string Description { get; set; }
         public string Comments { get; set; }
         public string OnAreaEnterScript { get; set; }

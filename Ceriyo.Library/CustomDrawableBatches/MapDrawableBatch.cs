@@ -29,7 +29,7 @@ namespace Ceriyo.Library.CustomDrawableBatches
             this._sourceRectangle = new Rectangle(0, 0, TileWidth, TileHeight);
 
             this.DrawableArea = area;
-            this.MapTexture = FlatRedBallServices.Load<Texture2D>(FileManager.RelativeDirectory + @"Content/" + area.TextureFilePath);
+            this.MapTexture = FlatRedBallServices.Load<Texture2D>(FileManager.RelativeDirectory + @"Content/" + "Tilesets/grassland_tiles"); // TODO: Retrieve file from resource package
             this.TileSprites = new SpriteList();
 
             int capacity = area.MapWidth * area.MapHeight;
@@ -77,7 +77,8 @@ namespace Ceriyo.Library.CustomDrawableBatches
 
         private void LoadMap()
         {
-            foreach (Tile[,] layer in DrawableArea.MapTiles)
+
+            foreach (Tile[,] layer in DrawableArea.Tiles)
             {
                 int listIndex = 0;
                 int xBound = layer.GetUpperBound(0);
