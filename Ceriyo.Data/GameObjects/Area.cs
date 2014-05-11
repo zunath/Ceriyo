@@ -51,6 +51,17 @@ namespace Ceriyo.Data.GameObjects
 
         public Area()
         {
+            this.Name = "";
+            this.Tag = "";
+            this.Resref = "";
+            this.Description = "";
+            this.Comments = "";
+            this.MapWidth = EngineConstants.AreaMaxWidth;
+            this.MapHeight = EngineConstants.AreaMaxHeight;
+            this.LayerCount = EngineConstants.AreaMaxLayers;
+            this.LocalVariables = new BindingList<LocalVariable>();
+            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            this.MapTiles = new BindingList<MapTile>();
         }
 
         public Area(

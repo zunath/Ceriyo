@@ -28,23 +28,14 @@ namespace Ceriyo.Toolset.Windows
             SetLimits();
         }
 
-        public EditAreaWindow(Area area)
+        private void InitializeModel()
         {
-            InitializeComponent();
-            Model = new EditAreaVM();
-            InitializeModel(area);
-            SetDataContexts();
-            SetLimits();
         }
 
-        private void InitializeModel()
+        private void PopulateModel(Area area)
         {
             Model.Tilesets = WorkingDataManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
             Model.Scripts = WorkingDataManager.GetAllScriptNames();
-        }
-
-        private void InitializeModel(Area area)
-        {
             Model.Comments = area.Comments;
             Model.Description = area.Description;
             Model.Height = area.MapHeight;
@@ -52,11 +43,21 @@ namespace Ceriyo.Toolset.Windows
             Model.Resref = area.Resref;
             Model.Tag = area.Tag;
             Model.Width = area.MapWidth;
-            Model.OnAreaEnterScript = area.Scripts[ScriptEventTypeEnum.OnAreaEnter];
-            Model.OnAreaExitScript = area.Scripts[ScriptEventTypeEnum.OnAreaExit];
-            Model.OnAreaHeartbeatScript = area.Scripts[ScriptEventTypeEnum.OnHeartbeat];
 
-            InitializeModel();
+            if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnAreaEnter))
+            {
+                Model.OnAreaEnterScript = area.Scripts[ScriptEventTypeEnum.OnAreaEnter];
+            }
+
+            if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnAreaExit))
+            {
+                Model.OnAreaExitScript = area.Scripts[ScriptEventTypeEnum.OnAreaExit];
+            }
+
+            if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnHeartbeat))
+            {
+                Model.OnAreaHeartbeatScript = area.Scripts[ScriptEventTypeEnum.OnHeartbeat];
+            }
         }
 
         private void SetLimits()
@@ -92,9 +93,15 @@ namespace Ceriyo.Toolset.Windows
             dgLocalVariables.DataContext = Model;
         }
 
+        public void Open(Area area)
+        {
+            PopulateModel(area);
+            this.Show();
+        }
+
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -124,6 +131,12 @@ namespace Ceriyo.Toolset.Windows
             }
 
 
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
         }
     }
 }

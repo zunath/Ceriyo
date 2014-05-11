@@ -31,12 +31,15 @@ namespace Ceriyo.Toolset.Components
     {
         protected AreaSelectionVM Model { get; set; }
         public event EventHandler<GameObjectEventArgs> OnAreaOpen;
+        private EditAreaWindow EditPropertiesWindow { get; set; }
 
         public AreaSelectionControl()
         {
             InitializeComponent();
             InitializeModel();    
             SetDataContexts();
+            EditPropertiesWindow = new EditAreaWindow();
+            EditPropertiesWindow.OnSaveArea += OnSaveArea;
         }
 
         private void InitializeModel()
@@ -52,9 +55,8 @@ namespace Ceriyo.Toolset.Components
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            EditAreaWindow window = new EditAreaWindow();
-            window.OnSaveArea += OnSaveArea;
-            window.ShowDialog();
+            Area area = new Area();
+            EditPropertiesWindow.Open(area);
         }
 
         private void OnSaveArea(object sender, GameObjectEventArgs e)
@@ -120,6 +122,40 @@ namespace Ceriyo.Toolset.Components
             if (lbAreas.SelectedItem != null)
             {
                 btnOpen.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+        }
+
+        private void miNewArea_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbAreas.SelectedItem != null)
+            {
+                btnCreate.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+        }
+
+        private void miOpenArea_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbAreas.SelectedItem != null)
+            {
+                btnOpen.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+        }
+
+        private void miEditArea_Click(object sender, RoutedEventArgs e)
+        {
+            Area area = lbAreas.SelectedItem as Area;
+
+            if (lbAreas.SelectedItem != null)
+            {
+                EditPropertiesWindow.Open(area);
+            }
+        }
+
+        private void miDeleteArea_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbAreas.SelectedItem != null)
+            {
+                btnDelete.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
     }
