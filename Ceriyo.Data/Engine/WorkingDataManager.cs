@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -74,9 +75,9 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public static List<IGameObject> GetAllGameObjects(string folderName, Type gameObjectType)
+        public static BindingList<T> GetAllGameObjects<T>(string folderName) where T: IGameObject
         {
-            List<IGameObject> gameObjects = new List<IGameObject>();
+            BindingList<T> gameObjects = new BindingList<T>();
 
             try
             {
@@ -85,7 +86,7 @@ namespace Ceriyo.Data
 
                 foreach (string file in files)
                 {
-                    IGameObject gameObject = FileManager.XmlDeserialize(gameObjectType, file) as IGameObject;
+                    T gameObject = FileManager.XmlDeserialize<T>(file);
                     gameObjects.Add(gameObject);
                 }
             }
@@ -97,9 +98,9 @@ namespace Ceriyo.Data
             return gameObjects;
         }
 
-        public static List<string> GetAllScriptNames()
+        public static BindingList<string> GetAllScriptNames()
         {
-            List<string> scripts = new List<string>();
+            BindingList<string> scripts = new BindingList<string>();
 
             try
             {

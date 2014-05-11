@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.EventArguments

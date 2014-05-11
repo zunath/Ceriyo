@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data.Enumerations;
@@ -15,7 +16,7 @@ namespace Ceriyo.Data.GameObjects
         public string Description { get; set; }
         public string Comments { get; set; }
         public string WorkingDirectory { get { return WorkingPaths.TilesetsDirectory; } }
-        public List<LocalVariable> LocalVariables { get; set; }
+        public BindingList<LocalVariable> LocalVariables { get; set; }
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts
         {
             get { throw new NotSupportedException(); }

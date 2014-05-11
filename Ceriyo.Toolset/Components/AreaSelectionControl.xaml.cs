@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,30 +35,19 @@ namespace Ceriyo.Toolset.Components
         public AreaSelectionControl()
         {
             InitializeComponent();
-            this.Model = new AreaSelectionVM();
-            this.Loaded += LoadWindow;
-
+            InitializeModel();    
             SetDataContexts();
         }
 
-        private void LoadWindow(object sender, RoutedEventArgs e)
+        private void InitializeModel()
         {
-            SetDataContexts();
+            this.Model = new AreaSelectionVM();
+            Model.Areas = WorkingDataManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory) as BindingList<Area>;
         }
 
         private void SetDataContexts()
         {
             lbAreas.DataContext = Model;
-        }
-
-        public void Populate()
-        {
-            Model.Areas.Clear();
-            string[] areaFiles = Directory.GetFiles(WorkingPaths.AreasDirectory);
-            foreach (string area in areaFiles)
-            {
-                Model.Areas.Add(FileManager.XmlDeserialize<Area>(area));
-            }
         }
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
@@ -69,8 +59,17 @@ namespace Ceriyo.Toolset.Components
 
         private void OnSaveArea(object sender, GameObjectEventArgs e)
         {
-            List<IGameObject> areas = WorkingDataManager.GetAllGameObjects(ModulePaths.AreasDirectory, typeof(Area));
-            areas = Model.Areas.Union(areas).ToList();
+            Area area = Model.Areas.SingleOrDefault(x => x.Resref == e.GameObject.Resref);
+            
+            if (area == null)
+            {
+                Model.Areas.Add(e.GameObject as Area);
+            }
+            else
+            {
+                int index = Model.Areas.IndexOf(area);
+                Model.Areas[index] = e.GameObject as Area;
+            }
         }
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)

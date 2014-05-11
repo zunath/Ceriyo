@@ -39,12 +39,8 @@ namespace Ceriyo.Toolset.Windows
 
         private void InitializeModel()
         {
-            //Model.Tilesets = WorkingDataManager.GetAllGameObjects(ModulePaths.TilesetsDirectory);
-            List<string> scriptNames = WorkingDataManager.GetAllScriptNames();
-            foreach (string script in scriptNames)
-            {
-                Model.Scripts.Add(script);
-            }
+            Model.Tilesets = WorkingDataManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
+            Model.Scripts = WorkingDataManager.GetAllScriptNames();
         }
 
         private void InitializeModel(Area area)
@@ -106,7 +102,7 @@ namespace Ceriyo.Toolset.Windows
             Area area = new Area(Model.Name, Model.Tag, Model.Resref, Model.Width, Model.Height, EngineConstants.AreaMaxLayers);
             area.Comments = Model.Comments;
             area.Description = Model.Description;
-            area.LocalVariables = Model.LocalVariables.ToList();
+            area.LocalVariables = Model.LocalVariables;
             area.Scripts.Add(ScriptEventTypeEnum.OnAreaEnter, Model.OnAreaEnterScript);
             area.Scripts.Add(ScriptEventTypeEnum.OnAreaExit, Model.OnAreaExitScript);
             area.Scripts.Add(ScriptEventTypeEnum.OnHeartbeat, Model.OnAreaHeartbeatScript);

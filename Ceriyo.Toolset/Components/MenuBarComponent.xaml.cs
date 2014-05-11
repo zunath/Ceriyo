@@ -49,5 +49,10 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
+        private void miExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
     }
 }

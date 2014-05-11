@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
@@ -19,9 +20,9 @@ namespace Ceriyo.Data.GameObjects
         public int MapHeight { get; set; }
         public int LayerCount { get; set; }
         public string WorkingDirectory { get { return WorkingPaths.AreasDirectory; } }
-        public List<LocalVariable> LocalVariables { get; set; }
+        public BindingList<LocalVariable> LocalVariables { get; set; }
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
-        public List<MapTile> MapTiles { get; set; }
+        public BindingList<MapTile> MapTiles { get; set; }
 
         [XmlIgnore]
         public List<Tile[,]> Tiles
@@ -66,8 +67,8 @@ namespace Ceriyo.Data.GameObjects
             this.MapWidth = tilesWide;
             this.MapHeight = tilesHigh;
             this.LayerCount = numberOfLayers;
-            this.MapTiles = new List<MapTile>();
-            this.LocalVariables = new List<LocalVariable>();
+            this.MapTiles = new BindingList<MapTile>();
+            this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
 
             for (int layer = 0; layer < LayerCount; layer++)
