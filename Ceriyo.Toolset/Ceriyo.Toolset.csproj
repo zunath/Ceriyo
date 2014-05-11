@@ -151,6 +151,7 @@
     <Compile Include="Components\MenuBarComponent.xaml.cs">
       <DependentUpon>MenuBarComponent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValidationRules\MaxLevelRule.cs" />
     <Compile Include="ValidationRules\NameLengthRule.cs" />
     <Compile Include="ValidationRules\NumericAmountRule.cs" />
     <Compile Include="ValidationRules\ResrefLengthRule.cs" />
@@ -178,6 +179,9 @@
     </Compile>
     <Compile Include="Windows\EditPlaceableWindow.xaml.cs">
       <DependentUpon>EditPlaceableWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ModulePropertiesWindow.xaml.cs">
+      <DependentUpon>ModulePropertiesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ScriptEditorWindow.xaml.cs">
       <DependentUpon>ScriptEditorWindow.xaml</DependentUpon>
@@ -267,6 +271,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\EditPlaceableWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ModulePropertiesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

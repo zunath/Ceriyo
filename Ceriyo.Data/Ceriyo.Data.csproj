@@ -118,6 +118,7 @@
     <Compile Include="ViewModels\EditDialogVM.cs" />
     <Compile Include="ViewModels\LoadModuleVM.cs" />
     <Compile Include="ViewModels\EditAreaVM.cs" />
+    <Compile Include="ViewModels\ModulePropertiesVM.cs" />
     <Compile Include="ViewModels\ScriptSelectionVM.cs" />
     <Compile Include="ViewModels\ToolsetVM.cs" />
   </ItemGroup>

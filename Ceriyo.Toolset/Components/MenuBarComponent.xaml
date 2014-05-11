@@ -27,7 +27,7 @@
                 <MenuItem Header="Cut"></MenuItem>
                 <MenuItem Header="Paste"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="Module Properties"></MenuItem>
+                <MenuItem Header="Module Properties" Click="OpenModuleProperties"></MenuItem>
             </MenuItem>
             <MenuItem Header="Content">
                 <MenuItem Header="Manage Content Packages"></MenuItem>

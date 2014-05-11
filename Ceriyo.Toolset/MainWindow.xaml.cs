@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -13,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.ViewModels;
+using Ceriyo.Toolset.Windows;
 
 namespace Ceriyo.Toolset
 {
@@ -27,8 +29,13 @@ namespace Ceriyo.Toolset
         public MainWindow()
         {
             InitializeComponent();
-            Model = new ToolsetVM();
+            Initialize();
             SetUpEvents();
+        }
+
+        private void Initialize()
+        {
+            Model = new ToolsetVM();
         }
 
         private void SetUpEvents()
@@ -53,11 +60,9 @@ namespace Ceriyo.Toolset
             AreaEditorGame = new AreaEditorGame(gameControl);
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             Application.Current.Shutdown();
         }
-
-
     }
 }

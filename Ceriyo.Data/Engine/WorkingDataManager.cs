@@ -151,5 +151,23 @@ namespace Ceriyo.Data
             return File.Exists(path);
         }
 
+        public static GameModule GetGameModule()
+        {
+            GameModule module = null;
+
+            try
+            {
+                string path = EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension;
+                module = FileManager.XmlDeserialize<GameModule>(path);
+
+            }
+            catch (Exception ex)
+            {
+                module = null;
+            }
+
+            return module;
+        }
+
     }
 }

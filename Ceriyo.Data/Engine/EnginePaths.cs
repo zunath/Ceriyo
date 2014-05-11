@@ -18,6 +18,11 @@ namespace Ceriyo.Data
             get { return ".js"; }
         }
 
+        public static string ModuleDataFileName
+        {
+            get { return "Manifest"; }
+        }
+
         public static string ModulesDirectory
         {
             get { return FileManager.RelativeDirectory + @"Content/Modules/"; }
@@ -46,6 +51,11 @@ namespace Ceriyo.Data
         public static string SettingsDirectory
         {
             get { return FileManager.RelativeDirectory + @"Content/Settings/"; }
+        }
+
+        public static string DataDirectory
+        {
+            get { return FileManager.RelativeDirectory + @"Content/Data/"; }
         }
     }
 }

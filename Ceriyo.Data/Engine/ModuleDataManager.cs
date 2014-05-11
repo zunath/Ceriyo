@@ -33,6 +33,12 @@ namespace Ceriyo.Data
                 {
                     GameModule module = new GameModule(name, tag, resref);
 
+                    string levelPath = EnginePaths.DataDirectory + "LevelChart" + EnginePaths.DataExtension;
+                    if (File.Exists(levelPath))
+                    {
+                        module.Levels = FileManager.XmlDeserialize<LevelChart>(levelPath);
+                    }
+
                     using (ZipFile zip = new ZipFile(path))
                     {
                         AddDirectories(zip);

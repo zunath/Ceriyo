@@ -23,24 +23,9 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        private BindingList<string> _areaFileList;
-        public BindingList<string> AreaFileList
-        {
-            get
-            {
-                return _areaFileList;
-            }
-            set
-            {
-                _areaFileList = value;
-                OnPropertyChanged("AreaFileList");
-            }
-        }
-
         public ToolsetVM()
         {
             this.Module = new GameModule();
-            this.AreaFileList = new BindingList<string>();
         }
 
     }

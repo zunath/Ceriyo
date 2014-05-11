@@ -21,11 +21,13 @@ namespace Ceriyo.Toolset.Components
     /// </summary>
     public partial class MenuBarComponent : UserControl
     {
+        private ModulePropertiesWindow ModuleProperties { get; set; }
         public event EventHandler<GameModuleEventArgs> OnOpenModule;
 
         public MenuBarComponent()
         {
             InitializeComponent();
+            ModuleProperties = new ModulePropertiesWindow();
         }
 
         private void NewModule_Click(object sender, RoutedEventArgs e)
@@ -54,5 +56,9 @@ namespace Ceriyo.Toolset.Components
             Application.Current.Shutdown();
         }
 
+        private void OpenModuleProperties(object sender, RoutedEventArgs e)
+        {
+            ModuleProperties.Show();
+        }
     }
 }
