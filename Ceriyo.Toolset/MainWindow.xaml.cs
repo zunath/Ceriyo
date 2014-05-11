@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Toolset.Windows;
 
@@ -42,12 +43,7 @@ namespace Ceriyo.Toolset
         {
             Loaded += MainWindow_Loaded;
             menuBar.OnOpenModule += menuBar_OnOpenModule;
-            areaSelection.OnAreaOpen += areaSelection_OnAreaOpen;
-        }
-
-        private void areaSelection_OnAreaOpen(object sender, GameObjectEventArgs e)
-        {
-            
+            areaSelection.OnAreaOpen += objectSelection.LoadArea;
         }
 
         private void menuBar_OnOpenModule(object sender, GameModuleEventArgs e)

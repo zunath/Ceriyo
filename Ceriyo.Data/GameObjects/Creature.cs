@@ -19,5 +19,16 @@ namespace Ceriyo.Data.GameObjects
         public BindingList<LocalVariable> LocalVariables { get; set; }
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
         public string CategoryName { get { return "Script"; } }
+
+        public Creature()
+        {
+            this.Name = "";
+            this.Tag = "";
+            this.Resref = "";
+            this.Description = "";
+            this.Comments = "";
+            this.LocalVariables = new BindingList<LocalVariable>();
+            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+        }
     }
 }

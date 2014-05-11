@@ -103,6 +103,9 @@
     <Content Include="Content\Data\LevelChart.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tilesets\grassland_tiles.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Settings\" />

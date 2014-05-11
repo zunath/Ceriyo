@@ -126,17 +126,11 @@
     <Compile Include="Components\DialogSelectionControl.xaml.cs">
       <DependentUpon>DialogSelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\ExportResourcePackControl.xaml.cs">
-      <DependentUpon>ExportResourcePackControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Components\ImportResourcePackControl.xaml.cs">
-      <DependentUpon>ImportResourcePackControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Components\ManageResourcePackControl.xaml.cs">
-      <DependentUpon>ManageResourcePackControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Components\ModulePropertiesControl.xaml.cs">
       <DependentUpon>ModulePropertiesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ObjectSelectionComponent.xaml.cs">
+      <DependentUpon>ObjectSelectionComponent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\PaintObjectsControl.xaml.cs">
       <DependentUpon>PaintObjectsControl.xaml</DependentUpon>
@@ -198,19 +192,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Components\ExportResourcePackControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Components\FlatRedBallControl\FlatRedBallControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Components\ImportResourcePackControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Components\ManageResourcePackControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\ModulePropertiesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ObjectSelectionComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

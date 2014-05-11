@@ -83,6 +83,7 @@
     <Compile Include="Enumerations\GameTypeEnum.cs" />
     <Compile Include="Enumerations\FileOperationResultTypeEnum.cs" />
     <Compile Include="Enumerations\NetworkAgentRoleEnum.cs" />
+    <Compile Include="Enumerations\PaintObjectModeTypeEnum.cs" />
     <Compile Include="Enumerations\PVPTypeEnum.cs" />
     <Compile Include="Enumerations\ScriptEventTypeEnum.cs" />
     <Compile Include="EventArguments\GameObjectEventArgs.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="ViewModels\LoadModuleVM.cs" />
     <Compile Include="ViewModels\EditAreaVM.cs" />
     <Compile Include="ViewModels\ModulePropertiesVM.cs" />
+    <Compile Include="ViewModels\ObjectSelectionVM.cs" />
+    <Compile Include="ViewModels\PaintObjectsVM.cs" />
     <Compile Include="ViewModels\ScriptSelectionVM.cs" />
     <Compile Include="ViewModels\ToolsetVM.cs" />
   </ItemGroup>

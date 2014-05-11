@@ -24,6 +24,9 @@ namespace Ceriyo.Data.GameObjects
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
         public BindingList<MapTile> MapTiles { get; set; }
         public string CategoryName { get { return "Area"; } }
+        public BindingList<Creature> CreatureInstances { get; set; }
+        public BindingList<Placeable> PlaceableInstances { get; set; }
+        public BindingList<Item> ItemInstances { get; set; }
 
         [XmlIgnore]
         public List<Tile[,]> Tiles
@@ -82,6 +85,9 @@ namespace Ceriyo.Data.GameObjects
             this.MapTiles = new BindingList<MapTile>();
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            this.CreatureInstances = new BindingList<Creature>();
+            this.ItemInstances = new BindingList<Item>();
+            this.PlaceableInstances = new BindingList<Placeable>();
 
             for (int layer = 0; layer < LayerCount; layer++)
             {

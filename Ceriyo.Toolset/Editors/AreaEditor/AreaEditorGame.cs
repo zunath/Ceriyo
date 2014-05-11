@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data.GameObjects;
 using Ceriyo.Library.CustomDrawableBatches;
 using FlatRedBall;
 using Microsoft.Xna.Framework;
@@ -26,6 +27,7 @@ namespace Ceriyo.Toolset
             SpriteManager.Camera.UsePixelCoordinates();
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
 
+            AreaBatch = new MapDrawableBatch(new Area("test", "test", "test", 10, 10, 4));
         }
 
         protected override void Update(GameTime gameTime)
