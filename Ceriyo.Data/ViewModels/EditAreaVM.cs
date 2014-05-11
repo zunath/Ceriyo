@@ -1,27 +1,191 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data.Extensions;
 using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.ViewModels
 {
     public class EditAreaVM : BaseVM
     {
-        public string Name { get; set; }
-        public string Tag { get; set; }
-        public string Resref { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
+        private string _name;
+        private string _tag;
+        private string _resref;
+        private int _width;
+        private int _height;
+        private BindingList<string> _scripts;
+        private BindingList<LocalVariable> _localVariables;
+        private BindingList<Tileset> _tilesets;
+        private string _description;
+        private string _comments;
+        private string _onAreaEnterScript;
+        private string _onAreaExitScript;
+        private string _onAreaHeartbeatScript;
 
-        public List<string> Scripts { get; set; }
-        public List<LocalVariable> LocalVariables { get; set; }
-        public List<Tileset> Tilesets { get; set; }
-        public string Description { get; set; }
-        public string Comments { get; set; }
-        public string OnAreaEnterScript { get; set; }
-        public string OnAreaExitScript { get; set; }
-        public string OnAreaHeartbeatScript { get; set; }
+        public string Name 
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+        public string Tag 
+        {
+            get
+            {
+                return _tag;
+            }
+            set
+            {
+                _tag = value;
+                OnPropertyChanged("Tag");
+            }
+        }
+
+        public string Resref 
+        {
+            get
+            {
+                return _resref;
+            }
+            set
+            {
+                _resref = value;
+                OnPropertyChanged("Resref");
+            }
+        }
+        public int Width 
+        {
+            get
+            {
+                return _width;
+            }
+            set
+            {
+                _width = value;
+                OnPropertyChanged("Width");
+            }
+        }
+
+        public int Height 
+        {
+            get
+            {
+                return _height;
+            }
+            set
+            {
+                _height = value;
+                OnPropertyChanged("Height");
+            }
+        }
+
+        public BindingList<string> Scripts 
+        {
+            get
+            {
+                return _scripts;
+            }
+            set
+            {
+                _scripts = value;
+                OnPropertyChanged("Scripts");
+            }
+        }
+
+        public BindingList<LocalVariable> LocalVariables
+        {
+            get
+            {
+                return _localVariables;
+            }
+            set
+            {
+                _localVariables = value;
+                OnPropertyChanged("LocalVariables");
+            }
+        }
+
+        public BindingList<Tileset> Tilesets 
+        {
+            get
+            {
+                return _tilesets;
+            }
+            set
+            {
+                _tilesets = value;
+                OnPropertyChanged("Tilesets");
+            }
+        }
+        public string Description 
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = value;
+                OnPropertyChanged("Description");
+            }
+        }
+
+        public string Comments 
+        {
+            get
+            {
+                return _comments;
+            }
+            set
+            {
+                _comments = value;
+                OnPropertyChanged("Comments");
+            }
+        }
+        public string OnAreaEnterScript 
+        {
+            get
+            {
+                return _onAreaEnterScript;
+            }
+            set
+            {
+                _onAreaEnterScript = value;
+                OnPropertyChanged("OnAreaEnterScript");
+            }
+        }
+        public string OnAreaExitScript 
+        {
+            get
+            {
+                return _onAreaExitScript;
+            }
+            set
+            {
+                _onAreaExitScript = value;
+                OnPropertyChanged("OnAreaExitScript");
+            }
+        }
+        public string OnAreaHeartbeatScript 
+        {
+            get
+            {
+                return _onAreaHeartbeatScript;
+            }
+            set
+            {
+                _onAreaHeartbeatScript = value;
+                OnPropertyChanged("OnAreaHeartbeatScript");
+            }
+        }
         
 
         public EditAreaVM()
@@ -31,9 +195,9 @@ namespace Ceriyo.Data.ViewModels
             this.Resref = "";
             this.Width = EngineConstants.AreaMinWidth;
             this.Height = EngineConstants.AreaMinHeight;
-            this.Scripts = new List<string>();
-            this.LocalVariables = new List<LocalVariable>();
-            this.Tilesets = new List<Tileset>();
+            this.Scripts = new BindingList<string>();
+            this.LocalVariables = new BindingList<LocalVariable>();
+            this.Tilesets = new BindingList<Tileset>();
             this.Description = "";
             this.Comments = "";
             this.OnAreaEnterScript = "";

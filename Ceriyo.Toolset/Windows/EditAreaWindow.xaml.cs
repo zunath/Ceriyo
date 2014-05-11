@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
+using System.Linq;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
@@ -37,9 +39,8 @@ namespace Ceriyo.Toolset.Windows
 
         private void InitializeModel()
         {
-            Model.Tilesets = WorkingDataManager.GetAllGameObjects(ModulePaths.TilesetsDirectory) as List<Tileset>;
-            Model.Scripts = WorkingDataManager.GetAllScriptNames() as List<string>;
-            
+            Model.Tilesets = WorkingDataManager.GetAllGameObjects(ModulePaths.TilesetsDirectory) as BindingList<Tileset>;
+            Model.Scripts = WorkingDataManager.GetAllScriptNames() as BindingList<string>;
         }
 
         private void InitializeModel(Area area)
@@ -87,6 +88,8 @@ namespace Ceriyo.Toolset.Windows
             cboOnAreaEnter.DataContext = Model;
             cboOnAreaExit.DataContext = Model;
             cboOnAreaHeartbeat.DataContext = Model;
+
+            dgLocalVariables.DataContext = Model;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -99,7 +102,7 @@ namespace Ceriyo.Toolset.Windows
             Area area = new Area(Model.Name, Model.Tag, Model.Resref, Model.Width, Model.Height, EngineConstants.AreaMaxLayers);
             area.Comments = Model.Comments;
             area.Description = Model.Description;
-            area.LocalVariables = Model.LocalVariables;
+            area.LocalVariables = Model.LocalVariables.ToList();
             area.Scripts.Add(ScriptEventTypeEnum.OnAreaEnter, Model.OnAreaEnterScript);
             area.Scripts.Add(ScriptEventTypeEnum.OnAreaExit, Model.OnAreaExitScript);
             area.Scripts.Add(ScriptEventTypeEnum.OnHeartbeat, Model.OnAreaHeartbeatScript);

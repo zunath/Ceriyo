@@ -181,7 +181,7 @@
                     		Margin="106,13,0,0" 
                     		VerticalAlignment="Top" 
                             ItemsSource="{Binding Scripts}"
-                            SelectedValue="{Binding AreaOnEnterScript}"
+                            SelectedValue="{Binding OnAreaEnterScript}"
                     		Width="266">
                         </ComboBox>
                         <Label Content="OnAreaExit:" 
@@ -206,12 +206,33 @@
                         	Margin="106,69,0,0" 
                         	VerticalAlignment="Top" 
                         	ItemsSource="{Binding Scripts}"
-                        	SelectedValue="{Binding AreaOnHeartbeatScript}"
+                        	SelectedValue="{Binding OnAreaHeartbeatScript}"
                         	Width="266"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Variables">
                     <Grid Background="#FFE5E5E5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        
+                        <DockPanel Grid.Row="1">
+                            <DataGrid Name="dgLocalVariables" 
+                                      ItemsSource="{Binding LocalVariables}"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch"
+                                      Width="Auto"
+                                      Height="Auto"
+                                      CanUserAddRows="True"
+                                      AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="*"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
 
                     </Grid>
                 </TabItem>
