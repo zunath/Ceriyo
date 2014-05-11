@@ -10,6 +10,13 @@ namespace Ceriyo.Data.Enumerations
         Unknown = 0,
         OnAreaEnter = 1,
         OnAreaExit = 2,
-        OnHeartbeat = 3
+        OnHeartbeat = 3,
+        OnPlayerEnter = 4,
+        OnPlayerLeaving = 5,
+        OnPlayerLeft = 6,
+        OnModuleLoad = 7,
+        OnPlayerDying = 8,
+        OnPlayerDeath = 9,
+        OnPlayerRespawn = 10
     }
 }

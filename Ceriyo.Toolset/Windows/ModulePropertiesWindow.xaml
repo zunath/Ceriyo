@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:val="clr-namespace:Ceriyo.Toolset.ValidationRules"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="Ceriyo.Toolset.Windows.ModulePropertiesWindow"
-        Title="Module Properties" Height="500" Width="400" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterOwner">
+        Title="Module Properties" Height="500" Width="400" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -48,7 +48,7 @@
                                         HorizontalAlignment="Left" 
                                         Margin="103,94,0,0" 
                                         VerticalAlignment="Top" 
-                                        Width="110">
+                                        Width="70">
                         <xctk:IntegerUpDown.Text>
                             <Binding Path="MaxLevel">
                                 <Binding.ValidationRules>
@@ -126,7 +126,7 @@
 							  ItemsSource="{Binding Scripts}"
 							  SelectedValue="{Binding OnPlayerRespawnScript}"
                               Width="249"/>
-                    <Label Content="OnPlayerLeft:" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top"/>
+                    <Label Content="OnPlayerLeft:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
                     <Label Content="OnHeartbeat:" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top"/>
                     <Label Content="OnModuleLoad:" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top"/>
                     <Label Content="OnPlayerDying:" HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top"/>
@@ -153,13 +153,36 @@
             <TabItem Header="Level Chart">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid Name="dgLevelChart" 
-                                      ItemsSource="{Binding Levels.Levels}"
+                                      ItemsSource="{Binding Levels}"
                                       VerticalAlignment="Stretch"
                                       HorizontalAlignment="Stretch"
                                       Width="Auto"
                                       Height="Auto"
                                       ColumnWidth="*"
+                                      AutoGenerateColumns="False"
+                                      AlternatingRowBackground="#ddd"
+                                      CanUserDeleteRows="False"
+                                      CanUserReorderColumns="False"
+                                      CanUserResizeColumns="True"
+                                      CanUserResizeRows="False"
+                                      CanUserSortColumns="True"
                                       CanUserAddRows="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Level"
+                                                IsReadOnly="True"
+                                                Binding="{Binding Level}">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="EXP Req."
+                                                Binding="{Binding ExperienceRequired}">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Skill Points"
+                                                Binding="{Binding SkillPoints}">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Abilities"
+                                                Binding="{Binding NewAbilities}">
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
@@ -191,8 +214,23 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="201,18,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btnSave" Content="Save Changes" HorizontalAlignment="Left" Margin="96,18,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btnCancel" 
+                Content="Cancel" 
+                HorizontalAlignment="Left" 
+                Margin="201,18,0,0" 
+                Grid.Row="1" 
+                VerticalAlignment="Top" 
+                Click="Cancel"
+                Width="100"/>
+        <Button x:Name="btnSave" 
+                Content="Save Changes" 
+                HorizontalAlignment="Left" 
+                Margin="96,18,0,0" 
+                Grid.Row="1" 
+                VerticalAlignment="Top" 
+                Click="Save"
+                IsEnabled="{Binding !HasError}"
+                Width="100"/>
 
     </Grid>
 </Window>

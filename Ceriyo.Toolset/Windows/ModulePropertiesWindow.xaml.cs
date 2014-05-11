@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Ceriyo.Data;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 
@@ -26,14 +27,13 @@ namespace Ceriyo.Toolset.Windows
         public ModulePropertiesWindow()
         {
             InitializeComponent();
-            InitializeModel();
+            Model = new ModulePropertiesVM();
             SetDataContexts();
             SetLimits();
         }
 
-        private void InitializeModel()
+        public void Open()
         {
-            Model = new ModulePropertiesVM();
             GameModule gameModule = WorkingDataManager.GetGameModule();
             Model.Comments = gameModule.Comments;
             Model.Description = gameModule.Description;
@@ -42,6 +42,9 @@ namespace Ceriyo.Toolset.Windows
             Model.Resref = gameModule.Resref;
             Model.Scripts = WorkingDataManager.GetAllScriptNames();
             Model.Tag = gameModule.Tag;
+            Model.Levels = gameModule.Levels.Levels;
+
+            this.Show();
         }
 
         private void SetDataContexts()
@@ -68,5 +71,45 @@ namespace Ceriyo.Toolset.Windows
             numMaxLevel.Minimum = 1;
             numMaxLevel.Maximum = EngineConstants.MaxLevel;
         }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void Save(object sender, RoutedEventArgs e)
+        {
+            GameModule module = new GameModule(Model.Name, Model.Tag, Model.Resref, Model.Description, Model.Comments);
+            module.Levels = new LevelChart(Model.Levels);
+            module.LocalVariables = Model.LocalVariables;
+
+            module.Scripts.Add(ScriptEventTypeEnum.OnHeartbeat, Model.OnHeartbeatScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnModuleLoad, Model.OnModuleLoadScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerDeath, Model.OnPlayerDeathScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerDying, Model.OnPlayerDyingScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerEnter, Model.OnPlayerEnterScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerLeaving, Model.OnPlayerLeavingScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerLeft, Model.OnPlayerLeftScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerRespawn, Model.OnPlayerRespawnScript);
+
+            FileOperationResultTypeEnum result = WorkingDataManager.SaveGameModule(module);
+
+            if (result == FileOperationResultTypeEnum.Success)
+            {
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Failed to save module properties.", "Failed to save", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+
     }
 }

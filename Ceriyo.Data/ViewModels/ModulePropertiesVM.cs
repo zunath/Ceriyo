@@ -17,7 +17,7 @@ namespace Ceriyo.Data.ViewModels
         private string _description;
         private string _comments;
         private int _maxLevel;
-        private LevelChart _levels;
+        private BindingList<LevelChartItem> _levels;
         private string _onPlayerEnterScript;
         private string _onPlayerLeavingScript;
         private string _onPlayerLeftScript;
@@ -129,7 +129,7 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        public LevelChart Levels
+        public BindingList<LevelChartItem> Levels
         {
             get
             {
@@ -255,7 +255,7 @@ namespace Ceriyo.Data.ViewModels
             this.Resref = "";
             this.Scripts = new BindingList<string>();
             this.Tag = "";
-            this.Levels = new LevelChart();
+            this.Levels = new BindingList<LevelChartItem>();
             this.MaxLevel = EngineConstants.MaxLevel;
 
             this.OnPlayerEnterScript = "";

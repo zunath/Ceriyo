@@ -46,5 +46,10 @@ namespace Ceriyo.Data
         {
             get { return EnginePaths.WorkingDirectory + ModulePaths.TilesetsDirectory; }
         }
+
+        public static string GameModuleDirectory
+        {
+            get { return EnginePaths.WorkingDirectory; }
+        }
     }
 }

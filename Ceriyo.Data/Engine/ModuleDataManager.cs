@@ -42,7 +42,7 @@ namespace Ceriyo.Data
                     using (ZipFile zip = new ZipFile(path))
                     {
                         AddDirectories(zip);
-                        AddManifest(zip, module);
+                        AddModulePropertiesFile(zip, module);
 
                         zip.Save();
                     }
@@ -151,19 +151,19 @@ namespace Ceriyo.Data
 
         }
 
-        private static void AddManifest(ZipFile zip, GameModule module)
+        private static void AddModulePropertiesFile(ZipFile zip, GameModule module)
         {
             string output = "";
             FileManager.XmlSerialize<GameModule>(module, out output);
 
-            zip.AddEntry("Manifest" + EnginePaths.DataExtension, output);
+            zip.AddEntry(EnginePaths.ModuleDataFileName + EnginePaths.DataExtension, output);
         }
 
-        private static GameModule GetManifest(string zipFilePath)
+        private static GameModule GetModulePropertiesFile(string zipFilePath)
         {
             using (ZipFile zip = new ZipFile(zipFilePath))
             {
-                ZipEntry entry = zip["Manifest" + EnginePaths.DataExtension];
+                ZipEntry entry = zip[EnginePaths.ModuleDataFileName + EnginePaths.DataExtension];
                 MemoryStream stream = new MemoryStream();
                 entry.Extract(stream);
                 string text = Encoding.ASCII.GetString(stream.ToArray());
@@ -178,7 +178,7 @@ namespace Ceriyo.Data
             string[] filePaths = Directory.GetFiles(EnginePaths.ModulesDirectory);
             foreach (string file in filePaths)
             {
-                GameModule deserialized = GetManifest(file);
+                GameModule deserialized = GetModulePropertiesFile(file);
                 modules.Add(deserialized);
             }
 

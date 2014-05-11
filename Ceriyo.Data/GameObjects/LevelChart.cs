@@ -13,7 +13,12 @@ namespace Ceriyo.Data.GameObjects
 
         public LevelChart()
         {
-            Levels = new BindingList<LevelChartItem>();
+            this.Levels = new BindingList<LevelChartItem>();
+        }
+
+        public LevelChart(BindingList<LevelChartItem> levels)
+        {
+            this.Levels = levels;
         }
     }
 }

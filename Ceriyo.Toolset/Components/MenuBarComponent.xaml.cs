@@ -58,7 +58,7 @@ namespace Ceriyo.Toolset.Components
 
         private void OpenModuleProperties(object sender, RoutedEventArgs e)
         {
-            ModuleProperties.Show();
+            ModuleProperties.Open();
         }
     }
 }
