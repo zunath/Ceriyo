@@ -7,13 +7,13 @@ using Ceriyo.Data;
 
 namespace Ceriyo.Toolset.ValidationRules
 {
-    public class TextLengthVR : ValidationRule
+    public class TextLengthRule : ValidationRule
     {
         public int MinimumLength { get; set; }
         public int MaximumLength { get; set; }
         public string ErrorMessage { get; set; }
 
-        public TextLengthVR()
+        public TextLengthRule()
         {
             this.MinimumLength = 1;
             this.MaximumLength = 1;

@@ -6,12 +6,12 @@ using Ceriyo.Data;
 
 namespace Ceriyo.Toolset.ValidationRules
 {
-    public class TagLengthVR : TextLengthVR
+    public class ResrefLengthRule : TextLengthRule
     {
-        public TagLengthVR()
+        public ResrefLengthRule()
         {
             this.MinimumLength = 1;
-            this.MaximumLength = EngineConstants.TagMaxLength;
+            this.MaximumLength = EngineConstants.ResrefMaxLength;
         }
     }
 }

@@ -6,9 +6,9 @@ using Ceriyo.Data;
 
 namespace Ceriyo.Toolset.ValidationRules
 {
-    public class AreaHeightVR: NumericAmountVR
+    public class AreaHeightRule: NumericAmountRule
     {
-        public AreaHeightVR()
+        public AreaHeightRule()
         {
             this.Minimum = EngineConstants.AreaMinHeight;
             this.Maximum = EngineConstants.AreaMaxHeight;

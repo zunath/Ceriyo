@@ -6,9 +6,9 @@ using Ceriyo.Data;
 
 namespace Ceriyo.Toolset.ValidationRules
 {
-    public class AreaWidthVR : NumericAmountVR
+    public class AreaWidthRule : NumericAmountRule
     {
-        public AreaWidthVR()
+        public AreaWidthRule()
         {
             this.Minimum = EngineConstants.AreaMinWidth;
             this.Maximum = EngineConstants.AreaMaxWidth;

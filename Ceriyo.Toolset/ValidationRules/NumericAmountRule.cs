@@ -6,13 +6,13 @@ using System.Windows.Controls;
 
 namespace Ceriyo.Toolset.ValidationRules
 {
-    public class NumericAmountVR : ValidationRule
+    public class NumericAmountRule : ValidationRule
     {
         public int Minimum { get; set; }
         public int Maximum { get; set; }
         public string ErrorMessage { get; set; }
 
-        public NumericAmountVR()
+        public NumericAmountRule()
         {
             this.Minimum = 0;
             this.Maximum = 0;

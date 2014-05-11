@@ -52,7 +52,7 @@
                                 <Binding Path="Name" 
                                          UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
-                                        <val:NameLengthVR></val:NameLengthVR>
+                                        <val:NameLengthRule></val:NameLengthRule>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -69,7 +69,7 @@
                                 <Binding Path="Tag" 
                                          UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
-                                        <val:NameLengthVR></val:NameLengthVR>
+                                        <val:NameLengthRule></val:NameLengthRule>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -86,7 +86,7 @@
                                 <Binding Path="Resref" 
                                          UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
-                                        <val:ResrefLengthVR></val:ResrefLengthVR>
+                                        <val:ResrefLengthRule></val:ResrefLengthRule>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
@@ -102,14 +102,14 @@
                             <xctk:IntegerUpDown.Text>
                                 <Binding Path="Width">
                                     <Binding.ValidationRules>
-                                        <val:AreaWidthVR></val:AreaWidthVR>
+                                        <val:AreaWidthRule></val:AreaWidthRule>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </xctk:IntegerUpDown.Text>
                             <xctk:IntegerUpDown.Value>
                                 <Binding Path="Width">
                                     <Binding.ValidationRules>
-                                        <val:AreaWidthVR></val:AreaWidthVR>
+                                        <val:AreaWidthRule></val:AreaWidthRule>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </xctk:IntegerUpDown.Value>
@@ -125,14 +125,14 @@
                             <xctk:IntegerUpDown.Text>
                                 <Binding Path="Height">
                                     <Binding.ValidationRules>
-                                        <val:AreaHeightVR></val:AreaHeightVR>
+                                        <val:AreaHeightRule></val:AreaHeightRule>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </xctk:IntegerUpDown.Text>
                             <xctk:IntegerUpDown.Value>
                                 <Binding Path="Height">
                                     <Binding.ValidationRules>
-                                        <val:AreaHeightVR></val:AreaHeightVR>
+                                        <val:AreaHeightRule></val:AreaHeightRule>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </xctk:IntegerUpDown.Value>
