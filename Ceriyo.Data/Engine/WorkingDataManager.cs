@@ -119,5 +119,12 @@ namespace Ceriyo.Data
             return scripts;
         }
 
+        public static bool DoesGameObjectExist(IGameObject gameObject)
+        {
+            string path = gameObject.WorkingDirectory + gameObject.Resref + EnginePaths.DataExtension;
+
+            return File.Exists(path);
+        }
+
     }
 }

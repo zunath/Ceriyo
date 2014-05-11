@@ -56,7 +56,7 @@ namespace Ceriyo.Toolset.Components
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             Area area = new Area();
-            EditPropertiesWindow.Open(area);
+            EditPropertiesWindow.Open(area, false);
         }
 
         private void OnSaveArea(object sender, GameObjectEventArgs e)
@@ -147,7 +147,7 @@ namespace Ceriyo.Toolset.Components
 
             if (lbAreas.SelectedItem != null)
             {
-                EditPropertiesWindow.Open(area);
+                EditPropertiesWindow.Open(area, true);
             }
         }
 

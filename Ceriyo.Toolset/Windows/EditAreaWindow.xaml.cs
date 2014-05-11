@@ -18,6 +18,7 @@ namespace Ceriyo.Toolset.Windows
     {
         private EditAreaVM Model { get; set; }
         public event EventHandler<GameObjectEventArgs> OnSaveArea;
+        private bool IsEditing { get; set; }
 
         public EditAreaWindow()
         {
@@ -93,9 +94,11 @@ namespace Ceriyo.Toolset.Windows
             dgLocalVariables.DataContext = Model;
         }
 
-        public void Open(Area area)
+        public void Open(Area area, bool isEditing)
         {
             PopulateModel(area);
+            this.IsEditing = isEditing;
+            txtResref.IsEnabled = !IsEditing;
             this.Show();
         }
 
@@ -107,29 +110,36 @@ namespace Ceriyo.Toolset.Windows
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             Area area = new Area(Model.Name, Model.Tag, Model.Resref, Model.Width, Model.Height, EngineConstants.AreaMaxLayers);
-            area.Comments = Model.Comments;
-            area.Description = Model.Description;
-            area.LocalVariables = Model.LocalVariables;
-            area.Scripts.Add(ScriptEventTypeEnum.OnAreaEnter, Model.OnAreaEnterScript);
-            area.Scripts.Add(ScriptEventTypeEnum.OnAreaExit, Model.OnAreaExitScript);
-            area.Scripts.Add(ScriptEventTypeEnum.OnHeartbeat, Model.OnAreaHeartbeatScript);
 
-            FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(area);
-
-            if (result == FileOperationResultTypeEnum.Success)
+            if (WorkingDataManager.DoesGameObjectExist(area) && !IsEditing)
             {
-                if (OnSaveArea != null)
+                MessageBox.Show("An area with that resref already exists. Please select a different resref.", "Resref in use", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                area.Comments = Model.Comments;
+                area.Description = Model.Description;
+                area.LocalVariables = Model.LocalVariables;
+                area.Scripts.Add(ScriptEventTypeEnum.OnAreaEnter, Model.OnAreaEnterScript);
+                area.Scripts.Add(ScriptEventTypeEnum.OnAreaExit, Model.OnAreaExitScript);
+                area.Scripts.Add(ScriptEventTypeEnum.OnHeartbeat, Model.OnAreaHeartbeatScript);
+
+                FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(area);
+
+                if (result == FileOperationResultTypeEnum.Success)
                 {
-                    OnSaveArea(this, new GameObjectEventArgs(area));
+                    if (OnSaveArea != null)
+                    {
+                        OnSaveArea(this, new GameObjectEventArgs(area));
+                    }
+
+                    this.Close();
                 }
-
-                this.Close();
+                else if (result == FileOperationResultTypeEnum.Failure)
+                {
+                    MessageBox.Show("Could not save area.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else if (result == FileOperationResultTypeEnum.Failure)
-            {
-                MessageBox.Show("Could not save area.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
 
         }
 
