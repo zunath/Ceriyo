@@ -8,7 +8,7 @@ using FlatRedBall;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Toolset
+namespace Ceriyo.Toolset.GameComponents
 {
     class AreaEditorGame : FlatRedBallGameBase
     {

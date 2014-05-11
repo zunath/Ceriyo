@@ -138,7 +138,7 @@
     <Compile Include="Components\ScriptSelectionControl.xaml.cs">
       <DependentUpon>ScriptSelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Editors\AreaEditor\AreaEditorGame.cs" />
+    <Compile Include="GameComponents\AreaEditorGame.cs" />
     <Compile Include="Components\CreateObjectComponent.xaml.cs">
       <DependentUpon>CreateObjectComponent.xaml</DependentUpon>
     </Compile>
@@ -304,18 +304,7 @@
       <Name>Ceriyo.Library</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Editors\AbilityEditor\" />
-    <Folder Include="Editors\AnimationEditor\" />
-    <Folder Include="Editors\CharacterClassEditor\" />
-    <Folder Include="Editors\ConversationEditor\" />
-    <Folder Include="Editors\CreatureEditor\" />
-    <Folder Include="Editors\ItemEditor\" />
-    <Folder Include="Editors\PlaceableEditor\" />
-    <Folder Include="Editors\ScriptEditor\" />
-    <Folder Include="Editors\SkillEditor\" />
-    <Folder Include="Editors\TilesetEditor\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
