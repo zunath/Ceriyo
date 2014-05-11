@@ -3,6 +3,7 @@ using FlatRedBall;
 using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
 using Ceriyo.Entities.Screens;
+using Ceriyo.Data.Engine;
 
 
 namespace Ceriyo
@@ -29,6 +30,7 @@ namespace Ceriyo
         protected override void Initialize()
         {
             FlatRedBallServices.InitializeFlatRedBall(this, graphics);
+            EngineDataManager.InitializeEngine();
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 			GlobalContent.Initialize();
 

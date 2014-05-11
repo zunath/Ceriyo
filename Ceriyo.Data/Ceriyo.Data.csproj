@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\EngineConstants.cs" />
+    <Compile Include="Engine\EngineDataManager.cs" />
     <Compile Include="Engine\EnginePaths.cs" />
     <Compile Include="Engine\WorkingDataManager.cs" />
     <Compile Include="Engine\WorkingPaths.cs" />

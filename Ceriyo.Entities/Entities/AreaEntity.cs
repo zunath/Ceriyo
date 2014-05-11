@@ -14,7 +14,6 @@ namespace Ceriyo.Entities
         {
         }
 
-
         protected override void CustomInitialize()
         {
         }

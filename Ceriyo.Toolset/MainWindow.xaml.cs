@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Toolset.GameComponents;
@@ -21,6 +22,8 @@ namespace Ceriyo.Toolset
             SetUpEvents();
         }
 
+
+
         private void Initialize()
         {
             Model = new ToolsetVM();
@@ -40,6 +43,7 @@ namespace Ceriyo.Toolset
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            EngineDataManager.InitializeEngine();
             AreaEditorGame = new AreaEditorGame(gameControl);
         }
 
