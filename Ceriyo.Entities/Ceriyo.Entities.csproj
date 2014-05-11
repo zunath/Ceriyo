@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="DrawableBatches\MapDrawableBatch.cs" />
     <Compile Include="Entities\AreaEntity.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\AreaEditorScreen.cs" />
     <Compile Include="Screens\BaseScreen.cs" />
