@@ -122,6 +122,7 @@
     <Compile Include="ViewModels\EditDialogVM.cs" />
     <Compile Include="ViewModels\LoadModuleVM.cs" />
     <Compile Include="ViewModels\EditAreaVM.cs" />
+    <Compile Include="ViewModels\ManageResourcePacksVM.cs" />
     <Compile Include="ViewModels\ModulePropertiesVM.cs" />
     <Compile Include="ViewModels\ObjectSelectionVM.cs" />
     <Compile Include="ViewModels\PaintObjectsVM.cs" />

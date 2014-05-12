@@ -22,6 +22,7 @@ namespace Ceriyo.Data.GameObjects
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
         public string CategoryName { get { return "Module"; } }
         public LevelChart Levels { get; set; }
+        public BindingList<string> ResourcePacks { get; set; }
 
         public GameModule()
         {
@@ -33,6 +34,7 @@ namespace Ceriyo.Data.GameObjects
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
             this.Levels = new LevelChart();
+            this.ResourcePacks = new BindingList<string>();
         }
 
         public GameModule(string name, string tag, string resref, string description = "", string comments = "")
@@ -45,6 +47,7 @@ namespace Ceriyo.Data.GameObjects
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
             this.Levels = new LevelChart();
+            this.ResourcePacks = new BindingList<string>();
         }
 
         public string ListBoxName

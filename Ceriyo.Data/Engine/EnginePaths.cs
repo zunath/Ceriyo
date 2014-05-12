@@ -94,5 +94,10 @@ namespace Ceriyo.Data
         {
             get { return FileManager.RelativeDirectory + @"Content/Data/"; }
         }
+
+        public static string ResourcePacksDirectory
+        {
+            get { return FileManager.RelativeDirectory + @"Content/ResourcePacks/"; }
+        }
     }
 }
