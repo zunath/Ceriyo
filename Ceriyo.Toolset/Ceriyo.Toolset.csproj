@@ -126,6 +126,9 @@
     <Compile Include="Components\DialogSelectionControl.xaml.cs">
       <DependentUpon>DialogSelectionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\HotBarControl.xaml.cs">
+      <DependentUpon>HotBarControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\ModulePropertiesControl.xaml.cs">
       <DependentUpon>ModulePropertiesControl.xaml</DependentUpon>
     </Compile>
@@ -138,13 +141,13 @@
     <Compile Include="Components\ScriptSelectionControl.xaml.cs">
       <DependentUpon>ScriptSelectionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameComponents\AreaEditorGame.cs" />
     <Compile Include="Components\CreateObjectComponent.xaml.cs">
       <DependentUpon>CreateObjectComponent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\MenuBarComponent.xaml.cs">
       <DependentUpon>MenuBarComponent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\FRBControl\FRBGameComponent.cs" />
     <Compile Include="ValidationRules\MaxLevelRule.cs" />
     <Compile Include="ValidationRules\NameLengthRule.cs" />
     <Compile Include="ValidationRules\NumericAmountRule.cs" />
@@ -198,7 +201,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Components\FlatRedBallControl\FlatRedBallControl.xaml">
+    <Page Include="Components\FRBControl\FlatRedBallControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\HotBarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -230,10 +237,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Components\FlatRedBallControl\FlatRedBallControl.xaml.cs">
+    <Compile Include="Components\FRBControl\FlatRedBallControl.xaml.cs">
       <DependentUpon>FlatRedBallControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\FlatRedBallControl\FlatRedBallGameBase.cs" />
+    <Compile Include="Components\FRBControl\FlatRedBallGameBase.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

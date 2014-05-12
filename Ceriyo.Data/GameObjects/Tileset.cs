@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
+using Ceriyo.Data.ResourceObjects;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -23,5 +24,18 @@ namespace Ceriyo.Data.GameObjects
             set { throw new NotSupportedException(); }
         }
         public string CategoryName { get { return "Tileset"; } }
+        public GameResource Graphic { get; set; }
+
+        public Tileset()
+        {
+            this.Name = "";
+            this.Tag = "";
+            this.Resref = "";
+            this.Description = "";
+            this.Comments = "";
+            this.LocalVariables = new BindingList<LocalVariable>();
+            this.Graphic = new GameResource();
+
+        }
     }
 }

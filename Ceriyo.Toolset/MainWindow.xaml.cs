@@ -3,7 +3,8 @@ using System.Windows;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.ViewModels;
-using Ceriyo.Toolset.GameComponents;
+using Ceriyo.Entities.Screens;
+using Ceriyo.Toolset.FRBControl;
 
 namespace Ceriyo.Toolset
 {
@@ -12,7 +13,7 @@ namespace Ceriyo.Toolset
     /// </summary>
     public partial class MainWindow : Window
     {
-        private AreaEditorGame AreaEditorGame { get; set; }
+        private FRBGameComponent AreaEditorGame { get; set; }
         private ToolsetVM Model { get; set; }
 
         public MainWindow()
@@ -44,7 +45,7 @@ namespace Ceriyo.Toolset
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             EngineDataManager.InitializeEngine();
-            AreaEditorGame = new AreaEditorGame(gameControl);
+            AreaEditorGame = new FRBGameComponent(gameControl, typeof(AreaEditorScreen));
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

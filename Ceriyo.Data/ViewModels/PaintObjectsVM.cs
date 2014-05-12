@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.ResourceObjects;
 
 namespace Ceriyo.Data.ViewModels
 {
@@ -14,6 +15,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<Creature> _creatures;
         private BindingList<Item> _items;
         private BindingList<Placeable> _placeables;
+        private GameResource _graphic;
 
         public PaintObjectModeTypeEnum PaintMode 
         {
@@ -66,12 +68,26 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public GameResource Graphic
+        {
+            get
+            {
+                return _graphic;
+            }
+            set
+            {
+                _graphic = value;
+                OnPropertyChanged("Graphic");
+            }
+        }
+
         public PaintObjectsVM()
         {
             this.PaintMode = PaintObjectModeTypeEnum.None;
             this.Creatures = new BindingList<Creature>();
             this.Items = new BindingList<Item>();
             this.Placeables = new BindingList<Placeable>();
+            this.Graphic = new GameResource();
         }
     }
 }

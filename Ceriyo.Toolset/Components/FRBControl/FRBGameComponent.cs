@@ -2,34 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ceriyo.Data.GameObjects;
-using Ceriyo.Entities;
 using Ceriyo.Entities.Screens;
+using Ceriyo.Toolset.FRBControl;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Toolset.GameComponents
+namespace Ceriyo.Toolset.FRBControl
 {
-    class AreaEditorGame : FlatRedBallGameBase
+    class FRBGameComponent : FlatRedBallGameBase
     {
-        private MapDrawableBatch AreaBatch { get; set; }
 
-        public AreaEditorGame(FlatRedBallControl frbControl)
+        public FRBGameComponent(FlatRedBallControl frbControl, Type screenType )
             : base(frbControl)
         {
-
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-
             SpriteManager.Camera.UsePixelCoordinates();
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
-
-            ScreenManager.Start(typeof(AreaEditorScreen));
         }
 
         protected override void Update(GameTime gameTime)
@@ -46,7 +39,6 @@ namespace Ceriyo.Toolset.GameComponents
             }
 
             FlatRedBallServices.Draw();
-
             base.Draw(gameTime);
         }
     }

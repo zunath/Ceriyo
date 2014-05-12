@@ -1,7 +1,7 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:Ceriyo.Toolset" xmlns:Comp="clr-namespace:Ceriyo.Toolset.Components" x:Class="Ceriyo.Toolset.MainWindow"
+        xmlns:frb="clr-namespace:Ceriyo.Toolset.FRBControl" xmlns:Comp="clr-namespace:Ceriyo.Toolset.Components" x:Class="Ceriyo.Toolset.MainWindow"
     Title="MainWindow" Height="600" Width="800" MinHeight="600" MinWidth="800"
     Closing="Window_Closing">
     <Grid>
@@ -15,6 +15,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -26,13 +27,13 @@
             <Comp:MenuBarComponent x:Name="menuBar" VerticalAlignment="Top" DockPanel.Dock="Top"/>
         </DockPanel>
         <Label
-        	Content="Conversations:" Margin="10,10,97,141" Grid.Row="2"/>
+        	Content="Conversations:" Margin="10,10,97,141" Grid.Row="3"/>
         <Label
-        	Content="Scripts:" Margin="10,10,127,141" Grid.Row="3"/>
+        	Content="Scripts:" Margin="10,10,127,141" Grid.Row="4"/>
 
         <GridSplitter
             Grid.Column="1"
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.RowSpan="5"
             Width="5"
             HorizontalAlignment="Left"
@@ -44,7 +45,7 @@
 
         <GridSplitter
             Grid.Column="4"
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.RowSpan="5"
             Width="5"
             HorizontalAlignment="Left"
@@ -56,21 +57,19 @@
 
         <DockPanel
             Grid.Column="2"
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.ColumnSpan="2"
             Grid.RowSpan="4">
-            <local:FlatRedBallControl 
+            <frb:FlatRedBallControl 
                 x:Name="gameControl"
                 Height="Auto"
                 Width="Auto"/>
-
-
         </DockPanel>
 
         <Comp:AreaSelectionControl 
             x:Name="areaSelection"
             HorizontalAlignment="Stretch" 
-            Grid.Row="1" 
+            Grid.Row="2" 
             Grid.Column="0" 
             VerticalAlignment="Stretch"
             Width="Auto"
@@ -81,17 +80,17 @@
             x:Name="dialogSelection"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="0"
             Width="Auto"
             Height="Auto"
             />
-        
+
         <Comp:ScriptSelectionControl 
             x:Name="scriptSelection"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="0"
             Width="Auto"
             Height="Auto"
@@ -99,16 +98,24 @@
         <Comp:PaintObjectsControl x:Name="paintObjects"
             Grid.Column="5" 
             HorizontalAlignment="Stretch" 
-            Grid.Row="3" 
+            Grid.Row="4" 
             Grid.RowSpan="2"
             VerticalAlignment="Stretch"/>
         <Comp:ObjectSelectionComponent x:Name="objectSelection"
             Grid.Column="5" 
             HorizontalAlignment="Stretch" 
-            Grid.Row="1" 
+            Grid.Row="2" 
             Grid.RowSpan="2" 
             VerticalAlignment="Stretch" 
             Height="Auto"
+            Width="Auto"/>
+        <Comp:HotBarControl Grid.Column="0"
+            Grid.ColumnSpan="6" 
+            HorizontalAlignment="Stretch" 
+            Height="Auto" 
+            Grid.Row="1" 
+            Grid.RowSpan="1"
+            VerticalAlignment="Stretch" 
             Width="Auto"/>
 
     </Grid>

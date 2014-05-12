@@ -107,6 +107,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Icons\" />
     <Folder Include="Content\Settings\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

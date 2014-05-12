@@ -15,6 +15,8 @@ using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
+using Ceriyo.Entities.Screens;
+using Ceriyo.Toolset.FRBControl;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -23,12 +25,18 @@ namespace Ceriyo.Toolset.Components
     /// </summary>
     public partial class PaintObjectsControl : UserControl
     {
+        private FRBGameComponent TilePickerGame { get; set; }
         private PaintObjectsVM Model { get; set; }
         public event EventHandler<EventArgs> OnModeChanged;
 
         public PaintObjectsControl()
         {
             InitializeComponent();
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             Model = new PaintObjectsVM();
             PopulateModel();
         }
@@ -39,6 +47,11 @@ namespace Ceriyo.Toolset.Components
             Model.Items = WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
             Model.Placeables = WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
             Model.PaintMode = PaintObjectModeTypeEnum.None;
+        }
+
+        private void LoadComponent(object sender, RoutedEventArgs e)
+        {
+            TilePickerGame = new FRBGameComponent(frbTilePicker, typeof(TilePickerScreen));
         }
 
     }

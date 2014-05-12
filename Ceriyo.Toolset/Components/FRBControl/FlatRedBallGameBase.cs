@@ -6,7 +6,7 @@ using FlatRedBall.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Toolset
+namespace Ceriyo.Toolset.FRBControl
 {
     class FlatRedBallGameBase : Game
     {
