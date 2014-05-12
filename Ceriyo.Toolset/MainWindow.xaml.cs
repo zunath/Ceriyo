@@ -32,11 +32,11 @@ namespace Ceriyo.Toolset
         private void SetUpEvents()
         {
             Loaded += MainWindow_Loaded;
-            menuBar.OnOpenModule += menuBar_OnOpenModule;
+            menuBar.OnOpenModule += OnModuleOpened;
             areaSelection.OnAreaOpen += objectSelection.LoadArea;
         }
 
-        private void menuBar_OnOpenModule(object sender, GameModuleEventArgs e)
+        private void OnModuleOpened(object sender, GameModuleEventArgs e)
         {
             Model.Module = e.Module;
         }

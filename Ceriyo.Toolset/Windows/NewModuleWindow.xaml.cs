@@ -16,24 +16,35 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Ceriyo.Data;
 using FlatRedBall.IO;
+using Ceriyo.Data.ViewModels;
 
 namespace Ceriyo.Toolset.Windows
 {
     /// <summary>
     /// Interaction logic for NewModuleWindow.xaml
     /// </summary>
-    public partial class EditModuleWindow : Window
+    public partial class NewModuleWindow : Window
     {
-        public EditModuleWindow()
+        private NewModuleVM Model { get; set; }
+
+        public NewModuleWindow()
         {
             InitializeComponent();
+            Model = new NewModuleVM();
+            SetDataContexts();
+            SetLimits();
+            txtName.Focus();
         }
 
-        public EditModuleWindow(string title)
+        private void SetDataContexts()
         {
-            InitializeComponent();
-            this.Title = title;
-            txtName.Focus();
+            txtName.DataContext = Model;
+            txtTag.DataContext = Model;
+            txtResref.DataContext = Model;
+        }
+
+        private void SetLimits()
+        {
             txtName.MaxLength = EngineConstants.NameMaxLength;
             txtTag.MaxLength = EngineConstants.TagMaxLength;
             txtResref.MaxLength = EngineConstants.ResrefMaxLength;
@@ -41,8 +52,8 @@ namespace Ceriyo.Toolset.Windows
 
         private void btnCreateModule_Click(object sender, RoutedEventArgs e)
         {
-            ModuleDataManager.CreateModule(txtName.Text, txtTag.Text, txtResref.Text);
-            ModuleDataManager.LoadModule(txtResref.Text);
+            ModuleDataManager.CreateModule(Model.Name, Model.Tag, Model.Resref);
+            ModuleDataManager.LoadModule(Model.Resref);
             this.Close();
         }
 

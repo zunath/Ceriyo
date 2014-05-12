@@ -39,7 +39,7 @@ namespace Ceriyo.Toolset.Components
 
         private void NewModule_Click(object sender, RoutedEventArgs e)
         {
-            EditModuleWindow modWindow = new EditModuleWindow("New Module");
+            NewModuleWindow modWindow = new NewModuleWindow();
             modWindow.ShowDialog();
         }
 

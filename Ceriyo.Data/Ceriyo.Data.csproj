@@ -126,6 +126,7 @@
     <Compile Include="ViewModels\EditAreaVM.cs" />
     <Compile Include="ViewModels\ManageResourcePacksVM.cs" />
     <Compile Include="ViewModels\ModulePropertiesVM.cs" />
+    <Compile Include="ViewModels\NewModuleVM.cs" />
     <Compile Include="ViewModels\ObjectSelectionVM.cs" />
     <Compile Include="ViewModels\PaintObjectsVM.cs" />
     <Compile Include="ViewModels\ResourceEditorVM.cs" />
