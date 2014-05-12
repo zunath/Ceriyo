@@ -59,22 +59,6 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public static FileOperationResultTypeEnum SaveModule(GameModule module)
-        {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
-
-            try
-            {
-                FileManager.XmlSerialize(module, EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.ModuleExtension);
-                result = FileOperationResultTypeEnum.Success;
-            }
-            catch
-            {
-                result = FileOperationResultTypeEnum.Failure;
-            }
-
-            return result;
-        }
 
         public static FileOperationResultTypeEnum LoadModule(string resref, bool forceDeleteWorkingDirectory = false)
         {
@@ -186,12 +170,6 @@ namespace Ceriyo.Data
                 string text = Encoding.ASCII.GetString(stream.ToArray());
                 return FileManager.XmlDeserializeFromString<GameModule>(text);
             }
-        }
-
-        public static GameModule GetGameModule()
-        {
-            string path = EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension;
-            return FileManager.XmlDeserialize<GameModule>(path);
         }
 
         public static IList<GameModule> GetModules()

@@ -92,7 +92,7 @@ namespace Ceriyo.Toolset.Windows
             module.Scripts.Add(ScriptEventTypeEnum.OnPlayerLeft, Model.OnPlayerLeftScript);
             module.Scripts.Add(ScriptEventTypeEnum.OnPlayerRespawn, Model.OnPlayerRespawnScript);
 
-            FileOperationResultTypeEnum result = WorkingDataManager.SaveGameModule(module);
+            FileOperationResultTypeEnum result = WorkingDataManager.SaveModuleFile(module);
 
             if (result == FileOperationResultTypeEnum.Success)
             {

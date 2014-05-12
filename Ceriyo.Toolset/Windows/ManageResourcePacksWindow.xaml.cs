@@ -33,7 +33,7 @@ namespace Ceriyo.Toolset.Windows
         private void Initialize()
         {
             Model.AvailableResourcePackages = ResourcePackDataManager.GetAllResourcePackNames();
-            Model.AttachedResourcePackages = ModuleDataManager.GetGameModule().ResourcePacks;
+            Model.AttachedResourcePackages = WorkingDataManager.GetGameModule().ResourcePacks;
         }
 
         private void SetDataContexts()

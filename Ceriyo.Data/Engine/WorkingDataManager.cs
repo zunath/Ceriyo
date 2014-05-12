@@ -169,15 +169,13 @@ namespace Ceriyo.Data
             return module;
         }
 
-        public static FileOperationResultTypeEnum SaveGameModule(GameModule module)
+        public static FileOperationResultTypeEnum SaveModuleFile(GameModule module)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 
             try
             {
-                string path = EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension;
-                FileManager.XmlSerialize<GameModule>(module, path);
-
+                FileManager.XmlSerialize(module, EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.ModuleExtension);
                 result = FileOperationResultTypeEnum.Success;
             }
             catch
@@ -187,6 +185,5 @@ namespace Ceriyo.Data
 
             return result;
         }
-
     }
 }

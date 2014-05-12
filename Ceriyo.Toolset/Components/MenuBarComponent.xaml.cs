@@ -80,7 +80,7 @@ namespace Ceriyo.Toolset.Components
 
         private void BuildModule(object sender, RoutedEventArgs e)
         {
-            GameModule module = ModuleDataManager.GetGameModule();
+            GameModule module = WorkingDataManager.GetGameModule();
             bool success = ResourcePackDataManager.BuildModule(module.ResourcePacks);
 
             if (success)
