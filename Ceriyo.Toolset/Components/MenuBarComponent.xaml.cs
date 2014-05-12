@@ -21,7 +21,8 @@ namespace Ceriyo.Toolset.Components
     /// </summary>
     public partial class MenuBarComponent : UserControl
     {
-        private ResourcePackEditorWindow ResourceEditor { get; set; } 
+        private ResourcePackEditorWindow ResourceEditor { get; set; }
+        private ManageResourcePacksWindow ResourceManager { get; set; }
         private ModulePropertiesWindow ModuleProperties { get; set; }
         public event EventHandler<GameModuleEventArgs> OnOpenModule;
 
@@ -30,6 +31,7 @@ namespace Ceriyo.Toolset.Components
             InitializeComponent();
             ModuleProperties = new ModulePropertiesWindow();
             ResourceEditor = new ResourcePackEditorWindow();
+            ResourceManager = new ManageResourcePacksWindow();
         }
 
         private void NewModule_Click(object sender, RoutedEventArgs e)
@@ -66,6 +68,11 @@ namespace Ceriyo.Toolset.Components
         private void OpenResourceEditor(object sender, RoutedEventArgs e)
         {
             ResourceEditor.Open();
+        }
+
+        private void OpenResourceManager(object sender, RoutedEventArgs e)
+        {
+            ResourceManager.Open();
         }
     }
 }

@@ -24,6 +24,11 @@ namespace Ceriyo.Data.Engine
             {
                 Directory.CreateDirectory(EnginePaths.ScriptsDirectory);
             }
+
+            if (!Directory.Exists(EnginePaths.ResourcePacksDirectory))
+            {
+                Directory.CreateDirectory(EnginePaths.ResourcePacksDirectory);
+            }
         }
     }
 }

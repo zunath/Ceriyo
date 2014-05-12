@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Ceriyo.Data;
+using Ceriyo.Data.Engine;
 using Ceriyo.Data.ViewModels;
 
 namespace Ceriyo.Toolset.Windows
@@ -24,11 +26,14 @@ namespace Ceriyo.Toolset.Windows
         public ManageResourcePacksWindow()
         {
             InitializeComponent();
+            Model = new ManageResourcePacksVM();
+            SetDataContexts();
         }
 
         private void Initialize()
         {
-            Model = new ManageResourcePacksVM();
+            Model.AvailableResourcePackages = ResourcePackDataManager.GetAllResourcePackNames();
+            Model.AttachedResourcePackages = ModuleDataManager.GetGameModule().ResourcePacks;
         }
 
         private void SetDataContexts()
@@ -39,18 +44,61 @@ namespace Ceriyo.Toolset.Windows
 
         private void MoveUp(object sender, RoutedEventArgs e)
         {
+            string resourcePack = lbAttachedPackages.SelectedItem as string;
+
+            if (resourcePack != null)
+            {
+                int oldIndex = Model.AttachedResourcePackages.IndexOf(resourcePack);
+                int newIndex = oldIndex - 1;
+                if (oldIndex > 0)
+                {
+                    Model.AttachedResourcePackages.RemoveAt(oldIndex);
+                    Model.AttachedResourcePackages.Insert(newIndex, resourcePack);
+
+                    lbAttachedPackages.SelectedIndex = newIndex;
+                }
+            }
         }
 
         private void MoveDown(object sender, RoutedEventArgs e)
         {
+            string resourcePack = lbAttachedPackages.SelectedItem as string;
+
+            if (resourcePack != null)
+            {
+                int oldIndex = Model.AttachedResourcePackages.IndexOf(resourcePack);
+                int newIndex = oldIndex + 1;
+
+                if (oldIndex + 1 < Model.AttachedResourcePackages.Count)
+                {
+                    Model.AttachedResourcePackages.RemoveAt(oldIndex);
+                    Model.AttachedResourcePackages.Insert(newIndex, resourcePack);
+
+                    lbAttachedPackages.SelectedIndex = newIndex;
+                }
+            }
+
         }
 
         private void AddPackage(object sender, RoutedEventArgs e)
         {
+            string resourcePack = ddlAvailableResourcePackages.SelectedItem as string;
+
+            if (!String.IsNullOrWhiteSpace(resourcePack) &&
+                !Model.AttachedResourcePackages.Contains(resourcePack))
+            {
+                Model.AttachedResourcePackages.Add(resourcePack);
+            }
         }
 
         private void RemoveSelected(object sender, RoutedEventArgs e)
         {
+            string resourcePack = lbAttachedPackages.SelectedItem as string;
+
+            if (!String.IsNullOrWhiteSpace(resourcePack))
+            {
+                Model.AttachedResourcePackages.Remove(resourcePack);
+            }
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -59,6 +107,8 @@ namespace Ceriyo.Toolset.Windows
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
+            Model.AttachedResourcePackages.Clear();
+            Model.AvailableResourcePackages.Clear();
             this.Hide();
         }
 
@@ -66,6 +116,12 @@ namespace Ceriyo.Toolset.Windows
         {
             e.Cancel = true;
             this.Hide();
+        }
+
+        public void Open()
+        {
+            Initialize();
+            this.Show();
         }
     }
 }

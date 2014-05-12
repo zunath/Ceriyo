@@ -90,5 +90,26 @@ namespace Ceriyo.Data.Engine
             return resources;
         }
 
+        public static BindingList<string> GetAllResourcePackNames()
+        {
+            BindingList<string> result = new BindingList<string>();
+
+            try
+            {
+                string[] files = Directory.GetFiles(EnginePaths.ResourcePacksDirectory, "*" + EnginePaths.ResourcePackExtension);
+                
+                foreach (string file in files)
+                {
+                    result.Add(Path.GetFileName(file));
+                }
+            }
+            catch
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
     }
 }
