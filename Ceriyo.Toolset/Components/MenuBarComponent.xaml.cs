@@ -11,7 +11,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ceriyo.Data;
+using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.GameObjects;
 using Ceriyo.Toolset.Windows;
 
 namespace Ceriyo.Toolset.Components
@@ -73,6 +76,21 @@ namespace Ceriyo.Toolset.Components
         private void OpenResourceManager(object sender, RoutedEventArgs e)
         {
             ResourceManager.Open();
+        }
+
+        private void BuildModule(object sender, RoutedEventArgs e)
+        {
+            GameModule module = ModuleDataManager.GetGameModule();
+            bool success = ResourcePackDataManager.BuildModule(module.ResourcePacks);
+
+            if (success)
+            {
+                MessageBox.Show("Module built successfully!", "Success", MessageBoxButton.OK);
+            }
+            else
+            {
+                MessageBox.Show("Module failed to build.", "Failure", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

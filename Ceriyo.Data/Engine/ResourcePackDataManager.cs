@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using FlatRedBall.IO;
 using Ionic.Zip;
@@ -109,6 +110,70 @@ namespace Ceriyo.Data.Engine
             }
 
             return result;
+        }
+
+        public static bool BuildModule(BindingList<string> resourcePackFileNames)
+        {
+            bool success = false;
+            BindingList<GameResource> resources = new BindingList<GameResource>();
+            GameModule module = WorkingDataManager.GetGameModule();
+            module.ResourcePacks = resourcePackFileNames;
+
+            try
+            {
+                foreach (string package in resourcePackFileNames)
+                {
+                    using (ZipFile zip = new ZipFile(EnginePaths.ResourcePacksDirectory + package))
+                    {
+                        foreach (ZipEntry resourceFile in zip.Entries)
+                        {
+                            string extension = Path.GetExtension(resourceFile.FileName);
+                            GameResource resource = new GameResource();
+                            resource.Package = package;
+                            resource.FileName = resourceFile.FileName;
+
+                            if (extension == ".png") resource.ResourceType = ResourceTypeEnum.Graphic;
+                            else if (extension == ".mp3") resource.ResourceType = ResourceTypeEnum.Audio;
+                            else resource.ResourceType = ResourceTypeEnum.Unknown;
+
+                            if (resources.SingleOrDefault(x => x.FileName == resource.FileName) == null && 
+                                resource.ResourceType != ResourceTypeEnum.Unknown)
+                            {
+                                resources.Add(resource);
+                            }
+                        }
+                    }
+                }
+
+                WorkingDataManager.SaveGameModule(module);
+                FileManager.XmlSerialize(resources, WorkingPaths.ResourceLinksFile);
+                success = true;
+            }
+            catch
+            {
+                success = false;
+            }
+
+            return success;
+        }
+
+        public static BindingList<GameResource> GetGameResources(ResourceTypeEnum resourceType)
+        {
+            BindingList<GameResource> resources = null;
+
+            try
+            {
+                string path = EnginePaths.WorkingDirectory + EnginePaths.ResourceLinksDataFileName + EnginePaths.DataExtension;
+                resources = FileManager.XmlDeserialize<BindingList<GameResource>>(path);
+                resources = new BindingList<GameResource>(resources.Where(x => x.ResourceType == resourceType).ToList());
+            }
+            catch
+            {
+                resources = null;
+            }
+
+
+            return resources;
         }
 
     }

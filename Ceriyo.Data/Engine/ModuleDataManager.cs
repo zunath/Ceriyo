@@ -59,6 +59,23 @@ namespace Ceriyo.Data
             return result;
         }
 
+        public static FileOperationResultTypeEnum SaveModule(GameModule module)
+        {
+            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+
+            try
+            {
+                FileManager.XmlSerialize(module, EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.ModuleExtension);
+                result = FileOperationResultTypeEnum.Success;
+            }
+            catch
+            {
+                result = FileOperationResultTypeEnum.Failure;
+            }
+
+            return result;
+        }
+
         public static FileOperationResultTypeEnum LoadModule(string resref, bool forceDeleteWorkingDirectory = false)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;

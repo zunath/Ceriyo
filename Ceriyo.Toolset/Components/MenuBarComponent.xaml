@@ -33,7 +33,7 @@
                 <MenuItem Name="miResourceEditor" Header="Editor" Click="OpenResourceEditor"></MenuItem>
                 <MenuItem Name="miManageResources" Header="Manage" Click="OpenResourceManager"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Name="miBuildModule" Header="Build Module"></MenuItem>
+                <MenuItem Name="miBuildModule" Header="Build Module" Click="BuildModule"></MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About"></MenuItem>

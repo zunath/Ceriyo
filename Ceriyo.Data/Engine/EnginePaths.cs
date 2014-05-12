@@ -43,6 +43,11 @@ namespace Ceriyo.Data
             get { return "Manifest"; }
         }
 
+        public static string ResourceLinksDataFileName
+        {
+            get { return "ResourceLinks"; }
+        }
+
         public static string ModuleFileFilter
         {
             get { return "Module files (*" + ModuleExtension + ") | *" + ModuleExtension; }

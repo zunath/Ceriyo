@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
+using Ceriyo.Data.ResourceObjects;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -27,6 +28,9 @@ namespace Ceriyo.Data.GameObjects
         public BindingList<Creature> CreatureInstances { get; set; }
         public BindingList<Placeable> PlaceableInstances { get; set; }
         public BindingList<Item> ItemInstances { get; set; }
+        public GameResource Graphic { get; set; }
+        public GameResource BattleMusic { get; set; }
+        public GameResource BackgroundMusic { get; set; }
 
         [XmlIgnore]
         public List<Tile[,]> Tiles
@@ -66,6 +70,9 @@ namespace Ceriyo.Data.GameObjects
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
             this.MapTiles = new BindingList<MapTile>();
+            this.Graphic = new GameResource();
+            this.BattleMusic = new GameResource();
+            this.BackgroundMusic = new GameResource();
         }
 
         public Area(
@@ -88,6 +95,9 @@ namespace Ceriyo.Data.GameObjects
             this.CreatureInstances = new BindingList<Creature>();
             this.ItemInstances = new BindingList<Item>();
             this.PlaceableInstances = new BindingList<Placeable>();
+            this.Graphic = new GameResource();
+            this.BattleMusic = new GameResource();
+            this.BackgroundMusic = new GameResource();
 
             for (int layer = 0; layer < LayerCount; layer++)
             {

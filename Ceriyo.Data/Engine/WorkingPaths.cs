@@ -51,5 +51,10 @@ namespace Ceriyo.Data
         {
             get { return EnginePaths.WorkingDirectory; }
         }
+
+        public static string ResourceLinksFile
+        {
+            get { return EnginePaths.WorkingDirectory + EnginePaths.ResourceLinksDataFileName + EnginePaths.DataExtension; }
+        }
     }
 }
