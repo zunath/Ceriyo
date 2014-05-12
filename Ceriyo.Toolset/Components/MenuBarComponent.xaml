@@ -29,9 +29,11 @@
                 <Separator></Separator>
                 <MenuItem Header="Module Properties" Click="OpenModuleProperties"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Content">
-                <MenuItem Header="Manage Content Packages"></MenuItem>
-                <MenuItem Header="Build Module"></MenuItem>
+            <MenuItem Header="Resources">
+                <MenuItem Name="miResourceEditor" Header="Editor" Click="OpenResourceEditor"></MenuItem>
+                <MenuItem Name="miManageResources" Header="Manage"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Name="miBuildModule" Header="Build Module"></MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About"></MenuItem>

@@ -18,7 +18,17 @@ namespace Ceriyo.Data
             get { return ".js"; }
         }
 
+        public static string BackupExtension
+        {
+            get { return ".bak"; }
+        }
+
         public static string ModuleDataFileName
+        {
+            get { return "Module"; }
+        }
+
+        public static string ResourcePackDataFileName
         {
             get { return "Manifest"; }
         }
