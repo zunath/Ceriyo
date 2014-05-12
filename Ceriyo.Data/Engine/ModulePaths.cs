@@ -7,11 +7,6 @@ namespace Ceriyo.Data
 {
     public static class ModulePaths
     {
-        public static string ModuleExtension
-        {
-            get { return ".cmod"; }
-        }
-
         public static string AreasDirectory
         {
             get { return "/Data/Areas/"; }

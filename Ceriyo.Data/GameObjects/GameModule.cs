@@ -51,7 +51,7 @@ namespace Ceriyo.Data.GameObjects
         {
             get
             {
-                return Name + " (" + Resref + ModulePaths.ModuleExtension + ")";
+                return Name + " (" + Resref + EnginePaths.ModuleExtension + ")";
             }
         }
     }

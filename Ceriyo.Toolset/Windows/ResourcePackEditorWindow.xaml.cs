@@ -7,6 +7,7 @@ using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Data.ViewModels;
 using Microsoft.Win32;
 using System.Linq;
+using Ceriyo.Data;
 
 namespace Ceriyo.Toolset.Windows
 {
@@ -36,9 +37,9 @@ namespace Ceriyo.Toolset.Windows
 
             AddResourceFile.Multiselect = true;
 
-            AddResourceFile.Filter = "";
-            SaveFile.Filter = "";
-            OpenFile.Filter = "";
+            AddResourceFile.Filter = EnginePaths.ResourceFileFilter;
+            SaveFile.Filter = EnginePaths.ResourcePackFileFilter;
+            OpenFile.Filter = EnginePaths.ResourcePackFileFilter;
 
         }
 

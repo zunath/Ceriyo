@@ -23,7 +23,7 @@ namespace Ceriyo.Data
                     Directory.CreateDirectory(EnginePaths.ModulesDirectory);
                 }
                 
-                string path = EnginePaths.ModulesDirectory + resref + ModulePaths.ModuleExtension;
+                string path = EnginePaths.ModulesDirectory + resref + EnginePaths.ModuleExtension;
 
                 if (File.Exists(path))
                 {
@@ -70,7 +70,7 @@ namespace Ceriyo.Data
                     Directory.CreateDirectory(EnginePaths.WorkingDirectory);
                 }
 
-                string path = EnginePaths.ModulesDirectory + resref + ModulePaths.ModuleExtension;
+                string path = EnginePaths.ModulesDirectory + resref + EnginePaths.ModuleExtension;
                 if (!File.Exists(path))
                 {
                     result = FileOperationResultTypeEnum.FileDoesNotExist;

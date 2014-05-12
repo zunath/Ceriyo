@@ -8,6 +8,16 @@ namespace Ceriyo.Data
 {
     public static class EnginePaths
     {
+        public static string ModuleExtension
+        {
+            get { return ".cmod"; }
+        }
+
+        public static string ResourcePackExtension
+        {
+            get { return ".crp"; }
+        }
+
         public static string DataExtension
         {
             get { return ".xml"; }
@@ -31,6 +41,23 @@ namespace Ceriyo.Data
         public static string ResourcePackDataFileName
         {
             get { return "Manifest"; }
+        }
+
+        public static string ModuleFileFilter
+        {
+            get { return "Module files (*" + ModuleExtension + ") | *" + ModuleExtension; }
+        }
+
+        public static string ResourcePackFileFilter
+        {
+            get { return "Resource Pack files (*" + ResourcePackExtension + ") | *" + ResourcePackExtension; }
+        }
+
+        public static string ResourceFileFilter
+        {
+            get { return "Image files (*.png) | *.png; |" +
+                         "Audio files (*.mp3) | *.mp3; |" +
+                         "All files (*.png, *.mp3) | *.png; *.mp3"; }
         }
 
         public static string ModulesDirectory
