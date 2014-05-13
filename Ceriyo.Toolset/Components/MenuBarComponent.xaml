@@ -29,6 +29,10 @@
                 <Separator></Separator>
                 <MenuItem Header="Module Properties" Click="OpenModuleProperties"></MenuItem>
             </MenuItem>
+            <MenuItem Header="Data">
+                <MenuItem Header="Editor" Click="OpenDataEditor">
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Resources">
                 <MenuItem Name="miResourceEditor" Header="Editor" Click="OpenResourceEditor"></MenuItem>
                 <MenuItem Name="miManageResources" Header="Manage" Click="OpenResourceManager"></MenuItem>

@@ -132,6 +132,7 @@
     <Compile Include="ViewModels\PaintObjectsVM.cs" />
     <Compile Include="ViewModels\ResourceEditorVM.cs" />
     <Compile Include="ViewModels\ScriptSelectionVM.cs" />
+    <Compile Include="ViewModels\TilesetEditorVM.cs" />
     <Compile Include="ViewModels\ToolsetVM.cs" />
   </ItemGroup>
   <ItemGroup />

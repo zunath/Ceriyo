@@ -129,6 +129,9 @@
     <Compile Include="Components\HotBarControl.xaml.cs">
       <DependentUpon>HotBarControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\ItemEditorControl.xaml.cs">
+      <DependentUpon>ItemEditorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\ModulePropertiesControl.xaml.cs">
       <DependentUpon>ModulePropertiesControl.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,9 @@
     </Compile>
     <Compile Include="Components\PaintObjectsControl.xaml.cs">
       <DependentUpon>PaintObjectsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\PlaceableEditorControl.xaml.cs">
+      <DependentUpon>PlaceableEditorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\ScriptSelectionControl.xaml.cs">
       <DependentUpon>ScriptSelectionControl.xaml</DependentUpon>
@@ -148,6 +154,9 @@
       <DependentUpon>MenuBarComponent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\FRBControl\FRBGameComponent.cs" />
+    <Compile Include="Components\TilesetEditorControl.xaml.cs">
+      <DependentUpon>TilesetEditorControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValidationRules\MaxLevelRule.cs" />
     <Compile Include="ValidationRules\NameLengthRule.cs" />
     <Compile Include="ValidationRules\NumericAmountRule.cs" />
@@ -158,6 +167,9 @@
     <Compile Include="ValidationRules\AreaWidthRule.cs" />
     <Compile Include="Windows\EditDialogWindow.xaml.cs">
       <DependentUpon>EditDialogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DataEditorWindow.xaml.cs">
+      <DependentUpon>DataEditorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\LoadModuleWindow.xaml.cs">
       <DependentUpon>LoadModuleWindow.xaml</DependentUpon>
@@ -209,6 +221,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\ItemEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\MenuBarComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,7 +241,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\PlaceableEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\ScriptSelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\TilesetEditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,6 +270,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\EditDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DataEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
