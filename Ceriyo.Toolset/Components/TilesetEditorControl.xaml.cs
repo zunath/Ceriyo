@@ -19,6 +19,7 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Data.ViewModels;
+using Ceriyo.Library.Processing;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -117,14 +118,7 @@ namespace Ceriyo.Toolset.Components
             if (resource != null)
             {
                 Model.SelectedTileset.Graphic = resource;
-
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.None;
-                image.StreamSource = new MemoryStream(Processor.ToBytes(resource));
-                image.EndInit();
-
-                imgGraphic.Source = image;
+                imgGraphic.Source = Processor.ToBitmapImage(resource);
             }
         }
 

@@ -20,6 +20,7 @@ using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Entities.Screens;
 using Ceriyo.Toolset.FRBControl;
+using Ceriyo.Library.Processing;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -65,12 +66,7 @@ namespace Ceriyo.Toolset.Components
         {
             Area area = e.GameObject as Area;
             GameResourceProcessor processor = new GameResourceProcessor();
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.StreamSource = new MemoryStream(processor.ToBytes(area.Graphic));
-            image.EndInit();
-
-            imgTiles.Source = image;
+            imgTiles.Source = processor.ToBitmapImage(area.Graphic);
         }
 
     }

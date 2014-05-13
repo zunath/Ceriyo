@@ -6,8 +6,10 @@ using System.Text;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Ionic.Zip;
+using Ceriyo.Data;
+using System.Windows.Media.Imaging;
 
-namespace Ceriyo.Data.Engine
+namespace Ceriyo.Library.Processing
 {
     public class GameResourceProcessor
     {
@@ -56,5 +58,16 @@ namespace Ceriyo.Data.Engine
 
             return bytes;
         }
+
+        public BitmapImage ToBitmapImage(GameResource resource)
+        {
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = new MemoryStream(ToBytes(resource));
+            image.EndInit();
+
+            return image;
+        }
+
     }
 }
