@@ -35,6 +35,7 @@ namespace Ceriyo.Toolset
             Loaded += MainWindow_Loaded;
             menuBar.OnOpenModule += OnModuleOpened;
             areaSelection.OnAreaOpen += objectSelection.LoadArea;
+            areaSelection.OnAreaOpen += paintObjects.LoadArea;
         }
 
         private void OnModuleOpened(object sender, GameModuleEventArgs e)

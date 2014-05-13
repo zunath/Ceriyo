@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.Enumerations;
+﻿using Ceriyo.Data.Enumerations;
 
 namespace Ceriyo.Data.ResourceObjects
 {

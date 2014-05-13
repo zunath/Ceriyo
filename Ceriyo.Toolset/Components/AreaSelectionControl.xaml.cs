@@ -78,9 +78,12 @@ namespace Ceriyo.Toolset.Components
         {
             Area area = lbAreas.SelectedItem as Area;
 
-            if (OnAreaOpen != null)
+            if (area != null)
             {
-                OnAreaOpen(this, new GameObjectEventArgs(area));
+                if (OnAreaOpen != null)
+                {
+                    OnAreaOpen(this, new GameObjectEventArgs(area));
+                }
             }
         }
 

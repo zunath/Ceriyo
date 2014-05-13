@@ -12,7 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ceriyo.Data;
+using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Entities.Screens;
@@ -27,6 +29,7 @@ namespace Ceriyo.Toolset.Components
     {
         private FRBGameComponent TilePickerGame { get; set; }
         private PaintObjectsVM Model { get; set; }
+        public event EventHandler<EventArgs> OnTilePicked;
         public event EventHandler<EventArgs> OnModeChanged;
 
         public PaintObjectsControl()
@@ -51,7 +54,22 @@ namespace Ceriyo.Toolset.Components
 
         private void LoadComponent(object sender, RoutedEventArgs e)
         {
-            TilePickerGame = new FRBGameComponent(frbTilePicker, typeof(TilePickerScreen));
+        }
+
+        public void LoadModule(object sender, GameModuleEventArgs e)
+        {
+        }
+
+        public void LoadArea(object sender, GameObjectEventArgs e)
+        {
+            Area area = e.GameObject as Area;
+            GameResourceProcessor processor = new GameResourceProcessor();
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = processor.ToMemoryStream(area.Graphic);
+            image.EndInit();
+
+            imgTiles.Source = image;
         }
 
     }

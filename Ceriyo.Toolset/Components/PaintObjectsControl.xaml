@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:frb="clr-namespace:Ceriyo.Toolset.FRBControl"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Background="White" Loaded="LoadComponent">
     <Grid>
@@ -16,12 +15,7 @@
             <TabControl>
                 <TabItem Header="Tiles">
                     <DockPanel>
-                        <frb:FlatRedBallControl x:Name="frbTilePicker"
-                                              HorizontalAlignment="Stretch"
-                                              VerticalAlignment="Stretch"
-                                              Height="Auto"
-                                              Width="Auto">
-                        </frb:FlatRedBallControl>
+                        <Image Name="imgTiles"></Image>
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="Creatures">
