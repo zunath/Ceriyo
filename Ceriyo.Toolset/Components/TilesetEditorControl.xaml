@@ -26,6 +26,8 @@
                  Grid.RowSpan="3"
                  BorderBrush="Black" 
                  ItemsSource="{Binding Tilesets}"
+                 DisplayMemberPath="Name"
+                 SelectionChanged="ItemSelected"
                  Margin="0,27,0,41">
         </ListBox>
         <Label Content="Tilesets:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
@@ -44,6 +46,7 @@
                   Margin="10,62,0,0" 
                   VerticalAlignment="Top" 
                   ItemsSource="{Binding Graphics}"
+                  DisplayMemberPath="Name"
                   Width="120" 
                   Grid.Row="1"/>
         <Label Content="Graphic:" 

@@ -17,7 +17,8 @@ namespace Ceriyo.Data.ViewModels
         private string _comments;
         private BindingList<LocalVariable> _localVariables;
         private BindingList<GameResource> _graphics;
-        private GameResource _selectedGraphic;
+        private BindingList<Tileset> _tilesets;
+        private Tileset _selectedTileset;
 
 
         public string Name
@@ -109,6 +110,32 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public Tileset SelectedTileset
+        {
+            get
+            {
+                return _selectedTileset;
+            }
+            set
+            {
+                _selectedTileset = value;
+                OnPropertyChanged("SelectedTileset");
+            }
+        }
+
+        public BindingList<Tileset> Tilesets
+        {
+            get
+            {
+                return _tilesets;
+            }
+            set
+            {
+                _tilesets = value;
+                OnPropertyChanged("Tilesets");
+            }
+        }
+
         public TilesetEditorVM()
         {
             this.Name = "";
@@ -118,6 +145,7 @@ namespace Ceriyo.Data.ViewModels
             this.Description = "";
             this.Comments = "";
             this.Graphics = new BindingList<GameResource>();
+            this.SelectedTileset = new Tileset();
         }
     }
 }

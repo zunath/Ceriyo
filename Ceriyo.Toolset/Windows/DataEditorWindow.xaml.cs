@@ -60,7 +60,7 @@ namespace Ceriyo.Toolset.Windows
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-
+            this.Hide();
         }
 
         private void ApplyChanges(object sender, RoutedEventArgs e)

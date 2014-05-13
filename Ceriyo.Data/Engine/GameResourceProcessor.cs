@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Ionic.Zip;
 
@@ -12,6 +13,29 @@ namespace Ceriyo.Data.Engine
     {
         public GameResourceProcessor()
         {
+        }
+
+        public string GenerateUniqueResref(IGameObject gameObject)
+        {
+            string resref = gameObject.CategoryName;
+            string[] files = Directory.GetFiles(gameObject.WorkingDirectory);
+
+            int count = 0;
+            foreach(string file in files)
+            {
+                if (Path.GetFileNameWithoutExtension(file) == resref + count)
+                {
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            resref = resref + count;
+
+            return resref;
         }
 
         public MemoryStream ToMemoryStream(GameResource resource)
