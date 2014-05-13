@@ -20,10 +20,12 @@ namespace Ceriyo.Data.GameObjects
         public int MapWidth { get; set; }
         public int MapHeight { get; set; }
         public int LayerCount { get; set; }
+        [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.AreasDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
         public BindingList<MapTile> MapTiles { get; set; }
+        [XmlIgnore]
         public string CategoryName { get { return "Area"; } }
         public BindingList<Creature> CreatureInstances { get; set; }
         public BindingList<Placeable> PlaceableInstances { get; set; }

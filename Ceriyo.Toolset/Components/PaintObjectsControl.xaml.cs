@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -66,7 +67,7 @@ namespace Ceriyo.Toolset.Components
             GameResourceProcessor processor = new GameResourceProcessor();
             BitmapImage image = new BitmapImage();
             image.BeginInit();
-            image.StreamSource = processor.ToMemoryStream(area.Graphic);
+            image.StreamSource = new MemoryStream(processor.ToBytes(area.Graphic));
             image.EndInit();
 
             imgTiles.Source = image;

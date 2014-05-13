@@ -38,18 +38,23 @@ namespace Ceriyo.Data.Engine
             return resref;
         }
 
-        public MemoryStream ToMemoryStream(GameResource resource)
+        public byte[] ToBytes(GameResource resource)
         {
-            MemoryStream stream = new MemoryStream();
-            string path = EnginePaths.ResourcePacksDirectory + resource.Package + EnginePaths.ResourcePackExtension;
+            string path = EnginePaths.ResourcePacksDirectory + resource.Package;
+            byte[] bytes;
 
-            using (ZipFile zip = new ZipFile(path))
+            using (MemoryStream stream = new MemoryStream())
             {
-                ZipEntry entry = zip[resource.FileName];
-                entry.Extract(stream);
+                using (ZipFile zip = new ZipFile(path))
+                {
+                    ZipEntry entry = zip[resource.FileName];
+                    entry.Extract(stream);
+                }
+                stream.Flush();
+                bytes = stream.ToArray();
             }
 
-            return stream;
+            return bytes;
         }
     }
 }

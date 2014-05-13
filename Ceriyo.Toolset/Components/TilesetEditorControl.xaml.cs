@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -16,6 +17,7 @@ using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Data.ViewModels;
 
 namespace Ceriyo.Toolset.Components
@@ -39,7 +41,7 @@ namespace Ceriyo.Toolset.Components
         private void SetDataContexts()
         {
             lbTilesets.DataContext = Model;
-            ddlGraphics.DataContext = Model;
+            lbGraphics.DataContext = Model;
             txtName.DataContext = Model.SelectedTileset;
             txtTag.DataContext = Model.SelectedTileset;
             txtResref.DataContext = Model.SelectedTileset;
@@ -94,13 +96,31 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
-        private void ItemSelected(object sender, SelectionChangedEventArgs e)
+        private void TilesetSelected(object sender, SelectionChangedEventArgs e)
         {
             Tileset tileset = lbTilesets.SelectedItem as Tileset;
 
             if (tileset != null)
             {
                 Model.SelectedTileset = tileset;
+            }
+        }
+
+        private void GraphicSelected(object sender, SelectionChangedEventArgs e)
+        {
+            GameResource resource = lbGraphics.SelectedItem as GameResource;
+
+            if (resource != null)
+            {
+                Model.SelectedTileset.Graphic = resource;
+
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.None;
+                image.StreamSource = new MemoryStream(Processor.ToBytes(resource));
+                image.EndInit();
+
+                imgGraphic.Source = image;
             }
         }
 

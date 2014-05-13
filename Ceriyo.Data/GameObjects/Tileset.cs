@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
 using Ceriyo.Data.ResourceObjects;
@@ -16,8 +17,10 @@ namespace Ceriyo.Data.GameObjects
         public string Resref { get; set; }
         public string Description { get; set; }
         public string Comments { get; set; }
+        [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.TilesetsDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
+        [XmlIgnore]
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts
         {
             get { throw new NotSupportedException(); }

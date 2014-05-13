@@ -7,8 +7,8 @@
              d:DesignHeight="500" d:DesignWidth="700" Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="145"></ColumnDefinition>
+            <ColumnDefinition Width="145"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="120"></ColumnDefinition>
@@ -27,41 +27,32 @@
                  BorderBrush="Black" 
                  ItemsSource="{Binding Tilesets}"
                  DisplayMemberPath="Name"
-                 SelectionChanged="ItemSelected"
+                 SelectionChanged="TilesetSelected"
                  Margin="0,27,0,41">
         </ListBox>
         <Label Content="Tilesets:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
         <TextBox Name="txtName"
                  Grid.Column="1" 
                  HorizontalAlignment="Left" 
-                 Height="23" Margin="10,52,0,0" 
+                 Height="23" Margin="5,36,0,0" 
                  TextWrapping="Wrap" 
                  Text="{Binding Name}" 
                  VerticalAlignment="Top" 
-                 Width="120"/>
-        <Label Content="Name:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="ddlGraphics"
-                  Grid.Column="1" 
-                  HorizontalAlignment="Left" 
-                  Margin="10,62,0,0" 
-                  VerticalAlignment="Top" 
-                  ItemsSource="{Binding Graphics}"
-                  DisplayMemberPath="Name"
-                  Width="120" 
-                  Grid.Row="1"/>
-        <Label Content="Graphic:" 
-               Grid.Column="1" 
-               HorizontalAlignment="Left" 
-               Margin="10,31,0,0" 
-               VerticalAlignment="Top" Grid.Row="1"/>
+                 Width="135"/>
+        <Label Content="Name:" Grid.Column="1" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top"/>
 
         <DockPanel Background="LightGray"
                Grid.Column="2"
                Grid.Row="0"
                Grid.ColumnSpan="2"
-               Grid.RowSpan="3">
-            <Image Name="imgGraphic">
-            </Image>
+               Grid.RowSpan="2">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <Image Name="imgGraphic" 
+                       Stretch="None"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top">
+                </Image>
+            </ScrollViewer>
         </DockPanel>
         <RadioButton Name="radPassage"
                      Content="Passage" 
@@ -76,10 +67,10 @@
         	HorizontalAlignment="Left" 
         	Margin="10,73,0,0" 
         	VerticalAlignment="Top"/>
-        <TextBox Name="txtTag" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,111,0,0" TextWrapping="Wrap" Text="{Binding Tag}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Tag:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="txtResref" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,3,0,0" TextWrapping="Wrap" Text="{Binding Resref}" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
-        <Label Content="Resref:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="txtTag" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="5,90,0,0" TextWrapping="Wrap" Text="{Binding Tag}" VerticalAlignment="Top" Width="135"/>
+        <Label Content="Tag:" Grid.Column="1" HorizontalAlignment="Left" Margin="11,64,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="txtResref" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="5,144,0,0" TextWrapping="Wrap" Text="{Binding Resref}" VerticalAlignment="Top" Width="135"/>
+        <Label Content="Resref:" Grid.Column="1" HorizontalAlignment="Left" Margin="11,118,0,0" VerticalAlignment="Top"/>
         <Button Content="New" 
                 Click="New"
                 HorizontalAlignment="Left" 
@@ -94,6 +85,15 @@
                 Grid.Row="2" 
                 VerticalAlignment="Bottom" 
                 Width="52"/>
+        <ListBox x:Name="lbGraphics"
+        	Grid.Column="2" 
+        	HorizontalAlignment="Stretch" 
+        	VerticalAlignment="Stretch" 
+        	ItemsSource="{Binding Graphics}"
+        	DisplayMemberPath="Name"
+        	Width="Auto" 
+        	SelectionChanged="GraphicSelected"
+        	Grid.Row="2" Grid.ColumnSpan="2" Height="Auto"/>
 
 
     </Grid>
