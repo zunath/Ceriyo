@@ -19,7 +19,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<GameResource> _graphics;
         private BindingList<Tileset> _tilesets;
         private Tileset _selectedTileset;
-
+        private bool _isTilesetSelected;
 
         public string Name
         {
@@ -136,6 +136,19 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public bool IsTilesetSelected
+        {
+            get
+            {
+                return _isTilesetSelected;
+            }
+            set
+            {
+                _isTilesetSelected = value;
+                OnPropertyChanged("IsTilesetSelected");
+            }
+        }
+
         public TilesetEditorVM()
         {
             this.Name = "";
@@ -145,7 +158,6 @@ namespace Ceriyo.Data.ViewModels
             this.Description = "";
             this.Comments = "";
             this.Graphics = new BindingList<GameResource>();
-            this.SelectedTileset = new Tileset();
         }
     }
 }

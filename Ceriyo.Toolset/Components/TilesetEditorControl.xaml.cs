@@ -42,9 +42,13 @@ namespace Ceriyo.Toolset.Components
         {
             lbTilesets.DataContext = Model;
             lbGraphics.DataContext = Model;
-            txtName.DataContext = Model.SelectedTileset;
-            txtTag.DataContext = Model.SelectedTileset;
-            txtResref.DataContext = Model.SelectedTileset;
+            txtName.DataContext = Model;
+            txtTag.DataContext = Model;
+            txtResref.DataContext = Model;
+            btnNew.DataContext = Model;
+            btnDelete.DataContext = Model;
+            radPassage.DataContext = Model;
+            radPassage4Direction.DataContext = Model;
         }
 
         private void New(object sender, RoutedEventArgs e)
@@ -57,6 +61,8 @@ namespace Ceriyo.Toolset.Components
             tileset.Resref = resref;
 
             Model.Tilesets.Add(tileset);
+            int index = lbTilesets.Items.IndexOf(tileset);
+            lbTilesets.SelectedItem = lbTilesets.Items[index];
         }
 
         private void Delete(object sender, RoutedEventArgs e)
@@ -68,6 +74,7 @@ namespace Ceriyo.Toolset.Components
                 if (MessageBox.Show("Are you sure you want to delete this tileset?", "Delete Tileset?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     Model.Tilesets.Remove(tileset);
+                    Model.IsTilesetSelected = false;
                 }
             }
         }
@@ -103,6 +110,7 @@ namespace Ceriyo.Toolset.Components
             if (tileset != null)
             {
                 Model.SelectedTileset = tileset;
+                Model.IsTilesetSelected = true;
             }
         }
 
