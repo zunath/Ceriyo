@@ -117,8 +117,9 @@ namespace Ceriyo.Toolset.Components
 
             if (resource != null)
             {
+                BitmapImage image = Processor.ToBitmapImage(resource);
                 Model.SelectedTileset.Graphic = resource;
-                imgGraphic.Source = Processor.ToBitmapImage(resource);
+                imgGraphic.Source = image;   
             }
         }
 

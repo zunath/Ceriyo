@@ -48,11 +48,48 @@
                Grid.ColumnSpan="2"
                Grid.RowSpan="2">
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                <Image Name="imgGraphic" 
-                       Stretch="None"
+                
+                <Grid Name="gridOverlay">
+
+                    <Image Name="imgGraphic" 
+                       Stretch="Fill"
+                       Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
+                       Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top">
-                </Image>
+
+                    </Image>
+                    
+                    <Grid>
+                        <Grid.Background>
+                            <DrawingBrush Viewport="0,0,64,32" ViewportUnits="Absolute" TileMode="Tile">
+
+
+                                <DrawingBrush.Drawing>
+                                    <DrawingGroup>
+                                        <GeometryDrawing Brush="Transparent">
+                                            <GeometryDrawing.Geometry>
+                                                <RectangleGeometry Rect="0,0,1,1"></RectangleGeometry>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                        <GeometryDrawing Geometry="M0,0 L1,0 1,0.05, 0,0.05Z " Brush="Black">
+                                        </GeometryDrawing>
+                                        <GeometryDrawing Geometry="M0,0 L0,1 0.05,1, 0.05,0Z" Brush="Black">
+                                        </GeometryDrawing>
+
+                                    </DrawingGroup>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Grid.Background>
+
+                    </Grid>
+                    
+                    
+                    
+                    
+                </Grid>
+                    
+                    
             </ScrollViewer>
         </DockPanel>
         <RadioButton Name="radPassage"
