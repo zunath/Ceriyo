@@ -124,9 +124,68 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
-        private void LoadPassability()
+        private void ChangeTileMode(object sender, RoutedEventArgs e)
         {
+            if (Model.TileEditMode == TileEditModeEnum.Passability)
+            {
+                LoadPassability();
+            }
+            else if(Model.TileEditMode == TileEditModeEnum.Passability4Way)
+            {
+                LoadPassability4Way();
+            }
         }
 
+        private void LoadPassability()
+        {
+            List<Rectangle> rects = cnvTileEditor.Children.OfType<Rectangle>().ToList();
+
+            foreach (Rectangle rect in rects)
+            {
+                cnvTileEditor.Children.Remove(rect);
+            }
+
+            if (Model.SelectedTileset != null)
+            {
+                foreach (Tile tile in Model.SelectedTileset.Tiles)
+                {
+                    int x = tile.TextureCellX * EngineConstants.TilePixelWidth;
+                    int y = tile.TextureCellY * EngineConstants.TilePixelHeight;
+                    float passageTileHeight = EngineConstants.TilePixelHeight / 2;
+                    float passageTileWidth = EngineConstants.TilePixelWidth / 2;
+
+                    Rectangle rect = new Rectangle();
+                    rect.Stroke = Brushes.Black;
+                    rect.Fill = tile.TopLeftPassable ? Brushes.Green : Brushes.Red;
+                    rect.Opacity = 0.2f;
+                    rect.Height = passageTileHeight;
+                    rect.Width = passageTileWidth;
+
+                    cnvTileEditor.Children.Add(rect);
+                    Canvas.SetLeft(rect, tile.TextureCellX);
+                    Canvas.SetTop(rect, tile.TextureCellY);
+
+                    rect.Fill = tile.TopRightPassable ? Brushes.Green : Brushes.Red;
+                    cnvTileEditor.Children.Add(rect);
+                    Canvas.SetLeft(rect, tile.TextureCellX + passageTileWidth);
+                    Canvas.SetTop(rect, tile.TextureCellY);
+
+                    rect.Fill = tile.BottomLeftPassable ? Brushes.Green : Brushes.Red;
+                    cnvTileEditor.Children.Add(rect);
+                    Canvas.SetLeft(rect, tile.TextureCellX);
+                    Canvas.SetTop(rect, tile.TextureCellY + passageTileHeight);
+
+                    rect.Fill = tile.BottomRightPassable ? Brushes.Green : Brushes.Red;
+                    cnvTileEditor.Children.Add(rect);
+                    Canvas.SetLeft(rect, tile.TextureCellX + passageTileWidth);
+                    Canvas.SetTop(rect, tile.TextureCellY + passageTileHeight);
+                }
+            }
+        }
+
+        private void LoadPassability4Way()
+        {
+        }
+        
     }
 }
