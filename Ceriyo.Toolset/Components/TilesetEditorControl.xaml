@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lib="clr-namespace:Ceriyo.Library.BindingConverters;assembly=Ceriyo.Library"
+             xmlns:data="clr-namespace:Ceriyo.Data.Enumerations;assembly=Ceriyo.Data"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700" Background="White">
     <Grid>
@@ -92,21 +94,26 @@
                     
             </ScrollViewer>
         </DockPanel>
-        <RadioButton Name="radPassage"
-                     Content="Passage" 
-                     Grid.Column="4" 
+        
+        <Grid Grid.Column="4">
+            <Grid.Resources>
+                <lib:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+            </Grid.Resources>
+            <RadioButton Name="radPassage"
+                     Content="Passage"
                      HorizontalAlignment="Left" 
                      Margin="10,52,0,0" 
-                     IsChecked="True"
+                     IsChecked="{Binding Path=TileEditMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static data:TileEditModeEnum.Passability}}"
                      IsEnabled="{Binding IsTilesetSelected}"
                      VerticalAlignment="Top" Height="16" Width="58"/>
-        <RadioButton x:Name="radPassage4Direction"
-        	Content="Passage (4 Dir)" 
-        	Grid.Column="4" 
-        	HorizontalAlignment="Left" 
-            IsEnabled="{Binding IsTilesetSelected}"
-        	Margin="10,73,0,0" 
-        	VerticalAlignment="Top" Height="16" Width="94"/>
+            <RadioButton x:Name="radPassage4Direction"
+            	Content="Passage (4 Dir)" 
+            	HorizontalAlignment="Left" 
+            	IsEnabled="{Binding IsTilesetSelected}"
+            	Margin="10,73,0,0" 
+            	VerticalAlignment="Top" Height="16" Width="94"/>
+        </Grid>
+        
         <TextBox Name="txtTag" 
                  Grid.Column="1" 
                  HorizontalAlignment="Left" 

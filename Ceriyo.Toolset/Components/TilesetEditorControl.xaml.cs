@@ -109,6 +109,7 @@ namespace Ceriyo.Toolset.Components
             Tileset tileset = lbTilesets.SelectedItem as Tileset;
             Model.SelectedTileset = tileset;
             Model.IsTilesetSelected = tileset == null ? false : true;
+
         }
 
         private void GraphicSelected(object sender, SelectionChangedEventArgs e)
@@ -123,6 +124,9 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
+        private void LoadPassability()
+        {
+        }
 
     }
 }

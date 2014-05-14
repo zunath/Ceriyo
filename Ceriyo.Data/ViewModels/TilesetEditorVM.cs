@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 
@@ -20,6 +21,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<Tileset> _tilesets;
         private Tileset _selectedTileset;
         private bool _isTilesetSelected;
+        private TileEditModeEnum _tileEditMode;
 
         public string Name
         {
@@ -149,6 +151,19 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public TileEditModeEnum TileEditMode
+        {
+            get
+            {
+                return _tileEditMode;
+            }
+            set
+            {
+                _tileEditMode = value;
+                OnPropertyChanged("TileEditMode");
+            }
+        }
+
         public TilesetEditorVM()
         {
             this.Name = "";
@@ -158,6 +173,7 @@ namespace Ceriyo.Data.ViewModels
             this.Description = "";
             this.Comments = "";
             this.Graphics = new BindingList<GameResource>();
+            this.TileEditMode = TileEditModeEnum.Passability;
         }
     }
 }
