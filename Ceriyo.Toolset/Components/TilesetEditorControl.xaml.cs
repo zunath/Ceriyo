@@ -55,7 +55,7 @@ namespace Ceriyo.Toolset.Components
         private void New(object sender, RoutedEventArgs e)
         {
             Tileset tileset = new Tileset();
-            string resref = Processor.GenerateUniqueResref(tileset);
+            string resref = Processor.GenerateUniqueResref(Model.Tilesets.Cast<IGameObject>().ToList(), tileset.CategoryName);
 
             tileset.Name = resref;
             tileset.Tag = resref;

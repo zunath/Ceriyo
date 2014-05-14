@@ -8,6 +8,7 @@ using Ceriyo.Data.ResourceObjects;
 using Ionic.Zip;
 using Ceriyo.Data;
 using System.Windows.Media.Imaging;
+using System.ComponentModel;
 
 namespace Ceriyo.Library.Processing
 {
@@ -36,6 +37,26 @@ namespace Ceriyo.Library.Processing
             }
 
             resref = resref + count;
+
+            return resref;
+        }
+
+        public string GenerateUniqueResref(IList<IGameObject> gameObjectList, string defaultCategoryName = "")
+        {
+            int count = 0;
+            string resref = defaultCategoryName + count;
+
+            if (gameObjectList.Count > 0)
+            {
+                resref = gameObjectList[0].CategoryName;
+
+                while (gameObjectList.FirstOrDefault(x => x.Resref == resref + count) != null)
+                {
+                    count++;
+                }
+
+                resref = resref + count;
+            }
 
             return resref;
         }
