@@ -28,6 +28,7 @@
                  Grid.RowSpan="3"
                  BorderBrush="Black" 
                  ItemsSource="{Binding Tilesets}"
+                 SelectedItem="{Binding Path=SelectedTileset, Mode=TwoWay}"
                  DisplayMemberPath="Name"
                  SelectionChanged="TilesetSelected"
                  Margin="0,27,0,41">
@@ -157,7 +158,7 @@
         	ItemsSource="{Binding Graphics}"
         	DisplayMemberPath="Name"
             IsEnabled="{Binding IsTilesetSelected}"
-            SelectedItem="{Binding Path=SelectedItem.Graphic}"
+            SelectedItem="{Binding Path=SelectedTileset.Graphic}"
         	Width="Auto" 
         	SelectionChanged="GraphicSelected"
         	Grid.Row="2" Grid.ColumnSpan="2" Height="Auto"/>

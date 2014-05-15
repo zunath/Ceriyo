@@ -62,6 +62,7 @@ namespace Ceriyo.Toolset.Components
             tileset.Tag = resref;
             tileset.Resref = resref;
 
+            tileset.Graphic = lbGraphics.Items[0] as GameResource;
             Model.Tilesets.Add(tileset);
             int index = lbTilesets.Items.IndexOf(tileset);
             lbTilesets.SelectedItem = lbTilesets.Items[index];
