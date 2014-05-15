@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingConverters\EnumToBooleanConverter.cs" />
+    <Compile Include="Extensions\BindingListExtensions.cs" />
     <Compile Include="Network\NetworkAgent.cs" />
     <Compile Include="Processing\GameResourceProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

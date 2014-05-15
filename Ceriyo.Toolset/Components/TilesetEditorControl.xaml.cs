@@ -20,6 +20,7 @@ using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Library.Processing;
+using Ceriyo.Library.Extensions;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -120,7 +121,44 @@ namespace Ceriyo.Toolset.Components
             {
                 BitmapImage image = Processor.ToBitmapImage(resource);
                 Model.SelectedTileset.Graphic = resource;
-                imgGraphic.Source = image;   
+                imgGraphic.Source = image;
+
+                ResizeTileList(image);
+                LoadPassability();
+            }
+        }
+
+        private void ResizeTileList(BitmapImage image)
+        {
+            if (Model.SelectedTileset != null)
+            {
+                // Get current count of cells
+                int cellCountX = Model.SelectedTileset.Tiles.Select(x => x.TextureCellX).DefaultIfEmpty(0).Max();
+                int cellCountY = Model.SelectedTileset.Tiles.Select(y => y.TextureCellY).DefaultIfEmpty(0).Max();
+
+                // Get how many cells there should be
+                int imageCellCountX = image.PixelWidth / EngineConstants.TilePixelWidth;
+                int imageCellCountY = image.PixelHeight / EngineConstants.TilePixelHeight;
+
+                // Remove excess cells
+                Model.SelectedTileset.Tiles.RemoveAll(x => x.TextureCellX > imageCellCountX ||
+                                                           x.TextureCellY > imageCellCountY);
+
+                // Figure out how many cells we need to add.
+                int deltaX = imageCellCountX - cellCountX;
+                int deltaY = imageCellCountY - cellCountY;
+
+
+                for (int x = 0; x < deltaX; x++)
+                {
+                    for (int y = 0; y < deltaY; y++)
+                    {
+                        Tile tile = new Tile();
+                        tile.TextureCellX = cellCountX + x;
+                        tile.TextureCellY = cellCountY + y;
+                        Model.SelectedTileset.Tiles.Add(tile);
+                    }
+                }
             }
         }
 
@@ -160,25 +198,42 @@ namespace Ceriyo.Toolset.Components
                     rect.Opacity = 0.2f;
                     rect.Height = passageTileHeight;
                     rect.Width = passageTileWidth;
-
                     cnvTileEditor.Children.Add(rect);
-                    Canvas.SetLeft(rect, tile.TextureCellX);
-                    Canvas.SetTop(rect, tile.TextureCellY);
+                    Canvas.SetLeft(rect, x);
+                    Canvas.SetTop(rect, y);
 
+
+                    rect = new Rectangle();
+                    rect.Stroke = Brushes.Black;
                     rect.Fill = tile.TopRightPassable ? Brushes.Green : Brushes.Red;
+                    rect.Opacity = 0.2f;
+                    rect.Height = passageTileHeight;
+                    rect.Width = passageTileWidth;
                     cnvTileEditor.Children.Add(rect);
-                    Canvas.SetLeft(rect, tile.TextureCellX + passageTileWidth);
-                    Canvas.SetTop(rect, tile.TextureCellY);
+                    Canvas.SetLeft(rect, x + passageTileWidth);
+                    Canvas.SetTop(rect, y);
 
+                    rect = new Rectangle();
+                    rect.Stroke = Brushes.Black;
+                    rect.Fill = tile.TopRightPassable ? Brushes.Green : Brushes.Red;
+                    rect.Opacity = 0.2f;
+                    rect.Height = passageTileHeight;
+                    rect.Width = passageTileWidth;
                     rect.Fill = tile.BottomLeftPassable ? Brushes.Green : Brushes.Red;
                     cnvTileEditor.Children.Add(rect);
-                    Canvas.SetLeft(rect, tile.TextureCellX);
-                    Canvas.SetTop(rect, tile.TextureCellY + passageTileHeight);
+                    Canvas.SetLeft(rect, x);
+                    Canvas.SetTop(rect, y + passageTileHeight);
 
+                    rect = new Rectangle();
+                    rect.Stroke = Brushes.Black;
+                    rect.Fill = tile.TopRightPassable ? Brushes.Green : Brushes.Red;
+                    rect.Opacity = 0.2f;
+                    rect.Height = passageTileHeight;
+                    rect.Width = passageTileWidth;
                     rect.Fill = tile.BottomRightPassable ? Brushes.Green : Brushes.Red;
                     cnvTileEditor.Children.Add(rect);
-                    Canvas.SetLeft(rect, tile.TextureCellX + passageTileWidth);
-                    Canvas.SetTop(rect, tile.TextureCellY + passageTileHeight);
+                    Canvas.SetLeft(rect, x + passageTileWidth);
+                    Canvas.SetTop(rect, y + passageTileHeight);
                 }
             }
         }

@@ -84,6 +84,9 @@
                             </DrawingBrush>
                         </Canvas.Background>
 
+                        <Rectangle></Rectangle>
+                        <Rectangle></Rectangle>
+                        
                     </Canvas>
                     
                     
