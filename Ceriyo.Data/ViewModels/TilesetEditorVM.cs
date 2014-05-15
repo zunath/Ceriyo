@@ -11,55 +11,12 @@ namespace Ceriyo.Data.ViewModels
 {
     public class TilesetEditorVM : BaseVM
     {
-        private string _name;
-        private string _tag;
-        private string _resref;
-        private string _description;
-        private string _comments;
         private BindingList<LocalVariable> _localVariables;
         private BindingList<GameResource> _graphics;
         private BindingList<Tileset> _tilesets;
         private Tileset _selectedTileset;
         private bool _isTilesetSelected;
         private TileEditModeEnum _tileEditMode;
-
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-        public string Tag
-        {
-            get
-            {
-                return _tag;
-            }
-            set
-            {
-                _tag = value;
-                OnPropertyChanged("Tag");
-            }
-        }
-
-        public string Resref
-        {
-            get
-            {
-                return _resref;
-            }
-            set
-            {
-                _resref = value;
-                OnPropertyChanged("Resref");
-            }
-        }
 
         public BindingList<GameResource> Graphics
         {
@@ -86,32 +43,7 @@ namespace Ceriyo.Data.ViewModels
                 OnPropertyChanged("LocalVariables");
             }
         }
-        public string Description
-        {
-            get
-            {
-                return _description;
-            }
-            set
-            {
-                _description = value;
-                OnPropertyChanged("Description");
-            }
-        }
-
-        public string Comments
-        {
-            get
-            {
-                return _comments;
-            }
-            set
-            {
-                _comments = value;
-                OnPropertyChanged("Comments");
-            }
-        }
-
+        
         public Tileset SelectedTileset
         {
             get
@@ -166,12 +98,7 @@ namespace Ceriyo.Data.ViewModels
 
         public TilesetEditorVM()
         {
-            this.Name = "";
-            this.Tag = "";
-            this.Resref = "";
             this.LocalVariables = new BindingList<LocalVariable>();
-            this.Description = "";
-            this.Comments = "";
             this.Graphics = new BindingList<GameResource>();
             this.TileEditMode = TileEditModeEnum.Passability;
         }

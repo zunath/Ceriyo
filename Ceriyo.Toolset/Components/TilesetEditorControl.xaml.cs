@@ -77,7 +77,10 @@ namespace Ceriyo.Toolset.Components
                 if (MessageBox.Show("Are you sure you want to delete this tileset?", "Delete Tileset?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     Model.Tilesets.Remove(tileset);
+                    Model.SelectedTileset = null;
                     Model.IsTilesetSelected = false;
+                    imgGraphic.Source = null;
+                    LoadPassability();
                 }
             }
         }

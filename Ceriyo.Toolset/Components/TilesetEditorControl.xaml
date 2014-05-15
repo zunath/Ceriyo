@@ -39,7 +39,7 @@
                  HorizontalAlignment="Left" 
                  Height="23" Margin="5,36,0,0" 
                  TextWrapping="Wrap" 
-                 Text="{Binding Name}" 
+                 Text="{Binding Path=SelectedTileset.Name}" 
                  IsEnabled="{Binding Path=IsTilesetSelected}"
                  VerticalAlignment="Top" 
                  Width="135"/>
@@ -118,7 +118,7 @@
                  Height="23" 
                  Margin="5,90,0,0" 
                  TextWrapping="Wrap" 
-                 Text="{Binding Tag}" 
+                 Text="{Binding Path=SelectedTileset.Tag}" 
                  IsEnabled="{Binding IsTilesetSelected}"
                  VerticalAlignment="Top" 
                  Width="135"/>
@@ -129,7 +129,7 @@
                  Height="23" 
                  Margin="5,144,0,0" 
                  TextWrapping="Wrap" 
-                 Text="{Binding Resref}" 
+                 Text="{Binding Path=SelectedTileset.Resref}" 
                  IsEnabled="{Binding IsTilesetSelected}"
                  VerticalAlignment="Top" 
                  Width="135"/>
