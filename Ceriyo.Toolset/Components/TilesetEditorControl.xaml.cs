@@ -103,6 +103,16 @@ namespace Ceriyo.Toolset.Components
             
             Model.Tilesets = WorkingDataManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
 
+            // Link graphics to instances in the data context, so that they load on page open.
+            foreach (Tileset tileset in Model.Tilesets)
+            {
+                GameResource resource = Model.Graphics.SingleOrDefault(x => x.FileName == tileset.Graphic.FileName);
+                if (resource != null)
+                {
+                    tileset.Graphic = resource;
+                }
+            }
+
             if (Model.Tilesets.Count > 0)
             {
                 lbTilesets.SelectedItem = Model.Tilesets[0];
