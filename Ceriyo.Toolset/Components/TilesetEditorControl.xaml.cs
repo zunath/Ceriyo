@@ -170,16 +170,6 @@ namespace Ceriyo.Toolset.Components
                 Model.SelectedTileset.Tiles.RemoveAll(x => x.TextureCellX > imageCellCountX ||
                                                            x.TextureCellY > imageCellCountY);
 
-
-                // Get current count of cells
-                int cellCountX = Model.SelectedTileset.Tiles.Select(x => x.TextureCellX).DefaultIfEmpty(0).Max();
-                int cellCountY = Model.SelectedTileset.Tiles.Select(y => y.TextureCellY).DefaultIfEmpty(0).Max();
-
-                // Figure out how many cells we need to add.
-                int deltaX = imageCellCountX - cellCountX;
-                int deltaY = imageCellCountY - cellCountY;
-
-
                 for (int x = 0; x < imageCellCountX; x++)
                 {
                     for (int y = 0; y < imageCellCountY; y++)
