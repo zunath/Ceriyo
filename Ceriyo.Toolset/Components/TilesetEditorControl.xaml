@@ -155,8 +155,9 @@
         	HorizontalAlignment="Stretch" 
         	VerticalAlignment="Stretch" 
         	ItemsSource="{Binding Graphics}"
-            IsEnabled="{Binding IsTilesetSelected}"
         	DisplayMemberPath="Name"
+            IsEnabled="{Binding IsTilesetSelected}"
+            SelectedItem="{Binding Path=SelectedItem.Graphic}"
         	Width="Auto" 
         	SelectionChanged="GraphicSelected"
         	Grid.Row="2" Grid.ColumnSpan="2" Height="Auto"/>

@@ -9,6 +9,7 @@ using Ionic.Zip;
 using Ceriyo.Data;
 using System.Windows.Media.Imaging;
 using System.ComponentModel;
+using Ceriyo.Data.Enumerations;
 
 namespace Ceriyo.Library.Processing
 {
@@ -82,11 +83,14 @@ namespace Ceriyo.Library.Processing
 
         public BitmapImage ToBitmapImage(GameResource resource)
         {
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.StreamSource = new MemoryStream(ToBytes(resource));
-            image.EndInit();
 
+            BitmapImage image = new BitmapImage();
+            if (resource.ResourceType != ResourceTypeEnum.None)
+            {
+                image.BeginInit();
+                image.StreamSource = new MemoryStream(ToBytes(resource));
+                image.EndInit();
+            }
             return image;
         }
 

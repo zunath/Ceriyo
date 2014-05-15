@@ -97,6 +97,9 @@ namespace Ceriyo.Toolset.Components
         public void Open(object sender, EventArgs e)
         {
             Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceTypeEnum.Graphic);
+            GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
+            Model.Graphics.Insert(0, graphic);
+            
             Model.Tilesets = WorkingDataManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
 
             if (Model.Tilesets.Count > 0)
@@ -119,18 +122,31 @@ namespace Ceriyo.Toolset.Components
 
             if (resource != null)
             {
-                BitmapImage image = Processor.ToBitmapImage(resource);
-                Model.SelectedTileset.Graphic = resource;
-                imgGraphic.Source = image;
+                if (resource.ResourceType == ResourceTypeEnum.None)
+                {
+                    imgGraphic.Source = null;
+                    ResizeTileList(null);
+                    LoadPassability();
+                }
+                else
+                {
+                    BitmapImage image = Processor.ToBitmapImage(resource);
+                    Model.SelectedTileset.Graphic = resource;
+                    imgGraphic.Source = image;
 
-                ResizeTileList(image);
-                LoadPassability();
+                    ResizeTileList(image);
+                    LoadPassability();
+                }
             }
         }
 
         private void ResizeTileList(BitmapImage image)
         {
-            if (Model.SelectedTileset != null)
+            if (image == null)
+            {
+                Model.SelectedTileset.Tiles.Clear();
+            }
+            else if (Model.SelectedTileset != null)
             {
                 // Get how many cells there should be
                 int imageCellCountX = image.PixelWidth / EngineConstants.TilePixelWidth;
@@ -144,7 +160,7 @@ namespace Ceriyo.Toolset.Components
                 // Get current count of cells
                 int cellCountX = Model.SelectedTileset.Tiles.Select(x => x.TextureCellX).DefaultIfEmpty(0).Max();
                 int cellCountY = Model.SelectedTileset.Tiles.Select(y => y.TextureCellY).DefaultIfEmpty(0).Max();
-                
+
                 // Figure out how many cells we need to add.
                 int deltaX = imageCellCountX - cellCountX;
                 int deltaY = imageCellCountY - cellCountY;
