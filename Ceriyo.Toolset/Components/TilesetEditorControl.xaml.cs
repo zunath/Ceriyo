@@ -163,18 +163,6 @@ namespace Ceriyo.Toolset.Components
                         }
                     }
                 }
-
-                //for (int row = cellCountX; row < cellCountX + deltaX; row++)
-                //{
-                //    for (int column = cellCountY; column < cellCountY + deltaY; column++)
-                //    {
-                //        Tile tile = new Tile();
-                //        tile.TextureCellX = row;
-                //        tile.TextureCellY = column;
-                //        Model.SelectedTileset.Tiles.Add(tile);
-                //    }
-                //}
-
             }
         }
 
@@ -256,6 +244,29 @@ namespace Ceriyo.Toolset.Components
 
         private void LoadPassability4Way()
         {
+        }
+
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Point position = e.GetPosition(cnvTileEditor);
+                Rectangle rect = Mouse.DirectlyOver as Rectangle;
+
+                int cellX = (int)position.X / EngineConstants.TilePixelWidth;
+                int cellY = (int)position.Y / EngineConstants.TilePixelHeight;
+
+                if (rect != null)
+                {
+                    Tile tile = Model.SelectedTileset.Tiles.SingleOrDefault(x => x.TextureCellX == cellX && x.TextureCellY == cellY);
+
+                    if (tile != null)
+                    {
+                        tile.TopLeftPassable = !tile.TopLeftPassable;
+                        rect.Fill = tile.TopLeftPassable ? Brushes.Green : Brushes.Red;
+                    }
+                }
+            }
         }
         
     }
