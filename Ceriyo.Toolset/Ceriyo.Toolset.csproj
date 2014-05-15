@@ -132,9 +132,6 @@
     <Compile Include="Components\ItemEditorControl.xaml.cs">
       <DependentUpon>ItemEditorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\ModulePropertiesControl.xaml.cs">
-      <DependentUpon>ModulePropertiesControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Components\ObjectSelectionComponent.xaml.cs">
       <DependentUpon>ObjectSelectionComponent.xaml</DependentUpon>
     </Compile>
@@ -226,10 +223,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\MenuBarComponent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Components\ModulePropertiesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

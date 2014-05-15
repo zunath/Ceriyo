@@ -157,6 +157,7 @@
 							Grid.Row="1" 
 							VerticalAlignment="Top" 
 							ItemsSource="{Binding Tilesets}"
+                            DisplayMemberPath="Name"
 							Width="292"/>
                     </Grid>
                 </TabItem>
