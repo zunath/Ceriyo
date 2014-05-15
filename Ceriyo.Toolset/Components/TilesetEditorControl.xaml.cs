@@ -132,10 +132,6 @@ namespace Ceriyo.Toolset.Components
         {
             if (Model.SelectedTileset != null)
             {
-                // Get current count of cells
-                int cellCountX = Model.SelectedTileset.Tiles.Select(x => x.TextureCellX).DefaultIfEmpty(0).Max();
-                int cellCountY = Model.SelectedTileset.Tiles.Select(y => y.TextureCellY).DefaultIfEmpty(0).Max();
-
                 // Get how many cells there should be
                 int imageCellCountX = image.PixelWidth / EngineConstants.TilePixelWidth;
                 int imageCellCountY = image.PixelHeight / EngineConstants.TilePixelHeight;
@@ -144,21 +140,41 @@ namespace Ceriyo.Toolset.Components
                 Model.SelectedTileset.Tiles.RemoveAll(x => x.TextureCellX > imageCellCountX ||
                                                            x.TextureCellY > imageCellCountY);
 
+
+                // Get current count of cells
+                int cellCountX = Model.SelectedTileset.Tiles.Select(x => x.TextureCellX).DefaultIfEmpty(0).Max();
+                int cellCountY = Model.SelectedTileset.Tiles.Select(y => y.TextureCellY).DefaultIfEmpty(0).Max();
+                
                 // Figure out how many cells we need to add.
                 int deltaX = imageCellCountX - cellCountX;
                 int deltaY = imageCellCountY - cellCountY;
 
 
-                for (int x = 0; x < deltaX; x++)
+                for (int x = 0; x < imageCellCountX; x++)
                 {
-                    for (int y = 0; y < deltaY; y++)
+                    for (int y = 0; y < imageCellCountY; y++)
                     {
-                        Tile tile = new Tile();
-                        tile.TextureCellX = cellCountX + x;
-                        tile.TextureCellY = cellCountY + y;
-                        Model.SelectedTileset.Tiles.Add(tile);
+                        if (Model.SelectedTileset.Tiles.SingleOrDefault(tile => tile.TextureCellX == x && tile.TextureCellY == y) == null)
+                        {
+                            Tile tile = new Tile();
+                            tile.TextureCellX = x;
+                            tile.TextureCellY = y;
+                            Model.SelectedTileset.Tiles.Add(tile);
+                        }
                     }
                 }
+
+                //for (int row = cellCountX; row < cellCountX + deltaX; row++)
+                //{
+                //    for (int column = cellCountY; column < cellCountY + deltaY; column++)
+                //    {
+                //        Tile tile = new Tile();
+                //        tile.TextureCellX = row;
+                //        tile.TextureCellY = column;
+                //        Model.SelectedTileset.Tiles.Add(tile);
+                //    }
+                //}
+
             }
         }
 
@@ -177,7 +193,7 @@ namespace Ceriyo.Toolset.Components
         private void LoadPassability()
         {
             List<Rectangle> rects = cnvTileEditor.Children.OfType<Rectangle>().ToList();
-
+            
             foreach (Rectangle rect in rects)
             {
                 cnvTileEditor.Children.Remove(rect);
