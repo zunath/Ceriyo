@@ -16,6 +16,8 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<Item> _items;
         private BindingList<Placeable> _placeables;
         private GameResource _graphic;
+        private int _selectedCellX;
+        private int _selectedCellY;
 
         public PaintObjectModeTypeEnum PaintMode 
         {
@@ -81,6 +83,32 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public int SelectedCellX
+        {
+            get
+            {
+                return _selectedCellX;
+            }
+            set
+            {
+                _selectedCellX = value;
+                OnPropertyChanged("SelectedCellX");
+            }
+        }
+
+        public int SelectedCellY
+        {
+            get
+            {
+                return _selectedCellY;
+            }
+            set
+            {
+                _selectedCellY = value;
+                OnPropertyChanged("SelectedCellY");
+            }
+        }
+
         public PaintObjectsVM()
         {
             this.PaintMode = PaintObjectModeTypeEnum.None;
@@ -88,6 +116,8 @@ namespace Ceriyo.Data.ViewModels
             this.Items = new BindingList<Item>();
             this.Placeables = new BindingList<Placeable>();
             this.Graphic = new GameResource();
+            this.SelectedCellX = 0;
+            this.SelectedCellY = 0;
         }
     }
 }

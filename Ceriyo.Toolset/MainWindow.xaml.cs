@@ -22,10 +22,8 @@ namespace Ceriyo.Toolset
         {
             InitializeComponent();
             Initialize();
-            SetUpEvents();
+            Loaded += MainWindow_Loaded;
         }
-
-
 
         private void Initialize()
         {
@@ -34,10 +32,18 @@ namespace Ceriyo.Toolset
 
         private void SetUpEvents()
         {
-            Loaded += MainWindow_Loaded;
+            AreaEditorGame = new FRBGameComponent(gameControl, typeof(AreaEditorScreen));
+            AreaEditorScreen screen = ScreenManager.CurrentScreen as AreaEditorScreen;
             menuBar.OnOpenModule += OnModuleOpened;
+            
             areaSelection.OnAreaOpen += objectSelection.LoadArea;
             areaSelection.OnAreaOpen += paintObjects.LoadArea;
+            areaSelection.OnAreaOpen += screen.LoadArea;
+            
+            areaSelection.OnAreaSaved += screen.OnModulePropertiesUpdate;
+
+            areaSelection.OnAreaClosed += paintObjects.UnloadArea;
+            areaSelection.OnAreaClosed += screen.CloseArea;
         }
 
         private void OnModuleOpened(object sender, GameModuleEventArgs e)
@@ -48,10 +54,7 @@ namespace Ceriyo.Toolset
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             EngineDataManager.InitializeEngine();
-            AreaEditorGame = new FRBGameComponent(gameControl, typeof(AreaEditorScreen));
-            AreaEditorScreen screen = ScreenManager.CurrentScreen as AreaEditorScreen;
-            areaSelection.OnAreaOpen += screen.LoadArea;
-            areaSelection.OnAreaSaved += screen.OnModulePropertiesUpdate;
+            SetUpEvents();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

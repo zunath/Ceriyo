@@ -38,6 +38,16 @@ namespace Ceriyo.Entities.Screens
             
         }
 
+        public void CloseArea(object sender, EventArgs e)
+        {
+            if (AreaBatch != null)
+            {
+                AreaBatch.Destroy();
+            }
+
+            LoadedArea = null;
+        }
+
         public void LoadArea(object sender, GameObjectEventArgs e)
         {
             if (AreaBatch != null)
@@ -51,9 +61,12 @@ namespace Ceriyo.Entities.Screens
 
         public void OnModulePropertiesUpdate(object sender, GameObjectEventArgs e)
         {
-            if (e.GameObject.Resref == LoadedArea.Resref)
+            if (LoadedArea != null)
             {
-                LoadArea(sender, e);
+                if (e.GameObject.Resref == LoadedArea.Resref)
+                {
+                    LoadArea(sender, e);
+                }
             }
         }
     }

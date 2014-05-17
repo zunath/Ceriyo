@@ -32,6 +32,7 @@ namespace Ceriyo.Toolset.Components
         protected AreaSelectionVM Model { get; set; }
         public event EventHandler<GameObjectEventArgs> OnAreaOpen;
         public event EventHandler<GameObjectEventArgs> OnAreaSaved;
+        public event EventHandler<EventArgs> OnAreaClosed;
         private EditAreaWindow EditPropertiesWindow { get; set; }
 
         public AreaSelectionControl()
@@ -108,6 +109,11 @@ namespace Ceriyo.Toolset.Components
                         if (result == FileOperationResultTypeEnum.Success)
                         {
                             Model.Areas.Remove(area);
+
+                            if (OnAreaClosed != null)
+                            {
+                                OnAreaClosed(this, new EventArgs());
+                            }
                         }
                         else if (result == FileOperationResultTypeEnum.FileDoesNotExist)
                         {

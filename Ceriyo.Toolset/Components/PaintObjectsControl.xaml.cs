@@ -43,7 +43,6 @@ namespace Ceriyo.Toolset.Components
         private void Initialize()
         {
             Model = new PaintObjectsVM();
-            PopulateModel();
         }
 
         private void PopulateModel()
@@ -58,8 +57,13 @@ namespace Ceriyo.Toolset.Components
         {
         }
 
-        public void LoadModule(object sender, GameModuleEventArgs e)
+        public void UnloadArea(object sender, EventArgs e)
         {
+            imgTiles.Source = null;
+            Model.Creatures.Clear();
+            Model.Items.Clear();
+            Model.Placeables.Clear();
+            Model.PaintMode = PaintObjectModeTypeEnum.None;
         }
 
         public void LoadArea(object sender, GameObjectEventArgs e)
@@ -74,6 +78,8 @@ namespace Ceriyo.Toolset.Components
                     imgTiles.Source = processor.ToBitmapImage(area.AreaTileset.Graphic);
                 }
             }
+
+            PopulateModel();
         }
 
     }
