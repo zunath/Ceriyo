@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
+using FlatRedBall;
+using FlatRedBall.Input;
 using FlatRedBall.Screens;
 
 namespace Ceriyo.Entities.Screens
@@ -24,7 +26,11 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomActivity(bool firstTimeCalled)
         {
-            
+            if(InputManager.Mouse.ButtonDown(Mouse.MouseButtons.RightButton))
+            {
+                SpriteManager.Camera.X -= InputManager.Mouse.XChange;
+                SpriteManager.Camera.Y += InputManager.Mouse.YChange;
+            }
         }
 
         protected override void CustomDestroy()

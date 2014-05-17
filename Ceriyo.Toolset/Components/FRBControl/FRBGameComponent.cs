@@ -28,6 +28,7 @@ namespace Ceriyo.Toolset.FRBControl
         protected override void Update(GameTime gameTime)
         {
             FlatRedBallServices.Update(gameTime);
+            ScreenManager.Activity();
             base.Update(gameTime);
         }
 
