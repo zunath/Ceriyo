@@ -84,9 +84,10 @@ namespace Ceriyo.Library.Processing
         public BitmapImage ToBitmapImage(GameResource resource)
         {
 
-            BitmapImage image = new BitmapImage();
+            BitmapImage image = null;
             if (resource.ResourceType != ResourceTypeEnum.None)
             {
+                image = new BitmapImage();
                 image.BeginInit();
                 image.StreamSource = new MemoryStream(ToBytes(resource));
                 image.EndInit();

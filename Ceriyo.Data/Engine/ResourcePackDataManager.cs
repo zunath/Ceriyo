@@ -166,6 +166,7 @@ namespace Ceriyo.Data.Engine
                 string path = EnginePaths.WorkingDirectory + EnginePaths.ResourceLinksDataFileName + EnginePaths.DataExtension;
                 resources = FileManager.XmlDeserialize<BindingList<GameResource>>(path);
                 resources = new BindingList<GameResource>(resources.Where(x => x.ResourceType == resourceType).ToList());
+                
             }
             catch
             {

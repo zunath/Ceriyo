@@ -24,6 +24,7 @@ namespace Ceriyo.Data.ViewModels
         private string _onAreaEnterScript;
         private string _onAreaExitScript;
         private string _onAreaHeartbeatScript;
+        private Tileset _selectedTileset;
 
         public string Name 
         {
@@ -187,7 +188,18 @@ namespace Ceriyo.Data.ViewModels
                 OnPropertyChanged("OnAreaHeartbeatScript");
             }
         }
-        
+        public Tileset SelectedTileset
+        {
+            get
+            {
+                return _selectedTileset;
+            }
+            set
+            {
+                _selectedTileset = value;
+                OnPropertyChanged("SelectedTileset");
+            }
+        }
 
         public EditAreaVM()
         {
@@ -204,6 +216,7 @@ namespace Ceriyo.Data.ViewModels
             this.OnAreaEnterScript = "";
             this.OnAreaExitScript = "";
             this.OnAreaHeartbeatScript = "";
+            this.SelectedTileset = new Tileset();
         }
     }
 }

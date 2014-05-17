@@ -119,6 +119,7 @@ namespace Ceriyo.Toolset.Windows
                 area.Scripts.Add(ScriptEventTypeEnum.OnAreaEnter, Model.OnAreaEnterScript);
                 area.Scripts.Add(ScriptEventTypeEnum.OnAreaExit, Model.OnAreaExitScript);
                 area.Scripts.Add(ScriptEventTypeEnum.OnHeartbeat, Model.OnAreaHeartbeatScript);
+                area.AreaTileset = Model.SelectedTileset;
 
                 FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(area);
 

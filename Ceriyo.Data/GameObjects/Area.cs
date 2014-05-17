@@ -30,7 +30,8 @@ namespace Ceriyo.Data.GameObjects
         public BindingList<Creature> CreatureInstances { get; set; }
         public BindingList<Placeable> PlaceableInstances { get; set; }
         public BindingList<Item> ItemInstances { get; set; }
-        public GameResource Graphic { get; set; }
+        
+        public Tileset AreaTileset { get; set; }
         public GameResource BattleMusic { get; set; }
         public GameResource BackgroundMusic { get; set; }
 
@@ -72,7 +73,7 @@ namespace Ceriyo.Data.GameObjects
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
             this.MapTiles = new BindingList<MapTile>();
-            this.Graphic = new GameResource();
+            this.AreaTileset = new Tileset();
             this.BattleMusic = new GameResource();
             this.BackgroundMusic = new GameResource();
         }
@@ -97,7 +98,7 @@ namespace Ceriyo.Data.GameObjects
             this.CreatureInstances = new BindingList<Creature>();
             this.ItemInstances = new BindingList<Item>();
             this.PlaceableInstances = new BindingList<Placeable>();
-            this.Graphic = new GameResource();
+            this.AreaTileset = new Tileset();
             this.BattleMusic = new GameResource();
             this.BackgroundMusic = new GameResource();
 

@@ -17,6 +17,8 @@ using System.Windows.Shapes;
 using Ceriyo.Data;
 using FlatRedBall.IO;
 using Ceriyo.Data.ViewModels;
+using Ceriyo.Data.Engine;
+using System.ComponentModel;
 
 namespace Ceriyo.Toolset.Windows
 {
@@ -54,6 +56,7 @@ namespace Ceriyo.Toolset.Windows
         {
             ModuleDataManager.CreateModule(Model.Name, Model.Tag, Model.Resref);
             ModuleDataManager.LoadModule(Model.Resref);
+            ResourcePackDataManager.BuildModule(new BindingList<string>());
             this.Close();
         }
 
