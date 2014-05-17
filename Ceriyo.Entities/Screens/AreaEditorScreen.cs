@@ -42,5 +42,13 @@ namespace Ceriyo.Entities.Screens
             LoadedArea = e.GameObject as Area;
             AreaBatch = new MapDrawableBatch(LoadedArea);
         }
+
+        public void OnModulePropertiesUpdate(object sender, GameObjectEventArgs e)
+        {
+            if (e.GameObject.Resref == LoadedArea.Resref)
+            {
+                LoadArea(sender, e);
+            }
+        }
     }
 }

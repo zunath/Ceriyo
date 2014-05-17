@@ -31,6 +31,7 @@ namespace Ceriyo.Toolset.Components
     {
         protected AreaSelectionVM Model { get; set; }
         public event EventHandler<GameObjectEventArgs> OnAreaOpen;
+        public event EventHandler<GameObjectEventArgs> OnAreaSaved;
         private EditAreaWindow EditPropertiesWindow { get; set; }
 
         public AreaSelectionControl()
@@ -72,6 +73,12 @@ namespace Ceriyo.Toolset.Components
                 int index = Model.Areas.IndexOf(area);
                 Model.Areas[index] = e.GameObject as Area;
             }
+
+            if(OnAreaSaved != null)
+            {
+                OnAreaSaved(this, e);
+            }
+
         }
 
         private void Open(object sender, RoutedEventArgs e)

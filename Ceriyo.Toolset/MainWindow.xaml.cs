@@ -51,6 +51,7 @@ namespace Ceriyo.Toolset
             AreaEditorGame = new FRBGameComponent(gameControl, typeof(AreaEditorScreen));
             AreaEditorScreen screen = ScreenManager.CurrentScreen as AreaEditorScreen;
             areaSelection.OnAreaOpen += screen.LoadArea;
+            areaSelection.OnAreaSaved += screen.OnModulePropertiesUpdate;
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

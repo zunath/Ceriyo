@@ -30,35 +30,9 @@ namespace Ceriyo.Data.GameObjects
         public BindingList<Creature> CreatureInstances { get; set; }
         public BindingList<Placeable> PlaceableInstances { get; set; }
         public BindingList<Item> ItemInstances { get; set; }
-        
         public Tileset AreaTileset { get; set; }
         public GameResource BattleMusic { get; set; }
         public GameResource BackgroundMusic { get; set; }
-
-        //[XmlIgnore]
-        //public List<TileDefinition[,]> TileDefinitions
-        //{
-        //    get
-        //    {
-        //        List<TileDefinition[,]> tilesList = new List<TileDefinition[,]>();
-
-        //        for (int layer = 0; layer < LayerCount; layer++)
-        //        {
-        //            TileDefinition[,] tileLayer = new TileDefinition[MapWidth, MapHeight];
-        //            for (int x = 0; x < MapWidth; x++)
-        //            {
-        //                for (int y = 0; y < MapHeight; y++)
-        //                {
-        //                    tileLayer[x, y] = new TileDefinition();
-        //                }
-        //            }
-
-        //            tilesList.Add(tileLayer);
-        //        }
-
-        //        return tilesList;
-        //    }
-        //}
 
         public Area()
         {
