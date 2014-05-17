@@ -14,9 +14,17 @@
         <DockPanel>
             <TabControl>
                 <TabItem Header="Tiles">
-                    <DockPanel>
-                        <Image Name="imgTiles"></Image>
-                    </DockPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Image Name="imgTiles"
+                               Stretch="Fill"
+                               Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
+                               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"></Image>
+                        </Grid>
+                    </ScrollViewer>
+                    
                 </TabItem>
                 <TabItem Header="Creatures">
 

@@ -24,8 +24,6 @@ namespace Ceriyo.Toolset.Windows
         {
             InitializeComponent();
             Model = new EditAreaVM();
-            SetDataContexts();
-            SetLimits();
         }
 
         private void PopulateModel(Area area)
@@ -40,6 +38,7 @@ namespace Ceriyo.Toolset.Windows
             Model.Tag = area.Tag;
             Model.Width = area.MapWidth;
             Model.LocalVariables = area.LocalVariables;
+            Model.SelectedTileset = Model.Tilesets.SingleOrDefault(x => x.Resref == area.AreaTileset.Resref);
 
             if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnAreaEnter))
             {
@@ -92,9 +91,12 @@ namespace Ceriyo.Toolset.Windows
 
         public void Open(Area area, bool isEditing)
         {
+            SetDataContexts();
+            SetLimits();
             PopulateModel(area);
             this.IsEditing = isEditing;
             txtResref.IsEnabled = !IsEditing;
+
             this.Show();
         }
 
