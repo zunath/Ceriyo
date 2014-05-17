@@ -52,11 +52,8 @@ namespace Ceriyo.Entities
 
         public void Destroy()
         {
-            foreach (Sprite sprite in TileSprites)
-            {
-                SpriteManager.RemoveSprite(sprite);
-            }
-            
+            SpriteManager.RemoveSpriteList(TileSprites);
+
             SpriteManager.RemovePositionedObject(this);
         }
 
