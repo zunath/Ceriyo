@@ -12,10 +12,10 @@ namespace Ceriyo.Toolset.FRBControl
 {
     class FRBGameComponent : FlatRedBallGameBase
     {
-
         public FRBGameComponent(FlatRedBallControl frbControl, Type screenType )
             : base(frbControl)
         {
+            ScreenManager.Start(screenType);
         }
 
         protected override void Initialize()

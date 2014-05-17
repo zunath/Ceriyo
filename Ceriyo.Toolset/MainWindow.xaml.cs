@@ -5,6 +5,8 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Entities.Screens;
 using Ceriyo.Toolset.FRBControl;
+using FlatRedBall;
+using FlatRedBall.Screens;
 
 namespace Ceriyo.Toolset
 {
@@ -47,6 +49,8 @@ namespace Ceriyo.Toolset
         {
             EngineDataManager.InitializeEngine();
             AreaEditorGame = new FRBGameComponent(gameControl, typeof(AreaEditorScreen));
+            AreaEditorScreen screen = ScreenManager.CurrentScreen as AreaEditorScreen;
+            areaSelection.OnAreaOpen += screen.LoadArea;
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

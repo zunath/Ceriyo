@@ -61,6 +61,10 @@
       <Project>{26e4c8b8-a8c4-4b77-bec7-e6149473eefb}</Project>
       <Name>Ceriyo.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ceriyo.Library\Ceriyo.Library.csproj">
+      <Project>{f9ab9dd8-a342-4d58-bbb9-e15184e7f522}</Project>
+      <Name>Ceriyo.Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

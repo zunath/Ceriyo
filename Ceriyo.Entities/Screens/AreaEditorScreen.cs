@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using FlatRedBall.Screens;
 
@@ -9,8 +10,9 @@ namespace Ceriyo.Entities.Screens
 {
     public class AreaEditorScreen : BaseScreen
     {
-        MapDrawableBatch AreaBatch;
-
+        private Area LoadedArea { get; set; }
+        private MapDrawableBatch AreaBatch;
+        
         public AreaEditorScreen()
             : base("AreaEditorScreen")
         {
@@ -18,8 +20,6 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
-            Area area = new Area("", "", "", 10, 10, 4);
-            AreaBatch = new MapDrawableBatch(area);
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -32,5 +32,15 @@ namespace Ceriyo.Entities.Screens
             
         }
 
+        public void LoadArea(object sender, GameObjectEventArgs e)
+        {
+            if (AreaBatch != null)
+            {
+                AreaBatch.Destroy();
+            }
+
+            LoadedArea = e.GameObject as Area;
+            AreaBatch = new MapDrawableBatch(LoadedArea);
+        }
     }
 }

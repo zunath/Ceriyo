@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Library.Processing;
 using FlatRedBall;
 using FlatRedBall.Graphics;
 using FlatRedBall.IO;
@@ -24,13 +26,15 @@ namespace Ceriyo.Entities
 
         public MapDrawableBatch(Area area)
         {
+            GameResourceProcessor processor = new GameResourceProcessor();
+
             this.TileWidth = EngineConstants.TilePixelWidth;
             this.TileHeight = EngineConstants.TilePixelHeight;
             this._sourceRectangle = new Rectangle(0, 0, TileWidth, TileHeight);
 
             this.DrawableArea = area;
-            string path = FileManager.RelativeDirectory + @"Content/" + "Tilesets/grassland_tiles.png"; // TODO: Retrieve file from resource package
-            this.MapTexture = FlatRedBallServices.Load<Texture2D>(path); 
+            byte[] imageData = processor.ToBytes(area.AreaTileset.Graphic);
+            this.MapTexture = Texture2D.FromStream(FlatRedBallServices.GraphicsDevice, new MemoryStream(imageData));
             this.TileSprites = new SpriteList();
 
             int capacity = area.MapWidth * area.MapHeight;
@@ -58,7 +62,7 @@ namespace Ceriyo.Entities
                 SpriteManager.RemoveSprite(sprite);
             }
 
-            SpriteManager.RemoveDrawableBatch(this);
+            //SpriteManager.RemoveDrawableBatch(this);
             SpriteManager.RemovePositionedObject(this);
         }
 

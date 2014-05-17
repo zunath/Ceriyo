@@ -62,9 +62,7 @@
             Grid.ColumnSpan="2"
             Grid.RowSpan="4">
             <frb:FlatRedBallControl 
-                x:Name="gameControl"
-                Height="Auto"
-                Width="Auto"/>
+                x:Name="gameControl"/>
         </DockPanel>
 
         <Comp:AreaSelectionControl 
