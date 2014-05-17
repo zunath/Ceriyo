@@ -7,6 +7,11 @@ namespace Ceriyo.Data
 {
     public static class WorkingPaths
     {
+        public static string DataDirectory
+        {
+            get { return EnginePaths.WorkingDirectory + "Data/"; }
+        }
+
         public static string AreasDirectory
         {
             get { return EnginePaths.WorkingDirectory + ModulePaths.AreasDirectory; }

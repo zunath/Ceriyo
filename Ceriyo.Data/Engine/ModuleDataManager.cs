@@ -186,5 +186,51 @@ namespace Ceriyo.Data
             return modules;
         }
 
+        public static FileOperationResultTypeEnum SaveModule(string moduleResref)
+        {
+            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            string path = EnginePaths.ModulesDirectory + moduleResref + EnginePaths.ModuleExtension;
+            string backup = EnginePaths.ModulesDirectory + moduleResref + EnginePaths.ModuleExtension + EnginePaths.BackupExtension;
+                
+            try
+            {
+                if (File.Exists(path))
+                {
+                    File.Move(path, backup);
+                }
+
+                using (ZipFile zip = new ZipFile(path))
+                {
+                    zip.AddDirectory(WorkingPaths.DataDirectory, "Data");
+                    zip.AddFile(EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension, "");
+                    zip.AddFile(EnginePaths.WorkingDirectory + EnginePaths.ResourceLinksDataFileName + EnginePaths.DataExtension, "");
+
+                    zip.Save();
+                }
+
+                if (File.Exists(backup))
+                {
+                    File.Delete(backup);
+                }
+
+                result = FileOperationResultTypeEnum.Success;
+            }
+            catch
+            {
+                if (File.Exists(backup))
+                {
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+                    File.Move(backup, path);
+                }
+
+                result = FileOperationResultTypeEnum.Failure;
+            }
+
+            return result;
+        }
+
     }
 }

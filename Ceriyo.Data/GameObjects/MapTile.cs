@@ -10,14 +10,16 @@ namespace Ceriyo.Data.GameObjects
         public int MapX { get; set; }
         public int MapY { get; set; }
         public int Layer { get; set; }
-        public Tile Tile { get; set; }
+        public bool IsVisible { get; set; }
+        public TileDefinition Definition { get; set; }
 
         public MapTile()
         {
             this.MapX = 0;
             this.MapY = 0;
             this.Layer = 0;
-            this.Tile = new Tile();
+            this.IsVisible = true;
+            this.Definition = new TileDefinition();
         }
 
         public MapTile(int mapX, int mapY, int layer)
@@ -25,7 +27,8 @@ namespace Ceriyo.Data.GameObjects
             this.MapX = mapX;
             this.MapY = mapY;
             this.Layer = layer;
-            this.Tile = new Tile();
+            this.IsVisible = true;
+            this.Definition = new TileDefinition();
         }
     }
 }

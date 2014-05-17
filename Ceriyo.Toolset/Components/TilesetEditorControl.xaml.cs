@@ -176,7 +176,7 @@ namespace Ceriyo.Toolset.Components
                     {
                         if (Model.SelectedTileset.Tiles.SingleOrDefault(tile => tile.TextureCellX == x && tile.TextureCellY == y) == null)
                         {
-                            Tile tile = new Tile();
+                            TileDefinition tile = new TileDefinition();
                             tile.TextureCellX = x;
                             tile.TextureCellY = y;
                             Model.SelectedTileset.Tiles.Add(tile);
@@ -209,7 +209,7 @@ namespace Ceriyo.Toolset.Components
 
             if (Model.SelectedTileset != null)
             {
-                foreach (Tile tile in Model.SelectedTileset.Tiles)
+                foreach (TileDefinition tile in Model.SelectedTileset.Tiles)
                 {
                     int x = tile.TextureCellX * EngineConstants.TilePixelWidth;
                     int y = tile.TextureCellY * EngineConstants.TilePixelHeight;
@@ -278,7 +278,7 @@ namespace Ceriyo.Toolset.Components
 
                 if (rect != null)
                 {
-                    Tile tile = Model.SelectedTileset.Tiles.SingleOrDefault(x => x.TextureCellX == cellX && x.TextureCellY == cellY);
+                    TileDefinition tile = Model.SelectedTileset.Tiles.SingleOrDefault(x => x.TextureCellX == cellX && x.TextureCellY == cellY);
 
                     if (tile != null)
                     {

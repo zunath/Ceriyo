@@ -20,24 +20,20 @@ namespace Ceriyo.Entities
         private Area DrawableArea { get; set; }
         private Texture2D MapTexture { get; set; }
         private SpriteList TileSprites { get; set; }
-        private int TileWidth { get; set; }
-        private int TileHeight { get; set; }
         private Rectangle _sourceRectangle;
 
         public MapDrawableBatch(Area area)
         {
             GameResourceProcessor processor = new GameResourceProcessor();
 
-            this.TileWidth = EngineConstants.TilePixelWidth;
-            this.TileHeight = EngineConstants.TilePixelHeight;
-            this._sourceRectangle = new Rectangle(0, 0, TileWidth, TileHeight);
+            this._sourceRectangle = new Rectangle(0, 0, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
 
             this.DrawableArea = area;
             byte[] imageData = processor.ToBytes(area.AreaTileset.Graphic);
             this.MapTexture = Texture2D.FromStream(FlatRedBallServices.GraphicsDevice, new MemoryStream(imageData));
             this.TileSprites = new SpriteList();
 
-            int capacity = area.MapWidth * area.MapHeight;
+            int capacity = area.MapWidth * area.MapHeight * area.LayerCount;
             for (int current = 1; current <= capacity; current++)
             {
                 this.TileSprites.Add(new Sprite());
@@ -49,7 +45,6 @@ namespace Ceriyo.Entities
                 SpriteManager.AddSprite(sprite);
             }
 
-            SpriteManager.AddDrawableBatch(this);
             SpriteManager.AddPositionedObject(this);
 
             LoadMap();
@@ -61,8 +56,7 @@ namespace Ceriyo.Entities
             {
                 SpriteManager.RemoveSprite(sprite);
             }
-
-            //SpriteManager.RemoveDrawableBatch(this);
+            
             SpriteManager.RemovePositionedObject(this);
         }
 
@@ -82,34 +76,29 @@ namespace Ceriyo.Entities
 
         private void LoadMap()
         {
+            List<MapTile> orderedTiles = DrawableArea.MapTiles
+                .OrderBy(l => l.Layer)
+                .ThenBy(x => x.MapX)
+                .ThenBy(y => y.MapY).ToList();
 
-            foreach (Tile[,] layer in DrawableArea.Tiles)
+            int listIndex = 0;
+            foreach (MapTile tile in orderedTiles)
             {
-                int listIndex = 0;
-                int xBound = layer.GetUpperBound(0);
-                int yBound = layer.GetUpperBound(1);
+                TileDefinition definition = tile.Definition;
+                Sprite sprite = TileSprites[listIndex];
+                sprite.Texture = new Texture2D(FlatRedBallServices.GraphicsDevice, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
+                _sourceRectangle.X = definition.TextureCellX;
+                _sourceRectangle.Y = definition.TextureCellY;
 
-                for (int x = 0; x <= xBound; x++)
-                {
-                    for (int y = 0; y < yBound; y++)
-                    {
-                        Tile tile = layer[x, y];
-                        Sprite sprite = TileSprites[listIndex];
-                        sprite.Texture = new Texture2D(FlatRedBallServices.GraphicsDevice, TileWidth, TileHeight);
-                        _sourceRectangle.X = tile.TextureCellX;
-                        _sourceRectangle.Y = tile.TextureCellY;
+                Color[] data = new Color[_sourceRectangle.Width * _sourceRectangle.Height];
+                MapTexture.GetData<Color>(0, _sourceRectangle, data, 0, data.Length);
+                sprite.Texture.SetData<Color>(data);
+                sprite.Visible = tile.IsVisible;
 
-                        Color[] data = new Color[_sourceRectangle.Width * _sourceRectangle.Height];
-                        MapTexture.GetData<Color>(0, _sourceRectangle, data, 0, data.Length);
-                        sprite.Texture.SetData<Color>(data);
-                        sprite.Visible = tile.IsVisible;
+                sprite.X = (tile.MapY * EngineConstants.TilePixelWidth / 2) + (tile.MapX * EngineConstants.TilePixelWidth / 2);
+                sprite.Y = (tile.MapX * EngineConstants.TilePixelHeight / 2) - (tile.MapY * EngineConstants.TilePixelHeight / 2);
 
-                        sprite.X = (y * TileWidth / 2) + (x * TileWidth / 2);
-                        sprite.Y = (x * TileHeight / 2) - (y * TileHeight / 2);
-
-                        listIndex++;
-                    }
-                }
+                listIndex++;
             }
         }
 

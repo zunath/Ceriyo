@@ -145,7 +145,7 @@ namespace Ceriyo.Data.Engine
                     }
                 }
 
-                WorkingDataManager.SaveModuleFile(module);
+                WorkingDataManager.SaveModuleSettings(module);
                 FileManager.XmlSerialize(resources, WorkingPaths.ResourceLinksFile);
                 success = true;
             }

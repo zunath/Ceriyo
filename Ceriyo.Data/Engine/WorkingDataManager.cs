@@ -169,13 +169,13 @@ namespace Ceriyo.Data
             return module;
         }
 
-        public static FileOperationResultTypeEnum SaveModuleFile(GameModule module)
+        public static FileOperationResultTypeEnum SaveModuleSettings(GameModule module)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 
             try
             {
-                FileManager.XmlSerialize(module, EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.ModuleExtension);
+                FileManager.XmlSerialize(module, EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension);
                 result = FileOperationResultTypeEnum.Success;
             }
             catch

@@ -65,10 +65,14 @@ namespace Ceriyo.Toolset.Components
         public void LoadArea(object sender, GameObjectEventArgs e)
         {
             Area area = e.GameObject as Area;
-            if (!string.IsNullOrWhiteSpace(area.AreaTileset.Graphic.FileName))
+
+            if (area.AreaTileset != null)
             {
-                GameResourceProcessor processor = new GameResourceProcessor();
-                imgTiles.Source = processor.ToBitmapImage(area.AreaTileset.Graphic);
+                if (!string.IsNullOrWhiteSpace(area.AreaTileset.Graphic.FileName))
+                {
+                    GameResourceProcessor processor = new GameResourceProcessor();
+                    imgTiles.Source = processor.ToBitmapImage(area.AreaTileset.Graphic);
+                }
             }
         }
 

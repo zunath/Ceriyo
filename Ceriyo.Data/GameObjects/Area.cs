@@ -35,30 +35,30 @@ namespace Ceriyo.Data.GameObjects
         public GameResource BattleMusic { get; set; }
         public GameResource BackgroundMusic { get; set; }
 
-        [XmlIgnore]
-        public List<Tile[,]> Tiles
-        {
-            get
-            {
-                List<Tile[,]> tilesList = new List<Tile[,]>();
+        //[XmlIgnore]
+        //public List<TileDefinition[,]> TileDefinitions
+        //{
+        //    get
+        //    {
+        //        List<TileDefinition[,]> tilesList = new List<TileDefinition[,]>();
 
-                for (int layer = 0; layer < LayerCount; layer++)
-                {
-                    Tile[,] tileLayer = new Tile[MapWidth, MapHeight];
-                    for (int x = 0; x < MapWidth; x++)
-                    {
-                        for (int y = 0; y < MapHeight; y++)
-                        {
-                            tileLayer[x, y] = new Tile();
-                        }
-                    }
+        //        for (int layer = 0; layer < LayerCount; layer++)
+        //        {
+        //            TileDefinition[,] tileLayer = new TileDefinition[MapWidth, MapHeight];
+        //            for (int x = 0; x < MapWidth; x++)
+        //            {
+        //                for (int y = 0; y < MapHeight; y++)
+        //                {
+        //                    tileLayer[x, y] = new TileDefinition();
+        //                }
+        //            }
 
-                    tilesList.Add(tileLayer);
-                }
+        //            tilesList.Add(tileLayer);
+        //        }
 
-                return tilesList;
-            }
-        }
+        //        return tilesList;
+        //    }
+        //}
 
         public Area()
         {
@@ -104,7 +104,7 @@ namespace Ceriyo.Data.GameObjects
 
             for (int layer = 0; layer < LayerCount; layer++)
             {
-                for (int x = 0; x <= MapWidth; x++)
+                for (int x = 0; x < MapWidth; x++)
                 {
                     for (int y = 0; y < MapHeight; y++)
                     {

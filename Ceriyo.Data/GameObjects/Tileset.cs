@@ -28,7 +28,7 @@ namespace Ceriyo.Data.GameObjects
         }
         public string CategoryName { get { return "Tileset"; } }
         public GameResource Graphic { get; set; }
-        public BindingList<Tile> Tiles { get; set; }
+        public BindingList<TileDefinition> Tiles { get; set; }
 
         public Tileset()
         {
@@ -39,7 +39,7 @@ namespace Ceriyo.Data.GameObjects
             this.Comments = "";
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Graphic = new GameResource();
-            this.Tiles = new BindingList<Tile>();
+            this.Tiles = new BindingList<TileDefinition>();
         }
     }
 }
