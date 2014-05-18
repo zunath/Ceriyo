@@ -16,6 +16,9 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<Item> _items;
         private BindingList<Placeable> _placeables;
         private GameResource _graphic;
+        private Creature _selectedCreature;
+        private Item _selectedItem;
+        private Placeable _selectedPlaceable;
         private int _selectionStartX;
         private int _selectionStartY;
         private int _selectionEndX;
@@ -33,6 +36,7 @@ namespace Ceriyo.Data.ViewModels
                 OnPropertyChanged("PaintMode");
             }
         }
+
         public BindingList<Creature> Creatures 
         {
             get
@@ -137,6 +141,45 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public Creature SelectedCreature
+        {
+            get
+            {
+                return _selectedCreature;
+            }
+            set
+            {
+                _selectedCreature = value;
+                OnPropertyChanged("SelectedCreature");
+            }
+        }
+
+        public Item SelectedItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged("SelectedItem");
+            }
+        }
+
+        public Placeable SelectedPlaceable
+        {
+            get
+            {
+                return _selectedPlaceable;
+            }
+            set
+            {
+                _selectedPlaceable = value;
+                OnPropertyChanged("SelectedPlaceable");
+            }
+        }
+
         public PaintObjectsVM()
         {
             this.PaintMode = PaintObjectModeTypeEnum.None;
@@ -144,6 +187,9 @@ namespace Ceriyo.Data.ViewModels
             this.Items = new BindingList<Item>();
             this.Placeables = new BindingList<Placeable>();
             this.Graphic = new GameResource();
+            this.SelectedCreature = new Creature();
+            this.SelectedItem = new Item();
+            this.SelectedPlaceable = new Placeable();
             this.SelectionStartX = 0;
             this.SelectionStartY = 0;
             this.SelectionEndX = 0;

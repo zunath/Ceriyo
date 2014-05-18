@@ -20,17 +20,20 @@ namespace Ceriyo.Entities
         private Area DrawableArea { get; set; }
         private Texture2D MapTexture { get; set; }
         private SpriteList TileSprites { get; set; }
+        private Sprite SelectedTile { get; set; }
+        private int SelectedCellX { get; set; }
+        private int SelectedCellY { get; set; }
         private Rectangle _sourceRectangle;
+        private GameResourceProcessor Processor { get; set; }
 
         public MapDrawableBatch(Area area)
         {
-            GameResourceProcessor processor = new GameResourceProcessor();
-
+            this.Processor = new GameResourceProcessor();
+            this.SelectedTile = new Sprite();
             this._sourceRectangle = new Rectangle(0, 0, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
 
             this.DrawableArea = area;
-            byte[] imageData = processor.ToBytes(area.AreaTileset.Graphic);
-            this.MapTexture = Texture2D.FromStream(FlatRedBallServices.GraphicsDevice, new MemoryStream(imageData));
+            this.MapTexture = Processor.ToTexture2D(area.AreaTileset.Graphic);
             this.TileSprites = new SpriteList();
 
             int capacity = area.MapWidth * area.MapHeight * area.LayerCount;
@@ -45,7 +48,9 @@ namespace Ceriyo.Entities
                 SpriteManager.AddSprite(sprite);
             }
 
+            SpriteManager.AddSprite(SelectedTile);
             SpriteManager.AddPositionedObject(this);
+            
 
             LoadMap();
         }
@@ -53,7 +58,7 @@ namespace Ceriyo.Entities
         public void Destroy()
         {
             SpriteManager.RemoveSpriteList(TileSprites);
-
+            SpriteManager.RemoveSprite(SelectedTile);
             SpriteManager.RemovePositionedObject(this);
         }
 
@@ -98,5 +103,6 @@ namespace Ceriyo.Entities
                 listIndex++;
             }
         }
+
     }
 }

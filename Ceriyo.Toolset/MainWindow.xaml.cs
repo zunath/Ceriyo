@@ -44,6 +44,8 @@ namespace Ceriyo.Toolset
 
             areaSelection.OnAreaClosed += paintObjects.UnloadArea;
             areaSelection.OnAreaClosed += screen.CloseArea;
+
+            paintObjects.OnModeChange += screen.ChangePaintMode;
         }
 
         private void OnModuleOpened(object sender, GameModuleEventArgs e)

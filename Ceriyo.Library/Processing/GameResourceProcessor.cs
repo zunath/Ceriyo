@@ -10,6 +10,9 @@ using Ceriyo.Data;
 using System.Windows.Media.Imaging;
 using System.ComponentModel;
 using Ceriyo.Data.Enumerations;
+using Microsoft.Xna.Framework.Graphics;
+using FlatRedBall;
+using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Library.Processing
 {
@@ -93,6 +96,26 @@ namespace Ceriyo.Library.Processing
                 image.EndInit();
             }
             return image;
+        }
+
+        public Texture2D ToTexture2D(GameResource resource)
+        {
+            byte[] imageData = ToBytes(resource);
+
+            return Texture2D.FromStream(FlatRedBallServices.GraphicsDevice, new MemoryStream(imageData));
+        }
+
+        public Texture2D GetSubTexture(GameResource resource, int x, int y, int width, int height)
+        {
+            Texture2D fullTexture = ToTexture2D(resource);
+            Texture2D texture = new Texture2D(FlatRedBallServices.GraphicsDevice, width, height);
+            Rectangle rect = new Rectangle(x, y, width, height);
+
+            Color[] data = new Color[width * height];
+            fullTexture.GetData<Color>(0, rect, data, 0, data.Length);
+            texture.SetData<Color>(data);
+
+            return texture;
         }
 
     }

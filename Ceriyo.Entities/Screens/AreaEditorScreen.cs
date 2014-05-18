@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Entities.Entities;
 using FlatRedBall;
 using FlatRedBall.Input;
 using FlatRedBall.Screens;
@@ -13,8 +15,11 @@ namespace Ceriyo.Entities.Screens
     public class AreaEditorScreen : BaseScreen
     {
         private Area LoadedArea { get; set; }
-        private MapDrawableBatch AreaBatch;
-        
+        private MapDrawableBatch AreaBatch { get; set; }
+        private PaintTileEntity PaintTile { get; set; }
+
+        private event EventHandler<ObjectPainterEventArgs> OnPaintObjectChanged;
+
         public AreaEditorScreen()
             : base("AreaEditorScreen")
         {
@@ -22,10 +27,16 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
+            
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
         {
+            if (PaintTile != null)
+            {
+                PaintTile.Activity();
+            }
+
             if(InputManager.Mouse.ButtonDown(Mouse.MouseButtons.RightButton))
             {
                 SpriteManager.Camera.X -= InputManager.Mouse.XChange;
@@ -35,7 +46,8 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
-            
+            AreaBatch.Destroy();
+            PaintTile.Destroy();
         }
 
         public void CloseArea(object sender, EventArgs e)
@@ -46,6 +58,7 @@ namespace Ceriyo.Entities.Screens
             }
 
             LoadedArea = null;
+            PaintTile = null;
         }
 
         public void LoadArea(object sender, GameObjectEventArgs e)
@@ -57,6 +70,7 @@ namespace Ceriyo.Entities.Screens
 
             LoadedArea = e.GameObject as Area;
             AreaBatch = new MapDrawableBatch(LoadedArea);
+            PaintTile = new PaintTileEntity(LoadedArea.AreaTileset.Graphic);
         }
 
         public void OnModulePropertiesUpdate(object sender, GameObjectEventArgs e)
@@ -67,6 +81,14 @@ namespace Ceriyo.Entities.Screens
                 {
                     LoadArea(sender, e);
                 }
+            }
+        }
+
+        public void ChangePaintMode(object sender, ObjectPainterEventArgs e)
+        {
+            if (e.GameObject == null)
+            {
+                PaintTile.SetTilesetCoordinates(e.TileCellX, e.TileCellY);
             }
         }
     }

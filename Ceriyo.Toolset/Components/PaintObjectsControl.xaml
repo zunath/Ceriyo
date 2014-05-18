@@ -12,8 +12,8 @@
         
         
         <DockPanel>
-            <TabControl>
-                <TabItem Header="Tiles">
+            <TabControl Name="ObjectTabs" >
+                <TabItem Name="TilesTab" Header="Tiles">
 
                     <DockPanel>
 
@@ -44,30 +44,33 @@
                     </DockPanel>
 
                 </TabItem>
-                <TabItem Header="Creatures">
+                <TabItem Name="CreaturesTab" Header="Creatures">
 
                     <ListBox Name="lbCreatures"
                              Height="Auto" 
                              Width="Auto"
                              ItemsSource="{Binding Creatures}"
+                             SelectedItem="{Binding SelectedCreature}"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"/>
                 </TabItem>
-                <TabItem Header="Items">
+                <TabItem Name="ItemsTab" Header="Items">
 
                     <ListBox Name="lbItems"
                              Height="Auto" 
                              Width="Auto"
                              ItemsSource="{Binding Items}"
+                             SelectedItem="{Binding SelectedItem}"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"/>
                 </TabItem>
-                <TabItem Header="Placeables">
+                <TabItem Name="PlaceablesTab" Header="Placeables">
 
                     <ListBox Name="lbPlaceables"
                              Height="Auto" 
                              Width="Auto"
                              ItemsSource="{Binding Placeables}"
+                             SelectedItem="{Binding SelectedPlaceable}"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"/>
                 </TabItem>
