@@ -14,17 +14,35 @@
         <DockPanel>
             <TabControl>
                 <TabItem Header="Tiles">
-                    <ScrollViewer HorizontalScrollBarVisibility="Auto">
-                        <Grid>
-                            <Image Name="imgTiles"
-                               Stretch="Fill"
-                               Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
-                               Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"></Image>
-                        </Grid>
-                    </ScrollViewer>
-                    
+
+                    <DockPanel>
+
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                            <Grid>
+                                <Image Name="imgTiles"
+                                       Stretch="Fill"
+                                       Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
+                                       Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"></Image>
+
+                                <Canvas Name="cnvTilePicker" MouseDown="Canvas_MouseDown">
+                                    <Canvas.Background>
+                                        <DrawingBrush Viewport="0,0,64,32" ViewportUnits="Absolute" TileMode="Tile"></DrawingBrush>
+                                    </Canvas.Background>
+
+                                    <Rectangle Name="rectSelectedTiles"
+                                           Stroke="Black"
+                                           Fill="Yellow"
+                                           Opacity="0.3"
+                                           Visibility="Hidden">
+                                    </Rectangle>
+                                </Canvas>
+                            </Grid>
+                        </ScrollViewer>
+
+                    </DockPanel>
+
                 </TabItem>
                 <TabItem Header="Creatures">
 

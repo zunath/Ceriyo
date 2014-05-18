@@ -37,12 +37,13 @@ namespace Ceriyo.Toolset.Components
         public PaintObjectsControl()
         {
             InitializeComponent();
-            Initialize();
+            Model = new PaintObjectsVM();
+            SetDataContexts();
         }
 
-        private void Initialize()
+        private void SetDataContexts()
         {
-            Model = new PaintObjectsVM();
+            rectSelectedTiles.DataContext = Model;
         }
 
         private void PopulateModel()
@@ -55,6 +56,8 @@ namespace Ceriyo.Toolset.Components
 
         private void LoadComponent(object sender, RoutedEventArgs e)
         {
+            rectSelectedTiles.Width = EngineConstants.TilePixelWidth;
+            rectSelectedTiles.Height = EngineConstants.TilePixelHeight;
         }
 
         public void UnloadArea(object sender, EventArgs e)
@@ -80,6 +83,23 @@ namespace Ceriyo.Toolset.Components
             }
 
             PopulateModel();
+            Canvas.SetLeft(rectSelectedTiles, 0);
+            Canvas.SetTop(rectSelectedTiles, 0);
+            rectSelectedTiles.Visibility = Visibility.Visible;
+        }
+
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Point pos = e.GetPosition(cnvTilePicker);
+                int cellX = (int)pos.X / EngineConstants.TilePixelWidth;
+                int cellY = (int)pos.Y / EngineConstants.TilePixelHeight;
+
+                Canvas.SetLeft(rectSelectedTiles, cellX * EngineConstants.TilePixelWidth);
+                Canvas.SetTop(rectSelectedTiles, cellY * EngineConstants.TilePixelHeight);
+
+            }
         }
 
     }

@@ -16,8 +16,10 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<Item> _items;
         private BindingList<Placeable> _placeables;
         private GameResource _graphic;
-        private int _selectedCellX;
-        private int _selectedCellY;
+        private int _selectionStartX;
+        private int _selectionStartY;
+        private int _selectionEndX;
+        private int _selectionEndY;
 
         public PaintObjectModeTypeEnum PaintMode 
         {
@@ -83,29 +85,55 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        public int SelectedCellX
+        public int SelectionStartX
         {
             get
             {
-                return _selectedCellX;
+                return _selectionStartX;
             }
             set
             {
-                _selectedCellX = value;
-                OnPropertyChanged("SelectedCellX");
+                _selectionStartX = value;
+                OnPropertyChanged("SelectionStartX");
             }
         }
 
-        public int SelectedCellY
+        public int SelectionStartY
         {
             get
             {
-                return _selectedCellY;
+                return _selectionStartY;
             }
             set
             {
-                _selectedCellY = value;
-                OnPropertyChanged("SelectedCellY");
+                _selectionStartY = value;
+                OnPropertyChanged("SelectionStartY");
+            }
+        }
+
+        public int SelectionEndX
+        {
+            get
+            {
+                return _selectionEndX;
+            }
+            set
+            {
+                _selectionEndX = value;
+                OnPropertyChanged("SelectionEndX");
+            }
+        }
+
+        public int SelectionEndY
+        {
+            get
+            {
+                return _selectionEndY;
+            }
+            set
+            {
+                _selectionEndY = value;
+                OnPropertyChanged("SelectionEndY");
             }
         }
 
@@ -116,8 +144,10 @@ namespace Ceriyo.Data.ViewModels
             this.Items = new BindingList<Item>();
             this.Placeables = new BindingList<Placeable>();
             this.Graphic = new GameResource();
-            this.SelectedCellX = 0;
-            this.SelectedCellY = 0;
+            this.SelectionStartX = 0;
+            this.SelectionStartY = 0;
+            this.SelectionEndX = 0;
+            this.SelectionEndY = 0;
         }
     }
 }
