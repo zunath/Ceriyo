@@ -52,8 +52,8 @@ namespace Ceriyo.Entities.Entities
 
         protected override void CustomActivity()
         {
-            this.EntitySprite.X = InputManager.Mouse.WorldXAt(0);
-            this.EntitySprite.Y = InputManager.Mouse.WorldYAt(0);
+            this.X = InputManager.Mouse.WorldXAt(0);
+            this.Y = InputManager.Mouse.WorldYAt(0);
         }
 
         protected override void CustomDestroy()
@@ -70,6 +70,7 @@ namespace Ceriyo.Entities.Entities
                 EngineConstants.TilePixelWidth,
                 EngineConstants.TilePixelHeight);
 
+            EntitySprite.AttachTo(this, false);
             SpriteManager.AddSprite(EntitySprite);
         }
 
