@@ -39,6 +39,7 @@ namespace Ceriyo.Entities.Entities
             this.Graphic = graphic;
             this.EntitySprite = new Sprite();
             this.EntitySprite.Visible = true;
+            this.EntitySprite.Z = EngineConstants.AreaMaxLayers + 1;
             this.CellX = 0;
             this.CellY = 0;
             this.SourceRectangle = new Rectangle(0, 0, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
