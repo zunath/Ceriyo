@@ -104,6 +104,7 @@
     <Compile Include="GameObjects\GameModule.cs" />
     <Compile Include="GameObjects\IGameObject.cs" />
     <Compile Include="GameObjects\Item.cs" />
+    <Compile Include="GameObjects\ItemProperty.cs" />
     <Compile Include="GameObjects\ItemType.cs" />
     <Compile Include="GameObjects\LevelChart.cs" />
     <Compile Include="GameObjects\LevelChartItem.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\DialogSelectionVM.cs" />
     <Compile Include="ViewModels\EditDialogVM.cs" />
+    <Compile Include="ViewModels\ItemEditorVM.cs" />
     <Compile Include="ViewModels\LoadModuleVM.cs" />
     <Compile Include="ViewModels\EditAreaVM.cs" />
     <Compile Include="ViewModels\ManageResourcePacksVM.cs" />

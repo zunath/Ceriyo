@@ -133,6 +133,14 @@ namespace Ceriyo.Data
             {
                 zip.AddDirectoryByName(ModulePaths.ItemsDirectory);
             }
+            if (zip[ModulePaths.ItemTypesDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.ItemTypesDirectory);
+            }
+            if (zip[ModulePaths.ItemPropertiesDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.ItemPropertiesDirectory);
+            }
             if (zip[ModulePaths.AreasDirectory] == null)
             {
                 zip.AddDirectoryByName(ModulePaths.AreasDirectory);

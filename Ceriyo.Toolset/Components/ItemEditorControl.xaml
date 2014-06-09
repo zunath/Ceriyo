@@ -6,79 +6,124 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700" Background="White">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="145"></ColumnDefinition>
+            <ColumnDefinition Width="145"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="120"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="184*"></RowDefinition>
+            <RowDefinition Height="149*"></RowDefinition>
+            <RowDefinition Height="167*"></RowDefinition>
+        </Grid.RowDefinitions>
         <ListBox x:Name="lbItems"
     		Grid.Column="0"
     		Grid.Row="0"
+            Grid.RowSpan="3"
+            Height="Auto"
+            Width="Auto"
     		BorderBrush="Black" 
     		ItemsSource="{Binding Items}"
     		SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
     		DisplayMemberPath="Name"
-    		
-    		Margin="0,27,555,41"/>
-        <Label Content="Items:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26" Width="52"/>
+                 Margin="0,27,0,41"/>
+        <Label Content="Items:" 
+               HorizontalAlignment="Left" 
+               Margin="10,0,0,0" 
+               VerticalAlignment="Top" 
+               Height="26" 
+               Width="52"/>
         <Button x:Name="btnNew"
     		Content="New"
-    		
     		HorizontalAlignment="Left" 
     		Margin="10,0,0,10" 
     		VerticalAlignment="Bottom" 
-    		Width="52" Height="22"/>
+            Grid.Row="2"
+    		Width="52" 
+            Height="22"/>
         <Button x:Name="btnDelete"
     		Content="Delete" 
-    		
+    		Grid.Row="2"
     		HorizontalAlignment="Left" 
     		Margin="83,0,0,10" 
     		VerticalAlignment="Bottom" 
     		IsEnabled="{Binding IsItemSelected}"
     		Width="52" Height="22"/>
         <TextBox x:Name="txtName" 
+            Grid.Column="1"
         	HorizontalAlignment="Left" 
-        	Height="23" Margin="150,36,0,0" 
+        	Height="23" 
         	TextWrapping="Wrap" 
         	Text="{Binding SelectedItem.Name}" 
         	IsEnabled="{Binding IsItemSelected}"
         	VerticalAlignment="Top" 
-        	Width="135"/>
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="156,10,0,0" VerticalAlignment="Top" Height="26" Width="44"/>
+        	Width="135" Margin="5,41,0,0"/>
+        <Label Content="Name:" 
+               HorizontalAlignment="Left" 
+               Grid.Column="1"
+               VerticalAlignment="Top" 
+               Height="26" 
+               Width="44" Margin="5,10,0,0"/>
         <TextBox x:Name="txtTag" 
         	HorizontalAlignment="Left" 
         	Height="23" 
-        	Margin="150,90,0,0" 
+            Grid.Column="1"
         	TextWrapping="Wrap" 
         	Text="{Binding SelectedItem.Tag}" 
         	IsEnabled="{Binding IsItemSelected}"
         	VerticalAlignment="Top" 
-        	Width="135"/>
-        <Label Content="Tag:" HorizontalAlignment="Left" Margin="156,64,0,0" VerticalAlignment="Top" Height="26" Width="32"/>
+        	Width="135" Margin="5,95,0,0"/>
+        <Label Content="Tag:" 
+               HorizontalAlignment="Left" 
+               Grid.Column="1"
+               VerticalAlignment="Top" 
+               Height="26" 
+               Width="32" Margin="5,69,0,0"/>
         <TextBox x:Name="txtResref" 
         	HorizontalAlignment="Left" 
-        	Height="23" 
-        	Margin="150,144,0,0" 
+        	Height="23"
         	TextWrapping="Wrap" 
         	Text="{Binding SelectedItem.Resref}" 
         	IsEnabled="{Binding IsItemSelected}"
         	VerticalAlignment="Top" 
-        	Width="135"/>
-        <Label Content="Resref:" HorizontalAlignment="Left" Margin="156,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
-        <CheckBox Content="Is Stolen" 
+        	Width="135" Margin="5,154,0,0" Grid.Column="1"/>
+        <Label Content="Resref:" 
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top" 
+               Height="26" 
+               Width="45" Margin="5,123,0,0" Grid.Column="1"/>
+        <CheckBox Name="chkIsStolen"
+                  Content="Is Stolen" 
                   HorizontalAlignment="Left" 
-                  Margin="156,300,0,0" 
+                  Grid.Column="1"
                   IsChecked="{Binding SelectedItem.IsStolen}"
                   IsEnabled="{Binding IsItemSelected}"
-                  VerticalAlignment="Top"/>
-        <CheckBox Content="Is Plot" 
+                  VerticalAlignment="Top" Margin="5,30,0,0" Grid.Row="2"/>
+        <CheckBox Name="chkIsPlot"
+                  Content="Is Plot" 
                   HorizontalAlignment="Left" 
-                  Margin="156,322,0,0" 
+                  Grid.Column="1"
                   IsChecked="{Binding SelectedItem.IsPlot}"
                   IsEnabled="{Binding IsItemSelected}"
-                  VerticalAlignment="Top"/>
-        <CheckBox Content="Is Undroppable" 
+                  VerticalAlignment="Top" Margin="5,51,0,0" Grid.Row="2"/>
+        <CheckBox Name="chkIsUndroppable"
+                  Content="Is Undroppable" 
                   HorizontalAlignment="Left" 
-                  Margin="156,280,0,0" 
+                  Grid.Column="1"
                   IsChecked="{Binding SelectedItem.IsUndroppable}"
                   IsEnabled="{Binding IsItemSelected}"
-                  VerticalAlignment="Top"/>
-        <TabControl HorizontalAlignment="Left" Height="454" Margin="290,36,0,0" VerticalAlignment="Top" Width="400">
+                  VerticalAlignment="Top" Margin="5,9,0,0" Grid.Row="2"/>
+        <TabControl HorizontalAlignment="Stretch" 
+                    Height="Auto" 
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="3"
+                    Grid.RowSpan="3"
+                    VerticalAlignment="Stretch" 
+                    Width="Auto">
             <TabItem Header="Appearance">
                 <Grid Background="#FFE5E5E5">
                     <Label Content="World Graphic:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -88,11 +133,11 @@
                            VerticalAlignment="Top" 
                            Width="64"/>
                     <ListBox Name="lbWorldGraphic"
-                             HorizontalAlignment="Left" 
+                             HorizontalAlignment="Stretch" 
                              Height="100" 
                              Margin="10,74,0,0" 
                              VerticalAlignment="Top" 
-                             Width="370"/>
+                             Width="Auto"/>
                     <Label Content="Inventory Graphic:" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top"/>
                     <Image x:Name="imgInventoryGraphic"
                     	HorizontalAlignment="Left" 
@@ -100,14 +145,47 @@
                     	VerticalAlignment="Top" 
                     	Width="64"/>
                     <ListBox x:Name="lbInventoryGraphic"
-                    	HorizontalAlignment="Left" 
+                    	HorizontalAlignment="Stretch" 
                     	Height="100" 
                     	Margin="10,288,0,0" 
                     	VerticalAlignment="Top" 
-                    	Width="370"/>
+                    	Width="Auto"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Item Properties">
+            <TabItem Header="Requirements">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid Name="dgClassRestrictions"
+                                      ItemsSource="{Binding Levels}"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch"
+                                      Width="Auto"
+                                      Height="Auto"
+                                      ColumnWidth="*"
+                                      AutoGenerateColumns="False"
+                                      AlternatingRowBackground="#ddd"
+                                      CanUserDeleteRows="False"
+                                      CanUserReorderColumns="False"
+                                      CanUserResizeColumns="True"
+                                      CanUserResizeRows="False"
+                                      CanUserSortColumns="True"
+                                      CanUserAddRows="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Class Name"
+                                                IsReadOnly="True"
+                                                Binding="{Binding Name}">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Level Req."
+                                                Binding="{Binding ExperienceRequired}">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Is Available"
+                                                Binding="{Binding IsAvailable}">
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Properties">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -196,6 +274,9 @@
                     	Width="260"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Variables">
+
+            </TabItem>
             <TabItem Header="Description">
                 <Grid Background="#FFE5E5E5">
                     <TextBox x:Name="txtDescription" 
@@ -219,18 +300,19 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <ListBox HorizontalAlignment="Left" 
-                  Margin="150,198,0,0" 
+        <ListBox Name="lbItemType"
+                  HorizontalAlignment="Left" 
                   VerticalAlignment="Top" 
         	      ItemsSource="{Binding ItemTypes}"
         	      DisplayMemberPath="Name"
                   IsEnabled="{Binding IsItemSelected}"
                   SelectedItem="{Binding Path=SelectedItem.ItemType}"
-                  Width="135" Height="75"/>
+                  Width="135" Height="103" Grid.Column="1" Margin="5,36,0,0" Grid.Row="1"/>
         <Label Content="Item Type:" 
                HorizontalAlignment="Left" 
-               Margin="156,172,0,0" 
-               VerticalAlignment="Top"/>
+               Grid.Row="1"
+               Grid.Column="1"
+               VerticalAlignment="Top" Margin="5,10,0,0"/>
 
     </Grid>
 </UserControl>

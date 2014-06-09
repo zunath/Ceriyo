@@ -42,6 +42,11 @@ namespace Ceriyo.Data
             get { return EnginePaths.WorkingDirectory + ModulePaths.ItemTypesDirectory; }
         }
 
+        public static string ItemPropertiesDirectory
+        {
+            get { return EnginePaths.WorkingDirectory + ModulePaths.ItemPropertiesDirectory; }
+        }
+
         public static string PlaceablesDirectory
         {
             get { return EnginePaths.WorkingDirectory + ModulePaths.PlaceablesDirectory; }
