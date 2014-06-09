@@ -53,8 +53,11 @@ namespace Ceriyo.Entities.Entities
 
         protected override void CustomActivity()
         {
-            this.X = InputManager.Mouse.WorldXAt(0);
-            this.Y = InputManager.Mouse.WorldYAt(0);
+            if (InputManager.Mouse.IsInGameWindow())
+            {
+                this.X = InputManager.Mouse.WorldXAt(0);
+                this.Y = InputManager.Mouse.WorldYAt(0);
+            }
         }
 
         protected override void CustomDestroy()

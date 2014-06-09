@@ -104,6 +104,7 @@
     <Compile Include="GameObjects\GameModule.cs" />
     <Compile Include="GameObjects\IGameObject.cs" />
     <Compile Include="GameObjects\Item.cs" />
+    <Compile Include="GameObjects\ItemType.cs" />
     <Compile Include="GameObjects\LevelChart.cs" />
     <Compile Include="GameObjects\LevelChartItem.cs" />
     <Compile Include="GameObjects\LocalVariable.cs" />

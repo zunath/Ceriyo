@@ -6,6 +6,171 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700" Background="White">
     <Grid>
-            
+        <ListBox x:Name="lbItems"
+    		Grid.Column="0"
+    		Grid.Row="0"
+    		BorderBrush="Black" 
+    		ItemsSource="{Binding Items}"
+    		SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+    		DisplayMemberPath="Name"
+    		SelectionChanged="ItemSelected"
+    		Margin="0,27,555,41"/>
+        <Label Content="Items:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26" Width="52"/>
+        <Button x:Name="btnNew"
+    		Content="New" 
+    		Click="New"
+    		HorizontalAlignment="Left" 
+    		Margin="10,0,0,10" 
+    		VerticalAlignment="Bottom" 
+    		Width="52" Height="22"/>
+        <Button x:Name="btnDelete"
+    		Content="Delete" 
+    		Click="Delete"
+    		HorizontalAlignment="Left" 
+    		Margin="83,0,0,10" 
+    		VerticalAlignment="Bottom" 
+    		IsEnabled="{Binding IsItemSelected}"
+    		Width="52" Height="22"/>
+        <TextBox x:Name="txtName" 
+        	HorizontalAlignment="Left" 
+        	Height="23" Margin="150,36,0,0" 
+        	TextWrapping="Wrap" 
+        	Text="{Binding SelectedItem.Name}" 
+        	IsEnabled="{Binding IsItemSelected}"
+        	VerticalAlignment="Top" 
+        	Width="135"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="156,10,0,0" VerticalAlignment="Top" Height="26" Width="44"/>
+        <TextBox x:Name="txtTag" 
+        	HorizontalAlignment="Left" 
+        	Height="23" 
+        	Margin="150,90,0,0" 
+        	TextWrapping="Wrap" 
+        	Text="{Binding SelectedItem.Tag}" 
+        	IsEnabled="{Binding IsItemSelected}"
+        	VerticalAlignment="Top" 
+        	Width="135"/>
+        <Label Content="Tag:" HorizontalAlignment="Left" Margin="156,64,0,0" VerticalAlignment="Top" Height="26" Width="32"/>
+        <TextBox x:Name="txtResref" 
+        	HorizontalAlignment="Left" 
+        	Height="23" 
+        	Margin="150,144,0,0" 
+        	TextWrapping="Wrap" 
+        	Text="{Binding SelectedItem.Resref}" 
+        	IsEnabled="{Binding IsItemSelected}"
+        	VerticalAlignment="Top" 
+        	Width="135"/>
+        <Label Content="Resref:" HorizontalAlignment="Left" Margin="156,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>
+        <CheckBox Content="Is Stolen" 
+                  HorizontalAlignment="Left" 
+                  Margin="156,300,0,0" 
+                  IsChecked="{Binding SelectedItem.IsStolen}"
+                  IsEnabled="{Binding IsItemSelected}"
+                  VerticalAlignment="Top"/>
+        <CheckBox Content="Is Plot" 
+                  HorizontalAlignment="Left" 
+                  Margin="156,322,0,0" 
+                  IsChecked="{Binding SelectedItem.IsPlot}"
+                  IsEnabled="{Binding IsItemSelected}"
+                  VerticalAlignment="Top"/>
+        <CheckBox Content="Is Undroppable" 
+                  HorizontalAlignment="Left" 
+                  Margin="156,280,0,0" 
+                  IsChecked="{Binding SelectedItem.IsUndroppable}"
+                  IsEnabled="{Binding IsItemSelected}"
+                  VerticalAlignment="Top"/>
+        <TabControl HorizontalAlignment="Left" Height="454" Margin="290,36,0,0" VerticalAlignment="Top" Width="400">
+            <TabItem Header="Appearance">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Item Properties">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Available Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Assigned Properties:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Scripts">
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="On Acquired:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+                    <ComboBox Name="ddlOnAcquiredScript"
+                              HorizontalAlignment="Left" 
+                              Margin="120,39,0,0" 
+                              VerticalAlignment="Top" 
+							  ItemsSource="{Binding Scripts}"
+							  SelectedValue="{Binding OnAcquiredScript}"
+                              Width="260"/>
+                    <Label Content="On Unacquired:" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
+                    <ComboBox Name="ddlOnUnacquiredScript"
+                              HorizontalAlignment="Left" 
+                              Margin="120,66,0,0" 
+                              VerticalAlignment="Top" 
+							  ItemsSource="{Binding Scripts}"
+							  SelectedValue="{Binding OnUnacquiredScript}"
+                              Width="260"/>
+                    <Label Content="On Equipped:" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnEquippedScript"
+                    	HorizontalAlignment="Left" 
+                    	Margin="120,93,0,0" 
+                    	VerticalAlignment="Top" 
+						ItemsSource="{Binding Scripts}"
+						SelectedValue="{Binding OnEquippedScript}"
+                    	Width="260"/>
+                    <Label Content="On Unequipped:" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnUnequippedScript"
+                    	HorizontalAlignment="Left" 
+                    	Margin="120,120,0,0" 
+                    	VerticalAlignment="Top" 
+						ItemsSource="{Binding Scripts}"
+						SelectedValue="{Binding OnUnequippedScript}"
+                    	Width="260"/>
+                    <Label Content="On Activated:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnActivatedScript"
+                    	HorizontalAlignment="Left" 
+                    	Margin="120,12,0,0" 
+                    	VerticalAlignment="Top" 
+						ItemsSource="{Binding Scripts}"
+						SelectedValue="{Binding OnActivatedScript}"
+                    	Width="260"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Description">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="txtDescription" 
+                		HorizontalAlignment="Stretch" 
+                		VerticalAlignment="Stretch"
+                		AcceptsReturn="True"
+                		TextWrapping="Wrap"
+                		Width="Auto"
+                		Height="Auto"
+                		Text="{Binding Description}" Margin="0,0,6,32"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Comments">
+                <Grid Background="#FFE5E5E5" >
+                    <TextBox x:Name="txtComments" 
+                		TextWrapping="Wrap"
+                		AcceptsReturn="True"
+                		HorizontalAlignment="Stretch" 
+                		VerticalAlignment="Stretch"
+                		Text="{Binding Comments}" Margin="0,0,6,32"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <ListBox HorizontalAlignment="Left" 
+                  Margin="150,198,0,0" 
+                  VerticalAlignment="Top" 
+        	      ItemsSource="{Binding ItemTypes}"
+        	      DisplayMemberPath="Name"
+                  IsEnabled="{Binding IsItemSelected}"
+                  SelectedItem="{Binding Path=SelectedItem.ItemType}"
+                  Width="135" Height="75"/>
+        <Label Content="Item Type:" 
+               HorizontalAlignment="Left" 
+               Margin="156,172,0,0" 
+               VerticalAlignment="Top"/>
+
     </Grid>
 </UserControl>

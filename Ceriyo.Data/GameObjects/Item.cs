@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
+using Ceriyo.Data.ResourceObjects;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -23,6 +24,17 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string CategoryName { get { return "Item"; } }
 
+        public ItemType ItemType { get; set; }
+        public int Price { get; set; }
+        public int MaxStackSize { get; set; }
+        public GameResource InventoryGraphic { get; set; }
+        public GameResource WorldGraphic { get; set; }
+
+        public bool IsStolen { get; set; }
+        public bool IsPlot { get; set; }
+        public bool IsUndroppable { get; set; }
+
+
         public Item()
         {
             this.Name = "";
@@ -32,6 +44,14 @@ namespace Ceriyo.Data.GameObjects
             this.Comments = "";
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            this.ItemType = new ItemType();
+            this.Price = 0;
+            this.MaxStackSize = 0;
+            this.IsStolen = false;
+            this.IsPlot = false;
+            this.IsUndroppable = false;
+            this.InventoryGraphic = new GameResource();
+            this.WorldGraphic = new GameResource();
         }
     }
 }

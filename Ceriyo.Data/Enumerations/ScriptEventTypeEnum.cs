@@ -17,6 +17,11 @@ namespace Ceriyo.Data.Enumerations
         OnModuleLoad = 7,
         OnPlayerDying = 8,
         OnPlayerDeath = 9,
-        OnPlayerRespawn = 10
+        OnPlayerRespawn = 10,
+        OnItemAcquired = 11,
+        OnItemUnacquired = 12,
+        OnItemActivated = 13,
+        OnItemEquipped = 14,
+        OnItemUnequipped = 15
     }
 }
