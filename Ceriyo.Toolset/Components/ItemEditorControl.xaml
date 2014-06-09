@@ -13,19 +13,19 @@
     		ItemsSource="{Binding Items}"
     		SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
     		DisplayMemberPath="Name"
-    		SelectionChanged="ItemSelected"
+    		
     		Margin="0,27,555,41"/>
         <Label Content="Items:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26" Width="52"/>
         <Button x:Name="btnNew"
-    		Content="New" 
-    		Click="New"
+    		Content="New"
+    		
     		HorizontalAlignment="Left" 
     		Margin="10,0,0,10" 
     		VerticalAlignment="Bottom" 
     		Width="52" Height="22"/>
         <Button x:Name="btnDelete"
     		Content="Delete" 
-    		Click="Delete"
+    		
     		HorizontalAlignment="Left" 
     		Margin="83,0,0,10" 
     		VerticalAlignment="Bottom" 
@@ -80,16 +80,76 @@
                   VerticalAlignment="Top"/>
         <TabControl HorizontalAlignment="Left" Height="454" Margin="290,36,0,0" VerticalAlignment="Top" Width="400">
             <TabItem Header="Appearance">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="World Graphic:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Image Name="imgWorldGraphic"
+                           HorizontalAlignment="Left" 
+                           Height="64" Margin="149,5,0,0" 
+                           VerticalAlignment="Top" 
+                           Width="64"/>
+                    <ListBox Name="lbWorldGraphic"
+                             HorizontalAlignment="Left" 
+                             Height="100" 
+                             Margin="10,74,0,0" 
+                             VerticalAlignment="Top" 
+                             Width="370"/>
+                    <Label Content="Inventory Graphic:" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top"/>
+                    <Image x:Name="imgInventoryGraphic"
+                    	HorizontalAlignment="Left" 
+                    	Height="64" Margin="149,219,0,0" 
+                    	VerticalAlignment="Top" 
+                    	Width="64"/>
+                    <ListBox x:Name="lbInventoryGraphic"
+                    	HorizontalAlignment="Left" 
+                    	Height="100" 
+                    	Margin="10,288,0,0" 
+                    	VerticalAlignment="Top" 
+                    	Width="370"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Item Properties">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
                     <Label Content="Available Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Assigned Properties:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Assigned Properties:" Grid.Column="4" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <ListBox Name="lbAvailableProperties"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Height="Auto" 
+                             Grid.Row="1" 
+                             Width="Auto"/>
+                    <ListBox x:Name="lbAssignedProperties"
+                    	HorizontalAlignment="Stretch"
+                    	VerticalAlignment="Stretch"
+                    	Height="Auto" 
+                    	Grid.Row="1" 
+                        Grid.Column="4"
+                    	Width="Auto"/>
+                    <Button Name="btnAddProperty"
+                            Content="->" 
+                            Grid.Column="1" 
+                            HorizontalAlignment="Left" 
+                            Margin="5,43,0,0" 
+                            Grid.Row="1" 
+                            VerticalAlignment="Top" 
+                            Width="20"/>
+                    <Button x:Name="btnRemoveProperty"
+                    	Content="&lt;-" 
+                    	Grid.Column="1" 
+                    	HorizontalAlignment="Left" 
+                    	Margin="5,114,0,0" 
+                    	Grid.Row="1" 
+                    	VerticalAlignment="Top" 
+                    	Width="20"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Scripts">

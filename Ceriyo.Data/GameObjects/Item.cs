@@ -26,7 +26,6 @@ namespace Ceriyo.Data.GameObjects
 
         public ItemType ItemType { get; set; }
         public int Price { get; set; }
-        public int MaxStackSize { get; set; }
         public GameResource InventoryGraphic { get; set; }
         public GameResource WorldGraphic { get; set; }
 
@@ -46,7 +45,6 @@ namespace Ceriyo.Data.GameObjects
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
             this.ItemType = new ItemType();
             this.Price = 0;
-            this.MaxStackSize = 0;
             this.IsStolen = false;
             this.IsPlot = false;
             this.IsUndroppable = false;
