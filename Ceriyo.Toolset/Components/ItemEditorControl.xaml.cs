@@ -45,6 +45,8 @@ namespace Ceriyo.Toolset.Components
             chkIsPlot.DataContext = Model;
             chkIsStolen.DataContext = Model;
             chkIsUndroppable.DataContext = Model;
+            dgLocalVariables.DataContext = Model;
+            dgItemRequirements.DataContext = Model;
         }
 
         public void Save(object sender, EventArgs e)

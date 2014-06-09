@@ -20,6 +20,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<ItemProperty> _availableItemProperties;
         private BindingList<ItemProperty> _assignedItemProperties;
         private bool _isItemSelected;
+        private BindingList<ItemRequirement> _itemRequirements;
 
         public BindingList<GameResource> Graphics
         {
@@ -112,6 +113,19 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public BindingList<ItemRequirement> ItemRequirements
+        {
+            get
+            {
+                return _itemRequirements;
+            }
+            set
+            {
+                _itemRequirements = value;
+                OnPropertyChanged("ItemRequirements");
+            }
+        }
+
         public BindingList<ItemProperty> AvailableItemProperties
         {
             get
@@ -159,6 +173,7 @@ namespace Ceriyo.Data.ViewModels
             this.ItemTypes = new BindingList<ItemType>();
             this.AvailableItemProperties = new BindingList<ItemProperty>();
             this.AssignedItemProperties = new BindingList<ItemProperty>();
+            this.ItemRequirements = new BindingList<ItemRequirement>();
         }
     }
 }

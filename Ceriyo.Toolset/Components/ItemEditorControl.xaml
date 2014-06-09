@@ -154,7 +154,7 @@
             </TabItem>
             <TabItem Header="Requirements">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid Name="dgClassRestrictions"
+                    <DataGrid Name="dgItemRequirements"
                                       ItemsSource="{Binding Levels}"
                                       VerticalAlignment="Stretch"
                                       HorizontalAlignment="Stretch"
@@ -275,7 +275,20 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Variables">
+                <Grid Background="#FFE5E5E5">
+                    <DockPanel>
+                        <DataGrid Name="dgLocalVariables" 
+                                      ItemsSource="{Binding LocalVariables}"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch"
+                                      Width="Auto"
+                                      Height="Auto"
+                                      ColumnWidth="*"
+                                      CanUserAddRows="True">
+                        </DataGrid>
+                    </DockPanel>
 
+                </Grid>
             </TabItem>
             <TabItem Header="Description">
                 <Grid Background="#FFE5E5E5">

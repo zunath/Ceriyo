@@ -105,6 +105,7 @@
     <Compile Include="GameObjects\IGameObject.cs" />
     <Compile Include="GameObjects\Item.cs" />
     <Compile Include="GameObjects\ItemProperty.cs" />
+    <Compile Include="GameObjects\ItemRequirement.cs" />
     <Compile Include="GameObjects\ItemType.cs" />
     <Compile Include="GameObjects\LevelChart.cs" />
     <Compile Include="GameObjects\LevelChartItem.cs" />
