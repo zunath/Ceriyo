@@ -216,6 +216,7 @@
                              VerticalAlignment="Stretch"
                              Height="Auto" 
                              Grid.Row="1" 
+                             IsEnabled="{Binding IsItemSelected}"
                              Width="Auto"/>
                     <ListBox x:Name="lbAssignedProperties"
                     	HorizontalAlignment="Stretch"
@@ -223,6 +224,7 @@
                     	Height="Auto" 
                     	Grid.Row="1" 
                         Grid.Column="4"
+                        IsEnabled="{Binding IsItemSelected}"
                     	Width="Auto"/>
                     <Button Name="btnAddProperty"
                             Content="->" 
@@ -230,6 +232,7 @@
                             HorizontalAlignment="Left" 
                             Margin="5,43,0,0" 
                             Grid.Row="1" 
+                            IsEnabled="{Binding IsItemSelected}"
                             VerticalAlignment="Top" 
                             Width="20"/>
                     <Button x:Name="btnRemoveProperty"
@@ -238,6 +241,7 @@
                     	HorizontalAlignment="Left" 
                     	Margin="5,114,0,0" 
                     	Grid.Row="1" 
+                        IsEnabled="{Binding IsItemSelected}"
                     	VerticalAlignment="Top" 
                     	Width="20"/>
 
@@ -247,44 +251,49 @@
                 <Grid Background="#FFE5E5E5">
                     <Label Content="On Acquired:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
                     <ComboBox Name="ddlOnAcquiredScript"
-                              HorizontalAlignment="Left" 
+                              HorizontalAlignment="Stretch" 
                               Margin="120,39,0,0" 
                               VerticalAlignment="Top" 
 							  ItemsSource="{Binding Scripts}"
 							  SelectedValue="{Binding OnAcquiredScript}"
-                              Width="260"/>
+                              IsEnabled="{Binding IsItemSelected}"
+                              Width="Auto"/>
                     <Label Content="On Unacquired:" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
                     <ComboBox Name="ddlOnUnacquiredScript"
-                              HorizontalAlignment="Left" 
+                              HorizontalAlignment="Stretch" 
                               Margin="120,66,0,0" 
                               VerticalAlignment="Top" 
 							  ItemsSource="{Binding Scripts}"
 							  SelectedValue="{Binding OnUnacquiredScript}"
-                              Width="260"/>
+                              IsEnabled="{Binding IsItemSelected}"
+                              Width="Auto"/>
                     <Label Content="On Equipped:" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="ddlOnEquippedScript"
-                    	HorizontalAlignment="Left" 
+                    	HorizontalAlignment="Stretch" 
                     	Margin="120,93,0,0" 
                     	VerticalAlignment="Top" 
 						ItemsSource="{Binding Scripts}"
 						SelectedValue="{Binding OnEquippedScript}"
-                    	Width="260"/>
+                        IsEnabled="{Binding IsItemSelected}"
+                    	Width="Auto"/>
                     <Label Content="On Unequipped:" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="ddlOnUnequippedScript"
-                    	HorizontalAlignment="Left" 
+                    	HorizontalAlignment="Stretch" 
                     	Margin="120,120,0,0" 
                     	VerticalAlignment="Top" 
 						ItemsSource="{Binding Scripts}"
 						SelectedValue="{Binding OnUnequippedScript}"
-                    	Width="260"/>
+                        IsEnabled="{Binding IsItemSelected}"
+                    	Width="Auto"/>
                     <Label Content="On Activated:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="ddlOnActivatedScript"
-                    	HorizontalAlignment="Left" 
+                    	HorizontalAlignment="Stretch" 
                     	Margin="120,12,0,0" 
                     	VerticalAlignment="Top" 
 						ItemsSource="{Binding Scripts}"
 						SelectedValue="{Binding OnActivatedScript}"
-                    	Width="260"/>
+                        IsEnabled="{Binding IsItemSelected}"
+                    	Width="Auto"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Variables">
@@ -297,6 +306,7 @@
                                       Width="Auto"
                                       Height="Auto"
                                       ColumnWidth="*"
+                                      IsEnabled="{Binding IsItemSelected}"
                                       CanUserAddRows="True">
                         </DataGrid>
                     </DockPanel>
@@ -312,6 +322,7 @@
                 		TextWrapping="Wrap"
                 		Width="Auto"
                 		Height="Auto"
+                        IsEnabled="{Binding IsItemSelected}"
                 		Text="{Binding Description}" Margin="0,0,6,32"/>
                 </Grid>
             </TabItem>
@@ -322,6 +333,7 @@
                 		AcceptsReturn="True"
                 		HorizontalAlignment="Stretch" 
                 		VerticalAlignment="Stretch"
+                        IsEnabled="{Binding IsItemSelected}"
                 		Text="{Binding Comments}" Margin="0,0,6,32"/>
                 </Grid>
             </TabItem>

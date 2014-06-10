@@ -52,6 +52,11 @@ namespace Ceriyo.Toolset.Components
             chkIsUndroppable.DataContext = Model;
             dgLocalVariables.DataContext = Model;
             dgItemRequirements.DataContext = Model;
+            ddlOnAcquiredScript.DataContext = Model;
+            ddlOnActivatedScript.DataContext = Model;
+            ddlOnEquippedScript.DataContext = Model;
+            ddlOnUnacquiredScript.DataContext = Model;
+            ddlOnUnequippedScript.DataContext = Model;
         }
 
         private void New(object sender, RoutedEventArgs e)

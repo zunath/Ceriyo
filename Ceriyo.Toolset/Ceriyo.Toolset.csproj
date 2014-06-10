@@ -177,14 +177,8 @@
     <Compile Include="Windows\EditCreatureWindow.xaml.cs">
       <DependentUpon>EditCreatureWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\EditItemWindow.xaml.cs">
-      <DependentUpon>EditItemWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\NewModuleWindow.xaml.cs">
       <DependentUpon>NewModuleWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\EditPlaceableWindow.xaml.cs">
-      <DependentUpon>EditPlaceableWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ManageResourcePacksWindow.xaml.cs">
       <DependentUpon>ManageResourcePacksWindow.xaml</DependentUpon>
@@ -282,17 +276,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\EditItemWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\NewModuleWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\EditPlaceableWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ManageResourcePacksWindow.xaml">
       <SubType>Designer</SubType>
