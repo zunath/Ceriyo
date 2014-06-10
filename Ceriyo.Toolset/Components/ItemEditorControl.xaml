@@ -165,10 +165,10 @@
                     	Width="Auto"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Requirements">
+            <TabItem Header="Class Requirements">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid Name="dgItemRequirements"
-                                      ItemsSource="{Binding ItemRequirements}"
+                    <DataGrid Name="dgItemClassRequirements"
+                                      ItemsSource="{Binding SelectedItem.ItemRequirements}"
                                       VerticalAlignment="Stretch"
                                       HorizontalAlignment="Stretch"
                                       Width="Auto"
@@ -186,14 +186,15 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Class Name"
                                                 IsReadOnly="True"
-                                                Binding="{Binding Name}">
+                                                Binding="{Binding CharacterClass.Name}">
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="Level Req."
-                                                Binding="{Binding ExperienceRequired}">
+                                                Binding="{Binding LevelRequired}">
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Is Available"
-                                                Binding="{Binding IsAvailable}">
-                            </DataGridTextColumn>
+                            <DataGridCheckBoxColumn Header="Is Available"
+                                                Binding="{Binding IsAvailable}"
+                                                >
+                            </DataGridCheckBoxColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

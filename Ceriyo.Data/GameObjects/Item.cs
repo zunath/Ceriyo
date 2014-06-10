@@ -34,7 +34,7 @@ namespace Ceriyo.Data.GameObjects
         public bool IsUndroppable { get; set; }
 
         public BindingList<ItemProperty> ItemProperties { get; set; }
-        public BindingList<ItemRequirement> ItemRequirements { get; set; }
+        public BindingList<ItemClassRequirement> ItemRequirements { get; set; }
 
         public Item()
         {
@@ -53,7 +53,7 @@ namespace Ceriyo.Data.GameObjects
             this.InventoryGraphic = new GameResource();
             this.WorldGraphic = new GameResource();
             this.ItemProperties = new BindingList<ItemProperty>();
-            this.ItemRequirements = new BindingList<ItemRequirement>();
+            this.ItemRequirements = new BindingList<ItemClassRequirement>();
         }
     }
 }

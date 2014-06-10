@@ -18,6 +18,7 @@ using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.ResourceObjects;
+using System.ComponentModel;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -51,7 +52,7 @@ namespace Ceriyo.Toolset.Components
             chkIsStolen.DataContext = Model;
             chkIsUndroppable.DataContext = Model;
             dgLocalVariables.DataContext = Model;
-            dgItemRequirements.DataContext = Model;
+            dgItemClassRequirements.DataContext = Model;
             ddlOnAcquiredScript.DataContext = Model;
             ddlOnActivatedScript.DataContext = Model;
             ddlOnEquippedScript.DataContext = Model;
@@ -71,10 +72,33 @@ namespace Ceriyo.Toolset.Components
             item.InventoryGraphic = lbInventoryGraphic.Items[0] as GameResource;
             item.WorldGraphic = lbWorldGraphic.Items[0] as GameResource;
             item.ItemType = lbItemType.Items[0] as ItemType;
+            item.ItemRequirements = BuildItemRequirements();
             Model.Items.Add(item);
             int index = lbItems.Items.IndexOf(item);
             lbItems.SelectedItem = lbItems.Items[index];
             
+            
+        }
+
+        private BindingList<ItemClassRequirement> BuildItemRequirements()
+        {
+            BindingList<ItemClassRequirement> requirements = new BindingList<ItemClassRequirement>();
+
+            BindingList<CharacterClass> classes = WorkingDataManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
+
+            foreach (CharacterClass charClass in classes)
+            {
+                ItemClassRequirement req = new ItemClassRequirement
+                {
+                    ClassResref = charClass.Resref,
+                    IsAvailable = true,
+                    LevelRequired = EngineConstants.MaxLevel
+                };
+
+                requirements.Add(req);
+            }
+
+            return requirements;
         }
 
         private void Delete(object sender, RoutedEventArgs e)
