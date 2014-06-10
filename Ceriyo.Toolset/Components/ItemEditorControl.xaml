@@ -28,8 +28,9 @@
     		BorderBrush="Black" 
     		ItemsSource="{Binding Items}"
     		SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            SelectionChanged="ItemSelected"
     		DisplayMemberPath="Name"
-                 Margin="0,27,0,41"/>
+            Margin="0,27,0,41"/>
         <Label Content="Items:" 
                HorizontalAlignment="Left" 
                Margin="10,0,0,0" 
@@ -42,6 +43,7 @@
     		Margin="10,0,0,10" 
     		VerticalAlignment="Bottom" 
             Grid.Row="2"
+            Click="New"
     		Width="52" 
             Height="22"/>
         <Button x:Name="btnDelete"
@@ -50,6 +52,7 @@
     		HorizontalAlignment="Left" 
     		Margin="83,0,0,10" 
     		VerticalAlignment="Bottom" 
+            Click="Delete"
     		IsEnabled="{Binding IsItemSelected}"
     		Width="52" Height="22"/>
         <TextBox x:Name="txtName" 
@@ -137,6 +140,11 @@
                              Height="100" 
                              Margin="10,74,0,0" 
                              VerticalAlignment="Top" 
+                             DisplayMemberPath="Name"
+                             IsEnabled="{Binding IsItemSelected}"
+                             ItemsSource="{Binding Graphics}"
+                             SelectedItem="{Binding Path=SelectedItem.WorldGraphic}"
+                             SelectionChanged="WorldGraphicSelected"
                              Width="Auto"/>
                     <Label Content="Inventory Graphic:" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top"/>
                     <Image x:Name="imgInventoryGraphic"
@@ -149,13 +157,18 @@
                     	Height="100" 
                     	Margin="10,288,0,0" 
                     	VerticalAlignment="Top" 
+                        DisplayMemberPath="Name"
+                        IsEnabled="{Binding IsItemSelected}"
+                        ItemsSource="{Binding Graphics}"
+                        SelectedItem="{Binding Path=SelectedItem.InventoryGraphic}"
+                        SelectionChanged="InventoryGraphicSelected"
                     	Width="Auto"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Requirements">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid Name="dgItemRequirements"
-                                      ItemsSource="{Binding Levels}"
+                                      ItemsSource="{Binding ItemRequirements}"
                                       VerticalAlignment="Stretch"
                                       HorizontalAlignment="Stretch"
                                       Width="Auto"

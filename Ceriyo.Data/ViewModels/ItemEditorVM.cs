@@ -10,6 +10,8 @@ namespace Ceriyo.Data.ViewModels
 {
     public class ItemEditorVM : BaseVM
     {
+        private string _description;
+        private string _comments;
         private BindingList<LocalVariable> _localVariables;
         private BindingList<GameResource> _graphics;
         private BindingList<Item> _items;
@@ -21,6 +23,32 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<ItemProperty> _assignedItemProperties;
         private bool _isItemSelected;
         private BindingList<ItemRequirement> _itemRequirements;
+
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = value;
+                OnPropertyChanged("Description");
+            }
+        }
+
+        public string Comments
+        {
+            get
+            {
+                return _comments;
+            }
+            set
+            {
+                _comments = value;
+                OnPropertyChanged("Comments");
+            }
+        }
 
         public BindingList<GameResource> Graphics
         {
