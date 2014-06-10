@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ItemType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Ring</Name>
+  <Tag>ring</Tag>
+  <Resref>ring</Resref>
+  <Description />
+  <Comments />
+  <LocalVariables />
+  <Scripts />
+  <StackSize>1</StackSize>
+  <WearableInventorySlots>
+    <InventorySlotEnum>Ring1</InventorySlotEnum>
+    <InventorySlotEnum>Ring2</InventorySlotEnum>
+  </WearableInventorySlots>
+</ItemType>

@@ -70,9 +70,11 @@ namespace Ceriyo.Toolset.Components
 
             item.InventoryGraphic = lbInventoryGraphic.Items[0] as GameResource;
             item.WorldGraphic = lbWorldGraphic.Items[0] as GameResource;
+            item.ItemType = lbItemType.Items[0] as ItemType;
             Model.Items.Add(item);
             int index = lbItems.Items.IndexOf(item);
             lbItems.SelectedItem = lbItems.Items[index];
+            
         }
 
         private void Delete(object sender, RoutedEventArgs e)
@@ -112,6 +114,7 @@ namespace Ceriyo.Toolset.Components
             Model.Graphics.Insert(0, graphic);
 
             Model.Items = WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
+            Model.ItemTypes = WorkingDataManager.GetAllGameObjects<ItemType>(ModulePaths.ItemTypesDirectory);
 
             foreach (Item item in Model.Items)
             {

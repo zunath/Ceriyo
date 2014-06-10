@@ -23,6 +23,7 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string CategoryName { get { return "ItemTypes"; } }
         public int StackSize { get; set; }
+        public BindingList<InventorySlotEnum> WearableInventorySlots { get; set; }
 
         public ItemType()
         {
@@ -34,6 +35,7 @@ namespace Ceriyo.Data.GameObjects
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
             this.StackSize = 1;
+            this.WearableInventorySlots = new BindingList<InventorySlotEnum>();
         }
     }
 }

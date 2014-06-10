@@ -43,6 +43,7 @@ namespace Ceriyo.Data
                     {
                         AddDirectories(zip);
                         AddModulePropertiesFile(zip, module);
+                        AddItemTypesFiles(zip);
 
                         zip.Save();
                     }
@@ -166,6 +167,27 @@ namespace Ceriyo.Data
             FileManager.XmlSerialize<GameModule>(module, out output);
 
             zip.AddEntry(EnginePaths.ModuleDataFileName + EnginePaths.DataExtension, output);
+        }
+
+        private static void AddItemTypesFiles(ZipFile zip)
+        {
+            string itemTypesPath = EnginePaths.DataDirectory + ModulePaths.ItemTypesDirectory;
+            if (Directory.Exists(itemTypesPath))
+            {
+                foreach (string file in Directory.GetFiles(itemTypesPath))
+                {
+                    try
+                    {
+                        ItemType itemType = FileManager.XmlDeserialize<ItemType>(file);
+                        // Serialization worked - copy the file to the module zip
+                        zip.AddFile(Path.GetFileName(file), ModulePaths.ItemTypesDirectory);
+                    }
+                    catch
+                    {
+                        // TODO: Log entry maybe?
+                    }
+                }
+            }
         }
 
         private static GameModule GetGameModule(string zipFilePath)

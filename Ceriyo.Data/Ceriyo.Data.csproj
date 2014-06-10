@@ -84,6 +84,7 @@
     <Compile Include="Engine\WorkingPaths.cs" />
     <Compile Include="Enumerations\GameTypeEnum.cs" />
     <Compile Include="Enumerations\FileOperationResultTypeEnum.cs" />
+    <Compile Include="Enumerations\InventorySlotEnum.cs" />
     <Compile Include="Enumerations\NetworkAgentRoleEnum.cs" />
     <Compile Include="Enumerations\PaintObjectModeTypeEnum.cs" />
     <Compile Include="Enumerations\PVPTypeEnum.cs" />

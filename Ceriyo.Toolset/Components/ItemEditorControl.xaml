@@ -300,7 +300,7 @@
                 <Grid Background="#FFE5E5E5">
                     <DockPanel>
                         <DataGrid Name="dgLocalVariables" 
-                                      ItemsSource="{Binding LocalVariables}"
+                                      ItemsSource="{Binding SelectedItem.LocalVariables}"
                                       VerticalAlignment="Stretch"
                                       HorizontalAlignment="Stretch"
                                       Width="Auto"
@@ -323,7 +323,7 @@
                 		Width="Auto"
                 		Height="Auto"
                         IsEnabled="{Binding IsItemSelected}"
-                		Text="{Binding Description}" Margin="0,0,6,32"/>
+                		Text="{Binding SelectedItem.Description}" Margin="0,0,6,32"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Comments">
@@ -334,7 +334,7 @@
                 		HorizontalAlignment="Stretch" 
                 		VerticalAlignment="Stretch"
                         IsEnabled="{Binding IsItemSelected}"
-                		Text="{Binding Comments}" Margin="0,0,6,32"/>
+                		Text="{Binding SelectedItem.Comments}" Margin="0,0,6,32"/>
                 </Grid>
             </TabItem>
         </TabControl>

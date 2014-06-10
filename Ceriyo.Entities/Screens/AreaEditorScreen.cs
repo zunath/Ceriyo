@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data;
 using Ceriyo.Data.Engine;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Entities.Entities;
@@ -27,7 +29,19 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
-            
+
+            ItemType type = new ItemType
+            {
+                Name = "Sword",
+                Resref = "sword",
+                Tag = "sword",
+                StackSize = 1
+            };
+            type.WearableInventorySlots.Add(InventorySlotEnum.MainHand);
+            type.WearableInventorySlots.Add(InventorySlotEnum.OffHand);
+
+
+            WorkingDataManager.SaveGameObjectFile(type);
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
