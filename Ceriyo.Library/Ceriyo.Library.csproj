@@ -110,6 +110,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Data\CharacterClasses\mage.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Data\CharacterClasses\thief.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Data\CharacterClasses\warrior.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Data\ItemTypes\armor.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

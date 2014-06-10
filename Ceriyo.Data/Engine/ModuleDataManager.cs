@@ -44,6 +44,7 @@ namespace Ceriyo.Data
                         AddDirectories(zip);
                         AddModulePropertiesFile(zip, module);
                         AddItemTypesFiles(zip);
+                        AddCharacterClassesFiles(zip);
 
                         zip.Save();
                     }
@@ -120,12 +121,10 @@ namespace Ceriyo.Data
             {
                 zip.AddDirectoryByName(ModulePaths.CharacterClassesDirectory);
             }
-
             if (zip[ModulePaths.DialogsDirectory] == null)
             {
                 zip.AddDirectoryByName(ModulePaths.DialogsDirectory);
             }
-
             if (zip[ModulePaths.CreaturesDirectory] == null)
             {
                 zip.AddDirectoryByName(ModulePaths.CreaturesDirectory);
@@ -171,7 +170,7 @@ namespace Ceriyo.Data
 
         private static void AddItemTypesFiles(ZipFile zip)
         {
-            string itemTypesPath = EnginePaths.DataDirectory + ModulePaths.ItemTypesDirectory;
+            string itemTypesPath = EnginePaths.DataDirectory + "ItemTypes/";
             if (Directory.Exists(itemTypesPath))
             {
                 foreach (string file in Directory.GetFiles(itemTypesPath))
@@ -180,7 +179,27 @@ namespace Ceriyo.Data
                     {
                         ItemType itemType = FileManager.XmlDeserialize<ItemType>(file);
                         // Serialization worked - copy the file to the module zip
-                        zip.AddFile(Path.GetFileName(file), ModulePaths.ItemTypesDirectory);
+                        zip.AddFile(file, ModulePaths.ItemTypesDirectory);
+                    }
+                    catch
+                    {
+                        // TODO: Log entry maybe?
+                    }
+                }
+            }
+        }
+
+        private static void AddCharacterClassesFiles(ZipFile zip)
+        {
+            string characterClassesPath = EnginePaths.DataDirectory + "CharacterClasses/";
+            if (Directory.Exists(characterClassesPath))
+            {
+                foreach (string file in Directory.GetFiles(characterClassesPath))
+                {
+                    try
+                    {
+                        CharacterClass characterClass = FileManager.XmlDeserialize<CharacterClass>(file);
+                        zip.AddFile(file, ModulePaths.CharacterClassesDirectory);
                     }
                     catch
                     {
