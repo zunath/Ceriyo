@@ -1,8 +1,77 @@
-﻿<Window x:Class="Ceriyo.Toolset.Windows.ScriptEditorWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ScriptEditorWindow" Height="300" Width="300">
+        xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit" x:Class="Ceriyo.Toolset.Windows.ScriptEditorWindow"
+        Title="Script Editor" Height="600" Width="700">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <avalonedit:TextEditor Name="teEditor"
+                               SyntaxHighlighting="JavaScript"
+                               HorizontalAlignment="Stretch" 
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Grid.RowSpan="3"
+                               VerticalAlignment="Stretch"/>
+        <Menu HorizontalAlignment="Stretch" 
+              Height="Auto" 
+              Grid.Column="0"
+              Grid.Row="0"
+              Grid.ColumnSpan="3"
+              VerticalAlignment="Stretch" 
+              Width="Auto">
+            <MenuItem Header="File">
+                <MenuItem Header="New"></MenuItem>
+                <MenuItem Header="Save"></MenuItem>
+                <MenuItem Header="Save as..."></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Close"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TabControl Grid.Column="2" 
+                    HorizontalAlignment="Stretch" 
+                    Height="Auto" 
+                    Grid.Row="1" 
+                    Grid.RowSpan="3" 
+                    VerticalAlignment="Stretch" 
+                    Width="Auto">
+            <TabItem Header="Methods">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox Name="lbMethods"
+                             HorizontalAlignment="Stretch" 
+                             Height="Auto" 
+                             VerticalAlignment="Stretch" 
+                             Width="Auto"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Constants">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox Name="lbConstants"
+                             HorizontalAlignment="Stretch" 
+                             Height="Auto" 
+                             VerticalAlignment="Stretch" 
+                             Width="Auto"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <avalonedit:TextEditor Name="teHelp"
+                               SyntaxHighlighting="JavaScript"
+                               HorizontalAlignment="Stretch" 
+                               Grid.Row="4"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               IsReadOnly="True"
+                               VerticalAlignment="Stretch"/>
     </Grid>
 </Window>
