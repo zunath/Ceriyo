@@ -339,19 +339,31 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <ListBox Name="lbItemType"
-                  HorizontalAlignment="Left" 
-                  VerticalAlignment="Top" 
+
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <ListBox Name="lbItemType"
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch" 
         	      ItemsSource="{Binding ItemTypes}"
         	      DisplayMemberPath="Name"
                   IsEnabled="{Binding IsItemSelected}"
-                  SelectedItem="{Binding Path=SelectedItem.ItemType}"
-                  Width="135" Height="103" Grid.Column="1" Margin="5,36,0,0" Grid.Row="1"/>
-        <Label Content="Item Type:" 
+                  SelectionChanged="ItemTypeSelected"
+                  Width="Auto" Height="Auto" Grid.Column="0" Grid.Row="1"/>
+            <Label Content="Item Type:" 
                HorizontalAlignment="Left" 
-               Grid.Row="1"
-               Grid.Column="1"
-               VerticalAlignment="Top" Margin="5,10,0,0"/>
+               VerticalAlignment="Top" 
+               Grid.Column="0"
+               Grid.Row="0"/>
+
+        </Grid>
+        
 
     </Grid>
 </UserControl>

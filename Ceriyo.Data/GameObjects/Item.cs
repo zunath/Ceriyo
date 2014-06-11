@@ -24,7 +24,15 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string CategoryName { get { return "Item"; } }
 
-        public ItemType ItemType { get; set; }
+        public string ItemTypeResref { get; set; }
+        [XmlIgnore]
+        public ItemType ItemType 
+        {
+            get
+            {
+                return WorkingDataManager.GetGameObject<ItemType>(ModulePaths.ItemTypesDirectory, ItemTypeResref);
+            }
+        }
         public int Price { get; set; }
         public GameResource InventoryGraphic { get; set; }
         public GameResource WorldGraphic { get; set; }
@@ -33,7 +41,20 @@ namespace Ceriyo.Data.GameObjects
         public bool IsPlot { get; set; }
         public bool IsUndroppable { get; set; }
 
-        public BindingList<ItemProperty> ItemProperties { get; set; }
+        public BindingList<string> ItemPropertiesResrefs { get; set; }
+
+        [XmlIgnore]
+        public BindingList<ItemProperty> ItemProperties
+        {
+            get
+            {
+                return new BindingList<ItemProperty>(
+                    WorkingDataManager.GetAllGameObjects<ItemProperty>(ModulePaths.ItemPropertiesDirectory)
+                                      .Where(x =>  ItemPropertiesResrefs.Contains(x.Resref))
+                                      .ToList());
+            }
+
+        }
         public BindingList<ItemClassRequirement> ItemRequirements { get; set; }
 
         public Item()
@@ -45,14 +66,14 @@ namespace Ceriyo.Data.GameObjects
             this.Comments = "";
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
-            this.ItemType = new ItemType();
+            this.ItemTypeResref = "";
             this.Price = 0;
             this.IsStolen = false;
             this.IsPlot = false;
             this.IsUndroppable = false;
             this.InventoryGraphic = new GameResource();
             this.WorldGraphic = new GameResource();
-            this.ItemProperties = new BindingList<ItemProperty>();
+            this.ItemPropertiesResrefs = new BindingList<string>();
             this.ItemRequirements = new BindingList<ItemClassRequirement>();
         }
     }

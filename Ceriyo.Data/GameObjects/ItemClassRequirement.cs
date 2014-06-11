@@ -13,7 +13,7 @@ namespace Ceriyo.Data.GameObjects
         {
             get
             {
-                return WorkingDataManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory).SingleOrDefault(x => x.Resref == ClassResref);
+                return WorkingDataManager.GetGameObject<CharacterClass>(ModulePaths.CharacterClassesDirectory, ClassResref);
             }
         }
 

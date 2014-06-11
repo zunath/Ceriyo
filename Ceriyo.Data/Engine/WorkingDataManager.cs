@@ -98,6 +98,20 @@ namespace Ceriyo.Data
             return gameObjects;
         }
 
+        public static T GetGameObject<T>(string folderName, string resref) where T: IGameObject
+        {
+            try
+            {
+                BindingList<T> gameObjects = GetAllGameObjects<T>(folderName);
+
+                return gameObjects.SingleOrDefault(x => x.Resref == resref);
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
+
         public static BindingList<string> GetAllScriptNames()
         {
             BindingList<string> scripts = new BindingList<string>();

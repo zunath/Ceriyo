@@ -71,7 +71,7 @@ namespace Ceriyo.Toolset.Components
 
             item.InventoryGraphic = lbInventoryGraphic.Items[0] as GameResource;
             item.WorldGraphic = lbWorldGraphic.Items[0] as GameResource;
-            item.ItemType = lbItemType.Items[0] as ItemType;
+            item.ItemTypeResref = (lbItemType.Items[0] as ItemType).Resref;
             item.ItemRequirements = BuildItemRequirements();
             Model.Items.Add(item);
             int index = lbItems.Items.IndexOf(item);
@@ -165,6 +165,19 @@ namespace Ceriyo.Toolset.Components
             Item item = lbItems.SelectedItem as Item;
             Model.SelectedItem = item;
             Model.IsItemSelected = item == null ? false : true;
+            
+            if(item != null)
+            {
+                lbItemType.SelectedItem = Model.ItemTypes.SingleOrDefault(x => x.Resref == item.ItemTypeResref);
+            }
+        }
+
+        private void ItemTypeSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbItemType.SelectedItem != null)
+            {
+                Model.SelectedItem.ItemTypeResref = (lbItemType.SelectedItem as ItemType).Resref;
+            }
         }
 
         public void InventoryGraphicSelected(object sender, SelectionChangedEventArgs e)

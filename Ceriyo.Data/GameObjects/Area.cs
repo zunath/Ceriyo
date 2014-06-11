@@ -27,9 +27,44 @@ namespace Ceriyo.Data.GameObjects
         public BindingList<MapTile> MapTiles { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "Area"; } }
-        public BindingList<Creature> CreatureInstances { get; set; }
-        public BindingList<Placeable> PlaceableInstances { get; set; }
-        public BindingList<Item> ItemInstances { get; set; }
+
+        public BindingList<string> CreatureInstancesResrefs { get; set; }
+        public BindingList<string> PlaceableInstancesResrefs { get; set; }
+        public BindingList<string> ItemInstancesResrefs { get; set; }
+
+        [XmlIgnore]
+        public BindingList<Creature> CreatureInstances 
+        {
+            get
+            {
+                return new BindingList<Creature>(
+                    WorkingDataManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory)
+                                      .Where(x => CreatureInstancesResrefs.Contains(x.Resref))
+                                      .ToList());
+            }
+        }
+        [XmlIgnore]
+        public BindingList<Placeable> PlaceableInstances 
+        {
+            get
+            {
+                return new BindingList<Placeable>(
+                    WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory)
+                                      .Where(x => PlaceableInstancesResrefs.Contains(x.Resref))
+                                      .ToList());
+            }
+        }
+        [XmlIgnore]
+        public BindingList<Item> ItemInstances 
+        {
+            get
+            {
+                return new BindingList<Item>(
+                    WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory)
+                                      .Where(x => ItemInstancesResrefs.Contains(x.Resref))
+                                      .ToList());
+            }
+        }
         public Tileset AreaTileset { get; set; }
         public GameResource BattleMusic { get; set; }
         public GameResource BackgroundMusic { get; set; }
@@ -69,9 +104,9 @@ namespace Ceriyo.Data.GameObjects
             this.MapTiles = new BindingList<MapTile>();
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
-            this.CreatureInstances = new BindingList<Creature>();
-            this.ItemInstances = new BindingList<Item>();
-            this.PlaceableInstances = new BindingList<Placeable>();
+            this.CreatureInstancesResrefs = new BindingList<string>();
+            this.ItemInstancesResrefs = new BindingList<string>();
+            this.PlaceableInstancesResrefs = new BindingList<string>();
             this.AreaTileset = new Tileset();
             this.BattleMusic = new GameResource();
             this.BackgroundMusic = new GameResource();
