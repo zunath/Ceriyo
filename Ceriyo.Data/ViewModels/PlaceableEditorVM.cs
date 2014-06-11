@@ -15,6 +15,7 @@ namespace Ceriyo.Data.ViewModels
         private GameResource _graphic;
         private Placeable _selectedPlaceable;
         private bool _isPlaceableSelected;
+        private BindingList<string> _scripts; 
 
         public BindingList<GameResource> Graphics
         {
@@ -81,11 +82,25 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public BindingList<string> Scripts
+        {
+            get
+            {
+                return _scripts;
+            }
+            set
+            {
+                _scripts = value;
+                OnPropertyChanged("Scripts");
+            }
+        }
+
         public PlaceableEditorVM()
         {
             this.Graphics = new BindingList<GameResource>();
             this.IsPlaceableSelected = false;
             this.Placeables = new BindingList<Placeable>();
+            this.Scripts = new BindingList<string>();
         }
 
     }

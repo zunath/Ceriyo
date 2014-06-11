@@ -50,6 +50,19 @@ namespace Ceriyo.Toolset.Components
             chkIsStatic.DataContext = Model;
             chkIsUseable.DataContext = Model;
             txtKeyTag.DataContext = Model;
+            txtDescription.DataContext = Model;
+            txtComments.DataContext = Model;
+            dgLocalVariables.DataContext = Model;
+            ddlOnAttackedScript.DataContext = Model;
+            ddlOnClosedScript.DataContext = Model;
+            ddlOnDamagedScript.DataContext = Model;
+            ddlOnDeathScript.DataContext = Model;
+            ddlOnDisturbedScript.DataContext = Model;
+            ddlOnHeartbeatScript.DataContext = Model;
+            ddlOnLocked.DataContext = Model;
+            ddlOnOpenScript.DataContext = Model;
+            ddlOnUnlockedScript.DataContext = Model;
+            ddlOnUsedScript.DataContext = Model;
         }
 
         private void New(object sender, RoutedEventArgs e)
@@ -101,6 +114,7 @@ namespace Ceriyo.Toolset.Components
             Model.Graphics.Insert(0, graphic);
 
             Model.Placeables = WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
+            Model.Scripts = WorkingDataManager.GetAllScriptNames();
 
             foreach (Placeable placeable in Model.Placeables)
             {

@@ -31,7 +31,7 @@ namespace Ceriyo.Data.Enumerations
         OnPlaceableLocked = 21,
         OnPlaceableAttacked = 22,
         OnPlaceableOpen = 23,
-        OnPlaceableUnlock = 24,
+        OnPlaceableUnlocked = 24,
         OnPlaceableUsed = 25
     }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:enums="clr-namespace:Ceriyo.Data.Enumerations;assembly=Ceriyo.Data"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700" Background="White">
     <Grid>
@@ -158,6 +159,154 @@
                  Text="{Binding SelectedPlaceable.KeyTag}" 
                  VerticalAlignment="Top" 
                  Width="Auto"/>
+        <TabControl HorizontalAlignment="Stretch" 
+                    Height="Auto" 
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="3"
+                    Grid.RowSpan="3"
+                    VerticalAlignment="Stretch" 
+                    Width="Auto">
+            <TabItem Header="Appearance">
+                <Grid Background="#FFE5E5E5">
 
+                </Grid>
+            </TabItem>
+            <TabItem Header="Scripts">
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="On Close:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnClosedScript"
+                		HorizontalAlignment="Stretch" 
+                		Margin="120,12,0,0" 
+                		VerticalAlignment="Top" 
+                		ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableClose]}"
+                		IsEnabled="{Binding IsPlaceableSelected}"
+                		Width="Auto"/>
+                    <Label Content="On Open:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnOpenScript"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,39,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableOpen]}"
+                    	IsEnabled="{Binding IsPlaceableSelected}"
+                    	Width="Auto"/>
+                    <Label Content="On Damaged:" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnDamagedScript"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,66,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableDamaged]}"
+                    	IsEnabled="{Binding IsPlaceableSelected}"
+                    	Width="Auto"/>
+                    <Label Content="On Death:" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnDeathScript"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,93,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableDeath]}"
+                    	IsEnabled="{Binding IsPlaceableSelected}"
+                    	Width="Auto"/>
+                    <Label Content="On Heartbeat:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnHeartbeatScript"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,120,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableHeartbeat]}"
+                    	IsEnabled="{Binding IsPlaceableSelected}"
+                    	Width="Auto"/>
+                    <Label Content="On Disturbed:" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnDisturbedScript"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,147,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableDisturbed]}"
+                    	IsEnabled="{Binding IsPlaceableSelected}"
+                    	Width="Auto"/>
+                    <Label Content="On Locked:" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnLocked"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,174,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableLocked]}"
+                    	IsEnabled="{Binding IsPlaceableSelected}"
+                    	Width="Auto"/>
+                    <Label Content="On Unlocked:" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnUnlockedScript"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,201,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableUnlocked]}"
+                    	IsEnabled="{Binding IsPlaceableSelected}"
+                    	Width="Auto"/>
+                    <Label Content="On Attacked:" HorizontalAlignment="Left" Margin="10,228,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnAttackedScript"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,228,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableAttacked]}"
+                    	IsEnabled="{Binding IsPlaceableSelected}"
+                    	Width="Auto"/>
+                    <Label Content="On Used:" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnUsedScript"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,255,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableUsed]}"
+                    	IsEnabled="{Binding IsPlaceableSelected}"
+                    	Width="Auto"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Variables">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dgLocalVariables" 
+                		ItemsSource="{Binding SelectedPlaceable.LocalVariables}"
+                		VerticalAlignment="Stretch"
+                		HorizontalAlignment="Stretch"
+                		Width="Auto"
+                		Height="Auto"
+                		ColumnWidth="*"
+                		IsEnabled="{Binding IsItemSelected}"
+                		CanUserAddRows="True" Margin="0,0,0,20"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Description">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="txtDescription" 
+                		HorizontalAlignment="Stretch" 
+                		VerticalAlignment="Stretch"
+                		AcceptsReturn="True"
+                		TextWrapping="Wrap"
+                		Width="Auto"
+                		Height="Auto"
+                		IsEnabled="{Binding IsPlaceableSelected}"
+                		Text="{Binding SelectedPlaceable.Description}" Margin="0,0,6,52"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Comments">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="txtComments" 
+                		TextWrapping="Wrap"
+                		AcceptsReturn="True"
+                		HorizontalAlignment="Stretch" 
+                		VerticalAlignment="Stretch"
+                		IsEnabled="{Binding IsPlaceableSelected}"
+                		Text="{Binding SelectedPlaceable.Comments}" Margin="0,0,6,52"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>
