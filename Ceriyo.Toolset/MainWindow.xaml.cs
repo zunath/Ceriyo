@@ -29,6 +29,9 @@ namespace Ceriyo.Toolset
         private void Initialize()
         {
             Model = new ToolsetVM();
+
+            ScriptEditorWindow test = new ScriptEditorWindow();
+            test.Show();
         }
 
         private void SetUpEvents()

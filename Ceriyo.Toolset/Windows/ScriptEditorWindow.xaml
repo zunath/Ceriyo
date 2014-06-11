@@ -11,19 +11,13 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
-        <avalonedit:TextEditor Name="teEditor"
-                               SyntaxHighlighting="JavaScript"
-                               HorizontalAlignment="Stretch" 
-                               Grid.Row="1"
-                               Grid.Column="0"
-                               Grid.ColumnSpan="2"
-                               Grid.RowSpan="3"
-                               VerticalAlignment="Stretch"/>
+        
         <Menu HorizontalAlignment="Stretch" 
               Height="Auto" 
               Grid.Column="0"
@@ -42,7 +36,7 @@
         <TabControl Grid.Column="2" 
                     HorizontalAlignment="Stretch" 
                     Height="Auto" 
-                    Grid.Row="1" 
+                    Grid.Row="2" 
                     Grid.RowSpan="3" 
                     VerticalAlignment="Stretch" 
                     Width="Auto">
@@ -68,10 +62,28 @@
         <avalonedit:TextEditor Name="teHelp"
                                SyntaxHighlighting="JavaScript"
                                HorizontalAlignment="Stretch" 
-                               Grid.Row="4"
+                               Grid.Row="5"
                                Grid.Column="0"
                                Grid.ColumnSpan="3"
                                IsReadOnly="True"
                                VerticalAlignment="Stretch"/>
+        <TabControl Name="tcScripts"
+                    Grid.ColumnSpan="2" 
+                    HorizontalAlignment="Stretch" 
+                    Height="Auto" 
+                    Grid.Row="2" 
+                    Grid.RowSpan="3" 
+                    VerticalAlignment="Stretch" 
+                    Width="Auto">
+            <TabItem Header="script0">
+                <Grid Background="#FFE5E5E5">
+
+                    <avalonedit:TextEditor Name="teEditor"
+                               SyntaxHighlighting="JavaScript"
+                               HorizontalAlignment="Stretch" 
+                               VerticalAlignment="Stretch"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
