@@ -75,6 +75,12 @@ namespace Ceriyo.Data.GameObjects
             this.WorldGraphic = new GameResource();
             this.ItemPropertiesResrefs = new BindingList<string>();
             this.ItemRequirements = new BindingList<ItemClassRequirement>();
+
+            Scripts.Add(ScriptEventTypeEnum.OnItemAcquired, "");
+            Scripts.Add(ScriptEventTypeEnum.OnItemActivated, "");
+            Scripts.Add(ScriptEventTypeEnum.OnItemEquipped, "");
+            Scripts.Add(ScriptEventTypeEnum.OnItemUnacquired, "");
+            Scripts.Add(ScriptEventTypeEnum.OnItemUnequipped, "");
         }
     }
 }

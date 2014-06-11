@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:enums="clr-namespace:Ceriyo.Data.Enumerations;assembly=Ceriyo.Data"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700" Background="White">
     <Grid>
@@ -98,21 +99,21 @@
                VerticalAlignment="Top" 
                Height="26" 
                Width="45" Margin="5,123,0,0" Grid.Column="1"/>
-        <CheckBox Name="chkIsStolen"
+        <CheckBox x:Name="chkIsStolen"
                   Content="Is Stolen" 
                   HorizontalAlignment="Left" 
                   Grid.Column="1"
                   IsChecked="{Binding SelectedItem.IsStolen}"
                   IsEnabled="{Binding IsItemSelected}"
                   VerticalAlignment="Top" Margin="5,30,0,0" Grid.Row="2"/>
-        <CheckBox Name="chkIsPlot"
+        <CheckBox x:Name="chkIsPlot"
                   Content="Is Plot" 
                   HorizontalAlignment="Left" 
                   Grid.Column="1"
                   IsChecked="{Binding SelectedItem.IsPlot}"
                   IsEnabled="{Binding IsItemSelected}"
                   VerticalAlignment="Top" Margin="5,51,0,0" Grid.Row="2"/>
-        <CheckBox Name="chkIsUndroppable"
+        <CheckBox x:Name="chkIsUndroppable"
                   Content="Is Undroppable" 
                   HorizontalAlignment="Left" 
                   Grid.Column="1"
@@ -256,7 +257,7 @@
                               Margin="120,39,0,0" 
                               VerticalAlignment="Top" 
 							  ItemsSource="{Binding Scripts}"
-							  SelectedValue="{Binding OnAcquiredScript}"
+                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemAcquired]}"
                               IsEnabled="{Binding IsItemSelected}"
                               Width="Auto"/>
                     <Label Content="On Unacquired:" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
@@ -265,7 +266,7 @@
                               Margin="120,66,0,0" 
                               VerticalAlignment="Top" 
 							  ItemsSource="{Binding Scripts}"
-							  SelectedValue="{Binding OnUnacquiredScript}"
+                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemUnacquired]}"
                               IsEnabled="{Binding IsItemSelected}"
                               Width="Auto"/>
                     <Label Content="On Equipped:" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
@@ -274,7 +275,7 @@
                     	Margin="120,93,0,0" 
                     	VerticalAlignment="Top" 
 						ItemsSource="{Binding Scripts}"
-						SelectedValue="{Binding OnEquippedScript}"
+                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemEquipped]}"
                         IsEnabled="{Binding IsItemSelected}"
                     	Width="Auto"/>
                     <Label Content="On Unequipped:" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
@@ -283,7 +284,7 @@
                     	Margin="120,120,0,0" 
                     	VerticalAlignment="Top" 
 						ItemsSource="{Binding Scripts}"
-						SelectedValue="{Binding OnUnequippedScript}"
+                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemUnequipped]}"
                         IsEnabled="{Binding IsItemSelected}"
                     	Width="Auto"/>
                     <Label Content="On Activated:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
@@ -292,7 +293,7 @@
                     	Margin="120,12,0,0" 
                     	VerticalAlignment="Top" 
 						ItemsSource="{Binding Scripts}"
-						SelectedValue="{Binding OnActivatedScript}"
+                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemActivated]}"
                         IsEnabled="{Binding IsItemSelected}"
                     	Width="Auto"/>
                 </Grid>

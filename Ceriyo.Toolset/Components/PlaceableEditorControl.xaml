@@ -100,7 +100,7 @@
                VerticalAlignment="Top" 
                Height="26" 
                Width="45" Margin="5,123,0,0" Grid.Column="1"/>
-        <CheckBox Name="chkIsPlot"
+        <CheckBox x:Name="chkIsPlot"
                   Content="Plot" 
                   Grid.Column="1" 
                   IsChecked="{Binding SelectedPlaceable.IsPlot}"
@@ -149,7 +149,7 @@
             IsChecked="{Binding SelectedPlaceable.AutoRemoveKey}"
         	VerticalAlignment="Top"/>
         <Label Content="Key Tag:" Grid.Column="1" HorizontalAlignment="Left" Margin="5,73,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <TextBox Name="txtKeyTag"
+        <TextBox x:Name="txtKeyTag"
                  Grid.Column="1" 
                  HorizontalAlignment="Stretch" 
                  Height="23" 
@@ -276,7 +276,7 @@
                 		Width="Auto"
                 		Height="Auto"
                 		ColumnWidth="*"
-                		IsEnabled="{Binding IsItemSelected}"
+                		IsEnabled="{Binding IsPlaceableSelected}"
                 		CanUserAddRows="True" Margin="0,0,0,20"/>
 
                 </Grid>
