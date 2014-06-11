@@ -50,9 +50,9 @@ namespace Ceriyo.Toolset.Windows
                 Model.OnAreaExitScript = area.Scripts[ScriptEventTypeEnum.OnAreaExit];
             }
 
-            if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnHeartbeat))
+            if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnAreaHeartbeat))
             {
-                Model.OnAreaHeartbeatScript = area.Scripts[ScriptEventTypeEnum.OnHeartbeat];
+                Model.OnAreaHeartbeatScript = area.Scripts[ScriptEventTypeEnum.OnAreaHeartbeat];
             }
         }
 
@@ -120,7 +120,7 @@ namespace Ceriyo.Toolset.Windows
                 area.LocalVariables = Model.LocalVariables;
                 area.Scripts.Add(ScriptEventTypeEnum.OnAreaEnter, Model.OnAreaEnterScript);
                 area.Scripts.Add(ScriptEventTypeEnum.OnAreaExit, Model.OnAreaExitScript);
-                area.Scripts.Add(ScriptEventTypeEnum.OnHeartbeat, Model.OnAreaHeartbeatScript);
+                area.Scripts.Add(ScriptEventTypeEnum.OnAreaHeartbeat, Model.OnAreaHeartbeatScript);
                 area.AreaTileset = Model.SelectedTileset;
 
                 FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(area);

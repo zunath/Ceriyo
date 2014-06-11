@@ -83,13 +83,13 @@ namespace Ceriyo.Toolset.Windows
             module.Levels = new LevelChart(Model.Levels);
             module.LocalVariables = Model.LocalVariables;
 
-            module.Scripts.Add(ScriptEventTypeEnum.OnHeartbeat, Model.OnHeartbeatScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnAreaHeartbeat, Model.OnHeartbeatScript);
             module.Scripts.Add(ScriptEventTypeEnum.OnModuleLoad, Model.OnModuleLoadScript);
             module.Scripts.Add(ScriptEventTypeEnum.OnPlayerDeath, Model.OnPlayerDeathScript);
             module.Scripts.Add(ScriptEventTypeEnum.OnPlayerDying, Model.OnPlayerDyingScript);
-            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerEnter, Model.OnPlayerEnterScript);
-            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerLeaving, Model.OnPlayerLeavingScript);
-            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerLeft, Model.OnPlayerLeftScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnModulePlayerEnter, Model.OnPlayerEnterScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeaving, Model.OnPlayerLeavingScript);
+            module.Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeft, Model.OnPlayerLeftScript);
             module.Scripts.Add(ScriptEventTypeEnum.OnPlayerRespawn, Model.OnPlayerRespawnScript);
 
             FileOperationResultTypeEnum result = WorkingDataManager.SaveModuleSettings(module);

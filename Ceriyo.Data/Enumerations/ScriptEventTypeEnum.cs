@@ -10,10 +10,10 @@ namespace Ceriyo.Data.Enumerations
         Unknown = 0,
         OnAreaEnter = 1,
         OnAreaExit = 2,
-        OnHeartbeat = 3,
-        OnPlayerEnter = 4,
-        OnPlayerLeaving = 5,
-        OnPlayerLeft = 6,
+        OnAreaHeartbeat = 3,
+        OnModulePlayerEnter = 4,
+        OnModulePlayerLeaving = 5,
+        OnModulePlayerLeft = 6,
         OnModuleLoad = 7,
         OnPlayerDying = 8,
         OnPlayerDeath = 9,
@@ -22,6 +22,16 @@ namespace Ceriyo.Data.Enumerations
         OnItemUnacquired = 12,
         OnItemActivated = 13,
         OnItemEquipped = 14,
-        OnItemUnequipped = 15
+        OnItemUnequipped = 15,
+        OnPlaceableClose = 16,
+        OnPlaceableDamaged = 17,
+        OnPlaceableDeath = 18,
+        OnPlaceableHeartbeat = 19,
+        OnPlaceableDisturbed = 20,
+        OnPlaceableLocked = 21,
+        OnPlaceableAttacked = 22,
+        OnPlaceableOpen = 23,
+        OnPlaceableUnlock = 24,
+        OnPlaceableUsed = 25
     }
 }

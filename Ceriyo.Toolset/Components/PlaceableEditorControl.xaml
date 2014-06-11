@@ -6,6 +6,158 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700" Background="White">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="145"></ColumnDefinition>
+            <ColumnDefinition Width="145"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="120"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="184*"></RowDefinition>
+            <RowDefinition Height="149*"></RowDefinition>
+            <RowDefinition Height="167*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="lbPlaceables"
+    		Grid.Column="0"
+    		Grid.Row="0"
+            Grid.RowSpan="3"
+            Height="Auto"
+            Width="Auto"
+    		BorderBrush="Black" 
+    		ItemsSource="{Binding Placeables}"
+    		SelectedItem="{Binding SelectedPlaceable, Mode=TwoWay}"
+            SelectionChanged="PlaceableSelected"
+    		DisplayMemberPath="Name"
+            Margin="0,27,0,41"/>
+        <Label Content="Placeables:" 
+               HorizontalAlignment="Left" 
+               Margin="10,0,0,0" 
+               VerticalAlignment="Top" 
+               Height="26" 
+               Width="81"/>
+        <Button x:Name="btnNew"
+    		Content="New"
+    		HorizontalAlignment="Left" 
+    		Margin="10,0,0,10" 
+    		VerticalAlignment="Bottom" 
+            Grid.Row="2"
+            Click="New"
+    		Width="52" 
+            Height="22"/>
+        <Button x:Name="btnDelete"
+    		Content="Delete" 
+    		Grid.Row="2"
+    		HorizontalAlignment="Left" 
+    		Margin="83,0,0,10" 
+    		VerticalAlignment="Bottom" 
+            Click="Delete"
+    		IsEnabled="{Binding IsPlaceableSelected}"
+    		Width="52" Height="22"/>
+        <TextBox x:Name="txtName" 
+            Grid.Column="1"
+        	HorizontalAlignment="Left" 
+        	Height="23" 
+        	TextWrapping="Wrap" 
+        	Text="{Binding SelectedPlaceable.Name}" 
+        	IsEnabled="{Binding IsPlaceableSelected}"
+        	VerticalAlignment="Top" 
+        	Width="135" Margin="5,41,0,0"/>
+        <Label Content="Name:" 
+               HorizontalAlignment="Left" 
+               Grid.Column="1"
+               VerticalAlignment="Top" 
+               Height="26" 
+               Width="44" Margin="5,10,0,0"/>
+        <TextBox x:Name="txtTag" 
+        	HorizontalAlignment="Left" 
+        	Height="23" 
+            Grid.Column="1"
+        	TextWrapping="Wrap" 
+        	Text="{Binding SelectedPlaceable.Tag}" 
+        	IsEnabled="{Binding IsPlaceableSelected}"
+        	VerticalAlignment="Top" 
+        	Width="135" Margin="5,95,0,0"/>
+        <Label Content="Tag:" 
+               HorizontalAlignment="Left" 
+               Grid.Column="1"
+               VerticalAlignment="Top" 
+               Height="26" 
+               Width="32" Margin="5,69,0,0"/>
+        <TextBox x:Name="txtResref" 
+        	HorizontalAlignment="Left" 
+        	Height="23"
+        	TextWrapping="Wrap" 
+        	Text="{Binding SelectedPlaceable.Resref}" 
+        	IsEnabled="{Binding IsPlaceableSelected}"
+        	VerticalAlignment="Top" 
+        	Width="135" Margin="5,154,0,0" Grid.Column="1"/>
+        <Label Content="Resref:" 
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top" 
+               Height="26" 
+               Width="45" Margin="5,123,0,0" Grid.Column="1"/>
+        <CheckBox Name="chkIsPlot"
+                  Content="Plot" 
+                  Grid.Column="1" 
+                  IsChecked="{Binding SelectedPlaceable.IsPlot}"
+                  HorizontalAlignment="Left" 
+                  Grid.Row="1" 
+                  VerticalAlignment="Top" 
+                  Margin="5,31,0,0"/>
+        <CheckBox x:Name="chkIsUseable"
+        	Content="Useable" 
+        	Grid.Column="1" 
+        	IsChecked="{Binding SelectedPlaceable.IsUseable}"
+        	HorizontalAlignment="Left" 
+        	Grid.Row="1" 
+        	VerticalAlignment="Top" 
+        	Margin="5,52,0,0"/>
+        <CheckBox x:Name="chkIsStatic"
+        	Content="Static" 
+        	Grid.Column="1" 
+        	IsChecked="{Binding SelectedPlaceable.IsStatic}"
+        	HorizontalAlignment="Left" 
+        	Grid.Row="1" 
+        	VerticalAlignment="Top" 
+        	Margin="5,10,0,0"/>
+        <CheckBox Name="chkIsLocked"
+                  Content="Locked" 
+                  Grid.Column="1" 
+                  HorizontalAlignment="Left" 
+                  Margin="5,10,0,0" 
+                  IsChecked="{Binding SelectedPlaceable.IsLocked}"
+                  Grid.Row="2" 
+                  VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkIsKeyRequired"
+        	Content="Key Required" 
+        	Grid.Column="1" 
+        	HorizontalAlignment="Left" 
+        	Margin="5,31,0,0" 
+            IsChecked="{Binding SelectedPlaceable.IsKeyRequired}"
+        	Grid.Row="2" 
+        	VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkAutoRemoveKey"
+        	Content="Auto Remove Key" 
+        	Grid.Column="1" 
+        	HorizontalAlignment="Left" 
+        	Margin="5,52,0,0" 
+        	Grid.Row="2" 
+            IsChecked="{Binding SelectedPlaceable.AutoRemoveKey}"
+        	VerticalAlignment="Top"/>
+        <Label Content="Key Tag:" Grid.Column="1" HorizontalAlignment="Left" Margin="5,73,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <TextBox Name="txtKeyTag"
+                 Grid.Column="1" 
+                 HorizontalAlignment="Stretch" 
+                 Height="23" 
+                 Margin="10,99,10,0" 
+                 Grid.Row="2" 
+                 TextWrapping="Wrap" 
+                 Text="{Binding SelectedPlaceable.KeyTag}" 
+                 VerticalAlignment="Top" 
+                 Width="Auto"/>
+
     </Grid>
 </UserControl>

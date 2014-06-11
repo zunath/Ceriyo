@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
+using Ceriyo.Data.ResourceObjects;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -23,6 +24,26 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string CategoryName { get { return "Placeable"; } }
 
+        public GameResource Graphic { get; set; }
+        public bool IsPlot { get; set; }
+        public bool IsUseable { get; set; }
+        public bool IsStatic { get; set; }
+
+        public bool IsLocked { get; set; }
+        public bool IsKeyRequired { get; set; }
+        public bool AutoRemoveKey { get; set; }
+        public string KeyTag { get; set; }
+
+        public string DialogResref { get; set; }
+        [XmlIgnore]
+        public Dialog Dialog 
+        {
+            get
+            {
+                return WorkingDataManager.GetGameObject<Dialog>(ModulePaths.DialogsDirectory, DialogResref);
+            }
+        }
+
         public Placeable()
         {
             this.Name = "";
@@ -32,6 +53,7 @@ namespace Ceriyo.Data.GameObjects
             this.Comments = "";
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            this.Graphic = new GameResource();
         }
     }
 }
