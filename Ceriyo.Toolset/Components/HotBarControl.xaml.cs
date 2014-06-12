@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ceriyo.Toolset.Windows;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -19,9 +20,19 @@ namespace Ceriyo.Toolset.Components
     /// </summary>
     public partial class HotBarControl : UserControl
     {
+        private ScriptEditorWindow ScriptEditor { get; set; }
+
         public HotBarControl()
         {
             InitializeComponent();
+            this.ScriptEditor = new ScriptEditorWindow();
         }
+
+        private void btnScriptEditor_Click(object sender, RoutedEventArgs e)
+        {
+            ScriptEditor.Open();
+        }
+
+
     }
 }

@@ -6,15 +6,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="25" d:DesignWidth="300" Background="White">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
+        <ToolBar Name="tbHotBar">
+            <Button Name="btnScriptEditor" Click="btnScriptEditor_Click">
+                <Image Source="/Images/script.png" Height="15" Width="15" ToolTip="Script Editor"></Image>
+            </Button>
+            <Button Name="btnDialogEditor">
+                <Image Source="/Images/view-list-tree-2.png" Height="15" Width="15" ToolTip="Dialog Editor"></Image>
+            </Button>
+        </ToolBar>
     </Grid>
 </UserControl>

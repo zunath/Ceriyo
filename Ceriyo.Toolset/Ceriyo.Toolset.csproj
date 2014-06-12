@@ -144,9 +144,6 @@
     <Compile Include="Components\PlaceableEditorControl.xaml.cs">
       <DependentUpon>PlaceableEditorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\ScriptSelectionControl.xaml.cs">
-      <DependentUpon>ScriptSelectionControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Components\CreateObjectComponent.xaml.cs">
       <DependentUpon>CreateObjectComponent.xaml</DependentUpon>
     </Compile>
@@ -232,10 +229,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\PlaceableEditorControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Components\ScriptSelectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -357,6 +350,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\document-new-6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\script.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\view-list-tree-2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -69,31 +69,13 @@
             x:Name="areaSelection"
             HorizontalAlignment="Stretch" 
             Grid.Row="2" 
+            Grid.RowSpan="4"
             Grid.Column="0" 
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
             />
 
-        <Comp:DialogSelectionControl
-            x:Name="dialogSelection"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Grid.Row="3"
-            Grid.Column="0"
-            Width="Auto"
-            Height="Auto"
-            />
-
-        <Comp:ScriptSelectionControl 
-            x:Name="scriptSelection"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Grid.Row="4"
-            Grid.Column="0"
-            Width="Auto"
-            Height="Auto"
-            />
         <Comp:PaintObjectsControl x:Name="paintObjects"
             Grid.Column="5" 
             HorizontalAlignment="Stretch" 
