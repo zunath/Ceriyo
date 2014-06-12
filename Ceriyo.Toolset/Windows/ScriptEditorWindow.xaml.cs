@@ -68,10 +68,17 @@ namespace Ceriyo.Toolset.Windows
             Model.ScriptNames = WorkingDataManager.GetAllScriptNames();
             GameScript existingScript = Model.OpenScripts.SingleOrDefault(x => x.Name == e.OldName);
             Model.OpenScripts.Remove(existingScript);
+            
+            if (e.IsOverwrite)
+            {
+                existingScript = Model.OpenScripts.SingleOrDefault(x => x.Name == e.Name);
+                Model.OpenScripts.Remove(existingScript);
+            }
 
             existingScript = new GameScript(e.Name, e.Contents);
             Model.OpenScripts.Add(existingScript);
             tcScripts.SelectedIndex = Model.OpenScripts.IndexOf(existingScript);
+            
         }
 
         private void DoScriptSave(string fileName, string contents)

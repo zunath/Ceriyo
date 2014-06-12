@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.ViewModels;
+using FlatRedBall.IO;
+using Ceriyo.Data;
 
 namespace Ceriyo.Toolset.Windows
 {
@@ -44,12 +46,27 @@ namespace Ceriyo.Toolset.Windows
         {
             try
             {
-                if (OnSaveComplete != null)
+                if (FileManager.FileExists(WorkingPaths.ScriptsDirectory + Model.FileName + EnginePaths.ScriptExtension))
                 {
-                    OnSaveComplete(this, new ScriptEventArgs(Model.FileName, Model.Contents, Model.OldFileName));
-                }
+                    if (MessageBox.Show("A script with the name '" + Model.FileName + "' already exists. Do you want to overwrite it?", "Overwrite script?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        if (OnSaveComplete != null)
+                        {
+                            OnSaveComplete(this, new ScriptEventArgs(Model.FileName, Model.Contents, Model.OldFileName, true));
+                        }
 
-                this.Hide();
+                        this.Hide();
+                    }
+                }
+                else
+                {
+                    if (OnSaveComplete != null)
+                    {
+                        OnSaveComplete(this, new ScriptEventArgs(Model.FileName, Model.Contents, Model.OldFileName, false));
+                    }
+
+                    this.Hide();
+                }
             }
             catch
             {

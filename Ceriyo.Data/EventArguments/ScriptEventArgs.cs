@@ -11,12 +11,14 @@ namespace Ceriyo.Data.EventArguments
         public string Name { get; set; }
         public string Contents { get; set; }
         public string OldName { get; set; }
+        public bool IsOverwrite { get; set; }
 
-        public ScriptEventArgs(string name, string contents, string oldName = "")
+        public ScriptEventArgs(string name, string contents, string oldName = "", bool isOverwrite = false)
         {
             this.Name = name;
             this.Contents = contents;
             this.OldName = oldName;
+            this.IsOverwrite = isOverwrite;
         }
     }
 }
