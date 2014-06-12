@@ -364,6 +364,12 @@
   <ItemGroup>
     <Resource Include="Images\view-list-tree-2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tab-close-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tab-close-4.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

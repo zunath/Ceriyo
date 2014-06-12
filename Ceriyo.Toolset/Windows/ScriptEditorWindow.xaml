@@ -121,12 +121,18 @@
                     Click="SaveScript">
                 <Image Source="/Images/document-save-5.png"></Image>
             </Button>
-            <Button Name="btnSaveAllScripts"
+            <Button Name="btnCloseScript"
+                    Width="25"
+                    Height="25"
+                    Click="btnCloseScript_Click">
+                <Image Source="/Images/tab-close-4.png"></Image>
+            </Button>
+            <!--<Button Name="btnSaveAllScripts"
                     Width="25"
                     Height="25"
                     Click="SaveAllScripts">
                 <Image Source="/Images/document-save-all.png"></Image>
-            </Button>
+            </Button>-->
         </ToolBar>
         <Button Content="Exit" 
                 Grid.Column="2" 

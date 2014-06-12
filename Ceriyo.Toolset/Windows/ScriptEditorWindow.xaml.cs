@@ -29,6 +29,7 @@ namespace Ceriyo.Toolset.Windows
     {
         private ScriptEditorVM Model { get; set; }
         private SaveScriptWindow SaveScriptWin { get; set; }
+        private const string DefaultScriptText = "function Main()\n{\n\t\n}";
 
         public ScriptEditorWindow()
         {
@@ -84,7 +85,7 @@ namespace Ceriyo.Toolset.Windows
 
         private void NewScript(object sender, RoutedEventArgs e)
         {
-            GameScript script = new GameScript("script" + GetUniqueScriptID(), "function Main()\n{\n\t\n}");
+            GameScript script = new GameScript("script" + GetUniqueScriptID(), DefaultScriptText);
             Model.OpenScripts.Add(script);
             tcScripts.SelectedIndex = Model.OpenScripts.IndexOf(script);
         }
@@ -95,7 +96,7 @@ namespace Ceriyo.Toolset.Windows
             Model.OpenScripts.Clear();
 
             Model.ScriptNames = WorkingDataManager.GetAllScriptNames();
-            Model.OpenScripts.Add(new GameScript("script" + GetUniqueScriptID(), "function Main()\n{\n\t\n}"));
+            Model.OpenScripts.Add(new GameScript("script" + GetUniqueScriptID(), DefaultScriptText));
             tcScripts.SelectedIndex = 0;
             this.Show();
         }
@@ -193,6 +194,17 @@ namespace Ceriyo.Toolset.Windows
                 {
                     throw ex;
                 }
+            }
+        }
+
+        private void btnCloseScript_Click(object sender, RoutedEventArgs e)
+        {
+            Model.OpenScripts.RemoveAt(tcScripts.SelectedIndex);
+
+            if (Model.OpenScripts.Count <= 0)
+            {
+                Model.OpenScripts.Add(new GameScript("script" + GetUniqueScriptID(), DefaultScriptText));
+                tcScripts.SelectedIndex = 0;
             }
         }
 
