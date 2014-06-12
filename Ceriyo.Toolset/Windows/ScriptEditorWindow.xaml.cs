@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 using FlatRedBall.IO;
@@ -27,11 +28,14 @@ namespace Ceriyo.Toolset.Windows
     public partial class ScriptEditorWindow : Window
     {
         private ScriptEditorVM Model { get; set; }
+        private SaveScriptWindow SaveScriptWin { get; set; }
 
         public ScriptEditorWindow()
         {
             InitializeComponent();
             Model = new ScriptEditorVM();
+            SaveScriptWin = new SaveScriptWindow();
+            SaveScriptWin.OnSaveComplete += SaveScriptWin_OnSaveComplete;
             SetDataContexts();
         }
 
@@ -45,7 +49,33 @@ namespace Ceriyo.Toolset.Windows
 
         private void SaveScript(object sender, RoutedEventArgs e)
         {
+            GameScript script = Model.OpenScripts[tcScripts.SelectedIndex];
 
+            if (FileManager.FileExists(WorkingPaths.ScriptsDirectory + script.Name + EnginePaths.ScriptExtension))
+            {
+                DoScriptSave(script.Name, script.ScriptDocument.Text);
+            }
+            else
+            {
+                SaveScriptWin.Open(script.Name, script.ScriptDocument.Text);
+            }
+        }
+
+        private void SaveScriptWin_OnSaveComplete(object sender, ScriptEventArgs e)
+        {
+            DoScriptSave(e.Name, e.Contents);
+            Model.ScriptNames = WorkingDataManager.GetAllScriptNames();
+            GameScript existingScript = Model.OpenScripts.SingleOrDefault(x => x.Name == e.OldName);
+            Model.OpenScripts.Remove(existingScript);
+
+            existingScript = new GameScript(e.Name, e.Contents);
+            Model.OpenScripts.Add(existingScript);
+            tcScripts.SelectedIndex = Model.OpenScripts.IndexOf(existingScript);
+        }
+
+        private void DoScriptSave(string fileName, string contents)
+        {
+            FileManager.SaveText(contents, WorkingPaths.ScriptsDirectory + fileName + EnginePaths.ScriptExtension);
         }
 
         private void SaveAllScripts(object sender, RoutedEventArgs e)
@@ -54,7 +84,7 @@ namespace Ceriyo.Toolset.Windows
 
         private void NewScript(object sender, RoutedEventArgs e)
         {
-            GameScript script = new GameScript("newscript", "function Main()\n{\n\t\n}");
+            GameScript script = new GameScript("script" + GetUniqueScriptID(), "function Main()\n{\n\t\n}");
             Model.OpenScripts.Add(script);
             tcScripts.SelectedIndex = Model.OpenScripts.IndexOf(script);
         }
@@ -65,7 +95,7 @@ namespace Ceriyo.Toolset.Windows
             Model.OpenScripts.Clear();
 
             Model.ScriptNames = WorkingDataManager.GetAllScriptNames();
-            Model.OpenScripts.Add(new GameScript("script0", "function Main()\n{\n\t\n}"));
+            Model.OpenScripts.Add(new GameScript("script" + GetUniqueScriptID(), "function Main()\n{\n\t\n}"));
             tcScripts.SelectedIndex = 0;
             this.Show();
         }
@@ -75,6 +105,19 @@ namespace Ceriyo.Toolset.Windows
             Model.OpenScripts.Clear();
             Model.ScriptNames.Clear();
             this.Hide();
+        }
+
+        private int GetUniqueScriptID()
+        {
+            int scriptID = 0;
+
+            while (Model.OpenScripts.SingleOrDefault(x => x.Name == "script" + scriptID) != null ||
+                  Model.ScriptNames.Contains("script" + scriptID))
+            {
+                scriptID++;
+            }
+
+            return scriptID;
         }
 
         private void OpenScript(object sender, MouseButtonEventArgs e)

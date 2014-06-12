@@ -143,6 +143,7 @@
     <Compile Include="ViewModels\PaintObjectsVM.cs" />
     <Compile Include="ViewModels\PlaceableEditorVM.cs" />
     <Compile Include="ViewModels\ResourceEditorVM.cs" />
+    <Compile Include="ViewModels\SaveScriptVM.cs" />
     <Compile Include="ViewModels\ScriptEditorVM.cs" />
     <Compile Include="ViewModels\ScriptSelectionVM.cs" />
     <Compile Include="ViewModels\TilesetEditorVM.cs" />

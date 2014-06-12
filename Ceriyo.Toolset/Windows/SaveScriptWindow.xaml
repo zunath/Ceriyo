@@ -1,0 +1,14 @@
+﻿<Window x:Class="Ceriyo.Toolset.Windows.SaveScriptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Save Script" Height="110" Width="221" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid>
+        <Label Content="Script Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="txtScriptName" 
+                 HorizontalAlignment="Left" Height="23" Margin="93,10,0,0" TextWrapping="Wrap" Text="{Binding FileName}" VerticalAlignment="Top" Width="100"/>
+        <Button Name="btnCancel" Content="Cancel" Click="btnCancel_Click" HorizontalAlignment="Left" Margin="118,48,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="btnSave" Content="Save" Click="btnSave_Click" HorizontalAlignment="Left" Margin="24,48,0,0" VerticalAlignment="Top" Width="75"/>
+
+
+    </Grid>
+</Window>

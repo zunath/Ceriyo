@@ -10,11 +10,13 @@ namespace Ceriyo.Data.EventArguments
     {
         public string Name { get; set; }
         public string Contents { get; set; }
+        public string OldName { get; set; }
 
-        public ScriptEventArgs(string name, string contents)
+        public ScriptEventArgs(string name, string contents, string oldName = "")
         {
             this.Name = name;
             this.Contents = contents;
+            this.OldName = oldName;
         }
     }
 }

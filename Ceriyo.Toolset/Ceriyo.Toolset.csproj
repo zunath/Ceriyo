@@ -189,6 +189,9 @@
     <Compile Include="Windows\ResourcePackEditorWindow.xaml.cs">
       <DependentUpon>ResourcePackEditorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SaveScriptWindow.xaml.cs">
+      <DependentUpon>SaveScriptWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ScriptEditorWindow.xaml.cs">
       <DependentUpon>ScriptEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -285,6 +288,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ResourcePackEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SaveScriptWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
