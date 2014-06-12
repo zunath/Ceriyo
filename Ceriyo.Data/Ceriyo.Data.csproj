@@ -54,6 +54,9 @@
     <Reference Include="FlatRedBall.Content">
       <HintPath>..\Ceriyo\Ceriyo\Libraries\Xna4Pc\FlatRedBall.Content.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\packages\AvalonEdit.4.4.2.9744\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\DotNetZip.1.9.2\lib\net20\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -103,6 +106,7 @@
     <Compile Include="GameObjects\Dialog.cs" />
     <Compile Include="GameObjects\Creature.cs" />
     <Compile Include="GameObjects\GameModule.cs" />
+    <Compile Include="GameObjects\GameScript.cs" />
     <Compile Include="GameObjects\IGameObject.cs" />
     <Compile Include="GameObjects\Item.cs" />
     <Compile Include="GameObjects\ItemProperty.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="ViewModels\PaintObjectsVM.cs" />
     <Compile Include="ViewModels\PlaceableEditorVM.cs" />
     <Compile Include="ViewModels\ResourceEditorVM.cs" />
+    <Compile Include="ViewModels\ScriptEditorVM.cs" />
     <Compile Include="ViewModels\ScriptSelectionVM.cs" />
     <Compile Include="ViewModels\TilesetEditorVM.cs" />
     <Compile Include="ViewModels\ToolsetVM.cs" />

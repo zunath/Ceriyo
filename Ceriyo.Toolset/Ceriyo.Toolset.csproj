@@ -339,7 +339,25 @@
       <Name>Ceriyo.Library</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\script-add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\script-save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\script-code.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\document-save-5.png" />
+    <Resource Include="Images\document-save-all.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\document-open-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\document-new-6.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
