@@ -97,8 +97,11 @@ namespace Ceriyo.Entities
                 sprite.Texture.SetData<Color>(data);
                 sprite.Visible = tile.IsVisible;
 
-                sprite.X = (tile.MapY * EngineConstants.TilePixelWidth / 2) + (tile.MapX * EngineConstants.TilePixelWidth / 2);
-                sprite.Y = (tile.MapX * EngineConstants.TilePixelHeight / 2) - (tile.MapY * EngineConstants.TilePixelHeight / 2);
+                tile.MapX = tile.MapX * EngineConstants.TilePixelWidth;
+                tile.MapY = tile.MapY * EngineConstants.TilePixelHeight;
+
+                //sprite.X = (tile.MapY * EngineConstants.TilePixelWidth / 2) + (tile.MapX * EngineConstants.TilePixelWidth / 2);
+                //sprite.Y = (tile.MapX * EngineConstants.TilePixelHeight / 2) - (tile.MapY * EngineConstants.TilePixelHeight / 2);
 
                 listIndex++;
             }

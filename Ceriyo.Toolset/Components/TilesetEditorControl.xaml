@@ -65,7 +65,7 @@
                     
                     <Canvas Name="cnvTileEditor" MouseDown="Canvas_MouseDown">
                         <Canvas.Background>
-                            <DrawingBrush Viewport="0,0,64,32" ViewportUnits="Absolute" TileMode="Tile">
+                            <DrawingBrush Viewport="0,0,32,32" ViewportUnits="Absolute" TileMode="Tile">
 
 
                                 <DrawingBrush.Drawing>

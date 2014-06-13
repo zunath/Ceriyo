@@ -9,7 +9,7 @@ namespace Ceriyo.Data
     {
         public static int TilePixelWidth
         {
-            get { return 64; }
+            get { return 32; }
         }
 
         public static int TilePixelHeight

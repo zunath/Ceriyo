@@ -10,20 +10,14 @@ namespace Ceriyo.Data.GameObjects
         public int TextureCellX { get; set; }
         public int TextureCellY { get; set; }
         public int Priority { get; set; }
-        public bool TopLeftPassable { get; set; }
-        public bool TopRightPassable { get; set; }
-        public bool BottomLeftPassable { get; set; }
-        public bool BottomRightPassable { get; set; }
+        public bool IsPassable { get; set; }
 
         public TileDefinition()
         {
             this.TextureCellX = 0;
-            this.TextureCellY = 0;
+            this.TextureCellY = 11;
             this.Priority = 0;
-            this.TopLeftPassable = true;
-            this.TopRightPassable = true;
-            this.BottomLeftPassable = true;
-            this.BottomRightPassable = true;
+            this.IsPassable = true;
         }
     }
 }

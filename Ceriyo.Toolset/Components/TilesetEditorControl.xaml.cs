@@ -213,51 +213,16 @@ namespace Ceriyo.Toolset.Components
                 {
                     int x = tile.TextureCellX * EngineConstants.TilePixelWidth;
                     int y = tile.TextureCellY * EngineConstants.TilePixelHeight;
-                    float passageTileHeight = EngineConstants.TilePixelHeight / 2;
-                    float passageTileWidth = EngineConstants.TilePixelWidth / 2;
 
                     Rectangle rect = new Rectangle();
                     rect.Stroke = Brushes.Black;
-                    rect.Fill = tile.TopLeftPassable ? Brushes.Green : Brushes.Red;
+                    rect.Fill = tile.IsPassable ? Brushes.Green : Brushes.Red;
                     rect.Opacity = 0.2f;
-                    rect.Height = passageTileHeight;
-                    rect.Width = passageTileWidth;
+                    rect.Height = EngineConstants.TilePixelHeight;
+                    rect.Width = EngineConstants.TilePixelWidth;
                     cnvTileEditor.Children.Add(rect);
                     Canvas.SetLeft(rect, x);
                     Canvas.SetTop(rect, y);
-
-
-                    rect = new Rectangle();
-                    rect.Stroke = Brushes.Black;
-                    rect.Fill = tile.TopRightPassable ? Brushes.Green : Brushes.Red;
-                    rect.Opacity = 0.2f;
-                    rect.Height = passageTileHeight;
-                    rect.Width = passageTileWidth;
-                    cnvTileEditor.Children.Add(rect);
-                    Canvas.SetLeft(rect, x + passageTileWidth);
-                    Canvas.SetTop(rect, y);
-
-                    rect = new Rectangle();
-                    rect.Stroke = Brushes.Black;
-                    rect.Fill = tile.TopRightPassable ? Brushes.Green : Brushes.Red;
-                    rect.Opacity = 0.2f;
-                    rect.Height = passageTileHeight;
-                    rect.Width = passageTileWidth;
-                    rect.Fill = tile.BottomLeftPassable ? Brushes.Green : Brushes.Red;
-                    cnvTileEditor.Children.Add(rect);
-                    Canvas.SetLeft(rect, x);
-                    Canvas.SetTop(rect, y + passageTileHeight);
-
-                    rect = new Rectangle();
-                    rect.Stroke = Brushes.Black;
-                    rect.Fill = tile.TopRightPassable ? Brushes.Green : Brushes.Red;
-                    rect.Opacity = 0.2f;
-                    rect.Height = passageTileHeight;
-                    rect.Width = passageTileWidth;
-                    rect.Fill = tile.BottomRightPassable ? Brushes.Green : Brushes.Red;
-                    cnvTileEditor.Children.Add(rect);
-                    Canvas.SetLeft(rect, x + passageTileWidth);
-                    Canvas.SetTop(rect, y + passageTileHeight);
                 }
             }
         }
@@ -282,8 +247,8 @@ namespace Ceriyo.Toolset.Components
 
                     if (tile != null)
                     {
-                        tile.TopLeftPassable = !tile.TopLeftPassable;
-                        rect.Fill = tile.TopLeftPassable ? Brushes.Green : Brushes.Red;
+                        tile.IsPassable = !tile.IsPassable;
+                        rect.Fill = tile.IsPassable ? Brushes.Green : Brushes.Red;
                     }
                 }
             }

@@ -38,16 +38,10 @@ namespace Ceriyo.Toolset.Components
         public AreaSelectionControl()
         {
             InitializeComponent();
-            InitializeModel();    
+            this.Model = new AreaSelectionVM();
             SetDataContexts();
             EditPropertiesWindow = new EditAreaWindow();
             EditPropertiesWindow.OnSaveArea += OnSaveArea;
-        }
-
-        private void InitializeModel()
-        {
-            this.Model = new AreaSelectionVM();
-            Model.Areas = WorkingDataManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory) as BindingList<Area>;
         }
 
         private void SetDataContexts()
