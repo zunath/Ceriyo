@@ -10,7 +10,17 @@ namespace Ceriyo.Library.ScriptEngine
     {
         public string GetName(IGameObject gameObject)
         {
-            return gameObject.Name;
+            string result = string.Empty;
+            try
+            {
+                result = gameObject.Name;
+            }
+            catch
+            {
+                result = string.Empty;
+            }
+
+            return result;
         }
 
         public string GetTag(IGameObject gameObject)
