@@ -15,7 +15,7 @@ namespace Ceriyo.Data.GameObjects
         public TileDefinition()
         {
             this.TextureCellX = 0;
-            this.TextureCellY = 11;
+            this.TextureCellY = 0;
             this.Priority = 0;
             this.IsPassable = true;
         }
