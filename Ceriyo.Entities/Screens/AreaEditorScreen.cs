@@ -71,7 +71,7 @@ namespace Ceriyo.Entities.Screens
 
             LoadedArea = e.GameObject as Area;
             AreaBatch = new MapDrawableBatch(LoadedArea);
-            PaintTile = new PaintTileEntity(LoadedArea.AreaTileset.Graphic);
+            PaintTile = new PaintTileEntity(LoadedArea.AreaTileset.Graphic, LoadedArea.MapWidth, LoadedArea.MapHeight);
         }
 
         public void OnModulePropertiesUpdate(object sender, GameObjectEventArgs e)
@@ -80,6 +80,7 @@ namespace Ceriyo.Entities.Screens
             {
                 if (e.GameObject.Resref == LoadedArea.Resref)
                 {
+                    PaintTile.Destroy();
                     LoadArea(sender, e);
                 }
             }

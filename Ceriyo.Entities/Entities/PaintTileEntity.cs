@@ -19,6 +19,8 @@ namespace Ceriyo.Entities.Entities
         private GameResource Graphic { get; set; }
         private Sprite EntitySprite { get; set; }
         private Rectangle SourceRectangle { get; set; }
+        private int AreaWidth { get; set; }
+        private int AreaHeight { get; set; }
 
         public int CellX
         {
@@ -32,7 +34,7 @@ namespace Ceriyo.Entities.Entities
             private set;
         }
 
-        public PaintTileEntity(GameResource graphic) :
+        public PaintTileEntity(GameResource graphic, int areaWidth, int areaHeight) :
             base("PaintTileEntity")
         {
             this.Processor = new GameResourceProcessor();
@@ -43,6 +45,8 @@ namespace Ceriyo.Entities.Entities
             this.CellX = 0;
             this.CellY = 0;
             this.SourceRectangle = new Rectangle(0, 0, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
+            this.AreaWidth = areaWidth;
+            this.AreaHeight = areaHeight;
 
             LoadEntity();
         }
@@ -55,8 +59,14 @@ namespace Ceriyo.Entities.Entities
         {
             if (InputManager.Mouse.IsInGameWindow())
             {
-                this.X = InputManager.Mouse.WorldXAt(0);
-                this.Y = InputManager.Mouse.WorldYAt(0);
+                CellX = Convert.ToInt32(InputManager.Mouse.WorldXAt(0) / EngineConstants.TilePixelWidth);
+                CellY = Convert.ToInt32(InputManager.Mouse.WorldYAt(0) / EngineConstants.TilePixelHeight);
+
+                this.X = CellX * (EngineConstants.TilePixelWidth);
+                this.Y = CellY * (EngineConstants.TilePixelHeight);
+                CheckBounds();
+                
+                
             }
         }
 
@@ -93,6 +103,27 @@ namespace Ceriyo.Entities.Entities
                 EngineConstants.TilePixelWidth, 
                 EngineConstants.TilePixelHeight);
 
+        }
+
+        private void CheckBounds()
+        {
+            if (this.X < 0)
+            {
+                this.X = 0;
+            }
+            if (this.Y < 0)
+            {
+                this.Y = 0;
+            }
+
+            if (this.X > (AreaWidth - 1) * EngineConstants.TilePixelWidth)
+            {
+                this.X = (AreaWidth - 1) * EngineConstants.TilePixelWidth;
+            }
+            if (this.Y > (AreaHeight - 1) * EngineConstants.TilePixelHeight)
+            {
+                this.Y = (AreaHeight - 1) * EngineConstants.TilePixelHeight;
+            }
         }
     }
 }
