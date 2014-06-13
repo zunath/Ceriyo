@@ -46,7 +46,7 @@ namespace Ceriyo.Library.ScriptEngine
         /// </summary>
         public object RunScript(GameModule module, object self, params string[] resultParameterName)
         {
-            string script = ""; // TODO: Load script from module
+            string script = string.Empty; // TODO: Load script from module
             this.JSContext.SetParameter("self", self);
             object result = this.JSContext.Run(script);
             return result;

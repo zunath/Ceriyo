@@ -203,19 +203,19 @@ namespace Ceriyo.Data.ViewModels
 
         public EditAreaVM()
         {
-            this.Name = "";
-            this.Tag = "";
-            this.Resref = "";
+            this.Name = string.Empty;
+            this.Tag = string.Empty;
+            this.Resref = string.Empty;
             this.Width = EngineConstants.AreaMinWidth;
             this.Height = EngineConstants.AreaMinHeight;
             this.Scripts = new BindingList<string>();
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Tilesets = new BindingList<Tileset>();
-            this.Description = "";
-            this.Comments = "";
-            this.OnAreaEnterScript = "";
-            this.OnAreaExitScript = "";
-            this.OnAreaHeartbeatScript = "";
+            this.Description = string.Empty;
+            this.Comments = string.Empty;
+            this.OnAreaEnterScript = string.Empty;
+            this.OnAreaExitScript = string.Empty;
+            this.OnAreaHeartbeatScript = string.Empty;
             this.SelectedTileset = new Tileset();
         }
     }

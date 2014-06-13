@@ -162,7 +162,7 @@ namespace Ceriyo.Data
 
         private static void AddModulePropertiesFile(ZipFile zip, GameModule module)
         {
-            string output = "";
+            string output = string.Empty;
             FileManager.XmlSerialize<GameModule>(module, out output);
 
             zip.AddEntry(EnginePaths.ModuleDataFileName + EnginePaths.DataExtension, output);

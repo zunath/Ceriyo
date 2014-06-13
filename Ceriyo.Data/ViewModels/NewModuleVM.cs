@@ -53,9 +53,9 @@ namespace Ceriyo.Data.ViewModels
 
         public NewModuleVM()
         {
-            this.Name = "";
-            this.Tag = "";
-            this.Resref = "";
+            this.Name = string.Empty;
+            this.Tag = string.Empty;
+            this.Resref = string.Empty;
         }
 
     }

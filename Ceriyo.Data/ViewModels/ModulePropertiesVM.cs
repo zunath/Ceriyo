@@ -248,24 +248,24 @@ namespace Ceriyo.Data.ViewModels
 
         public ModulePropertiesVM()
         {
-            this.Comments = "";
-            this.Description = "";
+            this.Comments = string.Empty;
+            this.Description = string.Empty;
             this.LocalVariables = new BindingList<LocalVariable>();
-            this.Name = "";
-            this.Resref = "";
+            this.Name = string.Empty;
+            this.Resref = string.Empty;
             this.Scripts = new BindingList<string>();
-            this.Tag = "";
+            this.Tag = string.Empty;
             this.Levels = new BindingList<LevelChartItem>();
             this.MaxLevel = EngineConstants.MaxLevel;
 
-            this.OnPlayerEnterScript = "";
-            this.OnPlayerLeavingScript = "";
-            this.OnPlayerLeftScript = "";
-            this.OnHeartbeatScript = "";
-            this.OnModuleLoadScript = "";
-            this.OnPlayerDyingScript = "";
-            this.OnPlayerDeathScript = "";
-            this.OnPlayerRespawnScript = "";
+            this.OnPlayerEnterScript = string.Empty;
+            this.OnPlayerLeavingScript = string.Empty;
+            this.OnPlayerLeftScript = string.Empty;
+            this.OnHeartbeatScript = string.Empty;
+            this.OnModuleLoadScript = string.Empty;
+            this.OnPlayerDyingScript = string.Empty;
+            this.OnPlayerDeathScript = string.Empty;
+            this.OnPlayerRespawnScript = string.Empty;
         }
     }
 }

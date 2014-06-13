@@ -23,7 +23,7 @@ namespace Ceriyo.Data.GameObjects
 
         public ItemClassRequirement()
         {
-            this.ClassResref = "";
+            this.ClassResref = string.Empty;
             this.LevelRequired = EngineConstants.MaxLevel;
             this.IsAvailable = true;
         }

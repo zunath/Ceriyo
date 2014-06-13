@@ -110,13 +110,13 @@ namespace Ceriyo.Data.ViewModels
 
         public EditDialogVM()
         {
-            this.Comments = "";
-            this.Description = "";
+            this.Comments = string.Empty;
+            this.Description = string.Empty;
             this.LocalVariables = new BindingList<LocalVariable>();
-            this.Name = "";
-            this.Resref = "";
+            this.Name = string.Empty;
+            this.Resref = string.Empty;
             this.Scripts = new BindingList<string>();
-            this.Tag = "";
+            this.Tag = string.Empty;
         }
 
     }

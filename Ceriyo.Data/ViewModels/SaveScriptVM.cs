@@ -52,9 +52,9 @@ namespace Ceriyo.Data.ViewModels
 
         public SaveScriptVM()
         {
-            this.FileName = "";
-            this.Contents = "";
-            this.OldFileName = "";
+            this.FileName = string.Empty;
+            this.Contents = string.Empty;
+            this.OldFileName = string.Empty;
         }
     }
 }

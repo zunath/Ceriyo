@@ -25,11 +25,11 @@ namespace Ceriyo.Data.GameObjects
 
         public ItemProperty()
         {
-            this.Name = "";
-            this.Tag = "";
-            this.Resref = "";
-            this.Description = "";
-            this.Comments = "";
+            this.Name = string.Empty;
+            this.Tag = string.Empty;
+            this.Resref = string.Empty;
+            this.Description = string.Empty;
+            this.Comments = string.Empty;
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
         }

@@ -12,8 +12,8 @@ namespace Ceriyo.Data.ResourceObjects
 
         public GameResource()
         {
-            this.FileName = "";
-            this.Package = "";
+            this.FileName = string.Empty;
+            this.Package = string.Empty;
             this.ResourceType = ResourceTypeEnum.Unknown;
         }
 

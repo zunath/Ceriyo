@@ -13,7 +13,7 @@ namespace Ceriyo.Data.GameObjects
 
         public GameScript()
         {
-            this.Name = "";
+            this.Name = string.Empty;
             this.ScriptDocument = new TextDocument();
         }
 

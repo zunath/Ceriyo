@@ -16,8 +16,8 @@ namespace Ceriyo.Data.ResourceObjects
 
         public ResourceEditorItem()
         {
-            this.FileName = "";
-            this.Extension = "";
+            this.FileName = string.Empty;
+            this.Extension = string.Empty;
             this.SizeBytes = 0;
         }
 
