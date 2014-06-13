@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Entities.Entities;
 using Ceriyo.Library.Processing;
 using FlatRedBall;
 using FlatRedBall.Graphics;
@@ -19,36 +21,31 @@ namespace Ceriyo.Entities
     {
         private Area DrawableArea { get; set; }
         private Texture2D MapTexture { get; set; }
-        private SpriteList TileSprites { get; set; }
-        private Sprite SelectedTile { get; set; }
-        private int SelectedCellX { get; set; }
-        private int SelectedCellY { get; set; }
+        private List<DrawableTile> DrawableTiles { get; set; }
         private Rectangle _sourceRectangle;
         private GameResourceProcessor Processor { get; set; }
 
         public MapDrawableBatch(Area area)
         {
             this.Processor = new GameResourceProcessor();
-            this.SelectedTile = new Sprite();
             this._sourceRectangle = new Rectangle(0, 0, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
 
             this.DrawableArea = area;
             this.MapTexture = Processor.ToTexture2D(area.AreaTileset.Graphic);
-            this.TileSprites = new SpriteList();
+            this.DrawableTiles = new List<DrawableTile>();
 
             int capacity = area.MapWidth * area.MapHeight * area.LayerCount;
             for (int current = 1; current <= capacity; current++)
             {
-                this.TileSprites.Add(new Sprite());
+                this.DrawableTiles.Add(new DrawableTile());
             }
 
-            foreach (Sprite sprite in TileSprites)
+            foreach(DrawableTile tile in DrawableTiles)
             {
-                sprite.PixelSize = 0.5f;
-                SpriteManager.AddSprite(sprite);
+                tile.TileSprite.PixelSize = 0.5f;
+                SpriteManager.AddSprite(tile.TileSprite);
             }
 
-            SpriteManager.AddSprite(SelectedTile);
             SpriteManager.AddPositionedObject(this);
             
 
@@ -57,8 +54,10 @@ namespace Ceriyo.Entities
 
         public void Destroy()
         {
-            SpriteManager.RemoveSpriteList(TileSprites);
-            SpriteManager.RemoveSprite(SelectedTile);
+            foreach (DrawableTile tile in DrawableTiles)
+            {
+                SpriteManager.RemoveSprite(tile.TileSprite);
+            }
             SpriteManager.RemovePositionedObject(this);
         }
 
@@ -76,6 +75,16 @@ namespace Ceriyo.Entities
             get { return false; }
         }
 
+        public void PaintTile(object sender, TilePaintEventArgs e)
+        {
+            DrawableTile tile = DrawableTiles.SingleOrDefault(t => t.Layer == e.Layer && t.CellX == e.CellX && t.CellY == e.CellY);
+
+            if (tile != null)
+            {
+                tile.TileSprite.Texture = e.Texture;
+            }
+        }
+
         private void LoadMap()
         {
             Texture2D emptyTexture = FlatRedBallServices.Load<Texture2D>("Content/Tilesets/emptytile.png");
@@ -87,7 +96,11 @@ namespace Ceriyo.Entities
             int listIndex = 0;
             foreach (MapTile tile in orderedTiles)
             {
-                Sprite sprite = TileSprites[listIndex];
+                DrawableTiles[listIndex].CellX = tile.MapX;
+                DrawableTiles[listIndex].CellY = tile.MapY;
+                DrawableTiles[listIndex].Layer = tile.Layer;
+
+                Sprite sprite = DrawableTiles[listIndex].TileSprite;
 
                 if (tile.HasGraphic)
                 {
@@ -116,6 +129,7 @@ namespace Ceriyo.Entities
                 listIndex++;
             }
         }
+
 
     }
 }

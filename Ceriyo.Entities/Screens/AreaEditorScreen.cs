@@ -47,6 +47,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
+            PaintTile.OnTilePainted -= AreaBatch.PaintTile;
             AreaBatch.Destroy();
             PaintTile.Destroy();
         }
@@ -58,6 +59,7 @@ namespace Ceriyo.Entities.Screens
                 AreaBatch.Destroy();
             }
 
+            PaintTile.OnTilePainted -= AreaBatch.PaintTile;
             LoadedArea = null;
             PaintTile = null;
         }
@@ -72,6 +74,8 @@ namespace Ceriyo.Entities.Screens
             LoadedArea = e.GameObject as Area;
             AreaBatch = new MapDrawableBatch(LoadedArea);
             PaintTile = new PaintTileEntity(LoadedArea.AreaTileset.Graphic, LoadedArea.MapWidth, LoadedArea.MapHeight);
+
+            PaintTile.OnTilePainted += AreaBatch.PaintTile;
         }
 
         public void OnModulePropertiesUpdate(object sender, GameObjectEventArgs e)

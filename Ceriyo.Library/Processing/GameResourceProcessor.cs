@@ -118,5 +118,17 @@ namespace Ceriyo.Library.Processing
             return texture;
         }
 
+        public Texture2D GetSubTexture(Texture2D texture, int x, int y, int width, int height)
+        {
+            Texture2D result = new Texture2D(FlatRedBallServices.GraphicsDevice, width, height);
+            Rectangle rect = new Rectangle(x, y, width, height);
+            Color[] data = new Color[width * height];
+            texture.GetData<Color>(0, rect, data, 0, data.Length);
+            result.SetData<Color>(data);
+
+            return result;
+
+        }
+
     }
 }

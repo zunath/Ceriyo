@@ -21,6 +21,9 @@ namespace Ceriyo.Entities.Entities
         private Rectangle SourceRectangle { get; set; }
         private int AreaWidth { get; set; }
         private int AreaHeight { get; set; }
+        private int Layer { get; set; }
+        public event EventHandler<TilePaintEventArgs> OnTilePainted;
+
 
         public int CellX
         {
@@ -65,7 +68,7 @@ namespace Ceriyo.Entities.Entities
                 this.X = CellX * (EngineConstants.TilePixelWidth);
                 this.Y = CellY * (EngineConstants.TilePixelHeight);
                 CheckBounds();
-                
+                PlaceTile();
                 
             }
         }
@@ -78,6 +81,7 @@ namespace Ceriyo.Entities.Entities
         public void LoadEntity()
         {
             EntitySprite.PixelSize = 0.5f;
+            EntitySprite.Alpha = 0.5f;
             EntitySprite.Texture = Processor.GetSubTexture(Graphic,
                 CellX * EngineConstants.TilePixelWidth,
                 CellY * EngineConstants.TilePixelHeight,
@@ -86,11 +90,6 @@ namespace Ceriyo.Entities.Entities
 
             EntitySprite.AttachTo(this, false);
             SpriteManager.AddSprite(EntitySprite);
-        }
-
-        public void PaintTile(object sender, TilePaintEventArgs e)
-        {
-
         }
 
         public void SetTilesetCoordinates(int cellX, int cellY)
@@ -103,6 +102,17 @@ namespace Ceriyo.Entities.Entities
                 EngineConstants.TilePixelWidth, 
                 EngineConstants.TilePixelHeight);
 
+        }
+
+        private void PlaceTile()
+        {
+            if (InputManager.Mouse.ButtonDown(Mouse.MouseButtons.LeftButton))
+            {
+                if (OnTilePainted != null)
+                {
+                    OnTilePainted(this, new TilePaintEventArgs(CellX, CellY, Layer, EntitySprite.Texture));
+                }
+            }
         }
 
         private void CheckBounds()
