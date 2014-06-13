@@ -149,12 +149,13 @@
     <Content Include="Content\Data\LevelChart.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Icons\Passable_64x32.png" />
-    <Content Include="Content\Icons\Unpassable_64x32.png" />
+    <Content Include="Content\Tilesets\emptytile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Icons\" />
     <Folder Include="Content\Settings\" />
-    <Folder Include="Content\Tilesets\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

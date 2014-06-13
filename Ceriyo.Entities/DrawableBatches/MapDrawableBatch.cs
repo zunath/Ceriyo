@@ -78,6 +78,7 @@ namespace Ceriyo.Entities
 
         private void LoadMap()
         {
+            Texture2D emptyTexture = FlatRedBallServices.Load<Texture2D>("Content/Tilesets/emptytile.png");
             List<MapTile> orderedTiles = DrawableArea.MapTiles
                 .OrderBy(l => l.Layer)
                 .ThenBy(x => x.MapX)
@@ -86,22 +87,31 @@ namespace Ceriyo.Entities
             int listIndex = 0;
             foreach (MapTile tile in orderedTiles)
             {
-                TileDefinition definition = tile.Definition;
                 Sprite sprite = TileSprites[listIndex];
-                sprite.Texture = new Texture2D(FlatRedBallServices.GraphicsDevice, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
-                _sourceRectangle.X = definition.TextureCellX;
-                _sourceRectangle.Y = definition.TextureCellY;
 
-                Color[] data = new Color[_sourceRectangle.Width * _sourceRectangle.Height];
-                MapTexture.GetData<Color>(0, _sourceRectangle, data, 0, data.Length);
-                sprite.Texture.SetData<Color>(data);
-                sprite.Visible = tile.IsVisible;
+                if (tile.HasGraphic)
+                {
+                    TileDefinition definition = DrawableArea.AreaTileset.Tiles
+                        .SingleOrDefault(t => t.TextureCellX == tile.TileDefinitionX &&
+                                              t.TextureCellY == tile.TileDefinitionY);
 
-                tile.MapX = tile.MapX * EngineConstants.TilePixelWidth;
-                tile.MapY = tile.MapY * EngineConstants.TilePixelHeight;
+                    sprite.Texture = new Texture2D(FlatRedBallServices.GraphicsDevice, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
+                    _sourceRectangle.X = definition.TextureCellX * EngineConstants.TilePixelWidth;
+                    _sourceRectangle.Y = definition.TextureCellY * EngineConstants.TilePixelHeight;
 
-                //sprite.X = (tile.MapY * EngineConstants.TilePixelWidth / 2) + (tile.MapX * EngineConstants.TilePixelWidth / 2);
-                //sprite.Y = (tile.MapX * EngineConstants.TilePixelHeight / 2) - (tile.MapY * EngineConstants.TilePixelHeight / 2);
+                    Color[] data = new Color[_sourceRectangle.Width * _sourceRectangle.Height];
+                    MapTexture.GetData<Color>(0, _sourceRectangle, data, 0, data.Length);
+                    sprite.Texture.SetData<Color>(data);
+                    sprite.Visible = true;
+                }
+                else if(!tile.HasGraphic && 
+                         tile.Layer == 0)
+                {
+                    sprite.Texture = emptyTexture;
+                }
+
+                sprite.X = tile.MapX * EngineConstants.TilePixelWidth;
+                sprite.Y = tile.MapY * EngineConstants.TilePixelHeight;
 
                 listIndex++;
             }

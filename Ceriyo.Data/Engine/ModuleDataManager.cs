@@ -215,13 +215,24 @@ namespace Ceriyo.Data
             {
                 // !!!TODO: Temporary workaround until DotNetZip fixes the bug with extracting to memory stream.!!!
                 ZipEntry entry = zip[EnginePaths.ModuleDataFileName + EnginePaths.DataExtension];
-                entry.Extract(EnginePaths.WorkingDirectory);
+
+                if (!Directory.Exists(EnginePaths.WorkingDirectory + "tempdotnetfix/"))
+                {
+                    Directory.CreateDirectory(EnginePaths.WorkingDirectory + "tempdotnetfix/");
+                }
+
+                foreach (string file in Directory.GetFiles(EnginePaths.WorkingDirectory + "tempdotnetfix/"))
+                {
+                    File.Delete(file);
+                }
+
+                entry.Extract(EnginePaths.WorkingDirectory + "tempdotnetfix/");
                 //MemoryStream stream = new MemoryStream();
                 //entry.Extract(stream);
                 //string text = Encoding.UTF8.GetString(stream.ToArray());
                 //return FileManager.XmlDeserializeFromString<GameModule>(text);
-                GameModule module = FileManager.XmlDeserialize<GameModule>(EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension);
-                FileManager.DeleteFile(EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension);
+                GameModule module = FileManager.XmlDeserialize<GameModule>(EnginePaths.WorkingDirectory + "tempdotnetfix/" + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension);
+                FileManager.DeleteFile(EnginePaths.WorkingDirectory + "tempdotnetfix/" + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension);
                 return module;
             }
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -10,16 +11,18 @@ namespace Ceriyo.Data.GameObjects
         public int MapX { get; set; }
         public int MapY { get; set; }
         public int Layer { get; set; }
-        public bool IsVisible { get; set; }
-        public TileDefinition Definition { get; set; }
+        public int TileDefinitionX { get; set; }
+        public int TileDefinitionY { get; set; }
+        public bool HasGraphic { get; set; }
 
         public MapTile()
         {
             this.MapX = 0;
             this.MapY = 0;
             this.Layer = 0;
-            this.IsVisible = true;
-            this.Definition = new TileDefinition();
+            this.TileDefinitionX = 0;
+            this.TileDefinitionY = 0;
+            this.HasGraphic = false;
         }
 
         public MapTile(int mapX, int mapY, int layer)
@@ -27,8 +30,9 @@ namespace Ceriyo.Data.GameObjects
             this.MapX = mapX;
             this.MapY = mapY;
             this.Layer = layer;
-            this.IsVisible = true;
-            this.Definition = new TileDefinition();
+            this.TileDefinitionX = 0;
+            this.TileDefinitionY = 0;
+            this.HasGraphic = false;
         }
     }
 }

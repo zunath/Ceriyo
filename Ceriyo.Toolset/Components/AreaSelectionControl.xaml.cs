@@ -44,6 +44,20 @@ namespace Ceriyo.Toolset.Components
             EditPropertiesWindow.OnSaveArea += OnSaveArea;
         }
 
+        public void ModuleLoaded(object sender, GameModuleEventArgs e)
+        {
+            Model.Areas.Clear();
+            Model.IsAreaLoaded = false;
+
+            if (OnAreaClosed != null)
+            {
+                OnAreaClosed(this, new EventArgs());
+            }
+
+            Model.Areas = WorkingDataManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory);
+
+        }
+
         private void SetDataContexts()
         {
             lbAreas.DataContext = Model;
