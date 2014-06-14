@@ -27,29 +27,37 @@ namespace Ceriyo.Library.ScriptEngine
             this._engineScriptDirectory = ConfigurationManager.AppSettings["GameFolder_EngineScripts"];
         }
 
-        /// <summary>
-        /// Executes a script from the engine scripts folder
-        /// </summary>
-        public object RunScript(string scriptName, object self)
+        public object RunEngineScript(string scriptName, object self)
         {
             scriptName += EnginePaths.ScriptExtension;
-            string filePath = EnginePaths.ScriptsDirectory + scriptName;
-            string script = File.ReadAllText(filePath) + "Main();";
-            this.JSContext.SetParameter("self", self);
-            object result = this.JSContext.Run(script);
-
-            return result;
+            if (File.Exists(EnginePaths.ScriptsDirectory + scriptName))
+            {
+                string filePath = EnginePaths.ScriptsDirectory + scriptName;
+                string script = File.ReadAllText(filePath) + " Main();";
+                this.JSContext.SetParameter("self", self);
+                object result = this.JSContext.Run(script);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        /// <summary>
-        /// Executes a script located in a game module.
-        /// </summary>
-        public object RunScript(GameModule module, object self, params string[] resultParameterName)
+        public object RunModuleScript(string scriptName, object self)
         {
-            string script = string.Empty; // TODO: Load script from module
-            this.JSContext.SetParameter("self", self);
-            object result = this.JSContext.Run(script);
-            return result;
+            scriptName += EnginePaths.ScriptExtension;
+            if (File.Exists(WorkingPaths.ScriptsDirectory + scriptName))
+            {
+                string script = FileManager.FromFileText(WorkingPaths.ScriptsDirectory + scriptName) + " Main();";
+                this.JSContext.SetParameter("self", self);
+                object result = this.JSContext.Run(script);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         ~ScriptManager()
