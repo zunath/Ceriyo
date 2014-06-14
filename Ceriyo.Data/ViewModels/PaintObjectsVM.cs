@@ -23,6 +23,7 @@ namespace Ceriyo.Data.ViewModels
         private int _selectionStartY;
         private int _selectionEndX;
         private int _selectionEndY;
+        private bool _isMouseDown;
 
         public PaintObjectModeTypeEnum PaintMode 
         {
@@ -180,6 +181,19 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public bool IsMouseDown
+        {
+            get
+            {
+                return _isMouseDown;
+            }
+            set
+            {
+                _isMouseDown = value;
+                OnPropertyChanged("IsMouseDown");
+            }
+        }
+
         public PaintObjectsVM()
         {
             this.PaintMode = PaintObjectModeTypeEnum.None;
@@ -194,6 +208,7 @@ namespace Ceriyo.Data.ViewModels
             this.SelectionStartY = 0;
             this.SelectionEndX = 0;
             this.SelectionEndY = 0;
+            this.IsMouseDown = false;
         }
     }
 }

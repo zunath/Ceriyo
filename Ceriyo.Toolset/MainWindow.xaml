@@ -98,6 +98,11 @@
             Grid.RowSpan="1"
             VerticalAlignment="Stretch" 
             Width="Auto"/>
+        <Comp:AreaToolbarControl Grid.Column="2" 
+                                 HorizontalAlignment="Stretch" 
+                                 Grid.Row="6" 
+                                 Grid.ColumnSpan="2"
+                                 VerticalAlignment="Stretch"/>
 
     </Grid>
 </Window>

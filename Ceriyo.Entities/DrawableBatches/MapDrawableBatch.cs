@@ -77,7 +77,10 @@ namespace Ceriyo.Entities
 
         public void PaintTile(object sender, TilePaintEventArgs e)
         {
-            DrawableTile tile = DrawableTiles.SingleOrDefault(t => t.Layer == e.Layer && t.CellX == e.CellX && t.CellY == e.CellY);
+            DrawableTile tile = DrawableTiles.SingleOrDefault(t => t.Layer == e.Layer && 
+                                                                   t.CellX == e.StartCellX && 
+                                                                   t.CellY == e.StartCellY);
+
 
             if (tile != null)
             {

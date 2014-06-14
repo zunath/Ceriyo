@@ -9,22 +9,26 @@ namespace Ceriyo.Data.EventArguments
 {
     public class ObjectPainterEventArgs : EventArgs
     {
-        public int TileCellX { get; set; }
-        public int TileCellY { get; set; }
+        public int TileCellXStart { get; set; }
+        public int TileCellYStart { get; set; }
+        public int TileCellXEnd { get; set; }
+        public int TileCellYEnd { get; set; }
         public IGameObject GameObject { get; set; }
 
 
-        public ObjectPainterEventArgs(int tileCellX, int tileCellY)
+        public ObjectPainterEventArgs(int tileCellXStart, int tileCellYStart, int tileCellXEnd, int tileCellYEnd)
         {
-            this.TileCellX = tileCellX;
-            this.TileCellY = tileCellY;
+            this.TileCellXStart = tileCellXStart;
+            this.TileCellYStart = tileCellYStart;
+            this.TileCellXEnd = tileCellXEnd;
+            this.TileCellYEnd = tileCellYEnd;
             this.GameObject = null;
         }
 
         public ObjectPainterEventArgs(IGameObject gameObject)
         {
-            this.TileCellX = 0;
-            this.TileCellY = 0;
+            this.TileCellXStart = 0;
+            this.TileCellYStart = 0;
             this.GameObject = gameObject;
         }
     }

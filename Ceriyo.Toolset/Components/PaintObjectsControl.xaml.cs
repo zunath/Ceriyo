@@ -90,61 +90,53 @@ namespace Ceriyo.Toolset.Components
         {
             if (e.LeftButton == MouseButtonState.Pressed && rectSelectedTiles.Visibility == Visibility.Visible)
             {
+                Model.IsMouseDown = true;
                 Point pos = e.GetPosition(cnvTilePicker);
-                int cellX = (int)pos.X / EngineConstants.TilePixelWidth;
-                int cellY = (int)pos.Y / EngineConstants.TilePixelHeight;
+                Model.SelectionStartX = (int)pos.X / EngineConstants.TilePixelWidth;
+                Model.SelectionStartY = (int)pos.Y / EngineConstants.TilePixelHeight;
 
-                Canvas.SetLeft(rectSelectedTiles, cellX * EngineConstants.TilePixelWidth);
-                Canvas.SetTop(rectSelectedTiles, cellY * EngineConstants.TilePixelHeight);
+                Canvas.SetLeft(rectSelectedTiles, Model.SelectionStartX * EngineConstants.TilePixelWidth);
+                Canvas.SetTop(rectSelectedTiles, Model.SelectionStartY * EngineConstants.TilePixelHeight);
+
+            }
+        }
+
+        private void Canvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Released && rectSelectedTiles.Visibility == Visibility.Visible)
+            {
+                Model.IsMouseDown = false;
 
                 if (OnModeChange != null)
                 {
-                    OnModeChange(this, new ObjectPainterEventArgs(cellX, cellY));
+                    OnModeChange(this, new ObjectPainterEventArgs(Model.SelectionStartX, 
+                                                                  Model.SelectionStartY, 
+                                                                  Model.SelectionEndX, 
+                                                                  Model.SelectionEndY));
                 }
             }
         }
 
-        //private void ChangeMode(object sender, SelectionChangedEventArgs e)
-        //{
-        //    TabItem item = ObjectTabs.SelectedItem as TabItem;
-        //    IGameObject gameObject = null;
-        //    int cellX = 0;
-        //    int cellY = 0;
-            
-        //    if (item != null)
-        //    {
-        //        if (item.Name == "TilesTab")
-        //        {
-        //            cellX = (int)Canvas.GetLeft(rectSelectedTiles) / EngineConstants.TilePixelWidth;
-        //            cellY = (int)Canvas.GetTop(rectSelectedTiles) / EngineConstants.TilePixelHeight;
-        //        }
-        //        else if (item.Name == "CreaturesTab")
-        //        {
-        //            gameObject = Model.SelectedCreature;
-        //        }
-        //        else if (item.Name == "ItemsTab")
-        //        {
-        //            gameObject = Model.SelectedItem;
-        //        }
-        //        else if (item.Name == "PlaceablesTab")
-        //        {
-        //            gameObject = Model.SelectedPlaceable;
-        //        }
+        private void Canvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (Model.IsMouseDown)
+            {
+                Point pos = e.GetPosition(cnvTilePicker);
+                Model.SelectionEndX = (int)pos.X / EngineConstants.TilePixelWidth;
+                Model.SelectionEndY = (int)pos.Y / EngineConstants.TilePixelHeight;
 
+                if (Model.SelectionEndX < Model.SelectionStartX)
+                {
+                    Model.SelectionEndX = Model.SelectionStartX;
+                }
+                if (Model.SelectionEndY < Model.SelectionStartY)
+                {
+                    Model.SelectionEndY = Model.SelectionStartY;
+                }
 
-        //        if (OnModeChange != null)
-        //        {
-        //            if (gameObject == null)
-        //            {
-        //                OnModeChange(this, new ObjectPainterEventArgs(cellX, cellY));
-        //            }
-        //            else
-        //            {
-        //                OnModeChange(this, new ObjectPainterEventArgs(gameObject));
-        //            }
-        //        }
-        //    }
-        //}
-
+                rectSelectedTiles.Width = (Model.SelectionEndX - Model.SelectionStartX + 1) * EngineConstants.TilePixelWidth;
+                rectSelectedTiles.Height = (Model.SelectionEndY - Model.SelectionStartY + 1) * EngineConstants.TilePixelHeight;
+            }
+        }
     }
 }

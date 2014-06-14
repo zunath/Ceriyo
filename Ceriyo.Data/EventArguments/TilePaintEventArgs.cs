@@ -9,16 +9,25 @@ namespace Ceriyo.Data.EventArguments
     public class TilePaintEventArgs : EventArgs
     {
         public int Layer { get; set; }
-        public int CellX { get; set; }
-        public int CellY { get; set; }
+        public int StartCellX { get; set; }
+        public int StartCellY { get; set; }
+        public int EndCellX { get; set; }
+        public int EndCellY { get; set; }
 
         public Texture2D Texture { get; set; }
 
-        public TilePaintEventArgs(int cellX, int cellY, int layer, Texture2D texture)
+        public TilePaintEventArgs(int startCellX, 
+                                 int startCellY, 
+                                 int endCellX, 
+                                 int endCellY, 
+                                 int layer, 
+                                 Texture2D texture)
         {
             this.Layer = layer;
-            this.CellX = cellX;
-            this.CellY = cellY;
+            this.StartCellX = startCellX;
+            this.StartCellY = startCellY;
+            this.EndCellX = endCellX;
+            this.EndCellY = endCellY;
             this.Texture = texture;
         }
     }

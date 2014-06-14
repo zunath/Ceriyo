@@ -132,6 +132,9 @@
     <Compile Include="Components\AreaSelectionControl.xaml.cs">
       <DependentUpon>AreaSelectionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\AreaToolbarControl.xaml.cs">
+      <DependentUpon>AreaToolbarControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\DialogSelectionControl.xaml.cs">
       <DependentUpon>DialogSelectionControl.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,10 @@
       <DependentUpon>ScriptEditorWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Components\AreaSelectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\AreaToolbarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
