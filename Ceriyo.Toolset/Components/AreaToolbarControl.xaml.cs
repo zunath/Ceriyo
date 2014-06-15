@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ceriyo.Data.ViewModels;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -19,9 +20,18 @@ namespace Ceriyo.Toolset.Components
     /// </summary>
     public partial class AreaToolbarControl : UserControl
     {
+        private AreaToolbarVM Model { get; set; }
+
         public AreaToolbarControl()
         {
             InitializeComponent();
+            Model = new AreaToolbarVM();
+            SetDataContexts();
+        }
+
+        private void SetDataContexts()
+        {
+            ddlLayer.DataContext = Model;
         }
     }
 }

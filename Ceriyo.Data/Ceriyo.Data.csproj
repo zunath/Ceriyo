@@ -132,6 +132,7 @@
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />
     <Compile Include="ViewModels\AreaSelectionVM.cs" />
+    <Compile Include="ViewModels\AreaToolbarVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\DialogSelectionVM.cs" />
     <Compile Include="ViewModels\EditDialogVM.cs" />
