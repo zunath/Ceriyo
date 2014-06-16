@@ -164,7 +164,6 @@ namespace Ceriyo.Data
         {
             string output = string.Empty;
             FileManager.XmlSerialize<GameModule>(module, out output);
-
             zip.AddEntry(EnginePaths.ModuleDataFileName + EnginePaths.DataExtension, output);
         }
 
@@ -213,27 +212,17 @@ namespace Ceriyo.Data
         {
             using (ZipFile zip = new ZipFile(zipFilePath))
             {
-                // !!!TODO: Temporary workaround until DotNetZip fixes the bug with extracting to memory stream.!!!
                 ZipEntry entry = zip[EnginePaths.ModuleDataFileName + EnginePaths.DataExtension];
 
-                if (!Directory.Exists(EnginePaths.WorkingDirectory + "tempdotnetfix/"))
+                using (MemoryStream stream = new MemoryStream())
                 {
-                    Directory.CreateDirectory(EnginePaths.WorkingDirectory + "tempdotnetfix/");
-                }
+                    entry.Extract(stream);
+                    stream.Position = 0;
+                    StreamReader reader = new StreamReader(stream);
 
-                foreach (string file in Directory.GetFiles(EnginePaths.WorkingDirectory + "tempdotnetfix/"))
-                {
-                    File.Delete(file);
+                    string text = reader.ReadToEnd();
+                    return FileManager.XmlDeserializeFromString<GameModule>(text);
                 }
-
-                entry.Extract(EnginePaths.WorkingDirectory + "tempdotnetfix/");
-                //MemoryStream stream = new MemoryStream();
-                //entry.Extract(stream);
-                //string text = Encoding.UTF8.GetString(stream.ToArray());
-                //return FileManager.XmlDeserializeFromString<GameModule>(text);
-                GameModule module = FileManager.XmlDeserialize<GameModule>(EnginePaths.WorkingDirectory + "tempdotnetfix/" + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension);
-                FileManager.DeleteFile(EnginePaths.WorkingDirectory + "tempdotnetfix/" + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension);
-                return module;
             }
         }
 
