@@ -59,7 +59,11 @@ namespace Ceriyo.Entities.Screens
                 AreaBatch.Destroy();
             }
 
-            PaintTile.OnTilePainted -= AreaBatch.PaintTile;
+            if (AreaBatch != null)
+            {
+                PaintTile.OnTilePainted -= AreaBatch.PaintTile;
+            }
+
             LoadedArea = null;
             PaintTile = null;
         }
