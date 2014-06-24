@@ -12,9 +12,9 @@ using Ionic.Zip;
 
 namespace Ceriyo.Data.Engine
 {
-    public static class ResourcePackDataManager
+    public class ResourcePackDataManager
     {
-        public static FileOperationResultTypeEnum SaveResourcePack(BindingList<ResourceEditorItem> resources, string path)
+        public FileOperationResultTypeEnum SaveResourcePack(BindingList<ResourceEditorItem> resources, string path)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
             string backupFilePath = path + EnginePaths.BackupExtension;
@@ -54,7 +54,7 @@ namespace Ceriyo.Data.Engine
             return result;
         }
 
-        public static BindingList<ResourceEditorItem> OpenResourcePack(string path)
+        public BindingList<ResourceEditorItem> OpenResourcePack(string path)
         {
             BindingList<ResourceEditorItem> resources = new BindingList<ResourceEditorItem>();
 
@@ -91,7 +91,7 @@ namespace Ceriyo.Data.Engine
             return resources;
         }
 
-        public static BindingList<string> GetAllResourcePackNames()
+        public BindingList<string> GetAllResourcePackNames()
         {
             BindingList<string> result = new BindingList<string>();
 
@@ -112,7 +112,7 @@ namespace Ceriyo.Data.Engine
             return result;
         }
 
-        public static bool BuildModule(BindingList<string> resourcePackFileNames)
+        public bool BuildModule(BindingList<string> resourcePackFileNames)
         {
             bool success = false;
             BindingList<GameResource> resources = new BindingList<GameResource>();
@@ -157,7 +157,7 @@ namespace Ceriyo.Data.Engine
             return success;
         }
 
-        public static BindingList<GameResource> GetGameResources(ResourceTypeEnum resourceType)
+        public BindingList<GameResource> GetGameResources(ResourceTypeEnum resourceType)
         {
             BindingList<GameResource> resources = null;
 

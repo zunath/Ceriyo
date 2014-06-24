@@ -20,6 +20,7 @@ namespace Ceriyo.Toolset.Windows
         private OpenFileDialog AddResourceFile { get; set; }
         private OpenFileDialog OpenFile { get; set; }
         private SaveFileDialog SaveFile { get; set; }
+        private ResourcePackDataManager ResourcePackManager { get; set; }
 
         public ResourcePackEditorWindow()
         {
@@ -31,6 +32,7 @@ namespace Ceriyo.Toolset.Windows
         private void Initialize()
         {
             Model = new ResourceEditorVM();
+            ResourcePackManager = new ResourcePackDataManager();
             AddResourceFile = new OpenFileDialog();
             OpenFile = new OpenFileDialog();
             SaveFile = new SaveFileDialog();
@@ -65,7 +67,7 @@ namespace Ceriyo.Toolset.Windows
             if (isOpening)
             {
                 Model.Resources.Clear();
-                Model.Resources = ResourcePackDataManager.OpenResourcePack(OpenFile.FileName);
+                Model.Resources = ResourcePackManager.OpenResourcePack(OpenFile.FileName);
             }
         }
 
@@ -75,7 +77,7 @@ namespace Ceriyo.Toolset.Windows
 
             if (isSaving)
             {
-                FileOperationResultTypeEnum result = ResourcePackDataManager.SaveResourcePack(Model.Resources, SaveFile.FileName);
+                FileOperationResultTypeEnum result = ResourcePackManager.SaveResourcePack(Model.Resources, SaveFile.FileName);
 
                 if (result != FileOperationResultTypeEnum.Success)
                 {

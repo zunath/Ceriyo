@@ -26,6 +26,7 @@ namespace Ceriyo.Toolset.Components
     {
         private ResourcePackEditorWindow ResourceEditor { get; set; }
         private ManageResourcePacksWindow ResourceManager { get; set; }
+        private ResourcePackDataManager ResourcePackManager { get; set; }
         private ModulePropertiesWindow ModuleProperties { get; set; }
         private DataEditorWindow DataEditor { get; set; }
         public event EventHandler<GameModuleEventArgs> OnOpenModule;
@@ -35,6 +36,7 @@ namespace Ceriyo.Toolset.Components
             InitializeComponent();
             ModuleProperties = new ModulePropertiesWindow();
             ResourceEditor = new ResourcePackEditorWindow();
+            ResourcePackManager = new ResourcePackDataManager();
             ResourceManager = new ManageResourcePacksWindow();
             DataEditor = new DataEditorWindow();
         }
@@ -88,7 +90,7 @@ namespace Ceriyo.Toolset.Components
         private void BuildModule(object sender, RoutedEventArgs e)
         {
             GameModule module = WorkingDataManager.GetGameModule();
-            bool success = ResourcePackDataManager.BuildModule(module.ResourcePacks);
+            bool success = ResourcePackManager.BuildModule(module.ResourcePacks);
 
             if (success)
             {

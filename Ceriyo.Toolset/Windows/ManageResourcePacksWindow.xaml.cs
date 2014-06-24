@@ -22,17 +22,19 @@ namespace Ceriyo.Toolset.Windows
     public partial class ManageResourcePacksWindow : Window
     {
         private ManageResourcePacksVM Model { get; set; }
+        private ResourcePackDataManager ResourcePackManager { get; set; }
 
         public ManageResourcePacksWindow()
         {
             InitializeComponent();
             Model = new ManageResourcePacksVM();
+            ResourcePackManager = new ResourcePackDataManager();
             SetDataContexts();
         }
 
         private void Initialize()
         {
-            Model.AvailableResourcePackages = ResourcePackDataManager.GetAllResourcePackNames();
+            Model.AvailableResourcePackages = ResourcePackManager.GetAllResourcePackNames();
             Model.AttachedResourcePackages = WorkingDataManager.GetGameModule().ResourcePacks;
         }
 
@@ -103,7 +105,7 @@ namespace Ceriyo.Toolset.Windows
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            bool success = ResourcePackDataManager.BuildModule(Model.AttachedResourcePackages);
+            bool success = ResourcePackManager.BuildModule(Model.AttachedResourcePackages);
 
             if (success)
             {

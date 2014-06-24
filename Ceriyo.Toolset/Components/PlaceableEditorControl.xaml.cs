@@ -28,12 +28,14 @@ namespace Ceriyo.Toolset.Components
     {
         private PlaceableEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
+        private ResourcePackDataManager ResourcePackManager { get; set; }
 
         public PlaceableEditorControl()
         {
             InitializeComponent();
             Model = new PlaceableEditorVM();
             Processor = new GameResourceProcessor();
+            ResourcePackManager = new ResourcePackDataManager();
             SetDataContexts();
         }
 
@@ -109,7 +111,7 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceTypeEnum.Graphic);
+            Model.Graphics = ResourcePackManager.GetGameResources(ResourceTypeEnum.Graphic);
             GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
             Model.Graphics.Insert(0, graphic);
 
