@@ -27,13 +27,15 @@ namespace Ceriyo.Toolset.Windows
     {
         protected LoadModuleVM Model { get; set; }
         public event EventHandler<GameModuleEventArgs> OnOpenModule;
+        private ModuleDataManager ModuleManager { get; set; }
 
         public LoadModuleWindow()
         {
             InitializeComponent();
             Model = new LoadModuleVM();
+            ModuleManager = new ModuleDataManager();
             BindDataContexts();
-            Model.GameModules = new BindingList<GameModule>(ModuleDataManager.GetModules());
+            Model.GameModules = new BindingList<GameModule>(ModuleManager.GetModules());
         }
 
 
@@ -53,13 +55,13 @@ namespace Ceriyo.Toolset.Windows
             GameModule moduleToLoad = lbModuleList.SelectedItem as GameModule;
             if (moduleToLoad != null)
             {
-                FileOperationResultTypeEnum result = ModuleDataManager.LoadModule(moduleToLoad.Resref);
+                FileOperationResultTypeEnum result = ModuleManager.LoadModule(moduleToLoad.Resref);
 
                 if (result == FileOperationResultTypeEnum.FileExists)
                 {
                     if (MessageBox.Show("WARNING: A module's temporary files are located on disk. If you continue, you will lose them. Are you sure you want to continue?", "Temporary Files Found", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        result = ModuleDataManager.LoadModule(moduleToLoad.Resref, true);
+                        result = ModuleManager.LoadModule(moduleToLoad.Resref, true);
                     }
                     else
                     {

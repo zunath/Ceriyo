@@ -10,7 +10,8 @@ namespace Ceriyo
 {
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
+        private GraphicsDeviceManager graphics;
+        private EngineDataManager EngineManager { get; set; }
 
         public Game1()
         {
@@ -30,7 +31,7 @@ namespace Ceriyo
         protected override void Initialize()
         {
             FlatRedBallServices.InitializeFlatRedBall(this, graphics);
-            EngineDataManager.InitializeEngine();
+            EngineManager.InitializeEngine();
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 			GlobalContent.Initialize();
 

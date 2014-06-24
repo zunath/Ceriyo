@@ -12,11 +12,13 @@ namespace Ceriyo.Toolset.Windows
     public partial class NewModuleWindow : Window
     {
         private NewModuleVM Model { get; set; }
+        private ModuleDataManager ModuleManager { get; set; }
 
         public NewModuleWindow()
         {
             InitializeComponent();
             Model = new NewModuleVM();
+            ModuleManager = new ModuleDataManager();
             SetDataContexts();
             SetLimits();
             txtName.Focus();
@@ -38,10 +40,10 @@ namespace Ceriyo.Toolset.Windows
 
         private void btnCreateModule_Click(object sender, RoutedEventArgs e)
         {
-            ModuleDataManager.CreateModule(Model.Name, Model.Tag, Model.Resref);
-            ModuleDataManager.LoadModule(Model.Resref);
+            ModuleManager.CreateModule(Model.Name, Model.Tag, Model.Resref);
+            ModuleManager.LoadModule(Model.Resref);
             ResourcePackDataManager.BuildModule(new BindingList<string>());
-            ModuleDataManager.SaveModule(Model.Resref);
+            ModuleManager.SaveModule(Model.Resref);
             this.Close();
         }
 

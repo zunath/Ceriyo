@@ -6,14 +6,14 @@ using System.Text;
 
 namespace Ceriyo.Data.Engine
 {
-    public static class EngineDataManager
+    public class EngineDataManager
     {
-        public static void InitializeEngine()
+        public void InitializeEngine()
         {
             AddEngineDirectories();
         }
 
-        private static void AddEngineDirectories()
+        private void AddEngineDirectories()
         {
             if (!Directory.Exists(EnginePaths.ModulesDirectory))
             {

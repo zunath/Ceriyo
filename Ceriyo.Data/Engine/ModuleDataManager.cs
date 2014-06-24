@@ -10,9 +10,9 @@ using Ionic.Zip;
 
 namespace Ceriyo.Data
 {
-    public static class ModuleDataManager
+    public class ModuleDataManager
     {
-        public static FileOperationResultTypeEnum CreateModule(string name, string tag, string resref)
+        public FileOperationResultTypeEnum CreateModule(string name, string tag, string resref)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 
@@ -62,7 +62,7 @@ namespace Ceriyo.Data
         }
 
 
-        public static FileOperationResultTypeEnum LoadModule(string resref, bool forceDeleteWorkingDirectory = false)
+        public FileOperationResultTypeEnum LoadModule(string resref, bool forceDeleteWorkingDirectory = false)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 
@@ -115,7 +115,7 @@ namespace Ceriyo.Data
             return result;
         }
 
-        private static void AddDirectories(ZipFile zip)
+        private void AddDirectories(ZipFile zip)
         {
             if (zip[ModulePaths.CharacterClassesDirectory] == null)
             {
@@ -160,14 +160,14 @@ namespace Ceriyo.Data
 
         }
 
-        private static void AddModulePropertiesFile(ZipFile zip, GameModule module)
+        private void AddModulePropertiesFile(ZipFile zip, GameModule module)
         {
             string output = string.Empty;
             FileManager.XmlSerialize<GameModule>(module, out output);
             zip.AddEntry(EnginePaths.ModuleDataFileName + EnginePaths.DataExtension, output);
         }
 
-        private static void AddItemTypesFiles(ZipFile zip)
+        private void AddItemTypesFiles(ZipFile zip)
         {
             string itemTypesPath = EnginePaths.DataDirectory + "ItemTypes/";
             if (Directory.Exists(itemTypesPath))
@@ -188,7 +188,7 @@ namespace Ceriyo.Data
             }
         }
 
-        private static void AddCharacterClassesFiles(ZipFile zip)
+        private void AddCharacterClassesFiles(ZipFile zip)
         {
             string characterClassesPath = EnginePaths.DataDirectory + "CharacterClasses/";
             if (Directory.Exists(characterClassesPath))
@@ -208,7 +208,7 @@ namespace Ceriyo.Data
             }
         }
 
-        private static GameModule GetGameModule(string zipFilePath)
+        private GameModule GetGameModule(string zipFilePath)
         {
             using (ZipFile zip = new ZipFile(zipFilePath))
             {
@@ -226,7 +226,7 @@ namespace Ceriyo.Data
             }
         }
 
-        public static IList<GameModule> GetModules()
+        public IList<GameModule> GetModules()
         {
             List<GameModule> modules = new List<GameModule>();
 
@@ -240,7 +240,7 @@ namespace Ceriyo.Data
             return modules;
         }
 
-        public static FileOperationResultTypeEnum SaveModule(string moduleResref)
+        public FileOperationResultTypeEnum SaveModule(string moduleResref)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
             string path = EnginePaths.ModulesDirectory + moduleResref + EnginePaths.ModuleExtension;
