@@ -32,12 +32,15 @@ namespace Ceriyo.Toolset.Components
         private TilesetEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
         private ResourcePackDataManager ResourcePackManager { get; set; }
+        private WorkingDataManager WorkingManager { get; set; }
 
         public TilesetEditorControl()
         {
             InitializeComponent();
             Model = new TilesetEditorVM();
             Processor = new GameResourceProcessor();
+            ResourcePackManager = new ResourcePackDataManager();
+            WorkingManager = new WorkingDataManager();
             SetDataContexts();
         }
 
@@ -90,7 +93,7 @@ namespace Ceriyo.Toolset.Components
         {
             foreach (Tileset tileset in Model.Tilesets)
             {
-                FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(tileset);
+                FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(tileset);
 
                 if (result != FileOperationResultTypeEnum.Success)
                 {
@@ -104,8 +107,8 @@ namespace Ceriyo.Toolset.Components
             Model.Graphics = ResourcePackManager.GetGameResources(ResourceTypeEnum.Graphic);
             GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
             Model.Graphics.Insert(0, graphic);
-            
-            Model.Tilesets = WorkingDataManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
+
+            Model.Tilesets = WorkingManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
 
             // Link graphics to instances in the data context, so that they load on page open.
             foreach (Tileset tileset in Model.Tilesets)

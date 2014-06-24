@@ -12,6 +12,9 @@ namespace Ceriyo.Data.GameObjects
 {
     public class Item : IGameObject
     {
+        [XmlIgnore]
+        private WorkingDataManager WorkingManager { get; set; }
+
         public string Name { get; set; }
         public string Tag { get; set; }
         public string Resref { get; set; }
@@ -30,7 +33,7 @@ namespace Ceriyo.Data.GameObjects
         {
             get
             {
-                return WorkingDataManager.GetGameObject<ItemType>(ModulePaths.ItemTypesDirectory, ItemTypeResref);
+                return WorkingManager.GetGameObject<ItemType>(ModulePaths.ItemTypesDirectory, ItemTypeResref);
             }
         }
         public int Price { get; set; }
@@ -49,7 +52,7 @@ namespace Ceriyo.Data.GameObjects
             get
             {
                 return new BindingList<ItemProperty>(
-                    WorkingDataManager.GetAllGameObjects<ItemProperty>(ModulePaths.ItemPropertiesDirectory)
+                    WorkingManager.GetAllGameObjects<ItemProperty>(ModulePaths.ItemPropertiesDirectory)
                                       .Where(x =>  ItemPropertiesResrefs.Contains(x.Resref))
                                       .ToList());
             }
@@ -75,6 +78,7 @@ namespace Ceriyo.Data.GameObjects
             this.WorldGraphic = new GameResource();
             this.ItemPropertiesResrefs = new BindingList<string>();
             this.ItemRequirements = new BindingList<ItemClassRequirement>();
+            this.WorkingManager = new WorkingDataManager();
 
             Scripts.Add(ScriptEventTypeEnum.OnItemAcquired, "");
             Scripts.Add(ScriptEventTypeEnum.OnItemActivated, "");

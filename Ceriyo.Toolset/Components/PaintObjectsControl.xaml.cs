@@ -31,11 +31,13 @@ namespace Ceriyo.Toolset.Components
     {
         private PaintObjectsVM Model { get; set; }
         public event EventHandler<ObjectPainterEventArgs> OnModeChange;
+        private WorkingDataManager WorkingManager { get; set; }
 
         public PaintObjectsControl()
         {
             InitializeComponent();
             Model = new PaintObjectsVM();
+            WorkingManager = new WorkingDataManager();
             SetDataContexts();
         }
 
@@ -46,9 +48,9 @@ namespace Ceriyo.Toolset.Components
 
         private void PopulateModel()
         {
-            Model.Creatures = WorkingDataManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
-            Model.Items = WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
-            Model.Placeables = WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
+            Model.Creatures = WorkingManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
+            Model.Items = WorkingManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
+            Model.Placeables = WorkingManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
             Model.PaintMode = PaintObjectModeTypeEnum.Tile;
         }
 

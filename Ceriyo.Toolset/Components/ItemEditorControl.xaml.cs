@@ -27,6 +27,7 @@ namespace Ceriyo.Toolset.Components
         private ItemEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
         private ResourcePackDataManager ResourcePackManager { get; set; }
+        private WorkingDataManager WorkingManager { get; set; }
 
         public ItemEditorControl()
         {
@@ -34,6 +35,7 @@ namespace Ceriyo.Toolset.Components
             Model = new ItemEditorVM();
             Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
+            WorkingManager = new WorkingDataManager();
             SetDataContexts();
         }
 
@@ -86,7 +88,7 @@ namespace Ceriyo.Toolset.Components
         {
             BindingList<ItemClassRequirement> requirements = new BindingList<ItemClassRequirement>();
 
-            BindingList<CharacterClass> classes = WorkingDataManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
+            BindingList<CharacterClass> classes = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
 
             foreach (CharacterClass charClass in classes)
             {
@@ -124,7 +126,7 @@ namespace Ceriyo.Toolset.Components
         {
             foreach (Item item in Model.Items)
             {
-                FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(item);
+                FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(item);
 
                 if (result != FileOperationResultTypeEnum.Success)
                 {
@@ -139,9 +141,9 @@ namespace Ceriyo.Toolset.Components
             GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
             Model.Graphics.Insert(0, graphic);
 
-            Model.Items = WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
-            Model.ItemTypes = WorkingDataManager.GetAllGameObjects<ItemType>(ModulePaths.ItemTypesDirectory);
-            Model.Scripts = WorkingDataManager.GetAllScriptNames();
+            Model.Items = WorkingManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
+            Model.ItemTypes = WorkingManager.GetAllGameObjects<ItemType>(ModulePaths.ItemTypesDirectory);
+            Model.Scripts = WorkingManager.GetAllScriptNames();
 
             foreach (Item item in Model.Items)
             {

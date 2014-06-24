@@ -9,11 +9,14 @@ namespace Ceriyo.Data.GameObjects
     public class ItemClassRequirement
     {
         [XmlIgnore]
+        private WorkingDataManager WorkingManager { get; set; }
+
+        [XmlIgnore]
         public CharacterClass CharacterClass
         {
             get
             {
-                return WorkingDataManager.GetGameObject<CharacterClass>(ModulePaths.CharacterClassesDirectory, ClassResref);
+                return WorkingManager.GetGameObject<CharacterClass>(ModulePaths.CharacterClassesDirectory, ClassResref);
             }
         }
 
@@ -26,6 +29,7 @@ namespace Ceriyo.Data.GameObjects
             this.ClassResref = string.Empty;
             this.LevelRequired = EngineConstants.MaxLevel;
             this.IsAvailable = true;
+            this.WorkingManager = new WorkingDataManager();
         }
     
     }

@@ -30,11 +30,13 @@ namespace Ceriyo.Toolset.Windows
         private ScriptEditorVM Model { get; set; }
         private SaveScriptWindow SaveScriptWin { get; set; }
         private const string DefaultScriptText = "function Main()\n{\n\t\n}";
+        private WorkingDataManager WorkingManager { get; set; }
 
         public ScriptEditorWindow()
         {
             InitializeComponent();
             Model = new ScriptEditorVM();
+            WorkingManager = new WorkingDataManager();
             SaveScriptWin = new SaveScriptWindow();
             SaveScriptWin.OnSaveComplete += SaveScriptWin_OnSaveComplete;
             SetDataContexts();
@@ -65,7 +67,7 @@ namespace Ceriyo.Toolset.Windows
         private void SaveScriptWin_OnSaveComplete(object sender, ScriptEventArgs e)
         {
             DoScriptSave(e.Name, e.Contents);
-            Model.ScriptNames = WorkingDataManager.GetAllScriptNames();
+            Model.ScriptNames = WorkingManager.GetAllScriptNames();
             GameScript existingScript = Model.OpenScripts.SingleOrDefault(x => x.Name == e.OldName);
             Model.OpenScripts.Remove(existingScript);
             
@@ -102,7 +104,7 @@ namespace Ceriyo.Toolset.Windows
             Model.ScriptNames.Clear();
             Model.OpenScripts.Clear();
 
-            Model.ScriptNames = WorkingDataManager.GetAllScriptNames();
+            Model.ScriptNames = WorkingManager.GetAllScriptNames();
             Model.OpenScripts.Add(new GameScript("script" + GetUniqueScriptID(), DefaultScriptText));
             tcScripts.SelectedIndex = 0;
             this.Show();
@@ -175,7 +177,7 @@ namespace Ceriyo.Toolset.Windows
                 {
                     if (MessageBox.Show("Are you sure you want to delete the script " + scriptName + " ?", "Delete Script?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
-                        FileOperationResultTypeEnum result = WorkingDataManager.DeleteScript(scriptName);
+                        FileOperationResultTypeEnum result = WorkingManager.DeleteScript(scriptName);
 
                         if (result == FileOperationResultTypeEnum.Success)
                         {

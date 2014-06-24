@@ -14,6 +14,13 @@ namespace Ceriyo.Data.Engine
 {
     public class ResourcePackDataManager
     {
+        WorkingDataManager WorkingManager { get; set; }
+
+        public ResourcePackDataManager()
+        {
+            WorkingManager = new WorkingDataManager();
+        }
+
         public FileOperationResultTypeEnum SaveResourcePack(BindingList<ResourceEditorItem> resources, string path)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
@@ -116,7 +123,7 @@ namespace Ceriyo.Data.Engine
         {
             bool success = false;
             BindingList<GameResource> resources = new BindingList<GameResource>();
-            GameModule module = WorkingDataManager.GetGameModule();
+            GameModule module = WorkingManager.GetGameModule();
             module.ResourcePacks = resourcePackFileNames;
 
             try
@@ -145,7 +152,7 @@ namespace Ceriyo.Data.Engine
                     }
                 }
 
-                WorkingDataManager.SaveModuleSettings(module);
+                WorkingManager.SaveModuleSettings(module);
                 FileManager.XmlSerialize(resources, WorkingPaths.ResourceLinksFile);
                 success = true;
             }

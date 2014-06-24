@@ -12,6 +12,9 @@ namespace Ceriyo.Data.GameObjects
 {
     public class Area : IGameObject
     {
+        [XmlIgnore]
+        private WorkingDataManager WorkingManager { get; set; }
+
         public string Name { get; set; }
         public string Tag { get; set; }
         public string Resref { get; set; }
@@ -38,7 +41,7 @@ namespace Ceriyo.Data.GameObjects
             get
             {
                 return new BindingList<Creature>(
-                    WorkingDataManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory)
+                    WorkingManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory)
                                       .Where(x => CreatureInstancesResrefs.Contains(x.Resref))
                                       .ToList());
             }
@@ -49,7 +52,7 @@ namespace Ceriyo.Data.GameObjects
             get
             {
                 return new BindingList<Placeable>(
-                    WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory)
+                    WorkingManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory)
                                       .Where(x => PlaceableInstancesResrefs.Contains(x.Resref))
                                       .ToList());
             }
@@ -60,7 +63,7 @@ namespace Ceriyo.Data.GameObjects
             get
             {
                 return new BindingList<Item>(
-                    WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory)
+                    WorkingManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory)
                                       .Where(x => ItemInstancesResrefs.Contains(x.Resref))
                                       .ToList());
             }
@@ -85,6 +88,7 @@ namespace Ceriyo.Data.GameObjects
             this.AreaTileset = new Tileset();
             this.BattleMusic = new GameResource();
             this.BackgroundMusic = new GameResource();
+            this.WorkingManager = new WorkingDataManager();
         }
 
         public Area(
@@ -110,6 +114,7 @@ namespace Ceriyo.Data.GameObjects
             this.AreaTileset = new Tileset();
             this.BattleMusic = new GameResource();
             this.BackgroundMusic = new GameResource();
+            this.WorkingManager = new WorkingDataManager();
 
             for (int layer = 0; layer < LayerCount; layer++)
             {

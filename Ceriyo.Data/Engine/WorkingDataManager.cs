@@ -10,9 +10,9 @@ using FlatRedBall.IO;
 
 namespace Ceriyo.Data
 {
-    public static class WorkingDataManager
+    public class WorkingDataManager
     {
-        public static FileOperationResultTypeEnum SaveGameObjectFile(IGameObject gameObject)
+        public FileOperationResultTypeEnum SaveGameObjectFile(IGameObject gameObject)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 
@@ -31,7 +31,7 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public static IGameObject OpenGameObjectFile(string relativeFilePath)
+        public IGameObject OpenGameObjectFile(string relativeFilePath)
         {
             IGameObject result = null;
 
@@ -49,7 +49,7 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public static FileOperationResultTypeEnum DeleteGameObjectFile(IGameObject gameObject)
+        public FileOperationResultTypeEnum DeleteGameObjectFile(IGameObject gameObject)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 
@@ -75,7 +75,7 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public static BindingList<T> GetAllGameObjects<T>(string folderName) where T: IGameObject
+        public BindingList<T> GetAllGameObjects<T>(string folderName) where T: IGameObject
         {
             BindingList<T> gameObjects = new BindingList<T>();
 
@@ -98,7 +98,7 @@ namespace Ceriyo.Data
             return gameObjects;
         }
 
-        public static T GetGameObject<T>(string folderName, string resref) where T: IGameObject
+        public T GetGameObject<T>(string folderName, string resref) where T: IGameObject
         {
             try
             {
@@ -112,7 +112,7 @@ namespace Ceriyo.Data
             }
         }
 
-        public static BindingList<string> GetAllScriptNames()
+        public BindingList<string> GetAllScriptNames()
         {
             BindingList<string> scripts = new BindingList<string>();
 
@@ -133,7 +133,7 @@ namespace Ceriyo.Data
             return scripts;
         }
 
-        public static FileOperationResultTypeEnum DeleteScript(string scriptName)
+        public FileOperationResultTypeEnum DeleteScript(string scriptName)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 
@@ -158,14 +158,14 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public static bool DoesGameObjectExist(IGameObject gameObject)
+        public bool DoesGameObjectExist(IGameObject gameObject)
         {
             string path = gameObject.WorkingDirectory + gameObject.Resref + EnginePaths.DataExtension;
 
             return File.Exists(path);
         }
 
-        public static GameModule GetGameModule()
+        public GameModule GetGameModule()
         {
             GameModule module = null;
 
@@ -183,7 +183,7 @@ namespace Ceriyo.Data
             return module;
         }
 
-        public static FileOperationResultTypeEnum SaveModuleSettings(GameModule module)
+        public FileOperationResultTypeEnum SaveModuleSettings(GameModule module)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 

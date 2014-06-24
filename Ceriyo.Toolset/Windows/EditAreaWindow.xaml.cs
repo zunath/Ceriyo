@@ -19,17 +19,19 @@ namespace Ceriyo.Toolset.Windows
         private EditAreaVM Model { get; set; }
         public event EventHandler<GameObjectEventArgs> OnSaveArea;
         private bool IsEditing { get; set; }
+        private WorkingDataManager WorkingManager { get; set; }
 
         public EditAreaWindow()
         {
             InitializeComponent();
             Model = new EditAreaVM();
+            WorkingManager = new WorkingDataManager();
         }
 
         private void PopulateModel(Area area)
         {
-            Model.Tilesets = WorkingDataManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
-            Model.Scripts = WorkingDataManager.GetAllScriptNames();
+            Model.Tilesets = WorkingManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
+            Model.Scripts = WorkingManager.GetAllScriptNames();
             Model.Comments = area.Comments;
             Model.Description = area.Description;
             Model.Height = area.MapHeight;
@@ -109,7 +111,7 @@ namespace Ceriyo.Toolset.Windows
         {
             Area area = new Area(Model.Name, Model.Tag, Model.Resref, Model.Width, Model.Height, EngineConstants.AreaMaxLayers);
 
-            if (WorkingDataManager.DoesGameObjectExist(area) && !IsEditing)
+            if (WorkingManager.DoesGameObjectExist(area) && !IsEditing)
             {
                 MessageBox.Show("An area with that resref already exists. Please select a different resref.", "Resref in use", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
@@ -123,7 +125,7 @@ namespace Ceriyo.Toolset.Windows
                 area.Scripts.Add(ScriptEventTypeEnum.OnAreaHeartbeat, Model.OnAreaHeartbeatScript);
                 area.AreaTileset = Model.SelectedTileset;
 
-                FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(area);
+                FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(area);
 
                 if (result == FileOperationResultTypeEnum.Success)
                 {

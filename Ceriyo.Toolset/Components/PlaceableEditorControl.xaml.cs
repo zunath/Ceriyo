@@ -29,6 +29,7 @@ namespace Ceriyo.Toolset.Components
         private PlaceableEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
         private ResourcePackDataManager ResourcePackManager { get; set; }
+        private WorkingDataManager WorkingManager { get; set; }
 
         public PlaceableEditorControl()
         {
@@ -36,6 +37,7 @@ namespace Ceriyo.Toolset.Components
             Model = new PlaceableEditorVM();
             Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
+            WorkingManager = new WorkingDataManager();
             SetDataContexts();
         }
 
@@ -100,7 +102,7 @@ namespace Ceriyo.Toolset.Components
         {
             foreach (Placeable placeable in Model.Placeables)
             {
-                FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(placeable);
+                FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(placeable);
 
                 if (result != FileOperationResultTypeEnum.Success)
                 {
@@ -115,8 +117,8 @@ namespace Ceriyo.Toolset.Components
             GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
             Model.Graphics.Insert(0, graphic);
 
-            Model.Placeables = WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
-            Model.Scripts = WorkingDataManager.GetAllScriptNames();
+            Model.Placeables = WorkingManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
+            Model.Scripts = WorkingManager.GetAllScriptNames();
 
             foreach (Placeable placeable in Model.Placeables)
             {

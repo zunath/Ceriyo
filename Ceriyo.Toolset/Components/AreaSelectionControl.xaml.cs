@@ -34,11 +34,13 @@ namespace Ceriyo.Toolset.Components
         public event EventHandler<GameObjectEventArgs> OnAreaSaved;
         public event EventHandler<EventArgs> OnAreaClosed;
         private EditAreaWindow EditPropertiesWindow { get; set; }
+        private WorkingDataManager WorkingManager { get; set; }
 
         public AreaSelectionControl()
         {
             InitializeComponent();
             this.Model = new AreaSelectionVM();
+            WorkingManager = new WorkingDataManager();
             SetDataContexts();
             EditPropertiesWindow = new EditAreaWindow();
             EditPropertiesWindow.OnSaveArea += OnSaveArea;
@@ -54,7 +56,7 @@ namespace Ceriyo.Toolset.Components
                 OnAreaClosed(this, new EventArgs());
             }
 
-            Model.Areas = WorkingDataManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory);
+            Model.Areas = WorkingManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory);
 
         }
 
@@ -112,7 +114,7 @@ namespace Ceriyo.Toolset.Components
                 {
                     if (MessageBox.Show("Are you sure you want to delete the area " + area.Name + " ?", "Delete Area?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
-                        FileOperationResultTypeEnum result = WorkingDataManager.DeleteGameObjectFile(area);
+                        FileOperationResultTypeEnum result = WorkingManager.DeleteGameObjectFile(area);
 
                         if (result == FileOperationResultTypeEnum.Success)
                         {
