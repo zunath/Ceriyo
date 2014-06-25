@@ -34,7 +34,7 @@ namespace Ceriyo
             EngineManager.InitializeEngine();
 			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
 			GlobalContent.Initialize();
-
+            FlatRedBallServices.IsWindowsCursorVisible = true;
 			ScreenManager.Start(typeof(GameScreen));
 
             base.Initialize();
