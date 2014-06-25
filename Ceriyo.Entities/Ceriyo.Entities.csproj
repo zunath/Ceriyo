@@ -51,6 +51,8 @@
     <Compile Include="DrawableBatches\MapDrawableBatch.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\DrawableTile.cs" />
+    <Compile Include="Entities\GraphicEntity.cs" />
+    <Compile Include="Entities\GUI\ButtonEntity.cs" />
     <Compile Include="Entities\PaintTileEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\AreaEditorScreen.cs" />
@@ -67,9 +69,7 @@
       <Name>Ceriyo.Library</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\GUI\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
