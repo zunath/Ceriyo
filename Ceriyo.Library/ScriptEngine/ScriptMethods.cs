@@ -14,6 +14,7 @@ namespace Ceriyo.Library.ScriptEngine
             try
             {
                 result = gameObject.Name;
+                result = result == null ? string.Empty : result;
             }
             catch
             {
@@ -25,12 +26,34 @@ namespace Ceriyo.Library.ScriptEngine
 
         public string GetTag(IGameObject gameObject)
         {
-            return gameObject.Tag;
+            string result = string.Empty;
+            try
+            {
+                result = gameObject.Tag;
+                result = result == null ? string.Empty : result;
+            }
+            catch
+            {
+                result = string.Empty;
+            }
+
+            return result;
         }
 
         public string GetResref(IGameObject gameObject)
         {
-            return gameObject.Resref;
+            string result = string.Empty;
+            try
+            {
+                result = gameObject.Resref;
+                result = result == null ? string.Empty : result;
+            }
+            catch
+            {
+                result = string.Empty;
+            }
+
+            return result;
         }
 
         public void Print(string message)
