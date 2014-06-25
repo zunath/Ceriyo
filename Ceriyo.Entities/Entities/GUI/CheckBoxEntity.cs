@@ -79,7 +79,7 @@ namespace Ceriyo.Entities.Entities.GUI
 
         private void Highlight()
         {
-            if (HasCursorOver(GuiManager.Cursor))
+            if (HasCursorOver(GuiManager.Cursor) && !InputManager.Mouse.ButtonDown(Mouse.MouseButtons.LeftButton))
             {
                 if (IsChecked)
                 {
@@ -105,6 +105,41 @@ namespace Ceriyo.Entities.Entities.GUI
 
         private void ButtonPress()
         {
+            if (HasCursorOver(GuiManager.Cursor))
+            {
+                if (InputManager.Mouse.ButtonDown(Mouse.MouseButtons.LeftButton))
+                {
+                    if (!IsChecked)
+                    {
+                        EntitySprite.Texture = UncheckedDown;
+                    }
+                }
+
+                else if (InputManager.Mouse.ButtonReleased(Mouse.MouseButtons.LeftButton))
+                {
+                    IsChecked = !IsChecked;
+
+                    if (IsChecked)
+                    {
+                        EntitySprite.Texture = CheckedHot;
+
+                        if (OnChecked != null)
+                        {
+                            OnChecked(this, new EventArgs());
+                        }
+                    }
+                    else
+                    {
+                        EntitySprite.Texture = UncheckedHot;
+
+                        if (OnUnchecked != null)
+                        {
+                            OnUnchecked(this, new EventArgs());
+                        }
+                    }
+
+                }
+            }
         }
 
         public bool HasCursorOver(Cursor cursor)
