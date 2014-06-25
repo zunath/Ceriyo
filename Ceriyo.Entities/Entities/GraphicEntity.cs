@@ -14,14 +14,27 @@ namespace Ceriyo.Entities.Entities
         private GameResourceProcessor Processor { get; set; }
         protected GameResource GraphicResource { get; set; }
         protected Sprite EntitySprite { get; set; }
-        
+
+        private AnimationChainList _animationChains;
+        protected AnimationChainList AnimationChains 
+        {
+            get { return _animationChains; }
+            set 
+            {
+                _animationChains = value;
+                EntitySprite.AnimationChains = value;
+            }
+        }
+
         public GraphicEntity(string contentManagerName, GameResource graphic)
             : base(contentManagerName)
         {
             this.GraphicResource = graphic;
             this.EntitySprite = new Sprite();
             this.EntitySprite.Visible = true;
-            
+            this.AnimationChains = new AnimationChainList();
+
+            EntitySprite.PixelSize = 0.5f;
         }
 
     }

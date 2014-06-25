@@ -16,6 +16,7 @@ namespace Ceriyo
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            EngineManager = new EngineDataManager();
 
 #if WINDOWS_PHONE || ANDROID || IOS
 

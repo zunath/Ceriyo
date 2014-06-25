@@ -15,6 +15,8 @@ namespace Ceriyo.Entities
         {
             mContentManagerName = contentManagerName;
             Initialize(true);
+
+            InitializeEntity(true);
         }
 
         protected abstract void CustomInitialize();
