@@ -22,7 +22,8 @@ namespace Ceriyo.Entities.Screens
         protected override void CustomInitialize()
         {
             SpriteManager.Camera.AddLayer(GUILayer);
-            button = new ButtonEntity("Test text");
+            button = new ButtonEntity("Login");
+
         }
 
         protected override void CustomActivity(bool firstTimeCalled)

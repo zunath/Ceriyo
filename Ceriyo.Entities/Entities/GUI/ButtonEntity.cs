@@ -3,6 +3,8 @@ using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Library.Processing;
 using FlatRedBall;
 using FlatRedBall.Graphics;
+using FlatRedBall.Gui;
+using FlatRedBall.Input;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -11,15 +13,29 @@ using System.Text;
 
 namespace Ceriyo.Entities.Entities.GUI
 {
-    public class ButtonEntity : BaseEntity
+    public class ButtonEntity : BaseEntity, IClickable
     {
-        public event EventHandler<EventArgs> OnButtonClicked;
-        public string Text { get; private set; }
+        public event EventHandler<EventArgs> OnClicked;
+        public event EventHandler<EventArgs> OnHovered;
+
+        private string _text;
+        public string Text 
+        {
+            get
+            {
+                return _text;
+            }
+            set
+            {
+                _text = value;
+                TextGraphic.DisplayText = value;
+            }
+        }
         private Text TextGraphic { get; set; }
         private Sprite EntitySprite { get; set; }
-        private string DefaultImage = EnginePaths.GUIDirectory + "button_default.png";
-        private string ButtonDownImage = EnginePaths.GUIDirectory + "button_down.png";
-        private string ButtonHotImage = EnginePaths.GUIDirectory + "button_hot.png";
+        private Texture2D DefaultTexture { get; set; }
+        private Texture2D ButtonDownTexture { get; set; }
+        private Texture2D ButtonHotTexture { get; set; }
 
         public ButtonEntity(string text)
             : base("ButtonEntity")
@@ -29,19 +45,29 @@ namespace Ceriyo.Entities.Entities.GUI
 
         protected override void CustomInitialize()
         {
+            DefaultTexture = FlatRedBallServices.Load<Texture2D>(EnginePaths.GUIDirectory + "button_default.png");
+            ButtonDownTexture = FlatRedBallServices.Load<Texture2D>(EnginePaths.GUIDirectory + "button_down.png");
+            ButtonHotTexture = FlatRedBallServices.Load<Texture2D>(EnginePaths.GUIDirectory + "button_hot.png");
+
+            
             EntitySprite = new Sprite();
             EntitySprite.PixelSize = 0.5f;
-            EntitySprite.Visible = true;
+            EntitySprite.Alpha = 0.85f;
             TextGraphic = TextManager.AddText(Text);
-            TextGraphic.AttachTo(EntitySprite, false);
-            EntitySprite.Texture = FlatRedBallServices.Load<Texture2D>(DefaultImage);
+            TextGraphic.AttachTo(EntitySprite, true);
+            TextGraphic.HorizontalAlignment = HorizontalAlignment.Center;
+
+            EntitySprite.Texture = DefaultTexture;
             EntitySprite.AttachTo(this, false);
 
             SpriteManager.AddSprite(EntitySprite);
+            
         }
 
         protected override void CustomActivity()
         {
+            Highlight();
+            ButtonPress();
         }
 
         protected override void CustomDestroy()
@@ -49,10 +75,50 @@ namespace Ceriyo.Entities.Entities.GUI
             SpriteManager.RemoveSprite(EntitySprite);   
         }
 
-        public void ChangeText(string newText)
+        private void Highlight()
         {
-            this.Text = newText;
-            TextGraphic.DisplayText = newText;
+            if (HasCursorOver(GuiManager.Cursor))
+            {
+                EntitySprite.Texture = ButtonHotTexture;
+
+                if (OnHovered != null)
+                {
+                    OnHovered(this, new EventArgs());
+                }
+            }
+            else
+            {
+                EntitySprite.Texture = DefaultTexture;
+            }
+        }
+
+        private void ButtonPress()
+        {
+            if (InputManager.Mouse.ButtonDown(Mouse.MouseButtons.LeftButton))
+            {
+                EntitySprite.Texture = ButtonDownTexture;
+
+                if (OnClicked != null)
+                {
+                    OnClicked(this, new EventArgs());
+                }
+            }
+            else if (InputManager.Mouse.ButtonReleased(Mouse.MouseButtons.LeftButton))
+            {
+                EntitySprite.Texture = ButtonHotTexture;
+            }
+        }
+
+        public bool HasCursorOver(Cursor cursor)
+        {
+            if (this.EntitySprite.Visible && cursor.IsOn3D(EntitySprite))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
