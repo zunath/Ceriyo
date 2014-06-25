@@ -10,7 +10,7 @@ namespace Ceriyo.Library.Tests
     public class BindingListExtensionsTests
     {
         [TestMethod]
-        public void RemoveAll()
+        public void BindingListExtensions_RemoveAll()
         {
             BindingList<int> list = new BindingList<int>();
             list.Add(1);
