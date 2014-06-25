@@ -164,6 +164,9 @@
     <Content Include="Content\GUI\checkbox_checked_hot.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\GUI\checkbox_default.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\GUI\checkbox_down.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -15,12 +15,10 @@ namespace Ceriyo.Entities
         {
             mContentManagerName = contentManagerName;
             Initialize(true);
-
-            InitializeEntity(true);
         }
 
         protected abstract void CustomInitialize();
-        protected virtual void InitializeEntity(bool addToManagers)
+        public virtual void InitializeEntity(bool addToManagers)
         {
             if (addToManagers)
             {

@@ -28,7 +28,10 @@ namespace Ceriyo.Entities.Entities.GUI
             set
             {
                 _text = value;
-                TextGraphic.DisplayText = value;
+                if (TextGraphic != null)
+                {
+                    TextGraphic.DisplayText = value;
+                }
             }
         }
         private Text TextGraphic { get; set; }
@@ -40,20 +43,19 @@ namespace Ceriyo.Entities.Entities.GUI
         public ButtonEntity(string text)
             : base("ButtonEntity")
         {
+            EntitySprite = new Sprite();
             this.Text = text;
-        }
-
-        protected override void CustomInitialize()
-        {
+            TextGraphic = TextManager.AddText(Text);
             DefaultTexture = FlatRedBallServices.Load<Texture2D>(EnginePaths.GUIDirectory + "button_default.png");
             ButtonDownTexture = FlatRedBallServices.Load<Texture2D>(EnginePaths.GUIDirectory + "button_down.png");
             ButtonHotTexture = FlatRedBallServices.Load<Texture2D>(EnginePaths.GUIDirectory + "button_hot.png");
 
-            
-            EntitySprite = new Sprite();
+        }
+
+        protected override void CustomInitialize()
+        {
             EntitySprite.PixelSize = 0.5f;
             EntitySprite.Alpha = 0.85f;
-            TextGraphic = TextManager.AddText(Text);
             TextGraphic.AttachTo(EntitySprite, true);
             TextGraphic.HorizontalAlignment = HorizontalAlignment.Center;
 
@@ -94,18 +96,21 @@ namespace Ceriyo.Entities.Entities.GUI
 
         private void ButtonPress()
         {
-            if (InputManager.Mouse.ButtonDown(Mouse.MouseButtons.LeftButton))
+            if (HasCursorOver(GuiManager.Cursor))
             {
-                EntitySprite.Texture = ButtonDownTexture;
-
-                if (OnClicked != null)
+                if (InputManager.Mouse.ButtonDown(Mouse.MouseButtons.LeftButton))
                 {
-                    OnClicked(this, new EventArgs());
+                    EntitySprite.Texture = ButtonDownTexture;
+
+                    if (OnClicked != null)
+                    {
+                        OnClicked(this, new EventArgs());
+                    }
                 }
-            }
-            else if (InputManager.Mouse.ButtonReleased(Mouse.MouseButtons.LeftButton))
-            {
-                EntitySprite.Texture = ButtonHotTexture;
+                else if (InputManager.Mouse.ButtonReleased(Mouse.MouseButtons.LeftButton))
+                {
+                    EntitySprite.Texture = ButtonHotTexture;
+                }
             }
         }
 
