@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ceriyo.Data.Settings
 {
-    class ToolsetSettings
+    public class ToolsetSettings
     {
     }
 }
