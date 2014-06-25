@@ -121,6 +121,7 @@
     <Compile Include="GameObjects\MapTile.cs" />
     <Compile Include="GameObjects\Placeable.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="GameObjects\SpriteAnimation.cs" />
     <Compile Include="GameObjects\TileDefinition.cs" />
     <Compile Include="Engine\ModuleDataManager.cs" />
     <Compile Include="Engine\ModulePaths.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />
+    <Compile Include="ViewModels\AnimationEditorVM.cs" />
     <Compile Include="ViewModels\AreaSelectionVM.cs" />
     <Compile Include="ViewModels\AreaToolbarVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />

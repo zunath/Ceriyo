@@ -44,6 +44,16 @@
 
                 </Grid>
             </TabItem>
+            <TabItem Header="Animations">
+                <Grid Background="#FFE5E5E5">
+                    <Components:AnimationEditorComponent
+                        x:Name="animationEditor"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                        
+                    </Components:AnimationEditorComponent>
+                </Grid>
+            </TabItem>
         </TabControl>
         <Button Content="OK" HorizontalAlignment="Left" Margin="375,8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="99" Click="OK"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="479,8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="99" Click="Cancel"/>

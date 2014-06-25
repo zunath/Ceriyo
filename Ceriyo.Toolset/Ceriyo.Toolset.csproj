@@ -129,6 +129,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\AnimationEditorComponent.xaml.cs">
+      <DependentUpon>AnimationEditorComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\AreaSelectionControl.xaml.cs">
       <DependentUpon>AreaSelectionControl.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
     <Compile Include="Windows\ScriptEditorWindow.xaml.cs">
       <DependentUpon>ScriptEditorWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Components\AnimationEditorComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\AreaSelectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

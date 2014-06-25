@@ -12,6 +12,11 @@ namespace Ceriyo.Data
             get { return EnginePaths.WorkingDirectory + "Data/"; }
         }
 
+        public static string AnimationsDirectory
+        {
+            get { return EnginePaths.WorkingDirectory + ModulePaths.AnimationsDirectory; }
+        }
+
         public static string AreasDirectory
         {
             get { return EnginePaths.WorkingDirectory + ModulePaths.AreasDirectory; }

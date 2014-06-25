@@ -57,6 +57,10 @@ namespace Ceriyo.Data
             get { return "/Data/Tilesets/"; }
         }
 
+        public static string AnimationsDirectory
+        {
+            get { return "/Data/Animations/"; }
+        }
 
     }
 }
