@@ -176,6 +176,9 @@
     <Content Include="Content\GUI\frame.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\GUI\window.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Tilesets\emptytile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

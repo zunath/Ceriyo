@@ -10,38 +10,28 @@ namespace Ceriyo.Entities.Screens
 {
     public class GameScreen : BaseScreen
     {
-        private ButtonEntity button { get; set; }
-        private CheckBoxEntity checkbox { get; set; }
-        private Layer GUILayer { get; set; }
+        private WindowEntity window;
 
         public GameScreen()
             : base("GameScreen")
         {
-            GUILayer = new Layer();
-            button = new ButtonEntity("Login");
-            checkbox = new CheckBoxEntity("short text");
+            window = new WindowEntity(400, 200, "title");
         }
 
         protected override void CustomInitialize()
         {
-            SpriteManager.Camera.AddLayer(GUILayer);
-            button.InitializeEntity(true);
-            checkbox.InitializeEntity(true);
-            checkbox.Y = checkbox.Y + 100;
+            window.InitializeEntity(true);
 
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
         {
-            button.Activity();
-            checkbox.Activity();
+            window.Activity();
         }
 
         protected override void CustomDestroy()
         {
-            SpriteManager.Camera.RemoveLayer(GUILayer);
-            button.Destroy();
-            checkbox.Destroy();
+            window.Destroy();
         }
     }
 }
