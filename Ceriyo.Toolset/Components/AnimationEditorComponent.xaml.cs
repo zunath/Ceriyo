@@ -49,7 +49,8 @@ namespace Ceriyo.Toolset.Components
             txtTag.DataContext = Model;
             lbAnimations.DataContext = Model;
             lbFrames.DataContext = Model;
-
+            btnNewFrame.DataContext = Model;
+            btnDeleteFrame.DataContext = Model;
         }
 
         public void Open(object sender, EventArgs e)
