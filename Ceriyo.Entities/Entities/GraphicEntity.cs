@@ -12,7 +12,6 @@ namespace Ceriyo.Entities.Entities
     public abstract class GraphicEntity : BaseEntity
     {
         private GameResourceProcessor Processor { get; set; }
-        protected GameResource GraphicResource { get; set; }
         protected Sprite EntitySprite { get; set; }
 
         private AnimationChainList _animationChains;
@@ -26,10 +25,9 @@ namespace Ceriyo.Entities.Entities
             }
         }
 
-        public GraphicEntity(string contentManagerName, GameResource graphic)
+        public GraphicEntity(string contentManagerName)
             : base(contentManagerName)
         {
-            this.GraphicResource = graphic;
             this.EntitySprite = new Sprite();
             this.EntitySprite.Visible = true;
             this.AnimationChains = new AnimationChainList();
