@@ -98,6 +98,19 @@ namespace Ceriyo.Library.Processing
             return image;
         }
 
+        public BitmapImage ToBitmapImage(Texture2D texture)
+        {
+            MemoryStream stream = new MemoryStream();
+
+            texture.SaveAsPng(stream, texture.Width, texture.Height);
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = stream;
+            image.EndInit();
+
+            return image;
+        }
+
         public Texture2D ToTexture2D(GameResource resource)
         {
             byte[] imageData = ToBytes(resource);

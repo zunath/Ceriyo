@@ -19,6 +19,7 @@ using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Library.Processing;
 using FlatRedBall.Graphics.Animation;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -49,8 +50,16 @@ namespace Ceriyo.Toolset.Components
             txtTag.DataContext = Model;
             lbAnimations.DataContext = Model;
             lbFrames.DataContext = Model;
+            lbGraphics.DataContext = Model;
             btnNewFrame.DataContext = Model;
             btnDeleteFrame.DataContext = Model;
+            btnMoveFrameUp.DataContext = Model;
+            btnMoveFrameDown.DataContext = Model;
+            txtFrameName.DataContext = Model;
+            decLength.DataContext = Model;
+            chkFlipHorizontal.DataContext = Model;
+            chkFlipVertical.DataContext = Model;
+            rectSelectedCell.DataContext = Model;
         }
 
         public void Open(object sender, EventArgs e)
@@ -87,8 +96,12 @@ namespace Ceriyo.Toolset.Components
             animation.Name = resref;
             animation.Tag = resref;
             animation.Resref = resref;
+            animation.Graphic = Model.Graphics[0];
+            animation.Frames.Add(new SpriteAnimationFrame("Frame 1"));
 
             Model.Animations.Add(animation);
+            int index = lbAnimations.Items.IndexOf(animation);
+            lbAnimations.SelectedItem = lbAnimations.Items[index];
         }
 
         private void DeleteAnimation(object sender, RoutedEventArgs e)
@@ -115,6 +128,14 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = lbAnimations.SelectedItem as SpriteAnimation;
             Model.SelectedAnimation = animation;
             Model.IsAnimationSelected = animation == null ? false : true;
+
+            if (animation != null)
+            {
+                if (animation.Frames.Count > 0)
+                {
+                    Model.SelectedFrame = animation.Frames[0];
+                }
+            }
         }
 
         private void FrameSelected(object sender, SelectionChangedEventArgs e)
@@ -122,6 +143,105 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimationFrame frame = lbFrames.SelectedItem as SpriteAnimationFrame;
             Model.SelectedFrame = frame;
             Model.IsFrameSelected = frame == null ? false : true;
+            rectSelectedCell.Visibility = frame == null ? Visibility.Hidden : Visibility.Visible;
+
+            RefreshSelectedFrame();
         }
+
+        private void GraphicSelected(object sender, SelectionChangedEventArgs e)
+        {
+            GameResource resource = lbGraphics.SelectedItem as GameResource;
+
+            if (resource != null)
+            {
+                if (resource.ResourceType == ResourceTypeEnum.None)
+                {
+                    imgGraphic.Source = null;
+                }
+                else
+                {
+                    BitmapImage image = Processor.ToBitmapImage(resource);
+                    Model.SelectedAnimation.Graphic = resource;
+                    imgGraphic.Source = image;
+                }
+
+                if (Model.SelectedFrame != null)
+                {
+                    Model.SelectedFrame.TextureCellX = 0;
+                    Model.SelectedFrame.TextureCellY = 0;
+                }
+            }
+
+            RefreshPreview();
+            RefreshSelectedFrame();
+        }
+
+        private void EditorCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Model.SelectedFrame != null)
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    Point position = e.GetPosition(cnvEditor);
+
+                    int cellX = (int)position.X / EngineConstants.AnimationFrameWidth;
+                    int cellY = (int)position.Y / EngineConstants.AnimationFrameHeight;
+
+                    if ((cellX * EngineConstants.AnimationFrameWidth + EngineConstants.AnimationFrameWidth) <= imgGraphic.Width &&
+                        (cellY * EngineConstants.AnimationFrameHeight + EngineConstants.AnimationFrameHeight) <= imgGraphic.Height)
+                    {
+                        Model.SelectedFrame.TextureCellX = cellX;
+                        Model.SelectedFrame.TextureCellY = cellY;
+
+                        RefreshSelectedFrame();
+                        RefreshPreview();
+                    }
+                    
+                }
+            }
+        }
+
+        private void RefreshSelectedFrame()
+        {
+            Canvas.SetLeft(rectSelectedCell, Model.SelectedFrame.TextureCellX * EngineConstants.AnimationFrameWidth);
+            Canvas.SetTop(rectSelectedCell, Model.SelectedFrame.TextureCellY * EngineConstants.AnimationFrameHeight);
+
+        }
+
+        private void RefreshPreview()
+        {
+            if (Model.SelectedAnimation != null && Model.SelectedFrame != null && Model.SelectedAnimation.Graphic.ResourceType == ResourceTypeEnum.Graphic)
+            {
+                Texture2D texture = Processor.GetSubTexture(Model.SelectedAnimation.Graphic,
+                    Model.SelectedFrame.TextureCellX * EngineConstants.AnimationFrameWidth,
+                    Model.SelectedFrame.TextureCellY * EngineConstants.AnimationFrameHeight,
+                    EngineConstants.AnimationFrameWidth,
+                    EngineConstants.AnimationFrameHeight);
+
+                imgPreview.Source = Processor.ToBitmapImage(texture);
+                imgPreview.RenderTransformOrigin = new Point(0.5, 0.5);
+
+                float xTransform = Model.SelectedFrame.FlipHorizontal ? -1.0f : 1.0f;
+                float yTransform = Model.SelectedFrame.FlipVertical ? -1.0f : 1.0f;
+
+                ScaleTransform transform = new ScaleTransform(xTransform, yTransform);
+                imgPreview.RenderTransform = transform;
+            }
+            else
+            {
+                imgPreview.Source = null;
+            }
+        }
+
+        private void chkFlipHorizontal_Checked(object sender, RoutedEventArgs e)
+        {
+            RefreshPreview();
+        }
+
+        private void chkFlipVertical_Checked(object sender, RoutedEventArgs e)
+        {
+            RefreshPreview();
+        }
+
     }
 }

@@ -74,12 +74,12 @@ namespace Ceriyo.Data
 
         public static int AnimationFrameWidth
         {
-            get { return 32; }
+            get { return 70; }
         }
 
         public static int AnimationFrameHeight
         {
-            get { return 32; }
+            get { return 70; }
         }
 
     }

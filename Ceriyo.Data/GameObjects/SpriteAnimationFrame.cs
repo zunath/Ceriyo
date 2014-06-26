@@ -11,6 +11,8 @@ namespace Ceriyo.Data.GameObjects
         public bool FlipHorizontal { get; set; }
         public bool FlipVertical { get; set; }
         public float FrameLength { get; set; }
+        public int TextureCellX { get; set; }
+        public int TextureCellY { get; set; }
 
         public SpriteAnimationFrame()
         {
@@ -18,6 +20,8 @@ namespace Ceriyo.Data.GameObjects
             this.FlipHorizontal = false;
             this.FlipVertical = false;
             this.FrameLength = 0.0f;
+            this.TextureCellX = 0;
+            this.TextureCellY = 0;
         }
 
         public SpriteAnimationFrame(string name)
@@ -26,6 +30,8 @@ namespace Ceriyo.Data.GameObjects
             this.FlipHorizontal = false;
             this.FlipVertical = false;
             this.FrameLength = 0.0f;
+            this.TextureCellX = 0;
+            this.TextureCellY = 0;
         }
     }
 }

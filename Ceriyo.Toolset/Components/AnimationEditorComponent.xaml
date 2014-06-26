@@ -40,6 +40,7 @@
 			SelectedItem="{Binding SelectedFrame, Mode=TwoWay}"
 			DisplayMemberPath="Name"
 			SelectionChanged="FrameSelected"
+			IsEnabled="{Binding IsAnimationSelected}"
 			Margin="7,41,51,34"/>
         <Label Content="Preview:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="100" Grid.Column="1" Grid.Row="1"/>
 
@@ -117,31 +118,99 @@
 
             <ScrollViewer>
                 <Grid>
+                    <Image Name="imgGraphic"
+                           Stretch="Fill"
+                           Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
+                           Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">
+                        
+                    </Image>
 
-                    <Canvas x:Name="cnvEditor"/>
+                    <Canvas Name="cnvEditor"
+                            MouseDown="EditorCanvas_MouseDown">
+                        <Canvas.Background>
+                            <DrawingBrush Viewport="0,0,70,70" ViewportUnits="Absolute" TileMode="Tile">
+
+
+                                <DrawingBrush.Drawing>
+                                    <DrawingGroup>
+                                        <GeometryDrawing Brush="Transparent">
+                                            <GeometryDrawing.Geometry>
+                                                <RectangleGeometry Rect="0,0,1,1"></RectangleGeometry>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                        <GeometryDrawing Geometry="M0,0 L1,0 1,0.05, 0,0.05Z " Brush="Black">
+                                        </GeometryDrawing>
+                                        <GeometryDrawing Geometry="M0,0 L0,1 0.05,1, 0.05,0Z" Brush="Black">
+                                        </GeometryDrawing>
+
+                                    </DrawingGroup>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Canvas.Background>
+                        
+                        <Rectangle Name="rectSelectedCell" 
+                                   Stroke="Black"
+                                   Fill="Yellow"
+                                   Opacity="0.4"
+                                   Height="70"
+                                   Width="70"
+                                   Visibility="Hidden">
+                            
+                        </Rectangle>
+                        
+                    </Canvas>
                 </Grid>
             </ScrollViewer>
         </DockPanel>
-        <Button Content="Up" Grid.Column="5" HorizontalAlignment="Left" Margin="129,41,0,0" VerticalAlignment="Top" Width="45"/>
-        <Button Content="Down" Grid.Column="5" HorizontalAlignment="Left" Margin="129,68,0,0" VerticalAlignment="Top" Width="45"/>
+        <Button Name="btnMoveFrameUp"
+                Content="Up" 
+                Grid.Column="5" 
+                HorizontalAlignment="Left" 
+                Margin="129,41,0,0" 
+                VerticalAlignment="Top" 
+			    IsEnabled="{Binding IsFrameSelected}"
+                Width="45"/>
+        <Button Name="btnMoveFrameDown"
+                Content="Down" 
+                Grid.Column="5" 
+                HorizontalAlignment="Left" 
+                Margin="129,68,0,0" 
+                VerticalAlignment="Top" 
+			    IsEnabled="{Binding IsFrameSelected}"
+                Width="45"/>
         <ListBox x:Name="lbGraphics"
 			Grid.ColumnSpan="3" 
 			Grid.Column="2" 
+        	ItemsSource="{Binding Graphics}"
+            IsEnabled="{Binding IsAnimationSelected}"
+        	DisplayMemberPath="Name"
+            SelectedItem="{Binding Path=SelectedAnimation.Graphic}"
 			HorizontalAlignment="Stretch" 
 			Height="Auto" 
 			Grid.Row="2" 
 			VerticalAlignment="Stretch" 
+            SelectionChanged="GraphicSelected"
 			Width="Auto"/>
         <CheckBox x:Name="chkFlipHorizontal"
 			Content="Flip Horizontal" 
 			Grid.Column="5" 
 			HorizontalAlignment="Left" 
+			IsEnabled="{Binding IsFrameSelected}"
+            IsChecked="{Binding SelectedFrame.FlipHorizontal}"
+            Checked="chkFlipHorizontal_Checked"
+            Unchecked="chkFlipHorizontal_Checked"
 			Margin="10,87,0,0" 
 			VerticalAlignment="Top" Grid.Row="1"/>
         <CheckBox x:Name="chkFlipVertical"
 			Content="Flip Vertical" 
 			Grid.Column="5" 
 			HorizontalAlignment="Left" 
+			IsEnabled="{Binding IsFrameSelected}"
+            IsChecked="{Binding SelectedFrame.FlipVertical}"
+            Checked="chkFlipVertical_Checked"
+            Unchecked="chkFlipVertical_Checked"
 			Margin="10,66,0,0" 
 			VerticalAlignment="Top" Grid.Row="1"/>
         <Label Content="Name:" Grid.Column="5" HorizontalAlignment="Left" Margin="7,10,0,0" VerticalAlignment="Top" Height="26" Width="45" Grid.Row="1"/>
@@ -165,6 +234,7 @@
             HorizontalAlignment="Left" 
             Margin="67,41,0,0" 
             VerticalAlignment="Top" 
+			IsEnabled="{Binding IsFrameSelected}"
             Width="98" 
             Grid.Row="1"/>
         <Label Content="Length:" Grid.Column="5" HorizontalAlignment="Left" Margin="8,36,0,0" VerticalAlignment="Top" Grid.Row="1"/>
@@ -176,6 +246,14 @@
               Background="LightGray"
               VerticalAlignment="Top" Grid.Row="1">
 
+            <Image Name="imgPreview"
+                    Stretch="Fill"
+                    Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
+                    Height="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelHeight}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                
+            </Image>
 
         </Grid>
         <Label Content="Frames:" Grid.Column="5" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>

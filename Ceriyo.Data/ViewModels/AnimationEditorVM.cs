@@ -18,7 +18,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<GameResource> _graphics;
         private bool _isAnimationSelected;
         private bool _isFrameSelected;
-
+        
         public SpriteAnimation SelectedAnimation
         {
             get
