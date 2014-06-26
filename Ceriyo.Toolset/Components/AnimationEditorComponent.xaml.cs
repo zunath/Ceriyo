@@ -203,14 +203,19 @@ namespace Ceriyo.Toolset.Components
 
         private void RefreshSelectedFrame()
         {
-            Canvas.SetLeft(rectSelectedCell, Model.SelectedFrame.TextureCellX * EngineConstants.AnimationFrameWidth);
-            Canvas.SetTop(rectSelectedCell, Model.SelectedFrame.TextureCellY * EngineConstants.AnimationFrameHeight);
-
+            if (Model.SelectedFrame != null)
+            {
+                Canvas.SetLeft(rectSelectedCell, Model.SelectedFrame.TextureCellX * EngineConstants.AnimationFrameWidth);
+                Canvas.SetTop(rectSelectedCell, Model.SelectedFrame.TextureCellY * EngineConstants.AnimationFrameHeight);
+            }
         }
 
         private void RefreshPreview()
         {
-            if (Model.SelectedAnimation != null && Model.SelectedFrame != null && Model.SelectedAnimation.Graphic.ResourceType == ResourceTypeEnum.Graphic)
+            if (Model.SelectedAnimation != null && 
+                Model.SelectedFrame != null && 
+                Model.SelectedAnimation.Graphic != null && 
+                Model.SelectedAnimation.Graphic.ResourceType == ResourceTypeEnum.Graphic)
             {
                 Texture2D texture = Processor.GetSubTexture(Model.SelectedAnimation.Graphic,
                     Model.SelectedFrame.TextureCellX * EngineConstants.AnimationFrameWidth,

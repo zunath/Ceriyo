@@ -153,7 +153,7 @@
                         <Rectangle Name="rectSelectedCell" 
                                    Stroke="Black"
                                    Fill="Yellow"
-                                   Opacity="0.4"
+                                   Opacity="0.5"
                                    Height="70"
                                    Width="70"
                                    Visibility="Hidden">
