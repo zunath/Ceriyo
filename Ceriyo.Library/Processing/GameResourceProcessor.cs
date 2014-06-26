@@ -113,9 +113,17 @@ namespace Ceriyo.Library.Processing
 
         public Texture2D ToTexture2D(GameResource resource)
         {
-            byte[] imageData = ToBytes(resource);
+            Texture2D result = null;
 
-            return Texture2D.FromStream(FlatRedBallServices.GraphicsDevice, new MemoryStream(imageData));
+            if (resource != null && 
+                resource.ResourceType == ResourceTypeEnum.Graphic)
+            {
+                byte[] imageData = ToBytes(resource);
+
+                result = Texture2D.FromStream(FlatRedBallServices.GraphicsDevice, new MemoryStream(imageData));
+            }
+
+            return result;
         }
 
         public Texture2D GetSubTexture(GameResource resource, int x, int y, int width, int height)
