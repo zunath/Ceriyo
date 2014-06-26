@@ -251,15 +251,44 @@ namespace Ceriyo.Toolset.Components
             RefreshPreview();
         }
 
-        private void MoveFrameDown(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void MoveFrameUp(object sender, RoutedEventArgs e)
         {
+            SpriteAnimationFrame frame = lbFrames.SelectedItem as SpriteAnimationFrame;
 
+            if (frame != null)
+            {
+                int oldIndex = Model.SelectedAnimation.Frames.IndexOf(frame);
+                int newIndex = oldIndex - 1;
+
+                if (oldIndex > 0)
+                {
+                    Model.SelectedAnimation.Frames.RemoveAt(oldIndex);
+                    Model.SelectedAnimation.Frames.Insert(newIndex, frame);
+
+                    lbFrames.SelectedIndex = newIndex;
+                }
+            }
         }
+
+        private void MoveFrameDown(object sender, RoutedEventArgs e)
+        {
+            SpriteAnimationFrame frame = lbFrames.SelectedItem as SpriteAnimationFrame;
+
+            if (frame != null)
+            {
+                int oldIndex = Model.SelectedAnimation.Frames.IndexOf(frame);
+                int newIndex = oldIndex + 1;
+
+                if (newIndex < Model.SelectedAnimation.Frames.Count)
+                {
+                    Model.SelectedAnimation.Frames.RemoveAt(oldIndex);
+                    Model.SelectedAnimation.Frames.Insert(newIndex, frame);
+
+                    lbFrames.SelectedIndex = newIndex;
+                }
+            }
+        }
+
 
     }
 }
