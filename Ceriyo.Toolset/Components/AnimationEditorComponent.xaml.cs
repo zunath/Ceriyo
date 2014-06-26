@@ -73,6 +73,21 @@ namespace Ceriyo.Toolset.Components
             Model.IsFrameSelected = false;
             Model.SelectedAnimation = new SpriteAnimation();
             Model.SelectedFrame = new SpriteAnimationFrame();
+
+            foreach (SpriteAnimation animation in Model.Animations)
+            {
+                GameResource resource = Model.Graphics.SingleOrDefault(x => x.FileName == animation.Graphic.FileName);
+                if (resource != null)
+                {
+                    animation.Graphic = resource;
+                }
+            }
+
+            if (Model.Animations.Count > 0)
+            {
+                lbAnimations.SelectedItem = Model.Animations[0];
+            }
+
         }
 
         public void Save(object sender, EventArgs e)
@@ -106,7 +121,19 @@ namespace Ceriyo.Toolset.Components
 
         private void DeleteAnimation(object sender, RoutedEventArgs e)
         {
+            if (Model.SelectedAnimation != null)
+            {
+                if (MessageBox.Show("Are you sure you want to delete this animation?", "Delete animation?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    Model.Animations.Remove(Model.SelectedAnimation);
+                    Model.SelectedAnimation = null;
+                    Model.IsAnimationSelected = false;
+                    Model.IsFrameSelected = false;
 
+                    RefreshPreview();
+                    RefreshSelectedFrame();
+                }
+            }
         }
 
         private void NewFrame(object sender, RoutedEventArgs e)
@@ -120,7 +147,18 @@ namespace Ceriyo.Toolset.Components
 
         private void DeleteFrame(object sender, RoutedEventArgs e)
         {
+            if (Model.SelectedFrame != null)
+            {
+                if (MessageBox.Show("Are you sure you want to delete this frame?", "Delete frame?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    Model.SelectedAnimation.Frames.Remove(Model.SelectedFrame);
+                    Model.SelectedFrame = null;
+                    Model.IsFrameSelected = false;
 
+                    RefreshPreview();
+                    RefreshSelectedFrame();
+                }
+            }
         }
 
         private void AnimationSelected(object sender, SelectionChangedEventArgs e)
