@@ -122,6 +122,7 @@
     <Compile Include="GameObjects\Placeable.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\SpriteAnimation.cs" />
+    <Compile Include="GameObjects\SpriteAnimationFrame.cs" />
     <Compile Include="GameObjects\TileDefinition.cs" />
     <Compile Include="Engine\ModuleDataManager.cs" />
     <Compile Include="Engine\ModulePaths.cs" />

@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
+using Ceriyo.Data.ResourceObjects;
 using FlatRedBall;
 using FlatRedBall.Graphics.Animation;
 using FlatRedBall.IO;
@@ -19,7 +20,8 @@ namespace Ceriyo.Data.GameObjects
         public string Resref { get; set; }
         public string Description { get; set; }
         public string Comments { get; set; }
-        public AnimationChain Animation { get; set; }
+        public BindingList<SpriteAnimationFrame> Frames { get; set; }
+        public GameResource Graphic { get; set; }
         [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.AnimationsDirectory; } }
         [XmlIgnore]
@@ -46,7 +48,8 @@ namespace Ceriyo.Data.GameObjects
             this.Resref = string.Empty;
             this.Description = string.Empty;
             this.Comments = string.Empty;
-            this.Animation = new AnimationChain();
+            this.Frames = new BindingList<SpriteAnimationFrame>();
+            this.Graphic = new GameResource();
         }
     }
 }

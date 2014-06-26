@@ -141,6 +141,10 @@ namespace Ceriyo.Data
             {
                 zip.AddDirectoryByName(ModulePaths.ItemPropertiesDirectory);
             }
+            if (zip[ModulePaths.AnimationsDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.AnimationsDirectory);
+            }
             if (zip[ModulePaths.AreasDirectory] == null)
             {
                 zip.AddDirectoryByName(ModulePaths.AreasDirectory);

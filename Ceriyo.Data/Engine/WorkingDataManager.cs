@@ -90,9 +90,10 @@ namespace Ceriyo.Data
                     gameObjects.Add(gameObject);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                gameObjects = null;
+                throw ex;
+
             }
 
             return gameObjects;

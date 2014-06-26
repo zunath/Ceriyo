@@ -25,8 +25,8 @@
                  Grid.Row="0"
                  Grid.RowSpan="3"
                  BorderBrush="Black" 
-                 ItemsSource="{Binding Tilesets}"
-                 SelectedItem="{Binding Path=SelectedTileset, Mode=TwoWay}"
+                 ItemsSource="{Binding Animations}"
+                 SelectedItem="{Binding Path=SelectedAnimation, Mode=TwoWay}"
                  DisplayMemberPath="Name"
                  SelectionChanged="AnimationSelected"
                  Margin="0,27,0,41">
@@ -37,7 +37,8 @@
         	Grid.Row="1"
         	Grid.RowSpan="2"
         	BorderBrush="Black" 
-        	ItemsSource="{Binding AnimationFrames}"
+        	ItemsSource="{Binding SelectedAnimation.Frames}"
+            SelectedItem="{Binding Path=SelectedFrame, Mode=TwoWay}"
         	DisplayMemberPath="Name"
         	SelectionChanged="FrameSelected"
         	Margin="0,34,0,41"/>
@@ -82,8 +83,8 @@
         	HorizontalAlignment="Left" 
         	Height="23" Margin="5,36,0,0" 
         	TextWrapping="Wrap" 
-        	Text="{Binding SelectedTileset.Name}" 
-        	IsEnabled="{Binding IsTilesetSelected}"
+        	Text="{Binding SelectedAnimation.Name}" 
+        	IsEnabled="{Binding IsAnimationSelected}"
         	VerticalAlignment="Top" 
         	Width="135"/>
         <Label Content="Name:" Grid.Column="1" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Height="26" Width="44"/>
@@ -93,8 +94,8 @@
         	Height="23" 
         	Margin="5,90,0,0" 
         	TextWrapping="Wrap" 
-        	Text="{Binding SelectedTileset.Tag}" 
-        	IsEnabled="{Binding IsTilesetSelected}"
+        	Text="{Binding SelectedAnimation.Tag}" 
+        	IsEnabled="{Binding IsAnimationSelected}"
         	VerticalAlignment="Top" 
         	Width="135"/>
         <Label Content="Tag:" Grid.Column="1" HorizontalAlignment="Left" Margin="11,64,0,0" VerticalAlignment="Top" Height="26" Width="32"/>
@@ -104,8 +105,8 @@
         	Height="23" 
         	Margin="5,144,0,0" 
         	TextWrapping="Wrap" 
-        	Text="{Binding SelectedTileset.Resref}" 
-        	IsEnabled="{Binding IsTilesetSelected}"
+        	Text="{Binding SelectedAnimation.Resref}" 
+        	IsEnabled="{Binding IsAnimationSelected}"
         	VerticalAlignment="Top" 
         	Width="135"/>
         <Label Content="Resref:" Grid.Column="1" HorizontalAlignment="Left" Margin="11,118,0,0" VerticalAlignment="Top" Height="26" Width="45"/>

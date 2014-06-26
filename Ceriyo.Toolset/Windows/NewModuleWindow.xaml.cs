@@ -43,7 +43,7 @@ namespace Ceriyo.Toolset.Windows
         private void btnCreateModule_Click(object sender, RoutedEventArgs e)
         {
             ModuleManager.CreateModule(Model.Name, Model.Tag, Model.Resref);
-            ModuleManager.LoadModule(Model.Resref);
+            ModuleManager.LoadModule(Model.Resref, true);
             ResourcePackManager.BuildModule(new BindingList<string>());
             ModuleManager.SaveModule(Model.Resref);
             this.Close();

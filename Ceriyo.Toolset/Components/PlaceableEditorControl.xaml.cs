@@ -106,7 +106,7 @@ namespace Ceriyo.Toolset.Components
 
                 if (result != FileOperationResultTypeEnum.Success)
                 {
-                    MessageBox.Show("Unable to save placeable: '" + placeable.Name + "'", "Saving item failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Unable to save placeable: '" + placeable.Name + "'", "Saving placeable failed", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

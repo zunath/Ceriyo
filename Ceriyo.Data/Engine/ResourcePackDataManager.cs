@@ -175,9 +175,9 @@ namespace Ceriyo.Data.Engine
                 resources = new BindingList<GameResource>(resources.Where(x => x.ResourceType == resourceType).ToList());
                 
             }
-            catch
+            catch(Exception ex)
             {
-                resources = null;
+                throw ex;
             }
 
 
