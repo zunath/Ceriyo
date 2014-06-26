@@ -136,6 +136,9 @@ namespace Ceriyo.Toolset.Components
                     Model.SelectedFrame = animation.Frames[0];
                 }
             }
+
+            RefreshPreview();
+            RefreshSelectedFrame();
         }
 
         private void FrameSelected(object sender, SelectionChangedEventArgs e)
@@ -246,6 +249,16 @@ namespace Ceriyo.Toolset.Components
         private void chkFlipVertical_Checked(object sender, RoutedEventArgs e)
         {
             RefreshPreview();
+        }
+
+        private void MoveFrameDown(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MoveFrameUp(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }

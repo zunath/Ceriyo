@@ -93,7 +93,6 @@ namespace Ceriyo.Data
             catch(Exception ex)
             {
                 throw ex;
-
             }
 
             return gameObjects;

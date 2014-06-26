@@ -82,5 +82,15 @@ namespace Ceriyo.Data
             get { return 70; }
         }
 
+        public static float MinimumAnimationFrameLength
+        {
+            get { return 0.1f; }
+        }
+
+        public static float MaximumAnimationFrameLength
+        {
+            get { return 5.0f; }
+        }
+
     }
 }

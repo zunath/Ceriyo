@@ -7,10 +7,30 @@ namespace Ceriyo.Data.GameObjects
 {
     public class SpriteAnimationFrame
     {
+        private float _frameLength;
+
         public string Name { get; set; }
         public bool FlipHorizontal { get; set; }
         public bool FlipVertical { get; set; }
-        public float FrameLength { get; set; }
+        public float FrameLength 
+        {
+            get
+            {
+                return _frameLength;
+            }
+            set
+            {
+                _frameLength = value;
+                if (_frameLength < EngineConstants.MinimumAnimationFrameLength)
+                {
+                    _frameLength = EngineConstants.MinimumAnimationFrameLength;
+                }
+                else if (_frameLength > EngineConstants.MaximumAnimationFrameLength)
+                {
+                    _frameLength = EngineConstants.MaximumAnimationFrameLength;
+                }
+            }
+        }
         public int TextureCellX { get; set; }
         public int TextureCellY { get; set; }
 
@@ -19,7 +39,7 @@ namespace Ceriyo.Data.GameObjects
             this.Name = string.Empty;
             this.FlipHorizontal = false;
             this.FlipVertical = false;
-            this.FrameLength = 0.0f;
+            this.FrameLength = EngineConstants.MinimumAnimationFrameLength;
             this.TextureCellX = 0;
             this.TextureCellY = 0;
         }
@@ -29,7 +49,7 @@ namespace Ceriyo.Data.GameObjects
             this.Name = name;
             this.FlipHorizontal = false;
             this.FlipVertical = false;
-            this.FrameLength = 0.0f;
+            this.FrameLength = EngineConstants.MinimumAnimationFrameLength;
             this.TextureCellX = 0;
             this.TextureCellY = 0;
         }

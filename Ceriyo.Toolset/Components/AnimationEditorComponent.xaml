@@ -171,6 +171,7 @@
                 Margin="129,41,0,0" 
                 VerticalAlignment="Top" 
 			    IsEnabled="{Binding IsFrameSelected}"
+                Click="MoveFrameUp"
                 Width="45"/>
         <Button Name="btnMoveFrameDown"
                 Content="Down" 
@@ -179,6 +180,7 @@
                 Margin="129,68,0,0" 
                 VerticalAlignment="Top" 
 			    IsEnabled="{Binding IsFrameSelected}"
+                Click="MoveFrameDown"
                 Width="45"/>
         <ListBox x:Name="lbGraphics"
 			Grid.ColumnSpan="3" 
@@ -230,7 +232,7 @@
             Increment="0.1"
             Maximum="5.0"
             Minimum="0.1"
-            Value="0.1"
+            Value="{Binding SelectedFrame.FrameLength}"
             HorizontalAlignment="Left" 
             Margin="67,41,0,0" 
             VerticalAlignment="Top" 
