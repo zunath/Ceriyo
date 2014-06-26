@@ -91,14 +91,11 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            foreach (Tileset tileset in Model.Tilesets)
-            {
-                FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(tileset);
+            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Tilesets.Cast<IGameObject>().ToList(), WorkingPaths.TilesetsDirectory);
 
-                if (result != FileOperationResultTypeEnum.Success)
-                {
-                    MessageBox.Show("Unable to save tileset: '" + tileset.Name + "'", "Saving tileset failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+            if (result != FileOperationResultTypeEnum.Success)
+            {
+                MessageBox.Show("Unable to save tilesets", "Saving tilesets failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

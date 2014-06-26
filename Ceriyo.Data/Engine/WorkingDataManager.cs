@@ -12,6 +12,65 @@ namespace Ceriyo.Data
 {
     public class WorkingDataManager
     {
+        public FileOperationResultTypeEnum ReplaceAllGameObjectFiles(IList<IGameObject> gameObjects, string directory)
+        {
+            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            string[] existingFiles = Directory.GetFiles(directory, "*" + EnginePaths.DataExtension);
+
+            try
+            {
+                // Backup existing files.
+                foreach (string file in existingFiles)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(file);
+                    string backupPath = directory + fileName + EnginePaths.BackupExtension;
+                    File.Move(file, backupPath);
+                }
+
+                // Save new files
+                foreach(IGameObject gameObject in gameObjects)
+                {
+                    string fileName = gameObject.Resref;
+                    string path = directory + fileName + EnginePaths.DataExtension;
+                    FileManager.XmlSerialize(gameObject.GetType(), gameObject, path);
+                }
+
+                // Remove backups
+                string[] backupFiles = Directory.GetFiles(directory, "*" + EnginePaths.BackupExtension);
+                foreach (string file in backupFiles)
+                {
+                    File.Delete(file);
+                }
+
+                result = FileOperationResultTypeEnum.Success;
+            }
+            catch
+            {
+                // Remove any partial new files
+                string[] partialNewFiles = Directory.GetFiles(directory, "*" + EnginePaths.DataExtension);
+                foreach(string partial in partialNewFiles)
+                {
+                    File.Delete(partial);
+                }
+
+                // Revert backups
+                foreach (string file in existingFiles)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(file);
+                    string backupPath = directory + fileName + EnginePaths.BackupExtension;
+                    if (File.Exists(backupPath))
+                    {
+                        File.Move(backupPath, file);
+                    }
+                }
+
+                result = FileOperationResultTypeEnum.Failure;
+            }
+
+            return result;
+        }
+
+
         public FileOperationResultTypeEnum SaveGameObjectFile(IGameObject gameObject)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;

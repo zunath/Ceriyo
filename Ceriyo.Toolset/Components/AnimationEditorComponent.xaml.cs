@@ -92,14 +92,15 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            foreach (SpriteAnimation animation in Model.Animations)
-            {
-                FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(animation);
+            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Animations.Cast<IGameObject>().ToList(), WorkingPaths.AnimationsDirectory);
 
-                if (result != FileOperationResultTypeEnum.Success)
-                {
-                    MessageBox.Show("Unable to save animation: '" + animation.Name + "'", "Saving animation failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+            if (result == FileOperationResultTypeEnum.Success)
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Unable to save animations.", "Animation save failed.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

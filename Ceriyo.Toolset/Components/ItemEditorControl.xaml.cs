@@ -124,14 +124,11 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            foreach (Item item in Model.Items)
-            {
-                FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(item);
+            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Items.Cast<IGameObject>().ToList(), WorkingPaths.ItemsDirectory);
 
-                if (result != FileOperationResultTypeEnum.Success)
-                {
-                    MessageBox.Show("Unable to save item: '" + item.Name + "'", "Saving item failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+            if (result != FileOperationResultTypeEnum.Success)
+            {
+                MessageBox.Show("Unable to save items.", "Saving items failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

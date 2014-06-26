@@ -100,14 +100,11 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            foreach (Placeable placeable in Model.Placeables)
-            {
-                FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(placeable);
+            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Placeables.Cast<IGameObject>().ToList(), WorkingPaths.PlaceablesDirectory);
 
-                if (result != FileOperationResultTypeEnum.Success)
-                {
-                    MessageBox.Show("Unable to save placeable: '" + placeable.Name + "'", "Saving placeable failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+            if (result != FileOperationResultTypeEnum.Success)
+            {
+                MessageBox.Show("Unable to save placeables.", "Saving placeables failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
