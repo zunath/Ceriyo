@@ -7,6 +7,11 @@ namespace Ceriyo.Data
 {
     public static class EngineConstants
     {
+        public static string ApplicationIdentifier
+        {
+            get { return "D7434CF5-4108-4654-9C52-AA5217D4104D"; }
+        }
+
         public static int TilePixelWidth
         {
             get { return 32; }

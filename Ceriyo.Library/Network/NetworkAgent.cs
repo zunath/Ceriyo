@@ -8,14 +8,12 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Packets;
 using Lidgren.Network;
 using ProtoBuf;
+using Ceriyo.Data;
 
 namespace Ceriyo.Library.Network
 {
-    class NetworkAgent
+    public class NetworkAgent
     {
-        private const string PacketEncryptionKey = "secretpassword";
-        private const string ApplicationIdentifier = "D7434CF5-4108-4654-9C52-AA5217D4104D";
-
         public event EventHandler<ConnectionStatusEventArgs> OnConnected;
         public event EventHandler<ConnectionStatusEventArgs> OnDisconnecting;
         public event EventHandler<ConnectionStatusEventArgs> OnDisconnected;
@@ -26,7 +24,6 @@ namespace Ceriyo.Library.Network
         public int Port { get; private set; }
         private NetOutgoingMessage OutgoingMessage { get; set; }
         private List<NetIncomingMessage> IncomingMessages { get; set; }
-        private INetEncryption Encryption { get; set; }
 
         public List<NetConnection> Connections
         {
@@ -39,7 +36,7 @@ namespace Ceriyo.Library.Network
         public NetworkAgent(NetworkAgentRoleEnum role, int port = 5121)
         {
             Role = role;
-            Configuration = new NetPeerConfiguration(ApplicationIdentifier);
+            Configuration = new NetPeerConfiguration(EngineConstants.ApplicationIdentifier);
             Port = port;
 
             Initialize();
@@ -47,7 +44,7 @@ namespace Ceriyo.Library.Network
 
         private void Initialize()
         {
-            Encryption = new NetXtea(PacketEncryptionKey);
+            //Encryption = new NetXtea(PacketEncryptionKey);
 
             if (Role == NetworkAgentRoleEnum.Server)
             {
@@ -114,8 +111,6 @@ namespace Ceriyo.Library.Network
         {
             if (!Object.ReferenceEquals(recipient, null))
             {
-                OutgoingMessage.Encrypt(Encryption);
-
                 Peer.SendMessage(OutgoingMessage, recipient, method);
                 OutgoingMessage = Peer.CreateMessage();
             }
@@ -173,7 +168,6 @@ namespace Ceriyo.Library.Network
                             break;
                         }
                     case NetIncomingMessageType.Data:
-                        incomingMessage.Decrypt(Encryption);
                         IncomingMessages.Add(incomingMessage);
                         break;
                     default:
