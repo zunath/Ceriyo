@@ -129,6 +129,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\AbilityEditorComponent.xaml.cs">
+      <DependentUpon>AbilityEditorComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\AnimationEditorComponent.xaml.cs">
       <DependentUpon>AnimationEditorComponent.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,9 @@
       <DependentUpon>MenuBarComponent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\FRBControl\FRBGameComponent.cs" />
+    <Compile Include="Components\SkillEditorComponent.xaml.cs">
+      <DependentUpon>SkillEditorComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\TilesetEditorControl.xaml.cs">
       <DependentUpon>TilesetEditorControl.xaml</DependentUpon>
     </Compile>
@@ -210,6 +216,10 @@
     <Compile Include="Windows\ScriptEditorWindow.xaml.cs">
       <DependentUpon>ScriptEditorWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Components\AbilityEditorComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\AnimationEditorComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -259,6 +269,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\PlaceableEditorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\SkillEditorComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

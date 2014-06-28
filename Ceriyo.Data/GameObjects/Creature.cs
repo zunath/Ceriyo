@@ -41,6 +41,8 @@ namespace Ceriyo.Data.GameObjects
         public BindingList<string> AbilityResrefs { get; set; }
         public BindingList<string> SkillResrefs { get; set; }
         public BindingList<string> ItemResrefs { get; set; }
+        public SerializableDictionary<InventorySlotEnum, string> EquippedItemResrefs { get; set; }
+        
 
         [XmlIgnore]
         public CharacterClass CharClass
@@ -101,7 +103,27 @@ namespace Ceriyo.Data.GameObjects
             this.AbilityResrefs = new BindingList<string>();
             this.SkillResrefs = new BindingList<string>();
             this.ItemResrefs = new BindingList<string>();
+            this.EquippedItemResrefs = new SerializableDictionary<InventorySlotEnum, string>();
 
+            this.Scripts.Add(ScriptEventTypeEnum.OnCreatureConversation, string.Empty);
+            this.Scripts.Add(ScriptEventTypeEnum.OnCreatureAttacked, string.Empty);
+            this.Scripts.Add(ScriptEventTypeEnum.OnCreatureDamaged, string.Empty);
+            this.Scripts.Add(ScriptEventTypeEnum.OnCreatureDeath, string.Empty);
+            this.Scripts.Add(ScriptEventTypeEnum.OnCreatureDisturbed, string.Empty);
+            this.Scripts.Add(ScriptEventTypeEnum.OnCreatureHeartbeat, string.Empty);
+            this.Scripts.Add(ScriptEventTypeEnum.OnCreatureSpawned, string.Empty);
+
+            this.EquippedItemResrefs.Add(InventorySlotEnum.Ammo, string.Empty);
+            this.EquippedItemResrefs.Add(InventorySlotEnum.Arms, string.Empty);
+            this.EquippedItemResrefs.Add(InventorySlotEnum.Back, string.Empty);
+            this.EquippedItemResrefs.Add(InventorySlotEnum.Body, string.Empty);
+            this.EquippedItemResrefs.Add(InventorySlotEnum.Head, string.Empty);
+            this.EquippedItemResrefs.Add(InventorySlotEnum.MainHand, string.Empty);
+            this.EquippedItemResrefs.Add(InventorySlotEnum.Neck, string.Empty);
+            this.EquippedItemResrefs.Add(InventorySlotEnum.OffHand, string.Empty);
+            this.EquippedItemResrefs.Add(InventorySlotEnum.Ring1, string.Empty);
+            this.EquippedItemResrefs.Add(InventorySlotEnum.Ring2, string.Empty);
+            this.EquippedItemResrefs.Add(InventorySlotEnum.Waist, string.Empty);
         }
     }
 }

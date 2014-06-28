@@ -32,6 +32,13 @@ namespace Ceriyo.Data.Enumerations
         OnPlaceableAttacked = 22,
         OnPlaceableOpen = 23,
         OnPlaceableUnlocked = 24,
-        OnPlaceableUsed = 25
+        OnPlaceableUsed = 25,
+        OnCreatureConversation = 26,
+        OnCreatureDamaged = 27,
+        OnCreatureDeath = 28,
+        OnCreatureDisturbed = 29,
+        OnCreatureHeartbeat = 30,
+        OnCreatureAttacked = 31,
+        OnCreatureSpawned = 32,
     }
 }
