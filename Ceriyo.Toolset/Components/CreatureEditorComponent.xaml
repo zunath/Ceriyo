@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:enums="clr-namespace:Ceriyo.Data.Enumerations;assembly=Ceriyo.Data"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="700" Background="White">
     <Grid>
@@ -101,6 +102,8 @@
                Height="26" 
                Width="45" Margin="5,123,0,0" Grid.Column="1"/>
 
+
+
         <TabControl HorizontalAlignment="Stretch" 
                     Height="Auto" 
                     Grid.Column="2"
@@ -115,22 +118,133 @@
             </TabItem>
             <TabItem Header="Scripts">
                 <Grid Background="#FFE5E5E5">
+                    <Label Content="On Attacked:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnAttackedScript"
+                		HorizontalAlignment="Stretch" 
+                		Margin="120,39,0,0" 
+                		VerticalAlignment="Top" 
+                		ItemsSource="{Binding Scripts}"
+                		SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureAttacked]}"
+                		IsEnabled="{Binding IsCreatureSelected}"
+                		Width="Auto"/>
+                    <Label Content="On Damaged:" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnDamagedScript"
+                		HorizontalAlignment="Stretch" 
+                		Margin="120,66,0,0" 
+                		VerticalAlignment="Top" 
+                		ItemsSource="{Binding Scripts}"
+                		SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureDamaged]}"
+                		IsEnabled="{Binding IsCreatureSelected}"
+                		Width="Auto"/>
+                    <Label Content="On Death:" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnDeathScript"
+                		HorizontalAlignment="Stretch" 
+                		Margin="120,93,0,0" 
+                		VerticalAlignment="Top" 
+                		ItemsSource="{Binding Scripts}"
+                		SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureDeath]}"
+                		IsEnabled="{Binding IsCreatureSelected}"
+                		Width="Auto"/>
+                    <Label Content="On Disturbed:" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnDisturbedScript"
+                		HorizontalAlignment="Stretch" 
+                		Margin="120,120,0,0" 
+                		VerticalAlignment="Top" 
+                		ItemsSource="{Binding Scripts}"
+                		SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureDisturbed]}"
+                		IsEnabled="{Binding IsCreatureSelected}"
+                		Width="Auto"/>
+                    <Label Content="On Conversation:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnConversationScript"
+                		HorizontalAlignment="Stretch" 
+                		Margin="120,12,0,0" 
+                		VerticalAlignment="Top" 
+                		ItemsSource="{Binding Scripts}"
+                		SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureConversation]}"
+                		IsEnabled="{Binding IsCreatureSelected}"
+                		Width="Auto"/>
+                    <Label Content="On Heartbeat:" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnHeartbeatScript"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,147,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureHeartbeat]}"
+                    	IsEnabled="{Binding IsCreatureSelected}"
+                    	Width="Auto"/>
+                    <Label Content="On Spawned:" HorizontalAlignment="Left" Margin="10,173,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlOnSpawnedScript"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,174,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Scripts}"
+                    	SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureSpawned]}"
+                    	IsEnabled="{Binding IsCreatureSelected}"
+                    	Width="Auto"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Variables">
                 <Grid Background="#FFE5E5E5">
+                    <DataGrid Name="dgLocalVariables" 
+                                      ItemsSource="{Binding SelectedCreature.LocalVariables}"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Stretch"
+                                      Width="Auto"
+                                      Height="Auto"
+                                      ColumnWidth="*"
+                                      IsEnabled="{Binding IsCreatureSelected}"
+                                      CanUserAddRows="True">
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="Description">
                 <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="txtDescription" 
+                		HorizontalAlignment="Stretch" 
+                		VerticalAlignment="Stretch"
+                		AcceptsReturn="True"
+                		TextWrapping="Wrap"
+                		Width="Auto"
+                		Height="Auto"
+                		IsEnabled="{Binding IsCreatureSelected}"
+                		Text="{Binding SelectedCreature.Description}" Margin="0,0,6,152"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Comments">
                 <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="txtComments" 
+                		TextWrapping="Wrap"
+                		AcceptsReturn="True"
+                		HorizontalAlignment="Stretch" 
+                		VerticalAlignment="Stretch"
+                		IsEnabled="{Binding IsCreatureSelected}"
+                		Text="{Binding SelectedCreature.Comments}" Margin="0,0,6,152"/>
                 </Grid>
             </TabItem>
-            
-        </TabControl>
 
+        </TabControl>
+        <Label Content="Class:" 
+               Grid.Column="1" 
+               HorizontalAlignment="Left" 
+               Margin="10,10,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top"/>
+        <ListBox Name="lbClass"
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch" 
+        	      ItemsSource="{Binding CharacterClasses}"
+        	      DisplayMemberPath="Name"
+                  IsEnabled="{Binding IsCreatureSelected}"
+                  SelectionChanged="ClassSelected"
+                  Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="1" Margin="5,41,5,10"/>
+        <Label Content="Dialog:" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ddlConversation"
+        	HorizontalAlignment="Stretch" 
+        	Margin="10,41,5,0" 
+        	VerticalAlignment="Top" 
+        	ItemsSource="{Binding Dialogs}"
+        	SelectedValue="{Binding SelectedCreature.Dialog}"
+        	IsEnabled="{Binding IsCreatureSelected}"
+        	Width="Auto" Grid.Column="1" Grid.Row="2"/>
     </Grid>
 </UserControl>

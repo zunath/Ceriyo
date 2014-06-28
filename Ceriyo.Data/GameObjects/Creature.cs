@@ -38,11 +38,21 @@ namespace Ceriyo.Data.GameObjects
         public int Charisma { get; set; }
         public GenderTypeEnum Gender { get; set; }
 
+        public string DialogResref { get; set; }
         public BindingList<string> AbilityResrefs { get; set; }
         public BindingList<string> SkillResrefs { get; set; }
         public BindingList<string> ItemResrefs { get; set; }
         public SerializableDictionary<InventorySlotEnum, string> EquippedItemResrefs { get; set; }
-        
+
+
+        [XmlIgnore]
+        public Dialog ConversationDialog
+        {
+            get
+            {
+                return WorkingManager.GetGameObject<Dialog>(ModulePaths.DialogsDirectory, DialogResref);
+            }
+        }
 
         [XmlIgnore]
         public CharacterClass CharClass
@@ -99,6 +109,7 @@ namespace Ceriyo.Data.GameObjects
             this.Intelligence = 0;
             this.Charisma = 0;
 
+            this.DialogResref = string.Empty;
             this.Gender = GenderTypeEnum.Male;
             this.AbilityResrefs = new BindingList<string>();
             this.SkillResrefs = new BindingList<string>();
