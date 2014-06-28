@@ -17,6 +17,11 @@ namespace Ceriyo.Data
             get { return EnginePaths.WorkingDirectory + ModulePaths.AnimationsDirectory; }
         }
 
+        public static string AbilitiesDirectory
+        {
+            get { return EnginePaths.WorkingDirectory + ModulePaths.AbilitiesDirectory; }
+        }
+
         public static string AreasDirectory
         {
             get { return EnginePaths.WorkingDirectory + ModulePaths.AreasDirectory; }
@@ -60,6 +65,11 @@ namespace Ceriyo.Data
         public static string ScriptsDirectory
         {
             get { return EnginePaths.WorkingDirectory + ModulePaths.ScriptsDirectory; }
+        }
+
+        public static string SkillsDirectory
+        {
+            get { return EnginePaths.WorkingDirectory + ModulePaths.SkillsDirectory; }
         }
 
         public static string TilesetsDirectory

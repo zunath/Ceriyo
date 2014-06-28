@@ -88,8 +88,10 @@
     <Compile Include="Engine\ResourcePackDataManager.cs" />
     <Compile Include="Engine\WorkingDataManager.cs" />
     <Compile Include="Engine\WorkingPaths.cs" />
+    <Compile Include="Enumerations\AnimationTypeEnum.cs" />
     <Compile Include="Enumerations\GameTypeEnum.cs" />
     <Compile Include="Enumerations\FileOperationResultTypeEnum.cs" />
+    <Compile Include="Enumerations\GenderTypeEnum.cs" />
     <Compile Include="Enumerations\InventorySlotEnum.cs" />
     <Compile Include="Enumerations\NetworkAgentRoleEnum.cs" />
     <Compile Include="Enumerations\PaintObjectModeTypeEnum.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="EventArguments\ObjectPainterEventArgs.cs" />
     <Compile Include="EventArguments\TilePaintEventArgs.cs" />
     <Compile Include="Extensions\SerializableDictionary.cs" />
+    <Compile Include="GameObjects\Ability.cs" />
     <Compile Include="GameObjects\Area.cs" />
     <Compile Include="GameObjects\CharacterClass.cs" />
     <Compile Include="GameObjects\Dialog.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="GameObjects\MapTile.cs" />
     <Compile Include="GameObjects\Placeable.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="GameObjects\Skill.cs" />
     <Compile Include="GameObjects\SpriteAnimation.cs" />
     <Compile Include="GameObjects\SpriteAnimationFrame.cs" />
     <Compile Include="GameObjects\TileDefinition.cs" />

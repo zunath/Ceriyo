@@ -14,6 +14,19 @@
 			Height="Auto" 
 			VerticalAlignment="Stretch" 
 			Width="Auto">
+            
+            <TabItem Header="Creatures">
+
+                <Grid Background="#FFE5E5E5">
+                    <Components:CreatureEditorComponent
+                        x:Name="creatureEditor"
+                        HorizontalAlignment="Stretch" 
+                        Height="Auto"  
+                        VerticalAlignment="Stretch" 
+                        Width="Auto"/>
+                </Grid>
+            </TabItem>
+            
             <TabItem Header="Items">
                 <Grid Background="#FFE5E5E5">
                     <Components:ItemEditorControl 

@@ -161,9 +161,8 @@ namespace Ceriyo.Data
         {
             try
             {
-                BindingList<T> gameObjects = GetAllGameObjects<T>(folderName);
-
-                return gameObjects.SingleOrDefault(x => x.Resref == resref);
+                string path = EnginePaths.WorkingDirectory + folderName + "/" + resref + EnginePaths.DataExtension;
+                return FileManager.XmlDeserialize<T>(path);
             }
             catch
             {

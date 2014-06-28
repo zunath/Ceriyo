@@ -138,6 +138,9 @@
     <Compile Include="Components\AreaToolbarControl.xaml.cs">
       <DependentUpon>AreaToolbarControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\CreatureEditorComponent.xaml.cs">
+      <DependentUpon>CreatureEditorComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\DialogSelectionControl.xaml.cs">
       <DependentUpon>DialogSelectionControl.xaml</DependentUpon>
     </Compile>
@@ -216,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\AreaToolbarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\CreatureEditorComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

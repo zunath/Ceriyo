@@ -12,6 +12,11 @@ namespace Ceriyo.Data
             get { return "/Data/Areas/"; }
         }
 
+        public static string AbilitiesDirectory
+        {
+            get { return "/Data/Abilities/"; }
+        }
+
         public static string CharacterClassesDirectory
         {
             get { return "/Data/CharacterClasses/"; }
@@ -50,6 +55,11 @@ namespace Ceriyo.Data
         public static string ScriptsDirectory
         {
             get { return "/Data/Scripts/"; }
+        }
+
+        public static string SkillsDirectory
+        {
+            get { return "/Data/Skills/"; }
         }
 
         public static string TilesetsDirectory
