@@ -23,6 +23,7 @@ namespace Ceriyo.Toolset.FRBControl
             base.Initialize();
             SpriteManager.Camera.UsePixelCoordinates();
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
+            IsRenderingPaused = false;
         }
 
         protected override void Update(GameTime gameTime)

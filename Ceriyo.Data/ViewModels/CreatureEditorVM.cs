@@ -14,6 +14,7 @@ namespace Ceriyo.Data.ViewModels
         private bool _isCreatureSelected;
         private BindingList<Dialog> _dialogs;
         private BindingList<string> _scripts;
+        private BindingList<CharacterClass> _characterClasses;
 
         public Creature SelectedCreature
         {
@@ -80,6 +81,20 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public BindingList<CharacterClass> CharacterClasses
+        {
+            get
+            {
+                return _characterClasses;
+            }
+            set
+            {
+                _characterClasses = value;
+                OnPropertyChanged("CharacterClasses");
+            }
+
+        }
+
         public CreatureEditorVM()
         {
             this.IsCreatureSelected = false;
@@ -87,6 +102,7 @@ namespace Ceriyo.Data.ViewModels
             this.SelectedCreature = new Creature();
             this.Dialogs = new BindingList<Dialog>();
             this.Scripts = new BindingList<string>();
+            this.CharacterClasses = new BindingList<CharacterClass>();
         }
     }
 }

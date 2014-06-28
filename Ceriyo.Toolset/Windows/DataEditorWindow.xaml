@@ -26,7 +26,16 @@
                         Width="Auto"/>
                 </Grid>
             </TabItem>
-            
+            <TabItem Header="Classes">
+                <Grid Background="#FFE5E5E5">
+                    <Components:ClassEditorComponent
+                        x:Name="classEditor"
+                        HorizontalAlignment="Stretch" 
+                        Height="Auto"  
+                        VerticalAlignment="Stretch" 
+                        Width="Auto"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="Items">
                 <Grid Background="#FFE5E5E5">
                     <Components:ItemEditorControl 

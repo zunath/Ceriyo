@@ -15,6 +15,7 @@ using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
+using Ceriyo.Library.Processing;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -25,12 +26,14 @@ namespace Ceriyo.Toolset.Components
     {
         private CreatureEditorVM Model { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
+        private GameResourceProcessor Processor { get; set; }
 
         public CreatureEditorComponent()
         {
             InitializeComponent();
             Model = new CreatureEditorVM();
             WorkingManager = new WorkingDataManager();
+            Processor = new GameResourceProcessor();
             SetDataContexts();
         }
 
@@ -56,22 +59,47 @@ namespace Ceriyo.Toolset.Components
 
         private void CreatureSelected(object sender, SelectionChangedEventArgs e)
         {
+            Creature creature = lbCreatures.SelectedItem as Creature;
+            Model.SelectedCreature = creature;
+            Model.IsCreatureSelected = creature == null ? false : true;
 
+            if (creature != null)
+            {
+                lbClass.SelectedItem = Model.CharacterClasses.SingleOrDefault(x => x.Resref == creature.CharacterClassResref);
+            }
         }
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-
+            if (Model.SelectedCreature != null)
+            {
+                if (MessageBox.Show("Are you sure you want to delete this creature?", "Delete creature?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    Model.Creatures.Remove(Model.SelectedCreature);
+                    Model.SelectedCreature = null;
+                    Model.IsCreatureSelected = false;
+                }
+            }
         }
 
         private void New(object sender, RoutedEventArgs e)
         {
+            Creature creature = new Creature();
+            string resref = Processor.GenerateUniqueResref(Model.Creatures.Cast<IGameObject>().ToList(), creature.CategoryName);
 
+            creature.Name = resref;
+            creature.Tag = resref;
+            creature.Resref = resref;
+            creature.CharacterClassResref = Model.CharacterClasses[0].Resref;
+
+            Model.Creatures.Add(creature);
+            int index = Model.Creatures.IndexOf(creature);
+            Model.SelectedCreature = Model.Creatures[index];
         }
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Creatures.Cast<IGameObject>().ToList(), ModulePaths.CreaturesDirectory);
+            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Creatures.Cast<IGameObject>().ToList(), WorkingPaths.CreaturesDirectory);
 
             if (result != FileOperationResultTypeEnum.Success)
             {
@@ -84,11 +112,23 @@ namespace Ceriyo.Toolset.Components
             Model.Creatures = WorkingManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
             Model.Dialogs = WorkingManager.GetAllGameObjects<Dialog>(ModulePaths.DialogsDirectory);
             Model.Scripts = WorkingManager.GetAllScriptNames();
+            Model.CharacterClasses = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
+            CharacterClass charClass = new CharacterClass();
+            charClass.Name = "(No Class)";
+            Model.CharacterClasses.Insert(0, charClass);
+
+            if (Model.Creatures.Count > 0)
+            {
+                Model.SelectedCreature = Model.Creatures[0];
+            }
         }
 
         private void ClassSelected(object sender, SelectionChangedEventArgs e)
         {
-
+            if (lbClass.SelectedItem != null)
+            {
+                Model.SelectedCreature.CharacterClassResref = (lbClass.SelectedItem as CharacterClass).Resref;
+            }
         }
     }
 }

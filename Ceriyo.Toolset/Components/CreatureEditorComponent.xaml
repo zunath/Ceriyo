@@ -124,7 +124,7 @@
                 		Margin="120,39,0,0" 
                 		VerticalAlignment="Top" 
                 		ItemsSource="{Binding Scripts}"
-                		SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureAttacked]}"
+                		SelectedValue="{Binding Path=SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureAttacked]}"
                 		IsEnabled="{Binding IsCreatureSelected}"
                 		Width="Auto"/>
                     <Label Content="On Damaged:" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
@@ -133,7 +133,7 @@
                 		Margin="120,66,0,0" 
                 		VerticalAlignment="Top" 
                 		ItemsSource="{Binding Scripts}"
-                		SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureDamaged]}"
+                		SelectedValue="{Binding Path=SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureDamaged]}"
                 		IsEnabled="{Binding IsCreatureSelected}"
                 		Width="Auto"/>
                     <Label Content="On Death:" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
@@ -142,7 +142,7 @@
                 		Margin="120,93,0,0" 
                 		VerticalAlignment="Top" 
                 		ItemsSource="{Binding Scripts}"
-                		SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureDeath]}"
+                		SelectedValue="{Binding Path=SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureDeath]}"
                 		IsEnabled="{Binding IsCreatureSelected}"
                 		Width="Auto"/>
                     <Label Content="On Disturbed:" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
@@ -151,7 +151,7 @@
                 		Margin="120,120,0,0" 
                 		VerticalAlignment="Top" 
                 		ItemsSource="{Binding Scripts}"
-                		SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureDisturbed]}"
+                		SelectedValue="{Binding Path=SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureDisturbed]}"
                 		IsEnabled="{Binding IsCreatureSelected}"
                 		Width="Auto"/>
                     <Label Content="On Conversation:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
@@ -160,7 +160,7 @@
                 		Margin="120,12,0,0" 
                 		VerticalAlignment="Top" 
                 		ItemsSource="{Binding Scripts}"
-                		SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureConversation]}"
+                		SelectedValue="{Binding Path=SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureConversation]}"
                 		IsEnabled="{Binding IsCreatureSelected}"
                 		Width="Auto"/>
                     <Label Content="On Heartbeat:" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top"/>
@@ -169,7 +169,7 @@
                     	Margin="120,147,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureHeartbeat]}"
+                    	SelectedValue="{Binding Path=SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureHeartbeat]}"
                     	IsEnabled="{Binding IsCreatureSelected}"
                     	Width="Auto"/>
                     <Label Content="On Spawned:" HorizontalAlignment="Left" Margin="10,173,0,0" VerticalAlignment="Top"/>
@@ -178,7 +178,7 @@
                     	Margin="120,174,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureSpawned]}"
+                    	SelectedValue="{Binding Path=SelectedCreature.Scripts[(enums:ScriptEventTypeEnum)OnCreatureSpawned]}"
                     	IsEnabled="{Binding IsCreatureSelected}"
                     	Width="Auto"/>
                 </Grid>

@@ -94,11 +94,7 @@ namespace Ceriyo.Toolset.Components
         {
             FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Animations.Cast<IGameObject>().ToList(), WorkingPaths.AnimationsDirectory);
 
-            if (result == FileOperationResultTypeEnum.Success)
-            {
-
-            }
-            else
+            if (result != FileOperationResultTypeEnum.Success)
             {
                 MessageBox.Show("Unable to save animations.", "Animation save failed.", MessageBoxButton.OK, MessageBoxImage.Error);
             }

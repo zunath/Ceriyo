@@ -257,7 +257,7 @@
                               Margin="120,39,0,0" 
                               VerticalAlignment="Top" 
 							  ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemAcquired]}"
+                    	      SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemAcquired]}"
                               IsEnabled="{Binding IsItemSelected}"
                               Width="Auto"/>
                     <Label Content="On Unacquired:" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>

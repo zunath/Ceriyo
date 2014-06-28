@@ -161,7 +161,14 @@ namespace Ceriyo.Data
             {
                 zip.AddDirectoryByName(ModulePaths.TilesetsDirectory);
             }
-
+            if (zip[ModulePaths.AbilitiesDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.AbilitiesDirectory);
+            }
+            if (zip[ModulePaths.SkillsDirectory] == null)
+            {
+                zip.AddDirectoryByName(ModulePaths.SkillsDirectory);
+            }
         }
 
         private void AddModulePropertiesFile(ZipFile zip, GameModule module)

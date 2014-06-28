@@ -233,7 +233,7 @@ namespace Ceriyo.Data
                 module = FileManager.XmlDeserialize<GameModule>(path);
 
             }
-            catch (Exception ex)
+            catch
             {
                 module = null;
             }

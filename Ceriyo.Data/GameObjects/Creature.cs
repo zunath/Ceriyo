@@ -24,7 +24,7 @@ namespace Ceriyo.Data.GameObjects
         public BindingList<LocalVariable> LocalVariables { get; set; }
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
         [XmlIgnore]
-        public string CategoryName { get { return "Script"; } }
+        public string CategoryName { get { return "Creature"; } }
         public SerializableDictionary<AnimationTypeEnum, string> AnimationResrefs { get; set; }
 
         public string CharacterClassResref { get; set; }
