@@ -57,6 +57,15 @@ namespace Ceriyo.Toolset.Components
             ddlOnDisturbedScript.DataContext = Model;
             ddlOnHeartbeatScript.DataContext = Model;
             ddlOnSpawnedScript.DataContext = Model;
+
+            ddlMoveEastAnimation.DataContext = Model;
+            ddlMoveNorthAnimation.DataContext = Model;
+            ddlMoveNortheastAnimation.DataContext = Model;
+            ddlMoveNorthwestAnimation.DataContext = Model;
+            ddlMoveSouthAnimation.DataContext = Model;
+            ddlMoveSoutheastAnimation.DataContext = Model;
+            ddlMoveSouthwestAnimation.DataContext = Model;
+            ddlMoveWestAnimation.DataContext = Model;
         }
 
         private void CreatureSelected(object sender, SelectionChangedEventArgs e)

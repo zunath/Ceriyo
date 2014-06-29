@@ -118,6 +118,15 @@ namespace Ceriyo.Data.GameObjects
             this.ItemResrefs = new BindingList<string>();
             this.EquippedItemResrefs = new SerializableDictionary<InventorySlotEnum, string>();
 
+            this.AnimationResrefs.Add(AnimationTypeEnum.MoveEast, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.MoveNorth, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.MoveNorthEast, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.MoveNorthWest, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.MoveSouth, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.MoveSouthEast, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.MoveSouthWest, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.MoveWest, string.Empty);
+
             this.Scripts.Add(ScriptEventTypeEnum.OnCreatureConversation, string.Empty);
             this.Scripts.Add(ScriptEventTypeEnum.OnCreatureAttacked, string.Empty);
             this.Scripts.Add(ScriptEventTypeEnum.OnCreatureDamaged, string.Empty);

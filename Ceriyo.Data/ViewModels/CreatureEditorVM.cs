@@ -15,6 +15,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<Dialog> _dialogs;
         private BindingList<string> _scripts;
         private BindingList<CharacterClass> _characterClasses;
+        private BindingList<SpriteAnimation> _animations;
         private int _maxLevel;
 
         public Creature SelectedCreature
@@ -96,6 +97,19 @@ namespace Ceriyo.Data.ViewModels
 
         }
 
+        public BindingList<SpriteAnimation> Animations
+        {
+            get
+            {
+                return _animations;
+            }
+            set
+            {
+                _animations = value;
+                OnPropertyChanged("Animations");
+            }
+        }
+
         public int MaxLevel
         {
             get
@@ -118,6 +132,7 @@ namespace Ceriyo.Data.ViewModels
             this.Scripts = new BindingList<string>();
             this.CharacterClasses = new BindingList<CharacterClass>();
             this.MaxLevel = EngineConstants.MaxLevel;
+            this.Animations = new BindingList<SpriteAnimation>();
         }
     }
 }

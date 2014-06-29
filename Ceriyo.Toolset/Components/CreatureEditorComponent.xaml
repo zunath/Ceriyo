@@ -114,7 +114,80 @@
 			VerticalAlignment="Stretch" 
 			Width="Auto">
             <TabItem Header="Animations">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="Move North:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlMoveNorthAnimation"
+                		HorizontalAlignment="Stretch" 
+                		Margin="120,12,0,0" 
+                		VerticalAlignment="Top" 
+                		ItemsSource="{Binding Animations}"
+                		SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveNorth]}"
+                		IsEnabled="{Binding IsCreatureSelected}"
+                		Width="Auto"/>
+                    <Label Content="Move South:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlMoveSouthAnimation"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,39,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Animations}"
+                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveSouth]}"
+                    	IsEnabled="{Binding IsCreatureSelected}"
+                    	Width="Auto"/>
+                    <Label Content="Move East:" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlMoveEastAnimation"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,66,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Animations}"
+                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveEast]}"
+                    	IsEnabled="{Binding IsCreatureSelected}"
+                    	Width="Auto"/>
+                    <Label Content="Move West:" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlMoveWestAnimation"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,93,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Animations}"
+                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveWest]}"
+                    	IsEnabled="{Binding IsCreatureSelected}"
+                    	Width="Auto"/>
+                    <Label Content="Move Northeast:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlMoveNortheastAnimation"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,120,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Animations}"
+                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveNorthEast]}"
+                    	IsEnabled="{Binding IsCreatureSelected}"
+                    	Width="Auto"/>
+                    <Label Content="Move Northwest:" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlMoveNorthwestAnimation"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,147,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Animations}"
+                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveNorthWest]}"
+                    	IsEnabled="{Binding IsCreatureSelected}"
+                    	Width="Auto"/>
+                    <Label Content="Move Southeast:" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlMoveSoutheastAnimation"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,174,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Animations}"
+                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveSouthEast]}"
+                    	IsEnabled="{Binding IsCreatureSelected}"
+                    	Width="Auto"/>
+                    <Label Content="Move Southwest:" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="ddlMoveSouthwestAnimation"
+                    	HorizontalAlignment="Stretch" 
+                    	Margin="120,201,0,0" 
+                    	VerticalAlignment="Top" 
+                    	ItemsSource="{Binding Animations}"
+                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveSouthwest]}"
+                    	IsEnabled="{Binding IsCreatureSelected}"
+                    	Width="Auto"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Scripts">
                 <Grid Background="#FFE5E5E5">
