@@ -48,6 +48,7 @@ namespace Ceriyo.Toolset.Components
             lbCreatures.DataContext = Model;
             lbItems.DataContext = Model;
             lbPlaceables.DataContext = Model;
+            ObjectTabs.DataContext = Model;
         }
 
         private void PopulateModel()
@@ -152,5 +153,68 @@ namespace Ceriyo.Toolset.Components
                 rectSelectedTiles.Height = (Model.SelectionEndY - Model.SelectionStartY + 1) * EngineConstants.TilePixelHeight;
             }
         }
+
+        private void CreatureSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (Model.SelectedCreature != null)
+            {
+                if (OnModeChange != null)
+                {
+                    OnModeChange(this, new ObjectPainterEventArgs(Model.SelectedCreature));
+                }
+            }
+        }
+
+        private void ItemSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (Model.SelectedItem != null)
+            {
+                if (OnModeChange != null)
+                {
+                    OnModeChange(this, new ObjectPainterEventArgs(Model.SelectedItem));
+                }
+            }
+        }
+
+        private void PlaceableSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (Model.SelectedPlaceable != null)
+            {
+                if (OnModeChange != null)
+                {
+                    OnModeChange(this, new ObjectPainterEventArgs(Model.SelectedPlaceable));
+                }
+            }
+        }
+
+        private void TabChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TabItem item = ObjectTabs.SelectedItem as TabItem;
+
+            if (item != null && OnModeChange != null)
+            {
+                if (item.Name == "TilesTab")
+                {
+                    OnModeChange(this, new ObjectPainterEventArgs(Model.SelectionStartX,
+                                                                    Model.SelectionStartY,
+                                                                    Model.SelectionEndX,
+                                                                    Model.SelectionEndY));
+
+                }
+                else if (item.Name == "CreaturesTab")
+                {
+                    OnModeChange(this, new ObjectPainterEventArgs(Model.SelectedCreature));
+                }
+                else if (item.Name == "ItemsTab")
+                {
+                    OnModeChange(this, new ObjectPainterEventArgs(Model.SelectedItem));
+                }
+                else if (item.Name == "PlaceablesTab")
+                {
+                    OnModeChange(this, new ObjectPainterEventArgs(Model.SelectedPlaceable));
+                }
+            }
+        }
+
     }
 }

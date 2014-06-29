@@ -34,17 +34,19 @@ namespace Ceriyo.Toolset.Components
         {
             AreaEditorScreen screen = ScreenManager.CurrentScreen as AreaEditorScreen;
 
-            areaSelection.OnAreaOpen += objectSelection.LoadArea;
-            areaSelection.OnAreaOpen += paintObjects.LoadArea;
-            areaSelection.OnAreaOpen += screen.LoadArea;
+            if (screen != null)
+            {
+                areaSelection.OnAreaOpen += objectSelection.LoadArea;
+                areaSelection.OnAreaOpen += paintObjects.LoadArea;
+                areaSelection.OnAreaOpen += screen.LoadArea;
 
-            areaSelection.OnAreaSaved += screen.OnModulePropertiesUpdate;
+                areaSelection.OnAreaSaved += screen.OnModulePropertiesUpdate;
 
-            areaSelection.OnAreaClosed += paintObjects.UnloadArea;
-            areaSelection.OnAreaClosed += screen.CloseArea;
+                areaSelection.OnAreaClosed += paintObjects.UnloadArea;
+                areaSelection.OnAreaClosed += screen.CloseArea;
 
-            paintObjects.OnModeChange += screen.ChangePaintMode;
-
+                paintObjects.OnModeChange += screen.ChangePaintMode;
+            }
         }
 
         private void SetUpExternalEvents()

@@ -12,7 +12,7 @@
         
         
         <DockPanel>
-            <TabControl Name="ObjectTabs" >
+            <TabControl Name="ObjectTabs" SelectionChanged="TabChanged">
                 <TabItem Name="TilesTab" Header="Tiles">
 
                     <DockPanel>
@@ -65,6 +65,7 @@
                              ItemsSource="{Binding Creatures}"
                              SelectedItem="{Binding SelectedCreature}"
                              DisplayMemberPath="Name"
+                             SelectionChanged="CreatureSelected"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"/>
                 </TabItem>
@@ -75,6 +76,7 @@
                              Width="Auto"
                              ItemsSource="{Binding Items}"
                              SelectedItem="{Binding SelectedItem}"
+                             SelectionChanged="ItemSelected"
                              DisplayMemberPath="Name"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"/>
@@ -86,6 +88,7 @@
                              Width="Auto"
                              ItemsSource="{Binding Placeables}"
                              SelectedItem="{Binding SelectedPlaceable}"
+                             SelectionChanged="PlaceableSelected"
                              DisplayMemberPath="Name"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"/>

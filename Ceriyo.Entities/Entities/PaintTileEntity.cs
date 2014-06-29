@@ -28,6 +28,7 @@ namespace Ceriyo.Entities.Entities
         private int StartCellY { get; set; }
         private int EndCellX { get; set; }
         private int EndCellY { get; set; }
+        public bool IsEnabled { get; set; }
 
         public PaintTileEntity(GameResource graphic, int areaWidth, int areaHeight) :
             base("PaintTileEntity")
@@ -42,6 +43,7 @@ namespace Ceriyo.Entities.Entities
             this.SourceRectangle = new Rectangle(0, 0, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
             this.AreaWidth = areaWidth;
             this.AreaHeight = areaHeight;
+            this.IsEnabled = false;
 
             LoadEntity();
         }
@@ -52,7 +54,9 @@ namespace Ceriyo.Entities.Entities
 
         protected override void CustomActivity()
         {
-            if (InputManager.Mouse.IsInGameWindow())
+            this.EntitySprite.Visible = IsEnabled;
+
+            if (InputManager.Mouse.IsInGameWindow() && IsEnabled)
             {
                 StartCellX = Convert.ToInt32(InputManager.Mouse.WorldXAt(0) / EngineConstants.TilePixelWidth);
                 StartCellY = Convert.ToInt32(InputManager.Mouse.WorldYAt(0) / EngineConstants.TilePixelHeight);

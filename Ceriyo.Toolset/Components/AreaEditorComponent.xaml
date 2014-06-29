@@ -21,14 +21,14 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <Comp:AreaSelectionControl 
             x:Name="areaSelection"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Grid.Row="0"
             Grid.RowSpan="1" />
-        
+
         <Comp:ObjectSelectionComponent
             x:Name="objectSelection"
             Grid.Column="0"
@@ -36,13 +36,13 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             ></Comp:ObjectSelectionComponent>
-        
+
         <Comp:PaintObjectsControl
             x:Name="paintObjects"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Grid.Row="3"
             Grid.RowSpan="2"></Comp:PaintObjectsControl>
-        
+
     </Grid>
 </UserControl>

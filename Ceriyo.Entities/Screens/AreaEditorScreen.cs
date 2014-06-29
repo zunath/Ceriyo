@@ -99,6 +99,11 @@ namespace Ceriyo.Entities.Screens
             if (e.GameObject == null)
             {
                 PaintTile.SetTilesetCoordinates(e.TileCellXStart, e.TileCellYStart, e.TileCellXEnd, e.TileCellYEnd);
+                PaintTile.IsEnabled = true;
+            }
+            else
+            {
+                PaintTile.IsEnabled = false;
             }
         }
     }
