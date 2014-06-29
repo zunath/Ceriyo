@@ -39,7 +39,8 @@ namespace Ceriyo.Toolset
             AreaEditorScreen screen = ScreenManager.CurrentScreen as AreaEditorScreen;
             menuBar.OnOpenModule += OnModuleOpened;
             menuBar.OnOpenModule += areaSelection.ModuleLoaded;
-            
+            menuBar.OnDataEditorClosed += paintObjects.GameObjectsListsChanged;
+
             areaSelection.OnAreaOpen += objectSelection.LoadArea;
             areaSelection.OnAreaOpen += paintObjects.LoadArea;
             areaSelection.OnAreaOpen += screen.LoadArea;

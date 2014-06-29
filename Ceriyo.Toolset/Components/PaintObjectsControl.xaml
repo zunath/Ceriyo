@@ -64,6 +64,7 @@
                              Width="Auto"
                              ItemsSource="{Binding Creatures}"
                              SelectedItem="{Binding SelectedCreature}"
+                             DisplayMemberPath="Name"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"/>
                 </TabItem>
@@ -74,6 +75,7 @@
                              Width="Auto"
                              ItemsSource="{Binding Items}"
                              SelectedItem="{Binding SelectedItem}"
+                             DisplayMemberPath="Name"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"/>
                 </TabItem>
@@ -84,6 +86,7 @@
                              Width="Auto"
                              ItemsSource="{Binding Placeables}"
                              SelectedItem="{Binding SelectedPlaceable}"
+                             DisplayMemberPath="Name"
                              VerticalAlignment="Stretch"
                              HorizontalAlignment="Stretch"/>
                 </TabItem>

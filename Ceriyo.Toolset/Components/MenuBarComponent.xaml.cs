@@ -31,6 +31,7 @@ namespace Ceriyo.Toolset.Components
         private ModulePropertiesWindow ModuleProperties { get; set; }
         private DataEditorWindow DataEditor { get; set; }
         public event EventHandler<GameModuleEventArgs> OnOpenModule;
+        public event EventHandler<EventArgs> OnDataEditorClosed;
 
         public MenuBarComponent()
         {
@@ -41,6 +42,20 @@ namespace Ceriyo.Toolset.Components
             WorkingManager = new WorkingDataManager();
             ResourceManager = new ManageResourcePacksWindow();
             DataEditor = new DataEditorWindow();
+            InitializeEvents();
+        }
+
+        private void InitializeEvents()
+        {
+            DataEditor.OnWindowHidden += RaiseDataEditorClosedEvent;
+        }
+
+        private void RaiseDataEditorClosedEvent(object sender, EventArgs e)
+        {
+            if (OnDataEditorClosed != null)
+            {
+                OnDataEditorClosed(this, e);
+            }
         }
 
         private void NewModule_Click(object sender, RoutedEventArgs e)
@@ -62,6 +77,8 @@ namespace Ceriyo.Toolset.Components
             {
                 OnOpenModule(sender, e);
             }
+
+            RaiseDataEditorClosedEvent(this, new EventArgs());
         }
 
         private void miExit_Click(object sender, RoutedEventArgs e)

@@ -21,6 +21,7 @@ namespace Ceriyo.Toolset.Windows
     {
         private event EventHandler<EventArgs> OnSave;
         private event EventHandler<EventArgs> OnOpen;
+        public event EventHandler<EventArgs> OnWindowHidden;
 
         public DataEditorWindow()
         {
@@ -66,11 +67,21 @@ namespace Ceriyo.Toolset.Windows
                 OnSave(this, new EventArgs());
             }
             this.Hide();
+
+            if (OnWindowHidden != null)
+            {
+                OnWindowHidden(this, new EventArgs());
+            }
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
             this.Hide();
+
+            if (OnWindowHidden != null)
+            {
+                OnWindowHidden(this, new EventArgs());
+            }
         }
 
         private void ApplyChanges(object sender, RoutedEventArgs e)
@@ -85,6 +96,11 @@ namespace Ceriyo.Toolset.Windows
         {
             e.Cancel = true;
             this.Hide();
+
+            if (OnWindowHidden != null)
+            {
+                OnWindowHidden(this, new EventArgs());
+            }
         }
 
     }

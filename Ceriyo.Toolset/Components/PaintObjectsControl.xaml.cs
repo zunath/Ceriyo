@@ -21,6 +21,7 @@ using Ceriyo.Data.ViewModels;
 using Ceriyo.Entities.Screens;
 using Ceriyo.Toolset.FRBControl;
 using Ceriyo.Library.Processing;
+using System.ComponentModel;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -44,6 +45,9 @@ namespace Ceriyo.Toolset.Components
         private void SetDataContexts()
         {
             rectSelectedTiles.DataContext = Model;
+            lbCreatures.DataContext = Model;
+            lbItems.DataContext = Model;
+            lbPlaceables.DataContext = Model;
         }
 
         private void PopulateModel()
@@ -67,6 +71,13 @@ namespace Ceriyo.Toolset.Components
             Model.Items.Clear();
             Model.Placeables.Clear();
             Model.PaintMode = PaintObjectModeTypeEnum.None;
+        }
+
+        public void GameObjectsListsChanged(object sender, EventArgs e)
+        {
+            Model.Items = WorkingManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
+            Model.Placeables = WorkingManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
+            Model.Creatures = WorkingManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
         }
 
         public void LoadArea(object sender, GameObjectEventArgs e)
