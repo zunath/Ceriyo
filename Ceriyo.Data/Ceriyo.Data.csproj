@@ -102,6 +102,7 @@
     <Compile Include="EventArguments\GameObjectEventArgs.cs" />
     <Compile Include="EventArguments\ConnectionStatusEventArgs.cs" />
     <Compile Include="EventArguments\GameModuleEventArgs.cs" />
+    <Compile Include="EventArguments\GameObjectListEventArgs.cs" />
     <Compile Include="EventArguments\ScriptEventArgs.cs" />
     <Compile Include="EventArguments\ObjectPainterEventArgs.cs" />
     <Compile Include="EventArguments\TilePaintEventArgs.cs" />

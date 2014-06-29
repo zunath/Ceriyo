@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -13,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Library.Processing;
@@ -127,6 +129,7 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
+            Model.Animations = WorkingManager.GetAllGameObjects<SpriteAnimation>(ModulePaths.AnimationsDirectory);
             Model.Creatures = WorkingManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
             Model.Dialogs = WorkingManager.GetAllGameObjects<Dialog>(ModulePaths.DialogsDirectory);
             Model.Scripts = WorkingManager.GetAllScriptNames();
@@ -139,6 +142,12 @@ namespace Ceriyo.Toolset.Components
             {
                 Model.SelectedCreature = Model.Creatures[0];
             }
+        }
+
+        public void AnimationsModified(object sender, GameObjectListEventArgs e)
+        {
+            BindingList<SpriteAnimation> animations = new BindingList<SpriteAnimation>(e.GameObjects.Cast<SpriteAnimation>().ToList());
+            Model.Animations = animations;
         }
 
         private void ClassSelected(object sender, SelectionChangedEventArgs e)

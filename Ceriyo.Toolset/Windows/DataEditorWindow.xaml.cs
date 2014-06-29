@@ -45,6 +45,8 @@ namespace Ceriyo.Toolset.Windows
             OnOpen += creatureEditor.Open;
             OnOpen += abilityEditor.Open;
             OnOpen += skillEditor.Open;
+
+            animationEditor.OnAnimationsListChanged += creatureEditor.AnimationsModified;
         }
 
         public void Open()

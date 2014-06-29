@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Data.ViewModels;
@@ -32,6 +33,8 @@ namespace Ceriyo.Toolset.Components
         private GameResourceProcessor Processor { get; set; }
         private ResourcePackDataManager ResourcePackManager { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
+
+        public event EventHandler<GameObjectListEventArgs> OnAnimationsListChanged;
 
         public AnimationEditorComponent()
         {
@@ -98,6 +101,13 @@ namespace Ceriyo.Toolset.Components
             {
                 MessageBox.Show("Unable to save animations.", "Animation save failed.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else
+            {
+                if (OnAnimationsListChanged != null)
+                {
+                    OnAnimationsListChanged(this, new GameObjectListEventArgs(Model.Animations.Cast<IGameObject>().ToList()));
+                }
+            }
         }
 
         private void NewAnimation(object sender, RoutedEventArgs e)
@@ -114,6 +124,11 @@ namespace Ceriyo.Toolset.Components
             Model.Animations.Add(animation);
             int index = lbAnimations.Items.IndexOf(animation);
             lbAnimations.SelectedItem = lbAnimations.Items[index];
+
+            if (OnAnimationsListChanged != null)
+            {
+                OnAnimationsListChanged(this, new GameObjectListEventArgs(Model.Animations.Cast<IGameObject>().ToList()));
+            }
         }
 
         private void DeleteAnimation(object sender, RoutedEventArgs e)
@@ -130,6 +145,11 @@ namespace Ceriyo.Toolset.Components
                     RefreshPreview();
                     RefreshSelectedFrame();
                 }
+            }
+
+            if (OnAnimationsListChanged != null)
+            {
+                OnAnimationsListChanged(this, new GameObjectListEventArgs(Model.Animations.Cast<IGameObject>().ToList()));
             }
         }
 

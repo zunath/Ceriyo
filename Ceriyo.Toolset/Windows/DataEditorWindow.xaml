@@ -10,12 +10,14 @@
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TabControl HorizontalAlignment="Stretch" 
+        <TabControl Name="tabPages"
+            HorizontalAlignment="Stretch" 
 			Height="Auto" 
 			VerticalAlignment="Stretch" 
 			Width="Auto">
             
-            <TabItem Header="Creatures">
+            <TabItem Name="tabCreatures"
+                Header="Creatures">
 
                 <Grid Background="#FFE5E5E5">
                     <Components:CreatureEditorComponent

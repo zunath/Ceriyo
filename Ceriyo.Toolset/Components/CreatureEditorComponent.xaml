@@ -123,6 +123,7 @@
                 		ItemsSource="{Binding Animations}"
                 		SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveNorth]}"
                 		IsEnabled="{Binding IsCreatureSelected}"
+                        DisplayMemberPath="Name"
                 		Width="Auto"/>
                     <Label Content="Move South:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="ddlMoveSouthAnimation"
@@ -132,6 +133,7 @@
                     	ItemsSource="{Binding Animations}"
                     	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveSouth]}"
                     	IsEnabled="{Binding IsCreatureSelected}"
+                        DisplayMemberPath="Name"
                     	Width="Auto"/>
                     <Label Content="Move East:" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="ddlMoveEastAnimation"
@@ -141,6 +143,7 @@
                     	ItemsSource="{Binding Animations}"
                     	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveEast]}"
                     	IsEnabled="{Binding IsCreatureSelected}"
+                        DisplayMemberPath="Name"
                     	Width="Auto"/>
                     <Label Content="Move West:" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="ddlMoveWestAnimation"
@@ -150,6 +153,7 @@
                     	ItemsSource="{Binding Animations}"
                     	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveWest]}"
                     	IsEnabled="{Binding IsCreatureSelected}"
+                        DisplayMemberPath="Name"
                     	Width="Auto"/>
                     <Label Content="Move Northeast:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="ddlMoveNortheastAnimation"
@@ -159,6 +163,7 @@
                     	ItemsSource="{Binding Animations}"
                     	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveNorthEast]}"
                     	IsEnabled="{Binding IsCreatureSelected}"
+                        DisplayMemberPath="Name"
                     	Width="Auto"/>
                     <Label Content="Move Northwest:" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="ddlMoveNorthwestAnimation"
@@ -168,6 +173,7 @@
                     	ItemsSource="{Binding Animations}"
                     	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveNorthWest]}"
                     	IsEnabled="{Binding IsCreatureSelected}"
+                        DisplayMemberPath="Name"
                     	Width="Auto"/>
                     <Label Content="Move Southeast:" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="ddlMoveSoutheastAnimation"
@@ -177,6 +183,7 @@
                     	ItemsSource="{Binding Animations}"
                     	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveSouthEast]}"
                     	IsEnabled="{Binding IsCreatureSelected}"
+                        DisplayMemberPath="Name"
                     	Width="Auto"/>
                     <Label Content="Move Southwest:" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="ddlMoveSouthwestAnimation"
@@ -186,6 +193,7 @@
                     	ItemsSource="{Binding Animations}"
                     	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveSouthwest]}"
                     	IsEnabled="{Binding IsCreatureSelected}"
+                        DisplayMemberPath="Name"
                     	Width="Auto"/>
                 </Grid>
             </TabItem>
