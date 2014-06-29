@@ -15,6 +15,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<Dialog> _dialogs;
         private BindingList<string> _scripts;
         private BindingList<CharacterClass> _characterClasses;
+        private int _maxLevel;
 
         public Creature SelectedCreature
         {
@@ -95,6 +96,19 @@ namespace Ceriyo.Data.ViewModels
 
         }
 
+        public int MaxLevel
+        {
+            get
+            {
+                return _maxLevel;
+            }
+            set
+            {
+                _maxLevel = value;
+                OnPropertyChanged("MaxLevel");
+            }
+        }
+
         public CreatureEditorVM()
         {
             this.IsCreatureSelected = false;
@@ -103,6 +117,7 @@ namespace Ceriyo.Data.ViewModels
             this.Dialogs = new BindingList<Dialog>();
             this.Scripts = new BindingList<string>();
             this.CharacterClasses = new BindingList<CharacterClass>();
+            this.MaxLevel = EngineConstants.MaxLevel;
         }
     }
 }

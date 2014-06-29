@@ -35,12 +35,16 @@ namespace Ceriyo.Toolset.Windows
             OnSave += placeableEditor.Save;
             OnSave += animationEditor.Save;
             OnSave += creatureEditor.Save;
+            OnSave += abilityEditor.Save;
+            OnSave += skillEditor.Save;
 
             OnOpen += tilesetEditor.Open;
             OnOpen += itemEditor.Open;
             OnOpen += placeableEditor.Open;
             OnOpen += animationEditor.Open;
             OnOpen += creatureEditor.Open;
+            OnOpen += abilityEditor.Open;
+            OnOpen += skillEditor.Open;
         }
 
         public void Open()

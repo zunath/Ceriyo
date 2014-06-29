@@ -138,6 +138,7 @@
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />
+    <Compile Include="ViewModels\AbilityEditorVM.cs" />
     <Compile Include="ViewModels\AnimationEditorVM.cs" />
     <Compile Include="ViewModels\AreaSelectionVM.cs" />
     <Compile Include="ViewModels\AreaToolbarVM.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="ViewModels\SaveScriptVM.cs" />
     <Compile Include="ViewModels\ScriptEditorVM.cs" />
     <Compile Include="ViewModels\ScriptSelectionVM.cs" />
+    <Compile Include="ViewModels\SkillEditorVM.cs" />
     <Compile Include="ViewModels\TilesetEditorVM.cs" />
     <Compile Include="ViewModels\ToolsetVM.cs" />
   </ItemGroup>

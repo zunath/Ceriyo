@@ -80,11 +80,11 @@ namespace Ceriyo.Data.GameObjects
             this.ItemRequirements = new BindingList<ItemClassRequirement>();
             this.WorkingManager = new WorkingDataManager();
 
-            Scripts.Add(ScriptEventTypeEnum.OnItemAcquired, "");
-            Scripts.Add(ScriptEventTypeEnum.OnItemActivated, "");
-            Scripts.Add(ScriptEventTypeEnum.OnItemEquipped, "");
-            Scripts.Add(ScriptEventTypeEnum.OnItemUnacquired, "");
-            Scripts.Add(ScriptEventTypeEnum.OnItemUnequipped, "");
+            Scripts.Add(ScriptEventTypeEnum.OnItemAcquired, string.Empty);
+            Scripts.Add(ScriptEventTypeEnum.OnItemActivated, string.Empty);
+            Scripts.Add(ScriptEventTypeEnum.OnItemEquipped, string.Empty);
+            Scripts.Add(ScriptEventTypeEnum.OnItemUnacquired, string.Empty);
+            Scripts.Add(ScriptEventTypeEnum.OnItemUnequipped, string.Empty);
         }
     }
 }

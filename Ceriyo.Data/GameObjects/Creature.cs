@@ -28,6 +28,7 @@ namespace Ceriyo.Data.GameObjects
         public SerializableDictionary<AnimationTypeEnum, string> AnimationResrefs { get; set; }
 
         public string CharacterClassResref { get; set; }
+        public int Level { get; set; }
         public int HitPoints { get; set; }
         public int Mana { get; set; }
         public int Strength { get; set; }
@@ -101,6 +102,7 @@ namespace Ceriyo.Data.GameObjects
             this.AnimationResrefs = new SerializableDictionary<AnimationTypeEnum, string>();
 
             this.CharacterClassResref = string.Empty;
+            this.Level = 1;
             this.HitPoints = 0;
             this.Strength = 0;
             this.Dexterity = 0;

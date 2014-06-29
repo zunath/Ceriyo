@@ -47,6 +47,8 @@ namespace Ceriyo.Toolset.Components
             dgLocalVariables.DataContext = Model;
             txtDescription.DataContext = Model;
             txtComments.DataContext = Model;
+            numLevel.DataContext = Model;
+            ddlDialog.DataContext = Model;
 
             ddlOnAttackedScript.DataContext = Model;
             ddlOnConversationScript.DataContext = Model;
@@ -65,7 +67,14 @@ namespace Ceriyo.Toolset.Components
 
             if (creature != null)
             {
-                lbClass.SelectedItem = Model.CharacterClasses.SingleOrDefault(x => x.Resref == creature.CharacterClassResref);
+                if (string.IsNullOrWhiteSpace(creature.CharacterClassResref))
+                {
+                    lbClass.SelectedItem = lbClass.Items[0];
+                }
+                else
+                {
+                    lbClass.SelectedItem = Model.CharacterClasses.SingleOrDefault(x => x.Resref == creature.CharacterClassResref);
+                }
             }
         }
 
@@ -128,6 +137,14 @@ namespace Ceriyo.Toolset.Components
             if (lbClass.SelectedItem != null)
             {
                 Model.SelectedCreature.CharacterClassResref = (lbClass.SelectedItem as CharacterClass).Resref;
+            }
+        }
+
+        private void DialogSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (ddlDialog.SelectedItem != null)
+            {
+                Model.SelectedCreature.DialogResref = (ddlDialog.SelectedItem as Dialog).Resref;
             }
         }
     }
