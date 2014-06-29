@@ -97,6 +97,7 @@ namespace Ceriyo.Toolset.Components
             Canvas.SetLeft(rectSelectedTiles, 0);
             Canvas.SetTop(rectSelectedTiles, 0);
             rectSelectedTiles.Visibility = Visibility.Visible;
+            GameObjectsListsChanged(sender, e);
         }
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
