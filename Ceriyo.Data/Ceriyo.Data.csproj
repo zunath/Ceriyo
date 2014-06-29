@@ -89,6 +89,7 @@
     <Compile Include="Engine\WorkingDataManager.cs" />
     <Compile Include="Engine\WorkingPaths.cs" />
     <Compile Include="Enumerations\AnimationTypeEnum.cs" />
+    <Compile Include="Enumerations\DirectionTypeEnum.cs" />
     <Compile Include="Enumerations\GameTypeEnum.cs" />
     <Compile Include="Enumerations\FileOperationResultTypeEnum.cs" />
     <Compile Include="Enumerations\GenderTypeEnum.cs" />
