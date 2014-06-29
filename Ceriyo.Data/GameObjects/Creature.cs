@@ -126,6 +126,14 @@ namespace Ceriyo.Data.GameObjects
             this.AnimationResrefs.Add(AnimationTypeEnum.MoveSouthEast, string.Empty);
             this.AnimationResrefs.Add(AnimationTypeEnum.MoveSouthWest, string.Empty);
             this.AnimationResrefs.Add(AnimationTypeEnum.MoveWest, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.IdleEast, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.IdleNorth, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.IdleNorthEast, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.IdleNorthWest, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.IdleSouth, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.IdleSouthEast, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.IdleSouthWest, string.Empty);
+            this.AnimationResrefs.Add(AnimationTypeEnum.IdleWest, string.Empty);
 
             this.Scripts.Add(ScriptEventTypeEnum.OnCreatureConversation, string.Empty);
             this.Scripts.Add(ScriptEventTypeEnum.OnCreatureAttacked, string.Empty);

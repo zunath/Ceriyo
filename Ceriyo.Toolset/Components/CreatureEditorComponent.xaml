@@ -115,86 +115,172 @@
 			Width="Auto">
             <TabItem Header="Animations">
                 <Grid Background="#FFE5E5E5">
-                    <Label Content="Move North:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="ddlMoveNorthAnimation"
+
+                    <ScrollViewer>
+                        <Grid>
+                            <Label Content="Move North:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlMoveNorthAnimation"
                 		HorizontalAlignment="Stretch" 
-                		Margin="120,12,0,0" 
+                		Margin="120,12,10,0" 
                 		VerticalAlignment="Top" 
                 		ItemsSource="{Binding Animations}"
                         SelectionChanged="MoveNorthAnimationChanged"
                 		IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                 		Width="Auto"/>
-                    <Label Content="Move South:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="ddlMoveSouthAnimation"
+                            <Label Content="Move South:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlMoveSouthAnimation"
                     	HorizontalAlignment="Stretch" 
-                    	Margin="120,39,0,0" 
+                    	Margin="120,39,10,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
                         SelectionChanged="MoveSouthAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
-                    <Label Content="Move East:" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="ddlMoveEastAnimation"
+                            <Label Content="Move East:" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlMoveEastAnimation"
                     	HorizontalAlignment="Stretch" 
-                    	Margin="120,66,0,0" 
+                    	Margin="120,66,10,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
                         SelectionChanged="MoveEastAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
-                    <Label Content="Move West:" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="ddlMoveWestAnimation"
+                            <Label Content="Move West:" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlMoveWestAnimation"
                     	HorizontalAlignment="Stretch" 
-                    	Margin="120,93,0,0" 
+                    	Margin="120,93,10,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
                         SelectionChanged="MoveWestAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
-                    <Label Content="Move Northeast:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="ddlMoveNortheastAnimation"
+                            <Label Content="Move Northeast:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlMoveNortheastAnimation"
                     	HorizontalAlignment="Stretch" 
-                    	Margin="120,120,0,0" 
+                    	Margin="120,120,10,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
                         SelectionChanged="MoveNortheastAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
-                    <Label Content="Move Northwest:" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="ddlMoveNorthwestAnimation"
+                            <Label Content="Move Northwest:" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlMoveNorthwestAnimation"
                     	HorizontalAlignment="Stretch" 
-                    	Margin="120,147,0,0" 
+                    	Margin="120,147,10,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
                         SelectionChanged="MoveNorthwestAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
-                    <Label Content="Move Southeast:" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="ddlMoveSoutheastAnimation"
+                            <Label Content="Move Southeast:" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlMoveSoutheastAnimation"
                     	HorizontalAlignment="Stretch" 
-                    	Margin="120,174,0,0" 
+                    	Margin="120,174,10,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
                         SelectionChanged="MoveSoutheastAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
-                    <Label Content="Move Southwest:" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="ddlMoveSouthwestAnimation"
+                            <Label Content="Move Southwest:" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlMoveSouthwestAnimation"
                     	HorizontalAlignment="Stretch" 
-                    	Margin="120,201,0,0" 
+                    	Margin="120,201,10,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
                         SelectionChanged="MoveSouthwestAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
+                            <Label Content="Idle North:" HorizontalAlignment="Left" Margin="10,227,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlIdleNorthAnimation"
+                            	HorizontalAlignment="Stretch" 
+                            	Margin="120,228,10,0" 
+                            	VerticalAlignment="Top" 
+                            	ItemsSource="{Binding Animations}"
+                            	SelectionChanged="IdleNorthAnimationChanged"
+                            	IsEnabled="{Binding IsCreatureSelected}"
+                            	DisplayMemberPath="Name"
+                            	Width="Auto"/>
+                            <Label Content="Idle South:" HorizontalAlignment="Left" Margin="10,256,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlIdleSouthAnimation"
+                            	HorizontalAlignment="Stretch" 
+                            	Margin="120,256,10,0" 
+                            	VerticalAlignment="Top" 
+                            	ItemsSource="{Binding Animations}"
+                            	SelectionChanged="IdleSouthAnimationChanged"
+                            	IsEnabled="{Binding IsCreatureSelected}"
+                            	DisplayMemberPath="Name"
+                            	Width="Auto"/>
+                            <Label Content="Idle East:" HorizontalAlignment="Left" Margin="10,283,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlIdleEastAnimation"
+                            	HorizontalAlignment="Stretch" 
+                            	Margin="120,283,10,0" 
+                            	VerticalAlignment="Top" 
+                            	ItemsSource="{Binding Animations}"
+                            	SelectionChanged="IdleEastAnimationChanged"
+                            	IsEnabled="{Binding IsCreatureSelected}"
+                            	DisplayMemberPath="Name"
+                            	Width="Auto"/>
+                            <Label Content="Idle West:" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlIdleWestAnimation"
+                            	HorizontalAlignment="Stretch" 
+                            	Margin="120,310,10,0" 
+                            	VerticalAlignment="Top" 
+                            	ItemsSource="{Binding Animations}"
+                            	SelectionChanged="IdleWestAnimationChanged"
+                            	IsEnabled="{Binding IsCreatureSelected}"
+                            	DisplayMemberPath="Name"
+                            	Width="Auto"/>
+                            <Label Content="Idle Northeast:" HorizontalAlignment="Left" Margin="10,337,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlIdleNortheastAnimation"
+                            	HorizontalAlignment="Stretch" 
+                            	Margin="120,337,10,0" 
+                            	VerticalAlignment="Top" 
+                            	ItemsSource="{Binding Animations}"
+                            	SelectionChanged="IdleNortheastAnimationChanged"
+                            	IsEnabled="{Binding IsCreatureSelected}"
+                            	DisplayMemberPath="Name"
+                            	Width="Auto"/>
+                            <Label Content="Idle Northwest:" HorizontalAlignment="Left" Margin="10,364,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlIdleNorthwestAnimation"
+                            	HorizontalAlignment="Stretch" 
+                            	Margin="120,364,10,0" 
+                            	VerticalAlignment="Top" 
+                            	ItemsSource="{Binding Animations}"
+                            	SelectionChanged="IdleNorthwestAnimationChanged"
+                            	IsEnabled="{Binding IsCreatureSelected}"
+                            	DisplayMemberPath="Name"
+                            	Width="Auto"/>
+                            <Label Content="Idle Southeast:" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlIdleSoutheastAnimation"
+                            	HorizontalAlignment="Stretch" 
+                            	Margin="120,391,10,0" 
+                            	VerticalAlignment="Top" 
+                            	ItemsSource="{Binding Animations}"
+                            	SelectionChanged="IdleSoutheastAnimationChanged"
+                            	IsEnabled="{Binding IsCreatureSelected}"
+                            	DisplayMemberPath="Name"
+                            	Width="Auto"/>
+                            <Label Content="Idle Southwest:" HorizontalAlignment="Left" Margin="10,418,0,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="ddlIdleSouthwestAnimation"
+                            	HorizontalAlignment="Stretch" 
+                            	Margin="120,418,10,0" 
+                            	VerticalAlignment="Top" 
+                            	ItemsSource="{Binding Animations}"
+                            	SelectionChanged="IdleSouthwestAnimationChanged"
+                            	IsEnabled="{Binding IsCreatureSelected}"
+                            	DisplayMemberPath="Name"
+                            	Width="Auto"/>
+                        </Grid>
+                    </ScrollViewer>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Scripts">
