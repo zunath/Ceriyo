@@ -5248,6 +5248,11 @@
             Gets or sets the current sorting mode.
             </summary>
         </member>
+        <member name="T:FlatRedBall.Graphics.RenderOverrides">
+            <summary>
+            Render overrides are a way to inject new information into the BasicEffect
+            </summary>
+        </member>
         <member name="M:FlatRedBall.Graphics.RenderTargetTexture.ResolveTexture">
             <summary>
             Resolves the texture by setting the current render target to null (back buffer) and then
@@ -5352,12 +5357,6 @@
         <member name="P:FlatRedBall.Graphics.Text.DisplayText">
             <summary>
             Gets or sets the string that the Text object is to display.
-            </summary>
-        </member>
-        <member name="P:FlatRedBall.Graphics.Text.AdjustedText">
-            <summary>
-            Returns the strin that the Text object will render.  This considers 
-            the MaxWidth and MaxWidthBehavior variables, meaning it may contain newlines.
             </summary>
         </member>
         <member name="P:FlatRedBall.Graphics.Text.HorizontalCenter">
@@ -5638,21 +5637,6 @@
             Reference to the camera to which the cursor belongs.
             </summary>
         </member>
-        <member name="F:FlatRedBall.Gui.Cursor.CustomUpdate">
-            <summary>
-            Delegate which can be used to apply custom
-            positioning and button state logic.  The argument
-            is the Cursor instance, and the bool indicates whether
-            the internal Cursor logic should apply click and push values.
-            <remarks>
-            If the CustomUpdate delegate assigns Click, Push, and DoubleClick
-            values internally, then it should return false, indicating that the
-            Cursor logic itself shouldn't.  If the CustomUpdate only modifies the
-            down states, then the CustomUpdate delegate should return true so that
-            the Click, Push, and DoubleClick values are 
-            </remarks>
-            </summary>
-        </member>
         <member name="M:FlatRedBall.Gui.Cursor.#ctor(FlatRedBall.Camera)">
             <summary>
             Creates a new Cursor
@@ -5669,7 +5653,7 @@
         </member>
         <member name="M:FlatRedBall.Gui.Cursor.ActualXVelocityAt(System.Single)">
             <summary>
-            Returns the world X Velocity of the Cursor at a particular Z.
+            Returns the xVelocity of the cursor at a particular Z.
             </summary>
             <remarks>
             As the cursor can control objects at various Z values, this method returns the X velocity
@@ -5678,14 +5662,6 @@
             </remarks>
             <param name="z">The z value to measure the velocity at.</param>
             <returns>The X velocity at the particular Z.</returns>
-        </member>
-        <member name="M:FlatRedBall.Gui.Cursor.ActualXVelocityAt(System.Single,FlatRedBall.Graphics.Layer)">
-            <summary>
-            Returns the world X Velocity of the Cursor at a particular Z on a particular Layer.
-            </summary>
-            <param name="z">The Z value to measure the velocity at.</param>
-            <param name="layer">The Layer to use for velocity calculations</param>
-            <returns>The X velocity at the particular Z and Layer.</returns>
         </member>
         <member name="M:FlatRedBall.Gui.Cursor.ActualYVelocityAt(System.Single)">
             <summary>
@@ -5992,6 +5968,24 @@
             This will only be accurate if the object is also 100 units away from the camera and
             if the camera is centered on the origin.  The
             x and y values must be passed to the GetCursorPosition method.
+            </remarks>
+        </member>
+        <member name="P:FlatRedBall.Gui.Cursor.XVelocity">
+            <summary>
+            The change in x since last frame in world units at 100 units away from the camera.
+            </summary>
+            <remarks>
+            Cursor velocity properties do not counsider bounds; that is, a cursor will still have an xVelocity
+            even if it is pressed against the right side of the screen and being moved to the right.
+            </remarks>
+        </member>
+        <member name="P:FlatRedBall.Gui.Cursor.YVelocity">
+            <summary>
+            The change in y since last frame in world units at 100 units away from the camera.
+            </summary>
+            <remarks>
+            Cursor velocity properties do not counsider bounds; that is, a cursor will still have an xVelocity
+            even if it is pressed against the right side of the screen and being moved to the right.
             </remarks>
         </member>
         <member name="P:FlatRedBall.Gui.Cursor.ZVelocity">
@@ -6308,12 +6302,6 @@
             when the playback started.
             </summary>
         </member>
-        <member name="M:FlatRedBall.Input.Xbox360GamePad.AnyButtonPushed">
-            <summary>
-            Returns whether any button was pushed on this Xbox360GamePad.  This considers face buttons, trigger buttons, shoulder buttons, and d pad.
-            </summary>
-            <returns>Whether any button was pushed.</returns>
-        </member>
         <member name="M:FlatRedBall.Input.Xbox360GamePad.CreateDefaultButtonMap">
             <summary>
             Creates a ButtomMap for this controller using the default bindings.  This is 
@@ -6342,19 +6330,6 @@
             Makes this Xbox360Gamepad ignore the argument button for the rest of the current frame.
             </summary>
             <param name="buttonToIgnore">The button that should be ignored for the rest of the current frame.</param>
-        </member>
-        <member name="M:FlatRedBall.Input.Xbox360GamePad.Update(Microsoft.Xna.Framework.Input.GamePadState)">
-            <summary>
-            Updates the Xbox360Gamepad according to the argument gamepadState.  This is publicly available for games
-            which need to simulate Xbox360Gamepads.
-            </summary>
-            <remarks>
-            This function is normally called automatically by the FlatRedBall Engine
-            in its regular update loop.  You only need to call this function if you want
-            to override the behavior of the gamepad.  Be sure to call this function after
-            FlatRedBallServices.Update, but before any custom game logic (such as ScreenManager.Activity).
-            </remarks>
-            <param name="gamepadState">The state containing the data for this frame.</param>
         </member>
         <member name="M:FlatRedBall.Input.Xbox360GamePad.SetVibration(System.Single,System.Single)">
             <summary>
@@ -10525,7 +10500,7 @@
             for every-frame custom logic.
             </summary>
             <remarks>
-            <seealso cref="!:FlatRedBall.ManagedSpriteGroups.SpriteFrame.CustomBehavior"/>
+            <seealso cref="E:FlatRedBall.ManagedSpriteGroups.SpriteFrame.CustomBehavior"/>
             </remarks>
             <param name="spriteFrame">The SpriteFrame on which the logic should execute.</param>
         </member>
@@ -10641,6 +10616,11 @@
             whenever the Borders property is changed.
             </summary>
             <param name="borderSides">The new BorderSides to use.</param>
+        </member>
+        <member name="E:FlatRedBall.ManagedSpriteGroups.SpriteFrame.CustomBehavior">
+            <summary>
+            Every-frame automatically raised by the SpriteManager.
+            </summary>
         </member>
         <member name="P:FlatRedBall.ManagedSpriteGroups.SpriteFrame.Alpha">
             <summary>
@@ -11574,16 +11554,6 @@
             Checks if the designated 2D point is in the 2D shapes of the shape collection
             </summary>
         </member>
-        <member name="M:FlatRedBall.Math.Geometry.ShapeCollection.CollideAgainstBounceWithoutSnag(FlatRedBall.Math.Geometry.Polygon,System.Boolean,FlatRedBall.Math.Axis,System.Single)">
-            <summary>
-            Performs a "snagless" collision between this and the argument Polygon.
-            </summary>
-            <param name="polygon">The Polygon to perform collision against.</param>
-            <param name="considerPartitioning">Whether to consider spacial partitioning.</param>
-            <param name="axisToUse">If partitioning is used, the axis that the list is already sorted along.</param>
-            <param name="elasticity">The elasticity to use in the collision.</param>
-            <returns>Whether collision has occurred.</returns>
-        </member>
         <member name="T:FlatRedBall.Math.Geometry.ShapeManager">
             <summary>
             Responsible for creating, destroying, and managing shapes (Circle, AxisAlignedRectangle,
@@ -12278,18 +12248,6 @@
             to the previous screen on the backstack.</summary>
             <remarks>Override this method if you want to have custom behavior when the back button is pressed.</remarks>
         </member>
-        <member name="P:FlatRedBall.Screens.Screen.Instructions">
-            <summary>
-            The list of instructions owned 
-            by this screen.
-            </summary>
-            <remarks>
-            These instructions will be automatically
-            executed based off of time.  Execution of
-            these instructions is automatically handled 
-            by the InstructionManager.
-            </remarks>
-        </member>
         <member name="P:FlatRedBall.Screens.Screen.AccumulatedPauseTime">
             <summary>
             Returns how much time the Screen has spent paused
@@ -12431,36 +12389,6 @@
             Gets the current animationChain - retrieved through the CurrentChainIndex property.
             </summary>
         </member>
-        <member name="P:FlatRedBall.Sprite.RelativeLeft">
-            <summary>
-            Returns the left edge of the Sprite relative its Parent.  This value uses RelativeX and Width/2 to calculate this value.
-            </summary>
-        </member>
-        <member name="P:FlatRedBall.Sprite.RelativeRight">
-            <summary>
-            Returns the right edge of the Sprite relative its Parent.  This value uses RelativeX and Width/2 to calculate this value.
-            </summary>
-        </member>
-        <member name="P:FlatRedBall.Sprite.RelativeTop">
-            <summary>
-            Returns the top edge of the Sprite relative its Parent.  This value uses RelativeY and Height/2 to calculate this value.
-            </summary>
-        </member>
-        <member name="P:FlatRedBall.Sprite.RelativeBottom">
-            <summary>
-            Returns the bottom edge of the Sprite relative its Parent.  This value uses RelativeY and Height/2 to calculate this value.
-            </summary>
-        </member>
-        <member name="P:FlatRedBall.Sprite.Width">
-            <summary>
-            The Sprite's Width in absolute world coordinates.
-            </summary>
-        </member>
-        <member name="P:FlatRedBall.Sprite.Height">
-            <summary>
-            The Sprite's Height in absolute world coordinates.
-            </summary>
-        </member>
         <member name="P:FlatRedBall.Sprite.TimeCreated">
             <summary>
             The time returned by the TimeManager when the Sprite was created.
@@ -12544,13 +12472,6 @@
             The index begins counting at the top left (index 0)
             and increases moving clockwise.
             </remarks>
-        </member>
-        <member name="P:FlatRedBall.Sprite.VerticesForDrawing">
-            <summary>
-            Represents the four (4) vertices used to render the Sprite.  This value is set
-            if the Sprite is either a manuall updated Sprite, or if the SpriteManager's ManualUpdate
-            method is called on this.
-            </summary>
         </member>
         <member name="T:FlatRedBall.SpriteCustomBehavior">
             <summary>
