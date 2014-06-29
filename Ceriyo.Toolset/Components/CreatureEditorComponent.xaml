@@ -121,7 +121,7 @@
                 		Margin="120,12,0,0" 
                 		VerticalAlignment="Top" 
                 		ItemsSource="{Binding Animations}"
-                		SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveNorth]}"
+                        SelectionChanged="MoveNorthAnimationChanged"
                 		IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                 		Width="Auto"/>
@@ -131,7 +131,7 @@
                     	Margin="120,39,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
-                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveSouth]}"
+                        SelectionChanged="MoveSouthAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
@@ -141,7 +141,7 @@
                     	Margin="120,66,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
-                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveEast]}"
+                        SelectionChanged="MoveEastAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
@@ -151,7 +151,7 @@
                     	Margin="120,93,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
-                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveWest]}"
+                        SelectionChanged="MoveWestAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
@@ -161,7 +161,7 @@
                     	Margin="120,120,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
-                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveNorthEast]}"
+                        SelectionChanged="MoveNortheastAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
@@ -171,7 +171,7 @@
                     	Margin="120,147,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
-                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveNorthWest]}"
+                        SelectionChanged="MoveNorthwestAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
@@ -181,7 +181,7 @@
                     	Margin="120,174,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
-                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveSouthEast]}"
+                        SelectionChanged="MoveSoutheastAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
@@ -191,7 +191,7 @@
                     	Margin="120,201,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Animations}"
-                    	SelectedValue="{Binding Path=SelectedCreature.AnimationResrefs[(enums:AnimationTypeEnum)MoveSouthwest]}"
+                        SelectionChanged="MoveSouthwestAnimationChanged"
                     	IsEnabled="{Binding IsCreatureSelected}"
                         DisplayMemberPath="Name"
                     	Width="Auto"/>
