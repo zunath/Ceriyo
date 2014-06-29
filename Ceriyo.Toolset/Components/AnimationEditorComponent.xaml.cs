@@ -158,8 +158,6 @@ namespace Ceriyo.Toolset.Components
             int frameCount = Model.SelectedAnimation.Frames.Count + 1;
             SpriteAnimationFrame frame = new SpriteAnimationFrame("Frame " + frameCount);
             Model.SelectedAnimation.Frames.Add(frame);
-            
-
         }
 
         private void DeleteFrame(object sender, RoutedEventArgs e)
@@ -204,6 +202,7 @@ namespace Ceriyo.Toolset.Components
             rectSelectedCell.Visibility = frame == null ? Visibility.Hidden : Visibility.Visible;
 
             RefreshSelectedFrame();
+            RefreshPreview();
         }
 
         private void GraphicSelected(object sender, SelectionChangedEventArgs e)
