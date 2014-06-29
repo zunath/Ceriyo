@@ -7,6 +7,7 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Library.Processing;
 using FlatRedBall;
+using FlatRedBall.Gui;
 using FlatRedBall.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

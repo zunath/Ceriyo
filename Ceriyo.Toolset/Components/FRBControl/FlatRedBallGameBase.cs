@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Threading;
 using FlatRedBall;
 using FlatRedBall.Graphics;
+using FlatRedBall.Input;
+using FlatRedBall.Math;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,10 +13,14 @@ namespace Ceriyo.Toolset.FRBControl
 {
     class FlatRedBallGameBase : Game
     {
+        private FlatRedBallControl _frbControl;
+
         #region Constructors
 
         public FlatRedBallGameBase(FlatRedBallControl frbControl)
         {
+            this._frbControl = frbControl;
+
             // Get the starting size of the control and start listening
             // to its Resize events.
             _windowHandle = frbControl.Handle;
@@ -52,6 +59,7 @@ namespace Ceriyo.Toolset.FRBControl
             graphicsOptions.ResolutionHeight = RenderHeight;
             graphicsOptions.ResumeDeviceReset();
             FlatRedBallServices.InitializeFlatRedBall(this, Graphics, graphicsOptions);
+            Mouse.ModifyMouseState += HandleModifyMouseState;
 
             base.Initialize();
         }
@@ -94,6 +102,24 @@ namespace Ceriyo.Toolset.FRBControl
 
             GraphicsDevice.Present();
         }
+
+        private void HandleModifyMouseState(ref Microsoft.Xna.Framework.Input.MouseState mouseState)
+        {
+            System.Drawing.Point point = Control.MousePosition;
+
+            var screen = _frbControl.PointFromScreen(new System.Windows.Point(point.X, point.Y));
+            var newMouseState = new Microsoft.Xna.Framework.Input.MouseState(
+                MathFunctions.RoundToInt(screen.X),
+                MathFunctions.RoundToInt(screen.Y),
+                mouseState.ScrollWheelValue,
+                mouseState.LeftButton,
+                mouseState.MiddleButton,
+                mouseState.RightButton,
+                mouseState.XButton1,
+                mouseState.XButton2);
+            mouseState = newMouseState;
+        }
+
 
         #endregion
 
