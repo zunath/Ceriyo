@@ -74,7 +74,7 @@ namespace Ceriyo.Entities.Entities
             SpriteManager.RemoveSprite(EntitySprite);
         }
 
-        public void LoadEntity()
+        private void LoadEntity()
         {
             EntitySprite.PixelSize = 0.5f;
             EntitySprite.Alpha = 0.5f;

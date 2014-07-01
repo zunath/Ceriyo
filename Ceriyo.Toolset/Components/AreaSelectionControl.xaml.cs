@@ -43,7 +43,7 @@ namespace Ceriyo.Toolset.Components
             WorkingManager = new WorkingDataManager();
             SetDataContexts();
             EditPropertiesWindow = new EditAreaWindow();
-            EditPropertiesWindow.OnSaveArea += OnSaveArea;
+            EditPropertiesWindow.OnSaveArea += SavedArea;
         }
 
         public void ModuleLoaded(object sender, GameModuleEventArgs e)
@@ -71,7 +71,7 @@ namespace Ceriyo.Toolset.Components
             EditPropertiesWindow.Open(area, false);
         }
 
-        private void OnSaveArea(object sender, GameObjectEventArgs e)
+        private void SavedArea(object sender, GameObjectEventArgs e)
         {
             Area area = Model.Areas.SingleOrDefault(x => x.Resref == e.GameObject.Resref);
             

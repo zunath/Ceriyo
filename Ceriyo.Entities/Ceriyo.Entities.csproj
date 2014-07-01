@@ -73,6 +73,7 @@
     <Compile Include="Entities\GUI\ButtonEntity.cs" />
     <Compile Include="Entities\GUI\CheckBoxEntity.cs" />
     <Compile Include="Entities\GUI\WindowEntity.cs" />
+    <Compile Include="Entities\PaintCreatureEntity.cs" />
     <Compile Include="Entities\PaintTileEntity.cs" />
     <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

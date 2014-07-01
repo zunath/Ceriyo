@@ -41,6 +41,7 @@ namespace Ceriyo.Toolset.Components
                 areaSelection.OnAreaOpen += screen.LoadArea;
 
                 areaSelection.OnAreaSaved += screen.OnModulePropertiesUpdate;
+                areaSelection.OnAreaSaved += paintObjects.ModulePropertiesUpdated;
 
                 areaSelection.OnAreaClosed += paintObjects.UnloadArea;
                 areaSelection.OnAreaClosed += screen.CloseArea;

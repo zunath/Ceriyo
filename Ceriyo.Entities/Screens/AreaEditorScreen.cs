@@ -19,6 +19,7 @@ namespace Ceriyo.Entities.Screens
         private Area LoadedArea { get; set; }
         private MapDrawableBatch AreaBatch { get; set; }
         private PaintTileEntity PaintTile { get; set; }
+        private PaintCreatureEntity PaintCreature { get; set; }
 
         private event EventHandler<ObjectPainterEventArgs> OnPaintObjectChanged;
 
