@@ -49,13 +49,13 @@ namespace Ceriyo.Entities.Entities.GUI
             DefaultTexture = FlatRedBallServices.Load<Texture2D>(EnginePaths.GUIDirectory + "button_default.png");
             ButtonDownTexture = FlatRedBallServices.Load<Texture2D>(EnginePaths.GUIDirectory + "button_down.png");
             ButtonHotTexture = FlatRedBallServices.Load<Texture2D>(EnginePaths.GUIDirectory + "button_hot.png");
-
         }
 
         protected override void CustomInitialize()
         {
             EntitySprite.PixelSize = 0.5f;
             EntitySprite.Alpha = 0.85f;
+            EntitySprite.Visible = true;
             TextGraphic.AttachTo(EntitySprite, true);
             TextGraphic.HorizontalAlignment = HorizontalAlignment.Center;
 
