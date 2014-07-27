@@ -106,6 +106,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\Javascript.NET\Noesis.Javascript.dll</HintPath>
     </Reference>
+    <Reference Include="Squid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5ba804b1072f6e05, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Squid\Squid.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
@@ -142,6 +146,10 @@
     <Content Include="Libraries\Javascript.NET\Noesis.Javascript.dll" />
     <Content Include="Libraries\Lidgren\Lidgren.Network.dll" />
     <Content Include="Libraries\Lidgren\Lidgren.Network.pdb" />
+    <Content Include="Libraries\Squid\MTV3D65.dll" />
+    <Content Include="Libraries\Squid\SlimDX.dll" />
+    <Content Include="Libraries\Squid\Squid.dll" />
+    <Content Include="Libraries\Squid\Squid.xml" />
     <Content Include="Libraries\Xna4Pc\FlatRedBall.Content.dll" />
     <None Include="app.config" />
     <None Include="packages.config" />

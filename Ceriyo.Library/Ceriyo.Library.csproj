@@ -66,6 +66,7 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Noesis.Javascript">
       <HintPath>..\Ceriyo\Ceriyo\Libraries\Javascript.NET\Noesis.Javascript.dll</HintPath>
@@ -74,6 +75,9 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="protobuf-net">
       <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="Squid">
+      <HintPath>..\Ceriyo\Ceriyo\Libraries\Squid\Squid.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -95,6 +99,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptEngine\ScriptManager.cs" />
     <Compile Include="ScriptEngine\ScriptMethods.cs" />
+    <Compile Include="SquidGUI\SquidInputManager.cs" />
+    <Compile Include="SquidGUI\SquidRendererXNA.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Data\Ceriyo.Data.csproj">
@@ -150,41 +156,12 @@
     <Content Include="Content\Data\LevelChart.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\GUI\button_default.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\GUI\button_down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\GUI\button_hot.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\GUI\checkbox_checked.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\GUI\checkbox_checked_hot.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\GUI\checkbox_default.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\GUI\checkbox_down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\GUI\checkbox_hot.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\GUI\frame.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\GUI\window.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Tilesets\emptytile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\GUI\" />
     <Folder Include="Content\Icons\" />
     <Folder Include="Content\Settings\" />
   </ItemGroup>

@@ -57,6 +57,10 @@
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Squid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5ba804b1072f6e05, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ceriyo\Ceriyo\Libraries\Squid\Squid.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -66,12 +70,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrawableBatches\GUIDrawableBatch.cs" />
     <Compile Include="DrawableBatches\MapDrawableBatch.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\DrawableTile.cs" />
     <Compile Include="Entities\GraphicEntity.cs" />
+    <Compile Include="Entities\GUI\Atlas.cs" />
     <Compile Include="Entities\GUI\ButtonEntity.cs" />
+    <Compile Include="Entities\GUI\ChatBox.cs" />
     <Compile Include="Entities\GUI\CheckBoxEntity.cs" />
+    <Compile Include="Entities\GUI\FileDialog.cs" />
+    <Compile Include="Entities\GUI\GameGui.cs" />
+    <Compile Include="Entities\GUI\Gridview\GridColumn.cs" />
+    <Compile Include="Entities\GUI\Gridview\GridView.cs" />
+    <Compile Include="Entities\GUI\Gridview\GridViewItem.cs" />
+    <Compile Include="Entities\GUI\MessageBox.cs" />
+    <Compile Include="Entities\GUI\SampleDesktop.cs" />
+    <Compile Include="Entities\GUI\SampleScene.cs" />
+    <Compile Include="Entities\GUI\SampleWindow.cs" />
     <Compile Include="Entities\GUI\WindowEntity.cs" />
     <Compile Include="Entities\PaintCreatureEntity.cs" />
     <Compile Include="Entities\PaintTileEntity.cs" />
