@@ -86,7 +86,6 @@
     <Compile Include="Entities\GUI\Gridview\GridViewItem.cs" />
     <Compile Include="Entities\GUI\MessageBox.cs" />
     <Compile Include="Entities\GUI\SampleDesktop.cs" />
-    <Compile Include="Entities\GUI\SampleScene.cs" />
     <Compile Include="Entities\GUI\SampleWindow.cs" />
     <Compile Include="Entities\GUI\WindowEntity.cs" />
     <Compile Include="Entities\PaintCreatureEntity.cs" />
