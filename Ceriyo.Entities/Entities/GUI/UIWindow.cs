@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using Squid;
 
-namespace SampleControls
+namespace Ceriyo.Entities.GUI
 {
-    public class SampleWindow : Window
+    public class UIWindow : Window
     {
         public TitleBar Titlebar { get; private set; }
 
-        public SampleWindow()
+        public UIWindow(bool canDragWindow = false)
         {
             AllowDragOut = true;
             Padding = new Margin(4);
@@ -17,9 +17,14 @@ namespace SampleControls
             Titlebar = new TitleBar();
             Titlebar.Dock = DockStyle.Top;
             Titlebar.Size = new Squid.Point(122, 35);
-            Titlebar.MouseDown += delegate(Control sender, MouseEventArgs args) { StartDrag(); };
-            Titlebar.MouseUp += delegate(Control sender, MouseEventArgs args) { StopDrag(); };
-            Titlebar.Cursor = Cursors.Move;
+
+            if (canDragWindow)
+            {
+                Titlebar.MouseDown += delegate(Control sender, MouseEventArgs args) { StartDrag(); };
+                Titlebar.MouseUp += delegate(Control sender, MouseEventArgs args) { StopDrag(); };
+                Titlebar.Cursor = Cursors.Move;
+            }
+
             Titlebar.Style = "frame";
             Titlebar.Margin = new Margin(-4, -4, -4, -1);
             Titlebar.Button.MouseClick += Button_OnMouseClick;
@@ -32,12 +37,6 @@ namespace SampleControls
 
         void Button_OnMouseClick(Control sender, MouseEventArgs args)
         {
-            Animation.Custom(FadeAndClose());
-        }
-
-        private System.Collections.IEnumerator FadeAndClose()
-        {
-            yield return Animation.Opacity(0, 500);
             Close();
         }
     }

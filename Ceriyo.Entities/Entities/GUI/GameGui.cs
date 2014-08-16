@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Squid;
 using System;
 using System.Reflection;
+using Ceriyo.Entities.GUI;
 
 namespace SampleControls
 {
@@ -534,7 +535,7 @@ namespace SampleControls
         protected override void DrawText(Style style, float opacity) { }
     }
 
-    public class Inventory : SampleWindow
+    public class Inventory : UIWindow
     {
         private TextBox search;
         private ScrollView view;
@@ -687,7 +688,7 @@ namespace SampleControls
         }
     }
 
-    public class Skillbook : SampleWindow
+    public class Skillbook : UIWindow
     {
         private TextBox searchfield;
         private ScrollView view;
@@ -744,7 +745,7 @@ namespace SampleControls
         }
     }
 
-    public class CharacterSheet : SampleWindow
+    public class CharacterSheet : UIWindow
     {
         private ScrollView stats;
         private SplitContainer split;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Entities.DrawableBatches;
+using Ceriyo.Entities.Entities.GUI.Desktops;
 
 namespace Ceriyo.Entities.Screens
 {
@@ -17,7 +18,7 @@ namespace Ceriyo.Entities.Screens
         public GameScreen()
             : base("GameScreen")
         {
-            _gui = new GUIDrawableBatch(new SampleControls.SampleDesktop { Name = "desk" });
+            _gui = new GUIDrawableBatch(new MainMenuDesktop { Name = "desk" });
         }
 
         protected override void CustomInitialize()
