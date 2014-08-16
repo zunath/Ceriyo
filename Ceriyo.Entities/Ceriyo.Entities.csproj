@@ -76,9 +76,7 @@
     <Compile Include="Entities\DrawableTile.cs" />
     <Compile Include="Entities\GraphicEntity.cs" />
     <Compile Include="Entities\GUI\Atlas.cs" />
-    <Compile Include="Entities\GUI\ButtonEntity.cs" />
     <Compile Include="Entities\GUI\ChatBox.cs" />
-    <Compile Include="Entities\GUI\CheckBoxEntity.cs" />
     <Compile Include="Entities\GUI\FileDialog.cs" />
     <Compile Include="Entities\GUI\GameGui.cs" />
     <Compile Include="Entities\GUI\Gridview\GridColumn.cs" />
