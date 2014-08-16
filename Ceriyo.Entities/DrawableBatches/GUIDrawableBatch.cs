@@ -8,6 +8,7 @@ using Ceriyo.Library.SquidGUI;
 using Squid;
 using SampleControls;
 using XInput = Microsoft.Xna.Framework.Input;
+using FlatRedBall.Input;
 
 namespace Ceriyo.Entities.DrawableBatches
 {
@@ -15,9 +16,9 @@ namespace Ceriyo.Entities.DrawableBatches
     {
         private Desktop _desktop;
 
-        public GUIDrawableBatch()
+        public GUIDrawableBatch(Desktop desktop)
         {
-            _desktop = new SampleDesktop { Name = "desk" };
+            _desktop = desktop;
             _desktop.ShowCursor = true;
 
             InitializeInputManager();
@@ -47,15 +48,14 @@ namespace Ceriyo.Entities.DrawableBatches
         {
             XInput.MouseState mouseState = XInput.Mouse.GetState();
 
-            int wheel = mouseState.ScrollWheelValue > LastScroll ? -1 : (mouseState.ScrollWheelValue < LastScroll ? 1 : 0);
-            LastScroll = mouseState.ScrollWheelValue;
-
-            Squid.GuiHost.SetMouse(mouseState.X, mouseState.Y, wheel);
+            int wheel = InputManager.Mouse.ScrollWheel < 0 ? 1 : (InputManager.Mouse.ScrollWheel > 0 ? -1 : 0);
+            
+            Squid.GuiHost.SetMouse(InputManager.Mouse.X, InputManager.Mouse.Y, wheel);
             Squid.GuiHost.SetButtons(mouseState.LeftButton == XInput.ButtonState.Pressed, mouseState.RightButton == XInput.ButtonState.Pressed);
 
             // Keyboard
             XInput.KeyboardState keyboardState = XInput.Keyboard.GetState();
-            List<Squid.KeyData> squidKeys = new List<Squid.KeyData>();
+            _squidKeys.Clear();
 
             double ms = Squid.GuiHost.TimeElapsed;
 
@@ -70,7 +70,7 @@ namespace Ceriyo.Entities.DrawableBatches
 
                 if (InputKeys[key].Repeat < 0 || !wasDown)
                 {
-                    squidKeys.Add(new Squid.KeyData()
+                    _squidKeys.Add(new Squid.KeyData()
                     {
                         Scancode = InputKeys[key].ScanCode,
                         Pressed = true
@@ -85,7 +85,7 @@ namespace Ceriyo.Entities.DrawableBatches
 
                 if (!isDown)
                 {
-                    squidKeys.Add(new Squid.KeyData()
+                    _squidKeys.Add(new Squid.KeyData()
                     {
                         Scancode = InputKeys[key].ScanCode,
                         Released = true
@@ -96,7 +96,7 @@ namespace Ceriyo.Entities.DrawableBatches
 
             LastKeyboardState = keyboardState;
 
-            Squid.GuiHost.SetKeyboard(squidKeys.ToArray());
+            Squid.GuiHost.SetKeyboard(_squidKeys.ToArray());
             Squid.GuiHost.TimeElapsed = (float)TimeManager.LastUpdateGameTime.ElapsedGameTime.TotalMilliseconds;
         }
 
@@ -117,9 +117,9 @@ namespace Ceriyo.Entities.DrawableBatches
 
         private static Dictionary<XInput.Keys, int> SpecialKeys = new Dictionary<XInput.Keys, int>();
         private Dictionary<XInput.Keys, InputKey> InputKeys = new Dictionary<XInput.Keys, InputKey>();
+        private List<Squid.KeyData> _squidKeys = new List<KeyData>();
 
         private XInput.KeyboardState LastKeyboardState;
-        private int LastScroll;
 
         private const int REPEAT_DELAY = 500;
         private const int REPEAT_RATE = 25;

@@ -17,7 +17,7 @@ namespace Ceriyo.Entities.Screens
         public GameScreen()
             : base("GameScreen")
         {
-            _gui = new GUIDrawableBatch();
+            _gui = new GUIDrawableBatch(new SampleControls.SampleDesktop { Name = "desk" });
         }
 
         protected override void CustomInitialize()
