@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ceriyo.Entities.Entities.GUI.Components;
 using Squid;
 
 namespace Ceriyo.Entities.GUI
 {
     public class UIWindow : Window
     {
-        public TitleBar Titlebar { get; private set; }
+        public TitleBarUIComponent Titlebar { get; private set; }
 
-        public UIWindow(bool canDragWindow = false)
+        public UIWindow(bool canDragWindow = false, bool canCloseWindow = false)
         {
             AllowDragOut = true;
             Padding = new Margin(4);
 
-            Titlebar = new TitleBar();
+            Titlebar = new TitleBarUIComponent(canCloseWindow);
             Titlebar.Dock = DockStyle.Top;
             Titlebar.Size = new Squid.Point(122, 35);
 
@@ -30,30 +31,15 @@ namespace Ceriyo.Entities.GUI
             Titlebar.Button.MouseClick += Button_OnMouseClick;
             Titlebar.TextAlign = Alignment.MiddleLeft;
             Titlebar.BBCodeEnabled = true;
-            AllowDragOut = false;
 
             Controls.Add(Titlebar);
+
+            AllowDragOut = false;
         }
 
-        void Button_OnMouseClick(Control sender, MouseEventArgs args)
+        private void Button_OnMouseClick(Control sender, MouseEventArgs args)
         {
             Close();
-        }
-    }
-
-    public class TitleBar : Label
-    {
-        public Button Button { get; private set; }
-
-        public TitleBar()
-        {
-            Button = new Button();
-            Button.Size = new Point(30, 30);
-            Button.Style = "button";
-            Button.Tooltip = "Close Window";
-            Button.Dock = DockStyle.Right;
-            Button.Margin = new Margin(0, 8, 8, 8);
-            Elements.Add(Button);
         }
     }
 }

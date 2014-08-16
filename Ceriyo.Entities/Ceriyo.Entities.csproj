@@ -78,6 +78,7 @@
     <Compile Include="Entities\GUI\Atlas.cs" />
     <Compile Include="Entities\GUI\ChatBox.cs" />
     <Compile Include="Entities\GUI\Components\LoginMenuUIComponent.cs" />
+    <Compile Include="Entities\GUI\Components\TitleBarUIComponent.cs" />
     <Compile Include="Entities\GUI\Desktops\BaseDesktop.cs" />
     <Compile Include="Entities\GUI\Desktops\MainMenuDesktop.cs" />
     <Compile Include="Entities\GUI\FileDialog.cs" />

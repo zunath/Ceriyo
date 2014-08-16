@@ -11,7 +11,6 @@ namespace Ceriyo.Entities.Entities.GUI.Components
     {
         public LoginMenuUIComponent(Desktop parent)
         {
-
             UIWindow window1 = new UIWindow();
             window1.Size = new Squid.Point(440, 340);
             window1.Position = new Squid.Point(40, 40);
@@ -40,7 +39,7 @@ namespace Ceriyo.Entities.Entities.GUI.Components
             label2.Parent = window1;
 
             TextBox textbox2 = new TextBox { Name = "textbox" };
-            textbox2.PasswordChar = char.Parse("*");
+            textbox2.PasswordChar = '*';
             textbox2.IsPassword = true;
             textbox2.Text = string.Empty;
             textbox2.Size = new Squid.Point(222, 35);
