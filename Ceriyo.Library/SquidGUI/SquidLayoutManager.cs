@@ -60,6 +60,7 @@ namespace Ceriyo.Library.SquidGUI
                     result = BuildCheckBox(component);
                     break;
                 default:
+                    // If not a primative control, assume it's another layout and attempt to load it.
                     try
                     {
                         BuildLayout(component.ComponentType.ToLower());
