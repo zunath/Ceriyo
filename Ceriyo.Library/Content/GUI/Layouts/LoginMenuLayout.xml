@@ -3,6 +3,7 @@
   <Components>
     <UIComponent>
       <ComponentType>Window</ComponentType>
+      <Name>LoginWindow</Name>
       <SizeX>440</SizeX>
       <SizeY>340</SizeY>
       <PositionX>40</PositionX>
@@ -15,6 +16,7 @@
       <Children>
         <UIComponent>
           <ComponentType>Label</ComponentType>
+          <Name>lblUserName</Name>
           <SizeX>122</SizeX>
           <SizeY>35</SizeY>
           <PositionX>60</PositionX>
@@ -28,6 +30,7 @@
         </UIComponent>
         <UIComponent>
           <ComponentType>TextBox</ComponentType>
+          <Name>txtUsername</Name>
           <SizeX>222</SizeX>
           <SizeY>35</SizeY>
           <PositionX>180</PositionX>
@@ -41,6 +44,7 @@
         </UIComponent>
         <UIComponent>
           <ComponentType>Label</ComponentType>
+          <Name>lblPassword</Name>
           <SizeX>122</SizeX>
           <SizeY>35</SizeY>
           <PositionX>60</PositionX>
@@ -54,6 +58,7 @@
         </UIComponent>
         <UIComponent>
           <ComponentType>TextBox</ComponentType>
+          <Name>txtPassword</Name>
           <SizeX>222</SizeX>
           <SizeY>35</SizeY>
           <PositionX>180</PositionX>
@@ -67,6 +72,7 @@
         </UIComponent>
         <UIComponent>
           <ComponentType>Button</ComponentType>
+          <Name>btnLogin</Name>
           <SizeX>157</SizeX>
           <SizeY>35</SizeY>
           <PositionX>245</PositionX>
@@ -80,6 +86,7 @@
         </UIComponent>
         <UIComponent>
           <ComponentType>CheckBox</ComponentType>
+          <Name>chkRememberMe</Name>
           <SizeX>157</SizeX>
           <SizeY>26</SizeY>
           <PositionX>280</PositionX>

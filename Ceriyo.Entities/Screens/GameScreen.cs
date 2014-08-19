@@ -9,19 +9,20 @@ using Ceriyo.Entities.DrawableBatches;
 using Ceriyo.Library.SquidGUI;
 using Ceriyo.Data.ResourceObjects;
 using FlatRedBall.IO;
+using Squid;
+using Ceriyo.Entities.Entities;
 
 namespace Ceriyo.Entities.Screens
 {
     public class GameScreen : BaseScreen
     {
-        GUIDrawableBatch _gui;
+        MainMenuGUIEntity _gui;
 
         public GameScreen()
             : base("GameScreen")
         {
-            SquidLayoutManager manager = new SquidLayoutManager();
-
-            _gui = new GUIDrawableBatch(manager.LayoutToDesktop("MainMenuLayout"));
+            _gui = new MainMenuGUIEntity();
+            
         }
 
         protected override void CustomInitialize()

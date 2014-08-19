@@ -75,6 +75,7 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\DrawableTile.cs" />
     <Compile Include="Entities\GraphicEntity.cs" />
+    <Compile Include="Entities\MainMenuGUIEntity.cs" />
     <Compile Include="Entities\PaintCreatureEntity.cs" />
     <Compile Include="Entities\PaintTileEntity.cs" />
     <Compile Include="Entities\PlayerEntity.cs" />

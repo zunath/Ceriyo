@@ -96,6 +96,7 @@ namespace Ceriyo.Library.SquidGUI
         private Label BuildLabel(UIComponent component)
         {
             Label label = new Label();
+            label.Name = component.Name;
             label.Text = component.Text;
             label.Size = new Point(component.SizeX, component.SizeY);
             label.Position = new Point(component.PositionX, component.PositionY);
@@ -108,6 +109,7 @@ namespace Ceriyo.Library.SquidGUI
         private TextBox BuildTextBox(UIComponent component)
         {
             TextBox box = new TextBox();
+            box.Name = component.Name;
             box.Text = component.Text;
             box.Size = new Point(component.SizeX, component.SizeY);
             box.Position = new Point(component.PositionX, component.PositionY);
@@ -120,6 +122,7 @@ namespace Ceriyo.Library.SquidGUI
         private Button BuildButton(UIComponent component)
         {
             Button button = new Button();
+            button.Name = component.Name;
             button.Size = new Point(component.SizeX, component.SizeY);
             button.Position = new Point(component.PositionX, component.PositionY);
             button.Text = component.Text;
@@ -133,6 +136,7 @@ namespace Ceriyo.Library.SquidGUI
         private CheckBox BuildCheckBox(UIComponent component)
         {
             CheckBox box = new CheckBox();
+            box.Name = component.Name;
             box.Size = new Point(component.SizeX, component.SizeY);
             box.Position = new Point(component.PositionX, component.PositionY);
             box.Text = component.Text;

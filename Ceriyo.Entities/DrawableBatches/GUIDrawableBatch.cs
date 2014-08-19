@@ -11,13 +11,16 @@ using FlatRedBall.Input;
 
 namespace Ceriyo.Entities.DrawableBatches
 {
-    public class GUIDrawableBatch : PositionedObject, IDrawableBatch
+    public abstract class GUIDrawableBatch : PositionedObject, IDrawableBatch
     {
-        private Desktop _desktop;
+        protected Desktop _desktop;
+        private SquidLayoutManager _layoutManager;
 
-        public GUIDrawableBatch(Desktop desktop)
+        public GUIDrawableBatch(string layoutName)
         {
-            _desktop = desktop;
+            _layoutManager = new SquidLayoutManager();
+
+            _desktop = _layoutManager.LayoutToDesktop(layoutName);
             _desktop.ShowCursor = true;
 
             InitializeInputManager();
@@ -104,6 +107,10 @@ namespace Ceriyo.Entities.DrawableBatches
             get { return true; }
         }
 
+        public Control GetControl(string controlName)
+        {
+            return _desktop.GetControl(controlName);
+        }
 
         #region SquidUI Input Helpers
 

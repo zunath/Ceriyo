@@ -9,6 +9,7 @@ namespace Ceriyo.Data.ResourceObjects
     public class UIComponent
     {
         public string ComponentType { get; set; }
+        public string Name { get; set; }
         public int SizeX { get; set; }
         public int SizeY { get; set; }
         public int PositionX { get; set; }
@@ -23,6 +24,7 @@ namespace Ceriyo.Data.ResourceObjects
         public UIComponent()
         {
             this.ComponentType = string.Empty;
+            this.Name = string.Empty;
             this.SizeX = 0;
             this.SizeY = 0;
             this.PositionX = 0;
