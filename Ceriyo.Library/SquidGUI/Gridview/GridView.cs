@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace SampleControls
+namespace Ceriyo.Library.SquidGUI.Gridview
 {
     public class GridViewItemCollection : ActiveList<GridViewItem> { }
     public class GridColumnCollection : ActiveList<GridColumn> { }

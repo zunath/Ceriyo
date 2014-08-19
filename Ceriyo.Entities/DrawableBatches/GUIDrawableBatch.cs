@@ -6,7 +6,6 @@ using FlatRedBall;
 using FlatRedBall.Graphics;
 using Ceriyo.Library.SquidGUI;
 using Squid;
-using SampleControls;
 using XInput = Microsoft.Xna.Framework.Input;
 using FlatRedBall.Input;
 

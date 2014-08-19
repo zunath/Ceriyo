@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Squid;
 
-namespace Ceriyo.Entities.Entities.GUI.Components
+namespace Ceriyo.Library.SquidGUI.Components
 {
     public class TitleBarUIComponent : Label
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Squid;
 
-namespace SampleControls
+namespace Ceriyo.Library.SquidGUI
 {
     public class ChatBox : Control
     {

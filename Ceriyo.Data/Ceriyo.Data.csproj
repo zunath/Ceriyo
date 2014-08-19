@@ -73,6 +73,9 @@
     <Reference Include="protobuf-net">
       <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
+    <Reference Include="Squid">
+      <HintPath>..\Ceriyo\Ceriyo\Libraries\Squid\Squid.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -137,6 +140,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceObjects\GameResource.cs" />
     <Compile Include="ResourceObjects\ResourceEditorItem.cs" />
+    <Compile Include="ResourceObjects\UIComponent.cs" />
+    <Compile Include="ResourceObjects\UILayout.cs" />
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />

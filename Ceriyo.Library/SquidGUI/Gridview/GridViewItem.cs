@@ -4,7 +4,7 @@ using System.Text;
 using System.ComponentModel;
 using Squid;
 
-namespace SampleControls
+namespace Ceriyo.Library.SquidGUI.Gridview
 {
     public class GridViewItem : GridViewSubItem
     {

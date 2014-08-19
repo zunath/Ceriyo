@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using Squid;
 
-namespace SampleControls
+namespace Ceriyo.Library.SquidGUI
 {
     public class PathInfo
     {

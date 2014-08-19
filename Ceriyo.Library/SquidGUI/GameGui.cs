@@ -5,7 +5,7 @@ using System;
 using System.Reflection;
 using Ceriyo.Entities.GUI;
 
-namespace SampleControls
+namespace Ceriyo.Library.SquidGUI
 {
     public class GameGui : Desktop
     {

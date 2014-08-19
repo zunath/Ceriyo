@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Ceriyo.Entities.Entities.GUI.Components;
+using Ceriyo.Library.SquidGUI.Components;
 using Squid;
 
 namespace Ceriyo.Entities.GUI

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UILayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Components>
+    <UIComponent>
+      <ComponentType>Window</ComponentType>
+      <SizeX>440</SizeX>
+      <SizeY>340</SizeY>
+      <PositionX>40</PositionX>
+      <PositionY>40</PositionY>
+      <Title>Log In</Title>
+      <Text />
+      <Resizeable>false</Resizeable>
+      <Anchor>None</Anchor>
+      <CursorType>default</CursorType>
+      <Children>
+        <UIComponent>
+          <ComponentType>Label</ComponentType>
+          <SizeX>122</SizeX>
+          <SizeY>35</SizeY>
+          <PositionX>60</PositionX>
+          <PositionY>100</PositionY>
+          <Title />
+          <Text>Username:</Text>
+          <Resizeable>false</Resizeable>
+          <Anchor>None</Anchor>
+          <CursorType>default</CursorType>
+          <Children />
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>TextBox</ComponentType>
+          <SizeX>222</SizeX>
+          <SizeY>35</SizeY>
+          <PositionX>180</PositionX>
+          <PositionY>100</PositionY>
+          <Title />
+          <Text></Text>
+          <Resizeable>false</Resizeable>
+          <Anchor>None</Anchor>
+          <CursorType>default</CursorType>
+          <Children />
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Label</ComponentType>
+          <SizeX>122</SizeX>
+          <SizeY>35</SizeY>
+          <PositionX>60</PositionX>
+          <PositionY>140</PositionY>
+          <Title />
+          <Text>Password:</Text>
+          <Resizeable>false</Resizeable>
+          <Anchor>None</Anchor>
+          <CursorType>default</CursorType>
+          <Children />
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>TextBox</ComponentType>
+          <SizeX>222</SizeX>
+          <SizeY>35</SizeY>
+          <PositionX>180</PositionX>
+          <PositionY>140</PositionY>
+          <Title />
+          <Text></Text>
+          <Resizeable>false</Resizeable>
+          <Anchor>None</Anchor>
+          <CursorType>default</CursorType>
+          <Children />
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <SizeX>157</SizeX>
+          <SizeY>35</SizeY>
+          <PositionX>245</PositionX>
+          <PositionY>294</PositionY>
+          <Title />
+          <Text>Log In</Text>
+          <Resizeable>false</Resizeable>
+          <Anchor>None</Anchor>
+          <CursorType>default</CursorType>
+          <Children />
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>CheckBox</ComponentType>
+          <SizeX>157</SizeX>
+          <SizeY>26</SizeY>
+          <PositionX>280</PositionX>
+          <PositionY>180</PositionY>
+          <Title />
+          <Text>Remember Me</Text>
+          <Resizeable>false</Resizeable>
+          <Anchor>None</Anchor>
+          <CursorType>link</CursorType>
+          <Children />
+        </UIComponent>
+      </Children>
+    </UIComponent>
+  </Components>
+</UILayout>

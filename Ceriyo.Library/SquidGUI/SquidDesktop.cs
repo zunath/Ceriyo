@@ -4,20 +4,18 @@ using System.Linq;
 using System.Text;
 using Squid;
 
-namespace Ceriyo.Entities.Entities.GUI.Desktops
+namespace Ceriyo.Library.SquidGUI
 {
-    public class BaseDesktop : Desktop
+    public class SquidDesktop : Desktop
     {
         private Skin _skin;
 
-        public BaseDesktop()
+        public SquidDesktop()
         {
             _skin = new Skin();
             InitializeStyles();
             InitializeCursors();
         }
-
-
         private void InitializeStyles()
         {
             ControlStyle baseStyle = new ControlStyle();
@@ -174,6 +172,5 @@ namespace Ceriyo.Entities.Entities.GUI.Desktops
             _skin.Cursors.Add(Cursors.SizeNWSE, new Cursor { Texture = "cursors\\SizeNWSE.png", Size = cursorSize, HotSpot = halfSize });
 
         }
-
     }
 }

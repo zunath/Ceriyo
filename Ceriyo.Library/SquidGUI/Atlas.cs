@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml;
 using Squid;
 
-namespace SampleControls
+namespace Ceriyo.Library.SquidGUI
 {
     [XmlRoot("dictionary")]
     public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable

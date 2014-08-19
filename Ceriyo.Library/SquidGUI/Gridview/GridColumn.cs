@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Squid;
 
-namespace SampleControls
+namespace Ceriyo.Library.SquidGUI.Gridview
 {
     public class GridColumn
     {

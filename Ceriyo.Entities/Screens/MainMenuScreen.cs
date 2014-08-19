@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ceriyo.Entities.Entities.GUI;
 using FlatRedBall;
 using FlatRedBall.Graphics;
 
