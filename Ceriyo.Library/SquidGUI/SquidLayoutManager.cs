@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data;
+﻿using Ceriyo.Data;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Entities.GUI;
 using FlatRedBall.IO;
@@ -12,24 +8,34 @@ namespace Ceriyo.Library.SquidGUI
 {
     public class SquidLayoutManager
     {
+        private SquidDesktop _desktop;
+
+        public SquidLayoutManager()
+        {
+            _desktop = new SquidDesktop();
+        }
+
         public SquidDesktop LayoutToDesktop(string layoutFileName)
         {
-            string path = EnginePaths.GUIDirectory + "Layouts/" + layoutFileName + EnginePaths.DataExtension;
+            BuildLayout(layoutFileName);
 
-            SquidDesktop desk = new SquidDesktop();
+            return _desktop;
+        }
+
+        private void BuildLayout(string layoutFileName)
+        {
+            string path = EnginePaths.GUIDirectory + "Layouts/" + layoutFileName + EnginePaths.DataExtension;
             UILayout layout = FileManager.XmlDeserialize<UILayout>(path);
 
             foreach (UIComponent component in layout.Components)
             {
-                Control control = BuildControl(component, desk);
+                Control control = BuildControl(component, _desktop);
 
                 foreach (UIComponent child in component.Children)
                 {
                     BuildControl(child, control);
                 }
             }
-
-            return desk;
         }
 
         private Control BuildControl(UIComponent component, Control parent)
@@ -52,6 +58,16 @@ namespace Ceriyo.Library.SquidGUI
                     break;
                 case "checkbox":
                     result = BuildCheckBox(component);
+                    break;
+                default:
+                    try
+                    {
+                        BuildLayout(component.ComponentType.ToLower());
+                    }
+                    catch
+                    {
+                        result = null;
+                    }
                     break;
             }
 
