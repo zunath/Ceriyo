@@ -4,18 +4,19 @@ using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
 using Ceriyo.Entities.Screens;
 using Ceriyo.Data.Engine;
+using FlatRedBall.Graphics;
 
 
 namespace Ceriyo
 {
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        private GraphicsDeviceManager graphics;
+        private GraphicsDeviceManager _graphics;
         private EngineDataManager EngineManager { get; set; }
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             EngineManager = new EngineDataManager();
 
 #if WINDOWS_PHONE || ANDROID || IOS
@@ -25,25 +26,25 @@ namespace Ceriyo
             TargetElapsedTime = TimeSpan.FromTicks(333333);
             graphics.IsFullScreen = true;
 #else
-            graphics.PreferredBackBufferHeight = 600;
+            _graphics.PreferredBackBufferHeight = 600;
 #endif
         }
 
         protected override void Initialize()
         {
-            FlatRedBallServices.InitializeFlatRedBall(this, graphics);
+            FlatRedBallServices.InitializeFlatRedBall(this, _graphics);
+			CameraSetup.SetupCamera(SpriteManager.Camera, _graphics);
             EngineManager.InitializeEngine();
-			CameraSetup.SetupCamera(SpriteManager.Camera, graphics);
+			CameraSetup.SetupCamera(SpriteManager.Camera, _graphics);
 			GlobalContent.Initialize();
             FlatRedBallServices.IsWindowsCursorVisible = true;
             this.Window.AllowUserResizing = true;
-            ScreenManager.Start(typeof(GameScreen));
 
             base.Initialize();
 
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
             SpriteManager.Camera.UsePixelCoordinates();
-
+			FlatRedBall.Screens.ScreenManager.Start(typeof(GameScreen));
         }
 
 

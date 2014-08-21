@@ -81,6 +81,8 @@ namespace Ceriyo.Library.SquidGUI
                 result.Anchor = component.Anchor;
                 result.Cursor = component.CursorType;
                 result.Name = component.Name;
+                result.Enabled = component.Enabled;
+                result.Visible = component.Visible;
             }
             
 

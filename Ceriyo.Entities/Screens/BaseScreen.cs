@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data;
+using FlatRedBall.Input;
 using FlatRedBall.Screens;
+using Microsoft.Xna.Framework.Input;
 
 namespace Ceriyo.Entities.Screens
 {
@@ -36,6 +39,15 @@ namespace Ceriyo.Entities.Screens
         {
             base.Activity(firstTimeCalled);
             CustomActivity(firstTimeCalled);
+
+
+            if (EngineConstants.IsDebugEnabled)
+            {
+                if (InputManager.Keyboard.KeyPushed(Keys.F5))
+                {
+                    this.MoveToScreen(this.GetType());
+                }
+            }
         }
 
         protected abstract void CustomDestroy();

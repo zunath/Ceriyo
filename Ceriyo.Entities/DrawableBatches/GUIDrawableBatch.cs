@@ -15,6 +15,7 @@ namespace Ceriyo.Entities.DrawableBatches
     {
         protected Desktop _desktop;
         private SquidLayoutManager _layoutManager;
+        private Layer _uiLayer;
 
         public GUIDrawableBatch(string layoutName)
         {
@@ -25,22 +26,26 @@ namespace Ceriyo.Entities.DrawableBatches
 
             InitializeInputManager();
             GuiHost.Renderer = new SquidRendererXNA();
+
+            _uiLayer = SpriteManager.AddLayer();
             
-            SpriteManager.AddDrawableBatch(this);
+            SpriteManager.AddToLayer(this, _uiLayer);
         }
 
         public void Destroy()
         {
             GuiHost.Renderer = null;
-            SpriteManager.RemoveDrawableBatch(this);
+            
+            _uiLayer.Remove(this);
+            SpriteManager.RemoveLayer(_uiLayer);
         }
 
         public void Draw(Camera camera)
         {
             GuiHost.TimeElapsed = (float)TimeManager.LastUpdateGameTime.ElapsedGameTime.TotalMilliseconds;
 
-            _desktop.Size = new Squid.Point((int)camera.OrthogonalWidth, 
-                (int)camera.OrthogonalHeight);
+            _desktop.Size = new Squid.Point(FlatRedBallServices.Game.GraphicsDevice.Viewport.Width,
+                FlatRedBallServices.Game.GraphicsDevice.Viewport.Height);
             _desktop.Update();
             _desktop.Draw();
 
@@ -122,7 +127,7 @@ namespace Ceriyo.Entities.DrawableBatches
             public double Repeat = REPEAT_DELAY;
         }
 
-        private static Dictionary<XInput.Keys, int> SpecialKeys = new Dictionary<XInput.Keys, int>();
+        private Dictionary<XInput.Keys, int> SpecialKeys = new Dictionary<XInput.Keys, int>();
         private Dictionary<XInput.Keys, InputKey> InputKeys = new Dictionary<XInput.Keys, InputKey>();
         private List<Squid.KeyData> _squidKeys = new List<KeyData>();
 

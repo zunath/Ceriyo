@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ceriyo.Data.Enumerations;
 using Squid;
 
 namespace Ceriyo.Library.SquidGUI
@@ -10,6 +11,14 @@ namespace Ceriyo.Library.SquidGUI
         private Label TitleLabel;
         private Label MessageLabel;
         private Frame ButtonFrame;
+
+        public EventHandler<EventArgs> OnOKClicked;
+        public EventHandler<EventArgs> OnCancelClicked;
+        public EventHandler<EventArgs> OnRetryClicked;
+        public EventHandler<EventArgs> OnYesClicked;
+        public EventHandler<EventArgs> OnNoClicked;
+        public EventHandler<EventArgs> OnIgnoreClicked;
+        public EventHandler<EventArgs> OnAbortClicked;
 
         private MessageBox(string title, string message)
         {
@@ -40,7 +49,7 @@ namespace Ceriyo.Library.SquidGUI
             Controls.Add(MessageLabel);
         }
 
-        public static MessageBox Show(Point size, string title, string message, MessageBoxButtons buttons, Desktop target)
+        public static MessageBox Show(Point size, string title, string message, MessageBoxButtonTypeEnum buttons, Desktop target)
         {
             MessageBox box = new MessageBox(title, message);
             box.Size = size;
@@ -50,31 +59,31 @@ namespace Ceriyo.Library.SquidGUI
             return box;
         }
 
-        private void InitButtons(MessageBoxButtons buttons)
+        private void InitButtons(MessageBoxButtonTypeEnum buttons)
         {
             switch (buttons)
             {
-                case MessageBoxButtons.OK:
+                case MessageBoxButtonTypeEnum.OK:
                     AddButton("OK", DialogResult.OK, 1);
                     break;
-                case MessageBoxButtons.OKCancel:
+                case MessageBoxButtonTypeEnum.OKCancel:
                     AddButton("Cancel", DialogResult.Cancel, 2);
                     AddButton("OK", DialogResult.OK, 2);
                     break;
-                case MessageBoxButtons.RetryCancel:
+                case MessageBoxButtonTypeEnum.RetryCancel:
                     AddButton("Cancel", DialogResult.Cancel, 2);
                     AddButton("Retry", DialogResult.Retry, 2);
                     break;
-                case MessageBoxButtons.YesNo:
+                case MessageBoxButtonTypeEnum.YesNo:
                     AddButton("No", DialogResult.No, 2);
                     AddButton("Yes", DialogResult.Yes, 2);
                     break;
-                case MessageBoxButtons.YesNoCancel:
+                case MessageBoxButtonTypeEnum.YesNoCancel:
                     AddButton("No", DialogResult.No, 3);
                     AddButton("Cancel", DialogResult.Cancel, 3);
                     AddButton("Yes", DialogResult.Yes, 3);
                     break;
-                case MessageBoxButtons.AbortRetryIgnore:
+                case MessageBoxButtonTypeEnum.AbortRetryIgnore:
                     AddButton("Retry", DialogResult.Retry, 3);
                     AddButton("Ignore", DialogResult.Ignore, 3);
                     AddButton("Abort", DialogResult.Abort, 3);
@@ -99,29 +108,59 @@ namespace Ceriyo.Library.SquidGUI
         void button_OnMouseClick(Control sender, MouseEventArgs args)
         {
             if (args.Button > 0) return;
+            DialogResult result = (DialogResult)sender.Tag;
 
-            Animation.Stop();
-            Animation.Custom(FadeAndClose(sender));
-            //Close();
-        }
-
-        private System.Collections.IEnumerator FadeAndClose(Control sender)
-        {
-            yield return Animation.Opacity(0, 500);
-
-            Result = (DialogResult)sender.Tag;
-
+            if (result == DialogResult.Abort)
+            {
+                if (OnAbortClicked != null)
+                {
+                    OnAbortClicked(this, new EventArgs());
+                }
+            }
+            else if (result == DialogResult.Cancel)
+            {
+                if (OnCancelClicked != null)
+                {
+                    OnCancelClicked(this, new EventArgs());
+                }
+            }
+            else if (result == DialogResult.Ignore)
+            {
+                if (OnIgnoreClicked != null)
+                {
+                    OnIgnoreClicked(this, new EventArgs());
+                }
+            }
+            else if (result == DialogResult.No)
+            {
+                if (OnNoClicked != null)
+                {
+                    OnNoClicked(this, new EventArgs());
+                }
+            }
+            else if (result == DialogResult.OK)
+            {
+                if (OnOKClicked != null)
+                {
+                    OnOKClicked(this, new EventArgs());
+                }
+            }
+            else if (result == DialogResult.Retry)
+            {
+                if (OnRetryClicked != null)
+                {
+                    OnRetryClicked(this, new EventArgs());
+                }
+            }
+            else if (result == DialogResult.Yes)
+            {
+                if (OnYesClicked != null)
+                {
+                    OnYesClicked(this, new EventArgs());
+                }
+            }
+            
             Close();
         }
-    }
-
-    public enum MessageBoxButtons
-    {
-        OK = 0,
-        OKCancel = 1,
-        AbortRetryIgnore = 2,
-        YesNoCancel = 3,
-        YesNo = 4,
-        RetryCancel = 5,
     }
 }

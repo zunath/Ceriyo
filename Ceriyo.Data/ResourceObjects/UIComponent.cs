@@ -20,6 +20,8 @@ namespace Ceriyo.Data.ResourceObjects
         public AnchorStyles Anchor { get; set; }
         public string CursorType { get; set; }
         public List<UIComponent> Children { get; set; }
+        public bool Enabled { get; set; }
+        public bool Visible { get; set; }
 
         public UIComponent()
         {
@@ -35,6 +37,8 @@ namespace Ceriyo.Data.ResourceObjects
             this.Anchor = AnchorStyles.None;
             this.CursorType = Cursors.Default;
             this.Children = new List<UIComponent>();
+            this.Enabled = true;
+            this.Visible = true;
         }
     }
 }

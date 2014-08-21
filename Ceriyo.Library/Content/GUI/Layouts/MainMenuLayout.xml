@@ -4,10 +4,10 @@
     <UIComponent>
       <ComponentType>Window</ComponentType>
       <Name>MainMenuWindow</Name>
-      <SizeX>500</SizeX>
+      <SizeX>600</SizeX>
       <SizeY>500</SizeY>
-      <PositionX>0</PositionX>
-      <PositionY>0</PositionY>
+      <PositionX>100</PositionX>
+      <PositionY>50</PositionY>
       <Title>Main Menu</Title>
       <Text></Text>
       <Resizeable>false</Resizeable>
@@ -15,7 +15,44 @@
       <CursorType>default</CursorType>
       <Children>
         <UIComponent>
-          
+          <ComponentType>Button</ComponentType>
+          <Name>btnLogin</Name>
+          <SizeX>425</SizeX>
+          <SizeY>40</SizeY>
+          <PositionX>85</PositionX>
+          <PositionY>80</PositionY>
+          <Text>Login</Text>
+          <Anchor>None</Anchor>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnFindServer</Name>
+          <SizeX>425</SizeX>
+          <SizeY>40</SizeY>
+          <PositionX>85</PositionX>
+          <PositionY>130</PositionY>
+          <Text>Find Server</Text>
+          <Anchor>None</Anchor>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnSettings</Name>
+          <SizeX>425</SizeX>
+          <SizeY>40</SizeY>
+          <PositionX>85</PositionX>
+          <PositionY>180</PositionY>
+          <Text>Settings</Text>
+          <Anchor>None</Anchor>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnExit</Name>
+          <SizeX>425</SizeX>
+          <SizeY>40</SizeY>
+          <PositionX>85</PositionX>
+          <PositionY>230</PositionY>
+          <Text>Exit</Text>
+          <Anchor>None</Anchor>
         </UIComponent>
       </Children>
     </UIComponent>

@@ -12,6 +12,11 @@ namespace Ceriyo.Data
             get { return "D7434CF5-4108-4654-9C52-AA5217D4104D"; }
         }
 
+        public static bool IsDebugEnabled
+        {
+            get { return true; } 
+        }
+
         public static int TilePixelWidth
         {
             get { return 32; }

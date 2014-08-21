@@ -97,6 +97,7 @@
     <Compile Include="Enumerations\FileOperationResultTypeEnum.cs" />
     <Compile Include="Enumerations\GenderTypeEnum.cs" />
     <Compile Include="Enumerations\InventorySlotEnum.cs" />
+    <Compile Include="Enumerations\MessageBoxButtonTypeEnum.cs" />
     <Compile Include="Enumerations\NetworkAgentRoleEnum.cs" />
     <Compile Include="Enumerations\PaintObjectModeTypeEnum.cs" />
     <Compile Include="Enumerations\PVPTypeEnum.cs" />

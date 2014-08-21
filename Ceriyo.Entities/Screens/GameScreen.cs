@@ -11,6 +11,7 @@ using Ceriyo.Data.ResourceObjects;
 using FlatRedBall.IO;
 using Squid;
 using Ceriyo.Entities.Entities;
+using Ceriyo.Entities.Entities.GUI;
 
 namespace Ceriyo.Entities.Screens
 {
@@ -27,6 +28,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
+            
         }
 
         protected override void CustomActivity(bool firstTimeCalled)

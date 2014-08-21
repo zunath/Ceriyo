@@ -7,9 +7,9 @@ using Ceriyo.Entities.GUI;
 using Ceriyo.Library.SquidGUI;
 using Squid;
 
-namespace Ceriyo.Entities.Entities
+namespace Ceriyo.Entities.Entities.GUI
 {
-    public class MainMenuGUIEntity : GUIDrawableBatch
+    public class LoginMenuGUIEntity : GUIDrawableBatch
     {
         #region Controls
 
@@ -23,7 +23,7 @@ namespace Ceriyo.Entities.Entities
 
         #endregion
 
-        public MainMenuGUIEntity()
+        public LoginMenuGUIEntity()
             : base("MainMenuLayout")
         {
             LoadControls();
