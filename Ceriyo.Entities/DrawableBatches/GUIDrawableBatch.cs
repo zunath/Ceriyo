@@ -28,8 +28,18 @@ namespace Ceriyo.Entities.DrawableBatches
             GuiHost.Renderer = new SquidRendererXNA();
 
             _uiLayer = SpriteManager.AddLayer();
-            
+
+            _desktop.Size = new Squid.Point(FlatRedBallServices.Game.GraphicsDevice.Viewport.Width,
+                FlatRedBallServices.Game.GraphicsDevice.Viewport.Height);
+            FlatRedBallServices.Game.Window.ClientSizeChanged += Window_ClientSizeChanged;
+
             SpriteManager.AddToLayer(this, _uiLayer);
+        }
+
+        private void Window_ClientSizeChanged(object sender, EventArgs e)
+        {
+            _desktop.Size = new Squid.Point(FlatRedBallServices.Game.GraphicsDevice.Viewport.Width,
+                FlatRedBallServices.Game.GraphicsDevice.Viewport.Height);
         }
 
         public void Destroy()
@@ -44,8 +54,6 @@ namespace Ceriyo.Entities.DrawableBatches
         {
             GuiHost.TimeElapsed = (float)TimeManager.LastUpdateGameTime.ElapsedGameTime.TotalMilliseconds;
 
-            _desktop.Size = new Squid.Point(FlatRedBallServices.Game.GraphicsDevice.Viewport.Width,
-                FlatRedBallServices.Game.GraphicsDevice.Viewport.Height);
             _desktop.Update();
             _desktop.Draw();
 
