@@ -75,13 +75,13 @@ namespace Ceriyo.Library.SquidGUI
             if (result != null)
             {
                 result.Parent = parent;
-            }
 
-            result.Size = new Point(component.SizeX, component.SizeY);
-            result.Position = new Point(component.PositionX, component.PositionY);
-            result.Anchor = component.Anchor;
-            result.Cursor = component.CursorType;
-            result.Name = component.Name;
+                result.Size = new Point(component.SizeX, component.SizeY);
+                result.Position = new Point(component.PositionX, component.PositionY);
+                result.Anchor = component.Anchor;
+                result.Cursor = component.CursorType;
+                result.Name = component.Name;
+            }
             
 
             return result;

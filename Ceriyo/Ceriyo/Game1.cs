@@ -37,7 +37,7 @@ namespace Ceriyo
 			GlobalContent.Initialize();
             FlatRedBallServices.IsWindowsCursorVisible = true;
             this.Window.AllowUserResizing = true;
-			ScreenManager.Start(typeof(GameScreen));
+            ScreenManager.Start(typeof(GameScreen));
 
             base.Initialize();
 
