@@ -43,6 +43,7 @@ namespace Ceriyo
 
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
             SpriteManager.Camera.UsePixelCoordinates();
+
         }
 
 

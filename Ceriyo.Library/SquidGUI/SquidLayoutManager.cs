@@ -77,18 +77,21 @@ namespace Ceriyo.Library.SquidGUI
                 result.Parent = parent;
             }
 
+            result.Size = new Point(component.SizeX, component.SizeY);
+            result.Position = new Point(component.PositionX, component.PositionY);
+            result.Anchor = component.Anchor;
+            result.Cursor = component.CursorType;
+            result.Name = component.Name;
+            
+
             return result;
         }
 
         private Window BuildWindow(UIComponent component)
         {
             UIWindow window = new UIWindow();
-            window.Size = new Point(component.SizeX, component.SizeY);
-            window.Position = new Point(component.PositionX, component.PositionY);
             window.Titlebar.Text = component.Title;
             window.Resizable = component.Resizeable;
-            window.Anchor = component.Anchor;
-            window.Cursor = component.CursorType;
 
             return window;
         }
@@ -96,12 +99,7 @@ namespace Ceriyo.Library.SquidGUI
         private Label BuildLabel(UIComponent component)
         {
             Label label = new Label();
-            label.Name = component.Name;
             label.Text = component.Text;
-            label.Size = new Point(component.SizeX, component.SizeY);
-            label.Position = new Point(component.PositionX, component.PositionY);
-            label.Cursor = component.CursorType;
-            label.Anchor = component.Anchor;
 
             return label;
         }
@@ -109,12 +107,8 @@ namespace Ceriyo.Library.SquidGUI
         private TextBox BuildTextBox(UIComponent component)
         {
             TextBox box = new TextBox();
-            box.Name = component.Name;
             box.Text = component.Text;
-            box.Size = new Point(component.SizeX, component.SizeY);
-            box.Position = new Point(component.PositionX, component.PositionY);
             box.Style = "textbox";
-            box.Anchor = component.Anchor;
 
             return box;
         }
@@ -122,28 +116,18 @@ namespace Ceriyo.Library.SquidGUI
         private Button BuildButton(UIComponent component)
         {
             Button button = new Button();
-            button.Name = component.Name;
-            button.Size = new Point(component.SizeX, component.SizeY);
-            button.Position = new Point(component.PositionX, component.PositionY);
             button.Text = component.Text;
             button.Style = "button";
-            button.Anchor = component.Anchor;
-            button.Cursor = component.CursorType;
-
+            
             return button;
         }
 
         private CheckBox BuildCheckBox(UIComponent component)
         {
             CheckBox box = new CheckBox();
-            box.Name = component.Name;
-            box.Size = new Point(component.SizeX, component.SizeY);
-            box.Position = new Point(component.PositionX, component.PositionY);
             box.Text = component.Text;
             box.Button.Style = "checkBox";
-            box.Button.Size = new Point(26, 26);
-            box.Button.Cursor = Cursors.Link;
-
+            
             return box;
         }
     }

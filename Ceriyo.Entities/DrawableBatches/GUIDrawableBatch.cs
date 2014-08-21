@@ -25,7 +25,7 @@ namespace Ceriyo.Entities.DrawableBatches
 
             InitializeInputManager();
             GuiHost.Renderer = new SquidRendererXNA();
-
+            
             SpriteManager.AddDrawableBatch(this);
         }
 
@@ -39,8 +39,8 @@ namespace Ceriyo.Entities.DrawableBatches
         {
             GuiHost.TimeElapsed = (float)TimeManager.LastUpdateGameTime.ElapsedGameTime.TotalMilliseconds;
 
-            _desktop.Size = new Squid.Point(FlatRedBallServices.Game.GraphicsDevice.Viewport.Width, 
-                FlatRedBallServices.Game.GraphicsDevice.Viewport.Height);
+            _desktop.Size = new Squid.Point((int)camera.OrthogonalWidth, 
+                (int)camera.OrthogonalHeight);
             _desktop.Update();
             _desktop.Draw();
 
@@ -106,6 +106,7 @@ namespace Ceriyo.Entities.DrawableBatches
         {
             get { return true; }
         }
+
 
         public Control GetControl(string controlName)
         {

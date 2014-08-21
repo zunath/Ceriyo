@@ -2,7 +2,22 @@
 <UILayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Components>
     <UIComponent>
-      <ComponentType>LoginMenuLayout</ComponentType>
+      <ComponentType>Window</ComponentType>
+      <Name>MainMenuWindow</Name>
+      <SizeX>500</SizeX>
+      <SizeY>500</SizeY>
+      <PositionX>0</PositionX>
+      <PositionY>0</PositionY>
+      <Title>Main Menu</Title>
+      <Text></Text>
+      <Resizeable>false</Resizeable>
+      <Anchor>None</Anchor>
+      <CursorType>default</CursorType>
+      <Children>
+        <UIComponent>
+          
+        </UIComponent>
+      </Children>
     </UIComponent>
   </Components>
 </UILayout>
