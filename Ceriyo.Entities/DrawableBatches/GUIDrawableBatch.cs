@@ -8,6 +8,7 @@ using Ceriyo.Library.SquidGUI;
 using Squid;
 using XInput = Microsoft.Xna.Framework.Input;
 using FlatRedBall.Input;
+using Ceriyo.Data.ResourceObjects;
 
 namespace Ceriyo.Entities.DrawableBatches
 {
@@ -16,9 +17,11 @@ namespace Ceriyo.Entities.DrawableBatches
         protected Desktop _desktop;
         private SquidLayoutManager _layoutManager;
         private Layer _uiLayer;
+        private string _layoutName;
 
         public GUIDrawableBatch(string layoutName)
         {
+            _layoutName = layoutName;
             _layoutManager = new SquidLayoutManager();
 
             _desktop = _layoutManager.LayoutToDesktop(layoutName);
@@ -40,6 +43,21 @@ namespace Ceriyo.Entities.DrawableBatches
         {
             _desktop.Size = new Squid.Point(FlatRedBallServices.Game.GraphicsDevice.Viewport.Width,
                 FlatRedBallServices.Game.GraphicsDevice.Viewport.Height);
+
+            foreach (Control control in _desktop.Controls)
+            {
+                UIComponent component = control.UserData as UIComponent;
+                int centerX = FlatRedBallServices.Game.GraphicsDevice.Viewport.Width / 2;
+                int centerY = FlatRedBallServices.Game.GraphicsDevice.Viewport.Height / 2;
+                int windowCenterX = control.Size.x / 2;
+                int windowCenterY = control.Size.y / 2;
+
+                control.Position = new Point(component.PositionX + centerX - windowCenterX,
+                                             component.PositionY + centerY - windowCenterY);
+
+            }
+
+
         }
 
         public void Destroy()

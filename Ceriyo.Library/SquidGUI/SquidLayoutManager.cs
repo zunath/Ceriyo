@@ -1,6 +1,7 @@
 ﻿using Ceriyo.Data;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Entities.GUI;
+using FlatRedBall;
 using FlatRedBall.IO;
 using Squid;
 
@@ -30,7 +31,7 @@ namespace Ceriyo.Library.SquidGUI
             foreach (UIComponent component in layout.Components)
             {
                 Control control = BuildControl(component, _desktop);
-
+                
                 foreach (UIComponent child in component.Children)
                 {
                     BuildControl(child, control);
@@ -83,6 +84,26 @@ namespace Ceriyo.Library.SquidGUI
                 result.Name = component.Name;
                 result.Enabled = component.Enabled;
                 result.Visible = component.Visible;
+                result.UserData = component;
+
+                if (parent != null)
+                {
+                    int centerX = FlatRedBallServices.Game.GraphicsDevice.Viewport.Width / 2;
+                    int centerY = FlatRedBallServices.Game.GraphicsDevice.Viewport.Height / 2;
+
+                    if (parent != _desktop)
+                    {
+                        centerX = parent.Size.x / 2;
+                        centerY = parent.Size.y / 2;
+                    }
+
+                    int controlCenterX = result.Size.x / 2;
+                    int controlCenterY = result.Size.y / 2;
+
+                    result.Position = new Point(component.PositionX + centerX - controlCenterX,
+                                                 component.PositionY + centerY - controlCenterY);
+
+                }
             }
             
 

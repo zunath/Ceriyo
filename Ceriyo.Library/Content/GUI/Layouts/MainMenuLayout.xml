@@ -6,8 +6,8 @@
       <Name>MainMenuWindow</Name>
       <SizeX>600</SizeX>
       <SizeY>500</SizeY>
-      <PositionX>100</PositionX>
-      <PositionY>50</PositionY>
+      <PositionX>0</PositionX>
+      <PositionY>0</PositionY>
       <Title>Main Menu</Title>
       <Text></Text>
       <Resizeable>false</Resizeable>
@@ -19,8 +19,8 @@
           <Name>btnLogin</Name>
           <SizeX>425</SizeX>
           <SizeY>40</SizeY>
-          <PositionX>85</PositionX>
-          <PositionY>80</PositionY>
+          <PositionX>0</PositionX>
+          <PositionY>-150</PositionY>
           <Text>Login</Text>
           <Anchor>None</Anchor>
         </UIComponent>
@@ -29,8 +29,8 @@
           <Name>btnFindServer</Name>
           <SizeX>425</SizeX>
           <SizeY>40</SizeY>
-          <PositionX>85</PositionX>
-          <PositionY>130</PositionY>
+          <PositionX>0</PositionX>
+          <PositionY>-100</PositionY>
           <Text>Find Server</Text>
           <Anchor>None</Anchor>
         </UIComponent>
@@ -39,8 +39,8 @@
           <Name>btnSettings</Name>
           <SizeX>425</SizeX>
           <SizeY>40</SizeY>
-          <PositionX>85</PositionX>
-          <PositionY>180</PositionY>
+          <PositionX>0</PositionX>
+          <PositionY>-50</PositionY>
           <Text>Settings</Text>
           <Anchor>None</Anchor>
         </UIComponent>
@@ -49,8 +49,8 @@
           <Name>btnExit</Name>
           <SizeX>425</SizeX>
           <SizeY>40</SizeY>
-          <PositionX>85</PositionX>
-          <PositionY>230</PositionY>
+          <PositionX>0</PositionX>
+          <PositionY>0</PositionY>
           <Text>Exit</Text>
           <Anchor>None</Anchor>
         </UIComponent>
