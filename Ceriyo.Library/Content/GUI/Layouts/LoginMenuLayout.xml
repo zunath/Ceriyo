@@ -5,9 +5,9 @@
       <ComponentType>Window</ComponentType>
       <Name>LoginWindow</Name>
       <SizeX>440</SizeX>
-      <SizeY>340</SizeY>
-      <PositionX>40</PositionX>
-      <PositionY>40</PositionY>
+      <SizeY>280</SizeY>
+      <PositionX>0</PositionX>
+      <PositionY>0</PositionY>
       <Title>Log In</Title>
       <Text />
       <Resizeable>false</Resizeable>
@@ -19,8 +19,8 @@
           <Name>lblUserName</Name>
           <SizeX>122</SizeX>
           <SizeY>35</SizeY>
-          <PositionX>60</PositionX>
-          <PositionY>100</PositionY>
+          <PositionX>-120</PositionX>
+          <PositionY>-40</PositionY>
           <Title />
           <Text>Username:</Text>
           <Resizeable>false</Resizeable>
@@ -33,8 +33,8 @@
           <Name>txtUsername</Name>
           <SizeX>222</SizeX>
           <SizeY>35</SizeY>
-          <PositionX>180</PositionX>
-          <PositionY>100</PositionY>
+          <PositionX>70</PositionX>
+          <PositionY>-40</PositionY>
           <Title />
           <Text></Text>
           <Resizeable>false</Resizeable>
@@ -47,8 +47,8 @@
           <Name>lblPassword</Name>
           <SizeX>122</SizeX>
           <SizeY>35</SizeY>
-          <PositionX>60</PositionX>
-          <PositionY>140</PositionY>
+          <PositionX>-120</PositionX>
+          <PositionY>0</PositionY>
           <Title />
           <Text>Password:</Text>
           <Resizeable>false</Resizeable>
@@ -61,8 +61,8 @@
           <Name>txtPassword</Name>
           <SizeX>222</SizeX>
           <SizeY>35</SizeY>
-          <PositionX>180</PositionX>
-          <PositionY>140</PositionY>
+          <PositionX>70</PositionX>
+          <PositionY>0</PositionY>
           <Title />
           <Text></Text>
           <Resizeable>false</Resizeable>
@@ -75,8 +75,8 @@
           <Name>btnLogin</Name>
           <SizeX>157</SizeX>
           <SizeY>35</SizeY>
-          <PositionX>245</PositionX>
-          <PositionY>294</PositionY>
+          <PositionX>100</PositionX>
+          <PositionY>60</PositionY>
           <Title />
           <Text>Log In</Text>
           <Resizeable>false</Resizeable>
@@ -85,19 +85,20 @@
           <Children />
         </UIComponent>
         <UIComponent>
-          <ComponentType>CheckBox</ComponentType>
-          <Name>chkRememberMe</Name>
+          <ComponentType>Button</ComponentType>
+          <Name>btnCreateAccount</Name>
           <SizeX>157</SizeX>
-          <SizeY>26</SizeY>
-          <PositionX>280</PositionX>
-          <PositionY>180</PositionY>
+          <SizeY>35</SizeY>
+          <PositionX>-60</PositionX>
+          <PositionY>60</PositionY>
           <Title />
-          <Text>Remember Me</Text>
+          <Text>Create Account</Text>
           <Resizeable>false</Resizeable>
           <Anchor>None</Anchor>
-          <CursorType>link</CursorType>
+          <CursorType>default</CursorType>
           <Children />
         </UIComponent>
+
       </Children>
     </UIComponent>
   </Components>

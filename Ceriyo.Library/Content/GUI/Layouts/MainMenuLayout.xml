@@ -56,5 +56,9 @@
         </UIComponent>
       </Children>
     </UIComponent>
+
+    <UIComponent>
+      <ComponentType>LoginMenuLayout</ComponentType>
+    </UIComponent>
   </Components>
 </UILayout>
