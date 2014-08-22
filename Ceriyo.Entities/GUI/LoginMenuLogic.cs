@@ -7,24 +7,24 @@ using Ceriyo.Entities.GUI;
 using Ceriyo.Library.SquidGUI;
 using Squid;
 
-namespace Ceriyo.Entities.Entities.GUI
+namespace Ceriyo.Entities.GUI
 {
-    public class LoginMenuGUIEntity : GUIDrawableBatch
+    public class LoginMenuLogic : GUIDrawableBatch
     {
         #region Controls
 
-        UIWindow Window { get; set; }
-        Label UsernameLabel { get; set; }
-        TextBox UsernameTextBox { get; set; }
-        Label PasswordLabel { get; set; }
-        TextBox PasswordTextBox { get; set; }
-        Button LoginButton { get; set; }
-        CheckBox RememberMeCheckBox { get; set; }
+        private UIWindow Window { get; set; }
+        private Label UsernameLabel { get; set; }
+        private TextBox UsernameTextBox { get; set; }
+        private Label PasswordLabel { get; set; }
+        private TextBox PasswordTextBox { get; set; }
+        private Button LoginButton { get; set; }
+        private CheckBox RememberMeCheckBox { get; set; }
 
         #endregion
 
-        public LoginMenuGUIEntity()
-            : base("MainMenuLayout")
+        public LoginMenuLogic()
+            : base("LoginMenu")
         {
             LoadControls();
             HookEvents();

@@ -26,12 +26,22 @@
         </UIComponent>
         <UIComponent>
           <ComponentType>Button</ComponentType>
-          <Name>btnFindServer</Name>
+          <Name>btnServerList</Name>
           <SizeX>425</SizeX>
           <SizeY>40</SizeY>
           <PositionX>0</PositionX>
           <PositionY>-100</PositionY>
-          <Text>Find Server</Text>
+          <Text>Server List</Text>
+          <Anchor>None</Anchor>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnDirectConnect</Name>
+          <SizeX>425</SizeX>
+          <SizeY>40</SizeY>
+          <PositionX>0</PositionX>
+          <PositionY>-50</PositionY>
+          <Text>Direct Connect</Text>
           <Anchor>None</Anchor>
         </UIComponent>
         <UIComponent>
@@ -40,7 +50,7 @@
           <SizeX>425</SizeX>
           <SizeY>40</SizeY>
           <PositionX>0</PositionX>
-          <PositionY>-50</PositionY>
+          <PositionY>0</PositionY>
           <Text>Settings</Text>
           <Anchor>None</Anchor>
         </UIComponent>
@@ -50,7 +60,7 @@
           <SizeX>425</SizeX>
           <SizeY>40</SizeY>
           <PositionX>0</PositionX>
-          <PositionY>0</PositionY>
+          <PositionY>50</PositionY>
           <Text>Exit</Text>
           <Anchor>None</Anchor>
         </UIComponent>

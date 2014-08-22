@@ -22,6 +22,7 @@ namespace Ceriyo.Data.ResourceObjects
         public List<UIComponent> Children { get; set; }
         public bool Enabled { get; set; }
         public bool Visible { get; set; }
+        public bool Modal { get; set; }
 
         public UIComponent()
         {
@@ -39,6 +40,7 @@ namespace Ceriyo.Data.ResourceObjects
             this.Children = new List<UIComponent>();
             this.Enabled = true;
             this.Visible = true;
+            this.Modal = false;
         }
     }
 }

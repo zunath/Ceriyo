@@ -11,6 +11,8 @@ namespace Ceriyo.Entities.Screens
 {
     public abstract class BaseScreen : Screen
     {
+        private bool AutoRefreshScreen { get; set; }
+
         public BaseScreen(string contentManagerName)
             : base(contentManagerName)
         {
@@ -19,6 +21,7 @@ namespace Ceriyo.Entities.Screens
         protected abstract void CustomInitialize();
         public override void Initialize(bool addToManagers)
         {
+            AutoRefreshScreen = false;
             base.Initialize(addToManagers);
 
             if (addToManagers)
@@ -47,6 +50,8 @@ namespace Ceriyo.Entities.Screens
                 {
                     this.MoveToScreen(this.GetType());
                 }
+
+                //this.MoveToScreen(this.GetType()); // For layout designing
             }
         }
 

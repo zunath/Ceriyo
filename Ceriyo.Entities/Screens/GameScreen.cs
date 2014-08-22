@@ -10,25 +10,25 @@ using Ceriyo.Library.SquidGUI;
 using Ceriyo.Data.ResourceObjects;
 using FlatRedBall.IO;
 using Squid;
-using Ceriyo.Entities.Entities;
-using Ceriyo.Entities.Entities.GUI;
+using Ceriyo.Entities.GUI;
 
 namespace Ceriyo.Entities.Screens
 {
     public class GameScreen : BaseScreen
     {
-        MainMenuGUIEntity _gui;
+        MainMenuLogic _mainMenuGUI;
+        DirectConnectLogic _directConnectGUI;
 
         public GameScreen()
             : base("GameScreen")
         {
-            _gui = new MainMenuGUIEntity();
-            
+            _mainMenuGUI = new MainMenuLogic();
+            _directConnectGUI = new DirectConnectLogic();
         }
 
         protected override void CustomInitialize()
         {
-            
+            HookEvents();
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -37,7 +37,15 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
-            _gui.Destroy();
+            _mainMenuGUI.Destroy();
+            _directConnectGUI.Destroy();
         }
+
+
+        private void HookEvents()
+        {
+            _mainMenuGUI.DirectConnectButtonPressed += _directConnectGUI.Show;
+        }
+
     }
 }

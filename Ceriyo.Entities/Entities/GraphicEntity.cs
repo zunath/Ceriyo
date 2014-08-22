@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ceriyo.Entities.Entities
+namespace Ceriyo.Entities
 {
     public abstract class GraphicEntity : BaseEntity
     {

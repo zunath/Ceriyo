@@ -9,22 +9,29 @@ using Ceriyo.Library.SquidGUI;
 using FlatRedBall;
 using Squid;
 
-namespace Ceriyo.Entities.Entities.GUI
+namespace Ceriyo.Entities.GUI
 {
-    public class MainMenuGUIEntity : GUIDrawableBatch
+    public class MainMenuLogic : GUIDrawableBatch
     {
         #region Controls
 
-        UIWindow Window { get; set; }
-        Button LoginButton { get; set; }
-        Button FindServerButton { get; set; }
-        Button SettingsButton { get; set; }
-        Button ExitButton { get; set; }
+        private UIWindow Window { get; set; }
+        private Button LoginButton { get; set; }
+        private Button ServerListButton { get; set; }
+        private Button DirectConnectButton { get; set; }
+        private Button SettingsButton { get; set; }
+        private Button ExitButton { get; set; }
 
         #endregion
 
-        public MainMenuGUIEntity()
-            : base("MainMenuLayout")
+        #region Events
+
+        public event EventHandler<EventArgs> DirectConnectButtonPressed;
+
+        #endregion
+
+        public MainMenuLogic()
+            : base("MainMenu")
         {
             LoadControls();
             HookEvents();
@@ -34,14 +41,24 @@ namespace Ceriyo.Entities.Entities.GUI
         {
             Window = GetControl("MainMenuWindow") as UIWindow;
             LoginButton = GetControl("btnLogin") as Button;
-            FindServerButton = GetControl("btnFindServer") as Button;
+            ServerListButton = GetControl("btnServerList") as Button;
+            DirectConnectButton = GetControl("btnDirectConnect") as Button;
             SettingsButton = GetControl("btnSettings") as Button;
             ExitButton = GetControl("btnExit") as Button;
         }
 
         private void HookEvents()
         {
+            DirectConnectButton.MouseClick += DirectConnectButton_MouseClick;
             ExitButton.MouseClick += ExitButton_MouseClick;
+        }
+
+        private void DirectConnectButton_MouseClick(Control sender, MouseEventArgs args)
+        {
+            if (DirectConnectButtonPressed != null)
+            {
+                DirectConnectButtonPressed(this, new EventArgs());
+            }
         }
 
         private void ExitButton_MouseClick(Control sender, MouseEventArgs args)

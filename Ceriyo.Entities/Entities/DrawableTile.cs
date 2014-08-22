@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using FlatRedBall;
 
-namespace Ceriyo.Entities.Entities
+namespace Ceriyo.Entities
 {
     public class DrawableTile
     {

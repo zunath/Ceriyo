@@ -12,7 +12,7 @@ using FlatRedBall.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Entities.Entities
+namespace Ceriyo.Entities
 {
     public class PaintTileEntity : BaseEntity
     {

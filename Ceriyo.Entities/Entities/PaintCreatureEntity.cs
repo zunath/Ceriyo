@@ -8,7 +8,7 @@ using Ceriyo.Library.Processing;
 using FlatRedBall;
 using FlatRedBall.Input;
 
-namespace Ceriyo.Entities.Entities
+namespace Ceriyo.Entities
 {
     public class PaintCreatureEntity : GraphicEntity
     {

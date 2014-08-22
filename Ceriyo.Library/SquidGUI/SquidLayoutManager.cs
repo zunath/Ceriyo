@@ -85,7 +85,7 @@ namespace Ceriyo.Library.SquidGUI
                 result.Enabled = component.Enabled;
                 result.Visible = component.Visible;
                 result.UserData = component;
-
+                
                 if (parent != null)
                 {
                     int centerX = FlatRedBallServices.Game.GraphicsDevice.Viewport.Width / 2;
@@ -115,6 +115,7 @@ namespace Ceriyo.Library.SquidGUI
             UIWindow window = new UIWindow();
             window.Titlebar.Text = component.Title;
             window.Resizable = component.Resizeable;
+            window.Modal = component.Modal;
 
             return window;
         }

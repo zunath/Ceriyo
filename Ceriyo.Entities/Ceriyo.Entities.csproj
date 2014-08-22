@@ -75,8 +75,9 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\DrawableTile.cs" />
     <Compile Include="Entities\GraphicEntity.cs" />
-    <Compile Include="Entities\GUI\MainMenuGUIEntity.cs" />
-    <Compile Include="Entities\GUI\LoginMenuGUIEntity.cs" />
+    <Compile Include="GUI\DirectConnectLogic.cs" />
+    <Compile Include="GUI\MainMenuLogic.cs" />
+    <Compile Include="GUI\LoginMenuLogic.cs" />
     <Compile Include="Entities\PaintCreatureEntity.cs" />
     <Compile Include="Entities\PaintTileEntity.cs" />
     <Compile Include="Entities\PlayerEntity.cs" />

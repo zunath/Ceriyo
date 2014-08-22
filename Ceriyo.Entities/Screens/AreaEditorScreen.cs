@@ -7,7 +7,6 @@ using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
-using Ceriyo.Entities.Entities;
 using FlatRedBall;
 using FlatRedBall.Input;
 using FlatRedBall.Screens;

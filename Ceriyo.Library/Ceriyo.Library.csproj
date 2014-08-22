@@ -165,11 +165,16 @@
     <Content Include="Content\Data\LevelChart.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Content\GUI\Layouts\LoginMenuLayout.xml">
+    <None Include="Content\GUI\Layouts\LoginMenu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Content\GUI\Layouts\MainMenuLayout.xml">
+    <None Include="Content\GUI\Layouts\MainMenu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Content\GUI\Layouts\DirectConnect.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <Content Include="Content\Tilesets\emptytile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

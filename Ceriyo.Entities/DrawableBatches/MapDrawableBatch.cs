@@ -7,7 +7,6 @@ using System.Text;
 using Ceriyo.Data;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
-using Ceriyo.Entities.Entities;
 using Ceriyo.Library.Processing;
 using FlatRedBall;
 using FlatRedBall.Graphics;
