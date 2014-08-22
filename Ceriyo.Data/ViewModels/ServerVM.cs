@@ -19,6 +19,34 @@ namespace Ceriyo.Data.ViewModels
         private string _ipAddress;
         private BindingList<string> _connectedUsernames;
         private BindingList<string> _logMessages;
+        private BindingList<string> _modules;
+        private string _selectedModule;
+
+        public string SelectedModule
+        {
+            get
+            {
+                return _selectedModule;
+            }
+            set
+            {
+                _selectedModule = value;
+                OnPropertyChanged("SelectedModule");
+            }
+        }
+
+        public BindingList<string> Modules
+        {
+            get
+            {
+                return _modules;
+            }
+            set
+            {
+                _modules = value;
+                OnPropertyChanged("Modules");
+            }
+        }
 
         public BindingList<string> ConnectedUsernames
         {
@@ -29,6 +57,7 @@ namespace Ceriyo.Data.ViewModels
             set
             {
                 _connectedUsernames = value;
+                OnPropertyChanged("ConnectedUsernames");
             }
         }
 
@@ -148,6 +177,8 @@ namespace Ceriyo.Data.ViewModels
             IPAddress = string.Empty;
             ConnectedUsernames = new BindingList<string>();
             LogMessages = new BindingList<string>();
+            Modules = new BindingList<string>();
+            SelectedModule = string.Empty;
         }
     }
 }

@@ -27,7 +27,6 @@ namespace Ceriyo.Server
             txtBlacklistUsername.DataContext = Model;
             txtDescription.DataContext = Model;
             txtGMPassword.DataContext = Model;
-            txtModuleFileName.DataContext = Model;
             txtPlayerPassword.DataContext = Model;
             txtServerMessage.DataContext = Model;
             txtServerName.DataContext = Model;
@@ -36,11 +35,13 @@ namespace Ceriyo.Server
             numMaxPlayers.DataContext = Model;
             numPort.DataContext = Model;
             ddlPVPType.DataContext = Model;
+            ddlModules.DataContext = Model;
             lbBlacklist.DataContext = Model;
             lbGameType.DataContext = Model;
             lblIPAddress.DataContext = Model;
             lbLog.DataContext = Model;
             lbPlayers.DataContext = Model;
+
         }
 
         private void SaveSettings(object sender, RoutedEventArgs e)

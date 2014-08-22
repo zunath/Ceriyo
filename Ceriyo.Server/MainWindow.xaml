@@ -229,24 +229,6 @@
                              MaxLength="32"
                              Grid.Column="2" 
                              Text="{Binding ServerSettings.PlayerPassword}" />
-                    <TextBox x:Name="txtModuleFileName"
-                             HorizontalAlignment="Left" 
-                             Height="23" Margin="42,37,0,0"
-                             TextWrapping="Wrap" 
-                             VerticalAlignment="Top" 
-                             Width="147"
-                             MaxLength="32" 
-                             IsReadOnly="True"
-                             IsEnabled="False" 
-                             Text="{Binding ModuleFileName}"
-                             Grid.Column="1" Grid.ColumnSpan="2"/>
-                    <Button x:Name="btnBrowse" 
-                            Content="Browse" 
-                            HorizontalAlignment="Left" 
-                            Margin="100.286,37,0,0" 
-                            VerticalAlignment="Top" 
-                            Width="75"  
-                            Grid.Column="2"/>
                     <Label Content="Port:" 
                            Grid.Column="2" 
                            HorizontalAlignment="Left" 
@@ -285,6 +267,15 @@
                             Click="SaveSettings"
                             Width="87" 
                              />
+                    <ComboBox Name="ddlModules"
+                              Grid.ColumnSpan="2" 
+                              Grid.Column="1" 
+                              HorizontalAlignment="Left" 
+                              Margin="42,37,0,0" 
+                              VerticalAlignment="Top" 
+                              ItemsSource="{Binding Modules}"
+                              SelectedItem="{Binding SelectedModule}"
+                              Width="227"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Description">
