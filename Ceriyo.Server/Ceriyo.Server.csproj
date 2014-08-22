@@ -52,6 +52,13 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FlatRedBall, Version=2014.7.6.996, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ceriyo\Ceriyo\Libraries\Xna4Pc\FlatRedBall.dll</HintPath>
+    </Reference>
+    <Reference Include="FlatRedBall.Content">
+      <HintPath>..\Ceriyo\Ceriyo\Libraries\Xna4Pc\FlatRedBall.Content.dll</HintPath>
+    </Reference>
     <Reference Include="Lidgren.Network, Version=2011.3.12.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Ceriyo\Ceriyo\Libraries\Lidgren\Lidgren.Network.dll</HintPath>

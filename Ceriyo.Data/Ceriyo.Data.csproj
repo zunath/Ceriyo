@@ -167,6 +167,7 @@
     <Compile Include="ViewModels\SaveScriptVM.cs" />
     <Compile Include="ViewModels\ScriptEditorVM.cs" />
     <Compile Include="ViewModels\ScriptSelectionVM.cs" />
+    <Compile Include="ViewModels\ServerVM.cs" />
     <Compile Include="ViewModels\SkillEditorVM.cs" />
     <Compile Include="ViewModels\TilesetEditorVM.cs" />
     <Compile Include="ViewModels\ToolsetVM.cs" />
