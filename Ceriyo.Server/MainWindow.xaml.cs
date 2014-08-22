@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Settings;
 using Ceriyo.Data.ViewModels;
-using FlatRedBall;
 using FlatRedBall.IO;
 
 namespace Ceriyo.Server
@@ -75,6 +63,31 @@ namespace Ceriyo.Server
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadSettings();
+        }
+
+        private void AddToBlacklist(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(Model.BlacklistUsername) &&
+                !Model.ServerSettings.Blacklist.Contains(Model.BlacklistUsername))
+            {
+                Model.ServerSettings.Blacklist.Add(Model.BlacklistUsername);
+            }
+
+            Model.BlacklistUsername = string.Empty;
+        }
+
+        private void RemoveSelectedFromBlacklist(object sender, RoutedEventArgs e)
+        {
+            List<string> namesToRemove = new List<string>();
+
+            foreach (string name in lbBlacklist.SelectedItems)
+            {
+                namesToRemove.Add(name);
+            }
+            foreach(string name in namesToRemove)
+            {
+                Model.ServerSettings.Blacklist.Remove(name);
+            }
         }
     }
 }

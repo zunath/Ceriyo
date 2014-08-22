@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data.Enumerations;
@@ -16,10 +17,10 @@ namespace Ceriyo.Data.ViewModels
         private string _moduleFileName;
         private int _moduleMaxLevel;
         private string _ipAddress;
-        private List<string> _connectedUsernames;
-        private List<string> _logMessages;
+        private BindingList<string> _connectedUsernames;
+        private BindingList<string> _logMessages;
 
-        public List<string> ConnectedUsernames
+        public BindingList<string> ConnectedUsernames
         {
             get
             {
@@ -31,7 +32,7 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        public List<string> LogMessages
+        public BindingList<string> LogMessages
         {
             get
             {
@@ -145,8 +146,8 @@ namespace Ceriyo.Data.ViewModels
             ModuleFileName = string.Empty;
             ModuleMaxLevel = EngineConstants.MaxLevel;
             IPAddress = string.Empty;
-            ConnectedUsernames = new List<string>();
-            LogMessages = new List<string>();
+            ConnectedUsernames = new BindingList<string>();
+            LogMessages = new BindingList<string>();
         }
     }
 }

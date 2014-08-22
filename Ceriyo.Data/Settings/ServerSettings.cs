@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data.Enumerations;
@@ -20,7 +21,7 @@ namespace Ceriyo.Data.Settings
         public GameTypeEnum GameType { get; set; }
         public string Description { get; set; }
         public string Announcement { get; set; }
-        public List<string> Blacklist { get; set; }
+        public BindingList<string> Blacklist { get; set; }
 
         public ServerSettings()
         {
@@ -36,7 +37,7 @@ namespace Ceriyo.Data.Settings
             GameType = GameTypeEnum.Action;
             Description = string.Empty;
             Announcement = string.Empty;
-            Blacklist = new List<string>();
+            Blacklist = new BindingList<string>();
         }
     }
 }
