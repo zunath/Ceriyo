@@ -22,6 +22,7 @@ namespace Ceriyo.Data.GameObjects
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "ItemProperties"; } }
+        public BindingList<ItemPropertyOption> Options { get; set; }
 
         public ItemProperty()
         {
@@ -32,6 +33,7 @@ namespace Ceriyo.Data.GameObjects
             this.Comments = string.Empty;
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            this.Options = new BindingList<ItemPropertyOption>();
         }
     }
 }

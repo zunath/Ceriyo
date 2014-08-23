@@ -91,6 +91,7 @@
     <Compile Include="Engine\ResourcePackDataManager.cs" />
     <Compile Include="Engine\WorkingDataManager.cs" />
     <Compile Include="Engine\WorkingPaths.cs" />
+    <Compile Include="Enumerations\AbilityTypeEnum.cs" />
     <Compile Include="Enumerations\AnimationTypeEnum.cs" />
     <Compile Include="Enumerations\DirectionTypeEnum.cs" />
     <Compile Include="Enumerations\GameTypeEnum.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="GameObjects\Item.cs" />
     <Compile Include="GameObjects\ItemProperty.cs" />
     <Compile Include="GameObjects\ItemClassRequirement.cs" />
+    <Compile Include="GameObjects\ItemPropertyOption.cs" />
     <Compile Include="GameObjects\ItemType.cs" />
     <Compile Include="GameObjects\LevelChart.cs" />
     <Compile Include="GameObjects\LevelChartItem.cs" />

@@ -45,6 +45,7 @@ namespace Ceriyo.Data
                         AddModulePropertiesFile(zip, module);
                         AddItemTypesFiles(zip);
                         AddCharacterClassesFiles(zip);
+                        AddItemPropertiesFiles(zip);
 
                         zip.Save();
                     }
@@ -210,6 +211,26 @@ namespace Ceriyo.Data
                     {
                         CharacterClass characterClass = FileManager.XmlDeserialize<CharacterClass>(file);
                         zip.AddFile(file, ModulePaths.CharacterClassesDirectory);
+                    }
+                    catch
+                    {
+                        // TODO: Log entry maybe?
+                    }
+                }
+            }
+        }
+
+        private void AddItemPropertiesFiles(ZipFile zip)
+        {
+            string itemPropertiesPath = EnginePaths.DataDirectory + "ItemProperties/";
+            if (Directory.Exists(itemPropertiesPath))
+            {
+                foreach (string file in Directory.GetFiles(itemPropertiesPath))
+                {
+                    try
+                    {
+                        ItemProperty itemProperty = FileManager.XmlDeserialize<ItemProperty>(file);
+                        zip.AddFile(file, ModulePaths.ItemPropertiesDirectory);
                     }
                     catch
                     {

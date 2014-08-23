@@ -141,6 +141,7 @@ namespace Ceriyo.Toolset.Components
             Model.Items = WorkingManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
             Model.ItemTypes = WorkingManager.GetAllGameObjects<ItemType>(ModulePaths.ItemTypesDirectory);
             Model.Scripts = WorkingManager.GetAllScriptNames();
+            Model.AvailableItemProperties = WorkingManager.GetAllGameObjects<ItemProperty>(ModulePaths.ItemPropertiesDirectory);
 
             foreach (Item item in Model.Items)
             {

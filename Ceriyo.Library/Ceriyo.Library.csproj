@@ -135,6 +135,9 @@
     <Content Include="Content\Data\CharacterClasses\warrior.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Data\ItemProperties\AbilityBonus.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Data\ItemTypes\armor.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

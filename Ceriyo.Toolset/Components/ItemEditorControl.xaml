@@ -211,14 +211,18 @@
                         <RowDefinition Height="40"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label Content="Available Properties:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Available Properties:" 
+                           HorizontalAlignment="Left" 
+                           Margin="10,10,0,0" VerticalAlignment="Top"/>
                     <Label Content="Assigned Properties:" Grid.Column="4" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     <ListBox Name="lbAvailableProperties"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch"
                              Height="Auto" 
                              Grid.Row="1" 
+                             ItemsSource="{Binding AvailableItemProperties}"
                              IsEnabled="{Binding IsItemSelected}"
+                             DisplayMemberPath="Name"
                              Width="Auto"/>
                     <ListBox x:Name="lbAssignedProperties"
                     	HorizontalAlignment="Stretch"
