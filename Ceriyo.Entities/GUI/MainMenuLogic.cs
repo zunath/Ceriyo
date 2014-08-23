@@ -22,11 +22,15 @@ namespace Ceriyo.Entities.GUI
         private Button SettingsButton { get; set; }
         private Button ExitButton { get; set; }
 
+        private UIWindow DirectConnectWindow { get; set; }
+        private Button ConnectButton { get; set; }
+        private Button CancelButton { get; set; }
+        private TextBox IPAddressTextBox { get; set; }
+        private TextBox PasswordTextBox { get; set; }
+
         #endregion
 
         #region Events
-
-        public event EventHandler<EventArgs> DirectConnectButtonPressed;
 
         #endregion
 
@@ -45,20 +49,33 @@ namespace Ceriyo.Entities.GUI
             DirectConnectButton = GetControl("btnDirectConnect") as Button;
             SettingsButton = GetControl("btnSettings") as Button;
             ExitButton = GetControl("btnExit") as Button;
+
+
+            DirectConnectWindow = GetControl("DirectConnectWindow") as UIWindow;
+            ConnectButton = GetControl("btnConnect") as Button;
+            CancelButton = GetControl("btnCancel") as Button;
+            IPAddressTextBox = GetControl("txtIPAddress") as TextBox;
+            PasswordTextBox = GetControl("txtPassword") as TextBox;
+
         }
 
         private void HookEvents()
         {
             DirectConnectButton.MouseClick += DirectConnectButton_MouseClick;
             ExitButton.MouseClick += ExitButton_MouseClick;
+
+            CancelButton.MouseClick += CancelButton_MouseClick;
+        }
+
+        private void CancelButton_MouseClick(Control sender, MouseEventArgs args)
+        {
+            DirectConnectWindow.Visible = false;
         }
 
         private void DirectConnectButton_MouseClick(Control sender, MouseEventArgs args)
         {
-            if (DirectConnectButtonPressed != null)
-            {
-                DirectConnectButtonPressed(this, new EventArgs());
-            }
+            DirectConnectWindow.Visible = true;
+            DirectConnectWindow.BringToFront();
         }
 
         private void ExitButton_MouseClick(Control sender, MouseEventArgs args)

@@ -17,13 +17,11 @@ namespace Ceriyo.Entities.Screens
     public class GameScreen : BaseScreen
     {
         MainMenuLogic _mainMenuGUI;
-        DirectConnectLogic _directConnectGUI;
 
         public GameScreen()
             : base("GameScreen")
         {
             _mainMenuGUI = new MainMenuLogic();
-            _directConnectGUI = new DirectConnectLogic();
         }
 
         protected override void CustomInitialize()
@@ -38,13 +36,12 @@ namespace Ceriyo.Entities.Screens
         protected override void CustomDestroy()
         {
             _mainMenuGUI.Destroy();
-            _directConnectGUI.Destroy();
         }
 
 
         private void HookEvents()
         {
-            _mainMenuGUI.DirectConnectButtonPressed += _directConnectGUI.Show;
+
         }
 
     }

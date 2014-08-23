@@ -172,10 +172,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Content\GUI\Layouts\DirectConnect.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Content\Tilesets\emptytile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
