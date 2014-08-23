@@ -10,14 +10,18 @@ namespace Ceriyo.Data.GameObjects
     public class ItemPropertyOption
     {
         public string Name { get; set; }
+        public string Resref { get; set; }
         public string SelectedValue { get; set; }
-        public SerializableDictionary<string, string> Values { get; set; }
+        public BindingList<ItemPropertyOptionValue> Values { get; set; }
+        public string ParentItemPropertyResref { get; set; }
 
         public ItemPropertyOption()
         {
             Name = string.Empty;
+            Resref = string.Empty;
             SelectedValue = string.Empty;
-            Values = new SerializableDictionary<string, string>();
+            Values = new BindingList<ItemPropertyOptionValue>();
+            ParentItemPropertyResref = string.Empty;
         }
     }
 }

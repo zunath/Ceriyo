@@ -47,7 +47,7 @@ namespace Ceriyo.Toolset.Components
             txtResref.DataContext = Model;
             txtTag.DataContext = Model;
             lbAssignedProperties.DataContext = Model;
-            lbAvailableProperties.DataContext = Model;
+            tvAvailableProperties.DataContext = Model;
             lbInventoryGraphic.DataContext = Model;
             lbItems.DataContext = Model;
             lbWorldGraphic.DataContext = Model;
@@ -219,6 +219,109 @@ namespace Ceriyo.Toolset.Components
                     imgWorldGraphic.Source = image;
                 }
             }
+        }
+
+        private void AddItemProperty(object sender, RoutedEventArgs e)
+        {
+            if (Model.SelectedItem != null && Model.SelectedAvailableItemProperty != null)
+            {
+                Type type = tvAvailableProperties.SelectedItem.GetType();
+
+                // Item property selected (I.E: Ability Bonus)
+                if (type == typeof(ItemProperty))
+                {
+                    ItemProperty ip = tvAvailableProperties.SelectedItem as ItemProperty;
+                    AssignedItemProperty aip = Model.SelectedItem.AssignedItemProperties.SingleOrDefault(x => x.ItemPropertyResref == ip.Resref);
+
+                    if (ip.Options.Count <= 0 && aip == null)
+                    {
+                        aip = new AssignedItemProperty
+                        {
+                            ItemPropertyType = ip.ItemPropertyType,
+                            ItemPropertyResref = ip.Resref
+                        };
+
+                        Model.SelectedItem.AssignedItemProperties.Add(aip);
+                    }
+                }
+                // Option selected (I.E: Strength)
+                else if (type == typeof(ItemPropertyOption))
+                {
+                    ItemPropertyOption ipo = tvAvailableProperties.SelectedItem as ItemPropertyOption;
+                    ItemProperty ip = Model.AvailableItemProperties.SingleOrDefault(x => x.Resref == ipo.ParentItemPropertyResref);
+                    AssignedItemProperty aip = Model.SelectedItem.AssignedItemProperties
+                        .SingleOrDefault(x => x.ItemPropertyResref == ipo.ParentItemPropertyResref && 
+                                              x.ItemPropertyOptionResref == ipo.Resref);
+                    
+
+                    if (ipo.Values.Count <= 0 && aip == null)
+                    {
+                        aip = new AssignedItemProperty
+                        {
+                            ItemPropertyOptionResref = ipo.Resref,
+                            ItemPropertyResref = ipo.ParentItemPropertyResref,
+                            ItemPropertyType = ip.ItemPropertyType
+                        };
+
+                        Model.SelectedItem.AssignedItemProperties.Add(aip);
+                    }
+                }
+                // Option value selected (I.E: +15)
+                else if(type == typeof(ItemPropertyOptionValue))
+                {
+                    ItemPropertyOptionValue optionValue = tvAvailableProperties.SelectedItem as ItemPropertyOptionValue;
+                    ItemProperty ip = Model.AvailableItemProperties.SingleOrDefault(x => x.Options.SingleOrDefault(y => y.Resref == optionValue.ParentOptionResref) != null);
+                    
+                    if(ip != null)
+                    {
+                        ItemPropertyOption ipo = ip.Options.SingleOrDefault(x => x.Resref == optionValue.ParentOptionResref);
+                    
+                        if(ipo != null)
+                        {
+                            AssignedItemProperty aip = Model.SelectedItem.AssignedItemProperties.SingleOrDefault(
+                                    x => x.ItemPropertyResref == ip.Resref &&
+                                    x.ItemPropertyOptionResref == ipo.Resref
+                                );
+
+                            if (aip != null)
+                            {
+                                Model.SelectedItem.AssignedItemProperties.Remove(aip);
+                            }
+
+                            aip = new AssignedItemProperty
+                            {
+                                ItemPropertyResref = ip.Resref,
+                                ItemPropertyType = ip.ItemPropertyType,
+                                ItemPropertyOptionResref = ipo.Resref,
+                                ItemPropertyOptionValueName = optionValue.Key,
+                                ItemPropertyOptionValueValue = optionValue.Value
+                            };
+
+                            Model.SelectedItem.AssignedItemProperties.Add(aip);
+                            
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private void RemoveItemProperty(object sender, RoutedEventArgs e)
+        {
+            if (Model.SelectedItem != null)
+            {
+                Model.SelectedItem.AssignedItemProperties.Remove(Model.SelectedAssignedItemProperty);
+            }
+        }
+
+        private void AvailablePropertiesDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            AddItemProperty(sender, e);
+        }
+
+        private void AssignedPropertiesDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            RemoveItemProperty(sender, e);
         }
     }
 }

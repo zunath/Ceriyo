@@ -6,6 +6,26 @@
              xmlns:enums="clr-namespace:Ceriyo.Data.Enumerations;assembly=Ceriyo.Data"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700" Background="White">
+    
+    <UserControl.Resources>
+        <DataTemplate x:Key="level3">
+            <TextBlock Text="{Binding Path=Key}"></TextBlock>
+        </DataTemplate>
+        
+        <HierarchicalDataTemplate x:Key="level2"
+                                  ItemsSource="{Binding Path=Values}"
+                                  ItemTemplate="{StaticResource level3}">
+            <TextBlock Text="{Binding Path=Name}"></TextBlock>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate x:Key="level1"
+                                  ItemsSource="{Binding Options}"
+                                  ItemTemplate="{StaticResource level2}">
+            <TextBlock Text="{Binding Path=Name}"></TextBlock>
+        </HierarchicalDataTemplate>
+
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="145"></ColumnDefinition>
@@ -215,22 +235,31 @@
                            HorizontalAlignment="Left" 
                            Margin="10,10,0,0" VerticalAlignment="Top"/>
                     <Label Content="Assigned Properties:" Grid.Column="4" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                    <ListBox Name="lbAvailableProperties"
+                    <TreeView 
+                             Name="tvAvailableProperties"
                              HorizontalAlignment="Stretch"
                              VerticalAlignment="Stretch"
                              Height="Auto" 
                              Grid.Row="1" 
-                             ItemsSource="{Binding AvailableItemProperties}"
                              IsEnabled="{Binding IsItemSelected}"
-                             DisplayMemberPath="Name"
-                             Width="Auto"/>
+                             ItemsSource="{Binding AvailableItemProperties}"  
+                             Width="Auto"
+                             ItemTemplate="{StaticResource level1}"
+                             MouseDoubleClick="AvailablePropertiesDoubleClick">
+                        
+                    </TreeView>
+                        
                     <ListBox x:Name="lbAssignedProperties"
                     	HorizontalAlignment="Stretch"
                     	VerticalAlignment="Stretch"
                     	Height="Auto" 
                     	Grid.Row="1" 
                         Grid.Column="4"
+                        ItemsSource="{Binding SelectedItem.AssignedItemProperties}"
                         IsEnabled="{Binding IsItemSelected}"
+                        SelectedItem="{Binding SelectedAssignedItemProperty}"
+                        MouseDoubleClick="AssignedPropertiesDoubleClick"
+                        DisplayMemberPath="Name"
                     	Width="Auto"/>
                     <Button Name="btnAddProperty"
                             Content="->" 
@@ -240,7 +269,7 @@
                             Grid.Row="1" 
                             IsEnabled="{Binding IsItemSelected}"
                             VerticalAlignment="Top" 
-                            Width="20"/>
+                            Width="20" Click="AddItemProperty"/>
                     <Button x:Name="btnRemoveProperty"
                     	Content="&lt;-" 
                     	Grid.Column="1" 
@@ -249,7 +278,7 @@
                     	Grid.Row="1" 
                         IsEnabled="{Binding IsItemSelected}"
                     	VerticalAlignment="Top" 
-                    	Width="20"/>
+                    	Width="20" Click="RemoveItemProperty"/>
 
                 </Grid>
             </TabItem>

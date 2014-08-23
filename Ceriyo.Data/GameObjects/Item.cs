@@ -43,21 +43,9 @@ namespace Ceriyo.Data.GameObjects
         public bool IsStolen { get; set; }
         public bool IsPlot { get; set; }
         public bool IsUndroppable { get; set; }
+        public BindingList<AssignedItemProperty> AssignedItemProperties { get; set; }
 
-        public BindingList<string> ItemPropertiesResrefs { get; set; }
 
-        [XmlIgnore]
-        public BindingList<ItemProperty> ItemProperties
-        {
-            get
-            {
-                return new BindingList<ItemProperty>(
-                    WorkingManager.GetAllGameObjects<ItemProperty>(ModulePaths.ItemPropertiesDirectory)
-                                      .Where(x =>  ItemPropertiesResrefs.Contains(x.Resref))
-                                      .ToList());
-            }
-
-        }
         public BindingList<ItemClassRequirement> ItemRequirements { get; set; }
 
         public Item()
@@ -76,7 +64,7 @@ namespace Ceriyo.Data.GameObjects
             this.IsUndroppable = false;
             this.InventoryGraphic = new GameResource();
             this.WorldGraphic = new GameResource();
-            this.ItemPropertiesResrefs = new BindingList<string>();
+            this.AssignedItemProperties = new BindingList<AssignedItemProperty>();
             this.ItemRequirements = new BindingList<ItemClassRequirement>();
             this.WorkingManager = new WorkingDataManager();
 

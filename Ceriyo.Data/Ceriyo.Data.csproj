@@ -98,6 +98,7 @@
     <Compile Include="Enumerations\FileOperationResultTypeEnum.cs" />
     <Compile Include="Enumerations\GenderTypeEnum.cs" />
     <Compile Include="Enumerations\InventorySlotEnum.cs" />
+    <Compile Include="Enumerations\ItemPropertyTypeEnum.cs" />
     <Compile Include="Enumerations\MessageBoxButtonTypeEnum.cs" />
     <Compile Include="Enumerations\NetworkAgentRoleEnum.cs" />
     <Compile Include="Enumerations\PaintObjectModeTypeEnum.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Extensions\SerializableDictionary.cs" />
     <Compile Include="GameObjects\Ability.cs" />
     <Compile Include="GameObjects\Area.cs" />
+    <Compile Include="GameObjects\AssignedItemProperty.cs" />
     <Compile Include="GameObjects\CharacterClass.cs" />
     <Compile Include="GameObjects\Dialog.cs" />
     <Compile Include="GameObjects\Creature.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="GameObjects\ItemProperty.cs" />
     <Compile Include="GameObjects\ItemClassRequirement.cs" />
     <Compile Include="GameObjects\ItemPropertyOption.cs" />
+    <Compile Include="GameObjects\ItemPropertyOptionValue.cs" />
     <Compile Include="GameObjects\ItemType.cs" />
     <Compile Include="GameObjects\LevelChart.cs" />
     <Compile Include="GameObjects\LevelChartItem.cs" />

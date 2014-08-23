@@ -17,10 +17,12 @@ namespace Ceriyo.Data.ViewModels
         private GameResource _inventoryGraphic;
         private Item _selectedItem;
         private BindingList<ItemProperty> _availableItemProperties;
-        private BindingList<ItemProperty> _assignedItemProperties;
+        private BindingList<AssignedItemProperty> _assignedItemProperties;
         private bool _isItemSelected;
         private BindingList<ItemClassRequirement> _itemRequirements;
         private BindingList<string> _scripts;
+        private ItemProperty _selectedAvailableItemProperty;
+        private AssignedItemProperty _selectedAssignedItemProperty;
 
         public BindingList<GameResource> Graphics
         {
@@ -126,7 +128,7 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        public BindingList<ItemProperty> AssignedItemProperties
+        public BindingList<AssignedItemProperty> AssignedItemProperties
         {
             get
             {
@@ -165,15 +167,44 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public ItemProperty SelectedAvailableItemProperty
+        {
+            get
+            {
+                return _selectedAvailableItemProperty;
+            }
+            set
+            {
+                _selectedAvailableItemProperty = value;
+                OnPropertyChanged("SelectedAvailableItemProperty");
+            }
+        }
+
+        public AssignedItemProperty SelectedAssignedItemProperty
+        {
+            get
+            {
+                return _selectedAssignedItemProperty;
+            }
+            set
+            {
+                _selectedAssignedItemProperty = value;
+                OnPropertyChanged("SelectedAssignedItemProperty");
+            }
+
+        }
+
         public ItemEditorVM()
         {
             this.Graphics = new BindingList<GameResource>();
             this.Items = new BindingList<Item>();
             this.ItemTypes = new BindingList<ItemType>();
             this.AvailableItemProperties = new BindingList<ItemProperty>();
-            this.AssignedItemProperties = new BindingList<ItemProperty>();
+            this.AssignedItemProperties = new BindingList<AssignedItemProperty>();
             this.ItemRequirements = new BindingList<ItemClassRequirement>();
             this.Scripts = new BindingList<string>();
+            this.SelectedAvailableItemProperty = new ItemProperty();
+            this.SelectedAssignedItemProperty = new AssignedItemProperty();
         }
     }
 }

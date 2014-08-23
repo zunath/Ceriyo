@@ -138,6 +138,12 @@
     <Content Include="Content\Data\ItemProperties\AbilityBonus.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Data\ItemProperties\Keen.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Data\ItemProperties\Regeneration.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Data\ItemTypes\armor.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
