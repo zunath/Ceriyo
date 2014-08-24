@@ -36,6 +36,7 @@ namespace Ceriyo.Toolset
         {
             Model = new ToolsetVM();
             EngineManager = new EngineDataManager();
+            LoadSettings();
         }
 
         private void SetUpEvents()
@@ -63,7 +64,6 @@ namespace Ceriyo.Toolset
         {
             EngineManager.InitializeEngine();
             SetUpEvents();
-            LoadSettings();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
