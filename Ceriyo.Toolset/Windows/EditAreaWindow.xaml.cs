@@ -40,7 +40,7 @@ namespace Ceriyo.Toolset.Windows
             Model.Tag = area.Tag;
             Model.Width = area.MapWidth;
             Model.LocalVariables = area.LocalVariables;
-            Model.SelectedTileset = Model.Tilesets.SingleOrDefault(x => x.Resref == area.AreaTileset.Resref);
+            Model.SelectedTileset = Model.Tilesets.SingleOrDefault(x => x.Resref == area.AreaTilesetResref);
 
             if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnAreaEnter))
             {
@@ -124,7 +124,7 @@ namespace Ceriyo.Toolset.Windows
                 area.Scripts.Add(ScriptEventTypeEnum.OnAreaEnter, Model.OnAreaEnterScript);
                 area.Scripts.Add(ScriptEventTypeEnum.OnAreaExit, Model.OnAreaExitScript);
                 area.Scripts.Add(ScriptEventTypeEnum.OnAreaHeartbeat, Model.OnAreaHeartbeatScript);
-                area.AreaTileset = Model.SelectedTileset;
+                area.AreaTilesetResref = Model.SelectedTileset.Resref;
 
                 FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(area);
 

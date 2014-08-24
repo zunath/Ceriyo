@@ -68,7 +68,17 @@ namespace Ceriyo.Data.GameObjects
                                       .ToList());
             }
         }
-        public Tileset AreaTileset { get; set; }
+
+        [XmlIgnore]
+        public Tileset AreaTileset
+        {
+            get
+            {
+                return WorkingManager.GetGameObject<Tileset>(ModulePaths.TilesetsDirectory, AreaTilesetResref);
+            }
+        }
+
+        public string AreaTilesetResref { get; set; }
         public GameResource BattleMusic { get; set; }
         public GameResource BackgroundMusic { get; set; }
 
@@ -85,7 +95,7 @@ namespace Ceriyo.Data.GameObjects
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
             this.MapTiles = new BindingList<MapTile>();
-            this.AreaTileset = new Tileset();
+            this.AreaTilesetResref = string.Empty;
             this.BattleMusic = new GameResource();
             this.BackgroundMusic = new GameResource();
             this.WorkingManager = new WorkingDataManager();
@@ -111,7 +121,7 @@ namespace Ceriyo.Data.GameObjects
             this.CreatureInstancesResrefs = new BindingList<string>();
             this.ItemInstancesResrefs = new BindingList<string>();
             this.PlaceableInstancesResrefs = new BindingList<string>();
-            this.AreaTileset = new Tileset();
+            this.AreaTilesetResref = string.Empty;
             this.BattleMusic = new GameResource();
             this.BackgroundMusic = new GameResource();
             this.WorkingManager = new WorkingDataManager();
