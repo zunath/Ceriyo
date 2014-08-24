@@ -31,7 +31,7 @@ namespace Ceriyo.Toolset.Components
     {
         protected AreaSelectionVM Model { get; set; }
         public event EventHandler<GameObjectEventArgs> OnAreaOpen;
-        public event EventHandler<GameObjectEventArgs> OnAreaSaved;
+        public event EventHandler<AreaPropertiesChangedEventArgs> OnAreaPropertiesSaved;
         public event EventHandler<EventArgs> OnAreaClosed;
         private EditAreaWindow EditPropertiesWindow { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
@@ -43,7 +43,8 @@ namespace Ceriyo.Toolset.Components
             WorkingManager = new WorkingDataManager();
             SetDataContexts();
             EditPropertiesWindow = new EditAreaWindow();
-            EditPropertiesWindow.OnSaveArea += SavedArea;
+            EditPropertiesWindow.OnSaveAreaProperties += SavedAreaProperties;
+            
         }
 
         public void ModuleLoaded(object sender, GameModuleEventArgs e)
@@ -71,23 +72,25 @@ namespace Ceriyo.Toolset.Components
             EditPropertiesWindow.Open(area, false);
         }
 
-        private void SavedArea(object sender, GameObjectEventArgs e)
+        private void SavedAreaProperties(object sender, AreaPropertiesChangedEventArgs e)
         {
-            Area area = Model.Areas.SingleOrDefault(x => x.Resref == e.GameObject.Resref);
+            Area area = Model.Areas.SingleOrDefault(x => x.Resref == e.ModifiedArea.Resref);
             
             if (area == null)
             {
-                Model.Areas.Add(e.GameObject as Area);
+                Model.Areas.Add(e.ModifiedArea);
             }
             else
             {
                 int index = Model.Areas.IndexOf(area);
-                Model.Areas[index] = e.GameObject as Area;
+                Model.Areas[index] = e.ModifiedArea;
             }
 
-            if(OnAreaSaved != null)
+            Model.SelectedArea = e.ModifiedArea;
+
+            if(OnAreaPropertiesSaved != null)
             {
-                OnAreaSaved(this, e);
+                OnAreaPropertiesSaved(this, new AreaPropertiesChangedEventArgs(e.ModifiedArea, e.IsUpdate));
             }
 
         }

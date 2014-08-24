@@ -82,14 +82,21 @@ namespace Ceriyo.Entities.Screens
             PaintTile.OnTilePainted += AreaBatch.PaintTile;
         }
 
-        public void OnModulePropertiesUpdate(object sender, GameObjectEventArgs e)
+        public void OnAreaPropertiesUpdate(object sender, AreaPropertiesChangedEventArgs e)
         {
-            if (LoadedArea != null)
+            if (!e.IsUpdate)
             {
-                if (e.GameObject.Resref == LoadedArea.Resref)
+                if (LoadedArea != null)
                 {
-                    PaintTile.Destroy();
-                    LoadArea(sender, e);
+                    if (e.ModifiedArea.Resref != LoadedArea.Resref)
+                    {
+                        PaintTile.Destroy();
+                        LoadArea(sender, new GameObjectEventArgs(e.ModifiedArea));
+                    }
+                }
+                else
+                {
+                    LoadArea(sender, new GameObjectEventArgs(e.ModifiedArea));
                 }
             }
         }

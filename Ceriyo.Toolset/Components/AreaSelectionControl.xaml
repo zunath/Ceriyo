@@ -21,6 +21,7 @@
                    Grid.ColumnSpan="2">
             <ListBox Name="lbAreas" 
                      ItemsSource="{Binding Areas}" 
+                     SelectedItem="{Binding SelectedArea}"
                      DisplayMemberPath="Name" 
                      SelectionMode="Single" 
                      MouseDoubleClick="DoubleClickItem">

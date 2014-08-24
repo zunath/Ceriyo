@@ -17,7 +17,7 @@ namespace Ceriyo.Toolset.Windows
     public partial class EditAreaWindow : Window
     {
         private EditAreaVM Model { get; set; }
-        public event EventHandler<GameObjectEventArgs> OnSaveArea;
+        public event EventHandler<AreaPropertiesChangedEventArgs> OnSaveAreaProperties;
         private bool IsEditing { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
@@ -98,6 +98,7 @@ namespace Ceriyo.Toolset.Windows
             PopulateModel(area);
             this.IsEditing = isEditing;
             txtResref.IsEnabled = !IsEditing;
+            ddlTileset.IsEnabled = !isEditing;
 
             this.Show();
         }
@@ -129,9 +130,9 @@ namespace Ceriyo.Toolset.Windows
 
                 if (result == FileOperationResultTypeEnum.Success)
                 {
-                    if (OnSaveArea != null)
+                    if (OnSaveAreaProperties != null)
                     {
-                        OnSaveArea(this, new GameObjectEventArgs(area));
+                        OnSaveAreaProperties(this, new AreaPropertiesChangedEventArgs(area, IsEditing));
                     }
 
                     this.Close();

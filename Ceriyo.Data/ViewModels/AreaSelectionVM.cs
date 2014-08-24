@@ -11,6 +11,21 @@ namespace Ceriyo.Data.ViewModels
     {
         private BindingList<Area> _areas;
         private bool _isAreaLoaded;
+        private Area _selectedArea;
+
+        public Area SelectedArea
+        {
+            get
+            {
+                return _selectedArea;
+            }
+            set
+            {
+                _selectedArea = value;
+                OnPropertyChanged("SelectedArea");
+            }
+
+        }
 
         public BindingList<Area> Areas
         {
@@ -36,6 +51,7 @@ namespace Ceriyo.Data.ViewModels
         {
             this._areas = new BindingList<Area>();
             this._isAreaLoaded = false;
+            this._selectedArea = new Area();
         }
     }
 }

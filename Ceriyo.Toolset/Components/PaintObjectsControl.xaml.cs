@@ -154,10 +154,10 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
-        public void ModulePropertiesUpdated(object sender, GameObjectEventArgs e)
+        public void ModulePropertiesUpdated(object sender, AreaPropertiesChangedEventArgs e)
         {
             UnloadArea(sender, new EventArgs());
-            LoadArea(sender, e);
+            LoadArea(sender, new GameObjectEventArgs(e.ModifiedArea));
         }
 
         private void CreatureSelected(object sender, SelectionChangedEventArgs e)
