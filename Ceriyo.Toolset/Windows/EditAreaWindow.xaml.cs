@@ -99,6 +99,8 @@ namespace Ceriyo.Toolset.Windows
             this.IsEditing = isEditing;
             txtResref.IsEnabled = !IsEditing;
             ddlTileset.IsEnabled = !isEditing;
+            numHeight.IsEnabled = !isEditing;
+            numWidth.IsEnabled = !isEditing;
 
             this.Show();
         }
