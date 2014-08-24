@@ -11,70 +11,60 @@
     <ItemPropertyOption>
       <Name>+1</Name>
       <Resref>regeneration_1</Resref>
-      <SelectedValue />
       <Values />
       <ParentItemPropertyResref>regeneration</ParentItemPropertyResref>
     </ItemPropertyOption>
     <ItemPropertyOption>
       <Name>+2</Name>
-      <Resref>regeneration_2</Resref>
-      <SelectedValue />
+      <Resref>regeneration_2</Resref>      
       <Values />
       <ParentItemPropertyResref>regeneration</ParentItemPropertyResref>
     </ItemPropertyOption>
     <ItemPropertyOption>
       <Name>+3</Name>
       <Resref>regeneration_3</Resref>
-      <SelectedValue />
       <Values />
       <ParentItemPropertyResref>regeneration</ParentItemPropertyResref>
     </ItemPropertyOption>
     <ItemPropertyOption>
       <Name>+4</Name>
       <Resref>regeneration_4</Resref>
-      <SelectedValue />
       <Values />
       <ParentItemPropertyResref>regeneration</ParentItemPropertyResref>
     </ItemPropertyOption>
     <ItemPropertyOption>
       <Name>+5</Name>
       <Resref>regeneration_5</Resref>
-      <SelectedValue />
       <Values />
       <ParentItemPropertyResref>regeneration</ParentItemPropertyResref>
     </ItemPropertyOption>
     <ItemPropertyOption>
       <Name>+6</Name>
       <Resref>regeneration_6</Resref>
-      <SelectedValue />
       <Values />
       <ParentItemPropertyResref>regeneration</ParentItemPropertyResref>
     </ItemPropertyOption>
     <ItemPropertyOption>
       <Name>+7</Name>
       <Resref>regeneration_7</Resref>
-      <SelectedValue />
       <Values />
       <ParentItemPropertyResref>regeneration</ParentItemPropertyResref>
     </ItemPropertyOption>
     <ItemPropertyOption>
       <Name>+8</Name>
       <Resref>regeneration_8</Resref>
-      <SelectedValue />
       <Values />
       <ParentItemPropertyResref>regeneration</ParentItemPropertyResref>
     </ItemPropertyOption>
     <ItemPropertyOption>
       <Name>+9</Name>
       <Resref>regeneration_9</Resref>
-      <SelectedValue />
       <Values />
       <ParentItemPropertyResref>regeneration</ParentItemPropertyResref>
     </ItemPropertyOption>
     <ItemPropertyOption>
       <Name>+10</Name>
       <Resref>regeneration_10</Resref>
-      <SelectedValue />
       <Values />
       <ParentItemPropertyResref>regeneration</ParentItemPropertyResref>
     </ItemPropertyOption>

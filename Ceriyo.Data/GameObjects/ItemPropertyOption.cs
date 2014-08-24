@@ -11,17 +11,17 @@ namespace Ceriyo.Data.GameObjects
     {
         public string Name { get; set; }
         public string Resref { get; set; }
-        public string SelectedValue { get; set; }
         public BindingList<ItemPropertyOptionValue> Values { get; set; }
         public string ParentItemPropertyResref { get; set; }
+        public bool AllowMultiple { get; set; }
 
         public ItemPropertyOption()
         {
             Name = string.Empty;
             Resref = string.Empty;
-            SelectedValue = string.Empty;
             Values = new BindingList<ItemPropertyOptionValue>();
             ParentItemPropertyResref = string.Empty;
+            AllowMultiple = true;
         }
     }
 }
