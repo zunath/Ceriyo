@@ -31,6 +31,7 @@ namespace Ceriyo.Toolset.Components
     {
         protected AreaSelectionVM Model { get; set; }
         public event EventHandler<GameObjectEventArgs> OnAreaOpen;
+        public event EventHandler<EventArgs> OnAreaSaved;
         public event EventHandler<AreaPropertiesChangedEventArgs> OnAreaPropertiesSaved;
         public event EventHandler<EventArgs> OnAreaClosed;
         private EditAreaWindow EditPropertiesWindow { get; set; }
@@ -95,16 +96,12 @@ namespace Ceriyo.Toolset.Components
 
         }
 
-        private void Open(object sender, RoutedEventArgs e)
-        {
-            Area area = lbAreas.SelectedItem as Area;
-
-            if (area != null)
+        private void Save(object sender, RoutedEventArgs e)
+        { 
+            // Send signal to screen to save the area.
+            if (OnAreaSaved != null)
             {
-                if (OnAreaOpen != null)
-                {
-                    OnAreaOpen(this, new GameObjectEventArgs(area));
-                }
+                OnAreaSaved(this, new EventArgs());
             }
         }
 
@@ -146,28 +143,32 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
+        private void OpenArea()
+        {
+            Area area = lbAreas.SelectedItem as Area;
+
+            if (area != null)
+            {
+                if (OnAreaOpen != null)
+                {
+                    OnAreaOpen(this, new GameObjectEventArgs(area));
+                }
+            }
+        }
+
         private void DoubleClickItem(object sender, MouseButtonEventArgs e)
         {
-            if (lbAreas.SelectedItem != null)
-            {
-                btnOpen.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
+            OpenArea();
         }
 
         private void ContextMenuNew(object sender, RoutedEventArgs e)
         {
-            if (lbAreas.SelectedItem != null)
-            {
-                btnCreate.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
+            btnCreate.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
 
         private void ContextMenuOpen(object sender, RoutedEventArgs e)
         {
-            if (lbAreas.SelectedItem != null)
-            {
-                btnOpen.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
-            }
+            OpenArea();
         }
 
         private void ContextMenuEdit(object sender, RoutedEventArgs e)

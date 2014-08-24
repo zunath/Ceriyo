@@ -10,12 +10,13 @@
             <ColumnDefinition Width="50"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <DockPanel Grid.Row="1"
                    Grid.Column="0"
                    Grid.ColumnSpan="2">
@@ -36,35 +37,33 @@
                 </ListBox.ContextMenu>
             </ListBox>
         </DockPanel>
-        
+
         <Label Grid.Row="0" Grid.Column="0" Content="Areas:">
         </Label>
 
         <Button 
             Name="btnCreate"
-            Content="New"
-            Grid.Column="1"
+            Content="New Area"
             HorizontalAlignment="Left"
-            Grid.Row="0" 
-            Margin="25,10,0,5"
-            Click="Create">
-        </Button>
+            Grid.Row="2" 
+            Margin="10,5,0,10"
+            Click="Create" Grid.ColumnSpan="2"/>
         <Button 
-            Name="btnOpen"
-            Content="Open"
+            Name="btnSave"
+            Content="Save Area"
             Grid.Column="1"
-            Grid.Row="0" 
+            Grid.Row="2" 
             HorizontalAlignment="Left"
-            Margin="60,10,0,5"
-            Click="Open">
+            Margin="23,5,0,10"
+            Click="Save">
         </Button>
         <Button 
             Name="btnDelete"
-            Content="Delete"
+            Content="Delete Area"
             Grid.Column="1"
-            Grid.Row="0" 
+            Grid.Row="2" 
             HorizontalAlignment="Left"
-            Margin="100,10,0,5" RenderTransformOrigin="1.525,0.76"
+            Margin="86,5,0,10" RenderTransformOrigin="1.525,0.76"
             Click="Delete">
         </Button>
     </Grid>

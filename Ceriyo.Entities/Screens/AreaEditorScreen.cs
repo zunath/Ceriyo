@@ -92,6 +92,11 @@ namespace Ceriyo.Entities.Screens
             PaintTile.OnTilePainted += AreaBatch.PaintTile;
         }
 
+        public void SaveArea(object sender, EventArgs e)
+        {
+
+        }
+
         public void OnAreaPropertiesUpdate(object sender, AreaPropertiesChangedEventArgs e)
         {
             if (!e.IsUpdate)

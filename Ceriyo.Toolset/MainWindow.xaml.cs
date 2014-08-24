@@ -41,7 +41,7 @@ namespace Ceriyo.Toolset
             menuBar.OnOpenModule += areaEditor.ModuleOpened;
             menuBar.OnDataEditorClosed += areaEditor.DataEditorClosed;
 
-
+            areaSelection.OnAreaSaved += areaEditor.AreaSaved;
             areaSelection.OnAreaOpen += areaEditor.AreaOpened;
             areaSelection.OnAreaPropertiesSaved += areaEditor.AreaPropertiesSaved;
             areaSelection.OnAreaClosed += areaEditor.AreaClosed;

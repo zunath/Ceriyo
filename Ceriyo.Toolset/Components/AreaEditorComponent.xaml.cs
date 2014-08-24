@@ -27,6 +27,7 @@ namespace Ceriyo.Toolset.Components
         private event EventHandler<EventArgs> OnAreaClosed;
         private event EventHandler<AreaPropertiesChangedEventArgs> OnAreaPropertiesSaved;
         private event EventHandler<GameObjectEventArgs> OnAreaOpened;
+        private event EventHandler<EventArgs> OnAreaSaved;
 
         public AreaEditorComponent()
         {
@@ -50,6 +51,8 @@ namespace Ceriyo.Toolset.Components
                 OnAreaClosed += screen.CloseArea;
 
                 paintObjects.OnModeChange += screen.ChangePaintMode;
+
+                OnAreaSaved += screen.SaveArea;
             }
         }
 
@@ -71,6 +74,14 @@ namespace Ceriyo.Toolset.Components
             if (OnModuleOpened != null)
             {
                 OnModuleOpened(sender, e);
+            }
+        }
+
+        public void AreaSaved(object sender, EventArgs e)
+        {
+            if (OnAreaSaved != null)
+            {
+                OnAreaSaved(sender, e);
             }
         }
 
