@@ -48,7 +48,7 @@ namespace Ceriyo.Entities
             this.SourceRectangle = new Rectangle(0, 0, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
             this.AreaWidth = areaWidth;
             this.AreaHeight = areaHeight;
-            this.IsEnabled = false;
+            this.IsEnabled = true;
 
             LoadEntity();
         }
@@ -147,6 +147,12 @@ namespace Ceriyo.Entities
             {
                 this.Y = (AreaHeight - 1) * EngineConstants.TilePixelHeight;
             }
+        }
+
+        public void AreaPropertiesSaved(object sender, AreaPropertiesChangedEventArgs e)
+        {
+            this.AreaWidth = e.ModifiedArea.MapWidth;
+            this.AreaHeight = e.ModifiedArea.MapHeight;
         }
     }
 }

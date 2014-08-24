@@ -20,8 +20,38 @@ namespace Ceriyo.Data.GameObjects
         public string Resref { get; set; }
         public string Description { get; set; }
         public string Comments { get; set; }
-        public int MapWidth { get; set; }
-        public int MapHeight { get; set; }
+        
+        [XmlIgnore]
+        public int MapWidth 
+        {
+            get
+            {
+                if (MapTiles == null || MapTiles.Count <= 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return MapTiles.Max(x => x.MapX) + 1;
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public int MapHeight 
+        {
+            get
+            {
+                if (MapTiles == null || MapTiles.Count <= 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return MapTiles.Max(y => y.MapY) + 1;
+                }
+            }
+        }
         public int LayerCount { get; set; }
         [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.AreasDirectory; } }
@@ -89,8 +119,6 @@ namespace Ceriyo.Data.GameObjects
             this.Resref = string.Empty;
             this.Description = string.Empty;
             this.Comments = string.Empty;
-            this.MapWidth = EngineConstants.AreaMaxWidth;
-            this.MapHeight = EngineConstants.AreaMaxHeight;
             this.LayerCount = EngineConstants.AreaMaxLayers;
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
@@ -112,8 +140,6 @@ namespace Ceriyo.Data.GameObjects
             this.Name = name;
             this.Tag = tag;
             this.Resref = resref;
-            this.MapWidth = tilesWide;
-            this.MapHeight = tilesHigh;
             this.LayerCount = numberOfLayers;
             this.MapTiles = new BindingList<MapTile>();
             this.LocalVariables = new BindingList<LocalVariable>();
@@ -128,9 +154,9 @@ namespace Ceriyo.Data.GameObjects
 
             for (int layer = 0; layer < LayerCount; layer++)
             {
-                for (int x = 0; x < MapWidth; x++)
+                for (int x = 0; x < tilesWide; x++)
                 {
-                    for (int y = 0; y < MapHeight; y++)
+                    for (int y = 0; y < tilesHigh; y++)
                     {
                         MapTile tile = new MapTile(x, y, layer);
                         MapTiles.Add(tile);

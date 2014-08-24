@@ -34,11 +34,11 @@ namespace Ceriyo.Toolset.Windows
             Model.Scripts = WorkingManager.GetAllScriptNames();
             Model.Comments = area.Comments;
             Model.Description = area.Description;
-            Model.Height = area.MapHeight;
             Model.Name = area.Name;
             Model.Resref = area.Resref;
             Model.Tag = area.Tag;
-            Model.Width = area.MapWidth;
+            Model.Width = area.MapWidth <= 0 ? EngineConstants.AreaMaxWidth : area.MapWidth;
+            Model.Height = area.MapHeight <= 0 ? EngineConstants.AreaMaxHeight : area.MapHeight;
             Model.LocalVariables = area.LocalVariables;
             Model.SelectedTileset = Model.Tilesets.SingleOrDefault(x => x.Resref == area.AreaTilesetResref);
 

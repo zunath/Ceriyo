@@ -22,6 +22,7 @@ namespace Ceriyo.Entities.Screens
         private PaintCreatureEntity PaintCreature { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
         private event EventHandler<ObjectPainterEventArgs> OnPaintObjectChanged;
+        private event EventHandler<AreaPropertiesChangedEventArgs> OnAreaPropertiesSaved;
 
         public AreaEditorScreen()
             : base("AreaEditorScreen")
@@ -79,6 +80,7 @@ namespace Ceriyo.Entities.Screens
             if (AreaBatch != null)
             {
                 AreaBatch.Destroy();
+                OnAreaPropertiesSaved -= AreaBatch.AreaPropertiesSaved;
             }
 
             LoadedArea = WorkingManager.GetGameObject<Area>(ModulePaths.AreasDirectory, e.GameObject.Resref);
@@ -92,6 +94,8 @@ namespace Ceriyo.Entities.Screens
             PaintTile = new PaintTileEntity(LoadedArea.AreaTileset.Graphic, LoadedArea.MapWidth, LoadedArea.MapHeight);
 
             PaintTile.OnTilePainted += AreaBatch.PaintTile;
+            OnAreaPropertiesSaved += AreaBatch.AreaPropertiesSaved;
+            OnAreaPropertiesSaved += PaintTile.AreaPropertiesSaved;
         }
 
         public void SaveArea(object sender, EventArgs e)
@@ -101,7 +105,7 @@ namespace Ceriyo.Entities.Screens
             WorkingManager.SaveGameObjectFile(LoadedArea);
         }
 
-        public void OnAreaPropertiesUpdate(object sender, AreaPropertiesChangedEventArgs e)
+        public void AreaPropertiesSaved(object sender, AreaPropertiesChangedEventArgs e)
         {
             if (!e.IsUpdate)
             {
@@ -117,6 +121,11 @@ namespace Ceriyo.Entities.Screens
                 {
                     LoadArea(sender, new GameObjectEventArgs(e.ModifiedArea));
                 }
+            }
+
+            if (OnAreaPropertiesSaved != null)
+            {
+                OnAreaPropertiesSaved(sender, e);
             }
         }
 

@@ -51,11 +51,16 @@ namespace Ceriyo.Entities
 
         public void Destroy()
         {
+            ClearSprites();
+            SpriteManager.RemovePositionedObject(this);
+        }
+
+        private void ClearSprites()
+        {
             foreach (MapTile tile in MapTiles)
             {
                 SpriteManager.RemoveSprite(tile.TileSprite);
             }
-            SpriteManager.RemovePositionedObject(this);
         }
 
         public void Draw(Camera camera)
@@ -133,5 +138,20 @@ namespace Ceriyo.Entities
                 listIndex++;
             }
         }
+
+        public void AreaPropertiesSaved(object sender, AreaPropertiesChangedEventArgs e)
+        {
+            // Area modified is currently open and its dimensions have changed.
+            if(e.ModifiedArea.Resref == DrawableArea.Resref && 
+               (e.ModifiedArea.MapWidth != DrawableArea.MapWidth ||
+               e.ModifiedArea.MapHeight != DrawableArea.MapHeight))
+            {
+                //ClearSprites();
+                //DrawableArea = e.ModifiedArea;
+
+                //LoadMap();
+            }
+        }
+
     }
 }
