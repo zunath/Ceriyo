@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Ceriyo.Data;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Library.Processing;
 using FlatRedBall;
 using FlatRedBall.Graphics;
-using FlatRedBall.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,9 +15,10 @@ namespace Ceriyo.Entities
     {
         private Area DrawableArea { get; set; }
         private Texture2D MapTexture { get; set; }
-        private List<DrawableTile> DrawableTiles { get; set; }
+        private List<MapTile> DrawableTiles { get; set; }
         private Rectangle _sourceRectangle;
         private GameResourceProcessor Processor { get; set; }
+        private Texture2D EmptyTileTexture { get; set; }
 
         public MapDrawableBatch(Area area)
         {
@@ -31,29 +27,29 @@ namespace Ceriyo.Entities
 
             this.DrawableArea = area;
             this.MapTexture = Processor.ToTexture2D(area.AreaTileset.Graphic);
-            this.DrawableTiles = new List<DrawableTile>();
+            this.DrawableTiles = new List<MapTile>();
 
             int capacity = area.MapWidth * area.MapHeight * area.LayerCount;
             for (int current = 1; current <= capacity; current++)
             {
-                this.DrawableTiles.Add(new DrawableTile());
+                this.DrawableTiles.Add(new MapTile());
             }
 
-            foreach(DrawableTile tile in DrawableTiles)
+            foreach (MapTile tile in DrawableTiles)
             {
                 tile.TileSprite.PixelSize = 0.5f;
                 SpriteManager.AddSprite(tile.TileSprite);
             }
 
             SpriteManager.AddPositionedObject(this);
-            
 
+            EmptyTileTexture = FlatRedBallServices.Load<Texture2D>("Content/Tilesets/emptytile.png");
             LoadMap();
         }
 
         public void Destroy()
         {
-            foreach (DrawableTile tile in DrawableTiles)
+            foreach (MapTile tile in DrawableTiles)
             {
                 SpriteManager.RemoveSprite(tile.TileSprite);
             }
@@ -76,10 +72,13 @@ namespace Ceriyo.Entities
 
         public void PaintTile(object sender, TilePaintEventArgs e)
         {
-            DrawableTile tile = DrawableTiles.SingleOrDefault(t => t.Layer == e.Layer && 
-                                                                   t.CellX == e.StartCellX && 
-                                                                   t.CellY == e.StartCellY);
+            MapTile tile = DrawableTiles.SingleOrDefault(t => t.Layer == e.Layer && 
+                                                                   t.MapX == e.StartCellX && 
+                                                                   t.MapY == e.StartCellY);
 
+            tile.TileDefinitionX = e.StartTextureCellX;
+            tile.TileDefinitionY = e.StartTextureCellY;
+            
 
             if (tile != null)
             {
@@ -89,7 +88,6 @@ namespace Ceriyo.Entities
 
         private void LoadMap()
         {
-            Texture2D emptyTexture = FlatRedBallServices.Load<Texture2D>("Content/Tilesets/emptytile.png");
             List<MapTile> orderedTiles = DrawableArea.MapTiles
                 .OrderBy(l => l.Layer)
                 .ThenBy(x => x.MapX)
@@ -98,9 +96,11 @@ namespace Ceriyo.Entities
             int listIndex = 0;
             foreach (MapTile tile in orderedTiles)
             {
-                DrawableTiles[listIndex].CellX = tile.MapX;
-                DrawableTiles[listIndex].CellY = tile.MapY;
+                DrawableTiles[listIndex].MapX = tile.MapX;
+                DrawableTiles[listIndex].MapY = tile.MapY;
                 DrawableTiles[listIndex].Layer = tile.Layer;
+                DrawableTiles[listIndex].TileDefinitionX = tile.TileDefinitionX;
+                DrawableTiles[listIndex].TileDefinitionY = tile.TileDefinitionY;
 
                 Sprite sprite = DrawableTiles[listIndex].TileSprite;
 
@@ -122,7 +122,7 @@ namespace Ceriyo.Entities
                 else if(!tile.HasGraphic && 
                          tile.Layer == 0)
                 {
-                    sprite.Texture = emptyTexture;
+                    sprite.Texture = EmptyTileTexture;
                 }
 
                 sprite.X = tile.MapX * EngineConstants.TilePixelWidth;
@@ -132,6 +132,23 @@ namespace Ceriyo.Entities
             }
         }
 
+        public List<MapTile> GetMapTiles()
+        {
+            List<MapTile> mapTiles = new List<MapTile>();
 
+            mapTiles = (from tile
+                        in DrawableTiles
+                        select new MapTile
+                        {
+                            Layer = tile.Layer,
+                            MapX = tile.MapX,
+                            MapY = tile.MapY,
+                            TileDefinitionX = tile.TileDefinitionX,
+                            TileDefinitionY = tile.TileDefinitionY
+
+                        }).ToList();
+
+            return mapTiles;
+        }
     }
 }

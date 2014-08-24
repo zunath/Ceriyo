@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data;
@@ -19,7 +20,7 @@ namespace Ceriyo.Entities.Screens
         private MapDrawableBatch AreaBatch { get; set; }
         private PaintTileEntity PaintTile { get; set; }
         private PaintCreatureEntity PaintCreature { get; set; }
-
+        private WorkingDataManager WorkingManager { get; set; }
         private event EventHandler<ObjectPainterEventArgs> OnPaintObjectChanged;
 
         public AreaEditorScreen()
@@ -29,6 +30,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
+            WorkingManager = new WorkingDataManager();
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -79,7 +81,7 @@ namespace Ceriyo.Entities.Screens
                 AreaBatch.Destroy();
             }
 
-            LoadedArea = e.GameObject as Area;
+            LoadedArea = WorkingManager.GetGameObject<Area>(ModulePaths.AreasDirectory, e.GameObject.Resref);
             AreaBatch = new MapDrawableBatch(LoadedArea);
 
             if (PaintTile != null)
@@ -94,7 +96,9 @@ namespace Ceriyo.Entities.Screens
 
         public void SaveArea(object sender, EventArgs e)
         {
+            LoadedArea.MapTiles = new BindingList<MapTile>(AreaBatch.GetMapTiles());
 
+            WorkingManager.SaveGameObjectFile(LoadedArea);
         }
 
         public void OnAreaPropertiesUpdate(object sender, AreaPropertiesChangedEventArgs e)

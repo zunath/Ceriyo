@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using FlatRedBall;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -15,6 +16,9 @@ namespace Ceriyo.Data.GameObjects
         public int TileDefinitionY { get; set; }
         public bool HasGraphic { get; set; }
 
+        [XmlIgnore]
+        public Sprite TileSprite { get; set; }
+
         public MapTile()
         {
             this.MapX = 0;
@@ -23,6 +27,7 @@ namespace Ceriyo.Data.GameObjects
             this.TileDefinitionX = 0;
             this.TileDefinitionY = 0;
             this.HasGraphic = false;
+            this.TileSprite = new Sprite();
         }
 
         public MapTile(int mapX, int mapY, int layer)
@@ -33,6 +38,7 @@ namespace Ceriyo.Data.GameObjects
             this.TileDefinitionX = 0;
             this.TileDefinitionY = 0;
             this.HasGraphic = false;
+            this.TileSprite = new Sprite();
         }
     }
 }

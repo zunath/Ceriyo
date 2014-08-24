@@ -28,6 +28,11 @@ namespace Ceriyo.Entities
         private int StartCellY { get; set; }
         private int EndCellX { get; set; }
         private int EndCellY { get; set; }
+        private int StartTextureCellX { get; set; }
+        private int StartTextureCellY { get; set; }
+        private int EndTextureCellX { get; set; }
+        private int EndTextureCellY { get; set; }
+
         public bool IsEnabled { get; set; }
 
         public PaintTileEntity(GameResource graphic, int areaWidth, int areaHeight) :
@@ -88,17 +93,17 @@ namespace Ceriyo.Entities
             SpriteManager.AddSprite(EntitySprite);
         }
 
-        public void SetTilesetCoordinates(int startCellX, int startCellY, int endCellX, int endCellY)
+        public void SetTilesetCoordinates(int tileStartCellX, int tileStartCellY, int tileEndCellX, int tileEndCellY)
         {
-            this.StartCellX = startCellX;
-            this.StartCellY = startCellY;
-            this.EndCellX = endCellX;
-            this.EndCellY = endCellY;
-            EntitySprite.Texture = Processor.GetSubTexture(Graphic, 
-                StartCellX * EngineConstants.TilePixelWidth, 
-                StartCellY * EngineConstants.TilePixelHeight, 
-                (EndCellX - StartCellX + 1) * EngineConstants.TilePixelWidth, 
-                (EndCellY - StartCellY + 1) * EngineConstants.TilePixelHeight);
+            this.StartTextureCellX = tileStartCellX;
+            this.StartTextureCellY = tileStartCellY;
+            this.EndTextureCellX = tileEndCellX;
+            this.EndTextureCellY = tileEndCellY;
+            EntitySprite.Texture = Processor.GetSubTexture(Graphic,
+                StartTextureCellX * EngineConstants.TilePixelWidth,
+                StartTextureCellY * EngineConstants.TilePixelHeight, 
+                (EndTextureCellX - StartTextureCellX + 1) * EngineConstants.TilePixelWidth,
+                (EndTextureCellY - StartTextureCellY + 1) * EngineConstants.TilePixelHeight);
 
         }
 
@@ -108,7 +113,17 @@ namespace Ceriyo.Entities
             {
                 if (OnTilePainted != null)
                 {
-                    OnTilePainted(this, new TilePaintEventArgs(StartCellX, StartCellY, EndCellX, EndCellY, Layer, EntitySprite.Texture));
+                    OnTilePainted(this, new TilePaintEventArgs(
+                        StartCellX, 
+                        StartCellY, 
+                        EndCellX, 
+                        EndCellY, 
+                        StartTextureCellX,
+                        StartTextureCellY,
+                        EndTextureCellX,
+                        EndTextureCellY,
+                        Layer, 
+                        EntitySprite.Texture));
                 }
             }
         }
