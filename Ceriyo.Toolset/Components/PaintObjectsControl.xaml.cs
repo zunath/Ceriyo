@@ -72,6 +72,7 @@ namespace Ceriyo.Toolset.Components
             Model.Items.Clear();
             Model.Placeables.Clear();
             Model.PaintMode = PaintObjectModeTypeEnum.None;
+            rectSelectedTiles.Visibility = Visibility.Hidden;
         }
 
         public void GameObjectsListsChanged(object sender, EventArgs e)

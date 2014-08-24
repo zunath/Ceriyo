@@ -64,8 +64,12 @@ namespace Ceriyo.Entities.Screens
                 PaintTile.OnTilePainted -= AreaBatch.PaintTile;
             }
 
+            if (PaintTile != null)
+            {
+                PaintTile.Destroy();
+            }
+
             LoadedArea = null;
-            PaintTile = null;
         }
 
         public void LoadArea(object sender, GameObjectEventArgs e)
