@@ -77,6 +77,12 @@ namespace Ceriyo.Entities.Screens
 
             LoadedArea = e.GameObject as Area;
             AreaBatch = new MapDrawableBatch(LoadedArea);
+
+            if (PaintTile != null)
+            {
+                PaintTile.Destroy();
+            }
+
             PaintTile = new PaintTileEntity(LoadedArea.AreaTileset.Graphic, LoadedArea.MapWidth, LoadedArea.MapHeight);
 
             PaintTile.OnTilePainted += AreaBatch.PaintTile;
