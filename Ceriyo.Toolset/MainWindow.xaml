@@ -28,11 +28,7 @@
         <DockPanel Grid.ColumnSpan="6">
             <Comp:MenuBarComponent x:Name="menuBar" VerticalAlignment="Top" DockPanel.Dock="Top"/>
         </DockPanel>
-        <Label
-        	Content="Conversations:" Margin="10,10,97,141" Grid.Row="3"/>
-        <Label
-        	Content="Scripts:" Margin="10,10,127,141" Grid.Row="4"/>
-
+        
         <GridSplitter
             Grid.Column="4"
             Grid.Row="2"
@@ -46,9 +42,9 @@
         </GridSplitter>
 
         <DockPanel
-            Grid.Column="0"
+            Grid.Column="1"
             Grid.Row="2"
-            Grid.ColumnSpan="5"
+            Grid.ColumnSpan="4"
             Grid.RowSpan="5" >
 
             <frb:FlatRedBallControl
@@ -72,6 +68,14 @@
                                  Grid.Row="7" 
                                  Grid.ColumnSpan="3"
                                  VerticalAlignment="Stretch"/>
+
+
+        <Comp:AreaSelectionControl 
+            x:Name="areaSelection"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Grid.Row="2"
+            Grid.RowSpan="6" />
 
     </Grid>
 </Window>

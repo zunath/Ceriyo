@@ -155,7 +155,7 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
-        public void ModulePropertiesUpdated(object sender, AreaPropertiesChangedEventArgs e)
+        public void AreaPropertiesUpdated(object sender, AreaPropertiesChangedEventArgs e)
         {
             UnloadArea(sender, new EventArgs());
             LoadArea(sender, new GameObjectEventArgs(e.ModifiedArea));

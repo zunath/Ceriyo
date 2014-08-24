@@ -40,6 +40,13 @@ namespace Ceriyo.Toolset
             menuBar.OnOpenModule += OnModuleOpened;
             menuBar.OnOpenModule += areaEditor.ModuleOpened;
             menuBar.OnDataEditorClosed += areaEditor.DataEditorClosed;
+
+
+            areaSelection.OnAreaOpen += areaEditor.AreaOpened;
+            areaSelection.OnAreaPropertiesSaved += areaEditor.AreaPropertiesSaved;
+            areaSelection.OnAreaClosed += areaEditor.AreaClosed;
+
+            areaEditor.OnModuleOpened += areaSelection.ModuleLoaded;
         }
 
         private void OnModuleOpened(object sender, GameModuleEventArgs e)
