@@ -96,7 +96,7 @@ namespace Ceriyo.Entities.Screens
 
         public void SaveArea(object sender, EventArgs e)
         {
-            LoadedArea.MapTiles = new BindingList<MapTile>(AreaBatch.GetMapTiles());
+            LoadedArea.MapTiles = AreaBatch.MapTiles;
 
             WorkingManager.SaveGameObjectFile(LoadedArea);
         }
