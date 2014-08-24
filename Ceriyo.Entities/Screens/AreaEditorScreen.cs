@@ -122,14 +122,17 @@ namespace Ceriyo.Entities.Screens
 
         public void ChangePaintMode(object sender, ObjectPainterEventArgs e)
         {
-            if (e.GameObject == null)
+            if (PaintTile != null)
             {
-                PaintTile.SetTilesetCoordinates(e.TileCellXStart, e.TileCellYStart, e.TileCellXEnd, e.TileCellYEnd);
-                PaintTile.IsEnabled = true;
-            }
-            else
-            {
-                PaintTile.IsEnabled = false;
+                if (e.GameObject == null)
+                {
+                    PaintTile.SetTilesetCoordinates(e.TileCellXStart, e.TileCellYStart, e.TileCellXEnd, e.TileCellYEnd);
+                    PaintTile.IsEnabled = true;
+                }
+                else
+                {
+                    PaintTile.IsEnabled = false;
+                }
             }
         }
     }

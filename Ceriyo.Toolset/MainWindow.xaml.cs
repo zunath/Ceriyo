@@ -8,6 +8,11 @@ using Ceriyo.Toolset.FRBControl;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using Ceriyo.Toolset.Windows;
+using Ceriyo.Data.Settings;
+using FlatRedBall.Input;
+using FlatRedBall.IO;
+using Ceriyo.Data;
+using System;
 
 namespace Ceriyo.Toolset
 {
@@ -58,11 +63,39 @@ namespace Ceriyo.Toolset
         {
             EngineManager.InitializeEngine();
             SetUpEvents();
+            LoadSettings();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            SaveSettings();
+
             Application.Current.Shutdown();
+        }
+
+        private void SaveSettings()
+        {
+            string path = EnginePaths.SettingsDirectory + "ToolsetSettings" + EnginePaths.DataExtension;
+            ToolsetSettings settings = new ToolsetSettings()
+            {
+                MainWindowHeight = Convert.ToInt32(this.Height),
+                MainWindowWidth = Convert.ToInt32(this.Width)
+            };
+
+            FileManager.XmlSerialize<ToolsetSettings>(settings, path);
+        }
+
+        private void LoadSettings()
+        {
+            string path = EnginePaths.SettingsDirectory + "ToolsetSettings" + EnginePaths.DataExtension;
+
+            if (FileManager.FileExists(path))
+            {
+                ToolsetSettings settings = FileManager.XmlDeserialize<ToolsetSettings>(path);
+
+                this.Width = settings.MainWindowWidth;
+                this.Height = settings.MainWindowHeight;
+            }
         }
     }
 }
