@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ceriyo.Server
+namespace Ceriyo.Data.Server
 {
-    public class ServerStatus
+    public class ServerGUIStatus
     {
     }
 }

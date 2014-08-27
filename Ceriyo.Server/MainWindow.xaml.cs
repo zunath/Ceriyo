@@ -7,6 +7,7 @@ using Ceriyo.Data;
 using Ceriyo.Data.Settings;
 using Ceriyo.Data.ViewModels;
 using FlatRedBall.IO;
+using Ceriyo.Data.EventArguments;
 
 namespace Ceriyo.Server
 {
@@ -25,7 +26,6 @@ namespace Ceriyo.Server
             SetDataContexts();
             GameThread = new BackgroundWorker();
             GameThread.DoWork += RunGameThread;
-            GameThread.ProgressChanged += GameThread_ProgressChanged;
             GameThread.RunWorkerCompleted += GameThread_RunWorkerCompleted;
             GameThread.WorkerReportsProgress = true;
 
@@ -40,13 +40,11 @@ namespace Ceriyo.Server
             try
             {
                 ServerGame game = new ServerGame();
-                game.OnUpdateStart += game_OnUpdateStart;
-                game.OnUpdateComplete += game_OnUpdateComplete;
+                game.OnSignalGUIUpdate += GameThread_UpdateGUI;
                 
                 game.Run();
 
-                game.OnUpdateStart -= game_OnUpdateStart;
-                game.OnUpdateComplete -= game_OnUpdateComplete;
+                game.OnSignalGUIUpdate -= GameThread_UpdateGUI;
             }
             catch
             {
@@ -54,20 +52,9 @@ namespace Ceriyo.Server
             }
         }
 
-        private void game_OnUpdateStart(object sender, EventArgs e)
+        private void GameThread_UpdateGUI(object sender, ServerStatusUpdateEventArgs e)
         {
-            
-        }
-
-        private void game_OnUpdateComplete(object sender, EventArgs e)
-        {
-            GameThread.ReportProgress(0);
-        }
-
-        private void GameThread_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            // Received update from game thread - update the GUI to reflect changes
-            
+            // Data from game thread -> GUI thread
         }
 
         private void GameThread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

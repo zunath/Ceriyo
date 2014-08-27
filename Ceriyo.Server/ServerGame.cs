@@ -6,16 +6,25 @@ using System.Windows.Forms;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
+using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.Server;
 
 namespace Ceriyo.Server
 {
     public class ServerGame : Microsoft.Xna.Framework.Game
     {
-        public event EventHandler<EventArgs> OnUpdateComplete;
-        public event EventHandler<EventArgs> OnUpdateStart;
+        public event EventHandler<ServerStatusUpdateEventArgs> OnSignalGUIUpdate;
+        private ServerGameStatus GameStatus { get; set; }
+        private ServerGUIStatus GUIStatus { get; set; }
+        private ServerStatusUpdateEventArgs EventArguments { get; set; }
+        private float SignalGUIUpdateTimer { get; set; }
+        private const float SignalGUIUpdateSeconds = 2.0f;
 
         public ServerGame()
         {
+            GameStatus = new ServerGameStatus();
+            GUIStatus = new ServerGUIStatus();
+            EventArguments = new ServerStatusUpdateEventArgs();
         }
 
         protected override void Initialize()
@@ -30,11 +39,6 @@ namespace Ceriyo.Server
 
         protected override void Update(GameTime gameTime)
         {
-            if (OnUpdateStart != null)
-            {
-                OnUpdateStart(this, null);
-            }
-
             FlatRedBallServices.UpdateCommandLine(gameTime);
             
             ScreenManager.Activity();
@@ -42,9 +46,22 @@ namespace Ceriyo.Server
             base.Update(gameTime);
             SuppressDraw();
 
-            if (OnUpdateComplete != null)
+            SignalGUIUpdateTimer += TimeManager.SecondDifference;
+
+            if (SignalGUIUpdateTimer >= SignalGUIUpdateSeconds)
             {
-                OnUpdateComplete(this, null);
+                if (OnSignalGUIUpdate != null)
+                {
+                    EventArguments.GameStatus = GameStatus;
+                    EventArguments.GUIStatus = GUIStatus;
+
+                    OnSignalGUIUpdate(this, EventArguments);
+
+                    EventArguments.GameStatus = null;
+                    EventArguments.GUIStatus = null;
+                }
+
+                SignalGUIUpdateTimer = 0.0f;
             }
         }
 
