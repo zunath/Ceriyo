@@ -12,6 +12,7 @@ namespace Ceriyo.Server
     public class ServerGame : Microsoft.Xna.Framework.Game
     {
         public event EventHandler<EventArgs> OnUpdateComplete;
+        public event EventHandler<EventArgs> OnUpdateStart;
 
         public ServerGame()
         {
@@ -29,6 +30,11 @@ namespace Ceriyo.Server
 
         protected override void Update(GameTime gameTime)
         {
+            if (OnUpdateStart != null)
+            {
+                OnUpdateStart(this, null);
+            }
+
             FlatRedBallServices.UpdateCommandLine(gameTime);
             
             ScreenManager.Activity();

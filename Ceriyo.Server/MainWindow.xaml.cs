@@ -17,9 +17,7 @@ namespace Ceriyo.Server
     {
         private ServerVM Model { get; set; }
         private BackgroundWorker GameThread { get; set; }
-        private const int FramesPerSecond = 30;
-        private const int SkipTicks = 1000 / FramesPerSecond;
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -40,18 +38,23 @@ namespace Ceriyo.Server
         {
             try
             {
-                bool isRunning = Model.IsServerRunning;
                 ServerGame game = new ServerGame();
+                game.OnUpdateStart += game_OnUpdateStart;
                 game.OnUpdateComplete += game_OnUpdateComplete;
                 game.Run();
-                
 
+                game.OnUpdateStart -= game_OnUpdateStart;
                 game.OnUpdateComplete -= game_OnUpdateComplete;
             }
             catch(Exception ex)
             {
                 throw new Exception("Game thread error. See inner exception.", ex);
             }
+        }
+
+        private void game_OnUpdateStart(object sender, EventArgs e)
+        {
+            
         }
 
         private void game_OnUpdateComplete(object sender, EventArgs e)
