@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using Ceriyo.Data;
 using Ceriyo.Data.Settings;
@@ -13,13 +16,59 @@ namespace Ceriyo.Server
     public partial class MainWindow : Window
     {
         private ServerVM Model { get; set; }
+        private BackgroundWorker GameThread { get; set; }
+        private const int FramesPerSecond = 30;
+        private const int SkipTicks = 1000 / FramesPerSecond;
 
         public MainWindow()
         {
             InitializeComponent();
             this.Model = new ServerVM();
             SetDataContexts();
+            GameThread = new BackgroundWorker();
+            GameThread.DoWork += RunGameThread;
+            GameThread.ProgressChanged += GameThread_ProgressChanged;
+            GameThread.WorkerReportsProgress = true;
+
+            Model.IsServerRunning = true;
+            GameThread.RunWorkerAsync(); // DEBUG
         }
+
+        #region Game Thread
+
+        private void RunGameThread(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                bool isRunning = Model.IsServerRunning;
+                ServerGame game = new ServerGame();
+                game.OnUpdateComplete += game_OnUpdateComplete;
+                game.Run();
+                
+
+                game.OnUpdateComplete -= game_OnUpdateComplete;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Game thread error. See inner exception.", ex);
+            }
+        }
+
+        private void game_OnUpdateComplete(object sender, EventArgs e)
+        {
+            GameThread.ReportProgress(0);
+        }
+
+        private void GameThread_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            // Received update from game thread - update the GUI to reflect changes
+            
+        }
+
+        #endregion
+
+
+        #region UI Thread
 
         private void SetDataContexts()
         {
@@ -90,5 +139,7 @@ namespace Ceriyo.Server
                 Model.ServerSettings.Blacklist.Remove(name);
             }
         }
+
+        #endregion
     }
 }

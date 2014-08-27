@@ -12,7 +12,7 @@ namespace Ceriyo
 {
 	internal static class CameraSetup
 	{
-			internal static void SetupCamera (Camera cameraToSetUp, GraphicsDeviceManager graphicsDeviceManager)
+			internal static void SetupCamera (Camera cameraToSetUp, GraphicsDeviceManager graphicsDeviceManager, int width = 800, int height = 600)
 			{
 				cameraToSetUp.UsePixelCoordinates();
 			}

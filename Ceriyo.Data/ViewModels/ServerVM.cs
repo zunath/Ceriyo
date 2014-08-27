@@ -21,6 +21,20 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<string> _logMessages;
         private BindingList<string> _modules;
         private string _selectedModule;
+        private bool _isServerRunning;
+
+        public bool IsServerRunning
+        {
+            get
+            {
+                return _isServerRunning;
+            }
+            set
+            {
+                _isServerRunning = value;
+                OnPropertyChanged("IsServerRunning");
+            }
+        }
 
         public string SelectedModule
         {
@@ -179,6 +193,7 @@ namespace Ceriyo.Data.ViewModels
             LogMessages = new BindingList<string>();
             Modules = new BindingList<string>();
             SelectedModule = string.Empty;
+            IsServerRunning = false;
         }
     }
 }
