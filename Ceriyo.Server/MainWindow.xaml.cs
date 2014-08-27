@@ -26,17 +26,22 @@ namespace Ceriyo.Server
             InitializeComponent();
             this.Model = new ServerVM();
             SetDataContexts();
+
+            // Every 2 seconds, send the current state of the GUI to the Game thread
             GUIToGameUpdateTimer = new Timer(2000.0f);
             GUIToGameUpdateTimer.Elapsed += GUIToGameUpdateTimer_Elapsed;
             GUIToGameUpdateTimer.Start();
 
+            // Set up the Game thread
             GameThread = new BackgroundWorker();
             GameThread.DoWork += RunGameThread;
             GameThread.RunWorkerCompleted += GameThread_RunWorkerCompleted;
             GameThread.WorkerReportsProgress = true;
 
+            // DEBUG
             Model.IsServerRunning = true;
-            GameThread.RunWorkerAsync(); // DEBUG
+            GameThread.RunWorkerAsync(); 
+            // END DEBUG
         }
 
         #region Game Thread
