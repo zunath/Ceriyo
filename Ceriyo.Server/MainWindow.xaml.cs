@@ -26,6 +26,7 @@ namespace Ceriyo.Server
             GameThread = new BackgroundWorker();
             GameThread.DoWork += RunGameThread;
             GameThread.ProgressChanged += GameThread_ProgressChanged;
+            GameThread.RunWorkerCompleted += GameThread_RunWorkerCompleted;
             GameThread.WorkerReportsProgress = true;
 
             Model.IsServerRunning = true;
@@ -41,14 +42,15 @@ namespace Ceriyo.Server
                 ServerGame game = new ServerGame();
                 game.OnUpdateStart += game_OnUpdateStart;
                 game.OnUpdateComplete += game_OnUpdateComplete;
+                
                 game.Run();
 
                 game.OnUpdateStart -= game_OnUpdateStart;
                 game.OnUpdateComplete -= game_OnUpdateComplete;
             }
-            catch(Exception ex)
+            catch
             {
-                throw new Exception("Game thread error. See inner exception.", ex);
+                throw;
             }
         }
 
@@ -66,6 +68,14 @@ namespace Ceriyo.Server
         {
             // Received update from game thread - update the GUI to reflect changes
             
+        }
+
+        private void GameThread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                throw e.Error;
+            }
         }
 
         #endregion
