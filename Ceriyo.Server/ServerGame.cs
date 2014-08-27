@@ -44,7 +44,7 @@ namespace Ceriyo.Server
 
         protected override void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
+            return;
         }
     }
 }
