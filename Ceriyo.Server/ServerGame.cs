@@ -15,16 +15,20 @@ namespace Ceriyo.Server
     {
         public event EventHandler<ServerStatusUpdateEventArgs> OnSignalGUIUpdate;
         private ServerGameStatus GameStatus { get; set; }
-        private ServerGUIStatus GUIStatus { get; set; }
         private ServerStatusUpdateEventArgs EventArguments { get; set; }
         private float SignalGUIUpdateTimer { get; set; }
         private const float SignalGUIUpdateSeconds = 2.0f;
+        public Queue<ServerGUIStatus> GUIStatusUpdateQueue
+        {
+            get;
+            private set;
+        }
 
         public ServerGame()
         {
             GameStatus = new ServerGameStatus();
-            GUIStatus = new ServerGUIStatus();
             EventArguments = new ServerStatusUpdateEventArgs();
+            GUIStatusUpdateQueue = new Queue<ServerGUIStatus>();
         }
 
         protected override void Initialize()
@@ -53,13 +57,13 @@ namespace Ceriyo.Server
                 if (OnSignalGUIUpdate != null)
                 {
                     EventArguments.GameStatus = GameStatus;
-                    EventArguments.GUIStatus = GUIStatus;
 
                     OnSignalGUIUpdate(this, EventArguments);
-
-                    EventArguments.GameStatus = null;
-                    EventArguments.GUIStatus = null;
                 }
+
+                // Every few seconds, the GUI thread enqueues a new object containing current values for a number of fields.
+                // We need to process those updates here.
+                ProcessGUIStatusUpdates();
 
                 SignalGUIUpdateTimer = 0.0f;
             }
@@ -68,6 +72,16 @@ namespace Ceriyo.Server
         protected override void Draw(GameTime gameTime)
         {
             return;
+        }
+
+        private void ProcessGUIStatusUpdates()
+        {
+            while (GUIStatusUpdateQueue.Count > 0)
+            {
+                ServerGUIStatus status = GUIStatusUpdateQueue.Dequeue();
+
+                
+            }
         }
     }
 }

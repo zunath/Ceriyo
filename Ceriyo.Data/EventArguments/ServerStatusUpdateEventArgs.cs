@@ -8,13 +8,15 @@ namespace Ceriyo.Data.EventArguments
 {
     public class ServerStatusUpdateEventArgs: EventArgs
     {
-        public ServerGUIStatus GUIStatus { get; set; }
         public ServerGameStatus GameStatus { get; set; }
 
-        public ServerStatusUpdateEventArgs(ServerGUIStatus guiStatus = null, ServerGameStatus gameStatus = null)
+        public ServerStatusUpdateEventArgs()
         {
-            this.GUIStatus = guiStatus;
-            this.GameStatus = gameStatus;
+        }
+
+        public ServerStatusUpdateEventArgs(ServerGameStatus status)
+        {
+            this.GameStatus = status;
         }
     }
 }

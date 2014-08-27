@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading;
-using System.Windows;
-using Ceriyo.Data;
+﻿using Ceriyo.Data;
+using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
 using Ceriyo.Data.ViewModels;
 using FlatRedBall.IO;
-using Ceriyo.Data.EventArguments;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Timers;
+using System.Windows;
 
 namespace Ceriyo.Server
 {
@@ -18,12 +18,18 @@ namespace Ceriyo.Server
     {
         private ServerVM Model { get; set; }
         private BackgroundWorker GameThread { get; set; }
-        
+        private ServerGame Game { get; set; } // Do not access directly from the GUI thread.
+        private Timer GUIToGameUpdateTimer { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
             this.Model = new ServerVM();
             SetDataContexts();
+            GUIToGameUpdateTimer = new Timer(2000.0f);
+            GUIToGameUpdateTimer.Elapsed += GUIToGameUpdateTimer_Elapsed;
+            GUIToGameUpdateTimer.Start();
+
             GameThread = new BackgroundWorker();
             GameThread.DoWork += RunGameThread;
             GameThread.RunWorkerCompleted += GameThread_RunWorkerCompleted;
@@ -39,12 +45,12 @@ namespace Ceriyo.Server
         {
             try
             {
-                ServerGame game = new ServerGame();
-                game.OnSignalGUIUpdate += GameThread_UpdateGUI;
+                Game = new ServerGame();
+                Game.OnSignalGUIUpdate += GameToGUIUpdate;
                 
-                game.Run();
-
-                game.OnSignalGUIUpdate -= GameThread_UpdateGUI;
+                Game.Run();
+                
+                Game.OnSignalGUIUpdate -= GameToGUIUpdate;
             }
             catch
             {
@@ -52,9 +58,10 @@ namespace Ceriyo.Server
             }
         }
 
-        private void GameThread_UpdateGUI(object sender, ServerStatusUpdateEventArgs e)
+        // Updates from the game thread are sent to the GUI thread every few seconds.
+        private void GameToGUIUpdate(object sender, ServerStatusUpdateEventArgs e)
         {
-            // Data from game thread -> GUI thread
+
         }
 
         private void GameThread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -140,6 +147,19 @@ namespace Ceriyo.Server
             }
         }
 
+        private void GUIToGameUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (Game != null)
+            {
+                ServerGUIStatus status = new ServerGUIStatus
+                {
+                };
+
+                Game.GUIStatusUpdateQueue.Enqueue(status);
+            }
+        }
+
         #endregion
+
     }
 }
