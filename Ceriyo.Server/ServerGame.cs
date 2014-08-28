@@ -26,11 +26,13 @@ namespace Ceriyo.Server
         }
         private ServerSettings Settings { get; set; }
         private bool IsServerRunning { get; set; }
+        private ServerActivityProcessor Processor { get; set; }
 
-        public ServerGame()
+        public ServerGame(ServerStartupArgs args)
         {
             ConnectedUsernames = new BindingList<string>(); // DEBUG
             GUIStatusUpdateQueue = new Queue<ServerGUIStatus>();
+            Processor = new ServerActivityProcessor(args.Port);
         }
 
         protected override void Initialize()
@@ -43,7 +45,6 @@ namespace Ceriyo.Server
             gameForm.ShowInTaskbar = false;
         }
 
-        int test = 0;
         protected override void Update(GameTime gameTime)
         {
             FlatRedBallServices.UpdateCommandLine(gameTime);
@@ -51,22 +52,17 @@ namespace Ceriyo.Server
             ScreenManager.Activity();
 
             base.Update(gameTime);
+            Processor.Update();
             SuppressDraw();
 
             SignalGUIUpdateTimer += TimeManager.SecondDifference;
-
             if (SignalGUIUpdateTimer >= SignalGUIUpdateSeconds)
             {
                 if (OnSignalGUIUpdate != null)
                 {
                     ServerStatusUpdateEventArgs e = new ServerStatusUpdateEventArgs();
-                    // DEBUGGING
-
-                    ConnectedUsernames.Add("player" + test++);
-
-                    // END DEBUGGING
-
                     e.ConnectedUsernames = ConnectedUsernames;
+
                     OnSignalGUIUpdate(this, e);
                 }
 

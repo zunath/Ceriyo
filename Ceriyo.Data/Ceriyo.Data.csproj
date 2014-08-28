@@ -152,6 +152,7 @@
     <Compile Include="ResourceObjects\UILayout.cs" />
     <Compile Include="Server\ServerGameStatus.cs" />
     <Compile Include="Server\ServerGUIStatus.cs" />
+    <Compile Include="Server\ServerStartupArgs.cs" />
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />

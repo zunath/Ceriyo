@@ -41,8 +41,13 @@ namespace Ceriyo.Server
             GameThread.WorkerReportsProgress = true;
 
             // DEBUG
+            ServerStartupArgs startUpArgs = new ServerStartupArgs
+            {
+                Port = Model.ServerSettings.Port
+            };
+
             Model.IsServerRunning = true;
-            GameThread.RunWorkerAsync(); 
+            GameThread.RunWorkerAsync(startUpArgs); 
             // END DEBUG
         }
 
@@ -53,7 +58,7 @@ namespace Ceriyo.Server
         {
             try
             {
-                Game = new ServerGame();
+                Game = new ServerGame(e.Argument as ServerStartupArgs);
                 Game.OnSignalGUIUpdate += GameToGUIUpdate;
                 
                 Game.Run();
