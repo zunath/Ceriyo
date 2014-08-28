@@ -158,6 +158,8 @@ namespace Ceriyo.Server
             {
                 ServerGUIStatus status = new ServerGUIStatus
                 {
+                    Settings = Model.ServerSettings,
+                    IsServerRunning = Model.IsServerRunning
                 };
 
                 Game.GUIStatusUpdateQueue.Enqueue(status);

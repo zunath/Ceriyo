@@ -8,6 +8,7 @@ using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Server;
+using Ceriyo.Data.Settings;
 
 namespace Ceriyo.Server
 {
@@ -23,6 +24,8 @@ namespace Ceriyo.Server
             get;
             private set;
         }
+        private ServerSettings Settings { get; set; }
+        private bool IsServerRunning { get; set; }
 
         public ServerGame()
         {
@@ -79,8 +82,8 @@ namespace Ceriyo.Server
             while (GUIStatusUpdateQueue.Count > 0)
             {
                 ServerGUIStatus status = GUIStatusUpdateQueue.Dequeue();
-
-                
+                this.Settings = status.Settings;
+                this.IsServerRunning = status.IsServerRunning;
             }
         }
     }
