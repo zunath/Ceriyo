@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Timers;
 using System.Windows;
+using System.Linq;
 
 namespace Ceriyo.Server
 {
@@ -35,6 +36,7 @@ namespace Ceriyo.Server
             // Set up the Game thread
             GameThread = new BackgroundWorker();
             GameThread.DoWork += RunGameThread;
+            GameThread.ProgressChanged += GameThread_ProgressChanged;
             GameThread.RunWorkerCompleted += GameThread_RunWorkerCompleted;
             GameThread.WorkerReportsProgress = true;
 
@@ -43,6 +45,7 @@ namespace Ceriyo.Server
             GameThread.RunWorkerAsync(); 
             // END DEBUG
         }
+
 
         #region Game Thread
 
@@ -66,7 +69,8 @@ namespace Ceriyo.Server
         // Updates from the game thread are sent to the GUI thread every few seconds.
         private void GameToGUIUpdate(object sender, ServerStatusUpdateEventArgs e)
         {
-
+            // Fires GameThread_ProgressChanged on the GUI thread.
+            GameThread.ReportProgress(0, e);
         }
 
         private void GameThread_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -166,6 +170,23 @@ namespace Ceriyo.Server
             }
         }
 
+        private void GameThread_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            ServerStatusUpdateEventArgs args = e.UserState as ServerStatusUpdateEventArgs;
+            List<string> toRemove = Model.ConnectedUsernames.Except(args.ConnectedUsernames).ToList();
+            List<string> toAdd = args.ConnectedUsernames.Except(Model.ConnectedUsernames).ToList();
+
+            foreach (string current in toRemove)
+            {
+                Model.ConnectedUsernames.Remove(current);
+            }
+
+            foreach (string current in toAdd)
+            {
+                Model.ConnectedUsernames.Add(current);
+            }
+
+        }
         #endregion
 
     }

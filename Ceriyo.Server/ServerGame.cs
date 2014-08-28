@@ -9,14 +9,14 @@ using Microsoft.Xna.Framework;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
+using System.ComponentModel;
 
 namespace Ceriyo.Server
 {
     public class ServerGame : Microsoft.Xna.Framework.Game
     {
+        private BindingList<string> ConnectedUsernames { get; set; } // DEBUG
         public event EventHandler<ServerStatusUpdateEventArgs> OnSignalGUIUpdate;
-        private ServerGameStatus GameStatus { get; set; }
-        private ServerStatusUpdateEventArgs EventArguments { get; set; }
         private float SignalGUIUpdateTimer { get; set; }
         private const float SignalGUIUpdateSeconds = 2.0f;
         public Queue<ServerGUIStatus> GUIStatusUpdateQueue
@@ -29,8 +29,7 @@ namespace Ceriyo.Server
 
         public ServerGame()
         {
-            GameStatus = new ServerGameStatus();
-            EventArguments = new ServerStatusUpdateEventArgs();
+            ConnectedUsernames = new BindingList<string>(); // DEBUG
             GUIStatusUpdateQueue = new Queue<ServerGUIStatus>();
         }
 
@@ -44,6 +43,7 @@ namespace Ceriyo.Server
             gameForm.ShowInTaskbar = false;
         }
 
+        int test = 0;
         protected override void Update(GameTime gameTime)
         {
             FlatRedBallServices.UpdateCommandLine(gameTime);
@@ -59,9 +59,15 @@ namespace Ceriyo.Server
             {
                 if (OnSignalGUIUpdate != null)
                 {
-                    EventArguments.GameStatus = GameStatus;
+                    ServerStatusUpdateEventArgs e = new ServerStatusUpdateEventArgs();
+                    // DEBUGGING
 
-                    OnSignalGUIUpdate(this, EventArguments);
+                    ConnectedUsernames.Add("player" + test++);
+
+                    // END DEBUGGING
+
+                    e.ConnectedUsernames = ConnectedUsernames;
+                    OnSignalGUIUpdate(this, e);
                 }
 
                 // Every few seconds, the GUI thread enqueues a new object containing current values for a number of fields.
