@@ -10,6 +10,7 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
 using System.ComponentModel;
+using System.Collections.Concurrent;
 
 namespace Ceriyo.Server
 {
@@ -21,7 +22,7 @@ namespace Ceriyo.Server
 
         private float SignalGUIUpdateTimer { get; set; }
         private const float SignalGUIUpdateSeconds = 2.0f;
-        public Queue<ServerGUIStatus> GUIStatusUpdateQueue
+        public ConcurrentQueue<ServerGUIStatus> GUIStatusUpdateQueue
         {
             get;
             private set;
@@ -32,7 +33,7 @@ namespace Ceriyo.Server
 
         public ServerGame(ServerStartupArgs args)
         {
-            GUIStatusUpdateQueue = new Queue<ServerGUIStatus>();
+            GUIStatusUpdateQueue = new ConcurrentQueue<ServerGUIStatus>();
             Processor = new ServerActivityProcessor(args.Port);
         }
 
@@ -92,13 +93,16 @@ namespace Ceriyo.Server
         {
             while (GUIStatusUpdateQueue.Count > 0)
             {
-                ServerGUIStatus status = GUIStatusUpdateQueue.Dequeue();
-                this.Settings = status.Settings;
-                this.IsServerRunning = status.IsServerRunning;
-
-                if (!IsServerRunning)
+                ServerGUIStatus status;
+                if (GUIStatusUpdateQueue.TryDequeue(out status))
                 {
-                    Exit();
+                    this.Settings = status.Settings;
+                    this.IsServerRunning = status.IsServerRunning;
+
+                    if (!IsServerRunning)
+                    {
+                        Exit();
+                    }
                 }
             }
         }
