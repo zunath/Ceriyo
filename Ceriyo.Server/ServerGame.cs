@@ -19,7 +19,6 @@ namespace Ceriyo.Server
         public event EventHandler<EventArgs> OnGameExiting;
         public event EventHandler<ServerStatusUpdateEventArgs> OnSignalGUIUpdate;
 
-        private BindingList<string> ConnectedUsernames { get; set; } // DEBUG
         private float SignalGUIUpdateTimer { get; set; }
         private const float SignalGUIUpdateSeconds = 2.0f;
         public Queue<ServerGUIStatus> GUIStatusUpdateQueue
@@ -33,7 +32,6 @@ namespace Ceriyo.Server
 
         public ServerGame(ServerStartupArgs args)
         {
-            ConnectedUsernames = new BindingList<string>(); // DEBUG
             GUIStatusUpdateQueue = new Queue<ServerGUIStatus>();
             Processor = new ServerActivityProcessor(args.Port);
         }
@@ -72,7 +70,7 @@ namespace Ceriyo.Server
                 if (OnSignalGUIUpdate != null)
                 {
                     ServerStatusUpdateEventArgs e = new ServerStatusUpdateEventArgs();
-                    e.ConnectedUsernames = ConnectedUsernames;
+                    e.ConnectedUsernames = Processor.GetPlayerNames();
 
                     OnSignalGUIUpdate(this, e);
                 }

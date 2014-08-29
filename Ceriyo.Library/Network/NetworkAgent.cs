@@ -24,6 +24,7 @@ namespace Ceriyo.Library.Network
         public int Port { get; private set; }
         private NetOutgoingMessage OutgoingMessage { get; set; }
         private List<NetIncomingMessage> IncomingMessages { get; set; }
+        private NetXtea Encryption { get; set; }
 
         public List<NetConnection> Connections
         {
@@ -44,7 +45,7 @@ namespace Ceriyo.Library.Network
 
         private void Initialize()
         {
-            //Encryption = new NetXtea(PacketEncryptionKey);
+            Encryption = new NetXtea(EngineConstants.PacketEncryptionKey);
 
             if (Role == NetworkAgentRoleEnum.Server)
             {
@@ -109,8 +110,9 @@ namespace Ceriyo.Library.Network
 
         private void SendMessage(NetConnection recipient, NetDeliveryMethod method)
         {
-            if (!Object.ReferenceEquals(recipient, null))
+            if (recipient != null)
             {
+                OutgoingMessage.Encrypt(Encryption);
                 Peer.SendMessage(OutgoingMessage, recipient, method);
                 OutgoingMessage = Peer.CreateMessage();
             }
@@ -144,30 +146,30 @@ namespace Ceriyo.Library.Network
 
                             if (status == NetConnectionStatus.Connected)
                             {
-                                if (!Object.ReferenceEquals(OnConnected, null))
+                                if (OnConnected != null)
                                 {
                                     OnConnected(this, e);
                                 }
                             }
                             else if (status == NetConnectionStatus.Disconnecting)
                             {
-                                if (!Object.ReferenceEquals(OnDisconnecting, null))
+                                if(OnDisconnecting != null)
                                 {
                                     OnDisconnecting(this, e);
                                 }
                             }
                             else if (status == NetConnectionStatus.Disconnected)
                             {
-                                if (!Object.ReferenceEquals(OnDisconnected, null))
+                                if(OnDisconnected != null)
                                 {
                                     OnDisconnected(this, e);
                                 }
                             }
 
-
                             break;
                         }
                     case NetIncomingMessageType.Data:
+                        incomingMessage.Decrypt(Encryption);
                         IncomingMessages.Add(incomingMessage);
                         break;
                     default:

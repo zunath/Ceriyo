@@ -12,6 +12,11 @@ namespace Ceriyo.Data
             get { return "D7434CF5-4108-4654-9C52-AA5217D4104D"; }
         }
 
+        public static string PacketEncryptionKey
+        {
+            get { return "9jRj2Y]GvwrN4u4hh6'[^V'y2:*O5G"; }
+        }
+
         public static bool IsDebugEnabled
         {
             get { return true; } 
