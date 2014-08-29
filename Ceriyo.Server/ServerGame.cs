@@ -29,12 +29,12 @@ namespace Ceriyo.Server
         }
         private ServerSettings Settings { get; set; }
         private bool IsServerRunning { get; set; }
-        private ServerActivityProcessor Processor { get; set; }
+        private ServerNetworkManager NetworkManager { get; set; }
 
         public ServerGame(ServerStartupArgs args)
         {
             GUIStatusUpdateQueue = new ConcurrentQueue<ServerGUIStatus>();
-            Processor = new ServerActivityProcessor(args.Port);
+            NetworkManager = new ServerNetworkManager(args.Port);
         }
 
         protected override void Initialize()
@@ -62,7 +62,7 @@ namespace Ceriyo.Server
             ScreenManager.Activity();
 
             base.Update(gameTime);
-            Processor.Update();
+            NetworkManager.Update();
             SuppressDraw();
 
             SignalGUIUpdateTimer += TimeManager.SecondDifference;
@@ -71,7 +71,7 @@ namespace Ceriyo.Server
                 if (OnSignalGUIUpdate != null)
                 {
                     ServerStatusUpdateEventArgs e = new ServerStatusUpdateEventArgs();
-                    e.ConnectedUsernames = Processor.GetPlayerNames();
+                    e.ConnectedUsernames = NetworkManager.GetPlayerNames();
 
                     OnSignalGUIUpdate(this, e);
                 }
@@ -109,7 +109,7 @@ namespace Ceriyo.Server
 
         protected override void OnExiting(object sender, EventArgs args)
         {
-            Processor.Destroy();
+            NetworkManager.Destroy();
             base.OnExiting(sender, args);
 
             if (OnGameExiting != null)
