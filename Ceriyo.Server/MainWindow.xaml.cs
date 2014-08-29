@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Timers;
 using System.Windows;
 using System.Linq;
+using System;
 
 namespace Ceriyo.Server
 {
@@ -31,7 +32,6 @@ namespace Ceriyo.Server
             // Every 2 seconds, send the current state of the GUI to the Game thread
             GUIToGameUpdateTimer = new Timer(2000.0f);
             GUIToGameUpdateTimer.Elapsed += GUIToGameUpdateTimer_Elapsed;
-            GUIToGameUpdateTimer.Start();
 
             // Set up the Game thread
             GameThread = new BackgroundWorker();
@@ -39,16 +39,6 @@ namespace Ceriyo.Server
             GameThread.ProgressChanged += GameThread_ProgressChanged;
             GameThread.RunWorkerCompleted += GameThread_RunWorkerCompleted;
             GameThread.WorkerReportsProgress = true;
-
-            // DEBUG
-            ServerStartupArgs startUpArgs = new ServerStartupArgs
-            {
-                Port = Model.ServerSettings.Port
-            };
-
-            Model.IsServerRunning = true;
-            GameThread.RunWorkerAsync(startUpArgs); 
-            // END DEBUG
         }
 
 
@@ -59,11 +49,16 @@ namespace Ceriyo.Server
             try
             {
                 Game = new ServerGame(e.Argument as ServerStartupArgs);
-                Game.OnSignalGUIUpdate += GameToGUIUpdate;
                 
+                Game.OnSignalGUIUpdate += GameToGUIUpdate;
+                Game.OnGameStarting += Game_OnGameStarting;
+                Game.OnGameExiting += Game_OnGameExiting;
+
                 Game.Run();
                 
                 Game.OnSignalGUIUpdate -= GameToGUIUpdate;
+                Game.OnGameStarting -= Game_OnGameStarting;
+                Game.OnGameExiting -= Game_OnGameExiting;
             }
             catch
             {
@@ -84,6 +79,26 @@ namespace Ceriyo.Server
             {
                 throw e.Error;
             }
+        }
+
+        private void Game_OnGameStarting(object sender, EventArgs e)
+        {
+            ServerStatusUpdateEventArgs args = new ServerStatusUpdateEventArgs
+            {
+                GameJustStarted = true
+            };
+
+            GameThread.ReportProgress(0, args);
+        }
+
+        private void Game_OnGameExiting(object sender, EventArgs e)
+        {
+            ServerStatusUpdateEventArgs args = new ServerStatusUpdateEventArgs
+            {
+                GameJustShutDown = true
+            };
+
+            GameThread.ReportProgress(100, args);
         }
 
         #endregion
@@ -178,21 +193,59 @@ namespace Ceriyo.Server
         private void GameThread_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             ServerStatusUpdateEventArgs args = e.UserState as ServerStatusUpdateEventArgs;
-            List<string> toRemove = Model.ConnectedUsernames.Except(args.ConnectedUsernames).ToList();
-            List<string> toAdd = args.ConnectedUsernames.Except(Model.ConnectedUsernames).ToList();
 
-            foreach (string current in toRemove)
+            if (args.GameJustShutDown)
             {
-                Model.ConnectedUsernames.Remove(current);
+                Model.ConnectedUsernames.Clear();
+                btnStartStop.IsEnabled = true;
+                btnStartStop.Content = "Start Server";
+                GUIToGameUpdateTimer.Stop();
             }
-
-            foreach (string current in toAdd)
+            else if (args.GameJustStarted)
             {
-                Model.ConnectedUsernames.Add(current);
+                btnStartStop.IsEnabled = true;
+                btnStartStop.Content = "Stop Server";
+                GUIToGameUpdateTimer.Start();
             }
+            else
+            {
+                List<string> toRemove = Model.ConnectedUsernames.Except(args.ConnectedUsernames).ToList();
+                List<string> toAdd = args.ConnectedUsernames.Except(Model.ConnectedUsernames).ToList();
 
+                foreach (string current in toRemove)
+                {
+                    Model.ConnectedUsernames.Remove(current);
+                }
+
+                foreach (string current in toAdd)
+                {
+                    Model.ConnectedUsernames.Add(current);
+                }
+            }
         }
+
+        private void StartStopServer(object sender, RoutedEventArgs e)
+        {
+            if (Model.IsServerRunning)
+            {
+                Model.IsServerRunning = false;
+            }
+            else
+            {
+                ServerStartupArgs startUpArgs = new ServerStartupArgs
+                {
+                    Port = Model.ServerSettings.Port
+                };
+
+                GameThread.RunWorkerAsync(startUpArgs);
+                Model.IsServerRunning = true;
+            }
+
+            btnStartStop.IsEnabled = false;
+        }
+
         #endregion
+
 
     }
 }

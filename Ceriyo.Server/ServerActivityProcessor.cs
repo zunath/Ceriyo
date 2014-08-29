@@ -37,5 +37,11 @@ namespace Ceriyo.Server
         {
             // TODO: Send game state updates to players 
         }
+
+        public void Destroy()
+        {
+            Agent.Shutdown();
+            
+        }
     }
 }

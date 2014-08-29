@@ -15,8 +15,11 @@ namespace Ceriyo.Server
 {
     public class ServerGame : Microsoft.Xna.Framework.Game
     {
-        private BindingList<string> ConnectedUsernames { get; set; } // DEBUG
+        public event EventHandler<EventArgs> OnGameStarting;
+        public event EventHandler<EventArgs> OnGameExiting;
         public event EventHandler<ServerStatusUpdateEventArgs> OnSignalGUIUpdate;
+
+        private BindingList<string> ConnectedUsernames { get; set; } // DEBUG
         private float SignalGUIUpdateTimer { get; set; }
         private const float SignalGUIUpdateSeconds = 2.0f;
         public Queue<ServerGUIStatus> GUIStatusUpdateQueue
@@ -37,12 +40,20 @@ namespace Ceriyo.Server
 
         protected override void Initialize()
         {
-            FlatRedBallServices.InitializeCommandLine(this);
+            if (!FlatRedBallServices.IsInitialized)
+            {
+                FlatRedBallServices.InitializeCommandLine(this);
+            }
             base.Initialize();
 
             Form gameForm = (Form)Form.FromHandle(this.Window.Handle);
             gameForm.Opacity = 0;
             gameForm.ShowInTaskbar = false;
+
+            if (OnGameStarting != null)
+            {
+                OnGameStarting(this, new EventArgs());
+            }
         }
 
         protected override void Update(GameTime gameTime)
@@ -69,7 +80,7 @@ namespace Ceriyo.Server
                 // Every few seconds, the GUI thread enqueues a new object containing current values for a number of fields.
                 // We need to process those updates here.
                 ProcessGUIStatusUpdates();
-
+                
                 SignalGUIUpdateTimer = 0.0f;
             }
         }
@@ -86,6 +97,22 @@ namespace Ceriyo.Server
                 ServerGUIStatus status = GUIStatusUpdateQueue.Dequeue();
                 this.Settings = status.Settings;
                 this.IsServerRunning = status.IsServerRunning;
+
+                if (!IsServerRunning)
+                {
+                    Exit();
+                }
+            }
+        }
+
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            Processor.Destroy();
+            base.OnExiting(sender, args);
+
+            if (OnGameExiting != null)
+            {
+                OnGameExiting(this, new EventArgs());
             }
         }
     }

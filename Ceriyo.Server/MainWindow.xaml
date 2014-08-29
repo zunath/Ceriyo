@@ -127,8 +127,8 @@
                             Margin="253.286,287,0,0" 
                             VerticalAlignment="Top" 
                             Width="90" 
-                            Grid.Column="2" 
-                            IsEnabled="False"/>
+                            Grid.Column="2"
+                            Click="StartStopServer"/>
                     <xctk:IntegerUpDown x:Name="numMaxLevel" 
                                         HorizontalAlignment="Left" 
                                         Margin="263.286,122,0,0" 
