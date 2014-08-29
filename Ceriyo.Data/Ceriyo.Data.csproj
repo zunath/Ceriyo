@@ -145,6 +145,7 @@
     <Compile Include="Engine\ModuleDataManager.cs" />
     <Compile Include="Engine\ModulePaths.cs" />
     <Compile Include="GameObjects\Tileset.cs" />
+    <Compile Include="NetworkObjects\PlayerNO.cs" />
     <Compile Include="Packets\UserConnectedPacket.cs" />
     <Compile Include="Packets\PacketBase.cs" />
     <Compile Include="Packets\UserDisconnectedPacket.cs" />

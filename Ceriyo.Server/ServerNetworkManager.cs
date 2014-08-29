@@ -9,6 +9,7 @@ using Ceriyo.Data.EventArguments;
 using Lidgren.Network;
 using Ceriyo.Data.GameObjects;
 using System.ComponentModel;
+using Ceriyo.Data.NetworkObjects;
 
 namespace Ceriyo.Server
 {
@@ -83,6 +84,14 @@ namespace Ceriyo.Server
                 !packet.IsRequest)
             {
                 PlayerUsernames.Add(packet.SenderConnection, packet.Username);
+
+                UserConnectedPacket response = new UserConnectedPacket
+                {
+                    PlayerList = new List<PlayerNO>(), // TODO: Get Player List network object
+                    Announcement = string.Empty // TODO: Get the server announcement
+                };
+
+                Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
             }
         }
 

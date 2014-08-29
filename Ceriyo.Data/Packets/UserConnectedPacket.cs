@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Ceriyo.Data.GameObjects;
 using ProtoBuf;
+using Ceriyo.Data.NetworkObjects;
 
 namespace Ceriyo.Data.Packets
 {
@@ -11,13 +12,13 @@ namespace Ceriyo.Data.Packets
     public class UserConnectedPacket : PacketBase
     {
         [ProtoMember(1)]
-        public List<string> PlayerList { get; set; }
+        public List<PlayerNO> PlayerList { get; set; }
         [ProtoMember(2)]
         public string Announcement { get; set; }
 
         public UserConnectedPacket()
         {
-            PlayerList = new List<string>(); // TODO: Set up DTO for sending character lists
+            PlayerList = new List<PlayerNO>();
             Announcement = string.Empty;
         }
     }
