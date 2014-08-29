@@ -108,12 +108,12 @@ namespace Ceriyo.Library.Network
             OutgoingMessage.Write(stream.ToArray());
         }
 
-        private void SendMessage(NetConnection recipient, NetDeliveryMethod method)
+        private void SendMessage(NetConnection recipient, NetDeliveryMethod method, int sequenceChannel)
         {
             if (recipient != null)
             {
                 OutgoingMessage.Encrypt(Encryption);
-                Peer.SendMessage(OutgoingMessage, recipient, method);
+                Peer.SendMessage(OutgoingMessage, recipient, method, sequenceChannel);
                 OutgoingMessage = Peer.CreateMessage();
             }
         }
@@ -199,10 +199,10 @@ namespace Ceriyo.Library.Network
             return packets;
         }
 
-        public void SendPacket(PacketBase packet, NetConnection connection, NetDeliveryMethod deliveryMethod)
+        public void SendPacket(PacketBase packet, NetConnection connection, NetDeliveryMethod deliveryMethod, int sequenceChannel = 1)
         {
             WriteMessage(packet);
-            SendMessage(connection, deliveryMethod);
+            SendMessage(connection, deliveryMethod, sequenceChannel);
         }
 
     }

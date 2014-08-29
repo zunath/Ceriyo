@@ -10,12 +10,14 @@ namespace Ceriyo.Data.Packets
     [ProtoContract]
     public class UserConnectedPacket : PacketBase
     {
-        public List<Player> PlayerList { get; set; }
+        [ProtoMember(1)]
+        public List<string> PlayerList { get; set; }
+        [ProtoMember(2)]
         public string Announcement { get; set; }
 
         public UserConnectedPacket()
         {
-            PlayerList = new List<Player>();
+            PlayerList = new List<string>(); // TODO: Set up DTO for sending character lists
             Announcement = string.Empty;
         }
     }
