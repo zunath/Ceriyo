@@ -15,31 +15,26 @@ using Ceriyo.Library.Network;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Packets;
 using Lidgren.Network;
+using Ceriyo.Data.EventArguments;
+using System.Net;
 
 namespace Ceriyo.Entities.Screens
 {
     public class GameScreen : BaseScreen
     {
         private NetworkAgent Agent { get; set; }
-        private MainMenuLogic _mainMenuGUI;
+        private MainMenuLogic GUI { get; set; }
 
         public GameScreen()
             : base("GameScreen")
         {
-            _mainMenuGUI = new MainMenuLogic();
+            GUI = new MainMenuLogic();
             Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, 5121);
         }
 
         protected override void CustomInitialize()
         {
             HookEvents();
-
-            // DEBUGGING
-
-            Agent.Connect("127.0.0.1");
-
-            // END DEBUGGING
-
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -49,14 +44,24 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
-            _mainMenuGUI.Destroy();
+            GUI.Destroy();
             Agent.Shutdown();
         }
 
 
         private void HookEvents()
         {
+            GUI.OnDirectConnect += GUI_OnDirectConnect;
+        }
 
+        private void GUI_OnDirectConnect(object sender, DirectConnectEventArgs e)
+        {
+            IPAddress address;
+
+            if (IPAddress.TryParse(e.IPAddress, out address))
+            {
+                Agent.Connect(e.IPAddress);
+            }
         }
 
         private void ProcessPackets()

@@ -72,12 +72,12 @@ namespace Ceriyo.Library.Network
         /// <summary>
         /// Connects to a server. Throws an exception if you attempt to call Connect as a Server.
         /// </summary>
-        public void Connect(string ip)
+        public NetConnection Connect(string ip)
         {
             if (Role == NetworkAgentRoleEnum.Client)
             {
                 IncomingMessages.Clear(); // Remove any old, out of date packets from being processed.
-                Peer.Connect(ip, Port);
+                return Peer.Connect(ip, Port);
             }
             else
             {

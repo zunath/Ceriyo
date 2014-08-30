@@ -107,6 +107,7 @@
     <Compile Include="Enumerations\ScriptEventTypeEnum.cs" />
     <Compile Include="Enumerations\TileEditModeEnum.cs" />
     <Compile Include="EventArguments\AreaPropertiesChangedEventArgs.cs" />
+    <Compile Include="EventArguments\DirectConnectEventArgs.cs" />
     <Compile Include="EventArguments\GameObjectEventArgs.cs" />
     <Compile Include="EventArguments\ConnectionStatusEventArgs.cs" />
     <Compile Include="EventArguments\GameModuleEventArgs.cs" />

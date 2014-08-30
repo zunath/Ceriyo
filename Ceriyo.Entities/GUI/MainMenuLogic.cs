@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.DrawableBatches;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.SquidGUI;
@@ -31,6 +32,8 @@ namespace Ceriyo.Entities.GUI
         #endregion
 
         #region Events
+
+        public event EventHandler<DirectConnectEventArgs> OnDirectConnect;
 
         #endregion
 
@@ -64,7 +67,18 @@ namespace Ceriyo.Entities.GUI
             DirectConnectButton.MouseClick += DirectConnectButton_MouseClick;
             ExitButton.MouseClick += ExitButton_MouseClick;
 
+            ConnectButton.MouseClick += ConnectButton_MouseClick;
             CancelButton.MouseClick += CancelButton_MouseClick;
+        }
+
+        private void ConnectButton_MouseClick(Control sender, MouseEventArgs args)
+        {
+            if (OnDirectConnect != null)
+            {
+                DirectConnectEventArgs e = new DirectConnectEventArgs(IPAddressTextBox.Text, PasswordTextBox.Text);
+
+                OnDirectConnect(this, e);
+            }
         }
 
         private void CancelButton_MouseClick(Control sender, MouseEventArgs args)
