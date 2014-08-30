@@ -17,19 +17,19 @@ using Ceriyo.Data.Packets;
 using Lidgren.Network;
 using Ceriyo.Data.EventArguments;
 using System.Net;
+using Ceriyo.Library.Global;
 
 namespace Ceriyo.Entities.Screens
 {
     public class GameScreen : BaseScreen
     {
-        private NetworkAgent Agent { get; set; }
         private MainMenuLogic GUI { get; set; }
 
         public GameScreen()
             : base("GameScreen")
         {
             GUI = new MainMenuLogic();
-            Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, 5121);
+            GameGlobal.Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, null, 5121);
         }
 
         protected override void CustomInitialize()
@@ -45,7 +45,7 @@ namespace Ceriyo.Entities.Screens
         protected override void CustomDestroy()
         {
             GUI.Destroy();
-            Agent.Shutdown();
+            GameGlobal.Agent.Disconnect();
         }
 
 
@@ -60,13 +60,14 @@ namespace Ceriyo.Entities.Screens
 
             if (IPAddress.TryParse(e.IPAddress, out address))
             {
-                Agent.Connect(e.IPAddress);
+                NetConnection conn = GameGlobal.Agent.Connect(e.IPAddress, e.Password);
+
             }
         }
 
         private void ProcessPackets()
         {
-            List<PacketBase> packets = Agent.CheckForPackets();
+            List<PacketBase> packets = GameGlobal.Agent.CheckForPackets();
 
             foreach (PacketBase packet in packets)
             {
@@ -89,7 +90,7 @@ namespace Ceriyo.Entities.Screens
                     Username = "zunath" // TODO: Get username
                 };
 
-                Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
+                GameGlobal.Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
             }
         }
 

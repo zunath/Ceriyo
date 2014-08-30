@@ -13,11 +13,14 @@ namespace Ceriyo.Data.Packets
         public bool IsRequest { get; set; }
         [ProtoMember(2)]
         public string Username { get; set; }
+        [ProtoMember(3)]
+        public string ServerPassword { get; set; }
 
         public UserInfoPacket()
         {
             this.IsRequest = false;
             this.Username = string.Empty;
+            this.ServerPassword = string.Empty;
         }
     }
 }

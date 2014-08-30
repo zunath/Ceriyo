@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="BindingConverters\EnumToBooleanConverter.cs" />
     <Compile Include="Extensions\BindingListExtensions.cs" />
+    <Compile Include="Global\GameGlobal.cs" />
     <Compile Include="Network\NetworkAgent.cs" />
     <Compile Include="Processing\GameResourceProcessor.cs" />
     <Compile Include="Processing\SpriteAnimationProcessor.cs" />

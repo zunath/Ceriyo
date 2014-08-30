@@ -34,7 +34,7 @@ namespace Ceriyo.Server
         public ServerGame(ServerStartupArgs args)
         {
             GUIStatusUpdateQueue = new ConcurrentQueue<ServerGUIStatus>();
-            NetworkManager = new ServerNetworkManager(args.Port);
+            NetworkManager = new ServerNetworkManager(args.ServerPassword, args.Port);
         }
 
         protected override void Initialize()

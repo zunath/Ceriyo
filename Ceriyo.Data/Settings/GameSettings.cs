@@ -7,5 +7,11 @@ namespace Ceriyo.Data.Settings
 {
     public class GameSettings
     {
+        public int Port { get; set; }
+
+        public GameSettings()
+        {
+            this.Port = 5121;
+        }
     }
 }

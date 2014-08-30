@@ -234,7 +234,8 @@ namespace Ceriyo.Server
             {
                 ServerStartupArgs startUpArgs = new ServerStartupArgs
                 {
-                    Port = Model.ServerSettings.Port
+                    Port = Model.ServerSettings.Port,
+                    ServerPassword = Model.ServerSettings.PlayerPassword
                 };
 
                 GameThread.RunWorkerAsync(startUpArgs);

@@ -25,6 +25,7 @@ namespace Ceriyo.Library.Network
         private NetOutgoingMessage OutgoingMessage { get; set; }
         private List<NetIncomingMessage> IncomingMessages { get; set; }
         private NetXtea Encryption { get; set; }
+        private string ServerPassword { get; set; }
 
         public List<NetConnection> Connections
         {
@@ -34,11 +35,12 @@ namespace Ceriyo.Library.Network
             }
         }
 
-        public NetworkAgent(NetworkAgentRoleEnum role, int port = 5121)
+        public NetworkAgent(NetworkAgentRoleEnum role, string serverPassword = null, int port = 5121)
         {
             Role = role;
             Configuration = new NetPeerConfiguration(EngineConstants.ApplicationIdentifier);
             Port = port;
+            ServerPassword = serverPassword == null ? string.Empty : serverPassword;
 
             Initialize();
         }
@@ -51,6 +53,7 @@ namespace Ceriyo.Library.Network
             {
                 Configuration.EnableMessageType(NetIncomingMessageType.DiscoveryRequest);
                 Configuration.Port = Port;
+                Configuration.SetMessageTypeEnabled(NetIncomingMessageType.ConnectionApproval, true);
 
                 //Casts the NetPeer to a NetServer
                 Peer = new NetServer(Configuration);
@@ -72,12 +75,15 @@ namespace Ceriyo.Library.Network
         /// <summary>
         /// Connects to a server. Throws an exception if you attempt to call Connect as a Server.
         /// </summary>
-        public NetConnection Connect(string ip)
+        public NetConnection Connect(string ip, string serverPassword)
         {
             if (Role == NetworkAgentRoleEnum.Client)
             {
+                NetOutgoingMessage hailMessage = Peer.CreateMessage(serverPassword);
+                hailMessage.Encrypt(Encryption);
+
                 IncomingMessages.Clear(); // Remove any old, out of date packets from being processed.
-                return Peer.Connect(ip, Port);
+                return Peer.Connect(ip, Port, hailMessage);
             }
             else
             {
@@ -125,8 +131,28 @@ namespace Ceriyo.Library.Network
 
             while ((incomingMessage = Peer.ReadMessage()) != null)
             {
+                NetConnection senderConnection = incomingMessage.SenderConnection;
                 switch (incomingMessage.MessageType)
                 {
+                    case NetIncomingMessageType.ConnectionApproval:
+                        {
+                            string serverPassword = string.Empty;
+                            incomingMessage.SenderConnection.RemoteHailMessage.Decrypt(Encryption);
+                            if (incomingMessage.SenderConnection.RemoteHailMessage != null)
+                            {
+                                serverPassword = incomingMessage.SenderConnection.RemoteHailMessage.ReadString();
+                            }
+
+                            if (serverPassword == ServerPassword || string.IsNullOrWhiteSpace(ServerPassword))
+                            {
+                                senderConnection.Approve();
+                            }
+                            else
+                            {
+                                senderConnection.Deny("Invalid password.");
+                            }
+                        }
+                        break;
                     case NetIncomingMessageType.DiscoveryRequest:
                         Peer.SendDiscoveryResponse(null, incomingMessage.SenderEndPoint);
                         break;
@@ -143,7 +169,7 @@ namespace Ceriyo.Library.Network
                             {
                                 Connection = incomingMessage.SenderConnection
                             };
-
+                            
                             if (status == NetConnectionStatus.Connected)
                             {
                                 if (OnConnected != null)
@@ -180,8 +206,13 @@ namespace Ceriyo.Library.Network
             return IncomingMessages;
         }
 
-        public List<PacketBase> CheckForPackets()
+        public List<PacketBase> CheckForPackets(string newPassword = null)
         {
+            if (newPassword != null)
+            {
+                this.ServerPassword = newPassword;
+            }
+
             List<NetIncomingMessage> messages = CheckForMessages();
             List<PacketBase> packets = new List<PacketBase>();
             MemoryStream stream = new MemoryStream();

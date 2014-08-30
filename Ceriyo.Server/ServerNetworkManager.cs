@@ -15,14 +15,13 @@ namespace Ceriyo.Server
 {
     public class ServerNetworkManager
     {
-        private GameModule Module { get; set; }
         private NetworkAgent Agent { get; set; }
         private Dictionary<NetConnection, string> PlayerUsernames { get; set; }
         public event EventHandler<PacketEventArgs> OnPacketReceived;
 
-        public ServerNetworkManager(int port)
+        public ServerNetworkManager(string serverPassword, int port)
         {
-            Agent = new NetworkAgent(NetworkAgentRoleEnum.Server, port);
+            Agent = new NetworkAgent(NetworkAgentRoleEnum.Server, serverPassword, port);
             PlayerUsernames = new Dictionary<NetConnection, string>();
             Agent.OnConnected += Agent_OnConnected;
             Agent.OnDisconnected += Agent_OnDisconnected;
