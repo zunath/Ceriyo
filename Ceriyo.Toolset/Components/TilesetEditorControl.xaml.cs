@@ -41,20 +41,7 @@ namespace Ceriyo.Toolset.Components
             Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
             WorkingManager = new WorkingDataManager();
-            SetDataContexts();
-        }
-
-        private void SetDataContexts()
-        {
-            lbTilesets.DataContext = Model;
-            lbGraphics.DataContext = Model;
-            txtName.DataContext = Model;
-            txtTag.DataContext = Model;
-            txtResref.DataContext = Model;
-            btnNew.DataContext = Model;
-            btnDelete.DataContext = Model;
-            radPassage.DataContext = Model;
-            radPassage4Direction.DataContext = Model;
+            this.DataContext = Model;
         }
 
         private void New(object sender, RoutedEventArgs e)

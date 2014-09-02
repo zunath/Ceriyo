@@ -36,47 +36,7 @@ namespace Ceriyo.Toolset.Components
             Model = new CreatureEditorVM();
             WorkingManager = new WorkingDataManager();
             Processor = new GameResourceProcessor();
-            SetDataContexts();
-        }
-
-        private void SetDataContexts()
-        {
-            lbCreatures.DataContext = Model;
-            txtName.DataContext = Model;
-            txtTag.DataContext = Model;
-            txtResref.DataContext = Model;
-            lbClass.DataContext = Model;
-            dgLocalVariables.DataContext = Model;
-            txtDescription.DataContext = Model;
-            txtComments.DataContext = Model;
-            numLevel.DataContext = Model;
-            ddlDialog.DataContext = Model;
-
-            ddlOnAttackedScript.DataContext = Model;
-            ddlOnConversationScript.DataContext = Model;
-            ddlOnDamagedScript.DataContext = Model;
-            ddlOnDeathScript.DataContext = Model;
-            ddlOnDisturbedScript.DataContext = Model;
-            ddlOnHeartbeatScript.DataContext = Model;
-            ddlOnSpawnedScript.DataContext = Model;
-
-            ddlMoveEastAnimation.DataContext = Model;
-            ddlMoveNorthAnimation.DataContext = Model;
-            ddlMoveNortheastAnimation.DataContext = Model;
-            ddlMoveNorthwestAnimation.DataContext = Model;
-            ddlMoveSouthAnimation.DataContext = Model;
-            ddlMoveSoutheastAnimation.DataContext = Model;
-            ddlMoveSouthwestAnimation.DataContext = Model;
-            ddlMoveWestAnimation.DataContext = Model;
-
-            ddlIdleEastAnimation.DataContext = Model;
-            ddlIdleNorthAnimation.DataContext = Model;
-            ddlIdleNortheastAnimation.DataContext = Model;
-            ddlIdleNorthwestAnimation.DataContext = Model;
-            ddlIdleSouthAnimation.DataContext = Model;
-            ddlIdleSoutheastAnimation.DataContext = Model;
-            ddlIdleSouthwestAnimation.DataContext = Model;
-            ddlIdleWestAnimation.DataContext = Model;
+            this.DataContext = Model;
         }
 
         private void CreatureSelected(object sender, SelectionChangedEventArgs e)

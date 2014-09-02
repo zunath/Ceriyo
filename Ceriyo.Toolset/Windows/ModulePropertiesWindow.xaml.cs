@@ -30,7 +30,7 @@ namespace Ceriyo.Toolset.Windows
             InitializeComponent();
             Model = new ModulePropertiesVM();
             WorkingManager = new WorkingDataManager();
-            SetDataContexts();
+            this.DataContext = Model;
             SetLimits();
         }
 
@@ -47,25 +47,6 @@ namespace Ceriyo.Toolset.Windows
             Model.Levels = gameModule.Levels.Levels;
 
             this.Show();
-        }
-
-        private void SetDataContexts()
-        {
-            txtComments.DataContext = Model;
-            txtDescription.DataContext = Model;
-            txtName.DataContext = Model;
-            txtResref.DataContext = Model;
-            txtTag.DataContext = Model;
-            ddlOnHeartbeatScript.DataContext = Model;
-            ddlOnModuleLoadScript.DataContext = Model;
-            ddlOnPlayerDeathScript.DataContext = Model;
-            ddlOnPlayerEnterScript.DataContext = Model;
-            ddlOnPlayerLeavingScript.DataContext = Model;
-            ddlOnPlayerLeftScript.DataContext = Model;
-            ddlOnPlayerRespawnScript.DataContext = Model;
-            numMaxLevel.DataContext = Model;
-            dgLevelChart.DataContext = Model;
-            dgLocalVariables.DataContext = Model;
         }
 
         private void SetLimits()

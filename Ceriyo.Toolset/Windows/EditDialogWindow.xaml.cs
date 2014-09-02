@@ -34,7 +34,7 @@ namespace Ceriyo.Toolset.Windows
             InitializeComponent();
             Model = new EditDialogVM();
             WorkingManager = new WorkingDataManager();
-            SetDataContexts();
+            this.DataContext = Model;
             SetLimits();
         }
 
@@ -47,10 +47,6 @@ namespace Ceriyo.Toolset.Windows
             Model.Resref = dialog.Resref;
             Model.Scripts = WorkingManager.GetAllScriptNames();
             Model.Tag = dialog.Tag;
-        }
-
-        private void SetDataContexts()
-        {
         }
 
         private void SetLimits()

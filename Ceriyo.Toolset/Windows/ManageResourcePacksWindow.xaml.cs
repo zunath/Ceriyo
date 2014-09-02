@@ -30,20 +30,14 @@ namespace Ceriyo.Toolset.Windows
             InitializeComponent();
             Model = new ManageResourcePacksVM();
             ResourcePackManager = new ResourcePackDataManager();
-            WorkingManager = new WorkingDataManager();
-            SetDataContexts();
+            WorkingManager = new WorkingDataManager(); 
+            this.DataContext = Model;
         }
 
         private void Initialize()
         {
             Model.AvailableResourcePackages = ResourcePackManager.GetAllResourcePackNames();
             Model.AttachedResourcePackages = WorkingManager.GetGameModule().ResourcePacks;
-        }
-
-        private void SetDataContexts()
-        {
-            ddlAvailableResourcePackages.DataContext = Model;
-            lbAttachedPackages.DataContext = Model;
         }
 
         private void MoveUp(object sender, RoutedEventArgs e)

@@ -16,6 +16,7 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             this.Model = new ObjectSelectionVM();
+            this.DataContext = Model;
         }
 
         public void LoadArea(object sender, GameObjectEventArgs e)
@@ -27,13 +28,6 @@ namespace Ceriyo.Toolset.Components
             Model.Placeables = area.PlaceableInstances;
 
 
-        }
-
-        private void SetDataContexts()
-        {
-            rootCreatures.DataContext = Model;
-            rootItems.DataContext = Model;
-            rootPlaceables.DataContext = Model;
         }
     }
 }

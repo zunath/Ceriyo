@@ -29,12 +29,7 @@ namespace Ceriyo.Toolset.Windows
         {
             InitializeComponent();
             Model = new SaveScriptVM();
-            SetDataContexts();
-        }
-
-        private void SetDataContexts()
-        {
-            txtScriptName.DataContext = Model;
+            this.DataContext = Model;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)

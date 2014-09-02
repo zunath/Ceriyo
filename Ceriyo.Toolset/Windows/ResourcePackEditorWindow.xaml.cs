@@ -26,7 +26,7 @@ namespace Ceriyo.Toolset.Windows
         {
             InitializeComponent();
             Initialize();
-            SetDataContexts();
+            this.DataContext = Model;
         }
 
         private void Initialize()
@@ -43,11 +43,6 @@ namespace Ceriyo.Toolset.Windows
             SaveFile.Filter = EnginePaths.ResourcePackFileFilter;
             OpenFile.Filter = EnginePaths.ResourcePackFileFilter;
 
-        }
-
-        private void SetDataContexts()
-        {
-            dgResources.DataContext = Model;
         }
 
         public void Open()

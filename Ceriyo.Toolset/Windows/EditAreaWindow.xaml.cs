@@ -72,28 +72,9 @@ namespace Ceriyo.Toolset.Windows
             numWidth.Minimum = EngineConstants.AreaMinWidth;
         }
 
-        private void SetDataContexts()
-        {
-            txtName.DataContext = Model;
-            txtTag.DataContext = Model;
-            txtResref.DataContext = Model;
-            txtComments.DataContext = Model;
-            txtDescription.DataContext = Model;
-
-            ddlTileset.DataContext = Model;
-            numHeight.DataContext = Model;
-            numWidth.DataContext = Model;
-
-            cboOnAreaEnter.DataContext = Model;
-            cboOnAreaExit.DataContext = Model;
-            cboOnAreaHeartbeat.DataContext = Model;
-
-            dgLocalVariables.DataContext = Model;
-        }
-
         public void Open(Area area, bool isEditing)
         {
-            SetDataContexts();
+            this.DataContext = Model;
             SetLimits();
             PopulateModel(area);
             this.IsEditing = isEditing;

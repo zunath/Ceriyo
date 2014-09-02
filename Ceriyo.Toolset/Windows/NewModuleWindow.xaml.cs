@@ -21,16 +21,9 @@ namespace Ceriyo.Toolset.Windows
             Model = new NewModuleVM();
             ModuleManager = new ModuleDataManager();
             ResourcePackManager = new ResourcePackDataManager();
-            SetDataContexts();
+            this.DataContext = Model;
             SetLimits();
             txtName.Focus();
-        }
-
-        private void SetDataContexts()
-        {
-            txtName.DataContext = Model;
-            txtTag.DataContext = Model;
-            txtResref.DataContext = Model;
         }
 
         private void SetLimits()

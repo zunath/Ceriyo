@@ -27,8 +27,8 @@ namespace Ceriyo.Server
         {
             InitializeComponent();
             this.Model = new ServerVM();
-            SetDataContexts();
-
+            this.DataContext = Model;
+            
             // Every 2 seconds, send the current state of the GUI to the Game thread
             GUIToGameUpdateTimer = new Timer(2000.0f);
             GUIToGameUpdateTimer.Elapsed += GUIToGameUpdateTimer_Elapsed;
@@ -105,29 +105,6 @@ namespace Ceriyo.Server
 
 
         #region UI Thread
-
-        private void SetDataContexts()
-        {
-            txtAnnouncement.DataContext = Model;
-            txtBlacklistUsername.DataContext = Model;
-            txtDescription.DataContext = Model;
-            txtGMPassword.DataContext = Model;
-            txtPlayerPassword.DataContext = Model;
-            txtServerMessage.DataContext = Model;
-            txtServerName.DataContext = Model;
-            txtServerStatus.DataContext = Model;
-            numMaxLevel.DataContext = Model;
-            numMaxPlayers.DataContext = Model;
-            numPort.DataContext = Model;
-            ddlPVPType.DataContext = Model;
-            ddlModules.DataContext = Model;
-            lbBlacklist.DataContext = Model;
-            lbGameType.DataContext = Model;
-            lblIPAddress.DataContext = Model;
-            lbLog.DataContext = Model;
-            lbPlayers.DataContext = Model;
-
-        }
 
         private void SaveSettings(object sender, RoutedEventArgs e)
         {

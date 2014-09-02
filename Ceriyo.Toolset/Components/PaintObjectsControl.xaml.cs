@@ -39,16 +39,7 @@ namespace Ceriyo.Toolset.Components
             InitializeComponent();
             Model = new PaintObjectsVM();
             WorkingManager = new WorkingDataManager();
-            SetDataContexts();
-        }
-
-        private void SetDataContexts()
-        {
-            rectSelectedTiles.DataContext = Model;
-            lbCreatures.DataContext = Model;
-            lbItems.DataContext = Model;
-            lbPlaceables.DataContext = Model;
-            ObjectTabs.DataContext = Model;
+            this.DataContext = Model;
         }
 
         private void PopulateModel()

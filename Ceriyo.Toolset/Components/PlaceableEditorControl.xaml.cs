@@ -38,35 +38,7 @@ namespace Ceriyo.Toolset.Components
             Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
             WorkingManager = new WorkingDataManager();
-            SetDataContexts();
-        }
-
-        private void SetDataContexts()
-        {
-            txtName.DataContext = Model;
-            txtResref.DataContext = Model;
-            txtTag.DataContext = Model;
-            lbPlaceables.DataContext = Model;
-            chkAutoRemoveKey.DataContext = Model;
-            chkIsKeyRequired.DataContext = Model;
-            chkIsLocked.DataContext = Model;
-            chkIsPlot.DataContext = Model;
-            chkIsStatic.DataContext = Model;
-            chkIsUseable.DataContext = Model;
-            txtKeyTag.DataContext = Model;
-            txtDescription.DataContext = Model;
-            txtComments.DataContext = Model;
-            dgLocalVariables.DataContext = Model;
-            ddlOnAttackedScript.DataContext = Model;
-            ddlOnClosedScript.DataContext = Model;
-            ddlOnDamagedScript.DataContext = Model;
-            ddlOnDeathScript.DataContext = Model;
-            ddlOnDisturbedScript.DataContext = Model;
-            ddlOnHeartbeatScript.DataContext = Model;
-            ddlOnLocked.DataContext = Model;
-            ddlOnOpenScript.DataContext = Model;
-            ddlOnUnlockedScript.DataContext = Model;
-            ddlOnUsedScript.DataContext = Model;
+            this.DataContext = Model;
         }
 
         private void New(object sender, RoutedEventArgs e)

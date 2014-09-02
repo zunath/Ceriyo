@@ -42,7 +42,7 @@ namespace Ceriyo.Toolset.Components
             InitializeComponent();
             this.Model = new AreaSelectionVM();
             WorkingManager = new WorkingDataManager();
-            SetDataContexts();
+            this.DataContext = Model;
             EditPropertiesWindow = new EditAreaWindow();
             EditPropertiesWindow.OnSaveAreaProperties += SavedAreaProperties;
             
@@ -60,11 +60,6 @@ namespace Ceriyo.Toolset.Components
 
             Model.Areas = WorkingManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory);
 
-        }
-
-        private void SetDataContexts()
-        {
-            lbAreas.DataContext = Model;
         }
 
         private void Create(object sender, RoutedEventArgs e)

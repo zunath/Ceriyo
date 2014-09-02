@@ -43,26 +43,7 @@ namespace Ceriyo.Toolset.Components
             Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
             WorkingManager = new WorkingDataManager();
-            SetDataContexts();
-        }
-
-        private void SetDataContexts()
-        {
-            txtName.DataContext = Model;
-            txtResref.DataContext = Model;
-            txtTag.DataContext = Model;
-            lbAnimations.DataContext = Model;
-            lbFrames.DataContext = Model;
-            lbGraphics.DataContext = Model;
-            btnNewFrame.DataContext = Model;
-            btnDeleteFrame.DataContext = Model;
-            btnMoveFrameUp.DataContext = Model;
-            btnMoveFrameDown.DataContext = Model;
-            txtFrameName.DataContext = Model;
-            decLength.DataContext = Model;
-            chkFlipHorizontal.DataContext = Model;
-            chkFlipVertical.DataContext = Model;
-            rectSelectedCell.DataContext = Model;
+            this.DataContext = Model;
         }
 
         public void Open(object sender, EventArgs e)

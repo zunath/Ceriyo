@@ -34,15 +34,7 @@ namespace Ceriyo.Toolset.Components
             this.Model = new AbilityEditorVM();
             this.Processor = new GameResourceProcessor();
             this.WorkingManager = new WorkingDataManager();
-            SetDataContexts();
-        }
-
-        private void SetDataContexts()
-        {
-            lbAbilities.DataContext = Model;
-            txtName.DataContext = Model;
-            txtTag.DataContext = Model;
-            txtResref.DataContext = Model;
+            this.DataContext = Model;
         }
 
         private void AbilitySelected(object sender, SelectionChangedEventArgs e)

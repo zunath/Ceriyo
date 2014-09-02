@@ -36,7 +36,7 @@ namespace Ceriyo.Toolset.Components
             InitializeComponent();
             WorkingManager = new WorkingDataManager();
             InitializeModel();
-            SetDataContexts();
+            this.DataContext = Model;
             EditPropertiesWindow = new EditDialogWindow();
 
         }
@@ -45,11 +45,6 @@ namespace Ceriyo.Toolset.Components
         {
             this.Model = new DialogSelectionVM();
             Model.Dialogs = WorkingManager.GetAllGameObjects<Dialog>(ModulePaths.DialogsDirectory) as BindingList<Dialog>;
-        }
-
-        private void SetDataContexts()
-        {
-            lbDialogs.DataContext = Model;
         }
 
         private void Create(object sender, RoutedEventArgs e)

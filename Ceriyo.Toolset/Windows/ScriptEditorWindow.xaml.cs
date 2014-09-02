@@ -39,15 +39,7 @@ namespace Ceriyo.Toolset.Windows
             WorkingManager = new WorkingDataManager();
             SaveScriptWin = new SaveScriptWindow();
             SaveScriptWin.OnSaveComplete += SaveScriptWin_OnSaveComplete;
-            SetDataContexts();
-        }
-
-        private void SetDataContexts()
-        {
-            lbScripts.DataContext = Model;
-            lbMethods.DataContext = Model;
-            lbConstants.DataContext = Model;
-            tcScripts.DataContext = Model;
+            this.DataContext = Model;
         }
 
         private void SaveScript(object sender, RoutedEventArgs e)

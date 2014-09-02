@@ -34,16 +34,7 @@ namespace Ceriyo.Toolset.Components
             this.Model = new SkillEditorVM();
             this.Processor = new GameResourceProcessor();
             this.WorkingManager = new WorkingDataManager();
-            SetDataContexts();
-        }
-
-        private void SetDataContexts()
-        {
-            lbSkills.DataContext = Model;
-            txtName.DataContext = Model;
-            txtTag.DataContext = Model;
-            txtResref.DataContext = Model;
-
+            this.DataContext = Model;
         }
 
         private void SkillSelected(object sender, SelectionChangedEventArgs e)

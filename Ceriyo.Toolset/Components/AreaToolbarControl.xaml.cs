@@ -26,12 +26,7 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             Model = new AreaToolbarVM();
-            SetDataContexts();
-        }
-
-        private void SetDataContexts()
-        {
-            ddlLayer.DataContext = Model;
+            this.DataContext = Model;
         }
     }
 }
