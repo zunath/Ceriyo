@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.DrawableBatches;
@@ -60,6 +61,10 @@ namespace Ceriyo.Entities.GUI
             IPAddressTextBox = GetControl("txtIPAddress") as TextBox;
             PasswordTextBox = GetControl("txtPassword") as TextBox;
 
+            if (EngineConstants.IsDebugEnabled)
+            {
+                IPAddressTextBox.Text = "127.0.0.1";
+            }
         }
 
         private void HookEvents()
