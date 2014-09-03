@@ -58,7 +58,10 @@ namespace Ceriyo.Server
 
         private void SendUpdatesToPlayers()
         {
-            // TODO: Send game state updates to players 
+            foreach (NetConnection connection in Agent.Connections)
+            {
+                // TODO: Send game state updates to players 
+            }
         }
 
         public void Destroy()

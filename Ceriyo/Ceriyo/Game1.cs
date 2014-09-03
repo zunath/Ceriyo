@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Ceriyo.Entities.Screens;
 using Ceriyo.Data.Engine;
 using FlatRedBall.Graphics;
+using Ceriyo.Library.Global;
 
 
 namespace Ceriyo
@@ -50,8 +51,8 @@ namespace Ceriyo
 
         protected override void Update(GameTime gameTime)
         {
+            GameGlobal.ProcessPackets();
             FlatRedBallServices.Update(gameTime);
-
             FlatRedBall.Screens.ScreenManager.Activity();
 
             base.Update(gameTime);

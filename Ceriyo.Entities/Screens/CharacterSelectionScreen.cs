@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.Packets;
+using Ceriyo.Library.Global;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +17,12 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
+            GameGlobal.OnPacketReceived += PacketReceived;
+
+            UserConnectedPacket packet = GameGlobal.ScreenTransferData as UserConnectedPacket;
+            // TODO: Load data into character selection screen.
+            GameGlobal.ScreenTransferData = null;
+
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -22,6 +31,13 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
+            GameGlobal.OnPacketReceived -= PacketReceived;
+        }
+
+
+        private void PacketReceived(object sender, PacketEventArgs e)
+        {
+
         }
     }
 }

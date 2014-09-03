@@ -39,6 +39,11 @@ namespace Ceriyo.Server
             GameThread.ProgressChanged += GameThread_ProgressChanged;
             GameThread.RunWorkerCompleted += GameThread_RunWorkerCompleted;
             GameThread.WorkerReportsProgress = true;
+
+            if (EngineConstants.IsDebugEnabled)
+            {
+                btnStartStop.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
+            }
         }
 
 

@@ -8,6 +8,7 @@ using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
 using Ceriyo.Library.Network;
 using Lidgren.Network;
+using FlatRedBall.Screens;
 
 namespace Ceriyo.Entities.Screens
 {
@@ -29,7 +30,6 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomActivity(bool firstTimeCalled)
         {
-            ProcessPackets();
         }
 
         protected override void CustomDestroy()
@@ -44,6 +44,7 @@ namespace Ceriyo.Entities.Screens
             GUI.OnDirectConnect += GUI_OnDirectConnect;
             GameGlobal.Agent.OnConnected += Agent_OnConnected;
             GameGlobal.Agent.OnDisconnected += Agent_OnDisconnected;
+            GameGlobal.OnPacketReceived += PacketReceived;
         }
 
         private void Agent_OnDisconnected(object sender, ConnectionStatusEventArgs e)
@@ -56,11 +57,27 @@ namespace Ceriyo.Entities.Screens
             
         }
 
+        private void PacketReceived(object sender, PacketEventArgs e)
+        {
+            PacketBase packet = e.Packet;
+            Type type = packet.GetType();
+
+            if (type == typeof(UserInfoPacket))
+            {
+                ReceiveUserInfoPacket(packet as UserInfoPacket);
+            }
+            else if (type == typeof(UserConnectedPacket))
+            {
+                ReceiveUserConnectedPacket(packet as UserConnectedPacket);
+            }
+        }
+
         private void UnhookEvents()
         {
             GUI.OnDirectConnect -= GUI_OnDirectConnect;
             GameGlobal.Agent.OnConnected -= Agent_OnConnected;
             GameGlobal.Agent.OnDisconnected -= Agent_OnDisconnected;
+            GameGlobal.OnPacketReceived -= PacketReceived;
         }
 
         private void GUI_OnDirectConnect(object sender, DirectConnectEventArgs e)
@@ -71,21 +88,6 @@ namespace Ceriyo.Entities.Screens
             {
                 GameGlobal.Agent.Connect(e.IPAddress, e.Password);
                 
-            }
-        }
-
-        private void ProcessPackets()
-        {
-            List<PacketBase> packets = GameGlobal.Agent.CheckForPackets();
-
-            foreach (PacketBase packet in packets)
-            {
-                Type type = packet.GetType();
-
-                if (type == typeof(UserInfoPacket))
-                {
-                    ReceiveUserInfoPacket(packet as UserInfoPacket);
-                }
             }
         }
 
@@ -101,6 +103,12 @@ namespace Ceriyo.Entities.Screens
 
                 GameGlobal.Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
             }
+        }
+
+        private void ReceiveUserConnectedPacket(UserConnectedPacket packet)
+        {
+            GameGlobal.ScreenTransferData = packet;
+            MoveToScreen(typeof(CharacterSelectionScreen));
         }
     }
 }
