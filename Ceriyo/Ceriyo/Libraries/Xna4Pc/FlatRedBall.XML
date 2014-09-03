@@ -6449,6 +6449,16 @@
             Gets reference to the object that is the target of the Instruction.
             </summary>
         </member>
+        <member name="P:FlatRedBall.Instructions.DelegateInstruction.Target">
+            <summary>
+            The target for DelegateInstruction doesn't have any internal purpose - it's used purely to 
+            help games track what has generated instructions.
+            </summary>
+            <remarks>
+            This used to be a null getter only, but now it stores data so that
+            projects like Gum can assign owners of an instruction.
+            </remarks>
+        </member>
         <member name="T:FlatRedBall.Instructions.GenericInstruction">
             <summary>
             Base class for typed Instructions.  This type can be used
@@ -12598,13 +12608,6 @@
             Particle Sprites are defined as Sprites which have a short lifespan and
             are created frequently.  Common uses are smoke, bullets, and explosions.
             </remarks>
-        </member>
-        <member name="M:FlatRedBall.SpriteManager.SetCurrentCamera(System.Int32)">
-            <summary>
-            This function is inteded for internal use only during rendering.
-            </summary>
-            <param name="i"></param>
-            <returns></returns>
         </member>
         <member name="M:FlatRedBall.SpriteManager.#cctor">
             <summary>

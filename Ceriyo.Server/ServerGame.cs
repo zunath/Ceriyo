@@ -41,7 +41,7 @@ namespace Ceriyo.Server
         {
             if (!FlatRedBallServices.IsInitialized)
             {
-                FlatRedBallServices.InitializeCommandLine(this);
+                FlatRedBallServices.InitializeCommandLine();
             }
             base.Initialize();
 
