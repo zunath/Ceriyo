@@ -25,7 +25,7 @@ namespace Ceriyo.Entities.DrawableBatches
             _layoutManager = new SquidLayoutManager();
 
             _desktop = _layoutManager.LayoutToDesktop(layoutName);
-            _desktop.ShowCursor = true;
+            _desktop.ShowCursor = false;
 
             InitializeInputManager();
             GuiHost.Renderer = new SquidRendererXNA();
