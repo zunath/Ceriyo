@@ -1,5 +1,6 @@
 ﻿using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Packets;
+using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,13 @@ namespace Ceriyo.Entities.Screens
 {
     public class CharacterSelectionScreen : BaseScreen
     {
+        private CharacterSelectionMenuLogic GUI { get; set; }
+
         public CharacterSelectionScreen()
             : base("CharacterSelectionScreen")
         {
+            GUI = new CharacterSelectionMenuLogic();
+
         }
 
         protected override void CustomInitialize()

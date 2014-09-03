@@ -78,6 +78,8 @@
     <Compile Include="DrawableBatches\MapDrawableBatch.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\GraphicEntity.cs" />
+    <Compile Include="GUI\CharacterSelectionMenuLogic.cs" />
+    <Compile Include="GUI\GameMenuLogic.cs" />
     <Compile Include="GUI\MainMenuLogic.cs" />
     <Compile Include="GUI\LoginMenuLogic.cs" />
     <Compile Include="Entities\PaintCreatureEntity.cs" />

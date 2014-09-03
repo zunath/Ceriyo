@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UILayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Components>
+    <UIComponent>
+      <ComponentType>Window</ComponentType>
+      <Name>InventoryWindow</Name>
+      <SizeX>440</SizeX>
+      <SizeY>280</SizeY>
+      <PositionX>0</PositionX>
+      <PositionY>0</PositionY>
+      <Title>Inventory</Title>
+      <Text />
+      <Resizeable>false</Resizeable>
+      <Anchor>None</Anchor>
+      <CursorType>default</CursorType>
+      <Children>
+      </Children>
+    </UIComponent>
+  </Components>
+</UILayout>

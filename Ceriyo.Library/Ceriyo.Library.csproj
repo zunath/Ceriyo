@@ -182,6 +182,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Content\GUI\Layouts\CharacterSelectionMenu.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GUI\Layouts\GameMenu.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Tilesets\emptytile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
