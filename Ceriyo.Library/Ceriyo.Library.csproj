@@ -48,6 +48,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSScriptLibrary">
+      <HintPath>..\Ceriyo\Ceriyo\Libraries\CSScript\CSScriptLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="FlatRedBall">
       <HintPath>..\Ceriyo\Ceriyo\Libraries\Xna4Pc\FlatRedBall.dll</HintPath>
     </Reference>
@@ -68,9 +71,6 @@
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
-    <Reference Include="Noesis.Javascript">
-      <HintPath>..\Ceriyo\Ceriyo\Libraries\Javascript.NET\Noesis.Javascript.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="protobuf-net">
@@ -92,6 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingConverters\EnumToBooleanConverter.cs" />
+    <None Include="Content\Scripts\Test.ccs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Extensions\BindingListExtensions.cs" />
     <Compile Include="Global\GameGlobal.cs" />
     <Compile Include="Network\NetworkAgent.cs" />
@@ -117,11 +120,6 @@
       <Project>{26e4c8b8-a8c4-4b77-bec7-e6149473eefb}</Project>
       <Name>Ceriyo.Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Content\Scripts\testscript.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

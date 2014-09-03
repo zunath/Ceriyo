@@ -76,9 +76,6 @@
     <Reference Include="MonitoredUndo">
       <HintPath>..\packages\MUF.1.2.1\lib\net40\MonitoredUndo.dll</HintPath>
     </Reference>
-    <Reference Include="Noesis.Javascript">
-      <HintPath>..\Ceriyo\Ceriyo\Libraries\Javascript.NET\Noesis.Javascript.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
     <Reference Include="System" />

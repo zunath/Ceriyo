@@ -25,7 +25,7 @@ namespace Ceriyo.Data
 
         public static string ScriptExtension
         {
-            get { return ".js"; }
+            get { return ".ccs"; }
         }
 
         public static string BackupExtension

@@ -102,10 +102,6 @@
     <Reference Include="mscorlib">
       <Private>False</Private>
     </Reference>
-    <Reference Include="Noesis.Javascript, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\Javascript.NET\Noesis.Javascript.dll</HintPath>
-    </Reference>
     <Reference Include="Squid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5ba804b1072f6e05, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\Squid\Squid.dll</HintPath>
@@ -141,9 +137,8 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
-    <Content Include="Libraries\Javascript.NET\msvcp100.dll" />
-    <Content Include="Libraries\Javascript.NET\msvcr100.dll" />
-    <Content Include="Libraries\Javascript.NET\Noesis.Javascript.dll" />
+    <Content Include="Libraries\CSScript\CSScriptLibrary.dll" />
+    <Content Include="Libraries\CSScript\CSScriptLibrary.xml" />
     <Content Include="Libraries\Lidgren\Lidgren.Network.dll" />
     <Content Include="Libraries\Lidgren\Lidgren.Network.pdb" />
     <Content Include="Libraries\Squid\MTV3D65.dll" />
