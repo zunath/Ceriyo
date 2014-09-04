@@ -96,7 +96,7 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <avalonedit:TextEditor SyntaxHighlighting="JavaScript"
+                    <avalonedit:TextEditor SyntaxHighlighting="C#"
                                HorizontalAlignment="Stretch" 
                                VerticalAlignment="Stretch"
                                Document="{Binding ScriptDocument}" />
