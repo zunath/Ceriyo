@@ -29,7 +29,7 @@ namespace Ceriyo.Toolset.Windows
     {
         private ScriptEditorVM Model { get; set; }
         private SaveScriptWindow SaveScriptWin { get; set; }
-        private const string DefaultScriptText = "function Main()\n{\n\t\n}";
+        private const string DefaultScriptText = "public static void Main()\n{\n\t\n}";
         private WorkingDataManager WorkingManager { get; set; }
 
         public ScriptEditorWindow()
