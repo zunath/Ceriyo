@@ -10,6 +10,10 @@ using Lidgren.Network;
 using Ceriyo.Data.GameObjects;
 using System.ComponentModel;
 using Ceriyo.Data.NetworkObjects;
+using Ceriyo.Data.Settings;
+using Ceriyo.Data;
+using System.IO;
+using Ceriyo.Data.Engine;
 
 namespace Ceriyo.Server
 {
@@ -18,6 +22,9 @@ namespace Ceriyo.Server
         private NetworkAgent Agent { get; set; }
         private Dictionary<NetConnection, string> PlayerUsernames { get; set; }
         public event EventHandler<PacketEventArgs> OnPacketReceived;
+        private ServerSettings Settings { get; set; }
+        private WorkingDataManager WorkingManager { get; set; }
+        private EngineDataManager EngineManager { get; set; }
 
         public ServerNetworkManager(string serverPassword, int port)
         {
@@ -26,12 +33,19 @@ namespace Ceriyo.Server
             Agent.OnConnected += Agent_OnConnected;
             Agent.OnDisconnected += Agent_OnDisconnected;
             Agent.OnDisconnecting += Agent_OnDisconnecting;
+            WorkingManager = new WorkingDataManager();
+            EngineManager = new EngineDataManager();
         }
 
         public void Update()
         {
             ProcessPackets();
             SendUpdatesToPlayers();
+        }
+
+        public void RefreshSettings(ServerSettings settings)
+        {
+            this.Settings = settings;
         }
 
         private void ProcessPackets()
@@ -87,10 +101,27 @@ namespace Ceriyo.Server
             {
                 PlayerUsernames.Add(packet.SenderConnection, packet.Username);
 
+                if (!Directory.Exists(EnginePaths.CharactersDirectory + packet.Username))
+                {
+                    Directory.CreateDirectory(EnginePaths.CharactersDirectory + packet.Username);
+                }
+
+                List<Player> characters = EngineManager.GetPlayers(packet.Username);
+                List<PlayerNO> characterNOs = new List<PlayerNO>();
+
+                foreach (Player pc in characters)
+                {
+                    characterNOs.Add(new PlayerNO
+                    {
+                        Description = pc.Description,
+                        Name = pc.Name
+                    });
+                }
+
                 UserConnectedPacket response = new UserConnectedPacket
                 {
-                    PlayerList = new List<PlayerNO>(), // TODO: Get Player List network object
-                    Announcement = string.Empty // TODO: Get the server announcement
+                    PlayerList = characterNOs, 
+                    Announcement = Settings.Announcement 
                 };
 
                 Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);

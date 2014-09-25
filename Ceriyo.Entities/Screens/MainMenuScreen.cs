@@ -20,7 +20,6 @@ namespace Ceriyo.Entities.Screens
             : base("MainMenu")
         {
             GUI = new MainMenuLogic();
-            GameGlobal.Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, null, 5121);
         }
 
         protected override void CustomInitialize()

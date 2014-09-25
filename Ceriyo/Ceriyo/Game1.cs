@@ -6,6 +6,8 @@ using Ceriyo.Entities.Screens;
 using Ceriyo.Data.Engine;
 using FlatRedBall.Graphics;
 using Ceriyo.Library.Global;
+using Ceriyo.Data.Enumerations;
+using Ceriyo.Library.Network;
 
 
 namespace Ceriyo
@@ -45,7 +47,8 @@ namespace Ceriyo
 
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
             SpriteManager.Camera.UsePixelCoordinates();
-			FlatRedBall.Screens.ScreenManager.Start(typeof(MainMenuScreen));
+            GameGlobal.Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, null, 5121);
+            FlatRedBall.Screens.ScreenManager.Start(typeof(MainMenuScreen));
         }
 
 

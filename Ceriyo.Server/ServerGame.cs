@@ -80,6 +80,9 @@ namespace Ceriyo.Server
                 // We need to process those updates here.
                 ProcessGUIStatusUpdates();
                 
+                // Refresh the network manager while we're at it.
+                NetworkManager.RefreshSettings(Settings);
+
                 SignalGUIUpdateTimer = 0.0f;
             }
         }

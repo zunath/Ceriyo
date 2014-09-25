@@ -24,9 +24,6 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string CategoryName { get { return "Player"; } }
 
-        [XmlIgnore]
-        public NetConnection Connection { get; set; }
-
         public Player()
         {
             this.Name = string.Empty;
