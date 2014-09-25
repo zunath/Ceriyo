@@ -12,14 +12,17 @@ namespace Ceriyo.Data.Packets
     public class UserConnectedPacket : PacketBase
     {
         [ProtoMember(1)]
-        public List<PlayerNO> PlayerList { get; set; }
+        public List<PlayerNO> CharacterList { get; set; }
         [ProtoMember(2)]
         public string Announcement { get; set; }
+        [ProtoMember(3)]
+        public bool CanDeleteCharacters { get; set; }
 
         public UserConnectedPacket()
         {
-            PlayerList = new List<PlayerNO>();
+            CharacterList = new List<PlayerNO>();
             Announcement = string.Empty;
+            CanDeleteCharacters = false;
         }
     }
 }

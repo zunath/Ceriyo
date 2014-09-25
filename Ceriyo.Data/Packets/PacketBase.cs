@@ -11,6 +11,7 @@ namespace Ceriyo.Data.Packets
     [ProtoInclude(100, typeof(UserConnectedPacket))]
     [ProtoInclude(101, typeof(UserDisconnectedPacket))]
     [ProtoInclude(102, typeof(UserInfoPacket))]
+    [ProtoInclude(103, typeof(DeleteCharacterPacket))]
     public class PacketBase
     {
         public NetConnection SenderConnection { get; set; }

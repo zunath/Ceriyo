@@ -4,8 +4,8 @@
     <UIComponent>
       <ComponentType>Window</ComponentType>
       <Name>CharacterSelectionWindow</Name>
-      <SizeX>440</SizeX>
-      <SizeY>280</SizeY>
+      <SizeX>600</SizeX>
+      <SizeY>500</SizeY>
       <PositionX>0</PositionX>
       <PositionY>0</PositionY>
       <Title>Character Selection</Title>
@@ -14,6 +14,77 @@
       <Anchor>None</Anchor>
       <CursorType>default</CursorType>
       <Children>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnCreate</Name>
+          <SizeX>120</SizeX>
+          <SizeY>45</SizeY>
+          <PositionX>-200</PositionX>
+          <PositionY>200</PositionY>
+          <Title></Title>
+          <Text>Create</Text>
+          <Anchor>None</Anchor>
+          <CursorType>default</CursorType>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnDelete</Name>
+          <SizeX>120</SizeX>
+          <SizeY>45</SizeY>
+          <PositionX>-70</PositionX>
+          <PositionY>200</PositionY>
+          <Title></Title>
+          <Text>Delete</Text>
+          <Anchor>None</Anchor>
+          <CursorType>default</CursorType>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnEnter</Name>
+          <SizeX>120</SizeX>
+          <SizeY>45</SizeY>
+          <PositionX>80</PositionX>
+          <PositionY>200</PositionY>
+          <Title></Title>
+          <Text>Enter Server</Text>
+          <Anchor>None</Anchor>
+          <CursorType>default</CursorType>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnDisconnect</Name>
+          <SizeX>120</SizeX>
+          <SizeY>45</SizeY>
+          <PositionX>210</PositionX>
+          <PositionY>200</PositionY>
+          <Title></Title>
+          <Text>Disconnect</Text>
+          <Anchor>None</Anchor>
+          <CursorType>default</CursorType>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Listbox</ComponentType>
+          <Name>lbCharacters</Name>
+          <SizeX>200</SizeX>
+          <SizeY>350</SizeY>
+          <PositionX>-170</PositionX>
+          <PositionY>-20</PositionY>
+          <Children>
+            
+          </Children>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Label</ComponentType>
+          <Name>lblName</Name>
+          <SizeX>120</SizeX>
+          <SizeY>45</SizeY>
+          <PositionX>20</PositionX>
+          <PositionY>-170</PositionY>
+          <Title></Title>
+          <Text>Name: </Text>
+          <Anchor>None</Anchor>
+          <CursorType>default</CursorType>
+        </UIComponent>
       </Children>
     </UIComponent>
   </Components>

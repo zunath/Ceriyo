@@ -120,8 +120,9 @@ namespace Ceriyo.Server
 
                 UserConnectedPacket response = new UserConnectedPacket
                 {
-                    PlayerList = characterNOs, 
-                    Announcement = Settings.Announcement 
+                    CharacterList = characterNOs, 
+                    Announcement = Settings.Announcement,
+                    CanDeleteCharacters = Settings.AllowCharacterDeletion
                 };
 
                 Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);

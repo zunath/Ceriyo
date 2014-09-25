@@ -23,6 +23,8 @@ namespace Ceriyo.Data.ResourceObjects
         public bool Enabled { get; set; }
         public bool Visible { get; set; }
         public bool Modal { get; set; }
+        public bool Multiselect { get; set; }
+        public int MaxSelected { get; set; }
 
         public UIComponent()
         {
@@ -41,6 +43,8 @@ namespace Ceriyo.Data.ResourceObjects
             this.Enabled = true;
             this.Visible = true;
             this.Modal = false;
+            this.Multiselect = false;
+            this.MaxSelected = 1;
         }
     }
 }

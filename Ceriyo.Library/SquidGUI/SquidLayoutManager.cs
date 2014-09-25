@@ -60,6 +60,9 @@ namespace Ceriyo.Library.SquidGUI
                 case "checkbox":
                     result = BuildCheckBox(component);
                     break;
+                case "listbox":
+                    result = BuildListBox(component);
+                    break;
                 default:
                     // If not a primative control, assume it's another layout and attempt to load it.
                     try
@@ -152,6 +155,35 @@ namespace Ceriyo.Library.SquidGUI
             box.Text = component.Text;
             box.Button.Style = "checkBox";
             
+            return box;
+        }
+
+        private ListBox BuildListBox(UIComponent component)
+        {
+            ListBox box = new ListBox();
+            box.Multiselect = component.Multiselect;
+            box.MaxSelected = component.MaxSelected;
+            box.Scrollbar.Size = new Squid.Point(14, 10);
+            box.Scrollbar.Slider.Style = "vscrollTrack";
+            box.Scrollbar.Slider.Button.Style = "vscrollButton";
+            box.Scrollbar.ButtonUp.Style = "vscrollUp";
+            box.Scrollbar.ButtonUp.Size = new Squid.Point(10, 20);
+            box.Scrollbar.ButtonDown.Style = "vscrollUp";
+            box.Scrollbar.ButtonDown.Size = new Squid.Point(10, 20);
+            box.Scrollbar.Slider.Margin = new Margin(0, 2, 0, 2);
+            
+            foreach (UIComponent child in component.Children)
+            {
+                if (child.ComponentType.ToLower() == "item")
+                {
+                    ListBoxItem item = new ListBoxItem();
+                    item.Text = child.Text;
+                    item.Size = new Point(child.SizeX, child.SizeY);
+
+                    box.Items.Add(item);
+                }
+            }
+
             return box;
         }
     }
