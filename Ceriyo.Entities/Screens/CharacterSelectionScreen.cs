@@ -9,6 +9,7 @@ using System.Text;
 using Ceriyo.Data;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.NetworkObjects;
+using FlatRedBall.Screens;
 
 namespace Ceriyo.Entities.Screens
 {
@@ -99,7 +100,8 @@ namespace Ceriyo.Entities.Screens
 
         private void GUI_OnDisconnected(object sender, EventArgs e)
         {
-            
+            GameGlobal.Agent.Disconnect();
+            MoveToScreen(typeof(MainMenuScreen));
         }
 
         private void GUI_OnDeleteCharacter(object sender, EventArgs e)
