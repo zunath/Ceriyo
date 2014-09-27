@@ -106,7 +106,10 @@ namespace Ceriyo.Entities.GUI
             {
                 OnDeleteCharacter(this, new EventArgs());
             }
+        }
 
+        public void PerformCharacterDelete()
+        {
             CharacterSelectionListBox.Items.Remove(CharacterSelectionListBox.SelectedItem);
         }
     }

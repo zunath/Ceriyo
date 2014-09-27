@@ -183,6 +183,9 @@
     <Content Include="Content\GUI\Layouts\CharacterSelectionMenu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\GUI\Layouts\CharacterCreationMenu.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\GUI\Layouts\GameMenu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -86,7 +86,10 @@ namespace Ceriyo.Entities.Screens
 
         private void ProcessDeleteCharacterResponse(DeleteCharacterPacket packet)
         {
-
+            if (packet.IsDeleteSuccessful)
+            {
+                GUI.PerformCharacterDelete();
+            }
         }
 
         #endregion
@@ -115,7 +118,7 @@ namespace Ceriyo.Entities.Screens
 
         private void GUI_OnCreateCharacter(object sender, EventArgs e)
         {
-
+            MoveToScreen(typeof(CharacterCreationScreen));
         }
 
         #endregion
