@@ -3,87 +3,154 @@
   <Components>
     <UIComponent>
       <ComponentType>Window</ComponentType>
-      <Name>CharacterSelectionWindow</Name>
+      <Name>CharacterCreationWindow</Name>
       <SizeX>600</SizeX>
       <SizeY>500</SizeY>
       <PositionX>0</PositionX>
       <PositionY>0</PositionY>
-      <Title>Character Selection</Title>
+      <Title>Character Creation</Title>
       <Text />
       <Resizeable>false</Resizeable>
       <Anchor>None</Anchor>
       <CursorType>default</CursorType>
       <Children>
         <UIComponent>
-          <ComponentType>Button</ComponentType>
-          <Name>btnCreate</Name>
-          <SizeX>120</SizeX>
-          <SizeY>45</SizeY>
-          <PositionX>-200</PositionX>
-          <PositionY>200</PositionY>
-          <Title></Title>
-          <Text>Create</Text>
-          <Anchor>None</Anchor>
-          <CursorType>default</CursorType>
-        </UIComponent>
-        <UIComponent>
-          <ComponentType>Button</ComponentType>
-          <Name>btnDelete</Name>
-          <SizeX>120</SizeX>
-          <SizeY>45</SizeY>
-          <PositionX>-70</PositionX>
-          <PositionY>200</PositionY>
-          <Title></Title>
-          <Text>Delete</Text>
-          <Anchor>None</Anchor>
-          <CursorType>default</CursorType>
-        </UIComponent>
-        <UIComponent>
-          <ComponentType>Button</ComponentType>
-          <Name>btnEnter</Name>
-          <SizeX>120</SizeX>
-          <SizeY>45</SizeY>
-          <PositionX>80</PositionX>
-          <PositionY>200</PositionY>
-          <Title></Title>
-          <Text>Enter Server</Text>
-          <Anchor>None</Anchor>
-          <CursorType>default</CursorType>
-        </UIComponent>
-        <UIComponent>
-          <ComponentType>Button</ComponentType>
-          <Name>btnDisconnect</Name>
-          <SizeX>120</SizeX>
-          <SizeY>45</SizeY>
-          <PositionX>210</PositionX>
-          <PositionY>200</PositionY>
-          <Title></Title>
-          <Text>Disconnect</Text>
-          <Anchor>None</Anchor>
-          <CursorType>default</CursorType>
-        </UIComponent>
-        <UIComponent>
           <ComponentType>Listbox</ComponentType>
-          <Name>lbCharacters</Name>
+          <Name>lbSteps</Name>
           <SizeX>200</SizeX>
           <SizeY>350</SizeY>
           <PositionX>-170</PositionX>
           <PositionY>-20</PositionY>
           <Children>
-            
+            <UIComponent>
+              <ComponentType>Item</ComponentType>
+              <Name>lbiDetails</Name>
+              <Text>Details</Text>
+              <SizeX>50</SizeX>
+              <SizeY>50</SizeY>
+            </UIComponent>
+            <UIComponent>
+              <ComponentType>Item</ComponentType>
+              <Name>lbiRace</Name>
+              <Text>Race</Text>
+              <SizeX>50</SizeX>
+              <SizeY>50</SizeY>
+            </UIComponent>
+            <UIComponent>
+              <ComponentType>Item</ComponentType>
+              <Name>lbiPortrait</Name>
+              <Text>Portrait</Text>
+              <SizeX>50</SizeX>
+              <SizeY>50</SizeY>
+            </UIComponent>
+            <UIComponent>
+              <ComponentType>Item</ComponentType>
+              <Name>lbiClass</Name>
+              <Text>Class</Text>
+              <SizeX>50</SizeX>
+              <SizeY>50</SizeY>
+            </UIComponent>
+            <UIComponent>
+              <ComponentType>Item</ComponentType>
+              <Name>lbiAbilities</Name>
+              <Text>Abilities</Text>
+              <SizeX>50</SizeX>
+              <SizeY>50</SizeY>
+            </UIComponent>
+            <UIComponent>
+              <ComponentType>Item</ComponentType>
+              <Name>lbiSkills</Name>
+              <Text>Skills</Text>
+              <SizeX>50</SizeX>
+              <SizeY>50</SizeY>
+            </UIComponent>
           </Children>
         </UIComponent>
         <UIComponent>
-          <ComponentType>Label</ComponentType>
-          <Name>lblName</Name>
+          <ComponentType>Panel</ComponentType>
+          <Name>pnlDetails</Name>
+          <SizeX>200</SizeX>
+          <SizeY>350</SizeY>
+          <PositionX>50</PositionX>
+          <PositionY>-20</PositionY>
+          <Children>
+            <UIComponent>
+              <ComponentType>Label</ComponentType>
+              <Name>lblTest</Name>
+              <SizeX>100</SizeX>
+              <SizeY>100</SizeY>
+              <PositionX>0</PositionX>
+              <PositionY>0</PositionY>
+              <Text>This is a test label.</Text>
+            </UIComponent>
+          </Children>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Panel</ComponentType>
+          <Name>pnlRace</Name>
+          <SizeX>200</SizeX>
+          <SizeY>350</SizeY>
+          <PositionX>50</PositionX>
+          <PositionY>-20</PositionY>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Panel</ComponentType>
+          <Name>pnlPortrait</Name>
+          <SizeX>200</SizeX>
+          <SizeY>350</SizeY>
+          <PositionX>50</PositionX>
+          <PositionY>-20</PositionY>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Panel</ComponentType>
+          <Name>pnlClass</Name>
+          <SizeX>200</SizeX>
+          <SizeY>350</SizeY>
+          <PositionX>50</PositionX>
+          <PositionY>-20</PositionY>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Panel</ComponentType>
+          <Name>pnlAbilities</Name>
+          <SizeX>200</SizeX>
+          <SizeY>350</SizeY>
+          <PositionX>50</PositionX>
+          <PositionY>-20</PositionY>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Panel</ComponentType>
+          <Name>pnlSkills</Name>
+          <SizeX>200</SizeX>
+          <SizeY>350</SizeY>
+          <PositionX>50</PositionX>
+          <PositionY>-20</PositionY>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnPlay</Name>
           <SizeX>120</SizeX>
           <SizeY>45</SizeY>
-          <PositionX>20</PositionX>
-          <PositionY>-170</PositionY>
-          <Title></Title>
-          <Text>Name: </Text>
-          <Anchor>None</Anchor>
-          <CursorType>default</CursorType>
+          <PositionX>-130</PositionX>
+          <PositionY>200</PositionY>
+          <Text>Play</Text>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnReset</Name>
+          <SizeX>120</SizeX>
+          <SizeY>45</SizeY>
+          <PositionX>0</PositionX>
+          <PositionY>200</PositionY>
+          <Text>Reset</Text>
+        </UIComponent>
+        <UIComponent>
+          <ComponentType>Button</ComponentType>
+          <Name>btnCancel</Name>
+          <SizeX>120</SizeX>
+          <SizeY>45</SizeY>
+          <PositionX>130</PositionX>
+          <PositionY>200</PositionY>
+          <Text>Cancel</Text>
         </UIComponent>
       </Children>
     </UIComponent>

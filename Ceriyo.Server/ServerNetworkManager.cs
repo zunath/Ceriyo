@@ -60,6 +60,10 @@ namespace Ceriyo.Server
                 {
                     ReceiveUserInfoPacket(packet as UserInfoPacket);
                 }
+                else if (type == typeof(DeleteCharacterPacket))
+                {
+                    ReceiveDeleteCharacterPacket(packet as DeleteCharacterPacket);
+                }
                 else
                 {
                     if (OnPacketReceived != null)
@@ -128,6 +132,18 @@ namespace Ceriyo.Server
                 Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
             }
         }
+
+        private void ReceiveDeleteCharacterPacket(DeleteCharacterPacket packet)
+        {
+
+            DeleteCharacterPacket response = new DeleteCharacterPacket
+            {
+                IsDeleteSuccessful = true
+            };
+
+            Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
+        }
+
 
         #endregion
 

@@ -63,6 +63,9 @@ namespace Ceriyo.Library.SquidGUI
                 case "listbox":
                     result = BuildListBox(component);
                     break;
+                case "panel":
+                    result = BuildPanel(component);
+                    break;
                 default:
                     // If not a primative control, assume it's another layout and attempt to load it.
                     try
@@ -179,6 +182,7 @@ namespace Ceriyo.Library.SquidGUI
                     ListBoxItem item = new ListBoxItem();
                     item.Text = child.Text;
                     item.Size = new Point(child.SizeX, child.SizeY);
+                    item.Name = child.Name;
 
                     box.Items.Add(item);
                 }
@@ -186,5 +190,18 @@ namespace Ceriyo.Library.SquidGUI
 
             return box;
         }
+
+        private Panel BuildPanel(UIComponent component)
+        {
+            Panel panel = new Panel();
+
+            foreach (UIComponent child in component.Children)
+            {
+                BuildControl(child, panel);
+            }
+
+            return panel;
+        }
+        
     }
 }
