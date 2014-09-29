@@ -47,7 +47,7 @@ namespace Ceriyo
 
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
             SpriteManager.Camera.UsePixelCoordinates();
-            GameGlobal.Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, null, 5121);
+            GameGlobal.Initialize();
             FlatRedBall.Screens.ScreenManager.Start(typeof(CharacterCreationScreen));
         }
 

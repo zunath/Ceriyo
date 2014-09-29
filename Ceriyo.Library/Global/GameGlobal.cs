@@ -6,6 +6,8 @@ using Ceriyo.Data;
 using Ceriyo.Library.Network;
 using Ceriyo.Data.Packets;
 using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.Settings;
+using Ceriyo.Data.Enumerations;
 
 namespace Ceriyo.Library.Global
 {
@@ -15,6 +17,7 @@ namespace Ceriyo.Library.Global
         public static string Username { get; set; }
         public static object ScreenTransferData { get; set; }
         public static event EventHandler<PacketEventArgs> OnPacketReceived;
+        public static GameSettings Settings { get; private set; }
 
         static GameGlobal()
         {
@@ -22,6 +25,12 @@ namespace Ceriyo.Library.Global
             {
                 Username = "zunath";
             }
+        }
+
+        public static void Initialize()
+        {
+            Settings = new GameSettings(); // TODO: Load from XML file
+            GameGlobal.Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, null, Settings.Port);
         }
 
         public static void ProcessPackets()
