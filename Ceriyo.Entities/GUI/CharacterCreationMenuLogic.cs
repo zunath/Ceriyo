@@ -80,7 +80,9 @@ namespace Ceriyo.Entities.GUI
             if (value == DetailsListBoxItem) DetailsPanel.Visible = true;
             else if (value == RaceListBoxItem) RacePanel.Visible = true;
             else if (value == PortraitListBoxItem) PortraitPanel.Visible = true;
-
+            else if (value == ClassListBoxItem) ClassPanel.Visible = true;
+            else if (value == AbilitiesListBoxItem) AbilitiesPanel.Visible = true;
+            else if (value == SkillsListBoxItem) SkillsPanel.Visible = true;
             
 
         }

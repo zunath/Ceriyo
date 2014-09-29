@@ -194,10 +194,13 @@ namespace Ceriyo.Library.SquidGUI
         private Panel BuildPanel(UIComponent component)
         {
             Panel panel = new Panel();
+            panel.Style = "frame";
 
             foreach (UIComponent child in component.Children)
             {
-                BuildControl(child, panel);
+                Control control = BuildControl(child, panel);
+
+                panel.Content.Controls.Add(control);
             }
 
             return panel;
