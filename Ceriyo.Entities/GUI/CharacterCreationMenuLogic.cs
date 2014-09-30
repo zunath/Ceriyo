@@ -45,6 +45,8 @@ namespace Ceriyo.Entities.GUI
 
         #region Events
 
+        public event EventHandler<EventArgs> OnCancelButtonClicked;
+
         #endregion
 
         public CharacterCreationMenuLogic()
@@ -89,6 +91,15 @@ namespace Ceriyo.Entities.GUI
         private void HookEvents()
         {
             StepsListBox.SelectedItemChanged += StepsListBox_SelectedItemChanged;
+            CancelButton.MouseClick += CancelButton_MouseClick;
+        }
+
+        private void CancelButton_MouseClick(Control sender, MouseEventArgs args)
+        {
+            if (OnCancelButtonClicked != null)
+            {
+                OnCancelButtonClicked(this, new EventArgs());
+            }
         }
 
         private void StepsListBox_SelectedItemChanged(Control sender, ListBoxItem value)

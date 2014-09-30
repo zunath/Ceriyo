@@ -22,6 +22,7 @@ namespace Ceriyo.Entities.Screens
         protected override void CustomInitialize()
         {
             GUI = new CharacterCreationMenuLogic();
+            GUI.OnCancelButtonClicked += GUI_OnCancelButtonClicked;
 
             GameGlobal.OnPacketReceived += GameGlobal_OnPacketReceived;
 
@@ -32,6 +33,11 @@ namespace Ceriyo.Entities.Screens
 
             GameGlobal.Agent.SendPacket(packet, GameGlobal.Agent.Connections[0], Lidgren.Network.NetDeliveryMethod.ReliableUnordered);
 
+        }
+
+        private void GUI_OnCancelButtonClicked(object sender, EventArgs e)
+        {
+            MoveToScreen(typeof(CharacterSelectionScreen));
         }
 
         private void GameGlobal_OnPacketReceived(object sender, PacketEventArgs e)
