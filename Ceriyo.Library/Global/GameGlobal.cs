@@ -8,6 +8,7 @@ using Ceriyo.Data.Packets;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Settings;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Library.Global
 {
@@ -18,6 +19,7 @@ namespace Ceriyo.Library.Global
         public static object ScreenTransferData { get; set; }
         public static event EventHandler<PacketEventArgs> OnPacketReceived;
         public static GameSettings Settings { get; private set; }
+        public static Player PC { get; set; }
 
         static GameGlobal()
         {

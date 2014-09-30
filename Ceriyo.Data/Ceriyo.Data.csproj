@@ -147,7 +147,8 @@
     <Compile Include="Engine\ModuleDataManager.cs" />
     <Compile Include="Engine\ModulePaths.cs" />
     <Compile Include="GameObjects\Tileset.cs" />
-    <Compile Include="Packets\CharacterCreationPacket.cs" />
+    <Compile Include="Packets\CharacterCreationScreenPacket.cs" />
+    <Compile Include="Packets\CreateCharacterPacket.cs" />
     <Compile Include="Packets\DeleteCharacterPacket.cs" />
     <Compile Include="Packets\UserConnectedPacket.cs" />
     <Compile Include="Packets\PacketBase.cs" />

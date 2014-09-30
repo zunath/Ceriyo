@@ -45,6 +45,7 @@ namespace Ceriyo.Entities.GUI
 
         #region Events
 
+        public event EventHandler<GameObjectEventArgs> OnPlayButtonClicked;
         public event EventHandler<EventArgs> OnCancelButtonClicked;
 
         #endregion
@@ -91,7 +92,22 @@ namespace Ceriyo.Entities.GUI
         private void HookEvents()
         {
             StepsListBox.SelectedItemChanged += StepsListBox_SelectedItemChanged;
+            PlayButton.MouseClick += PlayButton_MouseClick;
             CancelButton.MouseClick += CancelButton_MouseClick;
+        }
+
+        private void PlayButton_MouseClick(Control sender, MouseEventArgs args)
+        {
+            if (OnPlayButtonClicked != null)
+            {
+                Player pc = new Player
+                {
+                    Description = DescriptionTextBox.Text,
+                    Name = NameTextBox.Text
+                };
+
+                OnPlayButtonClicked(this, new GameObjectEventArgs(pc));
+            }
         }
 
         private void CancelButton_MouseClick(Control sender, MouseEventArgs args)
@@ -126,7 +142,7 @@ namespace Ceriyo.Entities.GUI
             StepsListBox.SelectedItem = StepsListBox.Items[0];
         }
 
-        public void LoadServerData(CharacterCreationPacket packet)
+        public void LoadServerData(CharacterCreationScreenPacket packet)
         {
             foreach (Ability ability in packet.Abilities)
             {

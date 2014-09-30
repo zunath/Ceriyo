@@ -56,5 +56,31 @@ namespace Ceriyo.Data.Engine
             return players;
         }
 
+        public bool SavePlayer(string accountName, Player pc, bool isNewPC = false)
+        {
+            bool success = false;
+
+            try
+            {
+                string path = EnginePaths.CharactersDirectory + accountName + "/";
+                if (isNewPC)
+                {
+                    pc.Resref = Guid.NewGuid().ToString();
+                }
+
+                path += pc.Resref + EnginePaths.DataExtension;
+
+                FileManager.XmlSerialize(pc, path);
+
+                success = true;
+            }
+            catch
+            {
+                success = false;
+            }
+
+            return success;
+        }
+
     }
 }

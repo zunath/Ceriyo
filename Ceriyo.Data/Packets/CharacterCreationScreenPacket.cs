@@ -8,7 +8,7 @@ using ProtoBuf;
 namespace Ceriyo.Data.Packets
 {
     [ProtoContract]
-    public class CharacterCreationPacket : PacketBase
+    public class CharacterCreationScreenPacket : PacketBase
     {
         [ProtoMember(1)]
         public bool IsRequest { get; set; }
@@ -21,7 +21,7 @@ namespace Ceriyo.Data.Packets
         [ProtoMember(5)]
         public List<Skill> Skills { get; set; }
 
-        public CharacterCreationPacket()
+        public CharacterCreationScreenPacket()
         {
             this.IsRequest = false;
             this.Races = new List<Race>();

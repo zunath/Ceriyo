@@ -63,9 +63,13 @@ namespace Ceriyo.Server
                 {
                     ReceiveDeleteCharacterPacket(packet as DeleteCharacterPacket);
                 }
-                else if (type == typeof(CharacterCreationPacket))
+                else if (type == typeof(CharacterCreationScreenPacket))
                 {
-                    ReceiveCharacterCreationPacket(packet as CharacterCreationPacket);
+                    ReceiveCharacterCreationScreenPacket(packet as CharacterCreationScreenPacket);
+                }
+                else if (type == typeof(CreateCharacterPacket))
+                {
+                    ReceiveCreateCharacterPacket(packet as CreateCharacterPacket);
                 }
                 else
                 {
@@ -138,14 +142,35 @@ namespace Ceriyo.Server
             Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
         }
 
-        private void ReceiveCharacterCreationPacket(CharacterCreationPacket packet)
+        private void ReceiveCharacterCreationScreenPacket(CharacterCreationScreenPacket packet)
         {
-            CharacterCreationPacket response = new CharacterCreationPacket
+            CharacterCreationScreenPacket response = new CharacterCreationScreenPacket
             {
                 Abilities = WorkingManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory).ToList(),
                 CharacterClasses = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory).ToList(),
                 Races = WorkingManager.GetAllGameObjects<Race>(ModulePaths.RacesDirectory).ToList(),
                 Skills = WorkingManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory).ToList()
+            };
+
+            Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
+        }
+
+        private void ReceiveCreateCharacterPacket(CreateCharacterPacket packet)
+        {
+            Player pc = new Player
+            {
+                Name = packet.Name,
+                Description = packet.Description
+            };
+
+            string username = PlayerUsernames[packet.SenderConnection];
+            string filePath = EnginePaths.CharactersDirectory + username;
+
+            EngineManager.SavePlayer(username, pc, true);
+
+            CreateCharacterPacket response = new CreateCharacterPacket
+            {
+                ResponsePlayer = pc
             };
 
             Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
