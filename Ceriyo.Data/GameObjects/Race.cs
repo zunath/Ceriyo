@@ -11,7 +11,7 @@ using ProtoBuf;
 namespace Ceriyo.Data.GameObjects
 {
     [ProtoContract]
-    public class Ability : IGameObject
+    public class Race : IGameObject
     {
         [ProtoMember(1)]
         public string Name { get; set; }
@@ -23,22 +23,10 @@ namespace Ceriyo.Data.GameObjects
         public string Description { get; set; }
         public string Comments { get; set; }
         [XmlIgnore]
-        public string WorkingDirectory { get { return WorkingPaths.AbilitiesDirectory; } }
+        public string WorkingDirectory { get { return WorkingPaths.RacesDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
         public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
         [XmlIgnore]
-        public string CategoryName { get { return "Ability"; } }
-
-        public Ability()
-        {
-            this.Name = string.Empty;
-            this.Tag = string.Empty;
-            this.Resref = string.Empty;
-            this.Description = string.Empty;
-            this.Comments = string.Empty;
-
-            this.LocalVariables = new BindingList<LocalVariable>();
-            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
-        }
+        public string CategoryName { get { return "Race"; } }
     }
 }

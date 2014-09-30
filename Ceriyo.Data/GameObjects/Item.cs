@@ -7,17 +7,23 @@ using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
 using Ceriyo.Data.ResourceObjects;
+using ProtoBuf;
 
 namespace Ceriyo.Data.GameObjects
 {
+    [ProtoContract]
     public class Item : IGameObject
     {
         [XmlIgnore]
         private WorkingDataManager WorkingManager { get; set; }
 
+        [ProtoMember(1)]
         public string Name { get; set; }
+        [ProtoMember(2)]
         public string Tag { get; set; }
+        [ProtoMember(3)]
         public string Resref { get; set; }
+        [ProtoMember(4)]
         public string Description { get; set; }
         public string Comments { get; set; }
         [XmlIgnore]

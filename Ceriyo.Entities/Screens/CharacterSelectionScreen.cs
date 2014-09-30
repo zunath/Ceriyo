@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using Ceriyo.Data;
 using Ceriyo.Data.GameObjects;
-using Ceriyo.Data.NetworkObjects;
 using FlatRedBall.Screens;
 
 namespace Ceriyo.Entities.Screens
@@ -41,14 +40,7 @@ namespace Ceriyo.Entities.Screens
                 }
             }
 
-            foreach (PlayerNO character in packet.CharacterList)
-            {
-                Players.Add(new Player
-                {
-                    Name = character.Name,
-                    Description = character.Description
-                });
-            }
+            Players = packet.CharacterList;
 
             GUI = new CharacterSelectionMenuLogic(packet.CanDeleteCharacters, Players);
             GUI.OnCreateCharacter += GUI_OnCreateCharacter;

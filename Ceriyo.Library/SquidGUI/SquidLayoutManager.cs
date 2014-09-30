@@ -139,7 +139,7 @@ namespace Ceriyo.Library.SquidGUI
             TextBox box = new TextBox();
             box.Text = component.Text;
             box.Style = "textbox";
-
+            
             return box;
         }
 

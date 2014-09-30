@@ -139,6 +139,7 @@
     <Compile Include="GameObjects\MapTile.cs" />
     <Compile Include="GameObjects\Placeable.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="GameObjects\Race.cs" />
     <Compile Include="GameObjects\Skill.cs" />
     <Compile Include="GameObjects\SpriteAnimation.cs" />
     <Compile Include="GameObjects\SpriteAnimationFrame.cs" />
@@ -146,7 +147,7 @@
     <Compile Include="Engine\ModuleDataManager.cs" />
     <Compile Include="Engine\ModulePaths.cs" />
     <Compile Include="GameObjects\Tileset.cs" />
-    <Compile Include="NetworkObjects\PlayerNO.cs" />
+    <Compile Include="Packets\CharacterCreationPacket.cs" />
     <Compile Include="Packets\DeleteCharacterPacket.cs" />
     <Compile Include="Packets\UserConnectedPacket.cs" />
     <Compile Include="Packets\PacketBase.cs" />

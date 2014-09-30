@@ -9,7 +9,6 @@ using Ceriyo.Data.EventArguments;
 using Lidgren.Network;
 using Ceriyo.Data.GameObjects;
 using System.ComponentModel;
-using Ceriyo.Data.NetworkObjects;
 using Ceriyo.Data.Settings;
 using Ceriyo.Data;
 using System.IO;
@@ -64,6 +63,10 @@ namespace Ceriyo.Server
                 {
                     ReceiveDeleteCharacterPacket(packet as DeleteCharacterPacket);
                 }
+                else if (type == typeof(CharacterCreationPacket))
+                {
+                    ReceiveCharacterCreationPacket(packet as CharacterCreationPacket);
+                }
                 else
                 {
                     if (OnPacketReceived != null)
@@ -111,20 +114,10 @@ namespace Ceriyo.Server
                 }
 
                 List<Player> characters = EngineManager.GetPlayers(packet.Username);
-                List<PlayerNO> characterNOs = new List<PlayerNO>();
-
-                foreach (Player pc in characters)
-                {
-                    characterNOs.Add(new PlayerNO
-                    {
-                        Description = pc.Description,
-                        Name = pc.Name
-                    });
-                }
-
+                
                 UserConnectedPacket response = new UserConnectedPacket
                 {
-                    CharacterList = characterNOs, 
+                    CharacterList = characters, 
                     Announcement = Settings.Announcement,
                     CanDeleteCharacters = Settings.AllowCharacterDeletion
                 };
@@ -135,6 +128,7 @@ namespace Ceriyo.Server
 
         private void ReceiveDeleteCharacterPacket(DeleteCharacterPacket packet)
         {
+            // TODO: Delete the player character file.
 
             DeleteCharacterPacket response = new DeleteCharacterPacket
             {
@@ -144,6 +138,18 @@ namespace Ceriyo.Server
             Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
         }
 
+        private void ReceiveCharacterCreationPacket(CharacterCreationPacket packet)
+        {
+            CharacterCreationPacket response = new CharacterCreationPacket
+            {
+                Abilities = WorkingManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory).ToList(),
+                CharacterClasses = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory).ToList(),
+                Races = WorkingManager.GetAllGameObjects<Race>(ModulePaths.RacesDirectory).ToList(),
+                Skills = WorkingManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory).ToList()
+            };
+
+            Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
+        }
 
         #endregion
 

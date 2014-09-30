@@ -42,6 +42,11 @@ namespace Ceriyo.Data
             get { return EnginePaths.WorkingDirectory + ModulePaths.CreaturesDirectory; }
         }
 
+        public static string RacesDirectory
+        {
+            get { return EnginePaths.WorkingDirectory + ModulePaths.RacesDirectory; }
+        }
+
         public static string ItemsDirectory
         {
             get { return EnginePaths.WorkingDirectory + ModulePaths.ItemsDirectory; }

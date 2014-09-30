@@ -32,6 +32,11 @@ namespace Ceriyo.Data
             get { return "/Data/Creatures/"; }
         }
 
+        public static string RacesDirectory
+        {
+            get { return "/Data/Races/"; }
+        }
+
         public static string ItemsDirectory
         {
             get { return "/Data/Items/"; }

@@ -7,14 +7,20 @@ using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
 using Lidgren.Network;
+using ProtoBuf;
 
 namespace Ceriyo.Data.GameObjects
 {
+    [ProtoContract]
     public class Player: IGameObject
     {
+        [ProtoMember(1)]
         public string Name { get; set; }
+        [ProtoMember(2)]
         public string Tag { get; set; }
+        [ProtoMember(3)]
         public string Resref { get; set; }
+        [ProtoMember(4)]
         public string Description { get; set; }
         public string Comments { get; set; }
         [XmlIgnore]

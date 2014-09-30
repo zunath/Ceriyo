@@ -48,7 +48,7 @@ namespace Ceriyo
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
             SpriteManager.Camera.UsePixelCoordinates();
             GameGlobal.Initialize();
-            FlatRedBall.Screens.ScreenManager.Start(typeof(CharacterCreationScreen));
+            FlatRedBall.Screens.ScreenManager.Start(typeof(MainMenuScreen));
         }
 
 

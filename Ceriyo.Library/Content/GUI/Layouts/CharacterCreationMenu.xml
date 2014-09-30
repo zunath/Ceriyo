@@ -69,61 +69,134 @@
         <UIComponent>
           <ComponentType>Panel</ComponentType>
           <Name>pnlDetails</Name>
-          <SizeX>200</SizeX>
+          <SizeX>320</SizeX>
           <SizeY>350</SizeY>
-          <PositionX>50</PositionX>
+          <PositionX>110</PositionX>
           <PositionY>-20</PositionY>
           <Children>
             <UIComponent>
               <ComponentType>Label</ComponentType>
-              <Name>lblTest</Name>
+              <Name>lblName</Name>
+              <SizeX>80</SizeX>
+              <SizeY>30</SizeY>
+              <PositionX>10</PositionX>
+              <PositionY>-20</PositionY>
+              <Text>Name: </Text>
+            </UIComponent>
+            <UIComponent>
+              <ComponentType>Label</ComponentType>
+              <Name>lblDescription</Name>
               <SizeX>100</SizeX>
+              <SizeY>30</SizeY>
+              <PositionX>10</PositionX>
+              <PositionY>18</PositionY>
+              <Text>Description: </Text>
+            </UIComponent>
+            <UIComponent>
+              <ComponentType>Textbox</ComponentType>
+              <Name>txtName</Name>
+              <SizeX>200</SizeX>
+              <SizeY>30</SizeY>
+              <PositionX>150</PositionX>
+              <PositionY>-18</PositionY>
+            </UIComponent>
+            <UIComponent>
+              <ComponentType>Textbox</ComponentType>
+              <Name>txtDescription</Name>
+              <SizeX>200</SizeX>
               <SizeY>100</SizeY>
-              <PositionX>0</PositionX>
-              <PositionY>0</PositionY>
-              <Text>This is a test label.</Text>
+              <PositionX>150</PositionX>
+              <PositionY>60</PositionY>
             </UIComponent>
           </Children>
         </UIComponent>
         <UIComponent>
           <ComponentType>Panel</ComponentType>
           <Name>pnlRace</Name>
-          <SizeX>200</SizeX>
+          <SizeX>320</SizeX>
           <SizeY>350</SizeY>
-          <PositionX>50</PositionX>
+          <PositionX>110</PositionX>
           <PositionY>-20</PositionY>
+          <Children>
+            <UIComponent>
+              <ComponentType>Listbox</ComponentType>
+              <Name>lbRaces</Name>
+              <SizeX>300</SizeX>
+              <SizeY>300</SizeY>
+              <PositionX>110</PositionX>
+              <PositionY>120</PositionY>
+              <Children>
+              </Children>
+            </UIComponent>
+          </Children>
         </UIComponent>
         <UIComponent>
           <ComponentType>Panel</ComponentType>
           <Name>pnlPortrait</Name>
-          <SizeX>200</SizeX>
+          <SizeX>320</SizeX>
           <SizeY>350</SizeY>
-          <PositionX>50</PositionX>
+          <PositionX>110</PositionX>
           <PositionY>-20</PositionY>
         </UIComponent>
         <UIComponent>
           <ComponentType>Panel</ComponentType>
           <Name>pnlClass</Name>
-          <SizeX>200</SizeX>
+          <SizeX>320</SizeX>
           <SizeY>350</SizeY>
-          <PositionX>50</PositionX>
+          <PositionX>110</PositionX>
           <PositionY>-20</PositionY>
+          <Children>
+            <UIComponent>
+              <ComponentType>Listbox</ComponentType>
+              <Name>lbCharacterClasses</Name>
+              <SizeX>300</SizeX>
+              <SizeY>300</SizeY>
+              <PositionX>110</PositionX>
+              <PositionY>120</PositionY>
+              <Children>
+              </Children>
+            </UIComponent>
+          </Children>
         </UIComponent>
         <UIComponent>
           <ComponentType>Panel</ComponentType>
           <Name>pnlAbilities</Name>
-          <SizeX>200</SizeX>
+          <SizeX>320</SizeX>
           <SizeY>350</SizeY>
-          <PositionX>50</PositionX>
+          <PositionX>110</PositionX>
           <PositionY>-20</PositionY>
+          <Children>
+            <UIComponent>
+              <ComponentType>Listbox</ComponentType>
+              <Name>lbAbilities</Name>
+              <SizeX>300</SizeX>
+              <SizeY>300</SizeY>
+              <PositionX>110</PositionX>
+              <PositionY>120</PositionY>
+              <Children>
+              </Children>
+            </UIComponent>
+          </Children>
         </UIComponent>
         <UIComponent>
           <ComponentType>Panel</ComponentType>
           <Name>pnlSkills</Name>
-          <SizeX>200</SizeX>
+          <SizeX>320</SizeX>
           <SizeY>350</SizeY>
-          <PositionX>50</PositionX>
+          <PositionX>110</PositionX>
           <PositionY>-20</PositionY>
+          <Children>
+            <UIComponent>
+              <ComponentType>Listbox</ComponentType>
+              <Name>lbSkills</Name>
+              <SizeX>300</SizeX>
+              <SizeY>300</SizeY>
+              <PositionX>110</PositionX>
+              <PositionY>120</PositionY>
+              <Children>
+              </Children>
+            </UIComponent>
+          </Children>
         </UIComponent>
         <UIComponent>
           <ComponentType>Button</ComponentType>
