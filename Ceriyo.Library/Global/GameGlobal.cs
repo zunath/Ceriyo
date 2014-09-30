@@ -9,6 +9,7 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Settings;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
+using FlatRedBall.IO;
 
 namespace Ceriyo.Library.Global
 {
@@ -31,7 +32,7 @@ namespace Ceriyo.Library.Global
 
         public static void Initialize()
         {
-            Settings = new GameSettings(); // TODO: Load from XML file
+            LoadGameSettings();
             GameGlobal.Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, null, Settings.Port);
         }
 
@@ -45,6 +46,21 @@ namespace Ceriyo.Library.Global
                 {
                     OnPacketReceived(Agent, new PacketEventArgs(packet));
                 }
+            }
+        }
+
+        private static void LoadGameSettings()
+        {
+            string path = EnginePaths.SettingsDirectory + "GameSettings" + EnginePaths.DataExtension;
+
+            if (FileManager.FileExists(path))
+            {
+                Settings = FileManager.XmlDeserialize<GameSettings>(path);
+            }
+            else
+            {
+                Settings = new GameSettings();
+                FileManager.XmlSerialize<GameSettings>(Settings, path);
             }
         }
     }
