@@ -17,7 +17,6 @@ namespace Ceriyo.Library.Global
     {
         public static NetworkAgent Agent { get; set; }
         public static string Username { get; set; }
-        public static object ScreenTransferData { get; set; }
         public static event EventHandler<PacketEventArgs> OnPacketReceived;
         public static GameSettings Settings { get; private set; }
         public static Player PC { get; set; }

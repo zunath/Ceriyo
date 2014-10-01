@@ -82,5 +82,24 @@ namespace Ceriyo.Data.Engine
             return success;
         }
 
+        public bool DeletePlayer(string accountName, string resref)
+        {
+            bool success = false;
+
+            try
+            {
+                string path = EnginePaths.CharactersDirectory + accountName + "/" + resref + EnginePaths.DataExtension;
+                FileManager.DeleteFile(path);
+
+                success = true;
+            }
+            catch
+            {
+                success = false;
+            }
+
+            return success;
+        }
+
     }
 }

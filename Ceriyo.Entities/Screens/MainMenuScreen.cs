@@ -106,7 +106,6 @@ namespace Ceriyo.Entities.Screens
 
         private void ReceiveUserConnectedPacket(UserConnectedPacket packet)
         {
-            GameGlobal.ScreenTransferData = packet;
             MoveToScreen(typeof(CharacterSelectionScreen));
         }
     }

@@ -7,6 +7,7 @@ using Squid;
 using Ceriyo.Library.SquidGUI;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.EventArguments;
 
 namespace Ceriyo.Entities.GUI
 {
@@ -27,7 +28,7 @@ namespace Ceriyo.Entities.GUI
         public event EventHandler<EventArgs> OnEnterServer;
         public event EventHandler<EventArgs> OnDisconnected;
         public event EventHandler<EventArgs> OnCreateCharacter;
-        public event EventHandler<EventArgs> OnDeleteCharacter;
+        public event EventHandler<ResrefEventArgs> OnDeleteCharacter;
 
         #endregion
 
@@ -43,7 +44,8 @@ namespace Ceriyo.Entities.GUI
                 CharacterSelectionListBox.Items.Add(new ListBoxItem
                 {
                     Text = character.Name,
-                    Size = new Point(100, 50)
+                    Size = new Point(100, 50),
+                    UserData = character.Resref
                 });
             }
         }
@@ -104,7 +106,8 @@ namespace Ceriyo.Entities.GUI
         {
             if (OnDeleteCharacter != null)
             {
-                OnDeleteCharacter(this, new EventArgs());
+                ResrefEventArgs args = new ResrefEventArgs(CharacterSelectionListBox.SelectedItem.UserData as string);
+                OnDeleteCharacter(this, args);
             }
         }
 

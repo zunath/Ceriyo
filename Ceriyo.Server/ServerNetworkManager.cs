@@ -71,6 +71,10 @@ namespace Ceriyo.Server
                 {
                     ReceiveCreateCharacterPacket(packet as CreateCharacterPacket);
                 }
+                else if (type == typeof(CharacterSelectionScreenPacket))
+                {
+                    ReceiveCharacterSelectionScreenPacket(packet as CharacterSelectionScreenPacket);
+                }
                 else
                 {
                     if (OnPacketReceived != null)
@@ -106,7 +110,7 @@ namespace Ceriyo.Server
 
         private void ReceiveUserInfoPacket(UserInfoPacket packet)
         {
-            if (!PlayerUsernames.ContainsKey(packet.SenderConnection) && 
+            if (!PlayerUsernames.ContainsKey(packet.SenderConnection) &&
                 !PlayerUsernames.ContainsValue(packet.Username) &&
                 !packet.IsRequest)
             {
@@ -117,13 +121,9 @@ namespace Ceriyo.Server
                     Directory.CreateDirectory(EnginePaths.CharactersDirectory + packet.Username);
                 }
 
-                List<Player> characters = EngineManager.GetPlayers(packet.Username);
-                
                 UserConnectedPacket response = new UserConnectedPacket
                 {
-                    CharacterList = characters, 
-                    Announcement = Settings.Announcement,
-                    CanDeleteCharacters = Settings.AllowCharacterDeletion
+                    IsSuccessful = true
                 };
 
                 Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
@@ -132,11 +132,11 @@ namespace Ceriyo.Server
 
         private void ReceiveDeleteCharacterPacket(DeleteCharacterPacket packet)
         {
-            // TODO: Delete the player character file.
+            bool success = EngineManager.DeletePlayer(PlayerUsernames[packet.SenderConnection], packet.CharacterResref);
 
             DeleteCharacterPacket response = new DeleteCharacterPacket
             {
-                IsDeleteSuccessful = true
+                IsDeleteSuccessful = success
             };
 
             Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
@@ -171,6 +171,21 @@ namespace Ceriyo.Server
             CreateCharacterPacket response = new CreateCharacterPacket
             {
                 ResponsePlayer = pc
+            };
+
+            Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
+        }
+
+        private void ReceiveCharacterSelectionScreenPacket(CharacterSelectionScreenPacket packet)
+        {
+            string username = PlayerUsernames[packet.SenderConnection];
+            List<Player> characters = EngineManager.GetPlayers(username);
+
+            CharacterSelectionScreenPacket response = new CharacterSelectionScreenPacket
+            {
+                CharacterList = characters,
+                Announcement = Settings.Announcement,
+                CanDeleteCharacters = Settings.AllowCharacterDeletion
             };
 
             Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);

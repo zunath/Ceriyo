@@ -9,6 +9,7 @@ using System.Text;
 using Ceriyo.Data;
 using Ceriyo.Data.GameObjects;
 using FlatRedBall.Screens;
+using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens
 {
@@ -26,29 +27,13 @@ namespace Ceriyo.Entities.Screens
         protected override void CustomInitialize()
         {
             GameGlobal.OnPacketReceived += PacketReceived;
-            UserConnectedPacket packet = GameGlobal.ScreenTransferData as UserConnectedPacket;
 
-            if (EngineConstants.IsDebugEnabled)
+            CharacterSelectionScreenPacket packet = new CharacterSelectionScreenPacket
             {
-                if (packet == null)
-                {
-                    packet = new UserConnectedPacket
-                    {
-                        Announcement = "Test Announcement",
-                        CanDeleteCharacters = false
-                    };
-                }
-            }
+                IsRequest = true
+            };
 
-            Players = packet.CharacterList;
-
-            GUI = new CharacterSelectionMenuLogic(packet.CanDeleteCharacters, Players);
-            GUI.OnCreateCharacter += GUI_OnCreateCharacter;
-            GUI.OnDeleteCharacter += GUI_OnDeleteCharacter;
-            GUI.OnDisconnected += GUI_OnDisconnected;
-            GUI.OnEnterServer += GUI_OnEnterServer;
-
-            GameGlobal.ScreenTransferData = null;
+            GameGlobal.Agent.SendPacket(packet, GameGlobal.Agent.Connections[0], NetDeliveryMethod.ReliableUnordered);
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -68,9 +53,15 @@ namespace Ceriyo.Entities.Screens
 
         private void PacketReceived(object sender, PacketEventArgs e)
         {
-            if (e.Packet.GetType() == typeof(DeleteCharacterPacket))
+            Type type = e.Packet.GetType();
+
+            if (type == typeof(DeleteCharacterPacket))
             {
                 ProcessDeleteCharacterResponse(e.Packet as DeleteCharacterPacket);
+            }
+            else if (type == typeof(CharacterSelectionScreenPacket))
+            {
+                ProcessCharacterSelectionScreenPacket(e.Packet as CharacterSelectionScreenPacket);
             }
         }
 
@@ -82,6 +73,17 @@ namespace Ceriyo.Entities.Screens
             {
                 GUI.PerformCharacterDelete();
             }
+        }
+
+        private void ProcessCharacterSelectionScreenPacket(CharacterSelectionScreenPacket packet)
+        {
+            Players = packet.CharacterList;
+
+            GUI = new CharacterSelectionMenuLogic(packet.CanDeleteCharacters, Players);
+            GUI.OnCreateCharacter += GUI_OnCreateCharacter;
+            GUI.OnDeleteCharacter += GUI_OnDeleteCharacter;
+            GUI.OnDisconnected += GUI_OnDisconnected;
+            GUI.OnEnterServer += GUI_OnEnterServer;
         }
 
         #endregion
@@ -99,11 +101,12 @@ namespace Ceriyo.Entities.Screens
             MoveToScreen(typeof(MainMenuScreen));
         }
 
-        private void GUI_OnDeleteCharacter(object sender, EventArgs e)
+        private void GUI_OnDeleteCharacter(object sender, ResrefEventArgs e)
         {
             DeleteCharacterPacket packet = new DeleteCharacterPacket
             {
-                IsRequest = true
+                IsRequest = true,
+                CharacterResref = e.Resref
             };
             GameGlobal.Agent.SendPacket(packet, GameGlobal.Agent.Connections[0], Lidgren.Network.NetDeliveryMethod.ReliableUnordered);
         }
