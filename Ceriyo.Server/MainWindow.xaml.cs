@@ -10,6 +10,7 @@ using System.Timers;
 using System.Windows;
 using System.Linq;
 using System;
+using System.IO;
 
 namespace Ceriyo.Server
 {
@@ -128,9 +129,22 @@ namespace Ceriyo.Server
             }
         }
 
+        private void LoadModules()
+        {
+            Model.Modules = new BindingList<string>();
+            string[] filePaths = Directory.GetFiles(EnginePaths.ModulesDirectory, "*" + EnginePaths.ModuleExtension);
+
+            foreach (string file in filePaths)
+            {
+                Model.Modules.Add(Path.GetFileNameWithoutExtension(file));
+            }
+
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadSettings();
+            LoadModules();
         }
 
         private void AddToBlacklist(object sender, RoutedEventArgs e)

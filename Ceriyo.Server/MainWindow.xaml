@@ -4,6 +4,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:dtos="clr-namespace:Ceriyo.Data.Enumerations;assembly=Ceriyo.Data"
+        xmlns:conv="clr-namespace:Ceriyo.Library.BindingConverters;assembly=Ceriyo.Library"
     Title="Ceriyo - Server" Height="384" Width="528" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Window.Resources>
         <ObjectDataProvider MethodName="GetValues"
@@ -22,6 +23,9 @@
         </ObjectDataProvider>
     </Window.Resources>
     <Grid Margin="0,0,0,0">
+        <Grid.Resources>
+            <conv:InverseBooleanConverter x:Key="InverseBooleanConverter"></conv:InverseBooleanConverter>
+        </Grid.Resources>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TabItem Header="Details">
                 <Grid Background="#FFE5E5E5">
@@ -52,7 +56,7 @@
                             Margin="6,228,0,0" 
                             VerticalAlignment="Top" 
                             Width="81"  
-                            IsEnabled="False" 
+                            IsEnabled="{Binding IsServerRunning}" 
                             Grid.ColumnSpan="2"/>
                     <Button x:Name="btnBootPlayer" 
                             Content="Boot" 
@@ -61,7 +65,7 @@
                             VerticalAlignment="Top" 
                             Width="81" 
                             RenderTransformOrigin="0.5,0.5"  
-                            IsEnabled="False" 
+                            IsEnabled="{Binding IsServerRunning}" 
                             Grid.Column="1" Grid.ColumnSpan="2"/>
                     <Label Content="Server Message:" 
                            HorizontalAlignment="Left" 
@@ -75,7 +79,7 @@
                              TextWrapping="Wrap" 
                              VerticalAlignment="Top" 
                              Width="300" MaxLength="254" 
-                             IsEnabled="False" 
+                             IsEnabled="{Binding IsServerRunning}" 
                              Text="{Binding ServerMessage}"
                              Grid.Column="1" Grid.ColumnSpan="2"/>
                     <Button x:Name="btnSendMessage" 
@@ -85,7 +89,7 @@
                             VerticalAlignment="Top" 
                             Width="90" 
                             Grid.Column="2" 
-                            IsEnabled="False"/>
+                            IsEnabled="{Binding IsServerRunning}"/>
                     <TextBox Name="txtServerName" 
                              HorizontalAlignment="Left" 
                              Height="23" Margin="42,9,0,0" 
@@ -242,8 +246,8 @@
                                         Width="80" 
                                         Minimum="1" 
                                         Maximum="65535" 
-                                        Value="{Binding ServerSettings.Port}"
-                                         />
+                                        IsEnabled="{Binding Path=IsServerRunning, Converter={StaticResource InverseBooleanConverter}}"
+                                        Value="{Binding ServerSettings.Port}" />
                     <CheckBox x:Name="chkAllowCharacterDeletion" 
                               Content="Allow Character Deletion" 
                               Grid.Column="2" 
@@ -275,6 +279,8 @@
                               VerticalAlignment="Top" 
                               ItemsSource="{Binding Modules}"
                               SelectedItem="{Binding SelectedModule}"
+                              IsEnabled="{Binding Path=IsServerRunning, 
+                                          Converter={StaticResource InverseBooleanConverter}}"
                               Width="227"/>
                 </Grid>
             </TabItem>

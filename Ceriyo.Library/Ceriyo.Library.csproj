@@ -91,6 +91,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingConverters\InverseBooleanConverter.cs" />
     <Compile Include="BindingConverters\EnumToBooleanConverter.cs" />
     <None Include="Content\Scripts\Test.ccs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
