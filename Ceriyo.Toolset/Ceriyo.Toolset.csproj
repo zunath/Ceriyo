@@ -147,6 +147,9 @@
     <Compile Include="Components\ClassEditorComponent.xaml.cs">
       <DependentUpon>ClassEditorComponent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\RaceEditorComponent.xaml.cs">
+      <DependentUpon>RaceEditorComponent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\CreatureEditorComponent.xaml.cs">
       <DependentUpon>CreatureEditorComponent.xaml</DependentUpon>
     </Compile>
@@ -245,6 +248,10 @@
     <Page Include="Components\ClassEditorComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\RaceEditorComponent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Components\CreatureEditorComponent.xaml">
       <SubType>Designer</SubType>

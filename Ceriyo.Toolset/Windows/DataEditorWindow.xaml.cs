@@ -38,6 +38,7 @@ namespace Ceriyo.Toolset.Windows
             OnSave += creatureEditor.Save;
             OnSave += abilityEditor.Save;
             OnSave += skillEditor.Save;
+            OnSave += raceEditor.Save;
 
             OnOpen += tilesetEditor.Open;
             OnOpen += itemEditor.Open;
@@ -46,6 +47,7 @@ namespace Ceriyo.Toolset.Windows
             OnOpen += creatureEditor.Open;
             OnOpen += abilityEditor.Open;
             OnOpen += skillEditor.Open;
+            OnOpen += raceEditor.Open;
 
             animationEditor.OnAnimationsListChanged += creatureEditor.AnimationsModified;
         }

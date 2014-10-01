@@ -98,6 +98,20 @@
                     </Components:SkillEditorComponent>
                 </Grid>
             </TabItem>
+            <TabItem Header="Races">
+                <Grid Background="#FFE5E5E5">
+
+
+                    <Components:RaceEditorComponent
+                        x:Name="raceEditor"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+
+                    </Components:RaceEditorComponent>
+
+                </Grid>
+            </TabItem>
+            
         </TabControl>
         <Button Content="OK" HorizontalAlignment="Left" Margin="375,8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="99" Click="OK"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="479,8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="99" Click="Cancel"/>
