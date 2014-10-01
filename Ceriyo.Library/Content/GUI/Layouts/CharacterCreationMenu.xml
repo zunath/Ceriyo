@@ -101,7 +101,7 @@
               <PositionY>-18</PositionY>
             </UIComponent>
             <UIComponent>
-              <ComponentType>Textbox</ComponentType>
+              <ComponentType>Textarea</ComponentType>
               <Name>txtDescription</Name>
               <SizeX>200</SizeX>
               <SizeY>100</SizeY>

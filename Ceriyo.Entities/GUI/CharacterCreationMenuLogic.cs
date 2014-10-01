@@ -26,7 +26,7 @@ namespace Ceriyo.Entities.GUI
 
         private Panel DetailsPanel { get; set; }
         private TextBox NameTextBox { get; set; }
-        private TextBox DescriptionTextBox { get; set; }
+        private TextArea DescriptionTextArea { get; set; }
 
         private Panel RacePanel { get; set; }
         private ListBox RaceListBox { get; set; }
@@ -73,7 +73,7 @@ namespace Ceriyo.Entities.GUI
 
             DetailsPanel = GetControl("pnlDetails") as Panel;
             NameTextBox = GetControl("txtName") as TextBox;
-            DescriptionTextBox = GetControl("txtDescription") as TextBox;
+            DescriptionTextArea = GetControl("txtDescription") as TextArea;
 
             RacePanel = GetControl("pnlRace") as Panel;
             RaceListBox = GetControl("lbRaces") as ListBox;
@@ -102,7 +102,7 @@ namespace Ceriyo.Entities.GUI
             {
                 Player pc = new Player
                 {
-                    Description = DescriptionTextBox.Text,
+                    Description = DescriptionTextArea.Text,
                     Name = NameTextBox.Text
                 };
 

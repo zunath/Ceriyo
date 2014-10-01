@@ -54,6 +54,9 @@ namespace Ceriyo.Library.SquidGUI
                 case "textbox":
                     result = BuildTextBox(component);
                     break;
+                case "textarea":
+                    result = BuildTextArea(component);
+                    break;
                 case "button":
                     result = BuildButton(component);
                     break;
@@ -130,6 +133,7 @@ namespace Ceriyo.Library.SquidGUI
         {
             Label label = new Label();
             label.Text = component.Text;
+            label.NoEvents = true;
 
             return label;
         }
@@ -141,6 +145,15 @@ namespace Ceriyo.Library.SquidGUI
             box.Style = "textbox";
             
             return box;
+        }
+
+        private TextArea BuildTextArea(UIComponent component)
+        {
+            TextArea area = new TextArea();
+            area.Text = component.Text;
+            area.Style = "textbox";
+
+            return area;
         }
 
         private Button BuildButton(UIComponent component)
