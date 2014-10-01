@@ -35,6 +35,7 @@ namespace Ceriyo.Library.SquidGUI
             TitleLabel.Cursor = Cursors.Move;
             TitleLabel.Style = "frame";
             TitleLabel.Margin = new Margin(0, 0, 0, -1);
+            TitleLabel.NoEvents = true;
             Controls.Add(TitleLabel);
 
             ButtonFrame = new Frame();
@@ -46,6 +47,7 @@ namespace Ceriyo.Library.SquidGUI
             MessageLabel.Dock = DockStyle.Fill;
             MessageLabel.TextWrap = true;
             MessageLabel.Text = message;
+            MessageLabel.NoEvents = true;
             Controls.Add(MessageLabel);
         }
 
