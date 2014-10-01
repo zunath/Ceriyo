@@ -37,7 +37,7 @@ namespace Ceriyo.Toolset.Components
             this.DataContext = Model;
         }
 
-        private void SkillSelected(object sender, SelectionChangedEventArgs e)
+        private void RaceSelected(object sender, SelectionChangedEventArgs e)
         {
             Race race = lbRaces.SelectedItem as Race;
             Model.SelectedRace = race;
