@@ -9,6 +9,7 @@ using Ceriyo.Library.Global;
 using Ceriyo.Library.Network;
 using Lidgren.Network;
 using FlatRedBall.Screens;
+using Ceriyo.Library.ScriptEngine;
 
 namespace Ceriyo.Entities.Screens
 {
@@ -25,6 +26,13 @@ namespace Ceriyo.Entities.Screens
         protected override void CustomInitialize()
         {
             HookEvents();
+
+            // DEBUGGING
+
+            ScriptManager man = new ScriptManager();
+            man.RunEngineScript("test");
+
+            // END DEBUGGING
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
