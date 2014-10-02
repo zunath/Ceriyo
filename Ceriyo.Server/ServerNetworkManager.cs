@@ -132,7 +132,12 @@ namespace Ceriyo.Server
 
         private void ReceiveDeleteCharacterPacket(DeleteCharacterPacket packet)
         {
-            bool success = EngineManager.DeletePlayer(PlayerUsernames[packet.SenderConnection], packet.CharacterResref);
+            bool success = false;
+
+            if (Settings.AllowCharacterDeletion)
+            {
+                success = EngineManager.DeletePlayer(PlayerUsernames[packet.SenderConnection], packet.CharacterResref);
+            }
 
             DeleteCharacterPacket response = new DeleteCharacterPacket
             {
