@@ -433,6 +433,9 @@
   <ItemGroup>
     <Resource Include="Images\tab-close-4.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow-in.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

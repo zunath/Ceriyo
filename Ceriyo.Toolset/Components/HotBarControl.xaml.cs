@@ -33,6 +33,16 @@ namespace Ceriyo.Toolset.Components
             ScriptEditor.Open();
         }
 
+        private void btnDialogEditor_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnStartLocation_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
 
     }
 }
