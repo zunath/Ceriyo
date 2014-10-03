@@ -23,7 +23,7 @@ namespace Ceriyo.Library.ScriptEngine
             this.LuaManager = new Lua();
         }
 
-        public object RunEngineScript(string scriptName)
+        public object[] RunEngineScript(string scriptName)
         {
             scriptName += EnginePaths.ScriptExtension;
             if (File.Exists(EnginePaths.ScriptsDirectory + scriptName))
@@ -31,12 +31,7 @@ namespace Ceriyo.Library.ScriptEngine
                 string filePath = EnginePaths.ScriptsDirectory + scriptName;
                 string contents = FileManager.FromFileText(filePath);
 
-                // Load delegate method and call it.
-                //(new AsmHelper(CSScript.LoadMethod(contents)).GetStaticMethod("*.Main"))();
-                //LuaManager.LoadCLRPackage();
-                object[] test = LuaManager.DoFile(filePath);
-
-                return null; // DEBUG
+                return LuaManager.DoFile(filePath);
             }
             else
             {
@@ -44,17 +39,15 @@ namespace Ceriyo.Library.ScriptEngine
             }
         }
 
-        public object RunModuleScript(string scriptName, object self)
+        public object[] RunModuleScript(string scriptName, object self)
         {
             scriptName += EnginePaths.ScriptExtension;
             if (File.Exists(WorkingPaths.ScriptsDirectory + scriptName))
             {
                 string filePath = EnginePaths.ScriptsDirectory + scriptName;
                 string contents = FileManager.FromFileText(filePath);
-                // Load delegate method and call it.
-                //(new AsmHelper(CSScript.LoadMethod(contents)).GetStaticMethod("*.Main"))();
 
-                return null; // DEBUG
+                return LuaManager.DoFile(filePath);
             }
             else
             {
