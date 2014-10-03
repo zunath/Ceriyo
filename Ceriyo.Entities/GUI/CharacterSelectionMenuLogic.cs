@@ -25,7 +25,7 @@ namespace Ceriyo.Entities.GUI
 
         #region Events
 
-        public event EventHandler<EventArgs> OnEnterServer;
+        public event EventHandler<ResrefEventArgs> OnEnterServer;
         public event EventHandler<EventArgs> OnDisconnected;
         public event EventHandler<EventArgs> OnCreateCharacter;
         public event EventHandler<ResrefEventArgs> OnDeleteCharacter;
@@ -73,7 +73,14 @@ namespace Ceriyo.Entities.GUI
         {
             if (OnEnterServer != null)
             {
-                OnEnterServer(this, new EventArgs());
+                string resref = string.Empty;
+
+                if (CharacterSelectionListBox.SelectedItem != null)
+                {
+                    resref = CharacterSelectionListBox.SelectedItem.UserData as string;
+                }
+
+                OnEnterServer(this, new ResrefEventArgs(resref));
             }
         }
 

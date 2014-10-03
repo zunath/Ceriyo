@@ -170,6 +170,8 @@
     <Compile Include="Packets\CharacterSelectionScreenPacket.cs" />
     <Compile Include="Packets\CreateCharacterPacket.cs" />
     <Compile Include="Packets\DeleteCharacterPacket.cs" />
+    <Compile Include="Packets\GameScreenPacket.cs" />
+    <Compile Include="Packets\SelectCharacterPacket.cs" />
     <Compile Include="Packets\UserConnectedPacket.cs" />
     <Compile Include="Packets\PacketBase.cs" />
     <Compile Include="Packets\UserDisconnectedPacket.cs" />

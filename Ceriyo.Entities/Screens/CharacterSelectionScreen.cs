@@ -63,6 +63,10 @@ namespace Ceriyo.Entities.Screens
             {
                 ProcessCharacterSelectionScreenPacket(e.Packet as CharacterSelectionScreenPacket);
             }
+            else if (type == typeof(SelectCharacterPacket))
+            {
+                ProcessSelectCharacterResponse(e.Packet as SelectCharacterPacket);
+            }
         }
 
         #region Packet Processing
@@ -86,13 +90,30 @@ namespace Ceriyo.Entities.Screens
             GUI.OnEnterServer += GUI_OnEnterServer;
         }
 
+        private void ProcessSelectCharacterResponse(SelectCharacterPacket packet)
+        {
+            if (packet.IsSuccessful)
+            {
+                MoveToScreen(typeof(GameScreen));
+            }
+            else
+            {
+                // TODO: Display error message saying unable to select character.
+            }
+        }
+
         #endregion
 
         #region GUI Events
 
-        private void GUI_OnEnterServer(object sender, EventArgs e)
+        private void GUI_OnEnterServer(object sender, ResrefEventArgs e)
         {
-            
+            SelectCharacterPacket packet = new SelectCharacterPacket
+            {
+                Resref = e.Resref
+            };
+
+            GameGlobal.Agent.SendPacket(packet, GameGlobal.Agent.Connections[0], NetDeliveryMethod.ReliableUnordered);
         }
 
         private void GUI_OnDisconnected(object sender, EventArgs e)

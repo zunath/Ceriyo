@@ -75,6 +75,10 @@ namespace Ceriyo.Server
                 {
                     ReceiveCharacterSelectionScreenPacket(packet as CharacterSelectionScreenPacket);
                 }
+                else if (type == typeof(SelectCharacterPacket))
+                {
+                    ReceiveSelectCharacterPacket(packet as SelectCharacterPacket);
+                }
                 else
                 {
                     if (OnPacketReceived != null)
@@ -192,6 +196,20 @@ namespace Ceriyo.Server
                 Announcement = Settings.Announcement,
                 CanDeleteCharacters = Settings.AllowCharacterDeletion
             };
+
+            Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
+        }
+
+        private void ReceiveSelectCharacterPacket(SelectCharacterPacket packet)
+        {
+            string username = PlayerUsernames[packet.SenderConnection];
+            Player pc = EngineManager.GetPlayer(username, packet.Resref);
+            SelectCharacterPacket response = new SelectCharacterPacket();
+
+            if (pc != null)
+            {
+                response.IsSuccessful = true;
+            }
 
             Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
         }
