@@ -26,13 +26,6 @@ namespace Ceriyo.Entities.Screens
         protected override void CustomInitialize()
         {
             HookEvents();
-
-            // DEBUGGING
-
-            ScriptManager man = new ScriptManager();
-            man.RunEngineScript("test");
-
-            // END DEBUGGING
         }
 
         protected override void CustomActivity(bool firstTimeCalled)

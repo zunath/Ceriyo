@@ -17,8 +17,6 @@ namespace Ceriyo.Entities.GUI
         {
             LoadControls();
             HookEvents();
-
-
         }
 
         private void LoadControls()

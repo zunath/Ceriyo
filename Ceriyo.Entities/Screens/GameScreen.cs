@@ -10,7 +10,9 @@ namespace Ceriyo.Entities.Screens
 {
     public class GameScreen : BaseScreen
     {
+        private PlayerEntity PC { get; set; }
         private GameMenuLogic GUI { get; set; }
+
 
         public GameScreen()
             : base("GameScreen")
@@ -26,10 +28,20 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomActivity(bool firstTimeCalled)
         {
+            if (PC != null)
+            {
+                PC.Activity();
+            }
         }
 
         protected override void CustomDestroy()
         {
+            GameGlobal.OnPacketReceived -= PacketReceived;
+            GUI.Destroy();
+            if (PC != null)
+            {
+                PC.Destroy();
+            }
         }
 
         #region Packet Processing
@@ -46,6 +58,10 @@ namespace Ceriyo.Entities.Screens
 
         private void ProcessGameScreenPacket(GameScreenPacket packet)
         {
+            PC = new PlayerEntity();
+            PC.InitializeEntity(false);
+
+
         }
 
         private void RequestInitializationPacket()
@@ -55,7 +71,7 @@ namespace Ceriyo.Entities.Screens
                 IsRequest = true
             };
 
-            GameGlobal.Agent.SendPacket(packet, GameGlobal.Agent.Connections[0], NetDeliveryMethod.ReliableUnordered);
+            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
         }
 
         #endregion

@@ -33,7 +33,7 @@ namespace Ceriyo.Entities.Screens
                 IsRequest = true
             };
 
-            GameGlobal.Agent.SendPacket(packet, GameGlobal.Agent.Connections[0], NetDeliveryMethod.ReliableUnordered);
+            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -113,7 +113,7 @@ namespace Ceriyo.Entities.Screens
                 Resref = e.Resref
             };
 
-            GameGlobal.Agent.SendPacket(packet, GameGlobal.Agent.Connections[0], NetDeliveryMethod.ReliableUnordered);
+            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
         }
 
         private void GUI_OnDisconnected(object sender, EventArgs e)
@@ -129,7 +129,8 @@ namespace Ceriyo.Entities.Screens
                 IsRequest = true,
                 CharacterResref = e.Resref
             };
-            GameGlobal.Agent.SendPacket(packet, GameGlobal.Agent.Connections[0], Lidgren.Network.NetDeliveryMethod.ReliableUnordered);
+
+            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
         }
 
         private void GUI_OnCreateCharacter(object sender, EventArgs e)

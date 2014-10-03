@@ -13,13 +13,14 @@ using Ceriyo.Data.Settings;
 using Ceriyo.Data;
 using System.IO;
 using Ceriyo.Data.Engine;
+using Ceriyo.Data.Server;
 
 namespace Ceriyo.Server
 {
     public class ServerNetworkManager
     {
         private NetworkAgent Agent { get; set; }
-        private Dictionary<NetConnection, string> PlayerUsernames { get; set; }
+        private Dictionary<NetConnection, ServerPlayer> Players { get; set; }
         public event EventHandler<PacketEventArgs> OnPacketReceived;
         private ServerSettings Settings { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
@@ -28,7 +29,7 @@ namespace Ceriyo.Server
         public ServerNetworkManager(string serverPassword, int port)
         {
             Agent = new NetworkAgent(NetworkAgentRoleEnum.Server, serverPassword, port);
-            PlayerUsernames = new Dictionary<NetConnection, string>();
+            Players = new Dictionary<NetConnection, ServerPlayer>();
             Agent.OnConnected += Agent_OnConnected;
             Agent.OnDisconnected += Agent_OnDisconnected;
             Agent.OnDisconnecting += Agent_OnDisconnecting;
@@ -79,6 +80,10 @@ namespace Ceriyo.Server
                 {
                     ReceiveSelectCharacterPacket(packet as SelectCharacterPacket);
                 }
+                else if (type == typeof(GameScreenPacket))
+                {
+                    ReceiveGameScreenPacket(packet as GameScreenPacket);
+                }
                 else
                 {
                     if (OnPacketReceived != null)
@@ -105,20 +110,26 @@ namespace Ceriyo.Server
 
         public BindingList<string> GetPlayerNames()
         {
-            return new BindingList<string>((from name
-                                            in PlayerUsernames.Values
-                                            select name).ToList());
+            return new BindingList<string>((from pc
+                                            in Players.Values
+                                            select pc.Username).ToList());
         }
 
         #region Packet Processing
 
         private void ReceiveUserInfoPacket(UserInfoPacket packet)
         {
-            if (!PlayerUsernames.ContainsKey(packet.SenderConnection) &&
-                !PlayerUsernames.ContainsValue(packet.Username) &&
+            if (!Players.ContainsKey(packet.SenderConnection) &&
+                Players.SingleOrDefault(x => x.Value.Username == packet.Username).Value == null &&
                 !packet.IsRequest)
             {
-                PlayerUsernames.Add(packet.SenderConnection, packet.Username);
+                ServerPlayer pc = new ServerPlayer
+                {
+                    PC = new Player(),
+                    Username = packet.Username
+                };
+
+                Players.Add(packet.SenderConnection, pc);
 
                 if (!Directory.Exists(EnginePaths.CharactersDirectory + packet.Username))
                 {
@@ -140,7 +151,7 @@ namespace Ceriyo.Server
 
             if (Settings.AllowCharacterDeletion)
             {
-                success = EngineManager.DeletePlayer(PlayerUsernames[packet.SenderConnection], packet.CharacterResref);
+                success = EngineManager.DeletePlayer(Players[packet.SenderConnection].Username, packet.CharacterResref);
             }
 
             DeleteCharacterPacket response = new DeleteCharacterPacket
@@ -172,7 +183,7 @@ namespace Ceriyo.Server
                 Description = packet.Description
             };
 
-            string username = PlayerUsernames[packet.SenderConnection];
+            string username = Players[packet.SenderConnection].Username;
             string filePath = EnginePaths.CharactersDirectory + username;
 
             EngineManager.SavePlayer(username, pc, true);
@@ -187,7 +198,7 @@ namespace Ceriyo.Server
 
         private void ReceiveCharacterSelectionScreenPacket(CharacterSelectionScreenPacket packet)
         {
-            string username = PlayerUsernames[packet.SenderConnection];
+            string username = Players[packet.SenderConnection].Username;
             List<Player> characters = EngineManager.GetPlayers(username);
 
             CharacterSelectionScreenPacket response = new CharacterSelectionScreenPacket
@@ -202,14 +213,26 @@ namespace Ceriyo.Server
 
         private void ReceiveSelectCharacterPacket(SelectCharacterPacket packet)
         {
-            string username = PlayerUsernames[packet.SenderConnection];
+            string username = Players[packet.SenderConnection].Username;
             Player pc = EngineManager.GetPlayer(username, packet.Resref);
+            
             SelectCharacterPacket response = new SelectCharacterPacket();
 
             if (pc != null)
             {
+                Players[packet.SenderConnection].PC = pc;
                 response.IsSuccessful = true;
             }
+
+            Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
+        }
+
+        private void ReceiveGameScreenPacket(GameScreenPacket packet)
+        {
+            GameScreenPacket response = new GameScreenPacket
+            {
+                PC = Players[packet.SenderConnection].PC
+            };
 
             Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
         }
@@ -235,9 +258,9 @@ namespace Ceriyo.Server
 
         private void Agent_OnDisconnected(object sender, ConnectionStatusEventArgs e)
         {
-            if (PlayerUsernames.ContainsKey(e.Connection))
+            if (Players.ContainsKey(e.Connection))
             {
-                PlayerUsernames.Remove(e.Connection);
+                Players.Remove(e.Connection);
             }
         }
 

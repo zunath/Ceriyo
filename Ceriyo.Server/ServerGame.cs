@@ -11,6 +11,7 @@ using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
 using System.ComponentModel;
 using System.Collections.Concurrent;
+using Ceriyo.Library.ScriptEngine;
 
 namespace Ceriyo.Server
 {
@@ -30,11 +31,13 @@ namespace Ceriyo.Server
         private ServerSettings Settings { get; set; }
         private bool IsServerRunning { get; set; }
         private ServerNetworkManager NetworkManager { get; set; }
+        private ScriptManager Scripts { get; set; }
 
         public ServerGame(ServerStartupArgs args)
         {
             GUIStatusUpdateQueue = new ConcurrentQueue<ServerGUIStatus>();
             NetworkManager = new ServerNetworkManager(args.ServerPassword, args.Port);
+            Scripts = new ScriptManager();
         }
 
         protected override void Initialize()

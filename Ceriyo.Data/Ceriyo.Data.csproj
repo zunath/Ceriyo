@@ -86,8 +86,13 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="NLua, Version=1.3.1.0, Culture=neutral, PublicKeyToken=8df2ab518030ea95, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ceriyo\Ceriyo\Libraries\NLua\NLua.dll</HintPath>
+    </Reference>
     <Reference Include="protobuf-net">
       <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
@@ -171,6 +176,7 @@
     <Compile Include="Packets\CreateCharacterPacket.cs" />
     <Compile Include="Packets\DeleteCharacterPacket.cs" />
     <Compile Include="Packets\GameScreenPacket.cs" />
+    <Compile Include="Packets\PlayerInputPacket.cs" />
     <Compile Include="Packets\SelectCharacterPacket.cs" />
     <Compile Include="Packets\UserConnectedPacket.cs" />
     <Compile Include="Packets\PacketBase.cs" />
@@ -183,6 +189,7 @@
     <Compile Include="ResourceObjects\UILayout.cs" />
     <Compile Include="Server\ServerGameStatus.cs" />
     <Compile Include="Server\ServerGUIStatus.cs" />
+    <Compile Include="Server\ServerPlayer.cs" />
     <Compile Include="Server\ServerStartupArgs.cs" />
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />

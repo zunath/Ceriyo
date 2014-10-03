@@ -10,6 +10,7 @@ using Ceriyo.Data.Settings;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using FlatRedBall.IO;
+using Lidgren.Network;
 
 namespace Ceriyo.Library.Global
 {
@@ -33,6 +34,11 @@ namespace Ceriyo.Library.Global
         {
             LoadGameSettings();
             GameGlobal.Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, null, Settings.Port);
+        }
+
+        public static void SendPacket(PacketBase packet, NetDeliveryMethod deliveryMethod)
+        {
+            Agent.SendPacket(packet, Agent.Connections[0], deliveryMethod);
         }
 
         public static void ProcessPackets()

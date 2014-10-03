@@ -13,6 +13,7 @@
       <Resizeable>false</Resizeable>
       <Anchor>None</Anchor>
       <CursorType>default</CursorType>
+      <Visible>false</Visible>
       <Children>
       </Children>
     </UIComponent>

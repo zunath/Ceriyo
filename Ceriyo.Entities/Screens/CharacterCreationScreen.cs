@@ -6,6 +6,7 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Packets;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
+using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens
 {
@@ -32,8 +33,7 @@ namespace Ceriyo.Entities.Screens
                 IsRequest = true
             };
 
-            GameGlobal.Agent.SendPacket(packet, GameGlobal.Agent.Connections[0], Lidgren.Network.NetDeliveryMethod.ReliableUnordered);
-
+            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
         }
 
         private void GUI_OnPlayButtonClicked(object sender, GameObjectEventArgs e)
@@ -44,7 +44,7 @@ namespace Ceriyo.Entities.Screens
                 Name = e.GameObject.Name
             };
 
-            GameGlobal.Agent.SendPacket(packet, GameGlobal.Agent.Connections[0], Lidgren.Network.NetDeliveryMethod.ReliableUnordered);
+            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
         }
 
         private void GUI_OnCancelButtonClicked(object sender, EventArgs e)
