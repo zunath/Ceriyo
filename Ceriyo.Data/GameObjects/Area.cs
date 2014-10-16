@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
@@ -114,19 +111,19 @@ namespace Ceriyo.Data.GameObjects
 
         public Area()
         {
-            this.Name = string.Empty;
-            this.Tag = string.Empty;
-            this.Resref = string.Empty;
-            this.Description = string.Empty;
-            this.Comments = string.Empty;
-            this.LayerCount = EngineConstants.AreaMaxLayers;
-            this.LocalVariables = new BindingList<LocalVariable>();
-            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
-            this.MapTiles = new BindingList<MapTile>();
-            this.AreaTilesetResref = string.Empty;
-            this.BattleMusic = new GameResource();
-            this.BackgroundMusic = new GameResource();
-            this.WorkingManager = new WorkingDataManager();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comments = string.Empty;
+            LayerCount = EngineConstants.AreaMaxLayers;
+            LocalVariables = new BindingList<LocalVariable>();
+            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            MapTiles = new BindingList<MapTile>();
+            AreaTilesetResref = string.Empty;
+            BattleMusic = new GameResource();
+            BackgroundMusic = new GameResource();
+            WorkingManager = new WorkingDataManager();
         }
 
         public Area(
@@ -137,20 +134,20 @@ namespace Ceriyo.Data.GameObjects
             int tilesHigh, 
             int numberOfLayers)
         {
-            this.Name = name;
-            this.Tag = tag;
-            this.Resref = resref;
-            this.LayerCount = numberOfLayers;
-            this.MapTiles = new BindingList<MapTile>();
-            this.LocalVariables = new BindingList<LocalVariable>();
-            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
-            this.CreatureInstancesResrefs = new BindingList<string>();
-            this.ItemInstancesResrefs = new BindingList<string>();
-            this.PlaceableInstancesResrefs = new BindingList<string>();
-            this.AreaTilesetResref = string.Empty;
-            this.BattleMusic = new GameResource();
-            this.BackgroundMusic = new GameResource();
-            this.WorkingManager = new WorkingDataManager();
+            Name = name;
+            Tag = tag;
+            Resref = resref;
+            LayerCount = numberOfLayers;
+            MapTiles = new BindingList<MapTile>();
+            LocalVariables = new BindingList<LocalVariable>();
+            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            CreatureInstancesResrefs = new BindingList<string>();
+            ItemInstancesResrefs = new BindingList<string>();
+            PlaceableInstancesResrefs = new BindingList<string>();
+            AreaTilesetResref = string.Empty;
+            BattleMusic = new GameResource();
+            BackgroundMusic = new GameResource();
+            WorkingManager = new WorkingDataManager();
 
             for (int layer = 0; layer < LayerCount; layer++)
             {

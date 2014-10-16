@@ -1,31 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 using FlatRedBall.IO;
-using ICSharpCode;
-using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace Ceriyo.Toolset.Windows
 {
     /// <summary>
     /// Interaction logic for ScriptEditorWindow.xaml
     /// </summary>
-    public partial class ScriptEditorWindow : Window
+    public partial class ScriptEditorWindow
     {
         private ScriptEditorVM Model { get; set; }
         private SaveScriptWindow SaveScriptWin { get; set; }
@@ -39,7 +27,7 @@ namespace Ceriyo.Toolset.Windows
             WorkingManager = new WorkingDataManager();
             SaveScriptWin = new SaveScriptWindow();
             SaveScriptWin.OnSaveComplete += SaveScriptWin_OnSaveComplete;
-            this.DataContext = Model;
+            DataContext = Model;
         }
 
         private void SaveScript(object sender, RoutedEventArgs e)
@@ -99,14 +87,14 @@ namespace Ceriyo.Toolset.Windows
             Model.ScriptNames = WorkingManager.GetAllScriptNames();
             Model.OpenScripts.Add(new GameScript("script" + GetUniqueScriptID(), DefaultScriptText));
             tcScripts.SelectedIndex = 0;
-            this.Show();
+            Show();
         }
 
         private void Close(object sender, RoutedEventArgs e)
         {
             Model.OpenScripts.Clear();
             Model.ScriptNames.Clear();
-            this.Hide();
+            Hide();
         }
 
         private int GetUniqueScriptID()
@@ -142,8 +130,10 @@ namespace Ceriyo.Toolset.Windows
         {
             if (lbScripts.SelectedItem != null)
             {
-                GameScript script = new GameScript();
-                script.Name = lbScripts.SelectedItem as string;
+                GameScript script = new GameScript
+                {
+                    Name = lbScripts.SelectedItem as string
+                };
                 GameScript existingScript = Model.OpenScripts.SingleOrDefault(x => x.Name == script.Name);
 
                 if (existingScript == null)
@@ -163,38 +153,28 @@ namespace Ceriyo.Toolset.Windows
         {
             string scriptName = lbScripts.SelectedItem as string;
 
-            if (scriptName != null)
+            if (scriptName == null) return;
+            if (MessageBox.Show("Are you sure you want to delete the script " + scriptName + " ?", "Delete Script?",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
+
+            FileOperationResultTypeEnum result = WorkingManager.DeleteScript(scriptName);
+
+            switch (result)
             {
-                try
-                {
-                    if (MessageBox.Show("Are you sure you want to delete the script " + scriptName + " ?", "Delete Script?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                case FileOperationResultTypeEnum.Success:
+                    Model.ScriptNames.Remove(scriptName);
+                    GameScript existingScript = Model.OpenScripts.SingleOrDefault(x => x.Name == scriptName);
+                    if (existingScript != null)
                     {
-                        FileOperationResultTypeEnum result = WorkingManager.DeleteScript(scriptName);
-
-                        if (result == FileOperationResultTypeEnum.Success)
-                        {
-                            Model.ScriptNames.Remove(scriptName);
-
-                            GameScript existingScript = Model.OpenScripts.SingleOrDefault(x => x.Name == scriptName);
-                            if (existingScript != null)
-                            {
-                                Model.OpenScripts.Remove(existingScript);
-                            }
-                        }
-                        else if (result == FileOperationResultTypeEnum.FileDoesNotExist)
-                        {
-                            MessageBox.Show("Unable to delete script. File does not exist.", "Unable to delete script", MessageBoxButton.OK);
-                        }
-                        else if (result == FileOperationResultTypeEnum.Failure)
-                        {
-                            MessageBox.Show("Unable to delete script. Deletion failed.", "Unable to delete script", MessageBoxButton.OK);
-                        }
+                        Model.OpenScripts.Remove(existingScript);
                     }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                    break;
+                case FileOperationResultTypeEnum.FileDoesNotExist:
+                    MessageBox.Show("Unable to delete script. File does not exist.", "Unable to delete script", MessageBoxButton.OK);
+                    break;
+                case FileOperationResultTypeEnum.Failure:
+                    MessageBox.Show("Unable to delete script. Deletion failed.", "Unable to delete script", MessageBoxButton.OK);
+                    break;
             }
         }
 
@@ -202,11 +182,9 @@ namespace Ceriyo.Toolset.Windows
         {
             Model.OpenScripts.RemoveAt(tcScripts.SelectedIndex);
 
-            if (Model.OpenScripts.Count <= 0)
-            {
-                Model.OpenScripts.Add(new GameScript("script" + GetUniqueScriptID(), DefaultScriptText));
-                tcScripts.SelectedIndex = 0;
-            }
+            if (Model.OpenScripts.Count > 0) return;
+            Model.OpenScripts.Add(new GameScript("script" + GetUniqueScriptID(), DefaultScriptText));
+            tcScripts.SelectedIndex = 0;
         }
 
     }

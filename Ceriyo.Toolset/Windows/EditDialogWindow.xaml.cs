@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 
@@ -22,10 +10,9 @@ namespace Ceriyo.Toolset.Windows
     /// <summary>
     /// Interaction logic for EditDialogWindow.xaml
     /// </summary>
-    public partial class EditDialogWindow : Window
+    public partial class EditDialogWindow
     {
         private EditDialogVM Model { get; set; }
-        public event EventHandler<GameObjectEventArgs> OnSaveSuccess;
         private bool IsEditing { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
@@ -34,7 +21,7 @@ namespace Ceriyo.Toolset.Windows
             InitializeComponent();
             Model = new EditDialogVM();
             WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            DataContext = Model;
             SetLimits();
         }
 
@@ -56,14 +43,13 @@ namespace Ceriyo.Toolset.Windows
         public void Open(Dialog dialog, bool isEditing)
         {
             PopulateModel(dialog);
-            this.IsEditing = isEditing;
-            //txtResref.IsEnabled = !IsEditing;
-            this.Show();
+            IsEditing = isEditing;
+            Show();
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            Hide();
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -82,12 +68,7 @@ namespace Ceriyo.Toolset.Windows
 
                 if (result == FileOperationResultTypeEnum.Success)
                 {
-                    if (OnSaveSuccess != null)
-                    {
-                        OnSaveSuccess(this, new GameObjectEventArgs(dialog));
-                    }
-
-                    this.Close();
+                    Close();
                 }
                 else if (result == FileOperationResultTypeEnum.Failure)
                 {
@@ -99,7 +80,7 @@ namespace Ceriyo.Toolset.Windows
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
-            this.Hide();
+            Hide();
         }
 
     }

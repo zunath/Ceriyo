@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:val="clr-namespace:Ceriyo.Toolset.ValidationRules"
-        xmlns:eng="clr-namespace:Ceriyo.Data"
-        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid" x:Class="Ceriyo.Toolset.Windows.EditAreaWindow"
+        x:Class="Ceriyo.Toolset.Windows.EditAreaWindow"
         Title="Area Properties" Height="500" Width="400" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Grid>

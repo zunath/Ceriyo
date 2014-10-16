@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
@@ -20,7 +9,7 @@ namespace Ceriyo.Toolset.Windows
     /// <summary>
     /// Interaction logic for ModulePropertiesWindow.xaml
     /// </summary>
-    public partial class ModulePropertiesWindow : Window
+    public partial class ModulePropertiesWindow
     {
         private ModulePropertiesVM Model { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
@@ -30,7 +19,7 @@ namespace Ceriyo.Toolset.Windows
             InitializeComponent();
             Model = new ModulePropertiesVM();
             WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            DataContext = Model;
             SetLimits();
         }
 
@@ -46,7 +35,7 @@ namespace Ceriyo.Toolset.Windows
             Model.Tag = gameModule.Tag;
             Model.Levels = gameModule.Levels.Levels;
 
-            this.Show();
+            Show();
         }
 
         private void SetLimits()
@@ -57,14 +46,16 @@ namespace Ceriyo.Toolset.Windows
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            Hide();
         }
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            GameModule module = new GameModule(Model.Name, Model.Tag, Model.Resref, Model.Description, Model.Comments);
-            module.Levels = new LevelChart(Model.Levels);
-            module.LocalVariables = Model.LocalVariables;
+            GameModule module = new GameModule(Model.Name, Model.Tag, Model.Resref, Model.Description, Model.Comments)
+            {
+                Levels = new LevelChart(Model.Levels),
+                LocalVariables = Model.LocalVariables
+            };
 
             module.Scripts.Add(ScriptEventTypeEnum.OnAreaHeartbeat, Model.OnHeartbeatScript);
             module.Scripts.Add(ScriptEventTypeEnum.OnModuleLoad, Model.OnModuleLoadScript);
@@ -79,7 +70,7 @@ namespace Ceriyo.Toolset.Windows
 
             if (result == FileOperationResultTypeEnum.Success)
             {
-                this.Hide();
+                Hide();
             }
             else
             {
@@ -91,7 +82,7 @@ namespace Ceriyo.Toolset.Windows
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
-            this.Hide();
+            Hide();
         }
 
     }

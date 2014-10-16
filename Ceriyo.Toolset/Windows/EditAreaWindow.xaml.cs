@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows;
 using System.Linq;
+using System.Windows;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
@@ -14,7 +13,7 @@ namespace Ceriyo.Toolset.Windows
     /// <summary>
     /// Interaction logic for NewAreaWindow.xaml
     /// </summary>
-    public partial class EditAreaWindow : Window
+    public partial class EditAreaWindow
     {
         private EditAreaVM Model { get; set; }
         public event EventHandler<AreaPropertiesChangedEventArgs> OnSaveAreaProperties;
@@ -74,21 +73,21 @@ namespace Ceriyo.Toolset.Windows
 
         public void Open(Area area, bool isEditing)
         {
-            this.DataContext = Model;
+            DataContext = Model;
             SetLimits();
             PopulateModel(area);
-            this.IsEditing = isEditing;
+            IsEditing = isEditing;
             txtResref.IsEnabled = !IsEditing;
             ddlTileset.IsEnabled = !isEditing;
             numHeight.IsEnabled = !isEditing;
             numWidth.IsEnabled = !isEditing;
 
-            this.Show();
+            Show();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            Hide();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -118,7 +117,7 @@ namespace Ceriyo.Toolset.Windows
                         OnSaveAreaProperties(this, new AreaPropertiesChangedEventArgs(area, IsEditing));
                     }
 
-                    this.Close();
+                    Close();
                 }
                 else if (result == FileOperationResultTypeEnum.Failure)
                 {
@@ -131,7 +130,7 @@ namespace Ceriyo.Toolset.Windows
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
-            this.Hide();
+            Hide();
         }
     }
 }

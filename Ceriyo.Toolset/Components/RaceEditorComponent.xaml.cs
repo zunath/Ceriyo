@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
@@ -22,7 +13,7 @@ namespace Ceriyo.Toolset.Components
     /// <summary>
     /// Interaction logic for SkillEditorComponent.xaml
     /// </summary>
-    public partial class RaceEditorComponent : UserControl
+    public partial class RaceEditorComponent
     {
         private RaceEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
@@ -31,17 +22,17 @@ namespace Ceriyo.Toolset.Components
         public RaceEditorComponent()
         {
             InitializeComponent();
-            this.Model = new RaceEditorVM();
-            this.Processor = new GameResourceProcessor();
-            this.WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            Model = new RaceEditorVM();
+            Processor = new GameResourceProcessor();
+            WorkingManager = new WorkingDataManager();
+            DataContext = Model;
         }
 
         private void RaceSelected(object sender, SelectionChangedEventArgs e)
         {
             Race race = lbRaces.SelectedItem as Race;
             Model.SelectedRace = race;
-            Model.IsRaceSelected = race == null ? false : true;
+            Model.IsRaceSelected = race != null;
 
         }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 
@@ -34,11 +31,11 @@ namespace Ceriyo.Data.GameObjects
         public AssignedItemProperty()
         {
             _name = string.Empty;
-            this.ItemPropertyOptionResref = string.Empty;
-            this.ItemPropertyOptionValueName = string.Empty;
-            this.ItemPropertyOptionValueValue = string.Empty;
-            this.ItemPropertyResref = string.Empty;
-            this.ItemPropertyType = ItemPropertyTypeEnum.Unknown;
+            ItemPropertyOptionResref = string.Empty;
+            ItemPropertyOptionValueName = string.Empty;
+            ItemPropertyOptionValueValue = string.Empty;
+            ItemPropertyResref = string.Empty;
+            ItemPropertyType = ItemPropertyTypeEnum.Unknown;
         }
 
         private void GetName()

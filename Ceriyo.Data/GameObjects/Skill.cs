@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
@@ -31,14 +27,14 @@ namespace Ceriyo.Data.GameObjects
 
         public Skill()
         {
-            this.Name = string.Empty;
-            this.Tag = string.Empty;
-            this.Resref = string.Empty;
-            this.Description = string.Empty;
-            this.Comments = string.Empty;
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comments = string.Empty;
 
-            this.LocalVariables = new BindingList<LocalVariable>();
-            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            LocalVariables = new BindingList<LocalVariable>();
+            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
         }
     }
 }

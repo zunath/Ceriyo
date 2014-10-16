@@ -1,11 +1,7 @@
-﻿using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.Extensions;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using System.Xml.Serialization;
+using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.Extensions;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -27,15 +23,15 @@ namespace Ceriyo.Data.GameObjects
 
         public ItemType()
         {
-            this.Name = string.Empty;
-            this.Tag = string.Empty;
-            this.Resref = string.Empty;
-            this.Description = string.Empty;
-            this.Comments = string.Empty;
-            this.LocalVariables = new BindingList<LocalVariable>();
-            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
-            this.StackSize = 1;
-            this.WearableInventorySlots = new BindingList<InventorySlotEnum>();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comments = string.Empty;
+            LocalVariables = new BindingList<LocalVariable>();
+            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            StackSize = 1;
+            WearableInventorySlots = new BindingList<InventorySlotEnum>();
         }
     }
 }

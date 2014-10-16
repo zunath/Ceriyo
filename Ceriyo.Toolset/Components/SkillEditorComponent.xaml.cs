@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
@@ -22,7 +13,7 @@ namespace Ceriyo.Toolset.Components
     /// <summary>
     /// Interaction logic for SkillEditorComponent.xaml
     /// </summary>
-    public partial class SkillEditorComponent : UserControl
+    public partial class SkillEditorComponent
     {
         private SkillEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
@@ -31,17 +22,17 @@ namespace Ceriyo.Toolset.Components
         public SkillEditorComponent()
         {
             InitializeComponent();
-            this.Model = new SkillEditorVM();
-            this.Processor = new GameResourceProcessor();
-            this.WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            Model = new SkillEditorVM();
+            Processor = new GameResourceProcessor();
+            WorkingManager = new WorkingDataManager();
+            DataContext = Model;
         }
 
         private void SkillSelected(object sender, SelectionChangedEventArgs e)
         {
             Skill skill = lbSkills.SelectedItem as Skill;
             Model.SelectedSkill = skill;
-            Model.IsSkillSelected = skill == null ? false : true;
+            Model.IsSkillSelected = skill != null;
 
         }
 

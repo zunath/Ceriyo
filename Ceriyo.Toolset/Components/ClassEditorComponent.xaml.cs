@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
@@ -22,7 +13,7 @@ namespace Ceriyo.Toolset.Components
     /// <summary>
     /// Interaction logic for ClassEditorComponent.xaml
     /// </summary>
-    public partial class ClassEditorComponent : UserControl
+    public partial class ClassEditorComponent
     {
         private ClassEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
@@ -31,10 +22,10 @@ namespace Ceriyo.Toolset.Components
         public ClassEditorComponent()
         {
             InitializeComponent();
-            this.Model = new ClassEditorVM();
-            this.Processor = new GameResourceProcessor();
-            this.WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            Model = new ClassEditorVM();
+            Processor = new GameResourceProcessor();
+            WorkingManager = new WorkingDataManager();
+            DataContext = Model;
         }
 
 
@@ -42,7 +33,7 @@ namespace Ceriyo.Toolset.Components
         {
             CharacterClass charClass = lbClasses.SelectedItem as CharacterClass;
             Model.SelectedClass = charClass;
-            Model.IsClassSelected = charClass == null ? false : true;
+            Model.IsClassSelected = charClass != null;
 
         }
 

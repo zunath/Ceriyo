@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -26,10 +22,10 @@ namespace Ceriyo.Data.GameObjects
 
         public ItemClassRequirement()
         {
-            this.ClassResref = string.Empty;
-            this.LevelRequired = EngineConstants.MaxLevel;
-            this.IsAvailable = true;
-            this.WorkingManager = new WorkingDataManager();
+            ClassResref = string.Empty;
+            LevelRequired = EngineConstants.MaxLevel;
+            IsAvailable = true;
+            WorkingManager = new WorkingDataManager();
         }
     
     }

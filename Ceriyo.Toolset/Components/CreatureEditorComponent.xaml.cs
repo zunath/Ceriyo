@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
@@ -24,7 +15,7 @@ namespace Ceriyo.Toolset.Components
     /// <summary>
     /// Interaction logic for CreatureEditorComponent.xaml
     /// </summary>
-    public partial class CreatureEditorComponent : UserControl
+    public partial class CreatureEditorComponent
     {
         private CreatureEditorVM Model { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
@@ -36,28 +27,21 @@ namespace Ceriyo.Toolset.Components
             Model = new CreatureEditorVM();
             WorkingManager = new WorkingDataManager();
             Processor = new GameResourceProcessor();
-            this.DataContext = Model;
+            DataContext = Model;
         }
 
         private void CreatureSelected(object sender, SelectionChangedEventArgs e)
         {
             Creature creature = lbCreatures.SelectedItem as Creature;
             Model.SelectedCreature = creature;
-            Model.IsCreatureSelected = creature == null ? false : true;
+            Model.IsCreatureSelected = creature != null;
 
-            if (creature != null)
-            {
-                if (string.IsNullOrWhiteSpace(creature.CharacterClassResref))
-                {
-                    lbClass.SelectedItem = lbClass.Items[0];
-                }
-                else
-                {
-                    lbClass.SelectedItem = Model.CharacterClasses.SingleOrDefault(x => x.Resref == creature.CharacterClassResref);
-                }
+            if (creature == null) return;
+            lbClass.SelectedItem = string.IsNullOrWhiteSpace(creature.CharacterClassResref) ? 
+                lbClass.Items[0] : 
+                Model.CharacterClasses.SingleOrDefault(x => x.Resref == creature.CharacterClassResref);
 
-                RefreshAnimationList();
-            }
+            RefreshAnimationList();
         }
 
         private void RefreshAnimationList()
@@ -140,8 +124,10 @@ namespace Ceriyo.Toolset.Components
         public void Open(object sender, EventArgs e)
         {
             Model.Animations = WorkingManager.GetAllGameObjects<SpriteAnimation>(ModulePaths.AnimationsDirectory);
-            SpriteAnimation animation = new SpriteAnimation();
-            animation.Name = "(No Animation)";
+            SpriteAnimation animation = new SpriteAnimation
+            {
+                Name = "(No Animation)"
+            };
             Model.Animations.Insert(0, animation);
 
             Model.Creatures = WorkingManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
@@ -149,8 +135,10 @@ namespace Ceriyo.Toolset.Components
             Model.Scripts = WorkingManager.GetAllScriptNames();
             
             Model.CharacterClasses = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
-            CharacterClass charClass = new CharacterClass();
-            charClass.Name = "(No Class)";
+            CharacterClass charClass = new CharacterClass
+            {
+                Name = "(No Class)"
+            };
             Model.CharacterClasses.Insert(0, charClass);
 
             if (Model.Creatures.Count > 0)
@@ -163,8 +151,10 @@ namespace Ceriyo.Toolset.Components
         {
             BindingList<SpriteAnimation> animations = new BindingList<SpriteAnimation>(e.GameObjects.Cast<SpriteAnimation>().ToList());
             Model.Animations = animations;
-            SpriteAnimation animation = new SpriteAnimation();
-            animation.Name = "(No Animation)";
+            SpriteAnimation animation = new SpriteAnimation
+            {
+                Name = "(No Animation)"
+            };
             Model.Animations.Insert(0, animation);
 
             RefreshAnimationList();
@@ -172,17 +162,21 @@ namespace Ceriyo.Toolset.Components
 
         private void ClassSelected(object sender, SelectionChangedEventArgs e)
         {
-            if (lbClass.SelectedItem != null)
+            if (lbClass.SelectedItem == null) return;
+            CharacterClass characterClass = lbClass.SelectedItem as CharacterClass;
+            if (characterClass != null)
             {
-                Model.SelectedCreature.CharacterClassResref = (lbClass.SelectedItem as CharacterClass).Resref;
+                Model.SelectedCreature.CharacterClassResref = characterClass.Resref;
             }
         }
 
         private void DialogSelected(object sender, SelectionChangedEventArgs e)
         {
-            if (ddlDialog.SelectedItem != null)
+            if (ddlDialog.SelectedItem == null) return;
+            Dialog dialog = ddlDialog.SelectedItem as Dialog;
+            if (dialog != null)
             {
-                Model.SelectedCreature.DialogResref = (ddlDialog.SelectedItem as Dialog).Resref;
+                Model.SelectedCreature.DialogResref = dialog.Resref;
             }
         }
 

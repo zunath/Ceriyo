@@ -229,7 +229,7 @@
                 Grid.Row="1" 
                 VerticalAlignment="Top" 
                 Click="Save"
-                IsEnabled="{Binding !HasError}"
+                IsEnabled="{Binding HasError}"
                 Width="100"/>
 
     </Grid>

@@ -30,11 +30,11 @@ namespace Ceriyo.Entities
 
         public MapDrawableBatch(Area area)
         {
-            this.Processor = new GameResourceProcessor();
-            this._sourceRectangle = new Rectangle(0, 0, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
+            Processor = new GameResourceProcessor();
+            _sourceRectangle = new Rectangle(0, 0, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
 
-            this.DrawableArea = area;
-            this.MapTexture = Processor.ToTexture2D(area.AreaTileset.Graphic);
+            DrawableArea = area;
+            MapTexture = Processor.ToTexture2D(area.AreaTileset.Graphic);
 
 
             foreach (MapTile tile in MapTiles)
