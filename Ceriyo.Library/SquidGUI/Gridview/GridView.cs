@@ -1,8 +1,5 @@
-﻿using Squid;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
+using Squid;
 
 namespace Ceriyo.Library.SquidGUI.Gridview
 {
@@ -160,7 +157,7 @@ namespace Ceriyo.Library.SquidGUI.Gridview
 
         void Columns_OnAdd(object sender, ListEventArgs<GridColumn> e)
         {
-            e.Item.Click += new EventHandler(Column_Click);
+            e.Item.Click += Column_Click;
             headerContainer.Controls.Add(e.Item.Header);
             Panel.Content.Controls.Add(e.Item.Container);
 

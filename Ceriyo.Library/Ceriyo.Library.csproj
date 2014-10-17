@@ -66,9 +66,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CSScriptLibrary">
-      <HintPath>..\Ceriyo\Ceriyo\Libraries\CSScript\CSScriptLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="FlatRedBall">
       <HintPath>..\Ceriyo\Ceriyo\Libraries\Xna4Pc\FlatRedBall.dll</HintPath>
     </Reference>
