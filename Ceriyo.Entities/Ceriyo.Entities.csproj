@@ -117,6 +117,7 @@
     <Compile Include="Screens\BaseScreen.cs" />
     <Compile Include="Screens\CharacterCreationScreen.cs" />
     <Compile Include="Screens\CharacterSelectionScreen.cs" />
+    <Compile Include="Screens\EnteringGameScreen.cs" />
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
   </ItemGroup>

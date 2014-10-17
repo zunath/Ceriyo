@@ -1,20 +1,17 @@
 
+using Ceriyo.Data.Engine;
+using Ceriyo.Entities.Screens;
+using Ceriyo.Library.Global;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
-using Ceriyo.Entities.Screens;
-using Ceriyo.Data.Engine;
-using FlatRedBall.Graphics;
-using Ceriyo.Library.Global;
-using Ceriyo.Data.Enumerations;
-using Ceriyo.Library.Network;
 
 
 namespace Ceriyo
 {
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private readonly GraphicsDeviceManager _graphics;
         private EngineDataManager EngineManager { get; set; }
 
         public Game1()
@@ -36,19 +33,18 @@ namespace Ceriyo
         protected override void Initialize()
         {
             FlatRedBallServices.InitializeFlatRedBall(this, _graphics);
-			CameraSetup.SetupCamera(SpriteManager.Camera, _graphics);
             EngineManager.InitializeEngine();
 			CameraSetup.SetupCamera(SpriteManager.Camera, _graphics);
 			GlobalContent.Initialize();
             FlatRedBallServices.IsWindowsCursorVisible = true;
-            this.Window.AllowUserResizing = true;
+            Window.AllowUserResizing = true;
 
             base.Initialize();
 
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
             SpriteManager.Camera.UsePixelCoordinates();
             GameGlobal.Initialize();
-            FlatRedBall.Screens.ScreenManager.Start(typeof(MainMenuScreen));
+            ScreenManager.Start(typeof(MainMenuScreen));
         }
 
 
@@ -56,7 +52,7 @@ namespace Ceriyo
         {
             GameGlobal.ProcessPackets();
             FlatRedBallServices.Update(gameTime);
-            FlatRedBall.Screens.ScreenManager.Activity();
+            ScreenManager.Activity();
 
             base.Update(gameTime);
         }

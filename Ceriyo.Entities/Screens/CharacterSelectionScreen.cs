@@ -1,14 +1,10 @@
-﻿using Ceriyo.Data.EventArguments;
+﻿using System;
+using System.Collections.Generic;
+using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.Packets;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data;
-using Ceriyo.Data.GameObjects;
-using FlatRedBall.Screens;
 using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens
@@ -94,7 +90,7 @@ namespace Ceriyo.Entities.Screens
         {
             if (packet.IsSuccessful)
             {
-                MoveToScreen(typeof(GameScreen));
+                MoveToScreen(typeof(EnteringGameScreen));
             }
             else
             {

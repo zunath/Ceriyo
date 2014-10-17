@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data;
+﻿using Ceriyo.Data;
 using FlatRedBall.Input;
 using FlatRedBall.Screens;
 using Microsoft.Xna.Framework.Input;
@@ -11,7 +7,7 @@ namespace Ceriyo.Entities.Screens
 {
     public abstract class BaseScreen : Screen
     {
-        public BaseScreen(string contentManagerName)
+        protected BaseScreen(string contentManagerName)
             : base(contentManagerName)
         {
         }
@@ -28,12 +24,7 @@ namespace Ceriyo.Entities.Screens
 
             CustomInitialize();
         }
-
-        public override void AddToManagers()
-        {
-            base.AddToManagers();
-        }
-
+        
         protected abstract void CustomActivity(bool firstTimeCalled);
         public override void Activity(bool firstTimeCalled)
         {
@@ -45,10 +36,10 @@ namespace Ceriyo.Entities.Screens
             {
                 if (InputManager.Keyboard.KeyPushed(Keys.F5))
                 {
-                    this.MoveToScreen(this.GetType());
+                    MoveToScreen(GetType());
                 }
 
-                //this.MoveToScreen(this.GetType()); // For layout designing
+                //MoveToScreen(GetType()); // For layout designing
             }
         }
 

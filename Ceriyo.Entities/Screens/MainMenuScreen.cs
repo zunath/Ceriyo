@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
-using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Packets;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
-using Ceriyo.Library.Network;
 using Lidgren.Network;
-using FlatRedBall.Screens;
-using Ceriyo.Library.ScriptEngine;
 
 namespace Ceriyo.Entities.Screens
 {
