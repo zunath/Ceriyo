@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Packets;
 using Lidgren.Network;
 using ProtoBuf;
-using Ceriyo.Data;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Ceriyo.Library.Network
 {
@@ -40,7 +38,7 @@ namespace Ceriyo.Library.Network
             Role = role;
             Configuration = new NetPeerConfiguration(EngineConstants.ApplicationIdentifier);
             Port = port;
-            ServerPassword = serverPassword == null ? string.Empty : serverPassword;
+            ServerPassword = serverPassword ?? string.Empty;
 
             Initialize();
         }
@@ -77,18 +75,16 @@ namespace Ceriyo.Library.Network
         /// </summary>
         public NetConnection Connect(string ip, string serverPassword)
         {
-            if (Role == NetworkAgentRoleEnum.Client)
-            {
-                NetOutgoingMessage hailMessage = Peer.CreateMessage(serverPassword);
-                hailMessage.Encrypt(Encryption);
-
-                IncomingMessages.Clear(); // Remove any old, out of date packets from being processed.
-                return Peer.Connect(ip, Port, hailMessage);
-            }
-            else
+            if (Role != NetworkAgentRoleEnum.Client)
             {
                 throw new SystemException("Attempted to connect as server. Only clients should connect.");
             }
+
+            NetOutgoingMessage hailMessage = Peer.CreateMessage(serverPassword);
+            hailMessage.Encrypt(Encryption);
+
+            IncomingMessages.Clear(); // Remove any old, out of date packets from being processed.
+            return Peer.Connect(ip, Port, hailMessage);
         }
 
         /// <summary>
@@ -110,21 +106,20 @@ namespace Ceriyo.Library.Network
         private void WriteMessage(PacketBase packet)
         {
             MemoryStream stream = new MemoryStream();
-            Serializer.Serialize<PacketBase>(stream, packet); // Protobuf serialization
+            Serializer.Serialize(stream, packet); // Protobuf serialization
             OutgoingMessage.Write(stream.ToArray());
         }
 
         private void SendMessage(NetConnection recipient, NetDeliveryMethod method, int sequenceChannel)
         {
-            if (recipient != null)
-            {
-                OutgoingMessage.Encrypt(Encryption);
-                Peer.SendMessage(OutgoingMessage, recipient, method, sequenceChannel);
-                OutgoingMessage = Peer.CreateMessage();
-            }
+            if (recipient == null) return;
+
+            OutgoingMessage.Encrypt(Encryption);
+            Peer.SendMessage(OutgoingMessage, recipient, method, sequenceChannel);
+            OutgoingMessage = Peer.CreateMessage();
         }
 
-        private List<NetIncomingMessage> CheckForMessages()
+        private IEnumerable<NetIncomingMessage> CheckForMessages()
         {
             IncomingMessages.Clear();
             NetIncomingMessage incomingMessage;
@@ -198,9 +193,6 @@ namespace Ceriyo.Library.Network
                         incomingMessage.Decrypt(Encryption);
                         IncomingMessages.Add(incomingMessage);
                         break;
-                    default:
-                        // unknown message type
-                        break;
                 }
             }
             return IncomingMessages;
@@ -210,18 +202,16 @@ namespace Ceriyo.Library.Network
         {
             if (newPassword != null)
             {
-                this.ServerPassword = newPassword;
+                ServerPassword = newPassword;
             }
 
-            List<NetIncomingMessage> messages = CheckForMessages();
+            IEnumerable<NetIncomingMessage> messages = CheckForMessages();
             List<PacketBase> packets = new List<PacketBase>();
-            MemoryStream stream = new MemoryStream();
-            PacketBase currentPacket;
 
             foreach (NetIncomingMessage currentMessage in messages)
             {
-                stream = new MemoryStream(currentMessage.ReadBytes(currentMessage.LengthBytes));
-                currentPacket = Serializer.Deserialize<PacketBase>(stream); // Protobuf deserialization
+                MemoryStream stream = new MemoryStream(currentMessage.ReadBytes(currentMessage.LengthBytes));
+                PacketBase currentPacket = Serializer.Deserialize<PacketBase>(stream);
                 currentPacket.SenderConnection = currentMessage.SenderConnection;
 
                 packets.Add(currentPacket);

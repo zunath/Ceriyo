@@ -1,19 +1,18 @@
-﻿using Ceriyo.Data.Enumerations;
+﻿using Ceriyo.Data;
+using Ceriyo.Data.Engine;
+using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.Packets;
+using Ceriyo.Data.Server;
+using Ceriyo.Data.Settings;
 using Ceriyo.Library.Network;
+using Lidgren.Network;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.EventArguments;
-using Lidgren.Network;
-using Ceriyo.Data.GameObjects;
 using System.ComponentModel;
-using Ceriyo.Data.Settings;
-using Ceriyo.Data;
 using System.IO;
-using Ceriyo.Data.Engine;
-using Ceriyo.Data.Server;
+using System.Linq;
 
 namespace Ceriyo.Server
 {
@@ -45,7 +44,7 @@ namespace Ceriyo.Server
 
         public void RefreshSettings(ServerSettings settings)
         {
-            this.Settings = settings;
+            Settings = settings;
         }
 
         private void ProcessPackets()
@@ -184,8 +183,6 @@ namespace Ceriyo.Server
             };
 
             string username = Players[packet.SenderConnection].Username;
-            string filePath = EnginePaths.CharactersDirectory + username;
-
             EngineManager.SavePlayer(username, pc, true);
 
             CreateCharacterPacket response = new CreateCharacterPacket

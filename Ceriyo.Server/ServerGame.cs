@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.Server;
+using Ceriyo.Data.Settings;
+using Ceriyo.Library.ScriptEngine;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
-using Ceriyo.Data.EventArguments;
-using Ceriyo.Data.Server;
-using Ceriyo.Data.Settings;
-using System.ComponentModel;
+using System;
 using System.Collections.Concurrent;
-using Ceriyo.Library.ScriptEngine;
+using System.Windows.Forms;
 
 namespace Ceriyo.Server
 {
-    public class ServerGame : Microsoft.Xna.Framework.Game
+    public class ServerGame : Game
     {
         public event EventHandler<EventArgs> OnGameStarting;
         public event EventHandler<EventArgs> OnGameExiting;
@@ -48,7 +44,7 @@ namespace Ceriyo.Server
             }
             base.Initialize();
 
-            Form gameForm = (Form)Form.FromHandle(this.Window.Handle);
+            Form gameForm = (Form)Form.FromHandle(Window.Handle);
             gameForm.Opacity = 0;
             gameForm.ShowInTaskbar = false;
 
@@ -73,8 +69,10 @@ namespace Ceriyo.Server
             {
                 if (OnSignalGUIUpdate != null)
                 {
-                    ServerStatusUpdateEventArgs e = new ServerStatusUpdateEventArgs();
-                    e.ConnectedUsernames = NetworkManager.GetPlayerNames();
+                    ServerStatusUpdateEventArgs e = new ServerStatusUpdateEventArgs
+                    {
+                        ConnectedUsernames = NetworkManager.GetPlayerNames()
+                    };
 
                     OnSignalGUIUpdate(this, e);
                 }
@@ -92,7 +90,6 @@ namespace Ceriyo.Server
 
         protected override void Draw(GameTime gameTime)
         {
-            return;
         }
 
         private void ProcessGUIStatusUpdates()
@@ -102,8 +99,8 @@ namespace Ceriyo.Server
                 ServerGUIStatus status;
                 if (GUIStatusUpdateQueue.TryDequeue(out status))
                 {
-                    this.Settings = status.Settings;
-                    this.IsServerRunning = status.IsServerRunning;
+                    Settings = status.Settings;
+                    IsServerRunning = status.IsServerRunning;
 
                     if (!IsServerRunning)
                     {

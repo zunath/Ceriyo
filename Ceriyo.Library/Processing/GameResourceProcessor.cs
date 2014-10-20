@@ -1,27 +1,20 @@
-﻿using System;
+﻿using Ceriyo.Data;
+using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.ResourceObjects;
+using FlatRedBall;
+using Ionic.Zip;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Ceriyo.Data.GameObjects;
-using Ceriyo.Data.ResourceObjects;
-using Ionic.Zip;
-using Ceriyo.Data;
 using System.Windows.Media.Imaging;
-using System.ComponentModel;
-using Ceriyo.Data.Enumerations;
-using Microsoft.Xna.Framework.Graphics;
-using FlatRedBall;
-using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Library.Processing
 {
     public class GameResourceProcessor
     {
-        public GameResourceProcessor()
-        {
-        }
-
         public string GenerateUniqueResref(IGameObject gameObject)
         {
             string resref = gameObject.CategoryName;
@@ -133,8 +126,8 @@ namespace Ceriyo.Library.Processing
             Rectangle rect = new Rectangle(x, y, width, height);
 
             Color[] data = new Color[width * height];
-            fullTexture.GetData<Color>(0, rect, data, 0, data.Length);
-            texture.SetData<Color>(data);
+            fullTexture.GetData(0, rect, data, 0, data.Length);
+            texture.SetData(data);
 
             return texture;
         }
@@ -144,8 +137,8 @@ namespace Ceriyo.Library.Processing
             Texture2D result = new Texture2D(FlatRedBallServices.GraphicsDevice, width, height);
             Rectangle rect = new Rectangle(x, y, width, height);
             Color[] data = new Color[width * height];
-            texture.GetData<Color>(0, rect, data, 0, data.Length);
-            result.SetData<Color>(data);
+            texture.GetData(0, rect, data, 0, data.Length);
+            result.SetData(data);
 
             return result;
 

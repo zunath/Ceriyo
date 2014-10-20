@@ -10,11 +10,11 @@ namespace Ceriyo.Library.ScriptEngine
     {
         public string GetName(IGameObject gameObject)
         {
-            string result = string.Empty;
+            string result;
             try
             {
                 result = gameObject.Name;
-                result = result == null ? string.Empty : result;
+                result = result ?? string.Empty;
             }
             catch
             {
@@ -26,11 +26,11 @@ namespace Ceriyo.Library.ScriptEngine
 
         public string GetTag(IGameObject gameObject)
         {
-            string result = string.Empty;
+            string result;
             try
             {
                 result = gameObject.Tag;
-                result = result == null ? string.Empty : result;
+                result = result ?? string.Empty;
             }
             catch
             {
@@ -42,11 +42,11 @@ namespace Ceriyo.Library.ScriptEngine
 
         public string GetResref(IGameObject gameObject)
         {
-            string result = string.Empty;
+            string result;
             try
             {
                 result = gameObject.Resref;
-                result = result == null ? string.Empty : result;
+                result = result ?? string.Empty;
             }
             catch
             {
