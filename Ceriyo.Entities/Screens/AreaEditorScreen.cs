@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using Ceriyo.Data;
-using Ceriyo.Data.Engine;
-using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Entities.DrawableBatches;
 using FlatRedBall;
 using FlatRedBall.Input;
-using FlatRedBall.Screens;
 
 namespace Ceriyo.Entities.Screens
 {

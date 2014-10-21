@@ -1,11 +1,6 @@
-﻿using Ceriyo.Data.ResourceObjects;
-using Ceriyo.Library.Processing;
+﻿using Ceriyo.Library.Processing;
 using FlatRedBall;
 using FlatRedBall.Graphics.Animation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Ceriyo.Entities
 {
@@ -25,12 +20,14 @@ namespace Ceriyo.Entities
             }
         }
 
-        public GraphicEntity(string contentManagerName)
+        protected GraphicEntity(string contentManagerName)
             : base(contentManagerName)
         {
-            this.EntitySprite = new Sprite();
-            this.EntitySprite.Visible = true;
-            this.AnimationChains = new AnimationChainList();
+            EntitySprite = new Sprite
+            {
+                Visible = true
+            };
+            AnimationChains = new AnimationChainList();
 
             EntitySprite.PixelSize = 0.5f;
         }

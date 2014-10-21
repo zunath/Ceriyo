@@ -10,7 +10,7 @@ using FlatRedBall.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Entities
+namespace Ceriyo.Entities.DrawableBatches
 {
     public class MapDrawableBatch: PositionedObject, IDrawableBatch
     {
@@ -117,14 +117,17 @@ namespace Ceriyo.Entities
                         .SingleOrDefault(t => t.TextureCellX == tile.TileDefinitionX &&
                                               t.TextureCellY == tile.TileDefinitionY);
 
-                    sprite.Texture = new Texture2D(FlatRedBallServices.GraphicsDevice, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
-                    _sourceRectangle.X = definition.TextureCellX * EngineConstants.TilePixelWidth;
-                    _sourceRectangle.Y = definition.TextureCellY * EngineConstants.TilePixelHeight;
+                    if (definition != null)
+                    {
+                        sprite.Texture = new Texture2D(FlatRedBallServices.GraphicsDevice, EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight);
+                        _sourceRectangle.X = definition.TextureCellX * EngineConstants.TilePixelWidth;
+                        _sourceRectangle.Y = definition.TextureCellY * EngineConstants.TilePixelHeight;
 
-                    Color[] data = new Color[_sourceRectangle.Width * _sourceRectangle.Height];
-                    MapTexture.GetData<Color>(0, _sourceRectangle, data, 0, data.Length);
-                    sprite.Texture.SetData<Color>(data);
-                    sprite.Visible = true;
+                        Color[] data = new Color[_sourceRectangle.Width * _sourceRectangle.Height];
+                        MapTexture.GetData(0, _sourceRectangle, data, 0, data.Length);
+                        sprite.Texture.SetData(data);
+                        sprite.Visible = true;
+                    }
                 }
                 else if(!tile.HasGraphic && 
                          tile.Layer == 0)
