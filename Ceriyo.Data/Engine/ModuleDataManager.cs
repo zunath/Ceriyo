@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.Enumerations;
+﻿using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using FlatRedBall.IO;
 using Ionic.Zip;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Ceriyo.Data
 {
@@ -178,8 +175,8 @@ namespace Ceriyo.Data
 
         private void AddModulePropertiesFile(ZipFile zip, GameModule module)
         {
-            string output = string.Empty;
-            FileManager.XmlSerialize<GameModule>(module, out output);
+            string output;
+            FileManager.XmlSerialize(module, out output);
             zip.AddEntry(EnginePaths.ModuleDataFileName + EnginePaths.DataExtension, output);
         }
 
@@ -278,7 +275,7 @@ namespace Ceriyo.Data
 
         public FileOperationResultTypeEnum SaveModule(string moduleResref)
         {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            FileOperationResultTypeEnum result;
             string path = EnginePaths.ModulesDirectory + moduleResref + EnginePaths.ModuleExtension;
             string backup = EnginePaths.ModulesDirectory + moduleResref + EnginePaths.ModuleExtension + EnginePaths.BackupExtension;
                 

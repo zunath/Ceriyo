@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Ceriyo.Data.GameObjects;
+using FlatRedBall.IO;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.GameObjects;
-using FlatRedBall.IO;
 
 namespace Ceriyo.Data.Engine
 {
@@ -37,20 +35,13 @@ namespace Ceriyo.Data.Engine
         {
             List<Player> players = new List<Player>();
 
-            try
-            {
-                string path = EnginePaths.CharactersDirectory + accountName;
-                string[] files = Directory.GetFiles(path);
+            string path = EnginePaths.CharactersDirectory + accountName;
+            string[] files = Directory.GetFiles(path);
 
-                foreach(string file in files)
-                {
-                    Player player = FileManager.XmlDeserialize<Player>(file);
-                    players.Add(player);
-                }
-            }
-            catch
+            foreach(string file in files)
             {
-                throw;
+                Player player = FileManager.XmlDeserialize<Player>(file);
+                players.Add(player);
             }
 
             return players;
@@ -58,15 +49,8 @@ namespace Ceriyo.Data.Engine
 
         public Player GetPlayer(string username, string resref)
         {
-            try
-            {
-                string path = EnginePaths.CharactersDirectory + username + "/" + resref + EnginePaths.DataExtension;
-                return FileManager.XmlDeserialize<Player>(path);
-            }
-            catch
-            {
-                throw;
-            }
+            string path = EnginePaths.CharactersDirectory + username + "/" + resref + EnginePaths.DataExtension;
+            return FileManager.XmlDeserialize<Player>(path);
         }
 
         public bool SavePlayer(string accountName, Player pc, bool isNewPC = false)

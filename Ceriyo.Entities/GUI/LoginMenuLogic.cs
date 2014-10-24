@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Entities.DrawableBatches;
-using Ceriyo.Entities.GUI;
-using Ceriyo.Library.SquidGUI;
+﻿using Ceriyo.Entities.DrawableBatches;
 using Squid;
 
 namespace Ceriyo.Entities.GUI

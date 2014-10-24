@@ -1,13 +1,11 @@
-﻿using Ceriyo.Entities.DrawableBatches;
+﻿using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.GameObjects;
+using Ceriyo.Entities.DrawableBatches;
+using Ceriyo.Library.SquidGUI;
+using Squid;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Squid;
-using Ceriyo.Library.SquidGUI;
-using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.GameObjects;
-using Ceriyo.Data.EventArguments;
 
 namespace Ceriyo.Entities.GUI
 {
@@ -32,7 +30,7 @@ namespace Ceriyo.Entities.GUI
 
         #endregion
 
-        public CharacterSelectionMenuLogic(bool allowDelete, List<Player> characterList)
+        public CharacterSelectionMenuLogic(bool allowDelete, IEnumerable<Player> characterList)
             : base("CharacterSelectionMenu")
         {
             LoadControls();
@@ -104,7 +102,7 @@ namespace Ceriyo.Entities.GUI
         {
             if (CharacterSelectionListBox.SelectedItem != null)
             {
-                MessageBox popUp = MessageBox.Show(new Point(300, 150), "Really Delete?", "Are you sure you want to delete this character?", MessageBoxButtonTypeEnum.YesNo, this._desktop);
+                MessageBox popUp = MessageBox.Show(new Point(300, 150), "Really Delete?", "Are you sure you want to delete this character?", MessageBoxButtonTypeEnum.YesNo, _desktop);
                 popUp.OnYesClicked += ConfirmDelete;
             }
         }

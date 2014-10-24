@@ -9,7 +9,7 @@ namespace Ceriyo.Library.SquidGUI
 {
     public class SquidLayoutManager
     {
-        private SquidDesktop _desktop;
+        private readonly SquidDesktop _desktop;
 
         public SquidLayoutManager()
         {
@@ -70,7 +70,7 @@ namespace Ceriyo.Library.SquidGUI
                     result = BuildPanel(component);
                     break;
                 default:
-                    // If not a primative control, assume it's another layout and attempt to load it.
+                    // If not a primitive control, assume it's another layout and attempt to load it.
                     try
                     {
                         BuildLayout(component.ComponentType.ToLower());
@@ -176,26 +176,30 @@ namespace Ceriyo.Library.SquidGUI
 
         private ListBox BuildListBox(UIComponent component)
         {
-            ListBox box = new ListBox();
-            box.Multiselect = component.Multiselect;
-            box.MaxSelected = component.MaxSelected;
-            box.Scrollbar.Size = new Squid.Point(14, 10);
+            ListBox box = new ListBox
+            {
+                Multiselect = component.Multiselect, 
+                MaxSelected = component.MaxSelected
+            };
+            box.Scrollbar.Size = new Point(14, 10);
             box.Scrollbar.Slider.Style = "vscrollTrack";
             box.Scrollbar.Slider.Button.Style = "vscrollButton";
             box.Scrollbar.ButtonUp.Style = "vscrollUp";
-            box.Scrollbar.ButtonUp.Size = new Squid.Point(10, 20);
+            box.Scrollbar.ButtonUp.Size = new Point(10, 20);
             box.Scrollbar.ButtonDown.Style = "vscrollUp";
-            box.Scrollbar.ButtonDown.Size = new Squid.Point(10, 20);
+            box.Scrollbar.ButtonDown.Size = new Point(10, 20);
             box.Scrollbar.Slider.Margin = new Margin(0, 2, 0, 2);
             
             foreach (UIComponent child in component.Children)
             {
                 if (child.ComponentType.ToLower() == "item")
                 {
-                    ListBoxItem item = new ListBoxItem();
-                    item.Text = child.Text;
-                    item.Size = new Point(child.SizeX, child.SizeY);
-                    item.Name = child.Name;
+                    ListBoxItem item = new ListBoxItem
+                    {
+                        Text = child.Text,
+                        Size = new Point(child.SizeX, child.SizeY),
+                        Name = child.Name
+                    };
 
                     box.Items.Add(item);
                 }
@@ -206,8 +210,10 @@ namespace Ceriyo.Library.SquidGUI
 
         private Panel BuildPanel(UIComponent component)
         {
-            Panel panel = new Panel();
-            panel.Style = "frame";
+            Panel panel = new Panel
+            {
+                Style = "frame"
+            };
 
             foreach (UIComponent child in component.Children)
             {

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data;
+﻿using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.DrawableBatches;
-using Ceriyo.Entities.GUI;
 using Ceriyo.Library.SquidGUI;
 using FlatRedBall;
 using Squid;
-using Ceriyo.Library.ScriptEngine;
+using System;
 
 namespace Ceriyo.Entities.GUI
 {

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.Enumerations;
+﻿using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using FlatRedBall.IO;
 using Ionic.Zip;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
 
 namespace Ceriyo.Data.Engine
 {
@@ -23,7 +20,7 @@ namespace Ceriyo.Data.Engine
 
         public FileOperationResultTypeEnum SaveResourcePack(BindingList<ResourceEditorItem> resources, string path)
         {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            FileOperationResultTypeEnum result;
             string backupFilePath = path + EnginePaths.BackupExtension;
             
             try
@@ -73,10 +70,12 @@ namespace Ceriyo.Data.Engine
                     {
                         if (entry.FileName != EnginePaths.ResourcePackDataFileName + EnginePaths.DataExtension)
                         {
-                            ResourceEditorItem item = new ResourceEditorItem();
-                            item.FileName = Path.GetFileNameWithoutExtension(entry.FileName);
-                            item.Extension = Path.GetExtension(entry.FileName);
-                            item.SizeBytes = entry.UncompressedSize;
+                            ResourceEditorItem item = new ResourceEditorItem
+                            {
+                                FileName = Path.GetFileNameWithoutExtension(entry.FileName),
+                                Extension = Path.GetExtension(entry.FileName),
+                                SizeBytes = entry.UncompressedSize
+                            };
 
                             using (MemoryStream stream = new MemoryStream())
                             {
@@ -121,7 +120,7 @@ namespace Ceriyo.Data.Engine
 
         public bool BuildModule(BindingList<string> resourcePackFileNames)
         {
-            bool success = false;
+            bool success;
             BindingList<GameResource> resources = new BindingList<GameResource>();
             GameModule module = WorkingManager.GetGameModule();
             module.ResourcePacks = resourcePackFileNames;
@@ -135,13 +134,24 @@ namespace Ceriyo.Data.Engine
                         foreach (ZipEntry resourceFile in zip.Entries)
                         {
                             string extension = Path.GetExtension(resourceFile.FileName);
-                            GameResource resource = new GameResource();
-                            resource.Package = package;
-                            resource.FileName = resourceFile.FileName;
+                            GameResource resource = new GameResource
+                            {
+                                Package = package,
+                                FileName = resourceFile.FileName
+                            };
 
-                            if (extension == ".png") resource.ResourceType = ResourceTypeEnum.Graphic;
-                            else if (extension == ".mp3") resource.ResourceType = ResourceTypeEnum.Audio;
-                            else resource.ResourceType = ResourceTypeEnum.Unknown;
+                            switch (extension)
+                            {
+                                case ".png":
+                                    resource.ResourceType = ResourceTypeEnum.Graphic;
+                                    break;
+                                case ".mp3":
+                                    resource.ResourceType = ResourceTypeEnum.Audio;
+                                    break;
+                                default:
+                                    resource.ResourceType = ResourceTypeEnum.Unknown;
+                                    break;
+                            }
 
                             if (resources.SingleOrDefault(x => x.FileName == resource.FileName) == null && 
                                 resource.ResourceType != ResourceTypeEnum.Unknown)
@@ -166,21 +176,10 @@ namespace Ceriyo.Data.Engine
 
         public BindingList<GameResource> GetGameResources(ResourceTypeEnum resourceType)
         {
-            BindingList<GameResource> resources = null;
-
-            try
-            {
-                string path = EnginePaths.WorkingDirectory + EnginePaths.ResourceLinksDataFileName + EnginePaths.DataExtension;
-                resources = FileManager.XmlDeserialize<BindingList<GameResource>>(path);
-                resources = new BindingList<GameResource>(resources.Where(x => x.ResourceType == resourceType).ToList());
-                
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-
-
+            string path = EnginePaths.WorkingDirectory + EnginePaths.ResourceLinksDataFileName + EnginePaths.DataExtension;
+            BindingList<GameResource> resources = FileManager.XmlDeserialize<BindingList<GameResource>>(path);
+            resources = new BindingList<GameResource>(resources.Where(x => x.ResourceType == resourceType).ToList());
+            
             return resources;
         }
     }

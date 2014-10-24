@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.EventArguments;
+﻿using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Packets;
 using Ceriyo.Library.Global;
 using FlatRedBall.Input;

@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.GameObjects;
+using FlatRedBall.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.GameObjects;
-using FlatRedBall.IO;
 
 namespace Ceriyo.Data
 {
@@ -14,7 +11,7 @@ namespace Ceriyo.Data
     {
         public FileOperationResultTypeEnum ReplaceAllGameObjectFiles(IList<IGameObject> gameObjects, string directory)
         {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            FileOperationResultTypeEnum result;
             string[] existingFiles = Directory.GetFiles(directory, "*" + EnginePaths.DataExtension);
 
             try
@@ -73,7 +70,7 @@ namespace Ceriyo.Data
 
         public FileOperationResultTypeEnum SaveGameObjectFile(IGameObject gameObject)
         {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            FileOperationResultTypeEnum result;
 
             try
             {
@@ -92,7 +89,7 @@ namespace Ceriyo.Data
 
         public IGameObject OpenGameObjectFile(string relativeFilePath)
         {
-            IGameObject result = null;
+            IGameObject result;
 
             try
             {
@@ -110,7 +107,7 @@ namespace Ceriyo.Data
 
         public FileOperationResultTypeEnum DeleteGameObjectFile(IGameObject gameObject)
         {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            FileOperationResultTypeEnum result;
 
             try
             {
@@ -138,20 +135,13 @@ namespace Ceriyo.Data
         {
             BindingList<T> gameObjects = new BindingList<T>();
 
-            try
-            {
-                string path = EnginePaths.WorkingDirectory + folderName + "/";
-                string[] files = Directory.GetFiles(path);
+            string path = EnginePaths.WorkingDirectory + folderName + "/";
+            string[] files = Directory.GetFiles(path);
 
-                foreach (string file in files)
-                {
-                    T gameObject = FileManager.XmlDeserialize<T>(file);
-                    gameObjects.Add(gameObject);
-                }
-            }
-            catch
+            foreach (string file in files)
             {
-                throw;
+                T gameObject = FileManager.XmlDeserialize<T>(file);
+                gameObjects.Add(gameObject);
             }
 
             return gameObjects;
@@ -193,7 +183,7 @@ namespace Ceriyo.Data
 
         public FileOperationResultTypeEnum DeleteScript(string scriptName)
         {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            FileOperationResultTypeEnum result;
 
             try
             {
@@ -225,7 +215,7 @@ namespace Ceriyo.Data
 
         public GameModule GetGameModule()
         {
-            GameModule module = null;
+            GameModule module;
 
             try
             {
@@ -243,7 +233,7 @@ namespace Ceriyo.Data
 
         public FileOperationResultTypeEnum SaveModuleSettings(GameModule module)
         {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            FileOperationResultTypeEnum result;
 
             try
             {

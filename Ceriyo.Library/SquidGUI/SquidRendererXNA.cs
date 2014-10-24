@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Runtime.InteropServices;
-using Microsoft.Xna.Framework.Input;
 using FlatRedBall;
 
 namespace Ceriyo.Library.SquidGUI
@@ -22,43 +20,54 @@ namespace Ceriyo.Library.SquidGUI
         private static extern int ToAsciiEx(int uVirtKey, int uScanCode, ref byte lpKeyState, ref short lpChar, int uFlags, int dwhkl);
 
         private static int KeyboardLayout;
-        private byte[] KeyStates;
+        private readonly byte[] KeyStates;
 
-        private Dictionary<int, SpriteFont> Fonts = new Dictionary<int, SpriteFont>();
-        private Dictionary<string, int> FontLookup = new Dictionary<string, int>();
+        private readonly Dictionary<int, SpriteFont> Fonts = new Dictionary<int, SpriteFont>();
+        private readonly Dictionary<string, int> FontLookup = new Dictionary<string, int>();
 
-        private Dictionary<int, Texture2D> Textures = new Dictionary<int, Texture2D>();
-        private Dictionary<string, int> TextureLookup = new Dictionary<string, int>();
+        private readonly Dictionary<int, Texture2D> Textures = new Dictionary<int, Texture2D>();
+        private readonly Dictionary<string, int> TextureLookup = new Dictionary<string, int>();
 
-        private Dictionary<string, Squid.Font> FontTypes = new Dictionary<string, Squid.Font>();
+        private readonly Dictionary<string, Squid.Font> FontTypes = new Dictionary<string, Squid.Font>();
 
-        private SpriteBatch Batch;
+        private readonly SpriteBatch Batch;
 
         private int FontIndex;
         private int TextureIndex;
-        private Texture2D BlankTexture;
+        private readonly Texture2D BlankTexture;
 
 
-        private RasterizerState Rasterizer;
-        private SamplerState Sampler;
+        private readonly RasterizerState Rasterizer;
+        private readonly SamplerState Sampler;
 
         public SquidRendererXNA()
         {
             Batch = new SpriteBatch(FlatRedBallServices.Game.GraphicsDevice);
 
             BlankTexture = new Texture2D(FlatRedBallServices.Game.GraphicsDevice, 1, 1);
-            BlankTexture.SetData<Color>(new Color[] { new Color(255, 255, 255, 255) });
+            BlankTexture.SetData(new[] { new Color(255, 255, 255, 255) });
 
-            FontTypes.Add(Squid.Font.Default, new Squid.Font { Name = "Arial10", Family = "Arial", Size = 8, Bold = true, International = true });
+            FontTypes.Add(Squid.Font.Default, new Squid.Font
+            {
+                Name = "Arial10", 
+                Family = "Arial", 
+                Size = 8, 
+                Bold = true, 
+                International = true
+            });
 
             KeyboardLayout = GetKeyboardLayout(0);
             KeyStates = new byte[0x100];
 
-            Rasterizer = new RasterizerState();
-            Rasterizer.ScissorTestEnable = true;
+            Rasterizer = new RasterizerState
+            {
+                ScissorTestEnable = true
+            };
 
-            Sampler = new SamplerState();
-            Sampler.Filter = TextureFilter.Anisotropic;
+            Sampler = new SamplerState
+            {
+                Filter = TextureFilter.Anisotropic
+            };
         }
 
         public static int VirtualKeyToScancode(int key)
@@ -82,11 +91,11 @@ namespace Ceriyo.Library.SquidGUI
             return false;
         }
 
-        private Microsoft.Xna.Framework.Color ColorFromtInt32(int color)
+        private Color ColorFromtInt32(int color)
         {
             Byte[] bytes = BitConverter.GetBytes(color);
 
-            return new Microsoft.Xna.Framework.Color(bytes[2], bytes[1], bytes[0], bytes[3]);
+            return new Color(bytes[2], bytes[1], bytes[0], bytes[3]);
         }
 
         public int GetTexture(string name)
@@ -111,9 +120,6 @@ namespace Ceriyo.Library.SquidGUI
             if (!FontTypes.ContainsKey(name))
                 return -1;
 
-            Squid.Font type = FontTypes[name];
-
-            //SpriteFont font = FlatRedBallServices.Game.Content.Load<SpriteFont>(type.Name);
             SpriteFont font = FlatRedBallServices.Load<SpriteFont>("Content/Fonts/Arial10");
 
             FontIndex++;
@@ -163,12 +169,13 @@ namespace Ceriyo.Library.SquidGUI
             Texture2D tex = Textures[texture];
 
             Rectangle destination = new Rectangle(x, y, w, h);
-            Rectangle source = new Rectangle();
-
-            source.X = rect.Left;
-            source.Y = rect.Top;
-            source.Width = rect.Width;
-            source.Height = rect.Height;
+            Rectangle source = new Rectangle
+            {
+                X = rect.Left, 
+                Y = rect.Top, 
+                Width = rect.Width, 
+                Height = rect.Height
+            };
 
             Batch.Draw(tex, destination, source, ColorFromtInt32(color));
         }
