@@ -1,4 +1,5 @@
-﻿using Ceriyo.Data;
+﻿using System.Windows.Controls.Primitives;
+using Ceriyo.Data;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
@@ -17,7 +18,7 @@ namespace Ceriyo.Server
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private ServerVM Model { get; set; }
         private BackgroundWorker GameThread { get; set; }
@@ -27,8 +28,8 @@ namespace Ceriyo.Server
         public MainWindow()
         {
             InitializeComponent();
-            this.Model = new ServerVM();
-            this.DataContext = Model;
+            Model = new ServerVM();
+            DataContext = Model;
             
             // Every 2 seconds, send the current state of the GUI to the Game thread
             GUIToGameUpdateTimer = new Timer(2000.0f);
@@ -41,10 +42,7 @@ namespace Ceriyo.Server
             GameThread.RunWorkerCompleted += GameThread_RunWorkerCompleted;
             GameThread.WorkerReportsProgress = true;
 
-            if (EngineConstants.IsDebugEnabled)
-            {
-                btnStartStop.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
-            }
+            LoadModules();
         }
 
 
@@ -52,24 +50,18 @@ namespace Ceriyo.Server
 
         private void RunGameThread(object sender, DoWorkEventArgs e)
         {
-            try
-            {
-                Game = new ServerGame(e.Argument as ServerStartupArgs);
+            Game = new ServerGame(e.Argument as ServerStartupArgs);
                 
-                Game.OnSignalGUIUpdate += GameToGUIUpdate;
-                Game.OnGameStarting += Game_OnGameStarting;
-                Game.OnGameExiting += Game_OnGameExiting;
+            Game.OnSignalGUIUpdate += GameToGUIUpdate;
+            Game.OnGameStarting += Game_OnGameStarting;
+            Game.OnGameExiting += Game_OnGameExiting;
 
-                Game.Run();
+            Game.Run();
                 
-                Game.OnSignalGUIUpdate -= GameToGUIUpdate;
-                Game.OnGameStarting -= Game_OnGameStarting;
-                Game.OnGameExiting -= Game_OnGameExiting;
-            }
-            catch
-            {
-                throw;
-            }
+            Game.OnSignalGUIUpdate -= GameToGUIUpdate;
+            Game.OnGameStarting -= Game_OnGameStarting;
+            Game.OnGameExiting -= Game_OnGameExiting;
+            
         }
 
         // Updates from the game thread are sent to the GUI thread every few seconds.
@@ -139,6 +131,8 @@ namespace Ceriyo.Server
                 Model.Modules.Add(Path.GetFileNameWithoutExtension(file));
             }
 
+            Model.Modules.Insert(0, "-- Select a Module --");
+            Model.SelectedModule = Model.Modules[0];
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -160,12 +154,8 @@ namespace Ceriyo.Server
 
         private void RemoveSelectedFromBlacklist(object sender, RoutedEventArgs e)
         {
-            List<string> namesToRemove = new List<string>();
+            List<string> namesToRemove = lbBlacklist.SelectedItems.Cast<string>().ToList();
 
-            foreach (string name in lbBlacklist.SelectedItems)
-            {
-                namesToRemove.Add(name);
-            }
             foreach(string name in namesToRemove)
             {
                 Model.ServerSettings.Blacklist.Remove(name);
@@ -189,6 +179,8 @@ namespace Ceriyo.Server
         private void GameThread_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             ServerStatusUpdateEventArgs args = e.UserState as ServerStatusUpdateEventArgs;
+
+            if (args == null) return;
 
             if (args.GameJustShutDown)
             {
@@ -228,10 +220,21 @@ namespace Ceriyo.Server
             }
             else
             {
+                if (Model.SelectedModule == Model.Modules[0])
+                {
+                    MessageBox.Show("Please select a module to load.", 
+                        "Select a Module", 
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+
+                    return;
+                }
+
                 ServerStartupArgs startUpArgs = new ServerStartupArgs
                 {
                     Port = Model.ServerSettings.Port,
-                    ServerPassword = Model.ServerSettings.PlayerPassword
+                    ServerPassword = Model.ServerSettings.PlayerPassword,
+                    ModuleFileName = Model.SelectedModule
                 };
 
                 GameThread.RunWorkerAsync(startUpArgs);

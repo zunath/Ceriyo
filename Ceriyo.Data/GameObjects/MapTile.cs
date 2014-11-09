@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using FlatRedBall;
+using ProtoBuf;
 
 namespace Ceriyo.Data.GameObjects
 {
+    [ProtoContract]
     public class MapTile
     {
+        [ProtoMember(1)]
         public int MapX { get; set; }
+        [ProtoMember(2)]
         public int MapY { get; set; }
+        [ProtoMember(3)]
         public int Layer { get; set; }
+        [ProtoMember(4)]
         public int TileDefinitionX { get; set; }
+        [ProtoMember(5)]
         public int TileDefinitionY { get; set; }
+        [ProtoMember(6)]
         public bool HasGraphic { get; set; }
 
         [XmlIgnore]
@@ -21,24 +25,24 @@ namespace Ceriyo.Data.GameObjects
 
         public MapTile()
         {
-            this.MapX = 0;
-            this.MapY = 0;
-            this.Layer = 0;
-            this.TileDefinitionX = 0;
-            this.TileDefinitionY = 0;
-            this.HasGraphic = false;
-            this.TileSprite = new Sprite();
+            MapX = 0;
+            MapY = 0;
+            Layer = 0;
+            TileDefinitionX = 0;
+            TileDefinitionY = 0;
+            HasGraphic = false;
+            TileSprite = new Sprite();
         }
 
         public MapTile(int mapX, int mapY, int layer)
         {
-            this.MapX = mapX;
-            this.MapY = mapY;
-            this.Layer = layer;
-            this.TileDefinitionX = 0;
-            this.TileDefinitionY = 0;
-            this.HasGraphic = false;
-            this.TileSprite = new Sprite();
+            MapX = mapX;
+            MapY = mapY;
+            Layer = layer;
+            TileDefinitionX = 0;
+            TileDefinitionY = 0;
+            HasGraphic = false;
+            TileSprite = new Sprite();
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using Ceriyo.Library.Global;
+﻿using Ceriyo.Data.Packets;
+using Ceriyo.Library.Global;
 using FlatRedBall;
 using FlatRedBall.Graphics;
+using Lidgren.Network;
 using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Entities.Screens
@@ -23,6 +25,13 @@ namespace Ceriyo.Entities.Screens
         protected override void CustomInitialize()
         {
             HookEvents();
+
+            EnteringGameScreenPacket packet = new EnteringGameScreenPacket
+            {
+                IsRequest = true
+            };
+
+            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
         }
 
         protected override void CustomActivity(bool firstTimeCalled)

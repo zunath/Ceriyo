@@ -9,7 +9,7 @@ namespace Ceriyo.Data
 {
     public class WorkingDataManager
     {
-        public FileOperationResultTypeEnum ReplaceAllGameObjectFiles(IList<IGameObject> gameObjects, string directory)
+        public FileOperationResultTypeEnum ReplaceAllGameObjectFiles(IEnumerable<IGameObject> gameObjects, string directory)
         {
             FileOperationResultTypeEnum result;
             string[] existingFiles = Directory.GetFiles(directory, "*" + EnginePaths.DataExtension);

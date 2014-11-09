@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Ceriyo.Data.GameObjects;
 using ProtoBuf;
 
@@ -23,11 +20,11 @@ namespace Ceriyo.Data.Packets
 
         public CharacterCreationScreenPacket()
         {
-            this.IsRequest = false;
-            this.Races = new List<Race>();
-            this.CharacterClasses = new List<CharacterClass>();
-            this.Abilities = new List<Ability>();
-            this.Skills = new List<Skill>();
+            IsRequest = false;
+            Races = new List<Race>();
+            CharacterClasses = new List<CharacterClass>();
+            Abilities = new List<Ability>();
+            Skills = new List<Skill>();
         }
     }
 }

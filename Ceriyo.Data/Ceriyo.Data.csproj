@@ -175,6 +175,7 @@
     <Compile Include="Packets\CharacterSelectionScreenPacket.cs" />
     <Compile Include="Packets\CreateCharacterPacket.cs" />
     <Compile Include="Packets\DeleteCharacterPacket.cs" />
+    <Compile Include="Packets\EnteringGameScreenPacket.cs" />
     <Compile Include="Packets\GameScreenPacket.cs" />
     <Compile Include="Packets\PlayerInputPacket.cs" />
     <Compile Include="Packets\SelectCharacterPacket.cs" />

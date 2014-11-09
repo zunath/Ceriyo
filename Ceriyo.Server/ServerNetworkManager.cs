@@ -261,6 +261,11 @@ namespace Ceriyo.Server
             }
         }
 
+        public void SendPacket(PacketBase packet, NetConnection connection, NetDeliveryMethod deliveryMethod, int sequenceChannel = 1)
+        {
+            Agent.SendPacket(packet, connection, deliveryMethod, sequenceChannel);
+        }
+
         #endregion
     }
 }

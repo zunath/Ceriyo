@@ -1,4 +1,5 @@
-﻿using Ceriyo.Data.Enumerations;
+﻿using System;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using FlatRedBall.IO;
 using Ionic.Zip;
@@ -108,6 +109,29 @@ namespace Ceriyo.Data
             catch
             {
                 result = FileOperationResultTypeEnum.Failure;
+            }
+
+            return result;
+        }
+
+        public FileOperationResultTypeEnum CloseModule()
+        {
+            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+
+            try
+            {
+                if (Directory.Exists(EnginePaths.WorkingDirectory))
+                {
+                    Directory.Delete(EnginePaths.WorkingDirectory);
+                    Directory.CreateDirectory(EnginePaths.WorkingDirectory);
+                }
+
+                result = FileOperationResultTypeEnum.Success;
+            }
+            catch (Exception)
+            {
+                result = FileOperationResultTypeEnum.Failure;
+                throw;
             }
 
             return result;

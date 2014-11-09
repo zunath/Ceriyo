@@ -1,9 +1,17 @@
-﻿using Ceriyo.Data.EventArguments;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Documents;
+using Ceriyo.Data;
+using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.Packets;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
 using Ceriyo.Library.ScriptEngine;
 using FlatRedBall;
 using FlatRedBall.Screens;
+using Lidgren.Network;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Concurrent;
@@ -28,12 +36,26 @@ namespace Ceriyo.Server
         private bool IsServerRunning { get; set; }
         private ServerNetworkManager NetworkManager { get; set; }
         private ScriptManager Scripts { get; set; }
+        private BindingList<Area> Areas { get; set; }
+        private WorkingDataManager WorkingManager { get; set; }
+        private ModuleDataManager ModuleManager { get; set; } 
+        private GameModule Module { get; set; }
 
         public ServerGame(ServerStartupArgs args)
         {
+            ModuleManager = new ModuleDataManager();
+            WorkingManager = new WorkingDataManager();
             GUIStatusUpdateQueue = new ConcurrentQueue<ServerGUIStatus>();
             NetworkManager = new ServerNetworkManager(args.ServerPassword, args.Port);
             Scripts = new ScriptManager();
+
+            if (ModuleManager.LoadModule(args.ModuleFileName, true) != FileOperationResultTypeEnum.Success)
+            {
+                throw new Exception("Server was unable to load module.");
+            }
+
+            Module = WorkingManager.GetGameModule();
+            Areas = WorkingManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory);
         }
 
         protected override void Initialize()
@@ -44,7 +66,7 @@ namespace Ceriyo.Server
             }
             base.Initialize();
 
-            Form gameForm = (Form)Form.FromHandle(Window.Handle);
+            Form gameForm = (Form)Control.FromHandle(Window.Handle);
             gameForm.Opacity = 0;
             gameForm.ShowInTaskbar = false;
 
@@ -52,6 +74,9 @@ namespace Ceriyo.Server
             {
                 OnGameStarting(this, new EventArgs());
             }
+
+            NetworkManager.OnPacketReceived += NetworkManager_OnPacketReceived;
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -113,6 +138,7 @@ namespace Ceriyo.Server
         protected override void OnExiting(object sender, EventArgs args)
         {
             NetworkManager.Destroy();
+            ModuleManager.CloseModule();
             base.OnExiting(sender, args);
 
             if (OnGameExiting != null)
@@ -120,5 +146,31 @@ namespace Ceriyo.Server
                 OnGameExiting(this, new EventArgs());
             }
         }
+
+        #region Packet Processing
+
+        private void NetworkManager_OnPacketReceived(object sender, PacketEventArgs e)
+        {
+            PacketBase packet = e.Packet;
+            Type type = packet.GetType();
+
+            if (type == typeof (EnteringGameScreenPacket))
+            {
+                ReceiveEnteringGameScreenPacket(packet as EnteringGameScreenPacket);
+            }
+        }
+
+
+        private void ReceiveEnteringGameScreenPacket(EnteringGameScreenPacket packet)
+        {
+            EnteringGameScreenPacket response = new EnteringGameScreenPacket
+            {
+                
+            };
+
+            NetworkManager.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
+        }
+
+        #endregion
     }
 }

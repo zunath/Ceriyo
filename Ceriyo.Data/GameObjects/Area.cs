@@ -27,10 +27,7 @@ namespace Ceriyo.Data.GameObjects
                 {
                     return 0;
                 }
-                else
-                {
-                    return MapTiles.Max(x => x.MapX) + 1;
-                }
+                return MapTiles.Max(x => x.MapX) + 1;
             }
         }
 
@@ -43,10 +40,7 @@ namespace Ceriyo.Data.GameObjects
                 {
                     return 0;
                 }
-                else
-                {
-                    return MapTiles.Max(y => y.MapY) + 1;
-                }
+                return MapTiles.Max(y => y.MapY) + 1;
             }
         }
         public int LayerCount { get; set; }

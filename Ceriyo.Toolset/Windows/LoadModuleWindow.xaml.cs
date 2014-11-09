@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
@@ -23,9 +14,9 @@ namespace Ceriyo.Toolset.Windows
     /// <summary>
     /// Interaction logic for LoadModuleWindow.xaml
     /// </summary>
-    public partial class LoadModuleWindow : Window
+    public partial class LoadModuleWindow
     {
-        protected LoadModuleVM Model { get; set; }
+        private LoadModuleVM Model { get; set; }
         public event EventHandler<GameModuleEventArgs> OnOpenModule;
         private ModuleDataManager ModuleManager { get; set; }
 
@@ -47,7 +38,7 @@ namespace Ceriyo.Toolset.Windows
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
@@ -79,7 +70,7 @@ namespace Ceriyo.Toolset.Windows
                 }
                 else if (result == FileOperationResultTypeEnum.Success)
                 {
-                    this.Close();
+                    Close();
 
                     if (OnOpenModule != null)
                     {
