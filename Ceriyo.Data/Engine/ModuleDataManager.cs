@@ -122,7 +122,7 @@ namespace Ceriyo.Data
             {
                 if (Directory.Exists(EnginePaths.WorkingDirectory))
                 {
-                    Directory.Delete(EnginePaths.WorkingDirectory);
+                    Directory.Delete(EnginePaths.WorkingDirectory, true);
                     Directory.CreateDirectory(EnginePaths.WorkingDirectory);
                 }
 

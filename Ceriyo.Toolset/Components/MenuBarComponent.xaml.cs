@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
@@ -22,7 +12,7 @@ namespace Ceriyo.Toolset.Components
     /// <summary>
     /// Interaction logic for MenuBarComponent.xaml
     /// </summary>
-    public partial class MenuBarComponent : UserControl
+    public partial class MenuBarComponent
     {
         private ResourcePackEditorWindow ResourceEditor { get; set; }
         private ManageResourcePacksWindow ResourceManager { get; set; }
@@ -32,6 +22,7 @@ namespace Ceriyo.Toolset.Components
         private DataEditorWindow DataEditor { get; set; }
         public event EventHandler<GameModuleEventArgs> OnOpenModule;
         public event EventHandler<EventArgs> OnDataEditorClosed;
+        private ModuleDataManager ModuleManager { get; set;}
 
         public MenuBarComponent()
         {
@@ -42,6 +33,7 @@ namespace Ceriyo.Toolset.Components
             WorkingManager = new WorkingDataManager();
             ResourceManager = new ManageResourcePacksWindow();
             DataEditor = new DataEditorWindow();
+            ModuleManager = new ModuleDataManager();
             InitializeEvents();
         }
 
@@ -119,6 +111,20 @@ namespace Ceriyo.Toolset.Components
             {
                 MessageBox.Show("Module failed to build.", "Failure", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void SaveModule(object sender, RoutedEventArgs e)
+        {
+            GameModule module = WorkingManager.GetGameModule();
+            // TODO: Finish method
+
+
+            ModuleManager.SaveModule(module.Resref);
+        }
+
+        private void SaveAsModule(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
