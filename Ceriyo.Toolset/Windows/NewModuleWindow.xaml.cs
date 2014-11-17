@@ -21,7 +21,7 @@ namespace Ceriyo.Toolset.Windows
             Model = new NewModuleVM();
             ModuleManager = new ModuleDataManager();
             ResourcePackManager = new ResourcePackDataManager();
-            this.DataContext = Model;
+            DataContext = Model;
             SetLimits();
             txtName.Focus();
         }
@@ -37,14 +37,14 @@ namespace Ceriyo.Toolset.Windows
         {
             ModuleManager.CreateModule(Model.Name, Model.Tag, Model.Resref);
             ModuleManager.LoadModule(Model.Resref, true);
-            ResourcePackManager.BuildModule(new BindingList<string>());
+            ResourcePackManager.BuildModule(ResourcePackManager.GetAllResourcePackNames());
             ModuleManager.SaveModule(Model.Resref);
-            this.Close();
+            Close();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
     }

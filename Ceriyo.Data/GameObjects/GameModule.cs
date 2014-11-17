@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using Ceriyo.Data.Enumerations;
+﻿using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
+using System;
+using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -27,28 +24,28 @@ namespace Ceriyo.Data.GameObjects
 
         public GameModule()
         {
-            this.Name = string.Empty;
-            this.Tag = string.Empty;
-            this.Resref = string.Empty;
-            this.Description = string.Empty;
-            this.Comments = string.Empty;
-            this.LocalVariables = new BindingList<LocalVariable>();
-            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
-            this.Levels = new LevelChart();
-            this.ResourcePacks = new BindingList<string>();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comments = string.Empty;
+            LocalVariables = new BindingList<LocalVariable>();
+            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            Levels = new LevelChart();
+            ResourcePacks = new BindingList<string>();
         }
 
         public GameModule(string name, string tag, string resref, string description = "", string comments = "")
         {
-            this.Name = name;
-            this.Tag = tag;
-            this.Resref = resref;
-            this.Description = description;
-            this.Comments = comments;
-            this.LocalVariables = new BindingList<LocalVariable>();
-            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
-            this.Levels = new LevelChart();
-            this.ResourcePacks = new BindingList<string>();
+            Name = name;
+            Tag = tag;
+            Resref = resref;
+            Description = description;
+            Comments = comments;
+            LocalVariables = new BindingList<LocalVariable>();
+            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            Levels = new LevelChart();
+            ResourcePacks = new BindingList<string>();
         }
 
         public string ListBoxName

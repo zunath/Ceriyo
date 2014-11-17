@@ -12,7 +12,7 @@ namespace Ceriyo.Data
     {
         public FileOperationResultTypeEnum CreateModule(string name, string tag, string resref)
         {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            FileOperationResultTypeEnum result;
 
             try
             {
@@ -199,6 +199,9 @@ namespace Ceriyo.Data
 
         private void AddModulePropertiesFile(ZipFile zip, GameModule module)
         {
+            // Add the default resource packs to the module.
+            module.ResourcePacks.Add("CeriyoResources.crp");
+
             string output;
             FileManager.XmlSerialize(module, out output);
             zip.AddEntry(EnginePaths.ModuleDataFileName + EnginePaths.DataExtension, output);
