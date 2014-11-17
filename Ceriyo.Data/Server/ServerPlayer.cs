@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.GameObjects;
+﻿using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.Server
 {
@@ -13,8 +9,8 @@ namespace Ceriyo.Data.Server
 
         public ServerPlayer()
         {
-            this.Username = string.Empty;
-            this.PC = new Player();
+            Username = string.Empty;
+            PC = new Player();
         }
     }
 }

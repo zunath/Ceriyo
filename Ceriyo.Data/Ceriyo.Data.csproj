@@ -188,7 +188,6 @@
     <Compile Include="ResourceObjects\ResourceEditorItem.cs" />
     <Compile Include="ResourceObjects\UIComponent.cs" />
     <Compile Include="ResourceObjects\UILayout.cs" />
-    <Compile Include="Server\ServerGameStatus.cs" />
     <Compile Include="Server\ServerGUIStatus.cs" />
     <Compile Include="Server\ServerPlayer.cs" />
     <Compile Include="Server\ServerStartupArgs.cs" />

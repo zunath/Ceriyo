@@ -116,6 +116,9 @@
   <ItemGroup>
     <Compile Include="BindingConverters\InverseBooleanConverter.cs" />
     <Compile Include="BindingConverters\EnumToBooleanConverter.cs" />
+    <None Include="Content\ResourcePacks\CeriyoResources.crp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Scripts\Test.lua">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
