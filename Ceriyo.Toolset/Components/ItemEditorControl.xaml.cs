@@ -1,28 +1,21 @@
-﻿using Ceriyo.Data.ViewModels;
+﻿using Ceriyo.Data;
+using Ceriyo.Data.Engine;
+using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.ResourceObjects;
+using Ceriyo.Data.ViewModels;
 using Ceriyo.Library.Processing;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Ceriyo.Data.GameObjects;
-using Ceriyo.Data;
-using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.Engine;
-using Ceriyo.Data.ResourceObjects;
-using System.ComponentModel;
 
 namespace Ceriyo.Toolset.Components
 {
-    public partial class ItemEditorControl : UserControl
+    public partial class ItemEditorControl
     {
         private ItemEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
@@ -50,7 +43,7 @@ namespace Ceriyo.Toolset.Components
 
             item.InventoryGraphic = lbInventoryGraphic.Items[0] as GameResource;
             item.WorldGraphic = lbWorldGraphic.Items[0] as GameResource;
-            item.ItemTypeResref = (lbItemType.Items[0] as ItemType).Resref;
+            item.ItemTypeResref = ((ItemType) lbItemType.Items[0]).Resref;
             item.ItemRequirements = BuildItemRequirements();
             Model.Items.Add(item);
             int index = lbItems.Items.IndexOf(item);
@@ -142,7 +135,7 @@ namespace Ceriyo.Toolset.Components
         {
             Item item = lbItems.SelectedItem as Item;
             Model.SelectedItem = item;
-            Model.IsItemSelected = item == null ? false : true;
+            Model.IsItemSelected = item != null;
             
             if(item != null)
             {
@@ -154,7 +147,7 @@ namespace Ceriyo.Toolset.Components
         {
             if (lbItemType.SelectedItem != null)
             {
-                Model.SelectedItem.ItemTypeResref = (lbItemType.SelectedItem as ItemType).Resref;
+                Model.SelectedItem.ItemTypeResref = ((ItemType) lbItemType.SelectedItem).Resref;
             }
         }
 
@@ -198,86 +191,77 @@ namespace Ceriyo.Toolset.Components
 
         private void AddItemProperty(object sender, RoutedEventArgs e)
         {
-            if (Model.SelectedItem != null && Model.SelectedAvailableItemProperty != null)
+            if (Model.SelectedItem == null || tvAvailableProperties.SelectedItem == null) return;
+
+            Type type = tvAvailableProperties.SelectedItem.GetType();
+
+            // Item property selected (I.E: Ability Bonus)
+            if (type == typeof(ItemProperty))
             {
-                Type type = tvAvailableProperties.SelectedItem.GetType();
+                ItemProperty ip = tvAvailableProperties.SelectedItem as ItemProperty;
+                AssignedItemProperty aip = Model.SelectedItem.AssignedItemProperties.SingleOrDefault(x => x.ItemPropertyResref == ip.Resref);
 
-                // Item property selected (I.E: Ability Bonus)
-                if (type == typeof(ItemProperty))
+                if (ip == null || string.IsNullOrEmpty(ip.Resref) || ip.Options.Count > 0 || aip != null) return;
+
+                aip = new AssignedItemProperty
                 {
-                    ItemProperty ip = tvAvailableProperties.SelectedItem as ItemProperty;
-                    AssignedItemProperty aip = Model.SelectedItem.AssignedItemProperties.SingleOrDefault(x => x.ItemPropertyResref == ip.Resref);
+                    ItemPropertyType = ip.ItemPropertyType,
+                    ItemPropertyResref = ip.Resref
+                };
 
-                    if (ip.Options.Count <= 0 && aip == null)
-                    {
-                        aip = new AssignedItemProperty
-                        {
-                            ItemPropertyType = ip.ItemPropertyType,
-                            ItemPropertyResref = ip.Resref
-                        };
-
-                        Model.SelectedItem.AssignedItemProperties.Add(aip);
-                    }
-                }
+                Model.SelectedItem.AssignedItemProperties.Add(aip);
+            }
                 // Option selected (I.E: Strength)
-                else if (type == typeof(ItemPropertyOption))
+            else if (type == typeof(ItemPropertyOption))
+            {
+                ItemPropertyOption ipo = tvAvailableProperties.SelectedItem as ItemPropertyOption;
+                ItemProperty ip = Model.AvailableItemProperties.SingleOrDefault(x => x.Resref == ipo.ParentItemPropertyResref);
+                AssignedItemProperty aip = Model.SelectedItem.AssignedItemProperties
+                    .SingleOrDefault(x => x.ItemPropertyResref == ipo.ParentItemPropertyResref && 
+                                          x.ItemPropertyOptionResref == ipo.Resref);
+
+
+                if (ipo == null || string.IsNullOrWhiteSpace(ipo.Resref) || ipo.Values.Count > 0 || aip != null) return;
+                aip = new AssignedItemProperty
                 {
-                    ItemPropertyOption ipo = tvAvailableProperties.SelectedItem as ItemPropertyOption;
-                    ItemProperty ip = Model.AvailableItemProperties.SingleOrDefault(x => x.Resref == ipo.ParentItemPropertyResref);
-                    AssignedItemProperty aip = Model.SelectedItem.AssignedItemProperties
-                        .SingleOrDefault(x => x.ItemPropertyResref == ipo.ParentItemPropertyResref && 
-                                              x.ItemPropertyOptionResref == ipo.Resref);
-                    
+                    ItemPropertyOptionResref = ipo.Resref,
+                    ItemPropertyResref = ipo.ParentItemPropertyResref,
+                    ItemPropertyType = ip.ItemPropertyType
+                };
 
-                    if (ipo.Values.Count <= 0 && aip == null)
-                    {
-                        aip = new AssignedItemProperty
-                        {
-                            ItemPropertyOptionResref = ipo.Resref,
-                            ItemPropertyResref = ipo.ParentItemPropertyResref,
-                            ItemPropertyType = ip.ItemPropertyType
-                        };
-
-                        Model.SelectedItem.AssignedItemProperties.Add(aip);
-                    }
-                }
+                Model.SelectedItem.AssignedItemProperties.Add(aip);
+            }
                 // Option value selected (I.E: +15)
-                else if(type == typeof(ItemPropertyOptionValue))
+            else if(type == typeof(ItemPropertyOptionValue))
+            {
+                ItemPropertyOptionValue optionValue = tvAvailableProperties.SelectedItem as ItemPropertyOptionValue;
+                ItemProperty ip = Model.AvailableItemProperties.SingleOrDefault(x => x.Options.SingleOrDefault(y => y.Resref == optionValue.ParentOptionResref) != null);
+
+                if (ip == null || string.IsNullOrWhiteSpace(ip.Resref) || optionValue == null) return;
+                ItemPropertyOption ipo = ip.Options.SingleOrDefault(x => x.Resref == optionValue.ParentOptionResref);
+
+                if (ipo == null) return;
+
+                AssignedItemProperty aip = Model.SelectedItem.AssignedItemProperties.SingleOrDefault(
+                    x => x.ItemPropertyResref == ip.Resref &&
+                         x.ItemPropertyOptionResref == ipo.Resref
+                    );
+
+                if (aip != null)
                 {
-                    ItemPropertyOptionValue optionValue = tvAvailableProperties.SelectedItem as ItemPropertyOptionValue;
-                    ItemProperty ip = Model.AvailableItemProperties.SingleOrDefault(x => x.Options.SingleOrDefault(y => y.Resref == optionValue.ParentOptionResref) != null);
-                    
-                    if(ip != null)
-                    {
-                        ItemPropertyOption ipo = ip.Options.SingleOrDefault(x => x.Resref == optionValue.ParentOptionResref);
-                    
-                        if(ipo != null)
-                        {
-                            AssignedItemProperty aip = Model.SelectedItem.AssignedItemProperties.SingleOrDefault(
-                                    x => x.ItemPropertyResref == ip.Resref &&
-                                    x.ItemPropertyOptionResref == ipo.Resref
-                                );
-
-                            if (aip != null)
-                            {
-                                Model.SelectedItem.AssignedItemProperties.Remove(aip);
-                            }
-
-                            aip = new AssignedItemProperty
-                            {
-                                ItemPropertyResref = ip.Resref,
-                                ItemPropertyType = ip.ItemPropertyType,
-                                ItemPropertyOptionResref = ipo.Resref,
-                                ItemPropertyOptionValueName = optionValue.Key,
-                                ItemPropertyOptionValueValue = optionValue.Value
-                            };
-
-                            Model.SelectedItem.AssignedItemProperties.Add(aip);
-                            
-                        }
-                    }
-
+                    Model.SelectedItem.AssignedItemProperties.Remove(aip);
                 }
+
+                aip = new AssignedItemProperty
+                {
+                    ItemPropertyResref = ip.Resref,
+                    ItemPropertyType = ip.ItemPropertyType,
+                    ItemPropertyOptionResref = ipo.Resref,
+                    ItemPropertyOptionValueName = optionValue.Key,
+                    ItemPropertyOptionValueValue = optionValue.Value
+                };
+
+                Model.SelectedItem.AssignedItemProperties.Add(aip);
             }
         }
 
@@ -286,6 +270,11 @@ namespace Ceriyo.Toolset.Components
             if (Model.SelectedItem != null)
             {
                 Model.SelectedItem.AssignedItemProperties.Remove(Model.SelectedAssignedItemProperty);
+
+                if (Model.AssignedItemProperties.Count > 0)
+                {
+                    Model.SelectedAssignedItemProperty = Model.AssignedItemProperties[0];
+                }
             }
         }
 
