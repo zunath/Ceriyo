@@ -267,14 +267,12 @@ namespace Ceriyo.Toolset.Components
 
         private void RemoveItemProperty(object sender, RoutedEventArgs e)
         {
-            if (Model.SelectedItem != null)
-            {
-                Model.SelectedItem.AssignedItemProperties.Remove(Model.SelectedAssignedItemProperty);
+            if (Model.SelectedItem == null) return;
+            Model.SelectedItem.AssignedItemProperties.Remove(Model.SelectedAssignedItemProperty);
 
-                if (Model.AssignedItemProperties.Count > 0)
-                {
-                    Model.SelectedAssignedItemProperty = Model.AssignedItemProperties[0];
-                }
+            if (Model.SelectedItem.AssignedItemProperties.Count > 0)
+            {
+                Model.SelectedAssignedItemProperty = Model.SelectedItem.AssignedItemProperties[0];
             }
         }
 
