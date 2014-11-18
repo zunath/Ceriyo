@@ -1,17 +1,16 @@
-﻿using System.Windows.Controls.Primitives;
-using Ceriyo.Data;
+﻿using Ceriyo.Data;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
 using Ceriyo.Data.ViewModels;
 using FlatRedBall.IO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Timers;
 using System.Windows;
-using System.Linq;
-using System;
-using System.IO;
 
 namespace Ceriyo.Server
 {

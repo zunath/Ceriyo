@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ceriyo.Data.Enumerations;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.Enumerations;
 
 namespace Ceriyo.Data.Settings
 {
