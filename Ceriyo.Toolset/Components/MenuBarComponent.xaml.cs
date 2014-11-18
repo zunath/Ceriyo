@@ -52,13 +52,21 @@ namespace Ceriyo.Toolset.Components
 
         private void NewModule_Click(object sender, RoutedEventArgs e)
         {
-            NewModuleWindow modWindow = new NewModuleWindow();
+            NewModuleWindow modWindow = new NewModuleWindow
+            {
+                Owner = Window.GetWindow(this)
+            };
+
             modWindow.ShowDialog();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            LoadModuleWindow loadWindow = new LoadModuleWindow();
+            LoadModuleWindow loadWindow = new LoadModuleWindow
+            {
+                Owner = Window.GetWindow(this)
+            };
+
             loadWindow.OnOpenModule += OpenModuleFinished;
             loadWindow.ShowDialog();
         }
@@ -125,6 +133,14 @@ namespace Ceriyo.Toolset.Components
         private void SaveAsModule(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void MenuBarComponent_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            ResourceEditor.Owner = Window.GetWindow(this);
+            ResourceManager.Owner = Window.GetWindow(this);
+            ModuleProperties.Owner = Window.GetWindow(this);
+            DataEditor.Owner = Window.GetWindow(this);
         }
     }
 }
