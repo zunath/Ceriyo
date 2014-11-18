@@ -103,9 +103,11 @@
                            HorizontalAlignment="Left" 
                            Margin="180.286,6,0,0" 
                            VerticalAlignment="Top" 
+                           Visibility="Hidden"
                            Grid.Column="2"/>
                     <Label x:Name="lblIPAddress" 
                            Content="{Binding IPAddress}" 
+                           Visibility="Hidden"
                            HorizontalAlignment="Left" 
                            Margin="263.286,6,0,0" 
                            VerticalAlignment="Top" 
