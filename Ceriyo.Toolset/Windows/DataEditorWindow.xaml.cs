@@ -1,23 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Toolset.Windows
 {
     /// <summary>
     /// Interaction logic for EditorWindow.xaml
     /// </summary>
-    public partial class DataEditorWindow : Window
+    public partial class DataEditorWindow
     {
         private event EventHandler<EventArgs> OnSave;
         private event EventHandler<EventArgs> OnOpen;
@@ -52,6 +43,7 @@ namespace Ceriyo.Toolset.Windows
             OnOpen += classEditor.Open;
 
             animationEditor.OnAnimationsListChanged += creatureEditor.AnimationsModified;
+            classEditor.OnClassesListChanged += creatureEditor.ClassesModified;
         }
 
         public void Open()
@@ -61,7 +53,7 @@ namespace Ceriyo.Toolset.Windows
                 OnOpen(this, new EventArgs());
             }
 
-            this.Show();
+            Show();
         }
 
         private void OK(object sender, RoutedEventArgs e)
@@ -70,7 +62,7 @@ namespace Ceriyo.Toolset.Windows
             {
                 OnSave(this, new EventArgs());
             }
-            this.Hide();
+            Hide();
 
             if (OnWindowHidden != null)
             {
@@ -80,7 +72,7 @@ namespace Ceriyo.Toolset.Windows
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            Hide();
 
             if (OnWindowHidden != null)
             {
@@ -99,7 +91,7 @@ namespace Ceriyo.Toolset.Windows
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
-            this.Hide();
+            Hide();
 
             if (OnWindowHidden != null)
             {

@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
@@ -19,7 +13,6 @@ using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Library.Processing;
-using FlatRedBall.Graphics.Animation;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Toolset.Components
@@ -27,7 +20,7 @@ namespace Ceriyo.Toolset.Components
     /// <summary>
     /// Interaction logic for AnimationEditorComponent.xaml
     /// </summary>
-    public partial class AnimationEditorComponent : UserControl
+    public partial class AnimationEditorComponent
     {
         private AnimationEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
@@ -43,7 +36,7 @@ namespace Ceriyo.Toolset.Components
             Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
             WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            DataContext = Model;
         }
 
         public void Open(object sender, EventArgs e)
@@ -161,7 +154,7 @@ namespace Ceriyo.Toolset.Components
         {
             SpriteAnimation animation = lbAnimations.SelectedItem as SpriteAnimation;
             Model.SelectedAnimation = animation;
-            Model.IsAnimationSelected = animation == null ? false : true;
+            Model.IsAnimationSelected = animation != null;
 
             if (animation != null)
             {
@@ -179,7 +172,7 @@ namespace Ceriyo.Toolset.Components
         {
             SpriteAnimationFrame frame = lbFrames.SelectedItem as SpriteAnimationFrame;
             Model.SelectedFrame = frame;
-            Model.IsFrameSelected = frame == null ? false : true;
+            Model.IsFrameSelected = frame != null;
             rectSelectedCell.Visibility = frame == null ? Visibility.Hidden : Visibility.Visible;
 
             RefreshSelectedFrame();

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Library.Processing;
@@ -18,6 +19,8 @@ namespace Ceriyo.Toolset.Components
         private ClassEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
+
+        public event EventHandler<GameObjectListEventArgs> OnClassesListChanged;
 
         public ClassEditorComponent()
         {
@@ -48,6 +51,11 @@ namespace Ceriyo.Toolset.Components
                     Model.IsClassSelected = false;
                 }
             }
+
+            if (OnClassesListChanged != null)
+            {
+                OnClassesListChanged(this, new GameObjectListEventArgs(Model.Classes.Cast<IGameObject>().ToList()));
+            }
         }
 
         private void New(object sender, RoutedEventArgs e)
@@ -62,6 +70,11 @@ namespace Ceriyo.Toolset.Components
             Model.Classes.Add(charClass);
             int index = Model.Classes.IndexOf(charClass);
             Model.SelectedClass = Model.Classes[index];
+
+            if (OnClassesListChanged != null)
+            {
+                OnClassesListChanged(this, new GameObjectListEventArgs(Model.Classes.Cast<IGameObject>().ToList()));
+            }
         }
 
         public void Save(object sender, EventArgs e)
@@ -71,6 +84,11 @@ namespace Ceriyo.Toolset.Components
             if (result != FileOperationResultTypeEnum.Success)
             {
                 MessageBox.Show("Unable to save classes.", "Saving classes failed.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            if (OnClassesListChanged != null)
+            {
+                OnClassesListChanged(this, new GameObjectListEventArgs(Model.Classes.Cast<IGameObject>().ToList()));
             }
         }
 

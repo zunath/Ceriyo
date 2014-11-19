@@ -160,6 +160,12 @@ namespace Ceriyo.Toolset.Components
             RefreshAnimationList();
         }
 
+        public void ClassesModified(object sender, GameObjectListEventArgs e)
+        {
+            BindingList<CharacterClass> classes = new BindingList<CharacterClass>(e.GameObjects.Cast<CharacterClass>().ToList());
+            Model.CharacterClasses = classes;
+        }
+
         private void ClassSelected(object sender, SelectionChangedEventArgs e)
         {
             if (lbClass.SelectedItem == null) return;

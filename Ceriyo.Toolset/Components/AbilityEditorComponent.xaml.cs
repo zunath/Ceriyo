@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Library.Processing;
@@ -22,26 +14,28 @@ namespace Ceriyo.Toolset.Components
     /// <summary>
     /// Interaction logic for AbilityEditorComponent.xaml
     /// </summary>
-    public partial class AbilityEditorComponent : UserControl
+    public partial class AbilityEditorComponent
     {
         private AbilityEditorVM Model { get; set; }
         private GameResourceProcessor Processor { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
+        public event EventHandler<GameObjectListEventArgs> OnAbilitiesListChanged;
+
         public AbilityEditorComponent()
         {
             InitializeComponent();
-            this.Model = new AbilityEditorVM();
-            this.Processor = new GameResourceProcessor();
-            this.WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            Model = new AbilityEditorVM();
+            Processor = new GameResourceProcessor();
+            WorkingManager = new WorkingDataManager();
+            DataContext = Model;
         }
 
         private void AbilitySelected(object sender, SelectionChangedEventArgs e)
         {
             Ability ability = lbAbilities.SelectedItem as Ability;
             Model.SelectedAbility = ability;
-            Model.IsAbilitySelected = ability == null ? false : true;
+            Model.IsAbilitySelected = ability != null;
         }
 
         private void Delete(object sender, RoutedEventArgs e)
@@ -54,6 +48,11 @@ namespace Ceriyo.Toolset.Components
                     Model.SelectedAbility = null;
                     Model.IsAbilitySelected = false;
                 }
+            }
+
+            if (OnAbilitiesListChanged != null)
+            {
+                OnAbilitiesListChanged(this, new GameObjectListEventArgs(Model.Abilities.Cast<IGameObject>().ToList()));
             }
         }
 
@@ -69,6 +68,11 @@ namespace Ceriyo.Toolset.Components
             Model.Abilities.Add(ability);
             int index = Model.Abilities.IndexOf(ability);
             Model.SelectedAbility = Model.Abilities[index];
+
+            if (OnAbilitiesListChanged != null)
+            {
+                OnAbilitiesListChanged(this, new GameObjectListEventArgs(Model.Abilities.Cast<IGameObject>().ToList()));
+            }
         }
 
         public void Save(object sender, EventArgs e)
@@ -78,6 +82,11 @@ namespace Ceriyo.Toolset.Components
             if (result != FileOperationResultTypeEnum.Success)
             {
                 MessageBox.Show("Unable to save abilities.", "Saving abilities failed.", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            if (OnAbilitiesListChanged != null)
+            {
+                OnAbilitiesListChanged(this, new GameObjectListEventArgs(Model.Abilities.Cast<IGameObject>().ToList()));
             }
         }
 
