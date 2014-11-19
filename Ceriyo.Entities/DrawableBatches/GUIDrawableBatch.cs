@@ -75,57 +75,61 @@ namespace Ceriyo.Entities.DrawableBatches
 
         public void Update()
         {
-            XInput.MouseState mouseState = XInput.Mouse.GetState();
-
-            int wheel = InputManager.Mouse.ScrollWheel < 0 ? 1 : (InputManager.Mouse.ScrollWheel > 0 ? -1 : 0);
-            
-            GuiHost.SetMouse(InputManager.Mouse.X, InputManager.Mouse.Y, wheel);
-            GuiHost.SetButtons(mouseState.LeftButton == XInput.ButtonState.Pressed, mouseState.RightButton == XInput.ButtonState.Pressed);
-
-            // Keyboard
-            XInput.KeyboardState keyboardState = XInput.Keyboard.GetState();
-            _squidKeys.Clear();
-
-            double ms = GuiHost.TimeElapsed;
-
-            XInput.Keys[] now = keyboardState.GetPressedKeys();
-            XInput.Keys[] last = LastKeyboardState.GetPressedKeys();
-
-            foreach (XInput.Keys key in now)
+            if (FlatRedBallServices.Game.IsActive)
             {
-                bool wasDown = LastKeyboardState.IsKeyDown(key);
+                XInput.MouseState mouseState = XInput.Mouse.GetState();
 
-                InputKeys[key].Repeat -= ms;
+                int wheel = InputManager.Mouse.ScrollWheel < 0 ? 1 : (InputManager.Mouse.ScrollWheel > 0 ? -1 : 0);
+                GuiHost.SetMouse(InputManager.Mouse.X, InputManager.Mouse.Y, wheel);
+                GuiHost.SetButtons(mouseState.LeftButton == XInput.ButtonState.Pressed,
+                    mouseState.RightButton == XInput.ButtonState.Pressed);
 
-                if (InputKeys[key].Repeat < 0 || !wasDown)
+                // Keyboard
+                XInput.KeyboardState keyboardState = XInput.Keyboard.GetState();
+                _squidKeys.Clear();
+
+                double ms = GuiHost.TimeElapsed;
+
+                XInput.Keys[] now = keyboardState.GetPressedKeys();
+                XInput.Keys[] last = LastKeyboardState.GetPressedKeys();
+
+                foreach (XInput.Keys key in now)
                 {
-                    _squidKeys.Add(new KeyData()
+                    bool wasDown = LastKeyboardState.IsKeyDown(key);
+
+                    InputKeys[key].Repeat -= ms;
+
+                    if (InputKeys[key].Repeat < 0 || !wasDown)
                     {
-                        Scancode = InputKeys[key].ScanCode,
-                        Pressed = true
-                    });
-                    InputKeys[key].Repeat = !wasDown ? REPEAT_DELAY : REPEAT_RATE;
+                        _squidKeys.Add(new KeyData()
+                        {
+                            Scancode = InputKeys[key].ScanCode,
+                            Pressed = true
+                        });
+                        InputKeys[key].Repeat = !wasDown ? REPEAT_DELAY : REPEAT_RATE;
+                    }
                 }
+
+                foreach (XInput.Keys key in last)
+                {
+                    bool isDown = keyboardState.IsKeyDown(key);
+
+                    if (!isDown)
+                    {
+                        _squidKeys.Add(new KeyData()
+                        {
+                            Scancode = InputKeys[key].ScanCode,
+                            Released = true
+                        });
+                        InputKeys[key].Repeat = REPEAT_DELAY;
+                    }
+                }
+
+                LastKeyboardState = keyboardState;
+
+                GuiHost.SetKeyboard(_squidKeys.ToArray());
             }
 
-            foreach (XInput.Keys key in last)
-            {
-                bool isDown = keyboardState.IsKeyDown(key);
-
-                if (!isDown)
-                {
-                    _squidKeys.Add(new KeyData()
-                    {
-                        Scancode = InputKeys[key].ScanCode,
-                        Released = true
-                    });
-                    InputKeys[key].Repeat = REPEAT_DELAY;
-                }
-            }
-
-            LastKeyboardState = keyboardState;
-
-            GuiHost.SetKeyboard(_squidKeys.ToArray());
             GuiHost.TimeElapsed = (float)TimeManager.LastUpdateGameTime.ElapsedGameTime.TotalMilliseconds;
         }
 
