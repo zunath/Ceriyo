@@ -226,9 +226,6 @@
     <Compile Include="Windows\EditAreaWindow.xaml.cs">
       <DependentUpon>EditAreaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\EditCreatureWindow.xaml.cs">
-      <DependentUpon>EditCreatureWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\NewModuleWindow.xaml.cs">
       <DependentUpon>NewModuleWindow.xaml</DependentUpon>
     </Compile>
@@ -352,10 +349,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\EditAreaWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\EditCreatureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

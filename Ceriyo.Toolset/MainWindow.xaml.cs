@@ -1,25 +1,21 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.Settings;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Entities.Screens;
 using Ceriyo.Toolset.FRBControl;
-using FlatRedBall;
-using FlatRedBall.Screens;
-using Ceriyo.Toolset.Windows;
-using Ceriyo.Data.Settings;
-using FlatRedBall.Input;
 using FlatRedBall.IO;
-using Ceriyo.Data;
 using System;
+using System.ComponentModel;
+using System.Windows;
 
 namespace Ceriyo.Toolset
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private FRBGameComponent AreaEditorGame { get; set; }
         private ToolsetVM Model { get; set; }
@@ -42,7 +38,6 @@ namespace Ceriyo.Toolset
         private void SetUpEvents()
         {
             AreaEditorGame = new FRBGameComponent(gameControl, typeof(AreaEditorScreen));
-            AreaEditorScreen screen = ScreenManager.CurrentScreen as AreaEditorScreen;
             menuBar.OnOpenModule += OnModuleOpened;
             menuBar.OnOpenModule += areaEditor.ModuleOpened;
             menuBar.OnDataEditorClosed += areaEditor.DataEditorClosed;
@@ -76,26 +71,24 @@ namespace Ceriyo.Toolset
         private void SaveSettings()
         {
             string path = EnginePaths.SettingsDirectory + "ToolsetSettings" + EnginePaths.DataExtension;
-            ToolsetSettings settings = new ToolsetSettings()
+            ToolsetSettings settings = new ToolsetSettings
             {
-                MainWindowHeight = Convert.ToInt32(this.Height),
-                MainWindowWidth = Convert.ToInt32(this.Width)
+                MainWindowHeight = Convert.ToInt32(Height),
+                MainWindowWidth = Convert.ToInt32(Width)
             };
 
-            FileManager.XmlSerialize<ToolsetSettings>(settings, path);
+            FileManager.XmlSerialize(settings, path);
         }
 
         private void LoadSettings()
         {
             string path = EnginePaths.SettingsDirectory + "ToolsetSettings" + EnginePaths.DataExtension;
 
-            if (FileManager.FileExists(path))
-            {
-                ToolsetSettings settings = FileManager.XmlDeserialize<ToolsetSettings>(path);
+            if (!FileManager.FileExists(path)) return;
+            ToolsetSettings settings = FileManager.XmlDeserialize<ToolsetSettings>(path);
 
-                this.Width = settings.MainWindowWidth;
-                this.Height = settings.MainWindowHeight;
-            }
+            Width = settings.MainWindowWidth;
+            Height = settings.MainWindowHeight;
         }
     }
 }
