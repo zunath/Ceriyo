@@ -207,7 +207,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Class Name"
                                                 IsReadOnly="True"
-                                                Binding="{Binding CharacterClass.Name}">
+                                                Binding="{Binding ClassName}">
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="Level Req."
                                                 Binding="{Binding LevelRequired}">

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.EventArguments
@@ -13,7 +9,7 @@ namespace Ceriyo.Data.EventArguments
 
         public GameObjectEventArgs(IGameObject gameObject)
         {
-            this.GameObject = gameObject;
+            GameObject = gameObject;
         }
     }
 }

@@ -44,6 +44,7 @@ namespace Ceriyo.Toolset.Windows
 
             animationEditor.OnAnimationsListChanged += creatureEditor.AnimationsModified;
             classEditor.OnClassesListChanged += creatureEditor.ClassesModified;
+            classEditor.OnClassesListChanged += itemEditor.ClassesModified;
         }
 
         public void Open()

@@ -20,7 +20,7 @@ namespace Ceriyo.Toolset.Components
         private GameResourceProcessor Processor { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
-        public event EventHandler<GameObjectListEventArgs> OnClassesListChanged;
+        public event EventHandler<EditorItemChangedEventArgs> OnClassesListChanged;
 
         public ClassEditorComponent()
         {
@@ -46,16 +46,18 @@ namespace Ceriyo.Toolset.Components
             {
                 if (MessageBox.Show("Are you sure you want to delete this class?", "Delete class?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
+                    string resref = Model.SelectedClass.Resref;
                     Model.Classes.Remove(Model.SelectedClass);
                     Model.SelectedClass = null;
                     Model.IsClassSelected = false;
+
+                    if (OnClassesListChanged != null)
+                    {
+                        OnClassesListChanged(this, new EditorItemChangedEventArgs(Model.SelectedClass, resref, false));
+                    }
                 }
             }
 
-            if (OnClassesListChanged != null)
-            {
-                OnClassesListChanged(this, new GameObjectListEventArgs(Model.Classes.Cast<IGameObject>().ToList()));
-            }
         }
 
         private void New(object sender, RoutedEventArgs e)
@@ -73,7 +75,7 @@ namespace Ceriyo.Toolset.Components
 
             if (OnClassesListChanged != null)
             {
-                OnClassesListChanged(this, new GameObjectListEventArgs(Model.Classes.Cast<IGameObject>().ToList()));
+                OnClassesListChanged(this, new EditorItemChangedEventArgs(charClass, resref, true));
             }
         }
 
@@ -84,11 +86,6 @@ namespace Ceriyo.Toolset.Components
             if (result != FileOperationResultTypeEnum.Success)
             {
                 MessageBox.Show("Unable to save classes.", "Saving classes failed.", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            if (OnClassesListChanged != null)
-            {
-                OnClassesListChanged(this, new GameObjectListEventArgs(Model.Classes.Cast<IGameObject>().ToList()));
             }
         }
 

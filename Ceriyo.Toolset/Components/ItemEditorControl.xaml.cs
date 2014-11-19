@@ -1,6 +1,8 @@
-﻿using Ceriyo.Data;
+﻿using System.Collections.Generic;
+using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Data.ViewModels;
@@ -29,7 +31,7 @@ namespace Ceriyo.Toolset.Components
             Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
             WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            DataContext = Model;
         }
 
         private void New(object sender, RoutedEventArgs e)
@@ -56,15 +58,13 @@ namespace Ceriyo.Toolset.Components
         {
             BindingList<ItemClassRequirement> requirements = new BindingList<ItemClassRequirement>();
 
-            BindingList<CharacterClass> classes = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
-
-            foreach (CharacterClass charClass in classes)
+            foreach (CharacterClass charClass in Model.CharacterClasses)
             {
-                ItemClassRequirement req = new ItemClassRequirement
+                ItemClassRequirement req = new ItemClassRequirement(false, charClass.Name)
                 {
                     ClassResref = charClass.Resref,
                     IsAvailable = true,
-                    LevelRequired = EngineConstants.MaxLevel
+                    LevelRequired = 0
                 };
 
                 requirements.Add(req);
@@ -110,6 +110,7 @@ namespace Ceriyo.Toolset.Components
             Model.ItemTypes = WorkingManager.GetAllGameObjects<ItemType>(ModulePaths.ItemTypesDirectory);
             Model.Scripts = WorkingManager.GetAllScriptNames();
             Model.AvailableItemProperties = WorkingManager.GetAllGameObjects<ItemProperty>(ModulePaths.ItemPropertiesDirectory);
+            Model.CharacterClasses = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
 
             foreach (Item item in Model.Items)
             {
@@ -151,7 +152,7 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
-        public void InventoryGraphicSelected(object sender, SelectionChangedEventArgs e)
+        private void InventoryGraphicSelected(object sender, SelectionChangedEventArgs e)
         {
             GameResource resource = lbInventoryGraphic.SelectedItem as GameResource;
 
@@ -170,7 +171,7 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
-        public void WorldGraphicSelected(object sender, SelectionChangedEventArgs e)
+        private void WorldGraphicSelected(object sender, SelectionChangedEventArgs e)
         {
             GameResource resource = lbWorldGraphic.SelectedItem as GameResource;
 
@@ -285,5 +286,38 @@ namespace Ceriyo.Toolset.Components
         {
             RemoveItemProperty(sender, e);
         }
+
+        public void ClassesModified(object sender, EditorItemChangedEventArgs e)
+        {
+            if (e.IsAdded)
+            {
+                Model.CharacterClasses.Add(e.GameObject as CharacterClass);
+
+                foreach (Item item in Model.Items)
+                {
+                    ItemClassRequirement requirement = new ItemClassRequirement(false, e.GameObject.Name)
+                    {
+                        ClassResref = e.GameObject.Resref,
+                        IsAvailable = true,
+                        LevelRequired = 0
+                    };
+                    item.ItemRequirements.Add(requirement);
+                }
+            }
+            else
+            {
+                CharacterClass charClass = Model.CharacterClasses.SingleOrDefault(x => x.Resref == e.Resref);
+                Model.CharacterClasses.Remove(charClass);
+
+                foreach (Item item in Model.Items)
+                {
+                    ItemClassRequirement requirement =
+                        item.ItemRequirements.SingleOrDefault(x => x.ClassResref == e.Resref);
+
+                    item.ItemRequirements.Remove(requirement);
+                }
+            }
+        }
+
     }
 }

@@ -27,7 +27,7 @@ namespace Ceriyo.Toolset.Components
         private ResourcePackDataManager ResourcePackManager { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
-        public event EventHandler<GameObjectListEventArgs> OnAnimationsListChanged;
+        public event EventHandler<EditorItemChangedEventArgs> OnAnimationsListChanged;
 
         public AnimationEditorComponent()
         {
@@ -75,13 +75,6 @@ namespace Ceriyo.Toolset.Components
             {
                 MessageBox.Show("Unable to save animations.", "Animation save failed.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
-            {
-                if (OnAnimationsListChanged != null)
-                {
-                    OnAnimationsListChanged(this, new GameObjectListEventArgs(Model.Animations.Cast<IGameObject>().ToList()));
-                }
-            }
         }
 
         private void NewAnimation(object sender, RoutedEventArgs e)
@@ -101,29 +94,28 @@ namespace Ceriyo.Toolset.Components
 
             if (OnAnimationsListChanged != null)
             {
-                OnAnimationsListChanged(this, new GameObjectListEventArgs(Model.Animations.Cast<IGameObject>().ToList()));
+                OnAnimationsListChanged(this, new EditorItemChangedEventArgs(animation, animation.Resref, true));
             }
         }
 
         private void DeleteAnimation(object sender, RoutedEventArgs e)
         {
-            if (Model.SelectedAnimation != null)
+            if (Model.SelectedAnimation == null) return;
+            if (MessageBox.Show("Are you sure you want to delete this animation?", "Delete animation?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                if (MessageBox.Show("Are you sure you want to delete this animation?", "Delete animation?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                string resref = Model.SelectedAnimation.Resref;
+                Model.Animations.Remove(Model.SelectedAnimation);
+                Model.SelectedAnimation = null;
+                Model.IsAnimationSelected = false;
+                Model.IsFrameSelected = false;
+
+                RefreshPreview();
+                RefreshSelectedFrame();
+
+                if (OnAnimationsListChanged != null)
                 {
-                    Model.Animations.Remove(Model.SelectedAnimation);
-                    Model.SelectedAnimation = null;
-                    Model.IsAnimationSelected = false;
-                    Model.IsFrameSelected = false;
-
-                    RefreshPreview();
-                    RefreshSelectedFrame();
+                    OnAnimationsListChanged(this, new EditorItemChangedEventArgs(Model.SelectedAnimation, resref, false));
                 }
-            }
-
-            if (OnAnimationsListChanged != null)
-            {
-                OnAnimationsListChanged(this, new GameObjectListEventArgs(Model.Animations.Cast<IGameObject>().ToList()));
             }
         }
 

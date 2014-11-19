@@ -1,10 +1,6 @@
-﻿using Ceriyo.Data.GameObjects;
+﻿using System.ComponentModel;
+using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace Ceriyo.Data.ViewModels
 {
@@ -23,6 +19,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<string> _scripts;
         private ItemProperty _selectedAvailableItemProperty;
         private AssignedItemProperty _selectedAssignedItemProperty;
+        private BindingList<CharacterClass> _characterClasses; 
 
         public BindingList<GameResource> Graphics
         {
@@ -194,17 +191,31 @@ namespace Ceriyo.Data.ViewModels
 
         }
 
+        public BindingList<CharacterClass> CharacterClasses
+        {
+            get
+            {
+                return _characterClasses; 
+            }
+            set
+            {
+                _characterClasses = value;
+                OnPropertyChanged("CharacterClasses");
+            }
+        }
+
         public ItemEditorVM()
         {
-            this.Graphics = new BindingList<GameResource>();
-            this.Items = new BindingList<Item>();
-            this.ItemTypes = new BindingList<ItemType>();
-            this.AvailableItemProperties = new BindingList<ItemProperty>();
-            this.AssignedItemProperties = new BindingList<AssignedItemProperty>();
-            this.ItemRequirements = new BindingList<ItemClassRequirement>();
-            this.Scripts = new BindingList<string>();
-            this.SelectedAvailableItemProperty = new ItemProperty();
-            this.SelectedAssignedItemProperty = new AssignedItemProperty();
+            Graphics = new BindingList<GameResource>();
+            Items = new BindingList<Item>();
+            ItemTypes = new BindingList<ItemType>();
+            AvailableItemProperties = new BindingList<ItemProperty>();
+            AssignedItemProperties = new BindingList<AssignedItemProperty>();
+            ItemRequirements = new BindingList<ItemClassRequirement>();
+            Scripts = new BindingList<string>();
+            SelectedAvailableItemProperty = new ItemProperty();
+            SelectedAssignedItemProperty = new AssignedItemProperty();
+            CharacterClasses = new BindingList<CharacterClass>();
         }
     }
 }

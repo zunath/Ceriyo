@@ -72,6 +72,15 @@ namespace Ceriyo.Toolset.Components
         {
             if (Model.SelectedCreature.AnimationResrefs.ContainsKey(animationType))
             {
+                // Verify the animation currently set is actually valid. If not, remove it.
+                SpriteAnimation animation =
+                    Model.Animations.SingleOrDefault(
+                        x => x.Resref == Model.SelectedCreature.AnimationResrefs[animationType]);
+                if (animation == null)
+                {
+                    Model.SelectedCreature.AnimationResrefs[animationType] = string.Empty;
+                }
+
                 box.SelectedItem = string.IsNullOrWhiteSpace(Model.SelectedCreature.AnimationResrefs[animationType]) ?
                     box.SelectedItem = Model.Animations[0] :
                     Model.Animations.SingleOrDefault(x => x.Resref == Model.SelectedCreature.AnimationResrefs[animationType]);
@@ -147,23 +156,38 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
-        public void AnimationsModified(object sender, GameObjectListEventArgs e)
+        public void AnimationsModified(object sender, EditorItemChangedEventArgs e)
         {
-            BindingList<SpriteAnimation> animations = new BindingList<SpriteAnimation>(e.GameObjects.Cast<SpriteAnimation>().ToList());
-            Model.Animations = animations;
-            SpriteAnimation animation = new SpriteAnimation
+            if (e.IsAdded)
             {
-                Name = "(No Animation)"
-            };
-            Model.Animations.Insert(0, animation);
+                Model.Animations.Add(e.GameObject as SpriteAnimation);
+            }
+            else
+            {
+                SpriteAnimation animation = Model.Animations.SingleOrDefault(x => x.Resref == e.Resref);
+                if (animation != null)
+                {
+                    Model.Animations.Remove(animation);   
+                }
+            }
 
             RefreshAnimationList();
         }
 
-        public void ClassesModified(object sender, GameObjectListEventArgs e)
+        public void ClassesModified(object sender, EditorItemChangedEventArgs e)
         {
-            BindingList<CharacterClass> classes = new BindingList<CharacterClass>(e.GameObjects.Cast<CharacterClass>().ToList());
-            Model.CharacterClasses = classes;
+            if (e.IsAdded)
+            {
+                Model.CharacterClasses.Add(e.GameObject as CharacterClass);
+            }
+            else
+            {
+                CharacterClass charClass = Model.CharacterClasses.SingleOrDefault(x => x.Resref == e.Resref);
+                if (charClass != null)
+                {
+                    Model.CharacterClasses.Remove(charClass);
+                }
+            }
         }
 
         private void ClassSelected(object sender, SelectionChangedEventArgs e)

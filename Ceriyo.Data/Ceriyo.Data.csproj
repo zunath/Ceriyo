@@ -130,6 +130,7 @@
     <Compile Include="Enumerations\ScriptEventTypeEnum.cs" />
     <Compile Include="Enumerations\TileEditModeEnum.cs" />
     <Compile Include="EventArguments\AreaPropertiesChangedEventArgs.cs" />
+    <Compile Include="EventArguments\EditorItemChangedEventArgs.cs" />
     <Compile Include="EventArguments\ResrefEventArgs.cs" />
     <Compile Include="EventArguments\DirectConnectEventArgs.cs" />
     <Compile Include="EventArguments\GameObjectEventArgs.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Packets\PacketBase.cs" />
     <Compile Include="Packets\UserDisconnectedPacket.cs" />
     <Compile Include="Packets\UserInfoPacket.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceObjects\GameResource.cs" />
     <Compile Include="ResourceObjects\ResourceEditorItem.cs" />
