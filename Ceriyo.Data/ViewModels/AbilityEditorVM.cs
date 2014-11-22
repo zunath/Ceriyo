@@ -8,6 +8,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<Ability> _abilities;
         private Ability _selectedAbility;
         private bool _isAbilitySelected;
+        private BindingList<string> _scripts; 
 
         public BindingList<Ability> Abilities
         {
@@ -48,11 +49,25 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public BindingList<string> Scripts
+        {
+            get
+            {
+                return _scripts;
+            }
+            set
+            {
+                _scripts = value;
+                OnPropertyChanged("Scripts");
+            }
+        }
+
         public AbilityEditorVM()
         {
-            this.Abilities = new BindingList<Ability>();
-            this.IsAbilitySelected = false;
-            this.SelectedAbility = new Ability();
+            Abilities = new BindingList<Ability>();
+            IsAbilitySelected = false;
+            SelectedAbility = new Ability();
+            Scripts = new BindingList<string>();
         }
     }
 }

@@ -93,7 +93,7 @@ namespace Ceriyo.Toolset.Components
         public void Open(object sender, EventArgs e)
         {
             Model.Abilities = WorkingManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory);
-
+            Model.Scripts = WorkingManager.GetAllScriptNames();
 
             if (Model.Abilities.Count > 0)
             {

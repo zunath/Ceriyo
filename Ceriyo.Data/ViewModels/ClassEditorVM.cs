@@ -50,9 +50,9 @@ namespace Ceriyo.Data.ViewModels
 
         public ClassEditorVM()
         {
-            this.IsClassSelected = false;
-            this.Classes = new BindingList<CharacterClass>();
-            this.SelectedClass = new CharacterClass();
+            IsClassSelected = false;
+            Classes = new BindingList<CharacterClass>();
+            SelectedClass = new CharacterClass();
         }
     }
 }

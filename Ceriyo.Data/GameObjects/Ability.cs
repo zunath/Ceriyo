@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using System.Xml.Serialization;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Extensions;
@@ -22,6 +18,9 @@ namespace Ceriyo.Data.GameObjects
         [ProtoMember(4)]
         public string Description { get; set; }
         public string Comments { get; set; }
+        [ProtoMember(5)]
+        public bool IsPassive { get; set; }
+
         [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.AbilitiesDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
@@ -31,14 +30,17 @@ namespace Ceriyo.Data.GameObjects
 
         public Ability()
         {
-            this.Name = string.Empty;
-            this.Tag = string.Empty;
-            this.Resref = string.Empty;
-            this.Description = string.Empty;
-            this.Comments = string.Empty;
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comments = string.Empty;
+            IsPassive = true;
 
-            this.LocalVariables = new BindingList<LocalVariable>();
-            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            LocalVariables = new BindingList<LocalVariable>();
+            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+
+            Scripts.Add(ScriptEventTypeEnum.OnAbilityActivated, string.Empty);
         }
     }
 }

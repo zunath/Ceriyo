@@ -160,18 +160,22 @@ namespace Ceriyo.Data
             }
         }
 
-        public BindingList<string> GetAllScriptNames()
+        public BindingList<string> GetAllScriptNames(bool insertBlankEntry = true)
         {
             BindingList<string> scripts = new BindingList<string>();
 
             try
             {
-                string[] scriptNames = Directory.GetFiles(WorkingPaths.ScriptsDirectory, "*.js");
+                string[] scriptNames = Directory.GetFiles(WorkingPaths.ScriptsDirectory, "*" + EnginePaths.ScriptExtension);
                 foreach (string name in scriptNames)
                 {
                     scripts.Add(Path.GetFileNameWithoutExtension(name));
                 }
 
+                if(insertBlankEntry)
+                {
+                    scripts.Insert(0, string.Empty);
+                }
             }
             catch
             {
