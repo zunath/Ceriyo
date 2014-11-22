@@ -62,6 +62,7 @@ namespace Ceriyo.Toolset.Components
             {
                 ItemClassRequirement req = new ItemClassRequirement(false, charClass.Name)
                 {
+                    ClassName = charClass.Name,
                     ClassResref = charClass.Resref,
                     IsAvailable = true,
                     LevelRequired = 0
@@ -289,7 +290,30 @@ namespace Ceriyo.Toolset.Components
 
         public void ClassesModified(object sender, EditorItemChangedEventArgs e)
         {
-            if (e.IsAdded)
+            CharacterClass charClass = Model.CharacterClasses.SingleOrDefault(x => x.Resref == e.Resref);
+
+            if (e.IsChanged)
+            {
+                if (charClass == null) return;
+                int index = Model.CharacterClasses.IndexOf(charClass);
+                Model.CharacterClasses[index] = e.GameObject as CharacterClass;
+
+                foreach (Item item in Model.Items)
+                {
+                    ItemClassRequirement requirement =
+                        item.ItemRequirements.SingleOrDefault(x => x.ClassResref == e.Resref);
+                    index = item.ItemRequirements.IndexOf(requirement);
+                    item.ItemRequirements[index] = new ItemClassRequirement(false, e.GameObject.Name)
+                    {
+                        ClassResref = e.Resref,
+                        IsAvailable = item.ItemRequirements[index].IsAvailable,
+                        LevelRequired = item.ItemRequirements[index].LevelRequired
+                    };
+
+
+                }
+            }
+            else if (e.IsAdded)
             {
                 Model.CharacterClasses.Add(e.GameObject as CharacterClass);
 
@@ -306,7 +330,6 @@ namespace Ceriyo.Toolset.Components
             }
             else
             {
-                CharacterClass charClass = Model.CharacterClasses.SingleOrDefault(x => x.Resref == e.Resref);
                 Model.CharacterClasses.Remove(charClass);
 
                 foreach (Item item in Model.Items)

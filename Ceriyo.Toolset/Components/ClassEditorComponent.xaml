@@ -64,6 +64,7 @@
         	TextWrapping="Wrap" 
         	Text="{Binding SelectedClass.Name}" 
         	IsEnabled="{Binding IsClassSelected}"
+            TextChanged="ChangeClassName"
         	VerticalAlignment="Top" 
         	Width="135" Margin="5,41,0,0"/>
         <Label Content="Name:" 

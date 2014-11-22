@@ -53,7 +53,7 @@ namespace Ceriyo.Toolset.Components
 
                     if (OnClassesListChanged != null)
                     {
-                        OnClassesListChanged(this, new EditorItemChangedEventArgs(Model.SelectedClass, resref, false));
+                        OnClassesListChanged(this, new EditorItemChangedEventArgs(Model.SelectedClass, resref, false, false));
                     }
                 }
             }
@@ -75,7 +75,7 @@ namespace Ceriyo.Toolset.Components
 
             if (OnClassesListChanged != null)
             {
-                OnClassesListChanged(this, new EditorItemChangedEventArgs(charClass, resref, true));
+                OnClassesListChanged(this, new EditorItemChangedEventArgs(charClass, resref, true, false));
             }
         }
 
@@ -96,6 +96,18 @@ namespace Ceriyo.Toolset.Components
             if (Model.Classes.Count > 0)
             {
                 Model.SelectedClass = Model.Classes[0];
+            }
+        }
+
+        private void ChangeClassName(object sender, TextChangedEventArgs e)
+        {
+            if (OnClassesListChanged != null)
+            {
+                EditorItemChangedEventArgs args = new EditorItemChangedEventArgs(Model.SelectedClass,
+                    Model.SelectedClass.Resref, false, true);
+                args.GameObject.Name = txtName.Text;
+
+                OnClassesListChanged(this, args);
             }
         }
     }

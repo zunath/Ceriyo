@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Toolset.Windows
 {

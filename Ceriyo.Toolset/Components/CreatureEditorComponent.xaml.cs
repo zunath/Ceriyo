@@ -176,17 +176,21 @@ namespace Ceriyo.Toolset.Components
 
         public void ClassesModified(object sender, EditorItemChangedEventArgs e)
         {
-            if (e.IsAdded)
+            CharacterClass charClass = Model.CharacterClasses.SingleOrDefault(x => x.Resref == e.Resref);
+            if (e.IsChanged)
+            {
+                if (charClass == null) return;
+                int index = Model.CharacterClasses.IndexOf(charClass);
+                Model.CharacterClasses[index] = e.GameObject as CharacterClass;
+            }
+            else if (e.IsAdded)
             {
                 Model.CharacterClasses.Add(e.GameObject as CharacterClass);
             }
             else
             {
-                CharacterClass charClass = Model.CharacterClasses.SingleOrDefault(x => x.Resref == e.Resref);
-                if (charClass != null)
-                {
-                    Model.CharacterClasses.Remove(charClass);
-                }
+                if (charClass == null) return;
+                Model.CharacterClasses.Remove(charClass);
             }
         }
 

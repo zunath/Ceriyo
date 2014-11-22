@@ -94,7 +94,7 @@ namespace Ceriyo.Toolset.Components
 
             if (OnAnimationsListChanged != null)
             {
-                OnAnimationsListChanged(this, new EditorItemChangedEventArgs(animation, animation.Resref, true));
+                OnAnimationsListChanged(this, new EditorItemChangedEventArgs(animation, animation.Resref, true, false));
             }
         }
 
@@ -114,7 +114,7 @@ namespace Ceriyo.Toolset.Components
 
                 if (OnAnimationsListChanged != null)
                 {
-                    OnAnimationsListChanged(this, new EditorItemChangedEventArgs(Model.SelectedAnimation, resref, false));
+                    OnAnimationsListChanged(this, new EditorItemChangedEventArgs(Model.SelectedAnimation, resref, false, false));
                 }
             }
         }
