@@ -8,6 +8,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<Skill> _skills;
         private Skill _selectedSkill;
         private bool _isSkillSelected;
+        private BindingList<string> _scripts; 
 
         public BindingList<Skill> Skills
         {
@@ -48,11 +49,25 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public BindingList<string> Scripts
+        {
+            get
+            {
+                return _scripts;
+            }
+            set
+            {
+                _scripts = value;
+                OnPropertyChanged("Scripts");
+            }
+        }
+
         public SkillEditorVM()
         {
-            this.Skills = new BindingList<Skill>();
-            this.SelectedSkill = new Skill();
-            this.IsSkillSelected = false;
+            Skills = new BindingList<Skill>();
+            SelectedSkill = new Skill();
+            IsSkillSelected = false;
+            Scripts = new BindingList<string>();
         }
     }
 }

@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:enums="clr-namespace:Ceriyo.Data.Enumerations;assembly=Ceriyo.Data"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="700" Background="White">
     <Grid>
@@ -101,6 +102,61 @@
                Height="26" 
                Width="45" Margin="5,123,0,0" Grid.Column="1"/>
 
+        <CheckBox Content="Is Passive" 
+                  HorizontalAlignment="Left" 
+                  Grid.Column="1"
+                  IsChecked="{Binding SelectedSkill.IsPassive}"
+                  IsEnabled="{Binding IsSkillSelected}"
+                  VerticalAlignment="Top" Margin="10,195,0,0"/>
+
+        <TabControl HorizontalAlignment="Stretch" 
+                    Height="Auto" 
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="3"
+                    Grid.RowSpan="3"
+                    VerticalAlignment="Stretch" 
+                    Width="Auto">
+
+            <TabItem Header="Scripts">
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="On Activated:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
+                    <ComboBox HorizontalAlignment="Stretch" 
+                		Margin="120,12,0,0" 
+                		VerticalAlignment="Top" 
+                		ItemsSource="{Binding Scripts}"
+                		SelectedValue="{Binding Path=SelectedSkill.Scripts[(enums:ScriptEventTypeEnum)OnAbilityActivated]}"
+                		IsEnabled="{Binding IsSkillSelected}"
+                		Width="Auto"/>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Description">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox HorizontalAlignment="Stretch" 
+                		VerticalAlignment="Stretch"
+                		AcceptsReturn="True"
+                		TextWrapping="Wrap"
+                		Width="Auto"
+                		Height="Auto"
+                        IsEnabled="{Binding IsSkillSelected}"
+                		Text="{Binding SelectedSkill.Description}" Margin="0,0,6,32"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Comments">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox HorizontalAlignment="Stretch" 
+                		VerticalAlignment="Stretch"
+                		AcceptsReturn="True"
+                		TextWrapping="Wrap"
+                		Width="Auto"
+                		Height="Auto"
+                        IsEnabled="{Binding IsSkillSelected}"
+                		Text="{Binding SelectedSkill.Comments}" Margin="0,0,6,32"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
 
     </Grid>

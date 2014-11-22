@@ -36,6 +36,7 @@ namespace Ceriyo.Data.Enumerations
         OnCreatureHeartbeat = 30,
         OnCreatureAttacked = 31,
         OnCreatureSpawned = 32,
-        OnAbilityActivated = 33
+        OnAbilityActivated = 33,
+        OnSkillActivated = 34
     }
 }

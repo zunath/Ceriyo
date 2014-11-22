@@ -76,7 +76,7 @@ namespace Ceriyo.Toolset.Components
         public void Open(object sender, EventArgs e)
         {
             Model.Skills = WorkingManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory);
-
+            Model.Scripts = WorkingManager.GetAllScriptNames();
 
             if (Model.Skills.Count > 0)
             {
