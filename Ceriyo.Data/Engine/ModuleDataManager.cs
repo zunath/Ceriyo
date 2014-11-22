@@ -191,10 +191,6 @@ namespace Ceriyo.Data
             {
                 zip.AddDirectoryByName(ModulePaths.SkillsDirectory);
             }
-            if (zip[ModulePaths.RacesDirectory] == null)
-            {
-                zip.AddDirectoryByName(ModulePaths.RacesDirectory);
-            }
         }
 
         private void AddModulePropertiesFile(ZipFile zip, GameModule module)

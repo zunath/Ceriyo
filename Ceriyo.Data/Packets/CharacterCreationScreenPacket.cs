@@ -9,8 +9,6 @@ namespace Ceriyo.Data.Packets
     {
         [ProtoMember(1)]
         public bool IsRequest { get; set; }
-        [ProtoMember(2)]
-        public List<Race> Races { get; set; }
         [ProtoMember(3)]
         public List<CharacterClass> CharacterClasses { get; set; }
         [ProtoMember(4)]
@@ -21,7 +19,6 @@ namespace Ceriyo.Data.Packets
         public CharacterCreationScreenPacket()
         {
             IsRequest = false;
-            Races = new List<Race>();
             CharacterClasses = new List<CharacterClass>();
             Abilities = new List<Ability>();
             Skills = new List<Skill>();

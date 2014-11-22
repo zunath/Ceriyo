@@ -31,13 +31,6 @@
             </UIComponent>
             <UIComponent>
               <ComponentType>Item</ComponentType>
-              <Name>lbiRace</Name>
-              <Text>Race</Text>
-              <SizeX>50</SizeX>
-              <SizeY>50</SizeY>
-            </UIComponent>
-            <UIComponent>
-              <ComponentType>Item</ComponentType>
               <Name>lbiPortrait</Name>
               <Text>Portrait</Text>
               <SizeX>50</SizeX>

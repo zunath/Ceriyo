@@ -164,7 +164,6 @@
     <Compile Include="GameObjects\MapTile.cs" />
     <Compile Include="GameObjects\Placeable.cs" />
     <Compile Include="GameObjects\Player.cs" />
-    <Compile Include="GameObjects\Race.cs" />
     <Compile Include="GameObjects\Skill.cs" />
     <Compile Include="GameObjects\SpriteAnimation.cs" />
     <Compile Include="GameObjects\SpriteAnimationFrame.cs" />
@@ -202,7 +201,6 @@
     <Compile Include="ViewModels\AreaToolbarVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\ClassEditorVM.cs" />
-    <Compile Include="ViewModels\RaceEditorVM.cs" />
     <Compile Include="ViewModels\CreatureEditorVM.cs" />
     <Compile Include="ViewModels\DialogSelectionVM.cs" />
     <Compile Include="ViewModels\EditDialogVM.cs" />

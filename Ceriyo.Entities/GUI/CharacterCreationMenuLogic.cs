@@ -159,15 +159,6 @@ namespace Ceriyo.Entities.GUI
                 });
             }
 
-            foreach (Race race in packet.Races)
-            {
-                RaceListBox.Items.Add(new ListBoxItem
-                {
-                    Text = race.Name,
-                    Size = new Point(50, 50)
-                });
-            }
-
             foreach (Skill skill in packet.Skills)
             {
                 SkillsListBox.Items.Add(new ListBoxItem

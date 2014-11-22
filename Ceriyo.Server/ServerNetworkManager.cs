@@ -167,7 +167,6 @@ namespace Ceriyo.Server
             {
                 Abilities = WorkingManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory).ToList(),
                 CharacterClasses = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory).ToList(),
-                Races = WorkingManager.GetAllGameObjects<Race>(ModulePaths.RacesDirectory).ToList(),
                 Skills = WorkingManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory).ToList()
             };
 
