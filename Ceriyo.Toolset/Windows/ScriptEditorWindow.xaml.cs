@@ -84,7 +84,7 @@ namespace Ceriyo.Toolset.Windows
             Model.ScriptNames.Clear();
             Model.OpenScripts.Clear();
 
-            Model.ScriptNames = WorkingManager.GetAllScriptNames();
+            Model.ScriptNames = WorkingManager.GetAllScriptNames(false);
             Model.OpenScripts.Add(new GameScript("script" + GetUniqueScriptID(), DefaultScriptText));
             tcScripts.SelectedIndex = 0;
             Show();

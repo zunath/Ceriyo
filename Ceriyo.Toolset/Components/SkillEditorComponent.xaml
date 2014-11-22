@@ -107,7 +107,7 @@
                   Grid.Column="1"
                   IsChecked="{Binding SelectedSkill.IsPassive}"
                   IsEnabled="{Binding IsSkillSelected}"
-                  VerticalAlignment="Top" Margin="10,195,0,0"/>
+                  VerticalAlignment="Top" Margin="10,10,0,0" Grid.Row="1"/>
 
         <TabControl HorizontalAlignment="Stretch" 
                     Height="Auto" 
