@@ -17,7 +17,7 @@ namespace Ceriyo.Toolset.Windows
     {
         private ScriptEditorVM Model { get; set; }
         private SaveScriptWindow SaveScriptWin { get; set; }
-        private const string DefaultScriptText = "public static void Main()\n{\n\t\n}";
+        private const string DefaultScriptText = "";
         private WorkingDataManager WorkingManager { get; set; }
 
         public ScriptEditorWindow()

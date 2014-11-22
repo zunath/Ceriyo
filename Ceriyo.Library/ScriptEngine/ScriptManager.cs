@@ -20,7 +20,7 @@ namespace Ceriyo.Library.ScriptEngine
             scriptName += EnginePaths.ScriptExtension;
             if (!File.Exists(EnginePaths.ScriptsDirectory + scriptName)) return null;
             string filePath = EnginePaths.ScriptsDirectory + scriptName;
-                
+
             return LuaManager.DoFile(filePath);
         }
 
@@ -29,7 +29,7 @@ namespace Ceriyo.Library.ScriptEngine
             scriptName += EnginePaths.ScriptExtension;
             if (!File.Exists(WorkingPaths.ScriptsDirectory + scriptName)) return null;
             string filePath = EnginePaths.ScriptsDirectory + scriptName;
-                
+            
             return LuaManager.DoFile(filePath);
         }
 
