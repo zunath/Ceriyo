@@ -11,14 +11,12 @@
             <RowDefinition Height="40"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TabControl Name="tabPages"
-            HorizontalAlignment="Stretch" 
+        <TabControl HorizontalAlignment="Stretch" 
 			Height="Auto" 
 			VerticalAlignment="Stretch" 
 			Width="Auto">
             
-            <TabItem Name="tabCreatures"
-                Header="Creatures">
+            <TabItem Header="Creatures">
 
                 <Grid Background="#FFE5E5E5">
                     <Components:CreatureEditorComponent
@@ -99,19 +97,7 @@
                     </Components:SkillEditorComponent>
                 </Grid>
             </TabItem>
-            <TabItem Header="Races">
-                <Grid Background="#FFE5E5E5">
-
-
-                    <Components:RaceEditorComponent
-                        x:Name="raceEditor"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
-
-                    </Components:RaceEditorComponent>
-
-                </Grid>
-            </TabItem>
+            
             
         </TabControl>
         <Button Content="OK" HorizontalAlignment="Left" Margin="375,8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="99" Click="OK"/>
