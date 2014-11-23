@@ -186,5 +186,12 @@ namespace Ceriyo.Toolset.Components
             Model.IsAreaSelected = Model.SelectedArea != null;
         }
 
+        public void ModuleSaved(object sender, EventArgs e)
+        {
+            if (Model.IsAreaLoaded)
+            {
+                btnSave.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+        }
     }
 }

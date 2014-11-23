@@ -44,6 +44,8 @@ namespace Ceriyo.Toolset
             menuBar.OnOpenModule += areaSelection.ModuleLoaded;
             menuBar.OnOpenModule += hotBar.ModuleOpened;
 
+            menuBar.OnSaveModule += areaSelection.ModuleSaved;
+
             menuBar.OnCloseModule += OnModuleClosed;
             menuBar.OnCloseModule += areaSelection.ModuleClosed;
             menuBar.OnCloseModule += hotBar.ModuleClosed;

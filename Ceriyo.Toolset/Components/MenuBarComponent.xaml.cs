@@ -23,6 +23,7 @@ namespace Ceriyo.Toolset.Components
         private ModulePropertiesWindow ModuleProperties { get; set; }
         private DataEditorWindow DataEditor { get; set; }
         public event EventHandler<GameModuleEventArgs> OnOpenModule;
+        public event EventHandler<EventArgs> OnSaveModule;
         public event EventHandler<EventArgs> OnCloseModule;
         public event EventHandler<EventArgs> OnDataEditorClosed;
         private ModuleDataManager ModuleManager { get; set;}
@@ -144,7 +145,7 @@ namespace Ceriyo.Toolset.Components
         private void SaveModule(object sender, RoutedEventArgs e)
         {
             GameModule module = WorkingManager.GetGameModule();
-            ModuleManager.SaveModule(module.Resref);
+            DoSaveModule(sender, new GameModuleEventArgs(module.Resref));
         }
 
         private void SaveAsModule(object sender, RoutedEventArgs e)
@@ -153,8 +154,19 @@ namespace Ceriyo.Toolset.Components
             {
                 Owner = Window.GetWindow(this)
             };
+            window.OnSaveModule += DoSaveModule;
 
             window.ShowDialog();
+        }
+
+        private void DoSaveModule(object sender, GameModuleEventArgs e)
+        {
+            if (OnSaveModule != null)
+            {
+                OnSaveModule(this, new EventArgs());
+            }
+
+            ModuleManager.SaveModule(e.FileName);
         }
 
         private void MenuBarComponent_OnLoaded(object sender, RoutedEventArgs e)

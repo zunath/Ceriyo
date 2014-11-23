@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -61,7 +60,11 @@ namespace Ceriyo.Toolset.Windows
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    ModuleManager.SaveModule(Model.FileName);
+                    if (OnSaveModule != null)
+                    {
+                        OnSaveModule(this, new GameModuleEventArgs(Model.FileName));
+                    }
+
                     Close();
                 }
 
