@@ -23,6 +23,7 @@ namespace Ceriyo.Toolset.Components
         private ModulePropertiesWindow ModuleProperties { get; set; }
         private DataEditorWindow DataEditor { get; set; }
         public event EventHandler<GameModuleEventArgs> OnOpenModule;
+        public event EventHandler<EventArgs> OnCloseModule;
         public event EventHandler<EventArgs> OnDataEditorClosed;
         private ModuleDataManager ModuleManager { get; set;}
 
@@ -45,6 +46,7 @@ namespace Ceriyo.Toolset.Components
         private void InitializeEvents()
         {
             DataEditor.OnWindowHidden += RaiseDataEditorClosedEvent;
+            
         }
 
         private void RaiseDataEditorClosedEvent(object sender, EventArgs e)
@@ -62,7 +64,15 @@ namespace Ceriyo.Toolset.Components
                 Owner = Window.GetWindow(this)
             };
 
+            modWindow.OnModuleCreated += ModuleCreated;
+
             modWindow.ShowDialog();
+        }
+
+        private void ModuleCreated(object sender, GameModuleEventArgs eventArgs)
+        {
+            ModuleManager.LoadModule(eventArgs.FileName, true);
+            OpenModuleFinished(sender, eventArgs);
         }
 
         private void OpenModule(object sender, RoutedEventArgs e)
@@ -162,6 +172,11 @@ namespace Ceriyo.Toolset.Components
             if (result == FileOperationResultTypeEnum.Success)
             {
                 Model.IsModuleLoaded = false;
+
+                if (OnCloseModule != null)
+                {
+                    OnCloseModule(this, new EventArgs());
+                }
             }
             else
             {

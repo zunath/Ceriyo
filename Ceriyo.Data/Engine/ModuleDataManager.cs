@@ -1,10 +1,9 @@
 ﻿using System;
+using System.IO;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using FlatRedBall.IO;
 using Ionic.Zip;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Ceriyo.Data
 {
@@ -116,7 +115,7 @@ namespace Ceriyo.Data
 
         public FileOperationResultTypeEnum CloseModule()
         {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            FileOperationResultTypeEnum result;
 
             try
             {
@@ -131,7 +130,6 @@ namespace Ceriyo.Data
             catch (Exception)
             {
                 result = FileOperationResultTypeEnum.Failure;
-                throw;
             }
 
             return result;
@@ -206,20 +204,19 @@ namespace Ceriyo.Data
         private void AddItemTypesFiles(ZipFile zip)
         {
             string itemTypesPath = EnginePaths.DataDirectory + "ItemTypes/";
-            if (Directory.Exists(itemTypesPath))
+            if (!Directory.Exists(itemTypesPath)) return;
+            foreach (string file in Directory.GetFiles(itemTypesPath))
             {
-                foreach (string file in Directory.GetFiles(itemTypesPath))
+                try
                 {
-                    try
-                    {
-                        ItemType itemType = FileManager.XmlDeserialize<ItemType>(file);
-                        // Serialization worked - copy the file to the module zip
-                        zip.AddFile(file, ModulePaths.ItemTypesDirectory);
-                    }
-                    catch
-                    {
-                        // TODO: Log entry maybe?
-                    }
+                    FileManager.XmlDeserialize<ItemType>(file);
+                    // Serialization worked - copy the file to the module zip
+                    zip.AddFile(file, ModulePaths.ItemTypesDirectory);
+                }
+                catch
+                {
+                    throw;
+                    // TODO: Log entry maybe?
                 }
             }
         }
@@ -238,6 +235,7 @@ namespace Ceriyo.Data
                     }
                     catch
                     {
+                        throw;
                         // TODO: Log entry maybe?
                     }
                 }
@@ -258,28 +256,9 @@ namespace Ceriyo.Data
                     }
                     catch
                     {
+                        throw;
                         // TODO: Log entry maybe?
                     }
-                }
-            }
-        }
-
-        public GameModule GetGameModule(string fileName)
-        {
-            string filePath = EnginePaths.ModulesDirectory + fileName + EnginePaths.ModuleExtension;
-
-            using (ZipFile zip = new ZipFile(filePath))
-            {
-                ZipEntry entry = zip[EnginePaths.ModuleDataFileName + EnginePaths.DataExtension];
-
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    entry.Extract(stream);
-                    stream.Position = 0;
-                    StreamReader reader = new StreamReader(stream);
-
-                    string text = reader.ReadToEnd();
-                    return FileManager.XmlDeserializeFromString<GameModule>(text);
                 }
             }
         }

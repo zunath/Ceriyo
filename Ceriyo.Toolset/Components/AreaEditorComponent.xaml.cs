@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.Screens;
 using FlatRedBall.Screens;
@@ -20,7 +9,7 @@ namespace Ceriyo.Toolset.Components
     /// <summary>
     /// Interaction logic for AreaEditorComponent.xaml
     /// </summary>
-    public partial class AreaEditorComponent : UserControl
+    public partial class AreaEditorComponent
     {
         private event EventHandler<EventArgs> OnDataEditorClosed;
         public event EventHandler<GameModuleEventArgs> OnModuleOpened;
@@ -38,22 +27,20 @@ namespace Ceriyo.Toolset.Components
         {
             AreaEditorScreen screen = ScreenManager.CurrentScreen as AreaEditorScreen;
 
-            if (screen != null)
-            {
-                OnAreaOpened += objectSelection.LoadArea;
-                OnAreaOpened += paintObjects.LoadArea;
-                OnAreaOpened += screen.LoadArea;
+            if (screen == null) return;
+            OnAreaOpened += objectSelection.LoadArea;
+            OnAreaOpened += paintObjects.LoadArea;
+            OnAreaOpened += screen.LoadArea;
 
-                OnAreaPropertiesSaved += screen.AreaPropertiesSaved;
-                OnAreaPropertiesSaved += paintObjects.AreaPropertiesSaved;
+            OnAreaPropertiesSaved += screen.AreaPropertiesSaved;
+            OnAreaPropertiesSaved += paintObjects.AreaPropertiesSaved;
 
-                OnAreaClosed += paintObjects.UnloadArea;
-                OnAreaClosed += screen.CloseArea;
+            OnAreaClosed += paintObjects.UnloadArea;
+            OnAreaClosed += screen.CloseArea;
 
-                paintObjects.OnModeChange += screen.ChangePaintMode;
+            paintObjects.OnModeChange += screen.ChangePaintMode;
 
-                OnAreaSaved += screen.SaveArea;
-            }
+            OnAreaSaved += screen.SaveArea;
         }
 
         private void SetUpExternalEvents()

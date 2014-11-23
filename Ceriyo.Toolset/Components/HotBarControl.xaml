@@ -6,14 +6,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="25" d:DesignWidth="300" Background="White">
     <Grid>
-        <ToolBar Name="tbHotBar">
-            <Button Name="btnScriptEditor" Click="btnScriptEditor_Click">
+        <ToolBar>
+            <Button Click="btnScriptEditor_Click" IsEnabled="{Binding IsModuleLoaded}">
                 <Image Source="/Images/script.png" Height="15" Width="15" ToolTip="Script Editor"></Image>
             </Button>
-            <Button Name="btnDialogEditor" Click="btnDialogEditor_Click">
+            <Button Click="btnDialogEditor_Click" IsEnabled="{Binding IsModuleLoaded}">
                 <Image Source="/Images/view-list-tree-2.png" Height="15" Width="15" ToolTip="Dialog Editor"></Image>
             </Button>
-            <Button Name="btnStartLocation" Click="btnStartLocation_Click">
+            <Button Click="btnStartLocation_Click" IsEnabled="{Binding IsAreaLoaded}">
                 <Image Source="/Images/arrow-in.png" Height="15" Width="15" ToolTip="Set Start Location"></Image>
             </Button>
         </ToolBar>

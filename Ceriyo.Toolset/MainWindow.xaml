@@ -50,12 +50,12 @@
             <frb:FlatRedBallControl
             x:Name="gameControl"/>
         </DockPanel>
-        <Comp:HotBarControl Grid.Column="0"
+        <Comp:HotBarControl x:Name="hotBar"
+            Grid.Column="0"
             Grid.ColumnSpan="6" 
             HorizontalAlignment="Stretch" 
             Height="Auto" 
             Grid.Row="1" 
-            Grid.RowSpan="1"
             VerticalAlignment="Stretch" 
             Width="Auto"/>
         

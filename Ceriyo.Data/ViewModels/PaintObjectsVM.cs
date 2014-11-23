@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
@@ -196,19 +192,19 @@ namespace Ceriyo.Data.ViewModels
 
         public PaintObjectsVM()
         {
-            this.PaintMode = PaintObjectModeTypeEnum.None;
-            this.Creatures = new BindingList<Creature>();
-            this.Items = new BindingList<Item>();
-            this.Placeables = new BindingList<Placeable>();
-            this.Graphic = new GameResource();
-            this.SelectedCreature = new Creature();
-            this.SelectedItem = new Item();
-            this.SelectedPlaceable = new Placeable();
-            this.SelectionStartX = 0;
-            this.SelectionStartY = 0;
-            this.SelectionEndX = 0;
-            this.SelectionEndY = 0;
-            this.IsMouseDown = false;
+            PaintMode = PaintObjectModeTypeEnum.None;
+            Creatures = new BindingList<Creature>();
+            Items = new BindingList<Item>();
+            Placeables = new BindingList<Placeable>();
+            Graphic = new GameResource();
+            SelectedCreature = new Creature();
+            SelectedItem = new Item();
+            SelectedPlaceable = new Placeable();
+            SelectionStartX = 0;
+            SelectionStartY = 0;
+            SelectionEndX = 0;
+            SelectionEndY = 0;
+            IsMouseDown = false;
         }
     }
 }

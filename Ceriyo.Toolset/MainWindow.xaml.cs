@@ -41,23 +41,36 @@ namespace Ceriyo.Toolset
         {
             AreaEditorGame = new FRBGameComponent(gameControl, typeof(AreaEditorScreen));
             menuBar.OnOpenModule += OnModuleOpened;
-            menuBar.OnOpenModule += areaEditor.ModuleOpened;
-            
+            menuBar.OnOpenModule += areaSelection.ModuleLoaded;
+            menuBar.OnOpenModule += hotBar.ModuleOpened;
+
+            menuBar.OnCloseModule += OnModuleClosed;
+            menuBar.OnCloseModule += areaSelection.ModuleClosed;
+            menuBar.OnCloseModule += hotBar.ModuleClosed;
+
             menuBar.OnDataEditorClosed += areaEditor.DataEditorClosed;
 
-            areaSelection.OnAreaSaved += areaEditor.AreaSaved;
             areaSelection.OnAreaOpen += areaEditor.AreaOpened;
             areaSelection.OnAreaOpen += menuBar.AreaOpened;
+            areaSelection.OnAreaOpen += hotBar.AreaOpened;
+
             areaSelection.OnAreaPropertiesSaved += areaEditor.AreaPropertiesSaved;
+            
             areaSelection.OnAreaClosed += areaEditor.AreaClosed;
             areaSelection.OnAreaClosed += menuBar.AreaClosed;
+            areaSelection.OnAreaClosed += hotBar.AreaClosed;
 
-            areaEditor.OnModuleOpened += areaSelection.ModuleLoaded;
+            areaSelection.OnAreaSaved += areaEditor.AreaSaved;
         }
 
         private void OnModuleOpened(object sender, GameModuleEventArgs e)
         {
             Model.WindowTitle = "Ceriyo Editor - " + e.FileName + EnginePaths.ModuleExtension;
+        }
+
+        private void OnModuleClosed(object sender, EventArgs e)
+        {
+            Model.WindowTitle = "Ceriyo Editor";
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

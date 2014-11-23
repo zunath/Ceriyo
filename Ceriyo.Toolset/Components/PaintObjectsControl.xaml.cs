@@ -1,34 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data;
-using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
-using Ceriyo.Entities.Screens;
-using Ceriyo.Toolset.FRBControl;
 using Ceriyo.Library.Processing;
-using System.ComponentModel;
 
 namespace Ceriyo.Toolset.Components
 {
     /// <summary>
     /// Interaction logic for PaintObjectsControl.xaml
     /// </summary>
-    public partial class PaintObjectsControl : UserControl
+    public partial class PaintObjectsControl
     {
         private PaintObjectsVM Model { get; set; }
         public event EventHandler<ObjectPainterEventArgs> OnModeChange;
@@ -39,7 +25,7 @@ namespace Ceriyo.Toolset.Components
             InitializeComponent();
             Model = new PaintObjectsVM();
             WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            DataContext = Model;
         }
 
         private void PopulateModel()
@@ -77,7 +63,7 @@ namespace Ceriyo.Toolset.Components
         {
             Area area = e.GameObject as Area;
 
-            if (area.AreaTileset != null)
+            if (area != null && area.AreaTileset != null)
             {
                 if (!string.IsNullOrWhiteSpace(area.AreaTileset.Graphic.FileName))
                 {

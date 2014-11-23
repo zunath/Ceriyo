@@ -1,7 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
 using System.Windows;
 using Ceriyo.Data;
 using Ceriyo.Data.Engine;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.ViewModels;
 
 namespace Ceriyo.Toolset.Windows
@@ -9,11 +10,13 @@ namespace Ceriyo.Toolset.Windows
     /// <summary>
     /// Interaction logic for NewModuleWindow.xaml
     /// </summary>
-    public partial class NewModuleWindow : Window
+    public partial class NewModuleWindow
     {
         private NewModuleVM Model { get; set; }
         private ModuleDataManager ModuleManager { get; set; }
         private ResourcePackDataManager ResourcePackManager { get; set; }
+
+        public event EventHandler<GameModuleEventArgs> OnModuleCreated;
 
         public NewModuleWindow()
         {
@@ -36,9 +39,16 @@ namespace Ceriyo.Toolset.Windows
         private void btnCreateModule_Click(object sender, RoutedEventArgs e)
         {
             ModuleManager.CreateModule(Model.Name, Model.Tag, Model.Resref);
-            ModuleManager.LoadModule(Model.Resref, true);
+
+            if (OnModuleCreated != null)
+            {
+                OnModuleCreated(this, new GameModuleEventArgs(Model.Resref));
+            }
+
             ResourcePackManager.BuildModule(ResourcePackManager.GetAllResourcePackNames());
             ModuleManager.SaveModule(Model.Resref);
+            
+
             Close();
         }
 

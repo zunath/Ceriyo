@@ -15,8 +15,8 @@ namespace Ceriyo.Toolset.Components
         public ObjectSelectionComponent()
         {
             InitializeComponent();
-            this.Model = new ObjectSelectionVM();
-            this.DataContext = Model;
+            Model = new ObjectSelectionVM();
+            DataContext = Model;
         }
 
         public void LoadArea(object sender, GameObjectEventArgs e)

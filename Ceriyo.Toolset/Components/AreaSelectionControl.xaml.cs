@@ -52,6 +52,18 @@ namespace Ceriyo.Toolset.Components
 
         }
 
+        public void ModuleClosed(object sender, EventArgs e)
+        {
+            Model.Areas.Clear();
+            Model.IsAreaLoaded = false;
+            Model.IsModuleLoaded = false;
+
+            if (OnAreaClosed != null)
+            {
+                OnAreaClosed(this, new EventArgs());
+            }
+        }
+
         private void Create(object sender, RoutedEventArgs e)
         {
             Area area = new Area();
@@ -73,6 +85,11 @@ namespace Ceriyo.Toolset.Components
             }
 
             Model.SelectedArea = e.ModifiedArea;
+
+            if (!e.IsUpdate)
+            {
+                Model.IsAreaLoaded = true;
+            }
 
             if(OnAreaPropertiesSaved != null)
             {
@@ -168,5 +185,6 @@ namespace Ceriyo.Toolset.Components
         {
             Model.IsAreaSelected = Model.SelectedArea != null;
         }
+
     }
 }

@@ -201,6 +201,7 @@
     <Compile Include="ViewModels\AreaToolbarVM.cs" />
     <Compile Include="ViewModels\BaseVM.cs" />
     <Compile Include="ViewModels\ClassEditorVM.cs" />
+    <Compile Include="ViewModels\HotBarVM.cs" />
     <Compile Include="ViewModels\MenuBarVM.cs" />
     <Compile Include="ViewModels\SaveModuleVM.cs" />
     <Compile Include="ViewModels\CreatureEditorVM.cs" />

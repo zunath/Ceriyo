@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Ceriyo.Data.EventArguments;
+using Ceriyo.Data.ViewModels;
 using Ceriyo.Toolset.Windows;
 
 namespace Ceriyo.Toolset.Components
@@ -18,14 +9,18 @@ namespace Ceriyo.Toolset.Components
     /// <summary>
     /// Interaction logic for HotBarControl.xaml
     /// </summary>
-    public partial class HotBarControl : UserControl
+    public partial class HotBarControl
     {
+        private HotBarVM Model { get; set; }
         private ScriptEditorWindow ScriptEditor { get; set; }
 
         public HotBarControl()
         {
             InitializeComponent();
-            this.ScriptEditor = new ScriptEditorWindow();
+            Model = new HotBarVM();
+            DataContext = Model;
+
+            ScriptEditor = new ScriptEditorWindow();
         }
 
         private void btnScriptEditor_Click(object sender, RoutedEventArgs e)
@@ -43,6 +38,26 @@ namespace Ceriyo.Toolset.Components
 
         }
 
+
+        public void ModuleOpened(object sender, GameModuleEventArgs e)
+        {
+            Model.IsModuleLoaded = true;
+        }
+
+        public void ModuleClosed(object sender, EventArgs e)
+        {
+            Model.IsModuleLoaded = false;
+        }
+
+        public void AreaOpened(object sender, GameObjectEventArgs e)
+        {
+            Model.IsAreaLoaded = true;
+        }
+
+        public void AreaClosed(object sender, EventArgs e)
+        {
+            Model.IsAreaLoaded = false;
+        }
 
     }
 }
