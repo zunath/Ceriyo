@@ -34,7 +34,7 @@ namespace Ceriyo.Toolset.Windows
             string[] files = Directory.GetFiles(EnginePaths.ModulesDirectory, "*" + EnginePaths.ModuleExtension);
             foreach (string file in files)
             {
-                Model.Files.Add(Path.GetFileName(file));
+                Model.Files.Add(Path.GetFileNameWithoutExtension(file));
             }
         }
 
