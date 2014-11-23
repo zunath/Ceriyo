@@ -4,8 +4,17 @@
         Title="Load Module" Height="300" Width="300" WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight">
     <Grid>
         <Label Content="Please select a module to load." HorizontalAlignment="Left" Margin="60,24,0,0" VerticalAlignment="Top"/>
-        <ListBox Name="lbModuleList" ItemsSource="{Binding GameModules}" DisplayMemberPath="ListBoxName" HorizontalAlignment="Left" Height="158" Margin="10,55,0,0" VerticalAlignment="Top" Width="272" SelectionMode="Single" MouseDoubleClick="lbModuleList_MouseDoubleClick"/>
-        <Button Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="181,238,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
+        <ListBox Name="lbModuleList" 
+                 ItemsSource="{Binding Files}" 
+                 SelectedItem="{Binding SelectedFile}"
+                 HorizontalAlignment="Left" 
+                 Height="158" 
+                 Margin="10,55,0,0" 
+                 VerticalAlignment="Top" 
+                 Width="272" 
+                 SelectionMode="Single" 
+                 MouseDoubleClick="lbModuleList_MouseDoubleClick"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="181,238,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
         <Button Name="btnOpen" Content="Open" HorizontalAlignment="Left" Margin="90,238,0,0" VerticalAlignment="Top" Width="75" Click="btnOpen_Click"/>
 
     </Grid>

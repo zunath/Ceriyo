@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.EventArguments
 {
     public class GameModuleEventArgs : EventArgs
     {
-        public GameModule Module { get; set; }
+        public GameModule Module { get; private set; }
 
         public GameModuleEventArgs(GameModule module)
         {
-            this.Module = module;
+            Module = module;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -25,15 +26,17 @@ namespace Ceriyo.Toolset.Windows
             InitializeComponent();
             Model = new LoadModuleVM();
             ModuleManager = new ModuleDataManager();
-            BindDataContexts();
-            Model.GameModules = new BindingList<GameModule>(ModuleManager.GetModules());
+            DataContext = Model;
+            LoadFileNames();
         }
 
-
-
-        private void BindDataContexts()
+        private void LoadFileNames()
         {
-            lbModuleList.DataContext = Model;
+            string[] files = Directory.GetFiles(EnginePaths.ModulesDirectory, "*" + EnginePaths.ModuleExtension);
+            foreach (string file in files)
+            {
+                Model.Files.Add(Path.GetFileNameWithoutExtension(file));
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -43,39 +46,37 @@ namespace Ceriyo.Toolset.Windows
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            GameModule moduleToLoad = lbModuleList.SelectedItem as GameModule;
-            if (moduleToLoad != null)
+            if (string.IsNullOrWhiteSpace(Model.SelectedFile)) return;
+            FileOperationResultTypeEnum result = ModuleManager.LoadModule(Model.SelectedFile);
+
+            if (result == FileOperationResultTypeEnum.FileExists)
             {
-                FileOperationResultTypeEnum result = ModuleManager.LoadModule(moduleToLoad.Resref);
-
-                if (result == FileOperationResultTypeEnum.FileExists)
+                if (MessageBox.Show("WARNING: A module's temporary files are located on disk. If you continue, you will lose them. Are you sure you want to continue?", "Temporary Files Found", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    if (MessageBox.Show("WARNING: A module's temporary files are located on disk. If you continue, you will lose them. Are you sure you want to continue?", "Temporary Files Found", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                    {
-                        result = ModuleManager.LoadModule(moduleToLoad.Resref, true);
-                    }
-                    else
-                    {
-                        return;
-                    }
+                    result = ModuleManager.LoadModule(Model.SelectedFile, true);
                 }
-
-                if (result == FileOperationResultTypeEnum.FileDoesNotExist)
+                else
                 {
-                    MessageBox.Show("Module could not be found.", "Warning", MessageBoxButton.OK);
+                    return;
                 }
-                else if (result == FileOperationResultTypeEnum.Failure)
-                {
-                    MessageBox.Show("Failed to load module.", "Error", MessageBoxButton.OK);
-                }
-                else if (result == FileOperationResultTypeEnum.Success)
-                {
-                    Close();
+            }
 
-                    if (OnOpenModule != null)
-                    {
-                        OnOpenModule(this, new GameModuleEventArgs(moduleToLoad));
-                    }
+            if (result == FileOperationResultTypeEnum.FileDoesNotExist)
+            {
+                MessageBox.Show("Module could not be found.", "Warning", MessageBoxButton.OK);
+            }
+            else if (result == FileOperationResultTypeEnum.Failure)
+            {
+                MessageBox.Show("Failed to load module.", "Error", MessageBoxButton.OK);
+            }
+            else if (result == FileOperationResultTypeEnum.Success)
+            {
+                Close();
+
+                if (OnOpenModule != null)
+                {
+                    GameModule moduleToLoad = ModuleManager.GetGameModule(Model.SelectedFile);
+                    OnOpenModule(this, new GameModuleEventArgs(moduleToLoad));
                 }
             }
         }

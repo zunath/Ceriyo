@@ -47,13 +47,5 @@ namespace Ceriyo.Data.GameObjects
             Levels = new LevelChart();
             ResourcePacks = new BindingList<string>();
         }
-
-        public string ListBoxName
-        {
-            get
-            {
-                return Name + " (" + Resref + EnginePaths.ModuleExtension + ")";
-            }
-        }
     }
 }

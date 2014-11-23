@@ -1,18 +1,20 @@
 ﻿using System.ComponentModel;
+using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.ViewModels
 {
-    public class LoadModuleVM : BaseVM
+    public class SaveModuleVM : BaseVM
     {
-        private BindingList<string> _fileNames;
+        private BindingList<string> _files; 
         private string _selectedFile;
+        private string _fileName;
 
         public BindingList<string> Files
         {
-            get { return _fileNames; }
+            get { return _files; }
             set
             {
-                _fileNames = value;
+                _files = value;
                 OnPropertyChanged("Files");
             }
         }
@@ -27,10 +29,22 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        public LoadModuleVM()
+        public string FileName
+        {
+            get { return _fileName; }
+            set
+            {
+                _fileName = value;
+                OnPropertyChanged("FileName");
+            }
+        }
+
+
+        public SaveModuleVM()
         {
             Files = new BindingList<string>();
             SelectedFile = string.Empty;
+            FileName = string.Empty;
         }
     }
 }

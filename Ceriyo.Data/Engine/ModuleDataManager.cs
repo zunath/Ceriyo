@@ -61,7 +61,7 @@ namespace Ceriyo.Data
         }
 
 
-        public FileOperationResultTypeEnum LoadModule(string resref, bool forceDeleteWorkingDirectory = false)
+        public FileOperationResultTypeEnum LoadModule(string fileName, bool forceDeleteWorkingDirectory = false)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 
@@ -72,7 +72,7 @@ namespace Ceriyo.Data
                     Directory.CreateDirectory(EnginePaths.WorkingDirectory);
                 }
 
-                string path = EnginePaths.ModulesDirectory + resref + EnginePaths.ModuleExtension;
+                string path = EnginePaths.ModulesDirectory + fileName + EnginePaths.ModuleExtension;
                 if (!File.Exists(path))
                 {
                     result = FileOperationResultTypeEnum.FileDoesNotExist;
@@ -233,7 +233,7 @@ namespace Ceriyo.Data
                 {
                     try
                     {
-                        CharacterClass characterClass = FileManager.XmlDeserialize<CharacterClass>(file);
+                        FileManager.XmlDeserialize<CharacterClass>(file);
                         zip.AddFile(file, ModulePaths.CharacterClassesDirectory);
                     }
                     catch
@@ -253,7 +253,7 @@ namespace Ceriyo.Data
                 {
                     try
                     {
-                        ItemProperty itemProperty = FileManager.XmlDeserialize<ItemProperty>(file);
+                        FileManager.XmlDeserialize<ItemProperty>(file);
                         zip.AddFile(file, ModulePaths.ItemPropertiesDirectory);
                     }
                     catch
@@ -264,9 +264,11 @@ namespace Ceriyo.Data
             }
         }
 
-        private GameModule GetGameModule(string zipFilePath)
+        public GameModule GetGameModule(string fileName)
         {
-            using (ZipFile zip = new ZipFile(zipFilePath))
+            string filePath = EnginePaths.ModulesDirectory + fileName + EnginePaths.ModuleExtension;
+
+            using (ZipFile zip = new ZipFile(filePath))
             {
                 ZipEntry entry = zip[EnginePaths.ModuleDataFileName + EnginePaths.DataExtension];
 
@@ -282,25 +284,11 @@ namespace Ceriyo.Data
             }
         }
 
-        public IList<GameModule> GetModules()
-        {
-            List<GameModule> modules = new List<GameModule>();
-
-            string[] filePaths = Directory.GetFiles(EnginePaths.ModulesDirectory);
-            foreach (string file in filePaths)
-            {
-                GameModule deserialized = GetGameModule(file);
-                modules.Add(deserialized);
-            }
-
-            return modules;
-        }
-
-        public FileOperationResultTypeEnum SaveModule(string moduleResref)
+        public FileOperationResultTypeEnum SaveModule(string fileName)
         {
             FileOperationResultTypeEnum result;
-            string path = EnginePaths.ModulesDirectory + moduleResref + EnginePaths.ModuleExtension;
-            string backup = EnginePaths.ModulesDirectory + moduleResref + EnginePaths.ModuleExtension + EnginePaths.BackupExtension;
+            string path = EnginePaths.ModulesDirectory + fileName + EnginePaths.ModuleExtension;
+            string backup = EnginePaths.ModulesDirectory + fileName + EnginePaths.ModuleExtension + EnginePaths.BackupExtension;
                 
             try
             {

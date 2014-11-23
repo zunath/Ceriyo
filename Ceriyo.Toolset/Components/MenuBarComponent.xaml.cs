@@ -124,15 +124,17 @@ namespace Ceriyo.Toolset.Components
         private void SaveModule(object sender, RoutedEventArgs e)
         {
             GameModule module = WorkingManager.GetGameModule();
-            // TODO: Finish method
-
-
             ModuleManager.SaveModule(module.Resref);
         }
 
         private void SaveAsModule(object sender, RoutedEventArgs e)
         {
-            
+            SaveModuleWindow window = new SaveModuleWindow
+            {
+                Owner = Window.GetWindow(this)
+            };
+
+            window.ShowDialog();
         }
 
         private void MenuBarComponent_OnLoaded(object sender, RoutedEventArgs e)

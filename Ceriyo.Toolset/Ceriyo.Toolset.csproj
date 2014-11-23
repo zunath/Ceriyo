@@ -211,6 +211,9 @@
     <Compile Include="ValidationRules\TextLengthRule.cs" />
     <Compile Include="ValidationRules\AreaHeightRule.cs" />
     <Compile Include="ValidationRules\AreaWidthRule.cs" />
+    <Compile Include="Windows\SaveModuleWindow.xaml.cs">
+      <DependentUpon>SaveModuleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EditDialogWindow.xaml.cs">
       <DependentUpon>EditDialogWindow.xaml</DependentUpon>
     </Compile>
@@ -329,6 +332,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\SaveModuleWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\EditDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
