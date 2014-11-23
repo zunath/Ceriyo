@@ -25,6 +25,7 @@
                      SelectedItem="{Binding SelectedArea}"
                      DisplayMemberPath="Name" 
                      SelectionMode="Single" 
+                     SelectionChanged="AreaSelected"
                      MouseDoubleClick="DoubleClickItem">
                 <ListBox.ContextMenu>
                     <ContextMenu>
@@ -47,6 +48,7 @@
             HorizontalAlignment="Left"
             Grid.Row="2" 
             Margin="10,5,0,10"
+            IsEnabled="{Binding IsModuleLoaded}"
             Click="Create" Grid.ColumnSpan="2"/>
         <Button 
             Name="btnSave"
@@ -55,6 +57,7 @@
             Grid.Row="2" 
             HorizontalAlignment="Left"
             Margin="23,5,0,10"
+            IsEnabled="{Binding IsAreaLoaded}"
             Click="Save">
         </Button>
         <Button 
@@ -63,7 +66,8 @@
             Grid.Column="1"
             Grid.Row="2" 
             HorizontalAlignment="Left"
-            Margin="86,5,0,10" RenderTransformOrigin="1.525,0.76"
+            Margin="86,5,0,10" 
+            IsEnabled="{Binding IsAreaSelected}"
             Click="Delete">
         </Button>
     </Grid>

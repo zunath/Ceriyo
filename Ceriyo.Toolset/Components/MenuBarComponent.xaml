@@ -10,35 +10,35 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <MenuItem Header="New Module" Click="NewModule_Click"></MenuItem>
-                <MenuItem Header="Open Module" Click="MenuItem_Click"></MenuItem>
-                <MenuItem Header="Close Module"></MenuItem>
+                <MenuItem Header="Open Module" Click="OpenModule"></MenuItem>
+                <MenuItem Header="Close Module" Click="CloseModule" IsEnabled="{Binding IsModuleLoaded}"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="Save" Click="SaveModule"></MenuItem>
-                <MenuItem Header="Save As..." Click="SaveAsModule"></MenuItem>
+                <MenuItem Header="Save" Click="SaveModule" IsEnabled="{Binding IsModuleLoaded}"></MenuItem>
+                <MenuItem Header="Save As..." Click="SaveAsModule" IsEnabled="{Binding IsModuleLoaded}"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="Import"></MenuItem>
-                <MenuItem Header="Export"></MenuItem>
+                <MenuItem Header="Import" IsEnabled="{Binding IsModuleLoaded}"></MenuItem>
+                <MenuItem Header="Export" IsEnabled="{Binding IsModuleLoaded}"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Exit" Click="miExit_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem Header="Undo"></MenuItem>
-                <MenuItem Header="Redo"></MenuItem>
-                <MenuItem Header="Copy"></MenuItem>
-                <MenuItem Header="Cut"></MenuItem>
-                <MenuItem Header="Paste"></MenuItem>
+                <MenuItem Header="Undo" IsEnabled="{Binding IsAreaLoaded}"></MenuItem>
+                <MenuItem Header="Redo" IsEnabled="{Binding IsAreaLoaded}"></MenuItem>
+                <MenuItem Header="Copy" IsEnabled="{Binding IsAreaLoaded}"></MenuItem>
+                <MenuItem Header="Cut" IsEnabled="{Binding IsAreaLoaded}"></MenuItem>
+                <MenuItem Header="Paste" IsEnabled="{Binding IsAreaLoaded}"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="Module Properties" Click="OpenModuleProperties"></MenuItem>
+                <MenuItem Header="Module Properties" Click="OpenModuleProperties" IsEnabled="{Binding IsModuleLoaded}"></MenuItem>
             </MenuItem>
             <MenuItem Header="Data">
-                <MenuItem Header="Editor" Click="OpenDataEditor">
+                <MenuItem Header="Editor" Click="OpenDataEditor" IsEnabled="{Binding IsModuleLoaded}">
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Resources">
                 <MenuItem Header="Editor" Click="OpenResourceEditor"></MenuItem>
-                <MenuItem Header="Manage" Click="OpenResourceManager"></MenuItem>
+                <MenuItem Header="Manage" Click="OpenResourceManager" IsEnabled="{Binding IsModuleLoaded}"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="Build Module" Click="BuildModule"></MenuItem>
+                <MenuItem Header="Build Module" Click="BuildModule" IsEnabled="{Binding IsModuleLoaded}"></MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About"></MenuItem>

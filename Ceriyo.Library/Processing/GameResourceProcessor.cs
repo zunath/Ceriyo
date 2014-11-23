@@ -15,29 +15,6 @@ namespace Ceriyo.Library.Processing
 {
     public class GameResourceProcessor
     {
-        public string GenerateUniqueResref(IGameObject gameObject)
-        {
-            string resref = gameObject.CategoryName;
-            string[] files = Directory.GetFiles(gameObject.WorkingDirectory);
-
-            int count = 0;
-            foreach(string file in files)
-            {
-                if (Path.GetFileNameWithoutExtension(file) == resref + count)
-                {
-                    count++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            resref = resref + count;
-
-            return resref;
-        }
-
         public string GenerateUniqueResref(IList<IGameObject> gameObjectList, string defaultCategoryName = "")
         {
             int count = 0;
@@ -58,7 +35,7 @@ namespace Ceriyo.Library.Processing
             return resref;
         }
 
-        public byte[] ToBytes(GameResource resource)
+        private byte[] ToBytes(GameResource resource)
         {
             string path = EnginePaths.ResourcePacksDirectory + resource.Package;
             byte[] bytes;
@@ -131,18 +108,5 @@ namespace Ceriyo.Library.Processing
 
             return texture;
         }
-
-        public Texture2D GetSubTexture(Texture2D texture, int x, int y, int width, int height)
-        {
-            Texture2D result = new Texture2D(FlatRedBallServices.GraphicsDevice, width, height);
-            Rectangle rect = new Rectangle(x, y, width, height);
-            Color[] data = new Color[width * height];
-            texture.GetData(0, rect, data, 0, data.Length);
-            result.SetData(data);
-
-            return result;
-
-        }
-
     }
 }

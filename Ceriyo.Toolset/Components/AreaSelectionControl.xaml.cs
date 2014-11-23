@@ -1,35 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
 using Ceriyo.Toolset.Windows;
-using FlatRedBall.IO;
 
 namespace Ceriyo.Toolset.Components
 {
     /// <summary>
     /// Interaction logic for AreaSelectionControl.xaml
     /// </summary>
-    public partial class AreaSelectionControl : UserControl
+    public partial class AreaSelectionControl
     {
-        protected AreaSelectionVM Model { get; set; }
+        private AreaSelectionVM Model { get; set; }
         public event EventHandler<GameObjectEventArgs> OnAreaOpen;
         public event EventHandler<EventArgs> OnAreaSaved;
         public event EventHandler<AreaPropertiesChangedEventArgs> OnAreaPropertiesSaved;
@@ -40,9 +29,9 @@ namespace Ceriyo.Toolset.Components
         public AreaSelectionControl()
         {
             InitializeComponent();
-            this.Model = new AreaSelectionVM();
+            Model = new AreaSelectionVM();
             WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            DataContext = Model;
             EditPropertiesWindow = new EditAreaWindow();
             EditPropertiesWindow.OnSaveAreaProperties += SavedAreaProperties;
             
@@ -52,6 +41,7 @@ namespace Ceriyo.Toolset.Components
         {
             Model.Areas.Clear();
             Model.IsAreaLoaded = false;
+            Model.IsModuleLoaded = true;
 
             if (OnAreaClosed != null)
             {
@@ -103,51 +93,41 @@ namespace Ceriyo.Toolset.Components
         private void Delete(object sender, RoutedEventArgs e)
         {
             Area area = lbAreas.SelectedItem as Area;
-            if (area != null)
+            if (area == null) return;
+            if (MessageBox.Show("Are you sure you want to delete the area " + area.Name + " ?", "Delete Area?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                try
+                FileOperationResultTypeEnum result = WorkingManager.DeleteGameObjectFile(area);
+
+                if (result == FileOperationResultTypeEnum.Success)
                 {
-                    if (MessageBox.Show("Are you sure you want to delete the area " + area.Name + " ?", "Delete Area?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    Model.Areas.Remove(area);
+                    Model.IsAreaLoaded = false;
+
+                    if (OnAreaClosed != null)
                     {
-                        FileOperationResultTypeEnum result = WorkingManager.DeleteGameObjectFile(area);
-
-                        if (result == FileOperationResultTypeEnum.Success)
-                        {
-                            Model.Areas.Remove(area);
-
-                            if (OnAreaClosed != null)
-                            {
-                                OnAreaClosed(this, new EventArgs());
-                            }
-                        }
-                        else if (result == FileOperationResultTypeEnum.FileDoesNotExist)
-                        {
-                            MessageBox.Show("Unable to delete area. File does not exist.", "Unable to delete area", MessageBoxButton.OK);
-                        }
-                        else if (result == FileOperationResultTypeEnum.Failure)
-                        {
-                            MessageBox.Show("Unable to delete area. Deletion failed.", "Unable to delete area", MessageBoxButton.OK);
-                        }
-
+                        OnAreaClosed(this, new EventArgs());
                     }
                 }
-                catch (Exception ex)
+                else if (result == FileOperationResultTypeEnum.FileDoesNotExist)
                 {
-                    throw ex;
+                    MessageBox.Show("Unable to delete area. File does not exist.", "Unable to delete area", MessageBoxButton.OK);
                 }
+                else if (result == FileOperationResultTypeEnum.Failure)
+                {
+                    MessageBox.Show("Unable to delete area. Deletion failed.", "Unable to delete area", MessageBoxButton.OK);
+                }
+
             }
         }
 
         private void OpenArea()
         {
-            Area area = lbAreas.SelectedItem as Area;
+            if (Model.SelectedArea == null) return;
+            Model.IsAreaLoaded = true;
 
-            if (area != null)
+            if (OnAreaOpen != null)
             {
-                if (OnAreaOpen != null)
-                {
-                    OnAreaOpen(this, new GameObjectEventArgs(area));
-                }
+                OnAreaOpen(this, new GameObjectEventArgs(Model.SelectedArea));
             }
         }
 
@@ -182,6 +162,11 @@ namespace Ceriyo.Toolset.Components
             {
                 btnDelete.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
+        }
+
+        private void AreaSelected(object sender, SelectionChangedEventArgs e)
+        {
+            Model.IsAreaSelected = Model.SelectedArea != null;
         }
     }
 }

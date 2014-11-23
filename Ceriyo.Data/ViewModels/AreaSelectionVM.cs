@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.ViewModels
@@ -11,7 +7,9 @@ namespace Ceriyo.Data.ViewModels
     {
         private BindingList<Area> _areas;
         private bool _isAreaLoaded;
+        private bool _isModuleLoaded;
         private Area _selectedArea;
+        private bool _isAreaSelected;
 
         public Area SelectedArea
         {
@@ -47,11 +45,33 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public bool IsModuleLoaded
+        {
+            get { return _isModuleLoaded; }
+            set
+            {
+                _isModuleLoaded = value;
+                OnPropertyChanged("IsModuleLoaded");
+            }
+        }
+
+        public bool IsAreaSelected
+        {
+            get { return _isAreaSelected; }
+            set
+            {
+                _isAreaSelected = value;
+                OnPropertyChanged("IsAreaSelected");
+            }
+        }
+
         public AreaSelectionVM()
         {
-            this._areas = new BindingList<Area>();
-            this._isAreaLoaded = false;
-            this._selectedArea = new Area();
+            Areas = new BindingList<Area>();
+            IsAreaLoaded = false;
+            IsModuleLoaded = false;
+            IsAreaSelected = false;
+            SelectedArea = new Area();
         }
     }
 }

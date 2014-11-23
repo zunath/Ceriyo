@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Reflection;
 using System.Windows;
 using Ceriyo.Data;
 using Ceriyo.Data.Engine;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.ViewModels;
 using Ceriyo.Toolset.Windows;
 
 namespace Ceriyo.Toolset.Components
@@ -14,6 +15,7 @@ namespace Ceriyo.Toolset.Components
     /// </summary>
     public partial class MenuBarComponent
     {
+        private MenuBarVM Model { get; set; }
         private ResourcePackEditorWindow ResourceEditor { get; set; }
         private ManageResourcePacksWindow ResourceManager { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
@@ -27,6 +29,9 @@ namespace Ceriyo.Toolset.Components
         public MenuBarComponent()
         {
             InitializeComponent();
+            Model = new MenuBarVM();
+            DataContext = Model;
+
             ModuleProperties = new ModulePropertiesWindow();
             ResourceEditor = new ResourcePackEditorWindow();
             ResourcePackManager = new ResourcePackDataManager();
@@ -60,7 +65,7 @@ namespace Ceriyo.Toolset.Components
             modWindow.ShowDialog();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void OpenModule(object sender, RoutedEventArgs e)
         {
             LoadModuleWindow loadWindow = new LoadModuleWindow
             {
@@ -73,6 +78,11 @@ namespace Ceriyo.Toolset.Components
 
         private void OpenModuleFinished(object sender, GameModuleEventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(e.FileName))
+            {
+                Model.IsModuleLoaded = true;
+            }
+
             if(OnOpenModule != null)
             {
                 OnOpenModule(sender, e);
@@ -143,6 +153,31 @@ namespace Ceriyo.Toolset.Components
             ResourceManager.Owner = Window.GetWindow(this);
             ModuleProperties.Owner = Window.GetWindow(this);
             DataEditor.Owner = Window.GetWindow(this);
+        }
+
+        private void CloseModule(object sender, RoutedEventArgs e)
+        {
+            var result = ModuleManager.CloseModule();
+
+            if (result == FileOperationResultTypeEnum.Success)
+            {
+                Model.IsModuleLoaded = false;
+            }
+            else
+            {
+                MessageBox.Show("Unable to close module.", "Failed to close module", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
+        public void AreaClosed(object sender, EventArgs e)
+        {
+            Model.IsAreaLoaded = false;
+        }
+
+        public void AreaOpened(object sender, GameObjectEventArgs e)
+        {
+            Model.IsAreaLoaded = e.GameObject != null;
         }
     }
 }
