@@ -5,11 +5,11 @@ namespace Ceriyo.Data.EventArguments
 {
     public class GameModuleEventArgs : EventArgs
     {
-        public GameModule Module { get; private set; }
+        public string FileName { get; set; }
 
-        public GameModuleEventArgs(GameModule module)
+        public GameModuleEventArgs(string fileName)
         {
-            Module = module;
+            FileName = fileName;
         }
     }
 }

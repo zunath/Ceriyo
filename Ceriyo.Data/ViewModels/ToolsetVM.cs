@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.GameObjects;
+﻿using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.ViewModels
 {
     public class ToolsetVM : BaseVM
     {
-        private GameModule _module;
-        public GameModule Module
+        private string _windowTitle;
+
+        public string WindowTitle
         {
             get
             {
-                return _module;
+                return _windowTitle;
             }
             set
             {
-                _module = value;
-                OnPropertyChanged("Module");
+                _windowTitle = value;
+                OnPropertyChanged("WindowTitle");
             }
         }
 
         public ToolsetVM()
         {
-            this.Module = new GameModule();
+            WindowTitle = "Ceriyo Editor";
         }
 
     }

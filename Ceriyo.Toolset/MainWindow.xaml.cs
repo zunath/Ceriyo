@@ -32,6 +32,8 @@ namespace Ceriyo.Toolset
         {
             Model = new ToolsetVM();
             EngineManager = new EngineDataManager();
+            DataContext = Model;
+
             LoadSettings();
         }
 
@@ -52,7 +54,7 @@ namespace Ceriyo.Toolset
 
         private void OnModuleOpened(object sender, GameModuleEventArgs e)
         {
-            Model.Module = e.Module;
+            Model.WindowTitle = "Ceriyo Editor - " + e.FileName + EnginePaths.ModuleExtension;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

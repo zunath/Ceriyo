@@ -75,8 +75,7 @@ namespace Ceriyo.Toolset.Windows
 
                 if (OnOpenModule != null)
                 {
-                    GameModule moduleToLoad = ModuleManager.GetGameModule(Model.SelectedFile);
-                    OnOpenModule(this, new GameModuleEventArgs(moduleToLoad));
+                    OnOpenModule(this, new GameModuleEventArgs(Model.SelectedFile));
                 }
             }
         }
