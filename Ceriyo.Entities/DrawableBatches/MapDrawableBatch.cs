@@ -103,19 +103,24 @@ namespace Ceriyo.Entities.DrawableBatches
 
         public void Destroy()
         {
-            SpriteManager.RemoveDrawableBatch(this);
             AreaMap.DisposeTileSheets(_displayDevice);
             AreaMap = null;
         }
 
         public void Draw(Camera camera)
         {
-            AreaMap.Draw(_displayDevice, _viewport, _offset, false );
+            if (AreaMap != null)
+            {
+                AreaMap.Draw(_displayDevice, _viewport, _offset, false);    
+            }
         }
 
         public void Update()
         {
-            AreaMap.Update(TimeManager.LastUpdateGameTime.ElapsedGameTime.Milliseconds);
+            if (AreaMap != null)
+            {
+                AreaMap.Update(TimeManager.LastUpdateGameTime.ElapsedGameTime.Milliseconds);    
+            }
         }
 
         public bool UpdateEveryFrame
