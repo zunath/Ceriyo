@@ -5,6 +5,7 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using FlatRedBall;
 using FlatRedBall.Graphics;
+using FlatRedBall.Math;
 using xTile;
 using xTile.Dimensions;
 using xTile.Display;
@@ -21,6 +22,7 @@ namespace Ceriyo.Entities.DrawableBatches
         private Rectangle _viewport;
         private TileSheet _areaTileSheet;
         private TileSheet _emptyTileSheet;
+        private Location _offset;
 
         public MapDrawableBatch(Area area)
         {
@@ -35,6 +37,7 @@ namespace Ceriyo.Entities.DrawableBatches
             FlatRedBallServices.CornerGrabbingResize += FlatRedBallServices_CornerGrabbingResize;
 
             AreaMap = new Map(DrawableArea.Resref);
+            _offset = new Location(100, 100); // TODO: Determine the offset
 
             LoadTileSheets();
             LoadLayers();
@@ -82,7 +85,15 @@ namespace Ceriyo.Entities.DrawableBatches
                 List<MapTile> tiles = DrawableArea.MapTiles.Where(t => t.Layer == layer).ToList();
                 foreach (MapTile tile in tiles)
                 {
-                    areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _emptyTileSheet, BlendMode.Alpha, 0);
+                    if (!tile.HasGraphic)
+                    {
+                        areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _emptyTileSheet, BlendMode.Alpha, 0);    
+                    }
+                    else
+                    {
+                        areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _areaTileSheet, BlendMode.Alpha, 0); // TODO: Get correct index
+                    }
+                    
                 }
 
                 AreaMap.AddLayer(areaLayer);
@@ -93,21 +104,23 @@ namespace Ceriyo.Entities.DrawableBatches
         public void Destroy()
         {
             SpriteManager.RemoveDrawableBatch(this);
+            AreaMap.DisposeTileSheets(_displayDevice);
+            AreaMap = null;
         }
 
         public void Draw(Camera camera)
         {
-            AreaMap.Draw(_displayDevice, _viewport);
+            AreaMap.Draw(_displayDevice, _viewport, _offset, false );
         }
 
         public void Update()
         {
-            
+            AreaMap.Update(TimeManager.LastUpdateGameTime.ElapsedGameTime.Milliseconds);
         }
 
         public bool UpdateEveryFrame
         {
-            get { return false; }
+            get { return true; }
         }
 
         public void PaintTile(object sender, TilePaintEventArgs e)
