@@ -47,7 +47,7 @@ namespace Ceriyo.Toolset.Windows
         private void SaveScriptWin_OnSaveComplete(object sender, ScriptEventArgs e)
         {
             DoScriptSave(e.Name, e.Contents);
-            Model.ScriptNames = WorkingManager.GetAllScriptNames();
+            Model.ScriptNames = WorkingManager.GetAllScriptNames(false);
             GameScript existingScript = Model.OpenScripts.SingleOrDefault(x => x.Name == e.OldName);
             Model.OpenScripts.Remove(existingScript);
             
