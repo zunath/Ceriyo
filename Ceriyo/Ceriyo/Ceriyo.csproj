@@ -131,10 +131,6 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="xTile, Version=2.0.7.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\xTile\xTile.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalContent.Generated.cs" />
@@ -159,9 +155,6 @@
     <Content Include="Libraries\Squid\Squid.dll" />
     <Content Include="Libraries\Squid\Squid.xml" />
     <Content Include="Libraries\Xna4Pc\FlatRedBall.Content.dll" />
-    <Content Include="Libraries\xTile\xTile.dll" />
-    <Content Include="Libraries\xTile\xTile.Pipeline.dll" />
-    <Content Include="Libraries\xTile\xTile.xml" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="redball.BMP">
@@ -209,6 +202,10 @@
     <ProjectReference Include="..\..\Ceriyo.Library\Ceriyo.Library.csproj">
       <Project>{f9ab9dd8-a342-4d58-bbb9-e15184e7f522}</Project>
       <Name>Ceriyo.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\xTile\xTilePC.csproj">
+      <Project>{bf19f9e2-fd54-4b63-af67-da49b5ea11d9}</Project>
+      <Name>xTilePC</Name>
     </ProjectReference>
     <ProjectReference Include="..\CeriyoContent\CeriyoContent.contentproj">
       <Project>{64B23BEF-DD26-4B81-AAA6-D9F46B0140B4}</Project>
