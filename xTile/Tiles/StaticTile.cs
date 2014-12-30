@@ -11,9 +11,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
-
+using Microsoft.Xna.Framework;
 using xTile.Layers;
 
 namespace xTile.Tiles
@@ -48,6 +49,12 @@ namespace xTile.Tiles
             set { m_tileIndex = value; }
         }
 
+        public override Color TileColor
+        {
+            get { return m_color; }
+            set { m_color = value; }
+        }
+
         #endregion
 
         #region Public Methods
@@ -74,6 +81,8 @@ namespace xTile.Tiles
                 throw new Exception("The specified Tile Index is out of range");
 
             m_tileIndex = tileIndex;
+
+            m_color = Color.White;
         }
 
         /// <summary>
@@ -114,6 +123,7 @@ namespace xTile.Tiles
         private BlendMode m_blendMode;
         private TileSheet m_tileSheet;
         private int m_tileIndex;
+        private Color m_color;
 
         #endregion
     }

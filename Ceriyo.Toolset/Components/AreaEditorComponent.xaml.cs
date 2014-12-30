@@ -38,8 +38,6 @@ namespace Ceriyo.Toolset.Components
             OnAreaClosed += paintObjects.UnloadArea;
             OnAreaClosed += screen.CloseArea;
 
-            paintObjects.OnModeChange += screen.ChangePaintMode;
-
             OnAreaSaved += screen.SaveArea;
         }
 

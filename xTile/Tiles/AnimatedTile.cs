@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Microsoft.Xna.Framework;
 using xTile.Layers;
 
 namespace xTile.Tiles
@@ -96,6 +96,12 @@ namespace xTile.Tiles
         /// </summary>
         public long FrameInterval { get { return m_frameInterval; } }
 
+        public override Color TileColor
+        {
+            get { return m_color; }
+            set { m_color = value; }
+        }
+
         #endregion
 
         #region Public Methods
@@ -118,6 +124,8 @@ namespace xTile.Tiles
 
             m_frameInterval = frameInterval;
             m_animationInterval = frameInterval * tileFrames.Length;
+
+            m_color = Color.White;
         }
 
         /// <summary>
@@ -179,6 +187,7 @@ namespace xTile.Tiles
         private StaticTile[] m_tileFrames;
         private long m_frameInterval;
         private long m_animationInterval;
+        private Color m_color;
 
         #endregion
     }

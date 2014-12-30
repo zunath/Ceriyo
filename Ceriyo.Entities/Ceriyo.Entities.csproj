@@ -100,6 +100,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrawableBatches\EditableMapDrawableBatch.cs" />
     <Compile Include="DrawableBatches\GUIDrawableBatch.cs" />
     <Compile Include="DrawableBatches\MapDrawableBatch.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
@@ -110,7 +111,6 @@
     <Compile Include="GUI\MainMenuLogic.cs" />
     <Compile Include="GUI\LoginMenuLogic.cs" />
     <Compile Include="Entities\PaintCreatureEntity.cs" />
-    <Compile Include="Entities\PaintTileEntity.cs" />
     <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\AreaEditorScreen.cs" />

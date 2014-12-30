@@ -17,12 +17,12 @@ namespace Ceriyo.Entities.DrawableBatches
     public class MapDrawableBatch: PositionedObject, IDrawableBatch
     {
         private Area DrawableArea { get; set; }
-        private Map AreaMap { get; set; }
+        protected Map AreaMap { get; set; }
         private readonly IDisplayDevice _displayDevice;
-        private Rectangle _viewport;
+        protected Rectangle _viewport;
         private TileSheet _areaTileSheet;
-        private TileSheet _emptyTileSheet;
-        private Location _offset;
+        protected TileSheet _systemTileSheet;
+        private readonly Location _offset;
 
         public MapDrawableBatch(Area area)
         {
@@ -37,7 +37,7 @@ namespace Ceriyo.Entities.DrawableBatches
             FlatRedBallServices.CornerGrabbingResize += FlatRedBallServices_CornerGrabbingResize;
 
             AreaMap = new Map(DrawableArea.Resref);
-            _offset = new Location(100, 100); // TODO: Determine the offset
+            _offset = new Location(0, 0);
 
             LoadTileSheets();
             LoadLayers();
@@ -46,7 +46,7 @@ namespace Ceriyo.Entities.DrawableBatches
             SpriteManager.AddPositionedObject(this);
         }
 
-        void FlatRedBallServices_CornerGrabbingResize(object sender, System.EventArgs e)
+        private void FlatRedBallServices_CornerGrabbingResize(object sender, System.EventArgs e)
         {
             _viewport = new Rectangle(FlatRedBallServices.GraphicsDevice.Viewport.X,
                 FlatRedBallServices.GraphicsDevice.Viewport.Y,
@@ -61,16 +61,16 @@ namespace Ceriyo.Entities.DrawableBatches
                 new Size(512, 384),  // TODO: Get the width/height without loading the image into memory.
                 new Size(EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight));
 
-            _emptyTileSheet = new TileSheet(AreaMap,
-                "emptytile.png",
+            _systemTileSheet = new TileSheet(AreaMap,
+                "systemtiles.png",
                 new Size(EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight),
                 new Size(EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight));
 
             _displayDevice.LoadTileSheet(_areaTileSheet);
-            _displayDevice.LoadTileSheet(_emptyTileSheet);
+            _displayDevice.LoadTileSheet(_systemTileSheet);
 
             AreaMap.AddTileSheet(_areaTileSheet);
-            AreaMap.AddTileSheet(_emptyTileSheet);
+            AreaMap.AddTileSheet(_systemTileSheet);
         }
 
         private void LoadLayers()
@@ -87,11 +87,12 @@ namespace Ceriyo.Entities.DrawableBatches
                 {
                     if (!tile.HasGraphic)
                     {
-                        areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _emptyTileSheet, BlendMode.Alpha, 0);    
+                        areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _systemTileSheet, BlendMode.Alpha, 0);    
                     }
                     else
                     {
-                        areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _areaTileSheet, BlendMode.Alpha, 0); // TODO: Get correct index
+                        int tileIndex = _areaTileSheet.GetTileIndex(new Location(tile.MapX, tile.MapY));
+                        areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _areaTileSheet, BlendMode.Alpha, tileIndex);
                     }
                     
                 }
@@ -101,13 +102,13 @@ namespace Ceriyo.Entities.DrawableBatches
 
         }
 
-        public void Destroy()
+        public virtual void Destroy()
         {
             AreaMap.DisposeTileSheets(_displayDevice);
             AreaMap = null;
         }
 
-        public void Draw(Camera camera)
+        public virtual void Draw(Camera camera)
         {
             if (AreaMap != null)
             {
@@ -115,7 +116,7 @@ namespace Ceriyo.Entities.DrawableBatches
             }
         }
 
-        public void Update()
+        public virtual void Update()
         {
             if (AreaMap != null)
             {
@@ -127,11 +128,6 @@ namespace Ceriyo.Entities.DrawableBatches
         {
             get { return true; }
         }
-
-        public void PaintTile(object sender, TilePaintEventArgs e)
-        {
-        }
-
 
         public void AreaPropertiesSaved(object sender, AreaPropertiesChangedEventArgs e)
         {

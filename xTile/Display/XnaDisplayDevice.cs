@@ -193,7 +193,7 @@ namespace xTile.Display
             m_sourceRectangle.Width = sourceRectangle.Width;
             m_sourceRectangle.Height = sourceRectangle.Height;
 
-            spriteBatch.Draw(texture2D, m_tilePosition, m_sourceRectangle, m_modulationColour);
+            spriteBatch.Draw(texture2D, m_tilePosition, m_sourceRectangle, tile.TileColor);
         }
 
         /// <summary>

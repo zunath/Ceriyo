@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Microsoft.Xna.Framework;
 using xTile.ObjectModel;
 using xTile.Layers;
 
@@ -72,6 +72,8 @@ namespace xTile.Tiles
         {
             get { return TileSheet.TileIndexProperties[TileIndex]; }
         }
+
+        public abstract Color TileColor { get; set; }
 
         #endregion
 
