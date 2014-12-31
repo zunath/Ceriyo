@@ -1,9 +1,5 @@
-﻿using Ceriyo.Data.Server;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace Ceriyo.Data.EventArguments
 {
@@ -16,10 +12,10 @@ namespace Ceriyo.Data.EventArguments
 
         public ServerStatusUpdateEventArgs()
         {
-            this.ConnectedUsernames = new BindingList<string>();
-            this.MessageLog = new BindingList<string>();
-            this.GameJustStarted = false;
-            this.GameJustShutDown = false;
+            ConnectedUsernames = new BindingList<string>();
+            MessageLog = new BindingList<string>();
+            GameJustStarted = false;
+            GameJustShutDown = false;
         }
     }
 }

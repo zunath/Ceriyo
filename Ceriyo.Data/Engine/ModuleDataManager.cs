@@ -5,7 +5,7 @@ using Ceriyo.Data.GameObjects;
 using FlatRedBall.IO;
 using Ionic.Zip;
 
-namespace Ceriyo.Data
+namespace Ceriyo.Data.Engine
 {
     public static class ModuleDataManager
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.GameObjects;
+﻿using Ceriyo.Data.GameObjects;
 using ProtoBuf;
 
 namespace Ceriyo.Data.Packets
@@ -17,8 +13,8 @@ namespace Ceriyo.Data.Packets
 
         public GameScreenPacket()
         {
-            this.IsRequest = false;
-            this.PC = new Player();
+            IsRequest = false;
+            PC = new Player();
         }
     }
 }

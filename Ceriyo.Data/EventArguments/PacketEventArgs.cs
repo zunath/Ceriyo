@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Ceriyo.Data.Packets;
 
 namespace Ceriyo.Data.EventArguments
@@ -12,7 +9,7 @@ namespace Ceriyo.Data.EventArguments
 
         public PacketEventArgs(PacketBase packet)
         {
-            this.Packet = packet;
+            Packet = packet;
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.GameObjects;
+﻿using Ceriyo.Data.GameObjects;
 using ProtoBuf;
 
 namespace Ceriyo.Data.Packets
@@ -19,9 +15,9 @@ namespace Ceriyo.Data.Packets
 
         public CreateCharacterPacket()
         {
-            this.Name = string.Empty;
-            this.Description = string.Empty;
-            this.ResponsePlayer = new Player();
+            Name = string.Empty;
+            Description = string.Empty;
+            ResponsePlayer = new Player();
         }
     }
 }

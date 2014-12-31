@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Ceriyo.Data.GameObjects;
 using ProtoBuf;
 
@@ -21,7 +18,7 @@ namespace Ceriyo.Data.Packets
 
         public CharacterSelectionScreenPacket()
         {
-            this.IsRequest = false;
+            IsRequest = false;
             CharacterList = new List<Player>();
             Announcement = string.Empty;
             CanDeleteCharacters = false;

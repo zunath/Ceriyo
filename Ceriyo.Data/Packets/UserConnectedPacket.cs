@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data.GameObjects;
-using ProtoBuf;
+﻿using ProtoBuf;
 
 namespace Ceriyo.Data.Packets
 {
@@ -15,8 +10,8 @@ namespace Ceriyo.Data.Packets
 
         public UserConnectedPacket()
         {
-            this.IsSuccessful = false;
-            this.ErrorMessage = string.Empty;
+            IsSuccessful = false;
+            ErrorMessage = string.Empty;
         }
     }
 }

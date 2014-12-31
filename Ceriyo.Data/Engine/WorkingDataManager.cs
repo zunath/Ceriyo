@@ -1,11 +1,11 @@
-﻿using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.GameObjects;
-using FlatRedBall.IO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.GameObjects;
+using FlatRedBall.IO;
 
-namespace Ceriyo.Data
+namespace Ceriyo.Data.Engine
 {
     public static class WorkingDataManager
     {

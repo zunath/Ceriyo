@@ -4,6 +4,7 @@ using Ceriyo.Data.GameObjects;
 using Ceriyo.Library.Processing;
 using FlatRedBall.Graphics.Animation;
 using Ceriyo.Data;
+using Ceriyo.Data.Engine;
 
 namespace Ceriyo.Library.Tests.Processing
 {

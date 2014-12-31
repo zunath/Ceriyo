@@ -1,5 +1,6 @@
 ﻿using System.Xml.Serialization;
 using Ceriyo.Data.Annotations;
+using Ceriyo.Data.Engine;
 
 namespace Ceriyo.Data.GameObjects
 {

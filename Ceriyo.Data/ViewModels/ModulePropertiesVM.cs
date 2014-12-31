@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Ceriyo.Data.Engine;
 using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.ViewModels

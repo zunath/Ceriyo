@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Data;
+using Ceriyo.Data.Engine;
 using Ceriyo.Library.Network;
 using Ceriyo.Data.Packets;
 using Ceriyo.Data.EventArguments;
@@ -33,7 +31,7 @@ namespace Ceriyo.Library.Global
         public static void Initialize()
         {
             LoadGameSettings();
-            GameGlobal.Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, null, Settings.Port);
+            Agent = new NetworkAgent(NetworkAgentRoleEnum.Client, null, Settings.Port);
         }
 
         public static void SendPacket(PacketBase packet, NetDeliveryMethod deliveryMethod)
@@ -43,7 +41,7 @@ namespace Ceriyo.Library.Global
 
         public static void ProcessPackets()
         {
-            List<PacketBase> packets = GameGlobal.Agent.CheckForPackets();
+            List<PacketBase> packets = Agent.CheckForPackets();
 
             foreach (PacketBase packet in packets)
             {
@@ -65,7 +63,7 @@ namespace Ceriyo.Library.Global
             else
             {
                 Settings = new GameSettings();
-                FileManager.XmlSerialize<GameSettings>(Settings, path);
+                FileManager.XmlSerialize(Settings, path);
             }
         }
     }

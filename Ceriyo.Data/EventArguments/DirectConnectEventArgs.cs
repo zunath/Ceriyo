@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Ceriyo.Data.EventArguments
 {
@@ -12,8 +9,8 @@ namespace Ceriyo.Data.EventArguments
 
         public DirectConnectEventArgs(string ipAddress, string password)
         {
-            this.Password = password;
-            this.IPAddress = ipAddress;
+            Password = password;
+            IPAddress = ipAddress;
         }
     }
 }

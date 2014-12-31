@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ProtoBuf;
+﻿using ProtoBuf;
 
 namespace Ceriyo.Data.Packets
 {
@@ -42,21 +38,21 @@ namespace Ceriyo.Data.Packets
 
         public PlayerInputPacket()
         {
-            this.IsInventoryKeyPressed = false;
-            this.IsUpKeyPressed = false;
-            this.IsDownKeyPressed = false;
-            this.IsRightKeyPressed = false;
-            this.IsLeftKeyPressed = false;
-            this.IsHotBar1KeyPressed = false;
-            this.IsHotBar2KeyPressed = false;
-            this.IsHotBar3KeyPressed = false;
-            this.IsHotBar4KeyPressed = false;
-            this.IsHotBar5KeyPressed = false;
-            this.IsHotBar6KeyPressed = false;
-            this.IsHotBar7KeyPressed = false;
-            this.IsHotBar8KeyPressed = false;
-            this.IsHotBar9KeyPressed = false;
-            this.IsHotBar10KeyPressed = false;
+            IsInventoryKeyPressed = false;
+            IsUpKeyPressed = false;
+            IsDownKeyPressed = false;
+            IsRightKeyPressed = false;
+            IsLeftKeyPressed = false;
+            IsHotBar1KeyPressed = false;
+            IsHotBar2KeyPressed = false;
+            IsHotBar3KeyPressed = false;
+            IsHotBar4KeyPressed = false;
+            IsHotBar5KeyPressed = false;
+            IsHotBar6KeyPressed = false;
+            IsHotBar7KeyPressed = false;
+            IsHotBar8KeyPressed = false;
+            IsHotBar9KeyPressed = false;
+            IsHotBar10KeyPressed = false;
         }
     }
 }

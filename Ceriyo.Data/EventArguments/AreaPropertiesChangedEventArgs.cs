@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.EventArguments
@@ -13,8 +10,8 @@ namespace Ceriyo.Data.EventArguments
 
         public AreaPropertiesChangedEventArgs(Area modifiedArea, bool isUpdate)
         {
-            this.ModifiedArea = modifiedArea;
-            this.IsUpdate = isUpdate;
+            ModifiedArea = modifiedArea;
+            IsUpdate = isUpdate;
 
         }
     }

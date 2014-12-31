@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ProtoBuf;
+﻿using ProtoBuf;
 
 namespace Ceriyo.Data.Packets
 {
@@ -16,8 +12,8 @@ namespace Ceriyo.Data.Packets
 
         public SelectCharacterPacket()
         {
-            this.Resref = string.Empty;
-            this.IsSuccessful = false;
+            Resref = string.Empty;
+            IsSuccessful = false;
         }
     }
 }

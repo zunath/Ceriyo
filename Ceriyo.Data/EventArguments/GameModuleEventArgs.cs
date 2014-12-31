@@ -1,5 +1,4 @@
 ﻿using System;
-using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Data.EventArguments
 {

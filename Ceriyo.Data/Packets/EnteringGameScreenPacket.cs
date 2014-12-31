@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Ceriyo.Data.GameObjects;
 using ProtoBuf;
 

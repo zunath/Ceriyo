@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Data.EventArguments
@@ -32,17 +29,17 @@ namespace Ceriyo.Data.EventArguments
                                  int layer,
                                  Texture2D texture)
         {
-            this.Layer = layer;
-            this.StartCellX = startCellX;
-            this.StartCellY = startCellY;
-            this.EndCellX = endCellX;
-            this.EndCellY = endCellY;
-            this.Texture = texture;
+            Layer = layer;
+            StartCellX = startCellX;
+            StartCellY = startCellY;
+            EndCellX = endCellX;
+            EndCellY = endCellY;
+            Texture = texture;
 
-            this.StartTextureCellX = startTextureCellX;
-            this.StartTextureCellY = startTextureCellY;
-            this.EndTextureCellX = endTextureCellX;
-            this.EndTextureCellY = endTextureCellY;
+            StartTextureCellX = startTextureCellX;
+            StartTextureCellY = startTextureCellY;
+            EndTextureCellX = endTextureCellX;
+            EndTextureCellY = endTextureCellY;
         }
     }
 }

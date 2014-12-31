@@ -1,5 +1,5 @@
 ﻿
-namespace Ceriyo.Data
+namespace Ceriyo.Data.Engine
 {
     public static class WorkingPaths
     {

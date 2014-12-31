@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Ceriyo.Data.ResourceObjects
 {
@@ -16,16 +12,9 @@ namespace Ceriyo.Data.ResourceObjects
 
         public ResourceEditorItem()
         {
-            this.FileName = string.Empty;
-            this.Extension = string.Empty;
-            this.SizeBytes = 0;
-        }
-
-        public ResourceEditorItem(string fileName, string extension, long sizeBytes)
-        {
-            this.FileName = fileName;
-            this.Extension = extension;
-            this.SizeBytes = sizeBytes;
+            FileName = string.Empty;
+            Extension = string.Empty;
+            SizeBytes = 0;
         }
     }
 }

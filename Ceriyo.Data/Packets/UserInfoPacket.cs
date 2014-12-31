@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ProtoBuf;
+﻿using ProtoBuf;
 
 namespace Ceriyo.Data.Packets
 {
@@ -18,9 +14,9 @@ namespace Ceriyo.Data.Packets
 
         public UserInfoPacket()
         {
-            this.IsRequest = false;
-            this.Username = string.Empty;
-            this.ServerPassword = string.Empty;
+            IsRequest = false;
+            Username = string.Empty;
+            ServerPassword = string.Empty;
         }
     }
 }

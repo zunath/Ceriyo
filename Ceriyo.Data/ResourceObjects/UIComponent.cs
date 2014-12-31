@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Squid;
 
 namespace Ceriyo.Data.ResourceObjects
@@ -28,23 +25,23 @@ namespace Ceriyo.Data.ResourceObjects
 
         public UIComponent()
         {
-            this.ComponentType = string.Empty;
-            this.Name = string.Empty;
-            this.SizeX = 0;
-            this.SizeY = 0;
-            this.PositionX = 0;
-            this.PositionY = 0;
-            this.Title = string.Empty;
-            this.Text = string.Empty;
-            this.Resizeable = false;
-            this.Anchor = AnchorStyles.None;
-            this.CursorType = Cursors.Default;
-            this.Children = new List<UIComponent>();
-            this.Enabled = true;
-            this.Visible = true;
-            this.Modal = false;
-            this.Multiselect = false;
-            this.MaxSelected = 1;
+            ComponentType = string.Empty;
+            Name = string.Empty;
+            SizeX = 0;
+            SizeY = 0;
+            PositionX = 0;
+            PositionY = 0;
+            Title = string.Empty;
+            Text = string.Empty;
+            Resizeable = false;
+            Anchor = AnchorStyles.None;
+            CursorType = Cursors.Default;
+            Children = new List<UIComponent>();
+            Enabled = true;
+            Visible = true;
+            Modal = false;
+            Multiselect = false;
+            MaxSelected = 1;
         }
     }
 }

@@ -6,6 +6,7 @@ using Ceriyo.Library.SquidGUI;
 using FlatRedBall;
 using Squid;
 using System;
+using Ceriyo.Data.Engine;
 
 namespace Ceriyo.Entities.GUI
 {
