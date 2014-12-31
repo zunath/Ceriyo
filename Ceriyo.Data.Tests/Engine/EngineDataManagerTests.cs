@@ -11,8 +11,7 @@ namespace Ceriyo.Data.Tests
         [TestMethod]
         public void EngineDataManager_DirectoriesMustExist()
         {
-            EngineDataManager manager = new EngineDataManager();
-            manager.InitializeEngine();
+            EngineDataManager.InitializeEngine();
 
             bool exists = Directory.Exists(EnginePaths.ModulesDirectory);
             Assert.AreEqual(true, exists);

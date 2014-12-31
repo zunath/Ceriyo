@@ -22,8 +22,6 @@ namespace Ceriyo.Server
         private Dictionary<NetConnection, ServerPlayer> Players { get; set; }
         public event EventHandler<PacketEventArgs> OnPacketReceived;
         private ServerSettings Settings { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
-        private EngineDataManager EngineManager { get; set; }
 
         public ServerNetworkManager(string serverPassword, int port)
         {
@@ -32,8 +30,6 @@ namespace Ceriyo.Server
             Agent.OnConnected += Agent_OnConnected;
             Agent.OnDisconnected += Agent_OnDisconnected;
             Agent.OnDisconnecting += Agent_OnDisconnecting;
-            WorkingManager = new WorkingDataManager();
-            EngineManager = new EngineDataManager();
         }
 
         public void Update()
@@ -150,7 +146,7 @@ namespace Ceriyo.Server
 
             if (Settings.AllowCharacterDeletion)
             {
-                success = EngineManager.DeletePlayer(Players[packet.SenderConnection].Username, packet.CharacterResref);
+                success = EngineDataManager.DeletePlayer(Players[packet.SenderConnection].Username, packet.CharacterResref);
             }
 
             DeleteCharacterPacket response = new DeleteCharacterPacket
@@ -165,9 +161,9 @@ namespace Ceriyo.Server
         {
             CharacterCreationScreenPacket response = new CharacterCreationScreenPacket
             {
-                Abilities = WorkingManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory).ToList(),
-                CharacterClasses = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory).ToList(),
-                Skills = WorkingManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory).ToList()
+                Abilities = WorkingDataManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory).ToList(),
+                CharacterClasses = WorkingDataManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory).ToList(),
+                Skills = WorkingDataManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory).ToList()
             };
 
             Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
@@ -182,7 +178,7 @@ namespace Ceriyo.Server
             };
 
             string username = Players[packet.SenderConnection].Username;
-            EngineManager.SavePlayer(username, pc, true);
+            EngineDataManager.SavePlayer(username, pc, true);
 
             CreateCharacterPacket response = new CreateCharacterPacket
             {
@@ -195,7 +191,7 @@ namespace Ceriyo.Server
         private void ReceiveCharacterSelectionScreenPacket(CharacterSelectionScreenPacket packet)
         {
             string username = Players[packet.SenderConnection].Username;
-            List<Player> characters = EngineManager.GetPlayers(username);
+            List<Player> characters = EngineDataManager.GetPlayers(username);
 
             CharacterSelectionScreenPacket response = new CharacterSelectionScreenPacket
             {
@@ -210,7 +206,7 @@ namespace Ceriyo.Server
         private void ReceiveSelectCharacterPacket(SelectCharacterPacket packet)
         {
             string username = Players[packet.SenderConnection].Username;
-            Player pc = EngineManager.GetPlayer(username, packet.Resref);
+            Player pc = EngineDataManager.GetPlayer(username, packet.Resref);
             
             SelectCharacterPacket response = new SelectCharacterPacket();
 

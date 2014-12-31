@@ -18,13 +18,11 @@ namespace Ceriyo.Toolset.Components
     public partial class CreatureEditorComponent
     {
         private CreatureEditorVM Model { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public CreatureEditorComponent()
         {
             InitializeComponent();
             Model = new CreatureEditorVM();
-            WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
 
@@ -120,7 +118,7 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Creatures.Cast<IGameObject>().ToList(), WorkingPaths.CreaturesDirectory);
+            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Creatures.Cast<IGameObject>().ToList(), WorkingPaths.CreaturesDirectory);
 
             if (result != FileOperationResultTypeEnum.Success)
             {
@@ -130,18 +128,18 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Animations = WorkingManager.GetAllGameObjects<SpriteAnimation>(ModulePaths.AnimationsDirectory);
+            Model.Animations = WorkingDataManager.GetAllGameObjects<SpriteAnimation>(ModulePaths.AnimationsDirectory);
             SpriteAnimation animation = new SpriteAnimation
             {
                 Name = "(No Animation)"
             };
             Model.Animations.Insert(0, animation);
 
-            Model.Creatures = WorkingManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
-            Model.Dialogs = WorkingManager.GetAllGameObjects<Dialog>(ModulePaths.DialogsDirectory);
-            Model.Scripts = WorkingManager.GetAllScriptNames();
+            Model.Creatures = WorkingDataManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
+            Model.Dialogs = WorkingDataManager.GetAllGameObjects<Dialog>(ModulePaths.DialogsDirectory);
+            Model.Scripts = WorkingDataManager.GetAllScriptNames();
             
-            Model.CharacterClasses = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
+            Model.CharacterClasses = WorkingDataManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
             CharacterClass charClass = new CharacterClass
             {
                 Name = "(No Class)"

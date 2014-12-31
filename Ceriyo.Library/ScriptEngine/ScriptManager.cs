@@ -6,13 +6,12 @@ namespace Ceriyo.Library.ScriptEngine
 {
     public class ScriptManager
     {
-        private ScriptMethods Methods { get; set; }
-        private Lua LuaManager { get; set; }
+        private readonly Lua _lua;
 
         public ScriptManager()
         {
-            Methods = new ScriptMethods();
-            LuaManager = new Lua();
+            _lua = new Lua();
+            _lua["game"] = new ScriptMethods();
         }
 
         public object[] RunEngineScript(string scriptName)
@@ -21,7 +20,7 @@ namespace Ceriyo.Library.ScriptEngine
             if (!File.Exists(EnginePaths.ScriptsDirectory + scriptName)) return null;
             string filePath = EnginePaths.ScriptsDirectory + scriptName;
 
-            return LuaManager.DoFile(filePath);
+            return _lua.DoFile(filePath);
         }
 
         public object[] RunModuleScript(string scriptName, object self)
@@ -29,8 +28,8 @@ namespace Ceriyo.Library.ScriptEngine
             scriptName += EnginePaths.ScriptExtension;
             if (!File.Exists(WorkingPaths.ScriptsDirectory + scriptName)) return null;
             string filePath = EnginePaths.ScriptsDirectory + scriptName;
-            
-            return LuaManager.DoFile(filePath);
+
+            return _lua.DoFile(filePath);
         }
 
     }

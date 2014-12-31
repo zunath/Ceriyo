@@ -14,13 +14,11 @@ namespace Ceriyo.Toolset.Windows
     {
         private EditDialogVM Model { get; set; }
         private bool IsEditing { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public EditDialogWindow()
         {
             InitializeComponent();
             Model = new EditDialogVM();
-            WorkingManager = new WorkingDataManager();
             DataContext = Model;
             SetLimits();
         }
@@ -32,7 +30,7 @@ namespace Ceriyo.Toolset.Windows
             Model.LocalVariables = dialog.LocalVariables;
             Model.Name = dialog.Name;
             Model.Resref = dialog.Resref;
-            Model.Scripts = WorkingManager.GetAllScriptNames();
+            Model.Scripts = WorkingDataManager.GetAllScriptNames();
             Model.Tag = dialog.Tag;
         }
 
@@ -56,7 +54,7 @@ namespace Ceriyo.Toolset.Windows
         {
             Dialog dialog = new Dialog(Model.Name, Model.Tag, Model.Resref, Model.Description, Model.Comments);
 
-            if (WorkingManager.DoesGameObjectExist(dialog) && !IsEditing)
+            if (WorkingDataManager.DoesGameObjectExist(dialog) && !IsEditing)
             {
                 MessageBox.Show("A dialog with that resref already exists. Please select a different resref.", "Resref in use", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
@@ -64,7 +62,7 @@ namespace Ceriyo.Toolset.Windows
             {
                 dialog.LocalVariables = Model.LocalVariables;
                 
-                FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(dialog);
+                FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(dialog);
 
                 if (result == FileOperationResultTypeEnum.Success)
                 {

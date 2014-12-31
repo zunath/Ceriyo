@@ -17,7 +17,6 @@ namespace Ceriyo.Toolset.Components
     public partial class ClassEditorComponent
     {
         private ClassEditorVM Model { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public event EventHandler<EditorItemChangedEventArgs> OnClassesListChanged;
 
@@ -25,7 +24,6 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             Model = new ClassEditorVM();
-            WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
 
@@ -79,7 +77,7 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Classes.Cast<IGameObject>().ToList(), WorkingPaths.CharacterClassesDirectory);
+            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Classes.Cast<IGameObject>().ToList(), WorkingPaths.CharacterClassesDirectory);
 
             if (result != FileOperationResultTypeEnum.Success)
             {
@@ -89,7 +87,7 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Classes = WorkingManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
+            Model.Classes = WorkingDataManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory);
 
             if (Model.Classes.Count > 0)
             {

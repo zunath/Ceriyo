@@ -6,14 +6,14 @@ using System.IO;
 
 namespace Ceriyo.Data.Engine
 {
-    public class EngineDataManager
+    public static class EngineDataManager
     {
-        public void InitializeEngine()
+        public static void InitializeEngine()
         {
             AddEngineDirectories();
         }
 
-        private void AddEngineDirectories()
+        private static void AddEngineDirectories()
         {
             if (!Directory.Exists(EnginePaths.ModulesDirectory))
             {
@@ -31,7 +31,7 @@ namespace Ceriyo.Data.Engine
             }
         }
 
-        public List<Player> GetPlayers(string accountName)
+        public static List<Player> GetPlayers(string accountName)
         {
             List<Player> players = new List<Player>();
 
@@ -47,13 +47,13 @@ namespace Ceriyo.Data.Engine
             return players;
         }
 
-        public Player GetPlayer(string username, string resref)
+        public static Player GetPlayer(string username, string resref)
         {
             string path = EnginePaths.CharactersDirectory + username + "/" + resref + EnginePaths.DataExtension;
             return FileManager.XmlDeserialize<Player>(path);
         }
 
-        public bool SavePlayer(string accountName, Player pc, bool isNewPC = false)
+        public static bool SavePlayer(string accountName, Player pc, bool isNewPC = false)
         {
             bool success = false;
 
@@ -79,7 +79,7 @@ namespace Ceriyo.Data.Engine
             return success;
         }
 
-        public bool DeletePlayer(string accountName, string resref)
+        public static bool DeletePlayer(string accountName, string resref)
         {
             bool success = false;
 

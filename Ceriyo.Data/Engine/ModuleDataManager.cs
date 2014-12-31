@@ -7,9 +7,9 @@ using Ionic.Zip;
 
 namespace Ceriyo.Data
 {
-    public class ModuleDataManager
+    public static class ModuleDataManager
     {
-        public FileOperationResultTypeEnum CreateModule(string name, string tag, string resref)
+        public static FileOperationResultTypeEnum CreateModule(string name, string tag, string resref)
         {
             FileOperationResultTypeEnum result;
 
@@ -60,7 +60,7 @@ namespace Ceriyo.Data
         }
 
 
-        public FileOperationResultTypeEnum LoadModule(string fileName, bool forceDeleteWorkingDirectory = false)
+        public static FileOperationResultTypeEnum LoadModule(string fileName, bool forceDeleteWorkingDirectory = false)
         {
             FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
 
@@ -113,7 +113,7 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public FileOperationResultTypeEnum CloseModule()
+        public static FileOperationResultTypeEnum CloseModule()
         {
             FileOperationResultTypeEnum result;
 
@@ -135,7 +135,7 @@ namespace Ceriyo.Data
             return result;
         }
 
-        private void AddDirectories(ZipFile zip)
+        private static void AddDirectories(ZipFile zip)
         {
             if (zip[ModulePaths.CharacterClassesDirectory] == null)
             {
@@ -191,7 +191,7 @@ namespace Ceriyo.Data
             }
         }
 
-        private void AddModulePropertiesFile(ZipFile zip, GameModule module)
+        private static void AddModulePropertiesFile(ZipFile zip, GameModule module)
         {
             // Add the default resource packs to the module.
             module.ResourcePacks.Add("CeriyoResources.crp");
@@ -201,7 +201,7 @@ namespace Ceriyo.Data
             zip.AddEntry(EnginePaths.ModuleDataFileName + EnginePaths.DataExtension, output);
         }
 
-        private void AddItemTypesFiles(ZipFile zip)
+        private static void AddItemTypesFiles(ZipFile zip)
         {
             string itemTypesPath = EnginePaths.DataDirectory + "ItemTypes/";
             if (!Directory.Exists(itemTypesPath)) return;
@@ -221,7 +221,7 @@ namespace Ceriyo.Data
             }
         }
 
-        private void AddCharacterClassesFiles(ZipFile zip)
+        private static void AddCharacterClassesFiles(ZipFile zip)
         {
             string characterClassesPath = EnginePaths.DataDirectory + "CharacterClasses/";
             if (Directory.Exists(characterClassesPath))
@@ -242,7 +242,7 @@ namespace Ceriyo.Data
             }
         }
 
-        private void AddItemPropertiesFiles(ZipFile zip)
+        private static void AddItemPropertiesFiles(ZipFile zip)
         {
             string itemPropertiesPath = EnginePaths.DataDirectory + "ItemProperties/";
             if (Directory.Exists(itemPropertiesPath))
@@ -263,7 +263,7 @@ namespace Ceriyo.Data
             }
         }
 
-        public FileOperationResultTypeEnum SaveModule(string fileName)
+        public static FileOperationResultTypeEnum SaveModule(string fileName)
         {
             FileOperationResultTypeEnum result;
             string path = EnginePaths.ModulesDirectory + fileName + EnginePaths.ModuleExtension;

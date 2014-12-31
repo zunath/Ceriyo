@@ -8,9 +8,6 @@ namespace Ceriyo.Data.GameObjects
 {
     public class Placeable : IGameObject
     {
-        [XmlIgnore]
-        private WorkingDataManager WorkingManager { get; set; }
-
         public string Name { get; set; }
         public string Tag { get; set; }
         public string Resref { get; set; }
@@ -39,7 +36,7 @@ namespace Ceriyo.Data.GameObjects
         {
             get
             {
-                return WorkingManager.GetGameObject<Dialog>(ModulePaths.DialogsDirectory, DialogResref);
+                return WorkingDataManager.GetGameObject<Dialog>(ModulePaths.DialogsDirectory, DialogResref);
             }
         }
 
@@ -53,8 +50,7 @@ namespace Ceriyo.Data.GameObjects
             LocalVariables = new BindingList<LocalVariable>();
             Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
             Graphic = new GameResource();
-            WorkingManager = new WorkingDataManager();
-
+            
             Scripts.Add(ScriptEventTypeEnum.OnPlaceableAttacked, "");
             Scripts.Add(ScriptEventTypeEnum.OnPlaceableClose, "");
             Scripts.Add(ScriptEventTypeEnum.OnPlaceableDamaged, "");

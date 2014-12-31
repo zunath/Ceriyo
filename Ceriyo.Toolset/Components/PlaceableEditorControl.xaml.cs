@@ -27,15 +27,11 @@ namespace Ceriyo.Toolset.Components
     public partial class PlaceableEditorControl : UserControl
     {
         private PlaceableEditorVM Model { get; set; }
-        private ResourcePackDataManager ResourcePackManager { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public PlaceableEditorControl()
         {
             InitializeComponent();
             Model = new PlaceableEditorVM();
-            ResourcePackManager = new ResourcePackDataManager();
-            WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
 
@@ -70,7 +66,7 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Placeables.Cast<IGameObject>().ToList(), WorkingPaths.PlaceablesDirectory);
+            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Placeables.Cast<IGameObject>().ToList(), WorkingPaths.PlaceablesDirectory);
 
             if (result != FileOperationResultTypeEnum.Success)
             {
@@ -80,12 +76,12 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackManager.GetGameResources(ResourceTypeEnum.Graphic);
+            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceTypeEnum.Graphic);
             GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
             Model.Graphics.Insert(0, graphic);
 
-            Model.Placeables = WorkingManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
-            Model.Scripts = WorkingManager.GetAllScriptNames();
+            Model.Placeables = WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
+            Model.Scripts = WorkingDataManager.GetAllScriptNames();
 
             foreach (Placeable placeable in Model.Placeables)
             {

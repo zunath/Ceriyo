@@ -18,21 +18,19 @@ namespace Ceriyo.Toolset.Components
     {
         private PaintObjectsVM Model { get; set; }
         public event EventHandler<ObjectPainterEventArgs> OnModeChange;
-        private WorkingDataManager WorkingManager { get; set; }
 
         public PaintObjectsControl()
         {
             InitializeComponent();
             Model = new PaintObjectsVM();
-            WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
 
         private void PopulateModel()
         {
-            Model.Creatures = WorkingManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
-            Model.Items = WorkingManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
-            Model.Placeables = WorkingManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
+            Model.Creatures = WorkingDataManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
+            Model.Items = WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
+            Model.Placeables = WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
             Model.PaintMode = PaintObjectModeTypeEnum.Tile;
         }
 
@@ -54,9 +52,9 @@ namespace Ceriyo.Toolset.Components
 
         public void GameObjectsListsChanged(object sender, EventArgs e)
         {
-            Model.Items = WorkingManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
-            Model.Placeables = WorkingManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
-            Model.Creatures = WorkingManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
+            Model.Items = WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
+            Model.Placeables = WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
+            Model.Creatures = WorkingDataManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
         }
 
         public void LoadArea(object sender, GameObjectEventArgs e)

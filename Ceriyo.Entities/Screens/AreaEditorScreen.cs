@@ -12,7 +12,6 @@ namespace Ceriyo.Entities.Screens
     {
         private Area LoadedArea { get; set; }
         private EditableMapDrawableBatch AreaBatch { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
         private event EventHandler<AreaPropertiesChangedEventArgs> OnAreaPropertiesSaved;
 
         public AreaEditorScreen()
@@ -22,7 +21,6 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
-            WorkingManager = new WorkingDataManager();
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -52,7 +50,7 @@ namespace Ceriyo.Entities.Screens
                 OnAreaPropertiesSaved -= AreaBatch.AreaPropertiesSaved;
             }
 
-            LoadedArea = WorkingManager.GetGameObject<Area>(ModulePaths.AreasDirectory, e.GameObject.Resref);
+            LoadedArea = WorkingDataManager.GetGameObject<Area>(ModulePaths.AreasDirectory, e.GameObject.Resref);
             AreaBatch = new EditableMapDrawableBatch(LoadedArea);
 
             OnAreaPropertiesSaved += AreaBatch.AreaPropertiesSaved;
@@ -62,7 +60,7 @@ namespace Ceriyo.Entities.Screens
         {
             //LoadedArea.MapTiles = AreaBatch.MapTiles;
 
-            WorkingManager.SaveGameObjectFile(LoadedArea);
+            WorkingDataManager.SaveGameObjectFile(LoadedArea);
         }
 
         public void AreaPropertiesSaved(object sender, AreaPropertiesChangedEventArgs e)

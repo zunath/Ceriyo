@@ -40,8 +40,7 @@ namespace Ceriyo.Data.GameObjects
 
         private void GetName()
         {
-            WorkingDataManager wdm = new WorkingDataManager();
-            ItemProperty ip = wdm.GetGameObject<ItemProperty>(ModulePaths.ItemPropertiesDirectory, ItemPropertyResref);
+            ItemProperty ip = WorkingDataManager.GetGameObject<ItemProperty>(ModulePaths.ItemPropertiesDirectory, ItemPropertyResref);
             ItemPropertyOption ipo = ip.Options.SingleOrDefault(x => x.Resref == ItemPropertyOptionResref);
 
             _name = ip.Name;

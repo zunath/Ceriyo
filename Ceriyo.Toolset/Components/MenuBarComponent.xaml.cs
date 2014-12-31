@@ -18,15 +18,12 @@ namespace Ceriyo.Toolset.Components
         private MenuBarVM Model { get; set; }
         private ResourcePackEditorWindow ResourceEditor { get; set; }
         private ManageResourcePacksWindow ResourceManager { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
-        private ResourcePackDataManager ResourcePackManager { get; set; }
         private ModulePropertiesWindow ModuleProperties { get; set; }
         private DataEditorWindow DataEditor { get; set; }
         public event EventHandler<GameModuleEventArgs> OnOpenModule;
         public event EventHandler<EventArgs> OnSaveModule;
         public event EventHandler<EventArgs> OnCloseModule;
         public event EventHandler<EventArgs> OnDataEditorClosed;
-        private ModuleDataManager ModuleManager { get; set;}
 
         public MenuBarComponent()
         {
@@ -36,11 +33,8 @@ namespace Ceriyo.Toolset.Components
 
             ModuleProperties = new ModulePropertiesWindow();
             ResourceEditor = new ResourcePackEditorWindow();
-            ResourcePackManager = new ResourcePackDataManager();
-            WorkingManager = new WorkingDataManager();
             ResourceManager = new ManageResourcePacksWindow();
             DataEditor = new DataEditorWindow();
-            ModuleManager = new ModuleDataManager();
             InitializeEvents();
         }
 
@@ -72,7 +66,7 @@ namespace Ceriyo.Toolset.Components
 
         private void ModuleCreated(object sender, GameModuleEventArgs eventArgs)
         {
-            ModuleManager.LoadModule(eventArgs.FileName, true);
+            ModuleDataManager.LoadModule(eventArgs.FileName, true);
             OpenModuleFinished(sender, eventArgs);
         }
 
@@ -129,8 +123,8 @@ namespace Ceriyo.Toolset.Components
 
         private void BuildModule(object sender, RoutedEventArgs e)
         {
-            GameModule module = WorkingManager.GetGameModule();
-            bool success = ResourcePackManager.BuildModule(module.ResourcePacks);
+            GameModule module = WorkingDataManager.GetGameModule();
+            bool success = ResourcePackDataManager.BuildModule(module.ResourcePacks);
 
             if (success)
             {
@@ -144,7 +138,7 @@ namespace Ceriyo.Toolset.Components
 
         private void SaveModule(object sender, RoutedEventArgs e)
         {
-            GameModule module = WorkingManager.GetGameModule();
+            GameModule module = WorkingDataManager.GetGameModule();
             DoSaveModule(sender, new GameModuleEventArgs(module.Resref));
         }
 
@@ -166,7 +160,7 @@ namespace Ceriyo.Toolset.Components
                 OnSaveModule(this, new EventArgs());
             }
 
-            ModuleManager.SaveModule(e.FileName);
+            ModuleDataManager.SaveModule(e.FileName);
         }
 
         private void MenuBarComponent_OnLoaded(object sender, RoutedEventArgs e)
@@ -179,7 +173,7 @@ namespace Ceriyo.Toolset.Components
 
         private void CloseModule(object sender, RoutedEventArgs e)
         {
-            var result = ModuleManager.CloseModule();
+            var result = ModuleDataManager.CloseModule();
 
             if (result == FileOperationResultTypeEnum.Success)
             {

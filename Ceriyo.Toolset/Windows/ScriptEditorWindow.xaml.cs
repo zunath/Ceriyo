@@ -18,13 +18,11 @@ namespace Ceriyo.Toolset.Windows
         private ScriptEditorVM Model { get; set; }
         private SaveScriptWindow SaveScriptWin { get; set; }
         private const string DefaultScriptText = "";
-        private WorkingDataManager WorkingManager { get; set; }
 
         public ScriptEditorWindow()
         {
             InitializeComponent();
             Model = new ScriptEditorVM();
-            WorkingManager = new WorkingDataManager();
             SaveScriptWin = new SaveScriptWindow();
             SaveScriptWin.OnSaveComplete += SaveScriptWin_OnSaveComplete;
             DataContext = Model;
@@ -47,7 +45,7 @@ namespace Ceriyo.Toolset.Windows
         private void SaveScriptWin_OnSaveComplete(object sender, ScriptEventArgs e)
         {
             DoScriptSave(e.Name, e.Contents);
-            Model.ScriptNames = WorkingManager.GetAllScriptNames(false);
+            Model.ScriptNames = WorkingDataManager.GetAllScriptNames(false);
             GameScript existingScript = Model.OpenScripts.SingleOrDefault(x => x.Name == e.OldName);
             Model.OpenScripts.Remove(existingScript);
             
@@ -84,7 +82,7 @@ namespace Ceriyo.Toolset.Windows
             Model.ScriptNames.Clear();
             Model.OpenScripts.Clear();
 
-            Model.ScriptNames = WorkingManager.GetAllScriptNames(false);
+            Model.ScriptNames = WorkingDataManager.GetAllScriptNames(false);
             Model.OpenScripts.Add(new GameScript("script" + GetUniqueScriptID(), DefaultScriptText));
             tcScripts.SelectedIndex = 0;
             Show();
@@ -157,7 +155,7 @@ namespace Ceriyo.Toolset.Windows
             if (MessageBox.Show("Are you sure you want to delete the script " + scriptName + " ?", "Delete Script?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
 
-            FileOperationResultTypeEnum result = WorkingManager.DeleteScript(scriptName);
+            FileOperationResultTypeEnum result = WorkingDataManager.DeleteScript(scriptName);
 
             switch (result)
             {

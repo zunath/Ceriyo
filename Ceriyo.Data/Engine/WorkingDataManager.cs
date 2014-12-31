@@ -7,9 +7,9 @@ using System.IO;
 
 namespace Ceriyo.Data
 {
-    public class WorkingDataManager
+    public static class WorkingDataManager
     {
-        public FileOperationResultTypeEnum ReplaceAllGameObjectFiles(IEnumerable<IGameObject> gameObjects, string directory)
+        public static FileOperationResultTypeEnum ReplaceAllGameObjectFiles(IEnumerable<IGameObject> gameObjects, string directory)
         {
             FileOperationResultTypeEnum result;
             string[] existingFiles = Directory.GetFiles(directory, "*" + EnginePaths.DataExtension);
@@ -68,7 +68,7 @@ namespace Ceriyo.Data
         }
 
 
-        public FileOperationResultTypeEnum SaveGameObjectFile(IGameObject gameObject)
+        public static FileOperationResultTypeEnum SaveGameObjectFile(IGameObject gameObject)
         {
             FileOperationResultTypeEnum result;
 
@@ -87,25 +87,7 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public IGameObject OpenGameObjectFile(string relativeFilePath)
-        {
-            IGameObject result;
-
-            try
-            {
-                string filePath = EnginePaths.WorkingDirectory + relativeFilePath;
-                result = FileManager.XmlDeserialize(typeof(IGameObject), filePath) as IGameObject;
-            }
-            catch
-            {
-                result = null;
-            }
-
-
-            return result;
-        }
-
-        public FileOperationResultTypeEnum DeleteGameObjectFile(IGameObject gameObject)
+        public static FileOperationResultTypeEnum DeleteGameObjectFile(IGameObject gameObject)
         {
             FileOperationResultTypeEnum result;
 
@@ -131,7 +113,7 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public BindingList<T> GetAllGameObjects<T>(string folderName) where T: IGameObject
+        public static BindingList<T> GetAllGameObjects<T>(string folderName) where T: IGameObject
         {
             BindingList<T> gameObjects = new BindingList<T>();
 
@@ -147,7 +129,7 @@ namespace Ceriyo.Data
             return gameObjects;
         }
 
-        public T GetGameObject<T>(string folderName, string resref) where T: IGameObject
+        public static T GetGameObject<T>(string folderName, string resref) where T: IGameObject
         {
             try
             {
@@ -160,7 +142,7 @@ namespace Ceriyo.Data
             }
         }
 
-        public BindingList<string> GetAllScriptNames(bool insertBlankEntry = true)
+        public static BindingList<string> GetAllScriptNames(bool insertBlankEntry = true)
         {
             BindingList<string> scripts = new BindingList<string>();
 
@@ -185,7 +167,7 @@ namespace Ceriyo.Data
             return scripts;
         }
 
-        public FileOperationResultTypeEnum DeleteScript(string scriptName)
+        public static FileOperationResultTypeEnum DeleteScript(string scriptName)
         {
             FileOperationResultTypeEnum result;
 
@@ -210,14 +192,14 @@ namespace Ceriyo.Data
             return result;
         }
 
-        public bool DoesGameObjectExist(IGameObject gameObject)
+        public static bool DoesGameObjectExist(IGameObject gameObject)
         {
             string path = gameObject.WorkingDirectory + gameObject.Resref + EnginePaths.DataExtension;
 
             return File.Exists(path);
         }
 
-        public GameModule GetGameModule()
+        public static GameModule GetGameModule()
         {
             GameModule module;
 
@@ -235,7 +217,7 @@ namespace Ceriyo.Data
             return module;
         }
 
-        public FileOperationResultTypeEnum SaveModuleSettings(GameModule module)
+        public static FileOperationResultTypeEnum SaveModuleSettings(GameModule module)
         {
             FileOperationResultTypeEnum result;
 

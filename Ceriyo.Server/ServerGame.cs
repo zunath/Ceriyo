@@ -37,25 +37,21 @@ namespace Ceriyo.Server
         private ServerNetworkManager NetworkManager { get; set; }
         private ScriptManager Scripts { get; set; }
         private BindingList<Area> Areas { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
-        private ModuleDataManager ModuleManager { get; set; } 
         private GameModule Module { get; set; }
 
         public ServerGame(ServerStartupArgs args)
         {
-            ModuleManager = new ModuleDataManager();
-            WorkingManager = new WorkingDataManager();
             GUIStatusUpdateQueue = new ConcurrentQueue<ServerGUIStatus>();
             NetworkManager = new ServerNetworkManager(args.ServerPassword, args.Port);
             Scripts = new ScriptManager();
 
-            if (ModuleManager.LoadModule(args.ModuleFileName, true) != FileOperationResultTypeEnum.Success)
+            if (ModuleDataManager.LoadModule(args.ModuleFileName, true) != FileOperationResultTypeEnum.Success)
             {
                 throw new Exception("Server was unable to load module.");
             }
 
-            Module = WorkingManager.GetGameModule();
-            Areas = WorkingManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory);
+            Module = WorkingDataManager.GetGameModule();
+            Areas = WorkingDataManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory);
         }
 
         protected override void Initialize()
@@ -138,7 +134,7 @@ namespace Ceriyo.Server
         protected override void OnExiting(object sender, EventArgs args)
         {
             NetworkManager.Destroy();
-            ModuleManager.CloseModule();
+            ModuleDataManager.CloseModule();
             base.OnExiting(sender, args);
 
             if (OnGameExiting != null)

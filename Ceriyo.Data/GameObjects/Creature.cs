@@ -13,9 +13,6 @@ namespace Ceriyo.Data.GameObjects
     [ProtoContract]
     public class Creature: IGameObject
     {
-        [XmlIgnore]
-        private WorkingDataManager WorkingManager { get; set; }
-
         [ProtoMember(1)]
         public string Name { get; set; }
         [ProtoMember(2)]
@@ -57,7 +54,7 @@ namespace Ceriyo.Data.GameObjects
         {
             get
             {
-                return WorkingManager.GetGameObject<Dialog>(ModulePaths.DialogsDirectory, DialogResref);
+                return WorkingDataManager.GetGameObject<Dialog>(ModulePaths.DialogsDirectory, DialogResref);
             }
         }
 
@@ -66,7 +63,7 @@ namespace Ceriyo.Data.GameObjects
         {
             get
             {
-                return WorkingManager.GetGameObject<CharacterClass>(ModulePaths.CharacterClassesDirectory, this.CharacterClassResref);
+                return WorkingDataManager.GetGameObject<CharacterClass>(ModulePaths.CharacterClassesDirectory, this.CharacterClassResref);
             }
         }
 
@@ -76,7 +73,7 @@ namespace Ceriyo.Data.GameObjects
             get
             {
                 return new BindingList<Ability>(
-                    WorkingManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory)
+                    WorkingDataManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory)
                         .Where(x => AbilityResrefs.Contains(x.Resref))
                         .ToList());
             }
@@ -88,7 +85,7 @@ namespace Ceriyo.Data.GameObjects
             get
             {
                 return new BindingList<Item>(
-                    WorkingManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory)
+                    WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory)
                         .Where(x => ItemResrefs.Contains(x.Resref))
                         .ToList());
             }
@@ -96,8 +93,6 @@ namespace Ceriyo.Data.GameObjects
 
         public Creature()
         {
-            WorkingManager = new WorkingDataManager();
-
             Name = string.Empty;
             Tag = string.Empty;
             Resref = string.Empty;

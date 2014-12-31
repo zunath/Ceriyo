@@ -12,26 +12,24 @@ namespace Ceriyo.Toolset.Windows
     public partial class ModulePropertiesWindow
     {
         private ModulePropertiesVM Model { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public ModulePropertiesWindow()
         {
             InitializeComponent();
             Model = new ModulePropertiesVM();
-            WorkingManager = new WorkingDataManager();
             DataContext = Model;
             SetLimits();
         }
 
         public void Open()
         {
-            GameModule gameModule = WorkingManager.GetGameModule();
+            GameModule gameModule = WorkingDataManager.GetGameModule();
             Model.Comments = gameModule.Comments;
             Model.Description = gameModule.Description;
             Model.LocalVariables = gameModule.LocalVariables;
             Model.Name = gameModule.Name;
             Model.Resref = gameModule.Resref;
-            Model.Scripts = WorkingManager.GetAllScriptNames();
+            Model.Scripts = WorkingDataManager.GetAllScriptNames();
             Model.Tag = gameModule.Tag;
             Model.Levels = gameModule.Levels.Levels;
 
@@ -66,7 +64,7 @@ namespace Ceriyo.Toolset.Windows
             module.Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeft, Model.OnPlayerLeftScript);
             module.Scripts.Add(ScriptEventTypeEnum.OnPlayerRespawn, Model.OnPlayerRespawnScript);
 
-            FileOperationResultTypeEnum result = WorkingManager.SaveModuleSettings(module);
+            FileOperationResultTypeEnum result = WorkingDataManager.SaveModuleSettings(module);
 
             if (result == FileOperationResultTypeEnum.Success)
             {

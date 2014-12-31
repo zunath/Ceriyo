@@ -23,8 +23,6 @@ namespace Ceriyo.Toolset.Components
     public partial class AnimationEditorComponent
     {
         private AnimationEditorVM Model { get; set; }
-        private ResourcePackDataManager ResourcePackManager { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public event EventHandler<EditorItemChangedEventArgs> OnAnimationsListChanged;
 
@@ -32,18 +30,16 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             Model = new AnimationEditorVM();
-            ResourcePackManager = new ResourcePackDataManager();
-            WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackManager.GetGameResources(ResourceTypeEnum.Graphic);
+            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceTypeEnum.Graphic);
             GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
             Model.Graphics.Insert(0, graphic);
 
-            Model.Animations = WorkingManager.GetAllGameObjects<SpriteAnimation>(ModulePaths.AnimationsDirectory);
+            Model.Animations = WorkingDataManager.GetAllGameObjects<SpriteAnimation>(ModulePaths.AnimationsDirectory);
             Model.IsAnimationSelected = false;
             Model.IsFrameSelected = false;
             Model.SelectedAnimation = new SpriteAnimation();
@@ -67,7 +63,7 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Animations.Cast<IGameObject>().ToList(), WorkingPaths.AnimationsDirectory);
+            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Animations.Cast<IGameObject>().ToList(), WorkingPaths.AnimationsDirectory);
 
             if (result != FileOperationResultTypeEnum.Success)
             {

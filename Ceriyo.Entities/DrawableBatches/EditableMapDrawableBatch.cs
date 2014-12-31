@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Ceriyo.Data;
+using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
-using FlatRedBall;
 using FlatRedBall.Input;
 using Microsoft.Xna.Framework;
 using xTile.Dimensions;
-using xTile.Layers;
 using xTile.Tiles;
 
 namespace Ceriyo.Entities.DrawableBatches
@@ -16,6 +12,11 @@ namespace Ceriyo.Entities.DrawableBatches
     public class EditableMapDrawableBatch : MapDrawableBatch
     {
         private int CurrentLayer { get; set; }
+        private int SelectedTileX { get; set; }
+        private int SelectedTileY { get; set; }
+        private int SelectionTileWidth { get; set; }
+        private int SelectionTileHeight { get; set; }
+
         private int LastFrameX { get; set; }
         private int LastFrameY { get; set; }
         private int LastFrameLayer { get; set; }
@@ -29,6 +30,7 @@ namespace Ceriyo.Entities.DrawableBatches
         public override void Update()
         {
             HighlightSelectedTile();
+            PaintTiles();
 
             base.Update();
         }
@@ -65,6 +67,19 @@ namespace Ceriyo.Entities.DrawableBatches
             LastFrameX = x;
             LastFrameY = y;
             LastFrameLayer = layer;
+        }
+
+        private void PaintTiles()
+        {
+            if (InputManager.Mouse.ButtonPushed(Mouse.MouseButtons.LeftButton))
+            {
+                
+            }
+        }
+
+        public void TilesSelected(object sender, TilePaintEventArgs e)
+        {
+            
         }
     }
 }

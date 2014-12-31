@@ -18,19 +18,17 @@ namespace Ceriyo.Toolset.Windows
         private EditAreaVM Model { get; set; }
         public event EventHandler<AreaPropertiesChangedEventArgs> OnSaveAreaProperties;
         private bool IsEditing { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public EditAreaWindow()
         {
             InitializeComponent();
             Model = new EditAreaVM();
-            WorkingManager = new WorkingDataManager();
         }
 
         private void PopulateModel(Area area)
         {
-            Model.Tilesets = WorkingManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
-            Model.Scripts = WorkingManager.GetAllScriptNames();
+            Model.Tilesets = WorkingDataManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
+            Model.Scripts = WorkingDataManager.GetAllScriptNames();
             Model.Comments = area.Comments;
             Model.Description = area.Description;
             Model.Name = area.Name;
@@ -94,7 +92,7 @@ namespace Ceriyo.Toolset.Windows
         {
             Area area = new Area(Model.Name, Model.Tag, Model.Resref, Model.Width, Model.Height, EngineConstants.AreaMaxLayers);
 
-            if (WorkingManager.DoesGameObjectExist(area) && !IsEditing)
+            if (WorkingDataManager.DoesGameObjectExist(area) && !IsEditing)
             {
                 MessageBox.Show("An area with that resref already exists. Please select a different resref.", "Resref in use", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
@@ -108,7 +106,7 @@ namespace Ceriyo.Toolset.Windows
                 area.Scripts.Add(ScriptEventTypeEnum.OnAreaHeartbeat, Model.OnAreaHeartbeatScript);
                 area.AreaTilesetResref = Model.SelectedTileset.Resref;
 
-                FileOperationResultTypeEnum result = WorkingManager.SaveGameObjectFile(area);
+                FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(area);
 
                 if (result == FileOperationResultTypeEnum.Success)
                 {

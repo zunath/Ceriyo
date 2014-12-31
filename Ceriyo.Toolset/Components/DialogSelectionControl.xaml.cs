@@ -29,22 +29,20 @@ namespace Ceriyo.Toolset.Components
     {
         protected DialogSelectionVM Model { get; set; }
         private EditDialogWindow EditPropertiesWindow { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public DialogSelectionControl()
         {
             InitializeComponent();
-            WorkingManager = new WorkingDataManager();
             InitializeModel();
-            this.DataContext = Model;
+            DataContext = Model;
             EditPropertiesWindow = new EditDialogWindow();
 
         }
 
         private void InitializeModel()
         {
-            this.Model = new DialogSelectionVM();
-            Model.Dialogs = WorkingManager.GetAllGameObjects<Dialog>(ModulePaths.DialogsDirectory) as BindingList<Dialog>;
+            Model = new DialogSelectionVM();
+            Model.Dialogs = WorkingDataManager.GetAllGameObjects<Dialog>(ModulePaths.DialogsDirectory) as BindingList<Dialog>;
         }
 
         private void Create(object sender, RoutedEventArgs e)
@@ -88,7 +86,7 @@ namespace Ceriyo.Toolset.Components
                 {
                     if (MessageBox.Show("Are you sure you want to delete the dialog " + dialog.Name + " ?", "Delete Dialog?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
-                        FileOperationResultTypeEnum result = WorkingManager.DeleteGameObjectFile(dialog);
+                        FileOperationResultTypeEnum result = WorkingDataManager.DeleteGameObjectFile(dialog);
 
                         if (result == FileOperationResultTypeEnum.Success)
                         {

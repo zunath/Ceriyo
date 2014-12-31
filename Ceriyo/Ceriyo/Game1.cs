@@ -12,12 +12,10 @@ namespace Ceriyo
     public class Game1 : Game
     {
         private readonly GraphicsDeviceManager _graphics;
-        private EngineDataManager EngineManager { get; set; }
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
-            EngineManager = new EngineDataManager();
 
 #if WINDOWS_PHONE || ANDROID || IOS
 
@@ -33,7 +31,7 @@ namespace Ceriyo
         protected override void Initialize()
         {
             FlatRedBallServices.InitializeFlatRedBall(this, _graphics);
-            EngineManager.InitializeEngine();
+            EngineDataManager.InitializeEngine();
 			CameraSetup.SetupCamera(SpriteManager.Camera, _graphics);
 			GlobalContent.Initialize();
             FlatRedBallServices.IsWindowsCursorVisible = true;

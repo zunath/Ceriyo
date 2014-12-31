@@ -23,7 +23,7 @@ namespace Ceriyo.Entities.DrawableBatches
         private readonly IDisplayDevice _displayDevice;
         protected Rectangle _viewport;
         private TileSheet _areaTileSheet;
-        protected TileSheet _systemTileSheet;
+        private TileSheet _systemTileSheet;
         private readonly Location _offset;
 
         public MapDrawableBatch(Area area)

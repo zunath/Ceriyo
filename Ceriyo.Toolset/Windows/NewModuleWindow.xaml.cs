@@ -13,8 +13,6 @@ namespace Ceriyo.Toolset.Windows
     public partial class NewModuleWindow
     {
         private NewModuleVM Model { get; set; }
-        private ModuleDataManager ModuleManager { get; set; }
-        private ResourcePackDataManager ResourcePackManager { get; set; }
 
         public event EventHandler<GameModuleEventArgs> OnModuleCreated;
 
@@ -22,8 +20,6 @@ namespace Ceriyo.Toolset.Windows
         {
             InitializeComponent();
             Model = new NewModuleVM();
-            ModuleManager = new ModuleDataManager();
-            ResourcePackManager = new ResourcePackDataManager();
             DataContext = Model;
             SetLimits();
             txtName.Focus();
@@ -38,15 +34,15 @@ namespace Ceriyo.Toolset.Windows
 
         private void btnCreateModule_Click(object sender, RoutedEventArgs e)
         {
-            ModuleManager.CreateModule(Model.Name, Model.Tag, Model.Resref);
+            ModuleDataManager.CreateModule(Model.Name, Model.Tag, Model.Resref);
 
             if (OnModuleCreated != null)
             {
                 OnModuleCreated(this, new GameModuleEventArgs(Model.Resref));
             }
 
-            ResourcePackManager.BuildModule(ResourcePackManager.GetAllResourcePackNames());
-            ModuleManager.SaveModule(Model.Resref);
+            ResourcePackDataManager.BuildModule(ResourcePackDataManager.GetAllResourcePackNames());
+            ModuleDataManager.SaveModule(Model.Resref);
             
 
             Close();

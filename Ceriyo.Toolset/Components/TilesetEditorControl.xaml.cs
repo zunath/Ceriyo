@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Data.ViewModels;
@@ -30,15 +29,11 @@ namespace Ceriyo.Toolset.Components
     public partial class TilesetEditorControl : UserControl
     {
         private TilesetEditorVM Model { get; set; }
-        private ResourcePackDataManager ResourcePackManager { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public TilesetEditorControl()
         {
             InitializeComponent();
             Model = new TilesetEditorVM();
-            ResourcePackManager = new ResourcePackDataManager();
-            WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
 
@@ -76,7 +71,7 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Tilesets.Cast<IGameObject>().ToList(), WorkingPaths.TilesetsDirectory);
+            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Tilesets.Cast<IGameObject>().ToList(), WorkingPaths.TilesetsDirectory);
 
             if (result != FileOperationResultTypeEnum.Success)
             {
@@ -86,11 +81,11 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackManager.GetGameResources(ResourceTypeEnum.Graphic);
+            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceTypeEnum.Graphic);
             GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
             Model.Graphics.Insert(0, graphic);
 
-            Model.Tilesets = WorkingManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
+            Model.Tilesets = WorkingDataManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
 
             // Link graphics to instances in the data context, so that they load on page open.
             foreach (Tileset tileset in Model.Tilesets)

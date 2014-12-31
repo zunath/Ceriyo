@@ -10,9 +10,6 @@ namespace Ceriyo.Data.GameObjects
     [ProtoContract]
     public class Item : IGameObject
     {
-        [XmlIgnore]
-        private WorkingDataManager WorkingManager { get; set; }
-
         [ProtoMember(1)]
         public string Name { get; set; }
         [ProtoMember(2)]
@@ -35,7 +32,7 @@ namespace Ceriyo.Data.GameObjects
         {
             get
             {
-                return WorkingManager.GetGameObject<ItemType>(ModulePaths.ItemTypesDirectory, ItemTypeResref);
+                return WorkingDataManager.GetGameObject<ItemType>(ModulePaths.ItemTypesDirectory, ItemTypeResref);
             }
         }
         public int Price { get; set; }
@@ -68,8 +65,7 @@ namespace Ceriyo.Data.GameObjects
             WorldGraphic = new GameResource();
             AssignedItemProperties = new BindingList<AssignedItemProperty>();
             ItemRequirements = new BindingList<ItemClassRequirement>();
-            WorkingManager = new WorkingDataManager();
-
+            
             Scripts.Add(ScriptEventTypeEnum.OnItemAcquired, string.Empty);
             Scripts.Add(ScriptEventTypeEnum.OnItemActivated, string.Empty);
             Scripts.Add(ScriptEventTypeEnum.OnItemEquipped, string.Empty);

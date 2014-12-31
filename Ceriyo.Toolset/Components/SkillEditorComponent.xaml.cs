@@ -16,13 +16,11 @@ namespace Ceriyo.Toolset.Components
     public partial class SkillEditorComponent
     {
         private SkillEditorVM Model { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public SkillEditorComponent()
         {
             InitializeComponent();
             Model = new SkillEditorVM();
-            WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
 
@@ -63,7 +61,7 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Skills.Cast<IGameObject>().ToList(), WorkingPaths.SkillsDirectory);
+            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Skills.Cast<IGameObject>().ToList(), WorkingPaths.SkillsDirectory);
 
             if (result != FileOperationResultTypeEnum.Success)
             {
@@ -73,8 +71,8 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Skills = WorkingManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory);
-            Model.Scripts = WorkingManager.GetAllScriptNames();
+            Model.Skills = WorkingDataManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory);
+            Model.Scripts = WorkingDataManager.GetAllScriptNames();
 
             if (Model.Skills.Count > 0)
             {

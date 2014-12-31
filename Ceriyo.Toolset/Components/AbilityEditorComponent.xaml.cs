@@ -17,7 +17,6 @@ namespace Ceriyo.Toolset.Components
     public partial class AbilityEditorComponent
     {
         private AbilityEditorVM Model { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public event EventHandler<GameObjectListEventArgs> OnAbilitiesListChanged;
 
@@ -25,7 +24,6 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             Model = new AbilityEditorVM();
-            WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
 
@@ -75,7 +73,7 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingManager.ReplaceAllGameObjectFiles(Model.Abilities.Cast<IGameObject>().ToList(), WorkingPaths.AbilitiesDirectory);
+            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Abilities.Cast<IGameObject>().ToList(), WorkingPaths.AbilitiesDirectory);
 
             if (result != FileOperationResultTypeEnum.Success)
             {
@@ -90,8 +88,8 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Abilities = WorkingManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory);
-            Model.Scripts = WorkingManager.GetAllScriptNames();
+            Model.Abilities = WorkingDataManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory);
+            Model.Scripts = WorkingDataManager.GetAllScriptNames();
 
             if (Model.Abilities.Count > 0)
             {

@@ -18,13 +18,11 @@ namespace Ceriyo.Toolset.Windows
     {
         private SaveModuleVM Model { get; set; }
         public event EventHandler<GameModuleEventArgs> OnSaveModule;
-        private ModuleDataManager ModuleManager { get; set; }
 
         public SaveModuleWindow()
         {
             InitializeComponent();
             Model = new SaveModuleVM();
-            ModuleManager = new ModuleDataManager();
             DataContext = Model;
             LoadFileNames();
         }
@@ -71,7 +69,7 @@ namespace Ceriyo.Toolset.Windows
             }
             else
             {
-                ModuleManager.SaveModule(Model.FileName);
+                ModuleDataManager.SaveModule(Model.FileName);
                 Close();
             }
             

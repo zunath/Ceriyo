@@ -1,15 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.ViewModels;
@@ -22,22 +12,18 @@ namespace Ceriyo.Toolset.Windows
     public partial class ManageResourcePacksWindow : Window
     {
         private ManageResourcePacksVM Model { get; set; }
-        private ResourcePackDataManager ResourcePackManager { get; set; }
-        private WorkingDataManager WorkingManager { get; set; }
 
         public ManageResourcePacksWindow()
         {
             InitializeComponent();
             Model = new ManageResourcePacksVM();
-            ResourcePackManager = new ResourcePackDataManager();
-            WorkingManager = new WorkingDataManager(); 
-            this.DataContext = Model;
+            DataContext = Model;
         }
 
         private void Initialize()
         {
-            Model.AvailableResourcePackages = ResourcePackManager.GetAllResourcePackNames();
-            Model.AttachedResourcePackages = WorkingManager.GetGameModule().ResourcePacks;
+            Model.AvailableResourcePackages = ResourcePackDataManager.GetAllResourcePackNames();
+            Model.AttachedResourcePackages = WorkingDataManager.GetGameModule().ResourcePacks;
         }
 
         private void MoveUp(object sender, RoutedEventArgs e)
@@ -101,7 +87,7 @@ namespace Ceriyo.Toolset.Windows
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            bool success = ResourcePackManager.BuildModule(Model.AttachedResourcePackages);
+            bool success = ResourcePackDataManager.BuildModule(Model.AttachedResourcePackages);
 
             if (success)
             {

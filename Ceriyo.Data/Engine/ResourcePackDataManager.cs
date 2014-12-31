@@ -9,16 +9,9 @@ using System.Linq;
 
 namespace Ceriyo.Data.Engine
 {
-    public class ResourcePackDataManager
+    public static class ResourcePackDataManager
     {
-        WorkingDataManager WorkingManager { get; set; }
-
-        public ResourcePackDataManager()
-        {
-            WorkingManager = new WorkingDataManager();
-        }
-
-        public FileOperationResultTypeEnum SaveResourcePack(BindingList<ResourceEditorItem> resources, string path)
+        public static FileOperationResultTypeEnum SaveResourcePack(BindingList<ResourceEditorItem> resources, string path)
         {
             FileOperationResultTypeEnum result;
             string backupFilePath = path + EnginePaths.BackupExtension;
@@ -58,7 +51,7 @@ namespace Ceriyo.Data.Engine
             return result;
         }
 
-        public BindingList<ResourceEditorItem> OpenResourcePack(string path)
+        public static BindingList<ResourceEditorItem> OpenResourcePack(string path)
         {
             BindingList<ResourceEditorItem> resources = new BindingList<ResourceEditorItem>();
 
@@ -97,7 +90,7 @@ namespace Ceriyo.Data.Engine
             return resources;
         }
 
-        public BindingList<string> GetAllResourcePackNames()
+        public static BindingList<string> GetAllResourcePackNames()
         {
             BindingList<string> result = new BindingList<string>();
 
@@ -118,11 +111,11 @@ namespace Ceriyo.Data.Engine
             return result;
         }
 
-        public bool BuildModule(BindingList<string> resourcePackFileNames)
+        public static bool BuildModule(BindingList<string> resourcePackFileNames)
         {
             bool success;
             BindingList<GameResource> resources = new BindingList<GameResource>();
-            GameModule module = WorkingManager.GetGameModule();
+            GameModule module = WorkingDataManager.GetGameModule();
             module.ResourcePacks = resourcePackFileNames;
 
             try
@@ -162,7 +155,7 @@ namespace Ceriyo.Data.Engine
                     }
                 }
 
-                WorkingManager.SaveModuleSettings(module);
+                WorkingDataManager.SaveModuleSettings(module);
                 FileManager.XmlSerialize(resources, WorkingPaths.ResourceLinksFile);
                 success = true;
             }
@@ -174,7 +167,7 @@ namespace Ceriyo.Data.Engine
             return success;
         }
 
-        public BindingList<GameResource> GetGameResources(ResourceTypeEnum resourceType)
+        public static BindingList<GameResource> GetGameResources(ResourceTypeEnum resourceType)
         {
             string path = EnginePaths.WorkingDirectory + EnginePaths.ResourceLinksDataFileName + EnginePaths.DataExtension;
             BindingList<GameResource> resources = FileManager.XmlDeserialize<BindingList<GameResource>>(path);

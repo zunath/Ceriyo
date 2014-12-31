@@ -19,7 +19,6 @@ namespace Ceriyo.Toolset
     {
         private FRBGameComponent AreaEditorGame { get; set; }
         private ToolsetVM Model { get; set; }
-        private EngineDataManager EngineManager { get; set; }
 
         public MainWindow()
         {
@@ -31,7 +30,6 @@ namespace Ceriyo.Toolset
         private void Initialize()
         {
             Model = new ToolsetVM();
-            EngineManager = new EngineDataManager();
             DataContext = Model;
 
             LoadSettings();
@@ -77,7 +75,7 @@ namespace Ceriyo.Toolset
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            EngineManager.InitializeEngine();
+            EngineDataManager.InitializeEngine();
             SetUpEvents();
         }
 
