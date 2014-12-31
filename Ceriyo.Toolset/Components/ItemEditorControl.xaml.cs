@@ -20,7 +20,6 @@ namespace Ceriyo.Toolset.Components
     public partial class ItemEditorControl
     {
         private ItemEditorVM Model { get; set; }
-        private GameResourceProcessor Processor { get; set; }
         private ResourcePackDataManager ResourcePackManager { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
@@ -28,7 +27,6 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             Model = new ItemEditorVM();
-            Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
             WorkingManager = new WorkingDataManager();
             DataContext = Model;
@@ -37,7 +35,7 @@ namespace Ceriyo.Toolset.Components
         private void New(object sender, RoutedEventArgs e)
         {
             Item item = new Item();
-            string resref = Processor.GenerateUniqueResref(Model.Items.Cast<IGameObject>().ToList(), item.CategoryName);
+            string resref = GameResourceProcessor.GenerateUniqueResref(Model.Items.Cast<IGameObject>().ToList(), item.CategoryName);
 
             item.Name = resref;
             item.Tag = resref;
@@ -165,7 +163,7 @@ namespace Ceriyo.Toolset.Components
                 }
                 else
                 {
-                    BitmapImage image = Processor.ToBitmapImage(resource);
+                    BitmapImage image = GameResourceProcessor.ToBitmapImage(resource);
                     Model.SelectedItem.InventoryGraphic = resource;
                     imgInventoryGraphic.Source = image;
                 }
@@ -184,7 +182,7 @@ namespace Ceriyo.Toolset.Components
                 }
                 else
                 {
-                    BitmapImage image = Processor.ToBitmapImage(resource);
+                    BitmapImage image = GameResourceProcessor.ToBitmapImage(resource);
                     Model.SelectedItem.WorldGraphic = resource;
                     imgWorldGraphic.Source = image;
                 }

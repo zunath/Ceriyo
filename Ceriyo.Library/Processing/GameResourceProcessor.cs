@@ -13,9 +13,9 @@ using System.Windows.Media.Imaging;
 
 namespace Ceriyo.Library.Processing
 {
-    public class GameResourceProcessor
+    public static class GameResourceProcessor
     {
-        public string GenerateUniqueResref(IList<IGameObject> gameObjectList, string defaultCategoryName = "")
+        public static string GenerateUniqueResref(IList<IGameObject> gameObjectList, string defaultCategoryName = "")
         {
             int count = 0;
             string resref = defaultCategoryName + count;
@@ -35,7 +35,7 @@ namespace Ceriyo.Library.Processing
             return resref;
         }
 
-        private byte[] ToBytes(GameResource resource)
+        private static byte[] ToBytes(GameResource resource)
         {
             string path = EnginePaths.ResourcePacksDirectory + resource.Package;
             byte[] bytes;
@@ -54,7 +54,7 @@ namespace Ceriyo.Library.Processing
             return bytes;
         }
 
-        public BitmapImage ToBitmapImage(GameResource resource)
+        public static BitmapImage ToBitmapImage(GameResource resource)
         {
 
             BitmapImage image = null;
@@ -68,7 +68,7 @@ namespace Ceriyo.Library.Processing
             return image;
         }
 
-        public BitmapImage ToBitmapImage(Texture2D texture)
+        public static BitmapImage ToBitmapImage(Texture2D texture)
         {
             MemoryStream stream = new MemoryStream();
 
@@ -81,7 +81,7 @@ namespace Ceriyo.Library.Processing
             return image;
         }
 
-        public Texture2D ToTexture2D(GameResource resource)
+        public static Texture2D ToTexture2D(GameResource resource)
         {
             Texture2D result = null;
 
@@ -96,7 +96,7 @@ namespace Ceriyo.Library.Processing
             return result;
         }
 
-        public Texture2D GetSubTexture(GameResource resource, int x, int y, int width, int height)
+        public static Texture2D GetSubTexture(GameResource resource, int x, int y, int width, int height)
         {
             Texture2D fullTexture = ToTexture2D(resource);
             Texture2D texture = new Texture2D(FlatRedBallServices.GraphicsDevice, width, height);

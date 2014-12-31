@@ -18,6 +18,7 @@ namespace Ceriyo.Entities.DrawableBatches
         private int CurrentLayer { get; set; }
         private int LastFrameX { get; set; }
         private int LastFrameY { get; set; }
+        private int LastFrameLayer { get; set; }
         private Tile LastFrameTile { get; set; }
 
         public EditableMapDrawableBatch(Area area) 
@@ -27,16 +28,32 @@ namespace Ceriyo.Entities.DrawableBatches
 
         public override void Update()
         {
-            int layer = AreaMap.Layers.Count - 1;
+            HighlightSelectedTile();
 
+            base.Update();
+        }
+
+        private void HighlightSelectedTile()
+        {
             if (LastFrameTile != null)
             {
-                AreaMap.Layers[layer].Tiles[LastFrameX, LastFrameY].TileColor = Color.White;   
+                AreaMap.Layers[LastFrameLayer].Tiles[LastFrameX, LastFrameY].TileColor = Color.White;
             }
 
-            int x = InputManager.Mouse.X/EngineConstants.TilePixelWidth;
-            int y = InputManager.Mouse.Y/EngineConstants.TilePixelHeight;
+            int x = InputManager.Mouse.X / EngineConstants.TilePixelWidth;
+            int y = InputManager.Mouse.Y / EngineConstants.TilePixelHeight;
+            int layer = 0;
 
+            MapTile mapTile = DrawableArea.MapTiles
+                    .OrderByDescending(l => l.Layer)
+                    .FirstOrDefault(t => t.HasGraphic &&
+                                            t.MapX == x &&
+                                            t.MapY == y);
+            if (mapTile != null)
+            {
+                layer = mapTile.Layer;
+            }
+            
             Location selectedLocation = new Location(x, y);
             LastFrameTile = AreaMap.Layers[layer].PickTile(selectedLocation, _viewport.Size);
 
@@ -47,18 +64,7 @@ namespace Ceriyo.Entities.DrawableBatches
 
             LastFrameX = x;
             LastFrameY = y;
-
-            base.Update();
-        }
-
-        public override void Draw(Camera camera)
-        {
-            base.Draw(camera);
-        }
-
-        public override void Destroy()
-        {
-            base.Destroy();
+            LastFrameLayer = layer;
         }
     }
 }

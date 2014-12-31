@@ -17,7 +17,6 @@ namespace Ceriyo.Toolset.Components
     public partial class ClassEditorComponent
     {
         private ClassEditorVM Model { get; set; }
-        private GameResourceProcessor Processor { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
         public event EventHandler<EditorItemChangedEventArgs> OnClassesListChanged;
@@ -26,7 +25,6 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             Model = new ClassEditorVM();
-            Processor = new GameResourceProcessor();
             WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
@@ -63,7 +61,7 @@ namespace Ceriyo.Toolset.Components
         private void New(object sender, RoutedEventArgs e)
         {
             CharacterClass charClass = new CharacterClass();
-            string resref = Processor.GenerateUniqueResref(Model.Classes.Cast<IGameObject>().ToList(), charClass.CategoryName);
+            string resref = GameResourceProcessor.GenerateUniqueResref(Model.Classes.Cast<IGameObject>().ToList(), charClass.CategoryName);
 
             charClass.Name = resref;
             charClass.Tag = resref;

@@ -17,7 +17,6 @@ namespace Ceriyo.Toolset.Components
     public partial class AbilityEditorComponent
     {
         private AbilityEditorVM Model { get; set; }
-        private GameResourceProcessor Processor { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
         public event EventHandler<GameObjectListEventArgs> OnAbilitiesListChanged;
@@ -26,7 +25,6 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             Model = new AbilityEditorVM();
-            Processor = new GameResourceProcessor();
             WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
@@ -59,7 +57,7 @@ namespace Ceriyo.Toolset.Components
         private void New(object sender, RoutedEventArgs e)
         {
             Ability ability = new Ability();
-            string resref = Processor.GenerateUniqueResref(Model.Abilities.Cast<IGameObject>().ToList(), ability.CategoryName);
+            string resref = GameResourceProcessor.GenerateUniqueResref(Model.Abilities.Cast<IGameObject>().ToList(), ability.CategoryName);
 
             ability.Name = resref;
             ability.Tag = resref;

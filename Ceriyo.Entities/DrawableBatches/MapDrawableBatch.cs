@@ -3,9 +3,11 @@ using System.Linq;
 using Ceriyo.Data;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Library.Processing;
 using FlatRedBall;
 using FlatRedBall.Graphics;
 using FlatRedBall.Math;
+using Microsoft.Xna.Framework.Graphics;
 using xTile;
 using xTile.Dimensions;
 using xTile.Display;
@@ -16,7 +18,7 @@ namespace Ceriyo.Entities.DrawableBatches
 {
     public class MapDrawableBatch: PositionedObject, IDrawableBatch
     {
-        private Area DrawableArea { get; set; }
+        protected Area DrawableArea { get; set; }
         protected Map AreaMap { get; set; }
         private readonly IDisplayDevice _displayDevice;
         protected Rectangle _viewport;
@@ -56,9 +58,11 @@ namespace Ceriyo.Entities.DrawableBatches
 
         private void LoadTileSheets()
         {
+            Texture2D texture = GameResourceProcessor.ToTexture2D(DrawableArea.AreaTileset.Graphic);
+
             _areaTileSheet = new TileSheet(AreaMap,
                 DrawableArea.AreaTileset.Graphic,
-                new Size(512, 384),  // TODO: Get the width/height without loading the image into memory.
+                new Size(texture.Width, texture.Height),  
                 new Size(EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight));
 
             _systemTileSheet = new TileSheet(AreaMap,
@@ -85,11 +89,11 @@ namespace Ceriyo.Entities.DrawableBatches
                 List<MapTile> tiles = DrawableArea.MapTiles.Where(t => t.Layer == layer).ToList();
                 foreach (MapTile tile in tiles)
                 {
-                    if (!tile.HasGraphic)
+                    if (!tile.HasGraphic && layer == 0)
                     {
                         areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _systemTileSheet, BlendMode.Alpha, 0);    
                     }
-                    else
+                    else if(tile.HasGraphic)
                     {
                         int tileIndex = _areaTileSheet.GetTileIndex(new Location(tile.MapX, tile.MapY));
                         areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _areaTileSheet, BlendMode.Alpha, tileIndex);

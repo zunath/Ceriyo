@@ -11,8 +11,7 @@ namespace Ceriyo.Library.Processing
         public AnimationChain ToAnimationChain(SpriteAnimation animation)
         {
             AnimationChain chain = new AnimationChain();
-            GameResourceProcessor processor = new GameResourceProcessor();
-            Texture2D texture = processor.ToTexture2D(animation.Graphic);
+            Texture2D texture = GameResourceProcessor.ToTexture2D(animation.Graphic);
 
             foreach (SpriteAnimationFrame spriteFrame in animation.Frames)
             {

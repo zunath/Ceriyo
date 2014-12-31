@@ -67,8 +67,7 @@ namespace Ceriyo.Toolset.Components
             {
                 if (!string.IsNullOrWhiteSpace(area.AreaTileset.Graphic.FileName))
                 {
-                    GameResourceProcessor processor = new GameResourceProcessor();
-                    imgTiles.Source = processor.ToBitmapImage(area.AreaTileset.Graphic);
+                    imgTiles.Source = GameResourceProcessor.ToBitmapImage(area.AreaTileset.Graphic);
                 }
             }
 

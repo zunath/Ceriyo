@@ -19,14 +19,12 @@ namespace Ceriyo.Toolset.Components
     {
         private CreatureEditorVM Model { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
-        private GameResourceProcessor Processor { get; set; }
 
         public CreatureEditorComponent()
         {
             InitializeComponent();
             Model = new CreatureEditorVM();
             WorkingManager = new WorkingDataManager();
-            Processor = new GameResourceProcessor();
             DataContext = Model;
         }
 
@@ -108,7 +106,7 @@ namespace Ceriyo.Toolset.Components
         private void New(object sender, RoutedEventArgs e)
         {
             Creature creature = new Creature();
-            string resref = Processor.GenerateUniqueResref(Model.Creatures.Cast<IGameObject>().ToList(), creature.CategoryName);
+            string resref = GameResourceProcessor.GenerateUniqueResref(Model.Creatures.Cast<IGameObject>().ToList(), creature.CategoryName);
 
             creature.Name = resref;
             creature.Tag = resref;

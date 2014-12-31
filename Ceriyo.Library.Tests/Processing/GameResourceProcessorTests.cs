@@ -13,12 +13,11 @@ namespace Ceriyo.Library.Tests
         [TestMethod]
         public void GenerateUniqueResref_FromList_IsEqualToArea2()
         {
-            GameResourceProcessor processor = new GameResourceProcessor();
             IList<Area> list = new List<Area>();
             list.Add(new Area("Area0", "Area0", "Area0", 0, 0, 0));
             list.Add(new Area("Area1", "Area1", "Area1", 0, 0, 0));
 
-            string resref = processor.GenerateUniqueResref(list.Cast<IGameObject>().ToList(), "Area");
+            string resref = GameResourceProcessor.GenerateUniqueResref(list.Cast<IGameObject>().ToList(), "Area");
 
             Assert.AreEqual("Area2", resref);
         }

@@ -16,14 +16,12 @@ namespace Ceriyo.Toolset.Components
     public partial class SkillEditorComponent
     {
         private SkillEditorVM Model { get; set; }
-        private GameResourceProcessor Processor { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
         public SkillEditorComponent()
         {
             InitializeComponent();
             Model = new SkillEditorVM();
-            Processor = new GameResourceProcessor();
             WorkingManager = new WorkingDataManager();
             DataContext = Model;
         }
@@ -52,7 +50,7 @@ namespace Ceriyo.Toolset.Components
         private void New(object sender, RoutedEventArgs e)
         {
             Skill skill = new Skill();
-            string resref = Processor.GenerateUniqueResref(Model.Skills.Cast<IGameObject>().ToList(), skill.CategoryName);
+            string resref = GameResourceProcessor.GenerateUniqueResref(Model.Skills.Cast<IGameObject>().ToList(), skill.CategoryName);
 
             skill.Name = resref;
             skill.Tag = resref;

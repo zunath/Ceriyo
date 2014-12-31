@@ -30,7 +30,6 @@ namespace Ceriyo.Toolset.Components
     public partial class TilesetEditorControl : UserControl
     {
         private TilesetEditorVM Model { get; set; }
-        private GameResourceProcessor Processor { get; set; }
         private ResourcePackDataManager ResourcePackManager { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
@@ -38,16 +37,15 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             Model = new TilesetEditorVM();
-            Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
             WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            DataContext = Model;
         }
 
         private void New(object sender, RoutedEventArgs e)
         {
             Tileset tileset = new Tileset();
-            string resref = Processor.GenerateUniqueResref(Model.Tilesets.Cast<IGameObject>().ToList(), tileset.CategoryName);
+            string resref = GameResourceProcessor.GenerateUniqueResref(Model.Tilesets.Cast<IGameObject>().ToList(), tileset.CategoryName);
 
             tileset.Name = resref;
             tileset.Tag = resref;
@@ -132,7 +130,7 @@ namespace Ceriyo.Toolset.Components
                 }
                 else
                 {
-                    BitmapImage image = Processor.ToBitmapImage(resource);
+                    BitmapImage image = GameResourceProcessor.ToBitmapImage(resource);
                     Model.SelectedTileset.Graphic = resource;
                     imgGraphic.Source = image;
 

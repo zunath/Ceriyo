@@ -6,7 +6,6 @@ namespace Ceriyo.Entities
 {
     public abstract class GraphicEntity : BaseEntity
     {
-        private GameResourceProcessor Processor { get; set; }
         protected Sprite EntitySprite { get; set; }
 
         private AnimationChainList _animationChains;

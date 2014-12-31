@@ -129,8 +129,6 @@ namespace xTile.Display
         /// <param name="tileSheet">Tile sheet to load</param>
         public void LoadTileSheet(TileSheet tileSheet)
         {
-            GameResourceProcessor processor = new GameResourceProcessor();
-
             if (string.IsNullOrWhiteSpace(tileSheet.ImageSource.Package))
             {
                 m_tileSheetTextures[tileSheet] =
@@ -138,7 +136,7 @@ namespace xTile.Display
             }
             else
             {
-                m_tileSheetTextures[tileSheet] = processor.ToTexture2D(tileSheet.ImageSource);    
+                m_tileSheetTextures[tileSheet] = GameResourceProcessor.ToTexture2D(tileSheet.ImageSource);    
             }
         }
 

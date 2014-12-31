@@ -27,7 +27,6 @@ namespace Ceriyo.Toolset.Components
     public partial class PlaceableEditorControl : UserControl
     {
         private PlaceableEditorVM Model { get; set; }
-        private GameResourceProcessor Processor { get; set; }
         private ResourcePackDataManager ResourcePackManager { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
@@ -35,16 +34,15 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             Model = new PlaceableEditorVM();
-            Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
             WorkingManager = new WorkingDataManager();
-            this.DataContext = Model;
+            DataContext = Model;
         }
 
         private void New(object sender, RoutedEventArgs e)
         {
             Placeable placeable = new Placeable();
-            string resref = Processor.GenerateUniqueResref(Model.Placeables.Cast<IGameObject>().ToList(), placeable.CategoryName);
+            string resref = GameResourceProcessor.GenerateUniqueResref(Model.Placeables.Cast<IGameObject>().ToList(), placeable.CategoryName);
 
             placeable.Name = resref;
             placeable.Tag = resref;

@@ -23,7 +23,6 @@ namespace Ceriyo.Toolset.Components
     public partial class AnimationEditorComponent
     {
         private AnimationEditorVM Model { get; set; }
-        private GameResourceProcessor Processor { get; set; }
         private ResourcePackDataManager ResourcePackManager { get; set; }
         private WorkingDataManager WorkingManager { get; set; }
 
@@ -33,7 +32,6 @@ namespace Ceriyo.Toolset.Components
         {
             InitializeComponent();
             Model = new AnimationEditorVM();
-            Processor = new GameResourceProcessor();
             ResourcePackManager = new ResourcePackDataManager();
             WorkingManager = new WorkingDataManager();
             DataContext = Model;
@@ -80,7 +78,7 @@ namespace Ceriyo.Toolset.Components
         private void NewAnimation(object sender, RoutedEventArgs e)
         {
             SpriteAnimation animation = new SpriteAnimation();
-            string resref = Processor.GenerateUniqueResref(Model.Animations.Cast<IGameObject>().ToList(), animation.CategoryName);
+            string resref = GameResourceProcessor.GenerateUniqueResref(Model.Animations.Cast<IGameObject>().ToList(), animation.CategoryName);
 
             animation.Name = resref;
             animation.Tag = resref;
@@ -183,7 +181,7 @@ namespace Ceriyo.Toolset.Components
                 }
                 else
                 {
-                    BitmapImage image = Processor.ToBitmapImage(resource);
+                    BitmapImage image = GameResourceProcessor.ToBitmapImage(resource);
                     Model.SelectedAnimation.Graphic = resource;
                     imgGraphic.Source = image;
                 }
@@ -240,13 +238,13 @@ namespace Ceriyo.Toolset.Components
                 Model.SelectedAnimation.Graphic != null && 
                 Model.SelectedAnimation.Graphic.ResourceType == ResourceTypeEnum.Graphic)
             {
-                Texture2D texture = Processor.GetSubTexture(Model.SelectedAnimation.Graphic,
+                Texture2D texture = GameResourceProcessor.GetSubTexture(Model.SelectedAnimation.Graphic,
                     Model.SelectedFrame.TextureCellX * EngineConstants.AnimationFrameWidth,
                     Model.SelectedFrame.TextureCellY * EngineConstants.AnimationFrameHeight,
                     EngineConstants.AnimationFrameWidth,
                     EngineConstants.AnimationFrameHeight);
 
-                imgPreview.Source = Processor.ToBitmapImage(texture);
+                imgPreview.Source = GameResourceProcessor.ToBitmapImage(texture);
                 imgPreview.RenderTransformOrigin = new Point(0.5, 0.5);
 
                 float xTransform = Model.SelectedFrame.FlipHorizontal ? -1.0f : 1.0f;
