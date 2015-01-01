@@ -29,6 +29,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
+            OnObjectPainterModeChangeReceived -= AreaBatch.ChangeObjectSelectionMode;
             AreaBatch.Destroy();
         }
 
@@ -54,6 +55,7 @@ namespace Ceriyo.Entities.Screens
             AreaBatch = new EditableMapDrawableBatch(LoadedArea);
 
             OnAreaPropertiesSaved += AreaBatch.AreaPropertiesSaved;
+            OnObjectPainterModeChangeReceived += AreaBatch.ChangeObjectSelectionMode;
         }
 
         public void SaveArea(object sender, EventArgs e)
