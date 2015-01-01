@@ -19,7 +19,7 @@ namespace Ceriyo.Entities.DrawableBatches
         private int TileSheetXEnd { get; set; }
         private int TileSheetYEnd { get; set; }
 
-        private List<Vector3Int> LastFrameTiles { get; set; }
+        private List<Vector3Int> SelectedTiles { get; set; }
 
         private int MouseLayer { get; set; }
         private int MouseTileX { get; set; }
@@ -28,7 +28,7 @@ namespace Ceriyo.Entities.DrawableBatches
         public EditableMapDrawableBatch(Area area) 
             : base(area)
         {
-            LastFrameTiles = new List<Vector3Int>();
+            SelectedTiles = new List<Vector3Int>();
         }
         
         public override void Update()
@@ -60,14 +60,14 @@ namespace Ceriyo.Entities.DrawableBatches
 
         private void ResetTileHighlighting()
         {
-            if (LastFrameTiles.Count > 0)
+            if (SelectedTiles.Count > 0)
             {
-                foreach (Vector3Int location in LastFrameTiles)
+                foreach (Vector3Int location in SelectedTiles)
                 {
                     AreaMap.Layers[location.Z].Tiles[location.X, location.Y].TileColor = Color.White;
                 }
             }
-            LastFrameTiles.Clear();
+            SelectedTiles.Clear();
         }
 
         private void HighlightSelectedTile()
@@ -93,14 +93,14 @@ namespace Ceriyo.Entities.DrawableBatches
                     if (x >= 0 && x <= xEnd &&
                         y >= 0 && y <= yEnd)
                     {
-                        LastFrameTiles.Add(mapTile == null
+                        SelectedTiles.Add(mapTile == null
                             ? new Vector3Int(x, y, 0)
                             : new Vector3Int(x, y, mapTile.Layer));
                     }
                 }
             }
 
-            foreach (Vector3Int coords in LastFrameTiles)
+            foreach (Vector3Int coords in SelectedTiles)
             {
                 AreaMap.Layers[coords.Z].Tiles[coords.X, coords.Y].TileColor = new Color(255, 63, 73, 125);
             }
@@ -111,11 +111,16 @@ namespace Ceriyo.Entities.DrawableBatches
             if (InputManager.Mouse.ButtonDown(Mouse.MouseButtons.LeftButton))
             {
                 Layer layer = AreaMap.Layers[MouseLayer];
-                int tileIndex = _areaTileSheet.GetTileIndex(new Location(TileSheetXStart * EngineConstants.TilePixelWidth, 
-                    TileSheetYStart * EngineConstants.TilePixelHeight));
+                foreach (Vector3Int coords in SelectedTiles)
+                {
+                    int selectionWidth = coords.X - MouseTileX;
+                    int selectionHeight = coords.Y - MouseTileY;
 
-                layer.Tiles[MouseTileX, MouseTileY] = new StaticTile(layer, _areaTileSheet, BlendMode.Alpha, tileIndex);
+                    int tileIndex = _areaTileSheet.GetTileIndex(new Location((TileSheetXStart + selectionWidth ) * EngineConstants.TilePixelWidth,
+                        (TileSheetYStart + selectionHeight) * EngineConstants.TilePixelHeight));
 
+                    layer.Tiles[coords.X, coords.Y] = new StaticTile(layer, _areaTileSheet, BlendMode.Alpha, tileIndex);
+                }
             }
         }
 
