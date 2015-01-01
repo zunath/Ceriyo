@@ -45,7 +45,17 @@ namespace Ceriyo.Entities.DrawableBatches
 
             int x = InputManager.Mouse.X / EngineConstants.TilePixelWidth;
             int y = InputManager.Mouse.Y / EngineConstants.TilePixelHeight;
+            int tileXCount = DrawableArea.MapTiles.Max(t => t.MapX);
+            int tileYCount = DrawableArea.MapTiles.Max(t => t.MapY);
+
             int layer = 0;
+
+            if (x < 0) x = 0;
+            else if (x > tileXCount) x = tileXCount;
+
+            if (y < 0) y = 0;
+            else if (y > tileYCount) y = tileYCount;
+
 
             MapTile mapTile = DrawableArea.MapTiles
                     .OrderByDescending(l => l.Layer)
@@ -78,7 +88,7 @@ namespace Ceriyo.Entities.DrawableBatches
             }
         }
 
-        public void TilesSelected(object sender, TilePaintEventArgs e)
+        public void ChangeObjectSelectionMode(object sender, ObjectPainterEventArgs e)
         {
             
         }

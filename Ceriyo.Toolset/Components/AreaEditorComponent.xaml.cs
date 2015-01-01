@@ -39,6 +39,8 @@ namespace Ceriyo.Toolset.Components
             OnAreaClosed += screen.CloseArea;
 
             OnAreaSaved += screen.SaveArea;
+
+            paintObjects.OnModeChange += screen.PaintObjectModeChanged;
         }
 
         private void SetUpExternalEvents()

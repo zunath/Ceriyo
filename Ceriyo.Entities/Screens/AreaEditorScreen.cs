@@ -1,11 +1,8 @@
 ﻿using System;
-using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Entities.DrawableBatches;
-using FlatRedBall;
-using FlatRedBall.Input;
 
 namespace Ceriyo.Entities.Screens
 {
@@ -14,10 +11,12 @@ namespace Ceriyo.Entities.Screens
         private Area LoadedArea { get; set; }
         private EditableMapDrawableBatch AreaBatch { get; set; }
         private event EventHandler<AreaPropertiesChangedEventArgs> OnAreaPropertiesSaved;
+        private event EventHandler<ObjectPainterEventArgs> OnObjectPainterModeChangeReceived;
 
         public AreaEditorScreen()
             : base("AreaEditorScreen")
         {
+            //OnObjectPainterModeChangeReceived += AreaBatch.ChangeObjectSelectionMode;
         }
 
         protected override void CustomInitialize()
@@ -87,5 +86,12 @@ namespace Ceriyo.Entities.Screens
             }
         }
 
+        public void PaintObjectModeChanged(object sender, ObjectPainterEventArgs e)
+        {
+            if (OnObjectPainterModeChangeReceived != null)
+            {
+                OnObjectPainterModeChangeReceived(sender, e);
+            }
+        }
     }
 }

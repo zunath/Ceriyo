@@ -61,6 +61,8 @@ namespace Ceriyo.Toolset
             areaSelection.OnAreaClosed += hotBar.AreaClosed;
 
             areaSelection.OnAreaSaved += areaEditor.AreaSaved;
+
+            
         }
 
         private void OnModuleOpened(object sender, GameModuleEventArgs e)
