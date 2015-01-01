@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using Ceriyo.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Ceriyo.Data.DataObjects;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
-using FlatRedBall;
 using FlatRedBall.Input;
 using Microsoft.Xna.Framework;
 using xTile.Dimensions;
@@ -19,10 +19,7 @@ namespace Ceriyo.Entities.DrawableBatches
         private int TileSheetXEnd { get; set; }
         private int TileSheetYEnd { get; set; }
 
-        private int LastFrameX { get; set; }
-        private int LastFrameY { get; set; }
-        private int LastFrameLayer { get; set; }
-        private Tile LastFrameTile { get; set; }
+        private List<Vector3Int> LastFrameTiles { get; set; }
 
         private int MouseLayer { get; set; }
         private int MouseTileX { get; set; }
@@ -31,12 +28,14 @@ namespace Ceriyo.Entities.DrawableBatches
         public EditableMapDrawableBatch(Area area) 
             : base(area)
         {
+            LastFrameTiles = new List<Vector3Int>();
         }
-
+        
         public override void Update()
         {
             if (InputManager.Mouse.IsInGameWindow())
             {
+                ResetTileHighlighting();
                 UpdateTileSelected();
                 HighlightSelectedTile();
                 PaintTiles();
@@ -59,34 +58,52 @@ namespace Ceriyo.Entities.DrawableBatches
 
         }
 
+        private void ResetTileHighlighting()
+        {
+            if (LastFrameTiles.Count > 0)
+            {
+                foreach (Vector3Int location in LastFrameTiles)
+                {
+                    AreaMap.Layers[location.Z].Tiles[location.X, location.Y].TileColor = Color.White;
+                }
+            }
+            LastFrameTiles.Clear();
+        }
+
         private void HighlightSelectedTile()
         {
-            if (LastFrameTile != null)
-            {
-                AreaMap.Layers[LastFrameLayer].Tiles[LastFrameX, LastFrameY].TileColor = Color.White;
-            }
-            int layer = 0;
-            MapTile mapTile = DrawableArea.MapTiles
-                    .OrderByDescending(l => l.Layer)
-                    .FirstOrDefault(t => t.HasGraphic &&
-                                            t.MapX == MouseTileX &&
-                                            t.MapY == MouseTileY);
-            if (mapTile != null)
-            {
-                layer = mapTile.Layer;
-            }
-            
-            Location selectedLocation = new Location(MouseTileX, MouseTileY);
-            LastFrameTile = AreaMap.Layers[layer].PickTile(selectedLocation, _viewport.Size);
+            int xEnd = DrawableArea.MapTiles.Max(t => t.MapX);
+            int yEnd = DrawableArea.MapTiles.Max(t => t.MapY);
+            int tilesWide = TileSheetXEnd - TileSheetXStart;
+            int tilesHigh = TileSheetYEnd - TileSheetYStart;
 
-            if (LastFrameTile != null)
+            for(int w = 0; w <= tilesWide; w++)
             {
-                AreaMap.Layers[layer].Tiles[MouseTileX, MouseTileY].TileColor = new Color(255, 63, 73, 125);
+                for (int h = 0; h <= tilesHigh; h++)
+                {
+                    int x = MouseTileX + w;
+                    int y = MouseTileY + h;
+
+                    MapTile mapTile = DrawableArea.MapTiles
+                            .OrderByDescending(l => l.Layer)
+                            .FirstOrDefault(t => t.HasGraphic &&
+                                                    t.MapX == x &&
+                                                    t.MapY == y);
+
+                    if (x >= 0 && x <= xEnd &&
+                        y >= 0 && y <= yEnd)
+                    {
+                        LastFrameTiles.Add(mapTile == null
+                            ? new Vector3Int(x, y, 0)
+                            : new Vector3Int(x, y, mapTile.Layer));
+                    }
+                }
             }
 
-            LastFrameX = MouseTileX;
-            LastFrameY = MouseTileY;
-            LastFrameLayer = layer;
+            foreach (Vector3Int coords in LastFrameTiles)
+            {
+                AreaMap.Layers[coords.Z].Tiles[coords.X, coords.Y].TileColor = new Color(255, 63, 73, 125);
+            }
         }
 
         private void PaintTiles()
