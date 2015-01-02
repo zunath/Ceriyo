@@ -18,12 +18,12 @@ namespace Ceriyo.Entities.DrawableBatches
 {
     public class MapDrawableBatch: PositionedObject, IDrawableBatch
     {
-        protected Area DrawableArea { get; set; }
-        protected Map AreaMap { get; set; }
+        protected Area DrawableArea { get; private set; }
+        protected Map AreaMap { get; private set; }
         private readonly IDisplayDevice _displayDevice;
         private Rectangle _viewport;
         protected TileSheet _areaTileSheet;
-        protected TileSheet _systemTileSheet;
+        private TileSheet _systemTileSheet;
         private readonly Location _offset;
 
         public MapDrawableBatch(Area area)
@@ -43,9 +43,6 @@ namespace Ceriyo.Entities.DrawableBatches
 
             LoadTileSheets();
             LoadLayers();
-
-            SpriteManager.AddDrawableBatch(this);
-            SpriteManager.AddPositionedObject(this);
         }
 
         private void FlatRedBallServices_CornerGrabbingResize(object sender, EventArgs e)
@@ -110,8 +107,6 @@ namespace Ceriyo.Entities.DrawableBatches
 
         public virtual void Destroy()
         {
-            AreaMap.DisposeTileSheets(_displayDevice);
-            AreaMap = null;
         }
 
         public virtual void Draw(Camera camera)

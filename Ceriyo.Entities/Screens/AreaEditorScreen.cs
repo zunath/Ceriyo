@@ -4,6 +4,7 @@ using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Entities.DrawableBatches;
+using FlatRedBall;
 
 namespace Ceriyo.Entities.Screens
 {
@@ -37,6 +38,8 @@ namespace Ceriyo.Entities.Screens
         {
             if (AreaBatch != null)
             {
+                SpriteManager.RemoveDrawableBatch(AreaBatch);
+                OnAreaPropertiesSaved -= AreaBatch.AreaPropertiesSaved;
                 AreaBatch.Destroy();
             }
 
@@ -45,14 +48,11 @@ namespace Ceriyo.Entities.Screens
 
         public void LoadArea(object sender, GameObjectEventArgs e)
         {
-            if (AreaBatch != null)
-            {
-                AreaBatch.Destroy();
-                OnAreaPropertiesSaved -= AreaBatch.AreaPropertiesSaved;
-            }
+            CloseArea(sender, e);
 
             LoadedArea = WorkingDataManager.GetGameObject<Area>(ModulePaths.AreasDirectory, e.GameObject.Resref);
             AreaBatch = new EditableMapDrawableBatch(LoadedArea);
+            SpriteManager.AddDrawableBatch(AreaBatch);
 
             OnAreaPropertiesSaved += AreaBatch.AreaPropertiesSaved;
             OnObjectPainterModeChangeReceived += AreaBatch.ChangeObjectSelectionMode;
