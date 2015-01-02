@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Library.Processing;
 using FlatRedBall;
 using FlatRedBall.Graphics;
-using FlatRedBall.Math;
 using Microsoft.Xna.Framework.Graphics;
 using xTile;
 using xTile.Dimensions;
@@ -22,9 +21,9 @@ namespace Ceriyo.Entities.DrawableBatches
         protected Area DrawableArea { get; set; }
         protected Map AreaMap { get; set; }
         private readonly IDisplayDevice _displayDevice;
-        protected Rectangle _viewport;
+        private Rectangle _viewport;
         protected TileSheet _areaTileSheet;
-        private TileSheet _systemTileSheet;
+        protected TileSheet _systemTileSheet;
         private readonly Location _offset;
 
         public MapDrawableBatch(Area area)
@@ -49,7 +48,7 @@ namespace Ceriyo.Entities.DrawableBatches
             SpriteManager.AddPositionedObject(this);
         }
 
-        private void FlatRedBallServices_CornerGrabbingResize(object sender, System.EventArgs e)
+        private void FlatRedBallServices_CornerGrabbingResize(object sender, EventArgs e)
         {
             _viewport = new Rectangle(FlatRedBallServices.GraphicsDevice.Viewport.X,
                 FlatRedBallServices.GraphicsDevice.Viewport.Y,
@@ -96,7 +95,9 @@ namespace Ceriyo.Entities.DrawableBatches
                     }
                     else if(tile.HasGraphic)
                     {
-                        int tileIndex = _areaTileSheet.GetTileIndex(new Location(tile.MapX, tile.MapY));
+                        int tileIndex = _areaTileSheet.GetTileIndex(
+                            new Location(tile.TileSheetX * EngineConstants.TilePixelWidth, 
+                                         tile.TileSheetY * EngineConstants.TilePixelHeight));
                         areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _areaTileSheet, BlendMode.Alpha, tileIndex);
                     }
                     
@@ -145,5 +146,48 @@ namespace Ceriyo.Entities.DrawableBatches
             }
         }
 
+        public List<MapTile> GetMapTiles()
+        {
+            List<MapTile> mapTiles = new List<MapTile>();
+
+            for (int layer = 0; layer < AreaMap.Layers.Count; layer++)
+            {
+                int layerWidth = AreaMap.Layers[layer].LayerWidth;
+                int layerHeight = AreaMap.Layers[layer].LayerHeight;
+
+                for (int x = 0; x < layerWidth; x++)
+                {
+                    for (int y = 0; y < layerHeight; y++)
+                    {
+                        Tile tile = AreaMap.Layers[layer].Tiles[x, y];
+                        int tileSheetX = 0;
+                        int tileSheetY = 0;
+                        bool hasGraphic = false;
+
+                        if (tile != null)
+                        {
+                            var dimensions = tile.TileSheet.GetTileImageBounds(tile.TileIndex);
+                            tileSheetX = dimensions.X / EngineConstants.TilePixelWidth;
+                            tileSheetY = dimensions.Y / EngineConstants.TilePixelHeight;
+                            hasGraphic = tile.TileSheet != _systemTileSheet;
+                        }
+
+                        mapTiles.Add(new MapTile
+                        {
+                            HasGraphic = hasGraphic,
+                            MapX = x,
+                            MapY = y,
+                            TileSheetX = tileSheetX,
+                            TileSheetY = tileSheetY,
+                            Layer = layer
+                        });
+
+                    }
+                }
+
+            }
+
+            return mapTiles;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Ceriyo.Data.DataObjects;
 using Ceriyo.Data.Engine;
@@ -131,5 +132,6 @@ namespace Ceriyo.Entities.DrawableBatches
             TileSheetXEnd = e.TileCellXEnd;
             TileSheetYEnd = e.TileCellYEnd;
         }
+
     }
 }

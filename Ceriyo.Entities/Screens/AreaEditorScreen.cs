@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
@@ -16,7 +17,6 @@ namespace Ceriyo.Entities.Screens
         public AreaEditorScreen()
             : base("AreaEditorScreen")
         {
-            //OnObjectPainterModeChangeReceived += AreaBatch.ChangeObjectSelectionMode;
         }
 
         protected override void CustomInitialize()
@@ -60,7 +60,7 @@ namespace Ceriyo.Entities.Screens
 
         public void SaveArea(object sender, EventArgs e)
         {
-            //LoadedArea.MapTiles = AreaBatch.MapTiles;
+            LoadedArea.MapTiles = new BindingList<MapTile>(AreaBatch.GetMapTiles());
 
             WorkingDataManager.SaveGameObjectFile(LoadedArea);
         }

@@ -1,6 +1,4 @@
-﻿using System.Xml.Serialization;
-using FlatRedBall;
-using ProtoBuf;
+﻿using ProtoBuf;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -14,24 +12,20 @@ namespace Ceriyo.Data.GameObjects
         [ProtoMember(3)]
         public int Layer { get; set; }
         [ProtoMember(4)]
-        public int TileDefinitionX { get; set; }
-        [ProtoMember(5)]
-        public int TileDefinitionY { get; set; }
-        [ProtoMember(6)]
         public bool HasGraphic { get; set; }
-
-        [XmlIgnore]
-        public Sprite TileSprite { get; set; }
+        [ProtoMember(5)]
+        public int TileSheetX { get; set; }
+        [ProtoMember(6)]
+        public int TileSheetY { get; set; }
 
         public MapTile()
         {
             MapX = 0;
             MapY = 0;
+            TileSheetX = 0;
+            TileSheetY = 0;
             Layer = 0;
-            TileDefinitionX = 0;
-            TileDefinitionY = 0;
             HasGraphic = false;
-            TileSprite = new Sprite();
         }
 
         public MapTile(int mapX, int mapY, int layer)
@@ -39,10 +33,7 @@ namespace Ceriyo.Data.GameObjects
             MapX = mapX;
             MapY = mapY;
             Layer = layer;
-            TileDefinitionX = 0;
-            TileDefinitionY = 0;
             HasGraphic = false;
-            TileSprite = new Sprite();
         }
     }
 }
