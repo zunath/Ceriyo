@@ -55,7 +55,7 @@ namespace Ceriyo.Data.Engine
 
         public static int AreaMaxWidth
         {
-            get { return 32; }
+            get { return 100; }
         }
 
         public static int AreaMinWidth
@@ -65,7 +65,7 @@ namespace Ceriyo.Data.Engine
 
         public static int AreaMaxHeight
         {
-            get { return 32; }
+            get { return 100; }
         }
 
         public static int AreaMinHeight
