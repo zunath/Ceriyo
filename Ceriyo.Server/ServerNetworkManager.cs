@@ -29,7 +29,6 @@ namespace Ceriyo.Server
         public void Update()
         {
             ProcessPackets();
-            SendUpdatesToPlayers();
         }
 
         public void RefreshSettings(ServerSettings settings)
@@ -58,14 +57,6 @@ namespace Ceriyo.Server
                     data.ResponsePacket = null;
                     data.DeliveryMethod = NetDeliveryMethod.Unreliable;
                 }
-            }
-        }
-
-        private void SendUpdatesToPlayers()
-        {
-            foreach (NetConnection connection in Agent.Connections)
-            {
-                // TODO: Send game state updates to players 
             }
         }
 
@@ -105,11 +96,6 @@ namespace Ceriyo.Server
             {
                 Players.Remove(e.Connection);
             }
-        }
-
-        public void SendPacket(PacketBase packet, NetConnection connection, NetDeliveryMethod deliveryMethod, int sequenceChannel = 1)
-        {
-            Agent.SendPacket(packet, connection, deliveryMethod, sequenceChannel);
         }
 
         #endregion

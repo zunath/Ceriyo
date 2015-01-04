@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Documents;
-using Ceriyo.Data;
+﻿using System.ComponentModel;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
@@ -10,7 +7,6 @@ using Ceriyo.Data.Settings;
 using Ceriyo.Library.ScriptEngine;
 using FlatRedBall;
 using FlatRedBall.Screens;
-using Lidgren.Network;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Concurrent;
