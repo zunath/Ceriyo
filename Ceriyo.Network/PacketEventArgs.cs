@@ -1,5 +1,5 @@
 ﻿using System;
-using Ceriyo.Data.Packets;
+using Ceriyo.Network.Packets;
 
 namespace Ceriyo.Network
 {

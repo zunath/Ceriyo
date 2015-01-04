@@ -4,7 +4,7 @@ using System.IO;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
-using Ceriyo.Data.Packets;
+using Ceriyo.Network.Packets;
 using Lidgren.Network;
 using ProtoBuf;
 

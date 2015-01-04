@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xTilePC", "xTile\xTilePC.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Network", "Ceriyo.Network\Ceriyo.Network.csproj", "{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Network.Tests", "Ceriyo.Network.Tests\Ceriyo.Network.Tests.csproj", "{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -341,6 +343,26 @@ Global
 		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Release|x86.ActiveCfg = Release|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.DebugProfile|Any CPU.ActiveCfg = Debug|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.DebugProfile|Any CPU.Build.0 = Debug|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.DebugProfile|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.DebugProfile|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.DebugProfile|x86.ActiveCfg = Debug|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Profile|Any CPU.ActiveCfg = Release|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Profile|Any CPU.Build.0 = Release|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Profile|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Profile|Mixed Platforms.Build.0 = Release|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Profile|x86.ActiveCfg = Release|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B300CF30-7A7D-49B4-8C9E-D9B27EAD4507}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

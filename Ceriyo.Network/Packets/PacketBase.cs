@@ -1,9 +1,7 @@
-﻿using Ceriyo.Data.Server;
-using Ceriyo.Network;
-using Lidgren.Network;
+﻿using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Data.Packets
+namespace Ceriyo.Network.Packets
 {
     [ProtoContract]
     [ProtoInclude(100, typeof(UserConnectedPacket))]

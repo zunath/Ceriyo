@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Ceriyo.Data.EventArguments;
-using Ceriyo.Data.Packets;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
 using Ceriyo.Network;
+using Ceriyo.Network.Packets;
 using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens

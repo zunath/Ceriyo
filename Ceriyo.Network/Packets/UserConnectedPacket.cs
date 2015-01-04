@@ -1,8 +1,6 @@
-﻿using Ceriyo.Data.Server;
-using Ceriyo.Network;
-using ProtoBuf;
+﻿using ProtoBuf;
 
-namespace Ceriyo.Data.Packets
+namespace Ceriyo.Network.Packets
 {
     [ProtoContract]
     public class UserConnectedPacket : PacketBase

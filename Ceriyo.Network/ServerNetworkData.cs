@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Ceriyo.Data.Packets;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
+using Ceriyo.Network.Packets;
 using Lidgren.Network;
 
 namespace Ceriyo.Network

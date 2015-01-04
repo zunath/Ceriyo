@@ -1,6 +1,6 @@
-﻿using Ceriyo.Data.Packets;
-using Ceriyo.Library.Global;
+﻿using Ceriyo.Library.Global;
 using Ceriyo.Network;
+using Ceriyo.Network.Packets;
 using FlatRedBall;
 using FlatRedBall.Graphics;
 using Lidgren.Network;

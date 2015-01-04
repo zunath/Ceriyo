@@ -1,7 +1,7 @@
 ﻿using Ceriyo.Data.EventArguments;
-using Ceriyo.Data.Packets;
 using Ceriyo.Library.Global;
 using Ceriyo.Network;
+using Ceriyo.Network.Packets;
 using FlatRedBall.Input;
 
 namespace Ceriyo.Entities

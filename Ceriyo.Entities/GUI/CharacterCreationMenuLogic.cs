@@ -1,9 +1,9 @@
 ﻿using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
-using Ceriyo.Data.Packets;
 using Ceriyo.Entities.DrawableBatches;
 using Squid;
 using System;
+using Ceriyo.Network.Packets;
 
 namespace Ceriyo.Entities.GUI
 {

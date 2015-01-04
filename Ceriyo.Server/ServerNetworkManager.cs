@@ -1,6 +1,5 @@
 ﻿using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
-using Ceriyo.Data.Packets;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
 using Lidgren.Network;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Ceriyo.Network;
+using Ceriyo.Network.Packets;
 
 namespace Ceriyo.Server
 {

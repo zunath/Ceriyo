@@ -3,11 +3,10 @@ using System.Linq;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.Server;
-using Ceriyo.Network;
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Data.Packets
+namespace Ceriyo.Network.Packets
 {
     [ProtoContract]
     public class UserInfoPacket : PacketBase

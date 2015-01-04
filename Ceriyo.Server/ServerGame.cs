@@ -5,7 +5,6 @@ using Ceriyo.Data;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
-using Ceriyo.Data.Packets;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
 using Ceriyo.Library.ScriptEngine;

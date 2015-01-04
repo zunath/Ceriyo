@@ -1,10 +1,8 @@
 ﻿using Ceriyo.Data.Engine;
-using Ceriyo.Data.Server;
-using Ceriyo.Network;
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Data.Packets
+namespace Ceriyo.Network.Packets
 {
     [ProtoContract]
     public class DeleteCharacterPacket : PacketBase
