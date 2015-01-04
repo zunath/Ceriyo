@@ -26,7 +26,7 @@ namespace Ceriyo.Library.Network.Packets
             CanDeleteCharacters = false;
         }
 
-        public override NetworkTransferData Receive(NetworkTransferData data)
+        public override NetworkTransferData ServerReceive(NetworkTransferData data)
         {
             string username = data.Players[SenderConnection].Username;
             List<Player> characters = EngineDataManager.GetPlayers(username);
@@ -44,5 +44,9 @@ namespace Ceriyo.Library.Network.Packets
             
         }
 
+        public override NetworkTransferData ClientReceive(NetworkTransferData data)
+        {
+            return data;
+        }
     }
 }

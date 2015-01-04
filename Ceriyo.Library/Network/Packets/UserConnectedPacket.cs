@@ -14,10 +14,14 @@ namespace Ceriyo.Library.Network.Packets
             ErrorMessage = string.Empty;
         }
 
-        public override NetworkTransferData Receive(NetworkTransferData data)
+        public override NetworkTransferData ServerReceive(NetworkTransferData data)
         {
             return data;
         }
 
+        public override NetworkTransferData ClientReceive(NetworkTransferData data)
+        {
+            return data;
+        }
     }
 }

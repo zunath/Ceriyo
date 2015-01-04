@@ -25,7 +25,8 @@ namespace Ceriyo.Library.Network.Packets
             ServerPassword = string.Empty;
         }
 
-        public override NetworkTransferData Receive(NetworkTransferData data)
+        // Receiving from client
+        public override NetworkTransferData ServerReceive(NetworkTransferData data)
         {
             if (!data.Players.ContainsKey(SenderConnection) &&
                 data.Players.SingleOrDefault(x => x.Value.Username == Username).Value == null)
@@ -54,5 +55,17 @@ namespace Ceriyo.Library.Network.Packets
             return data;
         }
 
+        public override NetworkTransferData ClientReceive(NetworkTransferData data)
+        {
+            UserInfoPacket response = new UserInfoPacket
+            {
+                IsRequest = false,
+                Username = "zunath" // TODO: Store username after it's been authorized by the master server
+            };
+
+            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
+            
+            return data;
+        }
     }
 }

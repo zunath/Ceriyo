@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
-using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 
 namespace Ceriyo.Library.Network
@@ -10,7 +9,7 @@ namespace Ceriyo.Library.Network
     {
         public Dictionary<NetConnection, ServerPlayer> Players { get; set; }
         public ServerSettings Settings { get; set; }
-
+        public string Username { get; set; }
 
         public NetworkTransferData()
         {

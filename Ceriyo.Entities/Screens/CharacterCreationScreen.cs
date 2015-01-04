@@ -24,7 +24,7 @@ namespace Ceriyo.Entities.Screens
             GUI.OnPlayButtonClicked += GUI_OnPlayButtonClicked;
             GUI.OnCancelButtonClicked += GUI_OnCancelButtonClicked;
 
-            CeriyoServices.OnPacketReceived += GameGlobal_OnPacketReceived;
+            CeriyoServices.OnPacketReceived += ReceivePacket;
 
             CharacterCreationScreenPacket packet = new CharacterCreationScreenPacket
             {
@@ -50,7 +50,7 @@ namespace Ceriyo.Entities.Screens
             MoveToScreen(typeof(CharacterSelectionScreen));
         }
 
-        private void GameGlobal_OnPacketReceived(object sender, PacketEventArgs e)
+        private void ReceivePacket(object sender, PacketEventArgs e)
         {
             if (e.Packet.GetType() == typeof(CharacterCreationScreenPacket))
             {
@@ -76,6 +76,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
+            CeriyoServices.OnPacketReceived -= ReceivePacket;
             GUI.Destroy();
         }
     }

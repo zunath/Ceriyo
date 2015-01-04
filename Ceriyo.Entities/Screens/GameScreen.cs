@@ -10,18 +10,25 @@ namespace Ceriyo.Entities.Screens
     {
         private PlayerEntity PC { get; set; }
         private GameMenuLogic GUI { get; set; }
-
+        private NetworkTransferData _transferData;
 
         public GameScreen()
             : base("GameScreen")
         {
             GUI = new GameMenuLogic();
+            _transferData = new NetworkTransferData();
         }
 
         protected override void CustomInitialize()
         {
-            CeriyoServices.OnPacketReceived += PacketReceived;
-            RequestInitializationPacket();
+            CeriyoServices.OnPacketReceived += ReceivePacket;
+
+            GameScreenPacket packet = new GameScreenPacket
+            {
+                IsRequest = true
+            };
+
+            packet.Send(NetDeliveryMethod.ReliableUnordered);
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -34,7 +41,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
-            CeriyoServices.OnPacketReceived -= PacketReceived;
+            CeriyoServices.OnPacketReceived -= ReceivePacket;
             GUI.Destroy();
             if (PC != null)
             {
@@ -44,8 +51,10 @@ namespace Ceriyo.Entities.Screens
 
         #region Packet Processing
 
-        private void PacketReceived(object sender, PacketEventArgs e)
+        private void ReceivePacket(object sender, PacketEventArgs e)
         {
+            _transferData = e.Packet.ClientReceive(_transferData);
+
             Type type = e.Packet.GetType();
 
             if (type == typeof(GameScreenPacket))
@@ -58,18 +67,6 @@ namespace Ceriyo.Entities.Screens
         {
             PC = new PlayerEntity();
             PC.InitializeEntity(false);
-
-
-        }
-
-        private void RequestInitializationPacket()
-        {
-            GameScreenPacket packet = new GameScreenPacket
-            {
-                IsRequest = true
-            };
-
-            packet.Send(NetDeliveryMethod.ReliableUnordered);
         }
 
         #endregion

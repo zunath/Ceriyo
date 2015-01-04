@@ -10,7 +10,8 @@ namespace Ceriyo.Entities.Screens
 {
     public class EnteringGameScreen : BaseScreen
     {
-        private Text LoadingText { get; set;} 
+        private Text LoadingText { get; set;}
+        private NetworkTransferData _transferData;
 
         public EnteringGameScreen()
             : base("EnteringGameScreen")
@@ -19,13 +20,16 @@ namespace Ceriyo.Entities.Screens
             LoadingText.VerticalAlignment = VerticalAlignment.Center;
             LoadingText.HorizontalAlignment = HorizontalAlignment.Center;
 
-
+            _transferData = new NetworkTransferData();
             SpriteManager.Camera.BackgroundColor = Color.Black;
         }
 
         protected override void CustomInitialize()
         {
-            HookEvents();
+            CeriyoServices.OnPacketReceived += ReceivePacket;
+            CeriyoServices.Agent.OnConnected += Agent_OnConnected;
+            CeriyoServices.Agent.OnDisconnected += Agent_OnDisconnected;
+            CeriyoServices.OnPacketReceived += ReceivePacket;
 
             EnteringGameScreenPacket packet = new EnteringGameScreenPacket
             {
@@ -42,22 +46,15 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
-            UnhookEvents();
+            CeriyoServices.Agent.OnConnected -= Agent_OnConnected;
+            CeriyoServices.Agent.OnDisconnected -= Agent_OnDisconnected;
+            CeriyoServices.OnPacketReceived -= ReceivePacket;
             TextManager.RemoveText(LoadingText);
         }
 
-        private void HookEvents()
+        private void ReceivePacket(object sender, PacketEventArgs e)
         {
-            CeriyoServices.Agent.OnConnected += Agent_OnConnected;
-            CeriyoServices.Agent.OnDisconnected += Agent_OnDisconnected;
-            CeriyoServices.OnPacketReceived += OnPacketReceived;
-        }
-
-        private void UnhookEvents()
-        {
-            CeriyoServices.Agent.OnConnected -= Agent_OnConnected;
-            CeriyoServices.Agent.OnDisconnected -= Agent_OnDisconnected;
-            CeriyoServices.OnPacketReceived -= OnPacketReceived;
+            _transferData = e.Packet.ClientReceive(_transferData);
         }
 
         private void Agent_OnConnected(object sender, Data.EventArguments.ConnectionStatusEventArgs e)
@@ -65,10 +62,6 @@ namespace Ceriyo.Entities.Screens
 
         }
 
-        private void OnPacketReceived(object sender, PacketEventArgs e)
-        {
-            
-        }
 
         private void Agent_OnDisconnected(object sender, Data.EventArguments.ConnectionStatusEventArgs e)
         {

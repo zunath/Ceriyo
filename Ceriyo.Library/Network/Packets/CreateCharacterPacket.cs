@@ -22,7 +22,8 @@ namespace Ceriyo.Library.Network.Packets
             ResponsePlayer = new Player();
         }
 
-        public override NetworkTransferData Receive(NetworkTransferData data)
+        // Receiving from client
+        public override NetworkTransferData ServerReceive(NetworkTransferData data)
         {
             Player pc = new Player
             {
@@ -43,5 +44,9 @@ namespace Ceriyo.Library.Network.Packets
             return data;
         }
 
+        public override NetworkTransferData ClientReceive(NetworkTransferData data)
+        {
+            return data;
+        }
     }
 }

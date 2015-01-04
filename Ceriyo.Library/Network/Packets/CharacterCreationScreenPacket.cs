@@ -27,7 +27,8 @@ namespace Ceriyo.Library.Network.Packets
             Skills = new List<Skill>();
         }
 
-        public override NetworkTransferData Receive(NetworkTransferData data)
+        // Receiving from client
+        public override NetworkTransferData ServerReceive(NetworkTransferData data)
         {
             CharacterCreationScreenPacket response = new CharacterCreationScreenPacket
             {
@@ -38,6 +39,11 @@ namespace Ceriyo.Library.Network.Packets
 
             response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
 
+            return data;
+        }
+
+        public override NetworkTransferData ClientReceive(NetworkTransferData data)
+        {
             return data;
         }
     }

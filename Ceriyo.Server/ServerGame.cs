@@ -180,7 +180,7 @@ namespace Ceriyo.Server
 
         private void ProcessPacket(object sender, PacketEventArgs e)
         {
-            TransferData = e.Packet.Receive(TransferData);
+            TransferData = e.Packet.ServerReceive(TransferData);
         }
 
 

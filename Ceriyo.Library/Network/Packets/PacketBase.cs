@@ -25,7 +25,9 @@ namespace Ceriyo.Library.Network.Packets
         {
         }
 
-        public abstract NetworkTransferData Receive(NetworkTransferData data);
+        public abstract NetworkTransferData ServerReceive(NetworkTransferData data);
+
+        public abstract NetworkTransferData ClientReceive(NetworkTransferData data);
 
         public virtual void Send(NetDeliveryMethod deliveryMethod, NetConnection connection = null)
         {

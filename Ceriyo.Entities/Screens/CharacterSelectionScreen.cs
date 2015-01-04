@@ -14,16 +14,18 @@ namespace Ceriyo.Entities.Screens
     {
         private CharacterSelectionMenuLogic GUI { get; set; }
         private List<Player> Players { get; set; }
+        private NetworkTransferData _transferData;
 
         public CharacterSelectionScreen()
             : base("CharacterSelectionScreen")
         {
             Players = new List<Player>();
+            _transferData = new NetworkTransferData();
         }
 
         protected override void CustomInitialize()
         {
-            CeriyoServices.OnPacketReceived += PacketReceived;
+            CeriyoServices.OnPacketReceived += ReceivePacket;
 
             CharacterSelectionScreenPacket packet = new CharacterSelectionScreenPacket
             {
@@ -39,7 +41,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
-            CeriyoServices.OnPacketReceived -= PacketReceived;
+            CeriyoServices.OnPacketReceived -= ReceivePacket;
             GUI.OnCreateCharacter -= GUI_OnCreateCharacter;
             GUI.OnDeleteCharacter -= GUI_OnDeleteCharacter;
             GUI.OnDisconnected -= GUI_OnDisconnected;
@@ -48,8 +50,10 @@ namespace Ceriyo.Entities.Screens
         }
 
 
-        private void PacketReceived(object sender, PacketEventArgs e)
+        private void ReceivePacket(object sender, PacketEventArgs e)
         {
+            _transferData = e.Packet.ClientReceive(_transferData);
+
             Type type = e.Packet.GetType();
 
             if (type == typeof(DeleteCharacterPacket))

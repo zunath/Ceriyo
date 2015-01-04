@@ -19,7 +19,8 @@ namespace Ceriyo.Library.Network.Packets
             IsSuccessful = false;
         }
 
-        public override NetworkTransferData Receive(NetworkTransferData data)
+        // Receiving from client
+        public override NetworkTransferData ServerReceive(NetworkTransferData data)
         {
             string username = data.Players[SenderConnection].Username;
             Player pc = EngineDataManager.GetPlayer(username, Resref);
@@ -37,5 +38,9 @@ namespace Ceriyo.Library.Network.Packets
             return data;
         }
 
+        public override NetworkTransferData ClientReceive(NetworkTransferData data)
+        {
+            return data;
+        }
     }
 }

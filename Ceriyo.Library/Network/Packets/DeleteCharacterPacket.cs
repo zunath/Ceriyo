@@ -21,7 +21,8 @@ namespace Ceriyo.Library.Network.Packets
             CharacterResref = string.Empty;
         }
 
-        public override NetworkTransferData Receive(NetworkTransferData data)
+        // Receiving from client
+        public override NetworkTransferData ServerReceive(NetworkTransferData data)
         {
             bool success = false;
 
@@ -40,5 +41,9 @@ namespace Ceriyo.Library.Network.Packets
             return data;
         }
 
+        public override NetworkTransferData ClientReceive(NetworkTransferData data)
+        {
+            return data;
+        }
     }
 }
