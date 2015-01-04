@@ -64,7 +64,7 @@ namespace Ceriyo.Entities.Screens
 
         private void ReceiveCreateCharacterPacket(CreateCharacterPacket packet)
         {
-            // TODO: Store PC character in memory somewhere.
+            // TODO: Store PC character in memory somewhere?
 
             MoveToScreen(typeof(CharacterSelectionScreen));
         }

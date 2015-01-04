@@ -9,7 +9,6 @@ namespace Ceriyo.Library.Network
     {
         public Dictionary<NetConnection, ServerPlayer> Players { get; set; }
         public ServerSettings Settings { get; set; }
-        public string Username { get; set; }
 
         public NetworkTransferData()
         {
