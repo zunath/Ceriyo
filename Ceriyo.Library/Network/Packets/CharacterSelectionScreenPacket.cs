@@ -4,7 +4,7 @@ using Ceriyo.Data.GameObjects;
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Network.Packets
+namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
     public class CharacterSelectionScreenPacket : PacketBase
@@ -26,7 +26,7 @@ namespace Ceriyo.Network.Packets
             CanDeleteCharacters = false;
         }
 
-        public override ServerNetworkData Receive(ServerNetworkData data)
+        public override NetworkTransferData Receive(NetworkTransferData data)
         {
             string username = data.Players[SenderConnection].Username;
             List<Player> characters = EngineDataManager.GetPlayers(username);
@@ -38,17 +38,11 @@ namespace Ceriyo.Network.Packets
                 CanDeleteCharacters = data.Settings.AllowCharacterDeletion
             };
 
-            data.ResponsePacket = response;
-            data.DeliveryMethod = NetDeliveryMethod.ReliableUnordered;
-
+            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
+            
             return data;
             
         }
 
-        public override ServerNetworkData Send(ServerNetworkData data)
-        {
-            return data;
-            
-        }
     }
 }

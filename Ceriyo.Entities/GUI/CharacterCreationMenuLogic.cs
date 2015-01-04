@@ -3,7 +3,7 @@ using Ceriyo.Data.GameObjects;
 using Ceriyo.Entities.DrawableBatches;
 using Squid;
 using System;
-using Ceriyo.Network.Packets;
+using Ceriyo.Library.Network.Packets;
 
 namespace Ceriyo.Entities.GUI
 {

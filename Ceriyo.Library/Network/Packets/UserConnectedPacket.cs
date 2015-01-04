@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace Ceriyo.Network.Packets
+namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
     public class UserConnectedPacket : PacketBase
@@ -14,14 +14,10 @@ namespace Ceriyo.Network.Packets
             ErrorMessage = string.Empty;
         }
 
-        public override ServerNetworkData Receive(ServerNetworkData data)
+        public override NetworkTransferData Receive(NetworkTransferData data)
         {
             return data;
         }
 
-        public override ServerNetworkData Send(ServerNetworkData data)
-        {
-            return data;
-        }
     }
 }

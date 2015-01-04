@@ -4,8 +4,8 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
-using Ceriyo.Network;
-using Ceriyo.Network.Packets;
+using Ceriyo.Library.Network;
+using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens
@@ -23,14 +23,14 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
-            GameGlobal.OnPacketReceived += PacketReceived;
+            CeriyoServices.OnPacketReceived += PacketReceived;
 
             CharacterSelectionScreenPacket packet = new CharacterSelectionScreenPacket
             {
                 IsRequest = true
             };
 
-            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
+            packet.Send(NetDeliveryMethod.ReliableUnordered);
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -39,7 +39,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
-            GameGlobal.OnPacketReceived -= PacketReceived;
+            CeriyoServices.OnPacketReceived -= PacketReceived;
             GUI.OnCreateCharacter -= GUI_OnCreateCharacter;
             GUI.OnDeleteCharacter -= GUI_OnDeleteCharacter;
             GUI.OnDisconnected -= GUI_OnDisconnected;
@@ -110,12 +110,12 @@ namespace Ceriyo.Entities.Screens
                 Resref = e.Resref
             };
 
-            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
+            packet.Send(NetDeliveryMethod.ReliableUnordered);
         }
 
         private void GUI_OnDisconnected(object sender, EventArgs e)
         {
-            GameGlobal.Agent.Disconnect();
+            CeriyoServices.Agent.Disconnect();
             MoveToScreen(typeof(MainMenuScreen));
         }
 
@@ -127,7 +127,7 @@ namespace Ceriyo.Entities.Screens
                 CharacterResref = e.Resref
             };
 
-            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
+            packet.Send(NetDeliveryMethod.ReliableUnordered);
         }
 
         private void GUI_OnCreateCharacter(object sender, EventArgs e)

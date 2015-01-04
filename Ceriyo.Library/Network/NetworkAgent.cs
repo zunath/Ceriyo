@@ -4,11 +4,11 @@ using System.IO;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
-using Ceriyo.Network.Packets;
+using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Network
+namespace Ceriyo.Library.Network
 {
     public class NetworkAgent
     {
@@ -18,7 +18,7 @@ namespace Ceriyo.Network
         
         private NetPeer Peer { get; set; }
         private NetPeerConfiguration Configuration { get; set; }
-        private NetworkAgentRoleEnum Role { get; set; }
+        public NetworkAgentRoleEnum Role { get; private set; }
         public int Port { get; private set; }
         private NetOutgoingMessage OutgoingMessage { get; set; }
         private List<NetIncomingMessage> IncomingMessages { get; set; }

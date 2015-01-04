@@ -2,7 +2,7 @@
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Network.Packets
+namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
     public class GameScreenPacket : PacketBase
@@ -18,22 +18,17 @@ namespace Ceriyo.Network.Packets
             PC = new Player();
         }
 
-        public override ServerNetworkData Receive(ServerNetworkData data)
+        public override NetworkTransferData Receive(NetworkTransferData data)
         {
             GameScreenPacket response = new GameScreenPacket
             {
                 PC = data.Players[SenderConnection].PC
             };
 
-            data.ResponsePacket = response;
-            data.DeliveryMethod = NetDeliveryMethod.ReliableUnordered;
+            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
 
             return data;
         }
 
-        public override ServerNetworkData Send(ServerNetworkData data)
-        {
-            return data;
-        }
     }
 }

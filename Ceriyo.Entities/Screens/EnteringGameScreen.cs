@@ -1,6 +1,6 @@
 ﻿using Ceriyo.Library.Global;
-using Ceriyo.Network;
-using Ceriyo.Network.Packets;
+using Ceriyo.Library.Network;
+using Ceriyo.Library.Network.Packets;
 using FlatRedBall;
 using FlatRedBall.Graphics;
 using Lidgren.Network;
@@ -32,7 +32,7 @@ namespace Ceriyo.Entities.Screens
                 IsRequest = true
             };
 
-            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
+            packet.Send(NetDeliveryMethod.ReliableUnordered);
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -48,16 +48,16 @@ namespace Ceriyo.Entities.Screens
 
         private void HookEvents()
         {
-            GameGlobal.Agent.OnConnected += Agent_OnConnected;
-            GameGlobal.Agent.OnDisconnected += Agent_OnDisconnected;
-            GameGlobal.OnPacketReceived += OnPacketReceived;
+            CeriyoServices.Agent.OnConnected += Agent_OnConnected;
+            CeriyoServices.Agent.OnDisconnected += Agent_OnDisconnected;
+            CeriyoServices.OnPacketReceived += OnPacketReceived;
         }
 
         private void UnhookEvents()
         {
-            GameGlobal.Agent.OnConnected -= Agent_OnConnected;
-            GameGlobal.Agent.OnDisconnected -= Agent_OnDisconnected;
-            GameGlobal.OnPacketReceived -= OnPacketReceived;
+            CeriyoServices.Agent.OnConnected -= Agent_OnConnected;
+            CeriyoServices.Agent.OnDisconnected -= Agent_OnDisconnected;
+            CeriyoServices.OnPacketReceived -= OnPacketReceived;
         }
 
         private void Agent_OnConnected(object sender, Data.EventArguments.ConnectionStatusEventArgs e)

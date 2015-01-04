@@ -2,7 +2,7 @@
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Network.Packets
+namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
     public class DeleteCharacterPacket : PacketBase
@@ -21,7 +21,7 @@ namespace Ceriyo.Network.Packets
             CharacterResref = string.Empty;
         }
 
-        public override ServerNetworkData Receive(ServerNetworkData data)
+        public override NetworkTransferData Receive(NetworkTransferData data)
         {
             bool success = false;
 
@@ -35,15 +35,10 @@ namespace Ceriyo.Network.Packets
                 IsDeleteSuccessful = success
             };
 
-            data.ResponsePacket = response;
-            data.DeliveryMethod = NetDeliveryMethod.ReliableUnordered;
+            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
 
             return data;
         }
 
-        public override ServerNetworkData Send(ServerNetworkData data)
-        {
-            return data;
-        }
     }
 }

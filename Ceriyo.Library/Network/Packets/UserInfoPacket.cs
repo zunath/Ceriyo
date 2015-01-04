@@ -6,7 +6,7 @@ using Ceriyo.Data.Server;
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Network.Packets
+namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
     public class UserInfoPacket : PacketBase
@@ -25,7 +25,7 @@ namespace Ceriyo.Network.Packets
             ServerPassword = string.Empty;
         }
 
-        public override ServerNetworkData Receive(ServerNetworkData data)
+        public override NetworkTransferData Receive(NetworkTransferData data)
         {
             if (!data.Players.ContainsKey(SenderConnection) &&
                 data.Players.SingleOrDefault(x => x.Value.Username == Username).Value == null)
@@ -48,17 +48,11 @@ namespace Ceriyo.Network.Packets
                     IsSuccessful = true
                 };
 
-                data.ResponsePacket = response;
-                data.DeliveryMethod = NetDeliveryMethod.ReliableUnordered;
+                response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
             }
 
             return data;
         }
 
-        public override ServerNetworkData Send(ServerNetworkData data)
-        {
-
-            return data;
-        }
     }
 }

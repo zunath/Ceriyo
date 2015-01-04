@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
-using Ceriyo.Network;
-using Ceriyo.Network.Packets;
+using Ceriyo.Library.Network;
+using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens
@@ -27,14 +24,14 @@ namespace Ceriyo.Entities.Screens
             GUI.OnPlayButtonClicked += GUI_OnPlayButtonClicked;
             GUI.OnCancelButtonClicked += GUI_OnCancelButtonClicked;
 
-            GameGlobal.OnPacketReceived += GameGlobal_OnPacketReceived;
+            CeriyoServices.OnPacketReceived += GameGlobal_OnPacketReceived;
 
             CharacterCreationScreenPacket packet = new CharacterCreationScreenPacket
             {
                 IsRequest = true
             };
 
-            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
+            packet.Send(NetDeliveryMethod.ReliableUnordered);
         }
 
         private void GUI_OnPlayButtonClicked(object sender, GameObjectEventArgs e)
@@ -45,7 +42,7 @@ namespace Ceriyo.Entities.Screens
                 Name = e.GameObject.Name
             };
 
-            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
+            packet.Send(NetDeliveryMethod.ReliableUnordered);
         }
 
         private void GUI_OnCancelButtonClicked(object sender, EventArgs e)

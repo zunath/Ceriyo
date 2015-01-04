@@ -3,7 +3,7 @@ using Ceriyo.Data.GameObjects;
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Network.Packets
+namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
     public class SelectCharacterPacket : PacketBase
@@ -19,7 +19,7 @@ namespace Ceriyo.Network.Packets
             IsSuccessful = false;
         }
 
-        public override ServerNetworkData Receive(ServerNetworkData data)
+        public override NetworkTransferData Receive(NetworkTransferData data)
         {
             string username = data.Players[SenderConnection].Username;
             Player pc = EngineDataManager.GetPlayer(username, Resref);
@@ -32,15 +32,10 @@ namespace Ceriyo.Network.Packets
                 response.IsSuccessful = true;
             }
 
-            data.ResponsePacket = response;
-            data.DeliveryMethod = NetDeliveryMethod.ReliableUnordered;
-
+            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
+            
             return data;
         }
 
-        public override ServerNetworkData Send(ServerNetworkData data)
-        {
-            return data;
-        }
     }
 }

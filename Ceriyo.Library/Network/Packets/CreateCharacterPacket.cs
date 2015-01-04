@@ -3,7 +3,7 @@ using Ceriyo.Data.GameObjects;
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Network.Packets
+namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
     public class CreateCharacterPacket: PacketBase
@@ -22,7 +22,7 @@ namespace Ceriyo.Network.Packets
             ResponsePlayer = new Player();
         }
 
-        public override ServerNetworkData Receive(ServerNetworkData data)
+        public override NetworkTransferData Receive(NetworkTransferData data)
         {
             Player pc = new Player
             {
@@ -38,15 +38,10 @@ namespace Ceriyo.Network.Packets
                 ResponsePlayer = pc
             };
 
-            data.ResponsePacket = response;
-            data.DeliveryMethod = NetDeliveryMethod.ReliableUnordered;
-
+            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
+            
             return data;
         }
 
-        public override ServerNetworkData Send(ServerNetworkData data)
-        {
-            return data;
-        }
     }
 }

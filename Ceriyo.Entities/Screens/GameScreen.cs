@@ -1,11 +1,8 @@
-﻿
-using Ceriyo.Data.EventArguments;
-using Ceriyo.Entities.GUI;
+﻿using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
 using System;
-using System.Collections.Generic;
-using Ceriyo.Network;
-using Ceriyo.Network.Packets;
+using Ceriyo.Library.Network;
+using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 namespace Ceriyo.Entities.Screens
 {
@@ -23,7 +20,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
-            GameGlobal.OnPacketReceived += PacketReceived;
+            CeriyoServices.OnPacketReceived += PacketReceived;
             RequestInitializationPacket();
         }
 
@@ -37,7 +34,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
-            GameGlobal.OnPacketReceived -= PacketReceived;
+            CeriyoServices.OnPacketReceived -= PacketReceived;
             GUI.Destroy();
             if (PC != null)
             {
@@ -72,7 +69,7 @@ namespace Ceriyo.Entities.Screens
                 IsRequest = true
             };
 
-            GameGlobal.SendPacket(packet, NetDeliveryMethod.ReliableUnordered);
+            packet.Send(NetDeliveryMethod.ReliableUnordered);
         }
 
         #endregion

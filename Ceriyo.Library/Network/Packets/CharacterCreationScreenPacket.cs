@@ -5,18 +5,18 @@ using Ceriyo.Data.GameObjects;
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Network.Packets
+namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
     public class CharacterCreationScreenPacket : PacketBase
     {
         [ProtoMember(1)]
         public bool IsRequest { get; set; }
-        [ProtoMember(3)]
+        [ProtoMember(2)]
         public List<CharacterClass> CharacterClasses { get; set; }
-        [ProtoMember(4)]
+        [ProtoMember(3)]
         public List<Ability> Abilities { get; set; }
-        [ProtoMember(5)]
+        [ProtoMember(4)]
         public List<Skill> Skills { get; set; }
 
         public CharacterCreationScreenPacket()
@@ -27,7 +27,7 @@ namespace Ceriyo.Network.Packets
             Skills = new List<Skill>();
         }
 
-        public override ServerNetworkData Receive(ServerNetworkData data)
+        public override NetworkTransferData Receive(NetworkTransferData data)
         {
             CharacterCreationScreenPacket response = new CharacterCreationScreenPacket
             {
@@ -36,14 +36,8 @@ namespace Ceriyo.Network.Packets
                 Skills = WorkingDataManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory).ToList()
             };
 
-            data.ResponsePacket = response;
-            data.DeliveryMethod = NetDeliveryMethod.ReliableUnordered;
+            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
 
-            return data;
-        }
-
-        public override ServerNetworkData Send(ServerNetworkData data)
-        {
             return data;
         }
     }

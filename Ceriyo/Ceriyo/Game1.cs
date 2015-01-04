@@ -1,4 +1,5 @@
 using Ceriyo.Data.Engine;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Entities.Screens;
 using Ceriyo.Library.Global;
 using FlatRedBall;
@@ -40,14 +41,14 @@ namespace Ceriyo
 
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
             SpriteManager.Camera.UsePixelCoordinates();
-            GameGlobal.Initialize();
+            CeriyoServices.Initialize(NetworkAgentRoleEnum.Client, 5121); // TODO: Load port from settings
             ScreenManager.Start(typeof(MainMenuScreen));
         }
 
 
         protected override void Update(GameTime gameTime)
         {
-            GameGlobal.ProcessPackets();
+            CeriyoServices.Update();
             FlatRedBallServices.Update(gameTime);
             ScreenManager.Activity();
 

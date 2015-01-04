@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace Ceriyo.Network.Packets
+namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
     public class PlayerInputPacket : PacketBase
@@ -55,12 +55,7 @@ namespace Ceriyo.Network.Packets
             IsHotBar10KeyPressed = false;
         }
 
-        public override ServerNetworkData Receive(ServerNetworkData data)
-        {
-            return data;
-        }
-
-        public override ServerNetworkData Send(ServerNetworkData data)
+        public override NetworkTransferData Receive(NetworkTransferData data)
         {
             return data;
         }

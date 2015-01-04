@@ -123,7 +123,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="Extensions\BindingListExtensions.cs" />
-    <Compile Include="Global\GameGlobal.cs" />
+    <Compile Include="Global\CeriyoServices.cs" />
+    <Compile Include="Network\NetworkAgent.cs" />
+    <Compile Include="Network\NetworkTransferData.cs" />
+    <Compile Include="Network\PacketEventArgs.cs" />
+    <Compile Include="Network\Packets\CharacterCreationScreenPacket.cs" />
+    <Compile Include="Network\Packets\CharacterSelectionScreenPacket.cs" />
+    <Compile Include="Network\Packets\CreateCharacterPacket.cs" />
+    <Compile Include="Network\Packets\DeleteCharacterPacket.cs" />
+    <Compile Include="Network\Packets\EnteringGameScreenPacket.cs" />
+    <Compile Include="Network\Packets\GameScreenPacket.cs" />
+    <Compile Include="Network\Packets\PacketBase.cs" />
+    <Compile Include="Network\Packets\PlayerInputPacket.cs" />
+    <Compile Include="Network\Packets\SelectCharacterPacket.cs" />
+    <Compile Include="Network\Packets\UserConnectedPacket.cs" />
+    <Compile Include="Network\Packets\UserDisconnectedPacket.cs" />
+    <Compile Include="Network\Packets\UserInfoPacket.cs" />
     <Compile Include="Processing\GameResourceProcessor.cs" />
     <Compile Include="Processing\SpriteAnimationProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -145,10 +160,6 @@
     <ProjectReference Include="..\Ceriyo.Data\Ceriyo.Data.csproj">
       <Project>{26e4c8b8-a8c4-4b77-bec7-e6149473eefb}</Project>
       <Name>Ceriyo.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ceriyo.Network\Ceriyo.Network.csproj">
-      <Project>{d012eb04-9037-4dc2-9290-c39eff9df5ea}</Project>
-      <Name>Ceriyo.Network</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -3,8 +3,8 @@ using System.Net;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
-using Ceriyo.Network;
-using Ceriyo.Network.Packets;
+using Ceriyo.Library.Network;
+using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens
@@ -38,9 +38,9 @@ namespace Ceriyo.Entities.Screens
         private void HookEvents()
         {
             GUI.OnDirectConnect += GUI_OnDirectConnect;
-            GameGlobal.Agent.OnConnected += Agent_OnConnected;
-            GameGlobal.Agent.OnDisconnected += Agent_OnDisconnected;
-            GameGlobal.OnPacketReceived += PacketReceived;
+            CeriyoServices.Agent.OnConnected += Agent_OnConnected;
+            CeriyoServices.Agent.OnDisconnected += Agent_OnDisconnected;
+            CeriyoServices.OnPacketReceived += PacketReceived;
         }
 
         private void Agent_OnDisconnected(object sender, ConnectionStatusEventArgs e)
@@ -71,9 +71,9 @@ namespace Ceriyo.Entities.Screens
         private void UnhookEvents()
         {
             GUI.OnDirectConnect -= GUI_OnDirectConnect;
-            GameGlobal.Agent.OnConnected -= Agent_OnConnected;
-            GameGlobal.Agent.OnDisconnected -= Agent_OnDisconnected;
-            GameGlobal.OnPacketReceived -= PacketReceived;
+            CeriyoServices.Agent.OnConnected -= Agent_OnConnected;
+            CeriyoServices.Agent.OnDisconnected -= Agent_OnDisconnected;
+            CeriyoServices.OnPacketReceived -= PacketReceived;
         }
 
         private void GUI_OnDirectConnect(object sender, DirectConnectEventArgs e)
@@ -82,7 +82,7 @@ namespace Ceriyo.Entities.Screens
 
             if (IPAddress.TryParse(e.IPAddress, out address))
             {
-                GameGlobal.Agent.Connect(e.IPAddress, e.Password);
+                CeriyoServices.Agent.Connect(e.IPAddress, e.Password);
                 
             }
         }
@@ -97,7 +97,7 @@ namespace Ceriyo.Entities.Screens
                     Username = "zunath" // TODO: Store username after it's been authorized by the master server
                 };
 
-                GameGlobal.Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
+                response.Send(NetDeliveryMethod.ReliableUnordered, packet.SenderConnection);
             }
         }
 

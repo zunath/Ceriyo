@@ -3,7 +3,7 @@ using Ceriyo.Data.GameObjects;
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Network.Packets
+namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
     public class EnteringGameScreenPacket : PacketBase
@@ -34,22 +34,17 @@ namespace Ceriyo.Network.Packets
             AreaTiles = new BindingList<MapTile>();
         }
 
-        public override ServerNetworkData Receive(ServerNetworkData data)
+        public override NetworkTransferData Receive(NetworkTransferData data)
         {
             EnteringGameScreenPacket response = new EnteringGameScreenPacket
             {
 
             };
-
-            data.ResponsePacket = response;
-            data.DeliveryMethod = NetDeliveryMethod.ReliableUnordered;
-
+            
+            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
+            
             return data;
         }
 
-        public override ServerNetworkData Send(ServerNetworkData data)
-        {
-            return data;
-        }
     }
 }

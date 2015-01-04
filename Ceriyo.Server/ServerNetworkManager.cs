@@ -6,24 +6,24 @@ using Lidgren.Network;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Ceriyo.Network;
-using Ceriyo.Network.Packets;
+using Ceriyo.Library.Global;
+using Ceriyo.Library.Network;
+using Ceriyo.Library.Network.Packets;
 
 namespace Ceriyo.Server
 {
     public class ServerNetworkManager
     {
-        private NetworkAgent Agent { get; set; }
         private Dictionary<NetConnection, ServerPlayer> Players { get; set; }
         private ServerSettings Settings { get; set; }
 
         public ServerNetworkManager(string serverPassword, int port)
         {
-            Agent = new NetworkAgent(NetworkAgentRoleEnum.Server, serverPassword, port);
+            CeriyoServices.Agent = new NetworkAgent(NetworkAgentRoleEnum.Server, serverPassword, port);
             Players = new Dictionary<NetConnection, ServerPlayer>();
-            Agent.OnConnected += Agent_OnConnected;
-            Agent.OnDisconnected += Agent_OnDisconnected;
-            Agent.OnDisconnecting += Agent_OnDisconnecting;
+            CeriyoServices.Agent.OnConnected += Agent_OnConnected;
+            CeriyoServices.Agent.OnDisconnected += Agent_OnDisconnected;
+            CeriyoServices.Agent.OnDisconnecting += Agent_OnDisconnecting;
         }
 
         public void Update()
@@ -38,8 +38,8 @@ namespace Ceriyo.Server
 
         private void ProcessPackets()
         {
-            List<PacketBase> packets = Agent.CheckForPackets();
-            ServerNetworkData data = new ServerNetworkData
+            List<PacketBase> packets = CeriyoServices.Agent.CheckForPackets();
+            NetworkTransferData data = new NetworkTransferData
             {
                 Players = Players,
                 Settings = Settings
@@ -48,21 +48,12 @@ namespace Ceriyo.Server
             foreach (PacketBase packet in packets)
             {
                 data = packet.Receive(data);
-
-                if (data.ResponsePacket != null)
-                {
-                    Agent.SendPacket(data.ResponsePacket, packet.SenderConnection, data.DeliveryMethod);
-
-                    // Reset for next packet.
-                    data.ResponsePacket = null;
-                    data.DeliveryMethod = NetDeliveryMethod.Unreliable;
-                }
             }
         }
 
         public void Destroy()
         {
-            Agent.Shutdown();
+            CeriyoServices.Agent.Shutdown();
 
         }
 
@@ -82,7 +73,7 @@ namespace Ceriyo.Server
                 IsRequest = true
             };
 
-            Agent.SendPacket(packet, e.Connection, NetDeliveryMethod.ReliableUnordered);
+            CeriyoServices.Agent.SendPacket(packet, e.Connection, NetDeliveryMethod.ReliableUnordered);
         }
 
         private void Agent_OnDisconnecting(object sender, ConnectionStatusEventArgs e)
