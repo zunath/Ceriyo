@@ -1,4 +1,6 @@
-﻿using Ceriyo.Data.GameObjects;
+﻿using System.ComponentModel;
+using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.ResourceObjects;
 using Lidgren.Network;
 using ProtoBuf;
 
@@ -10,24 +12,52 @@ namespace Ceriyo.Library.Network.Packets
         [ProtoMember(1)]
         public bool IsRequest { get; set; }
         [ProtoMember(2)]
-        public Player PC { get; set; }
+        public string AreaName { get; set; }
+        [ProtoMember(3)]
+        public string AreaTag { get; set; }
+        [ProtoMember(4)]
+        public string AreaResref { get; set; }
+        [ProtoMember(5)]
+        public string AreaDescription { get; set; }
+        [ProtoMember(6)]
+        public BindingList<MapTile> AreaTiles { get; set; }
+        [ProtoMember(7)]
+        public int AreaLayers { get; set; }
+        [ProtoMember(8)]
+        public string TilesetGraphicResourcePackage { get; set; }
+        [ProtoMember(9)]
+        public string TilesetGraphicResourceFileName { get; set; }
 
         public GameScreenPacket()
         {
             IsRequest = false;
-            PC = new Player();
+            AreaName = string.Empty;
+            AreaTag = string.Empty;
+            AreaResref = string.Empty;
+            AreaDescription = string.Empty;
+
+            AreaTiles = new BindingList<MapTile>();
         }
 
-        // Receiving from client
         public override NetworkTransferData ServerReceive(NetworkTransferData data)
         {
+            GameResource tilesetGraphicResource = data.SelectedArea.AreaTileset.Graphic;
+
             GameScreenPacket response = new GameScreenPacket
             {
-                PC = data.Players[SenderConnection].PC
+                AreaDescription = data.SelectedArea.Description,
+                AreaName = data.SelectedArea.Name,
+                AreaResref = data.SelectedArea.Resref,
+                AreaTag = data.SelectedArea.Tag,
+                IsRequest = false,
+                AreaTiles = data.SelectedArea.MapTiles,
+                AreaLayers = data.SelectedArea.LayerCount,
+                TilesetGraphicResourceFileName = tilesetGraphicResource.FileName,
+                TilesetGraphicResourcePackage = tilesetGraphicResource.Package
             };
-
+            
             response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
-
+            
             return data;
         }
 

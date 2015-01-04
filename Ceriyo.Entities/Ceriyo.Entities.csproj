@@ -105,19 +105,19 @@
     <Compile Include="DrawableBatches\MapDrawableBatch.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\GraphicEntity.cs" />
+    <Compile Include="Entities\LoadingEntity.cs" />
     <Compile Include="GUI\CharacterCreationMenuLogic.cs" />
     <Compile Include="GUI\CharacterSelectionMenuLogic.cs" />
     <Compile Include="GUI\GameMenuLogic.cs" />
     <Compile Include="GUI\MainMenuLogic.cs" />
     <Compile Include="GUI\LoginMenuLogic.cs" />
-    <Compile Include="Entities\PlayerEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\AreaEditorScreen.cs" />
     <Compile Include="Screens\BaseScreen.cs" />
     <Compile Include="Screens\CharacterCreationScreen.cs" />
     <Compile Include="Screens\CharacterSelectionScreen.cs" />
-    <Compile Include="Screens\EnteringGameScreen.cs" />
     <Compile Include="Screens\GameScreen.cs" />
+    <Compile Include="Screens\LoadingScreen.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
   </ItemGroup>
   <ItemGroup>

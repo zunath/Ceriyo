@@ -15,9 +15,8 @@ namespace Ceriyo.Library.Network.Packets
     [ProtoInclude(104, typeof(CharacterCreationScreenPacket))]
     [ProtoInclude(105, typeof(CreateCharacterPacket))]
     [ProtoInclude(106, typeof(CharacterSelectionScreenPacket))]
-    [ProtoInclude(107, typeof(GameScreenPacket))]
-    [ProtoInclude(108, typeof(SelectCharacterPacket))]
-    [ProtoInclude(109, typeof(EnteringGameScreenPacket))]
+    [ProtoInclude(107, typeof(SelectCharacterPacket))]
+    [ProtoInclude(108, typeof(GameScreenPacket))]
     public abstract class PacketBase
     {
         public NetConnection SenderConnection { get; set; }

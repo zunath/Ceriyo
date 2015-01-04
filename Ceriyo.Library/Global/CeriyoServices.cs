@@ -4,7 +4,6 @@ using System.Linq;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Library.Network;
 using Ceriyo.Library.Network.Packets;
-using FlatRedBall.Network;
 
 namespace Ceriyo.Library.Global
 {

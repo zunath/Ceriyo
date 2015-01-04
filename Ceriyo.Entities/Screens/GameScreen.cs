@@ -1,68 +1,73 @@
-﻿using Ceriyo.Entities.GUI;
+﻿using Ceriyo.Data.Enumerations;
+using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.ResourceObjects;
+using Ceriyo.Entities.DrawableBatches;
 using Ceriyo.Library.Global;
 using Ceriyo.Library.Network.Packets;
+using FlatRedBall;
 using Lidgren.Network;
+using Microsoft.Xna.Framework;
+
 namespace Ceriyo.Entities.Screens
 {
     public class GameScreen : BaseScreen
     {
-        private PlayerEntity PC { get; set; }
-        private GameMenuLogic GUI { get; set; }
+        private Area _area;
+        private GameResource _tilesetGraphicResource;
+        private MapDrawableBatch _map;
 
         public GameScreen()
             : base("GameScreen")
         {
-            GUI = new GameMenuLogic();
         }
 
         protected override void CustomInitialize()
         {
             SubscribePacketActions();
-
-            GameScreenPacket packet = new GameScreenPacket
-            {
-                IsRequest = true
-            };
-
-            packet.Send(NetDeliveryMethod.ReliableUnordered);
+            new GameScreenPacket { IsRequest = true }.Send(NetDeliveryMethod.ReliableUnordered);
+            SpriteManager.Camera.BackgroundColor = Color.LightGray;
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
         {
-            if (PC != null)
-            {
-                PC.Activity();
-            }
         }
 
         protected override void CustomDestroy()
         {
             UnsubscribePacketActions();
-            GUI.Destroy();
-            if (PC != null)
-            {
-                PC.Destroy();
-            }
+            _map.Destroy();
         }
-
-        #region Packet Processing
 
         private void SubscribePacketActions()
         {
-            CeriyoServices.SubscribePacketAction(typeof(GameScreenPacket), ProcessGameScreenPacket);
+            CeriyoServices.SubscribePacketAction(typeof(GameScreenPacket), ReceiveEnteringGameScreenPacket);
         }
 
         private void UnsubscribePacketActions()
         {
-            CeriyoServices.UnsubscribePacketAction(typeof(GameScreenPacket), ProcessGameScreenPacket);
+            CeriyoServices.UnsubscribePacketAction(typeof(GameScreenPacket), ReceiveEnteringGameScreenPacket);
         }
 
-        private void ProcessGameScreenPacket(PacketBase packetBase)
+        private void ReceiveEnteringGameScreenPacket(PacketBase packetBase)
         {
-            PC = new PlayerEntity();
-            PC.InitializeEntity(false);
-        }
+            GameScreenPacket packet = (GameScreenPacket)packetBase;
+            _area = new Area
+            {
+                Description = packet.AreaDescription,
+                LayerCount = packet.AreaLayers,
+                Name = packet.AreaName,
+                MapTiles = packet.AreaTiles,
+                Resref = packet.AreaResref,
+                Tag = packet.AreaTag
+            };
 
-        #endregion
+            _tilesetGraphicResource = new GameResource
+                (packet.TilesetGraphicResourcePackage, 
+                packet.TilesetGraphicResourceFileName, 
+                ResourceTypeEnum.Graphic);
+
+            _map = new MapDrawableBatch(_area, _tilesetGraphicResource);
+            SpriteManager.AddDrawableBatch(_map);
+        }
     }
 }

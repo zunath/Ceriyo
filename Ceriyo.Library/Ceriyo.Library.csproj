@@ -131,7 +131,6 @@
     <Compile Include="Network\Packets\CharacterSelectionScreenPacket.cs" />
     <Compile Include="Network\Packets\CreateCharacterPacket.cs" />
     <Compile Include="Network\Packets\DeleteCharacterPacket.cs" />
-    <Compile Include="Network\Packets\EnteringGameScreenPacket.cs" />
     <Compile Include="Network\Packets\GameScreenPacket.cs" />
     <Compile Include="Network\Packets\PacketBase.cs" />
     <Compile Include="Network\Packets\PlayerInputPacket.cs" />

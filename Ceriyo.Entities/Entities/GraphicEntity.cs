@@ -1,5 +1,4 @@
-﻿using Ceriyo.Library.Processing;
-using FlatRedBall;
+﻿using FlatRedBall;
 using FlatRedBall.Graphics.Animation;
 
 namespace Ceriyo.Entities

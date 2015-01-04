@@ -90,7 +90,7 @@ namespace Ceriyo.Entities.Screens
 
             if (packet.IsSuccessful)
             {
-                MoveToScreen(typeof(EnteringGameScreen));
+                MoveToScreen(typeof(LoadingScreen));
             }
             else
             {

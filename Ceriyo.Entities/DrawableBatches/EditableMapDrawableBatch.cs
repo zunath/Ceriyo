@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Ceriyo.Data.DataObjects;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.ResourceObjects;
 using FlatRedBall.Input;
 using Microsoft.Xna.Framework;
 using xTile.Dimensions;
@@ -26,8 +26,8 @@ namespace Ceriyo.Entities.DrawableBatches
         private int MouseTileX { get; set; }
         private int MouseTileY { get; set; }
 
-        public EditableMapDrawableBatch(Area area) 
-            : base(area)
+        public EditableMapDrawableBatch(Area area, GameResource graphicResource) 
+            : base(area, graphicResource, true)
         {
             SelectedTiles = new List<Vector3Int>();
         }
@@ -46,7 +46,7 @@ namespace Ceriyo.Entities.DrawableBatches
 
         private void UpdateTileSelected()
         {
-            MouseTileX = InputManager.Mouse.X/EngineConstants.TilePixelWidth;
+            MouseTileX = InputManager.Mouse.X / EngineConstants.TilePixelWidth;
             MouseTileY = InputManager.Mouse.Y / EngineConstants.TilePixelHeight;
             int xEnd = DrawableArea.MapTiles.Max(t => t.MapX);
             int yEnd = DrawableArea.MapTiles.Max(t => t.MapY);

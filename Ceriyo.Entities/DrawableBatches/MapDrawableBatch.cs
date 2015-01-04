@@ -4,6 +4,7 @@ using System.Linq;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Library.Processing;
 using FlatRedBall;
 using FlatRedBall.Graphics;
@@ -25,10 +26,14 @@ namespace Ceriyo.Entities.DrawableBatches
         protected TileSheet _areaTileSheet;
         private TileSheet _systemTileSheet;
         private readonly Location _offset;
+        private readonly GameResource _graphicResource;
+        private bool DisplayGridLines { get; set; }
 
-        public MapDrawableBatch(Area area)
+        public MapDrawableBatch(Area area, GameResource graphicResource, bool displayGridLines = false)
         {
             DrawableArea = area;
+            _graphicResource = graphicResource;
+            DisplayGridLines = displayGridLines;
             _displayDevice = new XnaDisplayDevice(FlatRedBallServices.GetContentManagerByName(FlatRedBallServices.GlobalContentManager),
                 FlatRedBallServices.GraphicsDevice);
             _viewport = new Rectangle(FlatRedBallServices.GraphicsDevice.Viewport.X,
@@ -55,10 +60,10 @@ namespace Ceriyo.Entities.DrawableBatches
 
         private void LoadTileSheets()
         {
-            Texture2D texture = GameResourceProcessor.ToTexture2D(DrawableArea.AreaTileset.Graphic);
+            Texture2D texture = GameResourceProcessor.ToTexture2D(_graphicResource);
 
             _areaTileSheet = new TileSheet(AreaMap,
-                DrawableArea.AreaTileset.Graphic,
+                _graphicResource,
                 new Size(texture.Width, texture.Height),  
                 new Size(EngineConstants.TilePixelWidth, EngineConstants.TilePixelHeight));
 
@@ -86,7 +91,7 @@ namespace Ceriyo.Entities.DrawableBatches
                 List<MapTile> tiles = DrawableArea.MapTiles.Where(t => t.Layer == layer).ToList();
                 foreach (MapTile tile in tiles)
                 {
-                    if (!tile.HasGraphic && layer == 0)
+                    if (!tile.HasGraphic && layer == 0 && DisplayGridLines)
                     {
                         areaLayer.Tiles[tile.MapX, tile.MapY] = new StaticTile(areaLayer, _systemTileSheet, BlendMode.Alpha, 0);    
                     }

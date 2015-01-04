@@ -51,7 +51,7 @@ namespace Ceriyo.Entities.Screens
             CloseArea(sender, e);
 
             LoadedArea = WorkingDataManager.GetGameObject<Area>(ModulePaths.AreasDirectory, e.GameObject.Resref);
-            AreaBatch = new EditableMapDrawableBatch(LoadedArea);
+            AreaBatch = new EditableMapDrawableBatch(LoadedArea, LoadedArea.AreaTileset.Graphic);
             SpriteManager.AddDrawableBatch(AreaBatch);
 
             OnAreaPropertiesSaved += AreaBatch.AreaPropertiesSaved;

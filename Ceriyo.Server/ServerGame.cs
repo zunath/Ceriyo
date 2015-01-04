@@ -174,7 +174,8 @@ namespace Ceriyo.Server
             TransferData = new NetworkTransferData
             {
                 Players = Players,
-                Settings = Settings
+                Settings = Settings,
+                SelectedArea = Areas[0]
             };
         }
 
