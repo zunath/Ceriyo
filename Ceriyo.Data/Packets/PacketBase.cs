@@ -1,4 +1,5 @@
-﻿using Lidgren.Network;
+﻿using Ceriyo.Data.Server;
+using Lidgren.Network;
 using ProtoBuf;
 
 namespace Ceriyo.Data.Packets
@@ -13,7 +14,8 @@ namespace Ceriyo.Data.Packets
     [ProtoInclude(106, typeof(CharacterSelectionScreenPacket))]
     [ProtoInclude(107, typeof(GameScreenPacket))]
     [ProtoInclude(108, typeof(SelectCharacterPacket))]
-    public class PacketBase
+    [ProtoInclude(109, typeof(EnteringGameScreenPacket))]
+    public abstract class PacketBase
     {
         public NetConnection SenderConnection { get; set; }
 
@@ -21,5 +23,7 @@ namespace Ceriyo.Data.Packets
         {
         }
 
+        public abstract ServerGameData Receive(ServerGameData data);
+        public abstract ServerGameData Send(ServerGameData data);
     }
 }

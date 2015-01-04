@@ -71,9 +71,6 @@ namespace Ceriyo.Server
             {
                 OnGameStarting(this, new EventArgs());
             }
-
-            NetworkManager.OnPacketReceived += NetworkManager_OnPacketReceived;
-
         }
 
         protected override void Update(GameTime gameTime)
@@ -143,31 +140,5 @@ namespace Ceriyo.Server
                 OnGameExiting(this, new EventArgs());
             }
         }
-
-        #region Packet Processing
-
-        private void NetworkManager_OnPacketReceived(object sender, PacketEventArgs e)
-        {
-            PacketBase packet = e.Packet;
-            Type type = packet.GetType();
-
-            if (type == typeof (EnteringGameScreenPacket))
-            {
-                ReceiveEnteringGameScreenPacket(packet as EnteringGameScreenPacket);
-            }
-        }
-
-
-        private void ReceiveEnteringGameScreenPacket(EnteringGameScreenPacket packet)
-        {
-            EnteringGameScreenPacket response = new EnteringGameScreenPacket
-            {
-                
-            };
-
-            NetworkManager.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);
-        }
-
-        #endregion
     }
 }

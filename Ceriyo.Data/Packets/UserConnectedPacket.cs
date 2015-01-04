@@ -1,4 +1,5 @@
-﻿using ProtoBuf;
+﻿using Ceriyo.Data.Server;
+using ProtoBuf;
 
 namespace Ceriyo.Data.Packets
 {
@@ -12,6 +13,16 @@ namespace Ceriyo.Data.Packets
         {
             IsSuccessful = false;
             ErrorMessage = string.Empty;
+        }
+
+        public override ServerGameData Receive(ServerGameData data)
+        {
+            return data;
+        }
+
+        public override ServerGameData Send(ServerGameData data)
+        {
+            return data;
         }
     }
 }

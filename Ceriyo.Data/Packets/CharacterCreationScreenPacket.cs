@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Ceriyo.Data.Engine;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.Server;
+using Lidgren.Network;
 using ProtoBuf;
 
 namespace Ceriyo.Data.Packets
@@ -22,6 +26,26 @@ namespace Ceriyo.Data.Packets
             CharacterClasses = new List<CharacterClass>();
             Abilities = new List<Ability>();
             Skills = new List<Skill>();
+        }
+
+        public override ServerGameData Receive(ServerGameData data)
+        {
+            CharacterCreationScreenPacket response = new CharacterCreationScreenPacket
+            {
+                Abilities = WorkingDataManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory).ToList(),
+                CharacterClasses = WorkingDataManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory).ToList(),
+                Skills = WorkingDataManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory).ToList()
+            };
+
+            data.ResponsePacket = response;
+            data.DeliveryMethod = NetDeliveryMethod.ReliableUnordered;
+
+            return data;
+        }
+
+        public override ServerGameData Send(ServerGameData data)
+        {
+            return data;
         }
     }
 }

@@ -188,6 +188,7 @@
     <Compile Include="ResourceObjects\UIComponent.cs" />
     <Compile Include="ResourceObjects\UILayout.cs" />
     <Compile Include="Server\ServerGUIStatus.cs" />
+    <Compile Include="Server\ServerGameData.cs" />
     <Compile Include="Server\ServerPlayer.cs" />
     <Compile Include="Server\ServerStartupArgs.cs" />
     <Compile Include="Settings\GameSettings.cs" />
