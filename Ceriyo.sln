@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Toolset.Tests", "Cer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xTilePC", "xTile\xTilePC.csproj", "{BF19F9E2-FD54-4B63-AF67-DA49B5EA11D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Network", "Ceriyo.Network\Ceriyo.Network.csproj", "{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -319,6 +321,26 @@ Global
 		{BF19F9E2-FD54-4B63-AF67-DA49B5EA11D9}.Release|Mixed Platforms.Build.0 = Release|x86
 		{BF19F9E2-FD54-4B63-AF67-DA49B5EA11D9}.Release|x86.ActiveCfg = Release|x86
 		{BF19F9E2-FD54-4B63-AF67-DA49B5EA11D9}.Release|x86.Build.0 = Release|x86
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.DebugProfile|Any CPU.ActiveCfg = Debug|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.DebugProfile|Any CPU.Build.0 = Debug|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.DebugProfile|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.DebugProfile|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.DebugProfile|x86.ActiveCfg = Debug|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Profile|Any CPU.ActiveCfg = Release|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Profile|Any CPU.Build.0 = Release|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Profile|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Profile|Mixed Platforms.Build.0 = Release|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Profile|x86.ActiveCfg = Release|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D012EB04-9037-4DC2-9290-C39EFF9DF5EA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

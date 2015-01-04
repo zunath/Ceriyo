@@ -3,11 +3,11 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Packets;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
-using Ceriyo.Library.Network;
 using Lidgren.Network;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Ceriyo.Network;
 
 namespace Ceriyo.Server
 {
@@ -40,7 +40,7 @@ namespace Ceriyo.Server
         private void ProcessPackets()
         {
             List<PacketBase> packets = Agent.CheckForPackets();
-            ServerGameData data = new ServerGameData
+            ServerNetworkData data = new ServerNetworkData
             {
                 Players = Players,
                 Settings = Settings

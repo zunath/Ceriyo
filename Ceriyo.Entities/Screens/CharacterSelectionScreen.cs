@@ -5,6 +5,7 @@ using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.Packets;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
+using Ceriyo.Network;
 using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens

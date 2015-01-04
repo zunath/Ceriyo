@@ -1,4 +1,5 @@
 ﻿using Ceriyo.Data.Server;
+using Ceriyo.Network;
 using ProtoBuf;
 
 namespace Ceriyo.Data.Packets
@@ -56,12 +57,12 @@ namespace Ceriyo.Data.Packets
             IsHotBar10KeyPressed = false;
         }
 
-        public override ServerGameData Receive(ServerGameData data)
+        public override ServerNetworkData Receive(ServerNetworkData data)
         {
             return data;
         }
 
-        public override ServerGameData Send(ServerGameData data)
+        public override ServerNetworkData Send(ServerNetworkData data)
         {
             return data;
         }

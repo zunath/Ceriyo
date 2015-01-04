@@ -3,6 +3,7 @@ using System.Linq;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.Server;
+using Ceriyo.Network;
 using Lidgren.Network;
 using ProtoBuf;
 
@@ -28,7 +29,7 @@ namespace Ceriyo.Data.Packets
             Skills = new List<Skill>();
         }
 
-        public override ServerGameData Receive(ServerGameData data)
+        public override ServerNetworkData Receive(ServerNetworkData data)
         {
             CharacterCreationScreenPacket response = new CharacterCreationScreenPacket
             {
@@ -43,7 +44,7 @@ namespace Ceriyo.Data.Packets
             return data;
         }
 
-        public override ServerGameData Send(ServerGameData data)
+        public override ServerNetworkData Send(ServerNetworkData data)
         {
             return data;
         }

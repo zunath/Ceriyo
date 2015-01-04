@@ -5,6 +5,7 @@ using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
 using System;
 using System.Collections.Generic;
+using Ceriyo.Network;
 using Lidgren.Network;
 namespace Ceriyo.Entities.Screens
 {

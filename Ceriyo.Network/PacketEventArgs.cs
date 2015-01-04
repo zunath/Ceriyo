@@ -1,7 +1,7 @@
 ﻿using System;
 using Ceriyo.Data.Packets;
 
-namespace Ceriyo.Data.EventArguments
+namespace Ceriyo.Network
 {
     public class PacketEventArgs : EventArgs
     {

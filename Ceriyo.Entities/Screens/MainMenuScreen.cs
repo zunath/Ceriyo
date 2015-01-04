@@ -5,6 +5,7 @@ using Ceriyo.Data.Packets;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
 using Ceriyo.Library.ScriptEngine;
+using Ceriyo.Network;
 using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens

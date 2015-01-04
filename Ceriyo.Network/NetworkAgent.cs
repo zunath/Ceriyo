@@ -1,14 +1,14 @@
-﻿using Ceriyo.Data.Enumerations;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Ceriyo.Data.Engine;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Packets;
 using Lidgren.Network;
 using ProtoBuf;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Ceriyo.Data.Engine;
 
-namespace Ceriyo.Library.Network
+namespace Ceriyo.Network
 {
     public class NetworkAgent
     {

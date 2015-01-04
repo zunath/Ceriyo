@@ -135,7 +135,6 @@
     <Compile Include="EventArguments\ConnectionStatusEventArgs.cs" />
     <Compile Include="EventArguments\GameModuleEventArgs.cs" />
     <Compile Include="EventArguments\GameObjectListEventArgs.cs" />
-    <Compile Include="EventArguments\PacketEventArgs.cs" />
     <Compile Include="EventArguments\ScriptEventArgs.cs" />
     <Compile Include="EventArguments\ObjectPainterEventArgs.cs" />
     <Compile Include="EventArguments\ServerStatusUpdateEventArgs.cs" />
@@ -169,18 +168,6 @@
     <Compile Include="Engine\ModuleDataManager.cs" />
     <Compile Include="Engine\ModulePaths.cs" />
     <Compile Include="GameObjects\Tileset.cs" />
-    <Compile Include="Packets\CharacterCreationScreenPacket.cs" />
-    <Compile Include="Packets\CharacterSelectionScreenPacket.cs" />
-    <Compile Include="Packets\CreateCharacterPacket.cs" />
-    <Compile Include="Packets\DeleteCharacterPacket.cs" />
-    <Compile Include="Packets\EnteringGameScreenPacket.cs" />
-    <Compile Include="Packets\GameScreenPacket.cs" />
-    <Compile Include="Packets\PlayerInputPacket.cs" />
-    <Compile Include="Packets\SelectCharacterPacket.cs" />
-    <Compile Include="Packets\UserConnectedPacket.cs" />
-    <Compile Include="Packets\PacketBase.cs" />
-    <Compile Include="Packets\UserDisconnectedPacket.cs" />
-    <Compile Include="Packets\UserInfoPacket.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceObjects\GameResource.cs" />
@@ -188,7 +175,6 @@
     <Compile Include="ResourceObjects\UIComponent.cs" />
     <Compile Include="ResourceObjects\UILayout.cs" />
     <Compile Include="Server\ServerGUIStatus.cs" />
-    <Compile Include="Server\ServerGameData.cs" />
     <Compile Include="Server\ServerPlayer.cs" />
     <Compile Include="Server\ServerStartupArgs.cs" />
     <Compile Include="Settings\GameSettings.cs" />

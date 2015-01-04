@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ceriyo.Data.Engine;
-using Ceriyo.Library.Network;
 using Ceriyo.Data.Packets;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Settings;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Network;
 using FlatRedBall.IO;
 using Lidgren.Network;
 

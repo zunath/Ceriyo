@@ -129,6 +129,10 @@
       <Project>{f9ab9dd8-a342-4d58-bbb9-e15184e7f522}</Project>
       <Name>Ceriyo.Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ceriyo.Network\Ceriyo.Network.csproj">
+      <Project>{d012eb04-9037-4dc2-9290-c39eff9df5ea}</Project>
+      <Name>Ceriyo.Network</Name>
+    </ProjectReference>
     <ProjectReference Include="..\xTile\xTilePC.csproj">
       <Project>{bf19f9e2-fd54-4b63-af67-da49b5ea11d9}</Project>
       <Name>xTilePC</Name>

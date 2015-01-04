@@ -2,6 +2,7 @@
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.Server;
+using Ceriyo.Network;
 using Lidgren.Network;
 using ProtoBuf;
 
@@ -27,7 +28,7 @@ namespace Ceriyo.Data.Packets
             CanDeleteCharacters = false;
         }
 
-        public override ServerGameData Receive(ServerGameData data)
+        public override ServerNetworkData Receive(ServerNetworkData data)
         {
             string username = data.Players[SenderConnection].Username;
             List<Player> characters = EngineDataManager.GetPlayers(username);
@@ -46,7 +47,7 @@ namespace Ceriyo.Data.Packets
             
         }
 
-        public override ServerGameData Send(ServerGameData data)
+        public override ServerNetworkData Send(ServerNetworkData data)
         {
             return data;
             

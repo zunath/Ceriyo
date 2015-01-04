@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.Server;
+using Ceriyo.Network;
 using Lidgren.Network;
 using ProtoBuf;
 
@@ -11,7 +12,6 @@ namespace Ceriyo.Data.Packets
     {
         [ProtoMember(1)]
         public bool IsRequest { get; set; }
-
         [ProtoMember(2)]
         public string AreaName { get; set; }
         [ProtoMember(3)]
@@ -36,7 +36,7 @@ namespace Ceriyo.Data.Packets
             AreaTiles = new BindingList<MapTile>();
         }
 
-        public override ServerGameData Receive(ServerGameData data)
+        public override ServerNetworkData Receive(ServerNetworkData data)
         {
             EnteringGameScreenPacket response = new EnteringGameScreenPacket
             {
@@ -49,7 +49,7 @@ namespace Ceriyo.Data.Packets
             return data;
         }
 
-        public override ServerGameData Send(ServerGameData data)
+        public override ServerNetworkData Send(ServerNetworkData data)
         {
             return data;
         }

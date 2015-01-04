@@ -124,7 +124,6 @@
     </None>
     <Compile Include="Extensions\BindingListExtensions.cs" />
     <Compile Include="Global\GameGlobal.cs" />
-    <Compile Include="Network\NetworkAgent.cs" />
     <Compile Include="Processing\GameResourceProcessor.cs" />
     <Compile Include="Processing\SpriteAnimationProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -146,6 +145,10 @@
     <ProjectReference Include="..\Ceriyo.Data\Ceriyo.Data.csproj">
       <Project>{26e4c8b8-a8c4-4b77-bec7-e6149473eefb}</Project>
       <Name>Ceriyo.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ceriyo.Network\Ceriyo.Network.csproj">
+      <Project>{d012eb04-9037-4dc2-9290-c39eff9df5ea}</Project>
+      <Name>Ceriyo.Network</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

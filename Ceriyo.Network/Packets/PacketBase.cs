@@ -1,4 +1,5 @@
 ﻿using Ceriyo.Data.Server;
+using Ceriyo.Network;
 using Lidgren.Network;
 using ProtoBuf;
 
@@ -23,7 +24,7 @@ namespace Ceriyo.Data.Packets
         {
         }
 
-        public abstract ServerGameData Receive(ServerGameData data);
-        public abstract ServerGameData Send(ServerGameData data);
+        public abstract ServerNetworkData Receive(ServerNetworkData data);
+        public abstract ServerNetworkData Send(ServerNetworkData data);
     }
 }

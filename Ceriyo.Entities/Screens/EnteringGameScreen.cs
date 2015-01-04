@@ -1,5 +1,6 @@
 ﻿using Ceriyo.Data.Packets;
 using Ceriyo.Library.Global;
+using Ceriyo.Network;
 using FlatRedBall;
 using FlatRedBall.Graphics;
 using Lidgren.Network;
@@ -64,7 +65,7 @@ namespace Ceriyo.Entities.Screens
 
         }
 
-        private void OnPacketReceived(object sender, Data.EventArguments.PacketEventArgs e)
+        private void OnPacketReceived(object sender, PacketEventArgs e)
         {
             
         }
