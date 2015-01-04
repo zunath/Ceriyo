@@ -1,17 +1,15 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
-using Ceriyo.Library.Network;
 using Ceriyo.Library.Network.Packets;
+using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens
 {
     public class MainMenuScreen : BaseScreen
     {
         private MainMenuLogic GUI { get; set; }
-        private NetworkTransferData _transferData;
 
         public MainMenuScreen()
             : base("MainMenu")
@@ -21,8 +19,8 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
+            SubscribePacketActions();
             GUI.OnDirectConnect += GUI_OnDirectConnect;
-            CeriyoServices.OnPacketReceived += ReceivePacket;
         }
 
         protected override void CustomActivity(bool firstTimeCalled)
@@ -31,22 +29,21 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
+            UnsubscribePacketActions();
             GUI.OnDirectConnect -= GUI_OnDirectConnect;
-            CeriyoServices.OnPacketReceived -= ReceivePacket;
             GUI.Destroy();
         }
 
-        private void ReceivePacket(object sender, PacketEventArgs e)
+        private void SubscribePacketActions()
         {
-            _transferData = e.Packet.ClientReceive(_transferData);
+            CeriyoServices.SubscribePacketAction(typeof(UserConnectedPacket), ReceiveUserConnectedPacket);
+            CeriyoServices.SubscribePacketAction(typeof(UserInfoPacket), ReceiveUserInfoPacket);
+        }
 
-            PacketBase packet = e.Packet;
-            Type type = packet.GetType();
-
-            if (type == typeof(UserConnectedPacket))
-            {
-                ReceiveUserConnectedPacket(packet as UserConnectedPacket);
-            }
+        private void UnsubscribePacketActions()
+        {
+            CeriyoServices.UnsubscribePacketAction(typeof(UserConnectedPacket), ReceiveUserConnectedPacket);
+            CeriyoServices.UnsubscribePacketAction(typeof(UserInfoPacket), ReceiveUserInfoPacket);
         }
 
         private void GUI_OnDirectConnect(object sender, DirectConnectEventArgs e)
@@ -59,9 +56,20 @@ namespace Ceriyo.Entities.Screens
             }
         }
 
-        private void ReceiveUserConnectedPacket(UserConnectedPacket packet)
+        private void ReceiveUserConnectedPacket(PacketBase packetBase)
         {
             MoveToScreen(typeof(CharacterSelectionScreen));
+        }
+
+        private void ReceiveUserInfoPacket(PacketBase packetBase)
+        {
+            UserInfoPacket response = new UserInfoPacket
+            {
+                IsRequest = false,
+                Username = "zunath" // TODO: Store username after it's been authorized by the master server
+            };
+
+            response.Send(NetDeliveryMethod.ReliableUnordered);
         }
     }
 }

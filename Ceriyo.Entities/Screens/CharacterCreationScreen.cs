@@ -2,7 +2,6 @@
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
-using Ceriyo.Library.Network;
 using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 
@@ -20,11 +19,10 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomInitialize()
         {
+            SubscribePacketActions();
             GUI = new CharacterCreationMenuLogic();
             GUI.OnPlayButtonClicked += GUI_OnPlayButtonClicked;
             GUI.OnCancelButtonClicked += GUI_OnCancelButtonClicked;
-
-            CeriyoServices.OnPacketReceived += ReceivePacket;
 
             CharacterCreationScreenPacket packet = new CharacterCreationScreenPacket
             {
@@ -32,6 +30,17 @@ namespace Ceriyo.Entities.Screens
             };
 
             packet.Send(NetDeliveryMethod.ReliableUnordered);
+        }
+
+        protected override void CustomActivity(bool firstTimeCalled)
+        {
+
+        }
+
+        protected override void CustomDestroy()
+        {
+            UnsubscribePacketActions();
+            GUI.Destroy();
         }
 
         private void GUI_OnPlayButtonClicked(object sender, GameObjectEventArgs e)
@@ -50,34 +59,29 @@ namespace Ceriyo.Entities.Screens
             MoveToScreen(typeof(CharacterSelectionScreen));
         }
 
-        private void ReceivePacket(object sender, PacketEventArgs e)
-        {
-            if (e.Packet.GetType() == typeof(CharacterCreationScreenPacket))
-            {
-                GUI.LoadServerData(e.Packet as CharacterCreationScreenPacket);
-            }
-            else if (e.Packet.GetType() == typeof(CreateCharacterPacket))
-            {
-                ReceiveCreateCharacterPacket(e.Packet as CreateCharacterPacket);
-            }
-        }
-
-        private void ReceiveCreateCharacterPacket(CreateCharacterPacket packet)
+        private void ReceiveCreateCharacterPacket(PacketBase packetBase)
         {
             // TODO: Store PC character in memory somewhere?
 
             MoveToScreen(typeof(CharacterSelectionScreen));
         }
 
-        protected override void CustomActivity(bool firstTimeCalled)
+        private void ReceiveCharacterCreationScreenPacket(PacketBase packetBase)
         {
-            
+            CharacterCreationScreenPacket packet = (CharacterCreationScreenPacket) packetBase;
+            GUI.LoadServerData(packet);
         }
 
-        protected override void CustomDestroy()
+        private void SubscribePacketActions()
         {
-            CeriyoServices.OnPacketReceived -= ReceivePacket;
-            GUI.Destroy();
+            CeriyoServices.SubscribePacketAction(typeof(CharacterCreationScreenPacket), ReceiveCharacterCreationScreenPacket);
+            CeriyoServices.SubscribePacketAction(typeof(CreateCharacterPacket), ReceiveCreateCharacterPacket);
+        }
+
+        private void UnsubscribePacketActions()
+        {
+            CeriyoServices.UnsubscribePacketAction(typeof(CharacterCreationScreenPacket), ReceiveCharacterCreationScreenPacket);
+            CeriyoServices.UnsubscribePacketAction(typeof(CreateCharacterPacket), ReceiveCreateCharacterPacket);
         }
     }
 }

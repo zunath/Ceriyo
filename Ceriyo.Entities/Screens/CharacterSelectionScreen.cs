@@ -4,7 +4,6 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
-using Ceriyo.Library.Network;
 using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 
@@ -14,18 +13,16 @@ namespace Ceriyo.Entities.Screens
     {
         private CharacterSelectionMenuLogic GUI { get; set; }
         private List<Player> Players { get; set; }
-        private NetworkTransferData _transferData;
 
         public CharacterSelectionScreen()
             : base("CharacterSelectionScreen")
         {
             Players = new List<Player>();
-            _transferData = new NetworkTransferData();
         }
 
         protected override void CustomInitialize()
         {
-            CeriyoServices.OnPacketReceived += ReceivePacket;
+            SubscribePacketActions();
 
             CharacterSelectionScreenPacket packet = new CharacterSelectionScreenPacket
             {
@@ -41,7 +38,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
-            CeriyoServices.OnPacketReceived -= ReceivePacket;
+            UnsubscribePacketActions();
             GUI.OnCreateCharacter -= GUI_OnCreateCharacter;
             GUI.OnDeleteCharacter -= GUI_OnDeleteCharacter;
             GUI.OnDisconnected -= GUI_OnDisconnected;
@@ -49,39 +46,35 @@ namespace Ceriyo.Entities.Screens
             GUI.Destroy();
         }
 
-
-        private void ReceivePacket(object sender, PacketEventArgs e)
+        private void SubscribePacketActions()
         {
-            _transferData = e.Packet.ClientReceive(_transferData);
+            CeriyoServices.SubscribePacketAction(typeof(DeleteCharacterPacket), ReceiveDeleteCharacterPacket);
+            CeriyoServices.SubscribePacketAction(typeof(CharacterSelectionScreenPacket), ReceiveCharacterSelectionScreenPacket);
+            CeriyoServices.SubscribePacketAction(typeof(SelectCharacterPacket), ReceiveSelectCharacterPacket);
+        }
 
-            Type type = e.Packet.GetType();
-
-            if (type == typeof(DeleteCharacterPacket))
-            {
-                ProcessDeleteCharacterResponse(e.Packet as DeleteCharacterPacket);
-            }
-            else if (type == typeof(CharacterSelectionScreenPacket))
-            {
-                ProcessCharacterSelectionScreenPacket(e.Packet as CharacterSelectionScreenPacket);
-            }
-            else if (type == typeof(SelectCharacterPacket))
-            {
-                ProcessSelectCharacterResponse(e.Packet as SelectCharacterPacket);
-            }
+        private void UnsubscribePacketActions()
+        {
+            CeriyoServices.UnsubscribePacketAction(typeof(DeleteCharacterPacket), ReceiveDeleteCharacterPacket);
+            CeriyoServices.UnsubscribePacketAction(typeof(CharacterSelectionScreenPacket), ReceiveCharacterSelectionScreenPacket);
+            CeriyoServices.UnsubscribePacketAction(typeof(SelectCharacterPacket), ReceiveSelectCharacterPacket);
         }
 
         #region Packet Processing
 
-        private void ProcessDeleteCharacterResponse(DeleteCharacterPacket packet)
+        private void ReceiveDeleteCharacterPacket(PacketBase packetBase)
         {
+            DeleteCharacterPacket packet = (DeleteCharacterPacket)packetBase;
             if (packet.IsDeleteSuccessful)
             {
                 GUI.PerformCharacterDelete();
             }
         }
 
-        private void ProcessCharacterSelectionScreenPacket(CharacterSelectionScreenPacket packet)
+        private void ReceiveCharacterSelectionScreenPacket(PacketBase packetBase)
         {
+            CharacterSelectionScreenPacket packet = (CharacterSelectionScreenPacket)packetBase;
+
             Players = packet.CharacterList;
 
             GUI = new CharacterSelectionMenuLogic(packet.CanDeleteCharacters, Players);
@@ -91,8 +84,10 @@ namespace Ceriyo.Entities.Screens
             GUI.OnEnterServer += GUI_OnEnterServer;
         }
 
-        private void ProcessSelectCharacterResponse(SelectCharacterPacket packet)
+        private void ReceiveSelectCharacterPacket(PacketBase packetBase)
         {
+            SelectCharacterPacket packet = (SelectCharacterPacket) packetBase;
+
             if (packet.IsSuccessful)
             {
                 MoveToScreen(typeof(EnteringGameScreen));

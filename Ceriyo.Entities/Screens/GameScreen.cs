@@ -1,7 +1,5 @@
 ﻿using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Global;
-using System;
-using Ceriyo.Library.Network;
 using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 namespace Ceriyo.Entities.Screens
@@ -10,18 +8,16 @@ namespace Ceriyo.Entities.Screens
     {
         private PlayerEntity PC { get; set; }
         private GameMenuLogic GUI { get; set; }
-        private NetworkTransferData _transferData;
 
         public GameScreen()
             : base("GameScreen")
         {
             GUI = new GameMenuLogic();
-            _transferData = new NetworkTransferData();
         }
 
         protected override void CustomInitialize()
         {
-            CeriyoServices.OnPacketReceived += ReceivePacket;
+            SubscribePacketActions();
 
             GameScreenPacket packet = new GameScreenPacket
             {
@@ -41,7 +37,7 @@ namespace Ceriyo.Entities.Screens
 
         protected override void CustomDestroy()
         {
-            CeriyoServices.OnPacketReceived -= ReceivePacket;
+            UnsubscribePacketActions();
             GUI.Destroy();
             if (PC != null)
             {
@@ -51,19 +47,17 @@ namespace Ceriyo.Entities.Screens
 
         #region Packet Processing
 
-        private void ReceivePacket(object sender, PacketEventArgs e)
+        private void SubscribePacketActions()
         {
-            _transferData = e.Packet.ClientReceive(_transferData);
-
-            Type type = e.Packet.GetType();
-
-            if (type == typeof(GameScreenPacket))
-            {
-                ProcessGameScreenPacket(e.Packet as GameScreenPacket);
-            }
+            CeriyoServices.SubscribePacketAction(typeof(GameScreenPacket), ProcessGameScreenPacket);
         }
 
-        private void ProcessGameScreenPacket(GameScreenPacket packet)
+        private void UnsubscribePacketActions()
+        {
+            CeriyoServices.UnsubscribePacketAction(typeof(GameScreenPacket), ProcessGameScreenPacket);
+        }
+
+        private void ProcessGameScreenPacket(PacketBase packetBase)
         {
             PC = new PlayerEntity();
             PC.InitializeEntity(false);
