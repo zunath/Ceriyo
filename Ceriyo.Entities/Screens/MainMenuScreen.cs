@@ -94,7 +94,7 @@ namespace Ceriyo.Entities.Screens
                 UserInfoPacket response = new UserInfoPacket
                 {
                     IsRequest = false,
-                    Username = GameGlobal.Username
+                    Username = "zunath" // TODO: Store username after it's been authorized by the master server
                 };
 
                 GameGlobal.Agent.SendPacket(response, packet.SenderConnection, NetDeliveryMethod.ReliableUnordered);

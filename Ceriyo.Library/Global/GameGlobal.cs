@@ -15,17 +15,11 @@ namespace Ceriyo.Library.Global
     public static class GameGlobal
     {
         public static NetworkAgent Agent { get; set; }
-        public static string Username { get; set; }
         public static event EventHandler<PacketEventArgs> OnPacketReceived;
         public static GameSettings Settings { get; private set; }
-        public static Player PC { get; set; }
 
         static GameGlobal()
         {
-            if (EngineConstants.IsDebugEnabled)
-            {
-                Username = "zunath";
-            }
         }
 
         public static void Initialize()

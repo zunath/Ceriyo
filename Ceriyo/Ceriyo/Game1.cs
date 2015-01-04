@@ -1,7 +1,6 @@
 using Ceriyo.Data.Engine;
 using Ceriyo.Entities.Screens;
 using Ceriyo.Library.Global;
-using Ceriyo.Setup;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;

@@ -1,3 +1,6 @@
+#if ANDROID
+#define REQUIRES_PRIMARY_THREAD_LOADING
+#endif
 using System.Collections.Generic;
 using System.Threading;
 using FlatRedBall;
@@ -30,6 +33,8 @@ namespace Ceriyo
 		public static void Initialize ()
 		{
 			
+			#if !REQUIRES_PRIMARY_THREAD_LOADING
+			#endif
 						IsInitialized = true;
 		}
 		public static void Reload (object whatToReload)
