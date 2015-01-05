@@ -9,17 +9,17 @@ using FlatRedBall.Math;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Toolset.FRBControl
+namespace Ceriyo.Toolset.Components.FRBControl
 {
     class FlatRedBallGameBase : Game
     {
-        private FlatRedBallControl _frbControl;
+        private readonly FlatRedBallControl _frbControl;
 
         #region Constructors
 
         public FlatRedBallGameBase(FlatRedBallControl frbControl)
         {
-            this._frbControl = frbControl;
+            _frbControl = frbControl;
 
             // Get the starting size of the control and start listening
             // to its Resize events.
@@ -125,9 +125,9 @@ namespace Ceriyo.Toolset.FRBControl
 
         #region Fields
 
-        protected readonly GraphicsDeviceManager Graphics;
-        protected readonly Int32 RenderHeight;
-        protected readonly Int32 RenderWidth;
+        private readonly GraphicsDeviceManager Graphics;
+        private readonly Int32 RenderHeight;
+        private readonly Int32 RenderWidth;
         private readonly IntPtr _windowHandle;
         protected Boolean IsRenderingPaused;
         private DispatcherTimer _timer;

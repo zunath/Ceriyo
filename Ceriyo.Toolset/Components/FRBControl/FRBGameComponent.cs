@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Ceriyo.Entities.Screens;
-using Ceriyo.Toolset.FRBControl;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
 
-namespace Ceriyo.Toolset.FRBControl
+namespace Ceriyo.Toolset.Components.FRBControl
 {
     class FRBGameComponent : FlatRedBallGameBase
     {
