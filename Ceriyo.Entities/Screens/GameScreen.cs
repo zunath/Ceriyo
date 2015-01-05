@@ -24,7 +24,7 @@ namespace Ceriyo.Entities.Screens
         protected override void CustomInitialize()
         {
             SubscribePacketActions();
-            new GameScreenPacket { IsRequest = true }.Send(NetDeliveryMethod.ReliableUnordered);
+            new GameScreenInitPacket { IsRequest = true }.Send(NetDeliveryMethod.ReliableUnordered);
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
         }
 
@@ -40,17 +40,17 @@ namespace Ceriyo.Entities.Screens
 
         private void SubscribePacketActions()
         {
-            CeriyoServices.SubscribePacketAction(typeof(GameScreenPacket), ReceiveEnteringGameScreenPacket);
+            CeriyoServices.SubscribePacketAction(typeof(GameScreenInitPacket), ReceiveGameScreenInitPacket);
         }
 
         private void UnsubscribePacketActions()
         {
-            CeriyoServices.UnsubscribePacketAction(typeof(GameScreenPacket), ReceiveEnteringGameScreenPacket);
+            CeriyoServices.UnsubscribePacketAction(typeof(GameScreenInitPacket), ReceiveGameScreenInitPacket);
         }
 
-        private void ReceiveEnteringGameScreenPacket(PacketBase packetBase)
+        private void ReceiveGameScreenInitPacket(PacketBase packetBase)
         {
-            GameScreenPacket packet = (GameScreenPacket)packetBase;
+            GameScreenInitPacket packet = (GameScreenInitPacket)packetBase;
             _area = new Area
             {
                 Description = packet.AreaDescription,

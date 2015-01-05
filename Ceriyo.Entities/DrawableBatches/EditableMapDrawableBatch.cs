@@ -30,6 +30,7 @@ namespace Ceriyo.Entities.DrawableBatches
             : base(area, graphicResource, true)
         {
             SelectedTiles = new List<Vector3Int>();
+            MouseLayer = 0;
         }
         
         public override void Update()
@@ -65,10 +66,23 @@ namespace Ceriyo.Entities.DrawableBatches
             {
                 foreach (Vector3Int location in SelectedTiles)
                 {
-                    AreaMap.Layers[location.Z].Tiles[location.X, location.Y].TileColor = Color.White;
+                    Layer layer = AreaMap.Layers[location.Z];
+                    Tile tile = layer.Tiles[location.X, location.Y];
+
+                    // We temporarily create a new tile using the system tilesheet so that we
+                    // can specify a color for highlighting. We need to remove it here to do cleanup.
+                    if (tile.TileSheet == _systemTileSheet && location.Z > 0)
+                    {
+                        layer.Tiles[location.X, location.Y] = null;
+                    }
+                    else
+                    {
+                        layer.Tiles[location.X, location.Y].TileColor = Color.White;
+                    }
                 }
+
+                SelectedTiles.Clear();
             }
-            SelectedTiles.Clear();
         }
 
         private void HighlightSelectedTile()
@@ -85,25 +99,25 @@ namespace Ceriyo.Entities.DrawableBatches
                     int x = MouseTileX + w;
                     int y = MouseTileY + h;
 
-                    MapTile mapTile = DrawableArea.MapTiles
-                            .OrderByDescending(l => l.Layer)
-                            .FirstOrDefault(t => t.HasGraphic &&
-                                                    t.MapX == x &&
-                                                    t.MapY == y);
-
                     if (x >= 0 && x <= xEnd &&
                         y >= 0 && y <= yEnd)
                     {
-                        SelectedTiles.Add(mapTile == null
-                            ? new Vector3Int(x, y, 0)
-                            : new Vector3Int(x, y, mapTile.Layer));
+                        SelectedTiles.Add(new Vector3Int(x, y, MouseLayer));
                     }
                 }
             }
 
             foreach (Vector3Int coords in SelectedTiles)
             {
-                AreaMap.Layers[coords.Z].Tiles[coords.X, coords.Y].TileColor = new Color(255, 63, 73, 125);
+                Layer layer = AreaMap.Layers[coords.Z];
+                Tile tile = layer.Tiles[coords.X, coords.Y];
+
+                if (tile == null)
+                {
+                    layer.Tiles[coords.X, coords.Y] = new StaticTile(layer, _systemTileSheet, BlendMode.Alpha, 1);
+                }
+
+                layer.Tiles[coords.X, coords.Y].TileColor = new Color(255, 63, 73, 125);
             }
         }
 
@@ -133,5 +147,24 @@ namespace Ceriyo.Entities.DrawableBatches
             TileSheetYEnd = e.TileCellYEnd;
         }
 
+        public void SetActiveLayer(int layerID)
+        {
+            if (layerID < 0) layerID = 0;
+            else if (layerID > EngineConstants.AreaMaxLayers) layerID = EngineConstants.AreaMaxLayers;
+
+            MouseLayer = layerID;
+
+            foreach (Layer layer in AreaMap.Layers)
+            {
+                layer.ColorOverride = Color.White;
+            }
+
+            for (int layer = 0; layer < AreaMap.Layers.Count; layer++)
+            {
+                if (layer == MouseLayer) continue;
+
+                AreaMap.Layers[layer].ColorOverride = Color.LightGray;
+            }
+        }
     }
 }

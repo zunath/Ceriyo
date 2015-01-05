@@ -9,8 +9,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        
+
+
         <DockPanel>
             <TabControl Name="ObjectTabs" SelectionChanged="TabChanged">
                 <TabItem Name="TilesTab" Header="Tiles">
@@ -24,11 +24,19 @@
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="30"></RowDefinition>
                             </Grid.RowDefinitions>
 
                             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                                 <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="86*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
                                     <Image Name="imgTiles"
                                            Stretch="Fill"
                                            Width="{Binding RelativeSource={RelativeSource Self}, Path=Source.PixelWidth}" 
@@ -39,7 +47,7 @@
                                     <Canvas Name="cnvTilePicker" 
                                             MouseDown="Canvas_MouseDown"
                                             MouseUp="Canvas_MouseUp"
-                                            MouseMove="Canvas_MouseMove">
+                                            MouseMove="Canvas_MouseMove" Grid.ColumnSpan="2">
                                         <Canvas.Background>
                                             <DrawingBrush Viewport="0,0,32,32" ViewportUnits="Absolute" TileMode="Tile"></DrawingBrush>
                                         </Canvas.Background>
@@ -50,6 +58,7 @@
                                                Opacity="0.3"
                                                Visibility="Hidden">
                                         </Rectangle>
+
                                     </Canvas>
                                 </Grid>
                             </ScrollViewer>

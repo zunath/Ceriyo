@@ -38,31 +38,26 @@ namespace Ceriyo.Toolset
         private void SetUpEvents()
         {
             AreaEditorGame = new FRBGameComponent(gameControl, typeof(AreaEditorScreen));
+
             menuBar.OnOpenModule += OnModuleOpened;
             menuBar.OnOpenModule += areaSelection.ModuleLoaded;
             menuBar.OnOpenModule += hotBar.ModuleOpened;
-
             menuBar.OnSaveModule += areaSelection.ModuleSaved;
-
             menuBar.OnCloseModule += OnModuleClosed;
             menuBar.OnCloseModule += areaSelection.ModuleClosed;
             menuBar.OnCloseModule += hotBar.ModuleClosed;
-
             menuBar.OnDataEditorClosed += areaEditor.DataEditorClosed;
 
             areaSelection.OnAreaOpen += areaEditor.AreaOpened;
             areaSelection.OnAreaOpen += menuBar.AreaOpened;
             areaSelection.OnAreaOpen += hotBar.AreaOpened;
-
             areaSelection.OnAreaPropertiesSaved += areaEditor.AreaPropertiesSaved;
-            
             areaSelection.OnAreaClosed += areaEditor.AreaClosed;
             areaSelection.OnAreaClosed += menuBar.AreaClosed;
             areaSelection.OnAreaClosed += hotBar.AreaClosed;
-
             areaSelection.OnAreaSaved += areaEditor.AreaSaved;
 
-            
+            hotBar.OnLayerChanged += areaEditor.LayerChanged;
         }
 
         private void OnModuleOpened(object sender, GameModuleEventArgs e)

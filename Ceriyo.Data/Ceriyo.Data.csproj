@@ -126,6 +126,7 @@
     <Compile Include="Enumerations\PVPTypeEnum.cs" />
     <Compile Include="Enumerations\ResourceTypeEnum.cs" />
     <Compile Include="Enumerations\ScriptEventTypeEnum.cs" />
+    <Compile Include="Enumerations\SimpleTypesEventArgs.cs" />
     <Compile Include="Enumerations\TileEditModeEnum.cs" />
     <Compile Include="EventArguments\AreaPropertiesChangedEventArgs.cs" />
     <Compile Include="EventArguments\EditorItemChangedEventArgs.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />
     <Compile Include="DataObjects\Vector3Int.cs" />
+    <Compile Include="Toolset\ToolsetLayer.cs" />
     <Compile Include="ViewModels\AbilityEditorVM.cs" />
     <Compile Include="ViewModels\AnimationEditorVM.cs" />
     <Compile Include="ViewModels\AreaSelectionVM.cs" />

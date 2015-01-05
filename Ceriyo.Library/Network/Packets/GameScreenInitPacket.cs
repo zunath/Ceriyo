@@ -7,7 +7,7 @@ using ProtoBuf;
 namespace Ceriyo.Library.Network.Packets
 {
     [ProtoContract]
-    public class GameScreenPacket : PacketBase
+    public class GameScreenInitPacket : PacketBase
     {
         [ProtoMember(1)]
         public bool IsRequest { get; set; }
@@ -28,7 +28,7 @@ namespace Ceriyo.Library.Network.Packets
         [ProtoMember(9)]
         public string TilesetGraphicResourceFileName { get; set; }
 
-        public GameScreenPacket()
+        public GameScreenInitPacket()
         {
             IsRequest = false;
             AreaName = string.Empty;
@@ -43,7 +43,7 @@ namespace Ceriyo.Library.Network.Packets
         {
             GameResource tilesetGraphicResource = data.SelectedArea.AreaTileset.Graphic;
 
-            GameScreenPacket response = new GameScreenPacket
+            GameScreenInitPacket response = new GameScreenInitPacket
             {
                 AreaDescription = data.SelectedArea.Description,
                 AreaName = data.SelectedArea.Name,

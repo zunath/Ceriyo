@@ -24,7 +24,7 @@ namespace Ceriyo.Entities.DrawableBatches
         private readonly IDisplayDevice _displayDevice;
         private Rectangle _viewport;
         protected TileSheet _areaTileSheet;
-        private TileSheet _systemTileSheet;
+        protected TileSheet _systemTileSheet;
         private readonly Location _offset;
         private readonly GameResource _graphicResource;
         private bool DisplayGridLines { get; set; }

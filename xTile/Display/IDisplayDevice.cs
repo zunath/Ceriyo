@@ -13,9 +13,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Microsoft.Xna.Framework;
 using xTile.Dimensions;
 using xTile.Tiles;
+using Rectangle = xTile.Dimensions.Rectangle;
 
 namespace xTile.Display
 {
@@ -49,7 +50,8 @@ namespace xTile.Display
         /// </summary>
         /// <param name="tile">Tile to draw</param>
         /// <param name="location">Drawing location</param>
-        void DrawTile(Tile tile, Location location);
+        /// <param name="colorOverride">Will override the tile's color if set to something other than Color.White</param>
+        void DrawTile(Tile tile, Location location, Color colorOverride);
 
         /// <summary>
         /// Performs any actions necessary to terminate rendering of the current frame

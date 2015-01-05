@@ -170,7 +170,7 @@ namespace xTile.Display
         /// </summary>
         /// <param name="tile">Tile to draw</param>
         /// <param name="location">Drawing location</param>
-        public void DrawTile(Tile tile, Location location)
+        public void DrawTile(Tile tile, Location location, Color colorOverride)
         {
             if (tile == null)
                 return;
@@ -191,7 +191,8 @@ namespace xTile.Display
             m_sourceRectangle.Width = sourceRectangle.Width;
             m_sourceRectangle.Height = sourceRectangle.Height;
 
-            spriteBatch.Draw(texture2D, m_tilePosition, m_sourceRectangle, tile.TileColor);
+            Color tileColor = colorOverride == Color.White ? tile.TileColor : colorOverride;
+            spriteBatch.Draw(texture2D, m_tilePosition, m_sourceRectangle, tileColor);
         }
 
         /// <summary>

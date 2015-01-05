@@ -10,15 +10,13 @@
 /////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-
+using Microsoft.Xna.Framework;
 using xTile.Dimensions;
 using xTile.Display;
 using xTile.ObjectModel;
 using xTile.Tiles;
+using Rectangle = xTile.Dimensions.Rectangle;
 
 namespace xTile.Layers
 {
@@ -47,6 +45,7 @@ namespace xTile.Layers
             m_tiles = new Tile[layerSize.Width, layerSize.Height];
             m_tileArray = new TileArray(this, m_tiles);
             m_visible = true;
+            ColorOverride = Color.White;
         }
 
         /// <summary>
@@ -233,9 +232,9 @@ namespace xTile.Layers
         public void Draw(IDisplayDevice displayDevice, Rectangle mapViewport, Location displayOffset, bool wrapAround)
         {
             if (wrapAround)
-                DrawWrapped(displayDevice, mapViewport, displayOffset);
+                DrawWrapped(displayDevice, mapViewport, displayOffset, ColorOverride);
             else
-                DrawNormal(displayDevice, mapViewport, displayOffset);
+                DrawNormal(displayDevice, mapViewport, displayOffset, ColorOverride);
         }
 
         #endregion
@@ -362,6 +361,8 @@ namespace xTile.Layers
         /// </summary>
         public TileArray Tiles { get { return m_tileArray; } }
 
+        public Color ColorOverride { get; set; }
+
         #endregion
 
         #region Public Events
@@ -388,7 +389,7 @@ namespace xTile.Layers
             return value;
         }
 
-        private void DrawNormal(IDisplayDevice displayDevice, Rectangle mapViewport, Location displayOffset)
+        private void DrawNormal(IDisplayDevice displayDevice, Rectangle mapViewport, Location displayOffset, Color colorOverride)
         {
             if (BeforeDraw != null)
                 BeforeDraw(this, new LayerEventArgs(this, mapViewport));
@@ -441,7 +442,7 @@ namespace xTile.Layers
                     Tile tile = m_tiles[tileX, tileY];
 
                     if (tile != null)
-                        displayDevice.DrawTile(tile, tileLocation);
+                        displayDevice.DrawTile(tile, tileLocation, colorOverride);
 
                     tileLocation.X += tileWidth;
                 }
@@ -452,7 +453,7 @@ namespace xTile.Layers
                 AfterDraw(this, new LayerEventArgs(this, mapViewport));
         }
 
-        private void DrawWrapped(IDisplayDevice displayDevice, Rectangle mapViewport, Location displayOffset)
+        private void DrawWrapped(IDisplayDevice displayDevice, Rectangle mapViewport, Location displayOffset, Color colorOverride)
         {
             if (BeforeDraw != null)
                 BeforeDraw(this, new LayerEventArgs(this, mapViewport));
@@ -496,7 +497,7 @@ namespace xTile.Layers
                     Tile tile = m_tiles[Wrap(tileX, layerWidth), Wrap(tileY, layerHeight)];
 
                     if (tile != null)
-                        displayDevice.DrawTile(tile, tileLocation);
+                        displayDevice.DrawTile(tile, tileLocation, colorOverride);
 
                     tileLocation.X += tileWidth;
                 }

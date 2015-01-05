@@ -16,6 +16,17 @@
             <Button Click="btnStartLocation_Click" IsEnabled="{Binding IsAreaLoaded}">
                 <Image Source="/Images/arrow-in.png" Height="15" Width="15" ToolTip="Set Start Location"></Image>
             </Button>
+            <Separator></Separator>
+            <ComboBox Text="Layer" 
+                      Margin="4,0,0,0" 
+                      Width="71" 
+                      Height="22"
+                      IsEnabled="{Binding IsAreaLoaded}"
+                      ItemsSource="{Binding Layers}"
+                      SelectedItem="{Binding Path=SelectedLayer}"
+                      DisplayMemberPath="Name"
+                      SelectionChanged="ChangeLayer">
+            </ComboBox>
         </ToolBar>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.Screens;
 using FlatRedBall.Screens;
@@ -17,6 +18,7 @@ namespace Ceriyo.Toolset.Components
         private event EventHandler<AreaPropertiesChangedEventArgs> OnAreaPropertiesSaved;
         private event EventHandler<GameObjectEventArgs> OnAreaOpened;
         private event EventHandler<EventArgs> OnAreaSaved;
+        private event EventHandler<SimpleTypesEventArgs> OnLayerChanged;
 
         public AreaEditorComponent()
         {
@@ -41,6 +43,8 @@ namespace Ceriyo.Toolset.Components
             OnAreaSaved += screen.SaveArea;
 
             paintObjects.OnModeChange += screen.PaintObjectModeChanged;
+
+            OnLayerChanged += screen.LayerChanged;
         }
 
         private void SetUpExternalEvents()
@@ -93,6 +97,14 @@ namespace Ceriyo.Toolset.Components
             if (OnAreaPropertiesSaved != null)
             {
                 OnAreaPropertiesSaved(sender, e);
+            }
+        }
+
+        public void LayerChanged(object sender, SimpleTypesEventArgs e)
+        {
+            if (OnLayerChanged != null)
+            {
+                OnLayerChanged(sender, e);
             }
         }
 

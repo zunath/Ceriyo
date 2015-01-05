@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Ceriyo.Data.Engine;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Entities.DrawableBatches;
@@ -94,6 +95,11 @@ namespace Ceriyo.Entities.Screens
             {
                 OnObjectPainterModeChangeReceived(sender, e);
             }
+        }
+
+        public void LayerChanged(object sender, SimpleTypesEventArgs e)
+        {
+            AreaBatch.SetActiveLayer(e.IntegerValue-1);
         }
     }
 }
