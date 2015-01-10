@@ -191,9 +191,6 @@
     <Compile Include="Components\PlaceableEditorControl.xaml.cs">
       <DependentUpon>PlaceableEditorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Components\CreateObjectComponent.xaml.cs">
-      <DependentUpon>CreateObjectComponent.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Components\MenuBarComponent.xaml.cs">
       <DependentUpon>MenuBarComponent.xaml</DependentUpon>
     </Compile>
@@ -274,10 +271,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\DialogSelectionControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Components\CreateObjectComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
