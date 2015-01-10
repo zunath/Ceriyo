@@ -137,6 +137,22 @@ namespace Ceriyo.Entities.DrawableBatches
                     layer.Tiles[coords.X, coords.Y] = new StaticTile(layer, _areaTileSheet, BlendMode.Alpha, tileIndex);
                 }
             }
+            else if (InputManager.Mouse.ButtonDown(Mouse.MouseButtons.RightButton))
+            {
+                Layer layer = AreaMap.Layers[MouseLayer];
+                Tile tile = layer.Tiles[MouseTileX, MouseTileY];
+
+                if (tile == null) return;
+                if (MouseLayer == 0)
+                {
+                    layer.Tiles[MouseTileX, MouseTileY] = new StaticTile(layer, _systemTileSheet, BlendMode.Alpha, 0);
+                }
+                else
+                {
+                    layer.Tiles[MouseTileX, MouseTileY] = null;
+                    SelectedTiles.RemoveAll(t => t.X == MouseTileX && t.Y == MouseTileY && t.Z == MouseLayer);
+                }
+            }
         }
 
         public void ChangeObjectSelectionMode(object sender, ObjectPainterEventArgs e)
