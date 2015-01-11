@@ -5,10 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Library.Processing
 {
-    public class SpriteAnimationProcessor
+    public static class SpriteAnimationProcessor
     {
-
-        public AnimationChain ToAnimationChain(SpriteAnimation animation)
+        public static AnimationChain ToAnimationChain(SpriteAnimation animation)
         {
             AnimationChain chain = new AnimationChain();
             Texture2D texture = GameResourceProcessor.ToTexture2D(animation.Graphic);
@@ -29,11 +28,6 @@ namespace Ceriyo.Library.Processing
             }
 
             return chain;
-        }
-
-
-        public SpriteAnimationProcessor()
-        {
         }
     }
 }

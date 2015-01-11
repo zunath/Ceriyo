@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
@@ -138,7 +137,7 @@ namespace Ceriyo.Toolset.Components
 
         private void OpenArea()
         {
-            if (Model.SelectedArea == null) return;
+            if (Model.SelectedArea == null || string.IsNullOrWhiteSpace(Model.SelectedArea.Resref)) return;
             Model.IsAreaLoaded = true;
 
             if (OnAreaOpen != null)

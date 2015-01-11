@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Library.Processing;
 using FlatRedBall.Graphics.Animation;
-using Ceriyo.Data;
 using Ceriyo.Data.Engine;
 
 namespace Ceriyo.Library.Tests.Processing
@@ -11,13 +9,6 @@ namespace Ceriyo.Library.Tests.Processing
     [TestClass]
     public class SpriteAnimationProcessorTests
     {
-        private SpriteAnimationProcessor Processor {get; set;}
-
-        public SpriteAnimationProcessorTests()
-        {
-            this.Processor = new SpriteAnimationProcessor();
-        }
-
         [TestMethod]
         public void ToAnimationChain_CheckCoordinates()
         {
@@ -31,7 +22,7 @@ namespace Ceriyo.Library.Tests.Processing
 
             animation.Frames.Add(frame);
 
-            AnimationChain chain = Processor.ToAnimationChain(animation);
+            AnimationChain chain = SpriteAnimationProcessor.ToAnimationChain(animation);
 
             int expectedStartX = testX * EngineConstants.AnimationFrameWidth;
             int expectedStartY = testY * EngineConstants.AnimationFrameHeight;
@@ -53,7 +44,7 @@ namespace Ceriyo.Library.Tests.Processing
             frame.FlipHorizontal = true;
             animation.Frames.Add(frame);
 
-            AnimationChain chain = Processor.ToAnimationChain(animation);
+            AnimationChain chain = SpriteAnimationProcessor.ToAnimationChain(animation);
 
             Assert.AreEqual(true, chain[0].FlipHorizontal);
         }
@@ -66,7 +57,7 @@ namespace Ceriyo.Library.Tests.Processing
             frame.FlipVertical = true;
             animation.Frames.Add(frame);
 
-            AnimationChain chain = Processor.ToAnimationChain(animation);
+            AnimationChain chain = SpriteAnimationProcessor.ToAnimationChain(animation);
 
             Assert.AreEqual(true, chain[0].FlipVertical);
         }
