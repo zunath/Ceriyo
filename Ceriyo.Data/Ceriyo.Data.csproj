@@ -73,7 +73,7 @@
       <HintPath>..\Ceriyo\Ceriyo\Libraries\Xna4Pc\FlatRedBall.Content.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit">
-      <HintPath>..\packages\AvalonEdit.4.4.2.9744\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+      <HintPath>..\packages\AvalonEdit.5.0.2\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
