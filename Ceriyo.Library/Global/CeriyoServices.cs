@@ -12,17 +12,17 @@ namespace Ceriyo.Library.Global
         
     public static class CeriyoServices
     {
-        public static NetworkAgent Agent { get; set; }
+        public static NetworkAgent Agent { get; private set; }
         public static event EventHandler<PacketEventArgs> OnPacketReceived;
         // public static GameSettings Settings { get; private set; }
 
-        private static List<Tuple<Type, PacketAction>> PacketActions; 
+        private static List<Tuple<Type, PacketAction>> _packetActions; 
 
         public static void Initialize(NetworkAgentRoleEnum networkRole, int port)
         {
             //LoadGameSettings();
             Agent = new NetworkAgent(networkRole, null, port);
-            PacketActions = new List<Tuple<Type, PacketAction>>();
+            _packetActions = new List<Tuple<Type, PacketAction>>();
         }
 
         public static void Update()
@@ -36,7 +36,7 @@ namespace Ceriyo.Library.Global
 
             foreach (PacketBase packet in packets)
             {
-                var actions = PacketActions.Where(x => x.Item1 == packet.GetType()).ToList();
+                var actions = _packetActions.Where(x => x.Item1 == packet.GetType()).ToList();
 
                 foreach (var action in actions)
                 {
@@ -52,13 +52,14 @@ namespace Ceriyo.Library.Global
 
         public static void SubscribePacketAction(Type packetType, PacketAction action)
         {
-            PacketActions.Add(new Tuple<Type, PacketAction>(packetType, action));
+            _packetActions.Add(new Tuple<Type, PacketAction>(packetType, action));
         }
 
         public static void UnsubscribePacketAction(Type packetType, PacketAction action)
         {
-            PacketActions.RemoveAll(x => x.Item1 == packetType && x.Item2 == action);
+            _packetActions.RemoveAll(x => x.Item1 == packetType && x.Item2 == action);
         }
+
 
         //private static void LoadGameSettings()
         //{

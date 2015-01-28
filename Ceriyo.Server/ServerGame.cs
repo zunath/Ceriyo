@@ -84,6 +84,8 @@ namespace Ceriyo.Server
             CeriyoServices.Initialize(NetworkAgentRoleEnum.Server, Settings.Port);
             BindEvents();
 
+            Scripts.RunModuleScript(Module.Scripts[ScriptEventTypeEnum.OnModuleLoad], Module);
+
             if (OnGameStarting != null)
             {
                 OnGameStarting(this, new EventArgs());
@@ -204,11 +206,13 @@ namespace Ceriyo.Server
 
         private void Agent_OnDisconnecting(object sender, ConnectionStatusEventArgs e)
         {
-
+            Scripts.RunModuleScript(Module.Scripts[ScriptEventTypeEnum.OnModulePlayerLeaving], Players[e.Connection]);
         }
 
         private void Agent_OnDisconnected(object sender, ConnectionStatusEventArgs e)
         {
+            Scripts.RunModuleScript(Module.Scripts[ScriptEventTypeEnum.OnModulePlayerLeft], Players[e.Connection]);
+
             if (Players.ContainsKey(e.Connection))
             {
                 Players.Remove(e.Connection);

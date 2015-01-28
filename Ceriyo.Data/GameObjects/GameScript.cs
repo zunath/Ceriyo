@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ICSharpCode.AvalonEdit.Document;
+﻿using ICSharpCode.AvalonEdit.Document;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -13,14 +9,14 @@ namespace Ceriyo.Data.GameObjects
 
         public GameScript()
         {
-            this.Name = string.Empty;
-            this.ScriptDocument = new TextDocument();
+            Name = string.Empty;
+            ScriptDocument = new TextDocument();
         }
 
         public GameScript(string name, string scriptText)
         {
-            this.Name = name;
-            this.ScriptDocument = new TextDocument(scriptText);
+            Name = name;
+            ScriptDocument = new TextDocument(scriptText);
         }
     }
 }

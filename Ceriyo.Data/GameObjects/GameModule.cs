@@ -33,6 +33,8 @@ namespace Ceriyo.Data.GameObjects
             Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
             Levels = new LevelChart();
             ResourcePacks = new BindingList<string>();
+
+            AddEventStubs();
         }
 
         public GameModule(string name, string tag, string resref, string description = "", string comments = "")
@@ -46,6 +48,18 @@ namespace Ceriyo.Data.GameObjects
             Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
             Levels = new LevelChart();
             ResourcePacks = new BindingList<string>();
+
+            AddEventStubs();
+        }
+
+
+        private void AddEventStubs()
+        {
+            Scripts.Add(ScriptEventTypeEnum.OnModuleLoad, string.Empty);
+            Scripts.Add(ScriptEventTypeEnum.OnModulePlayerEnter, string.Empty);
+            Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeaving, string.Empty);
+            Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeft, string.Empty);
+
         }
     }
 }

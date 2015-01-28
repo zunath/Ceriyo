@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Linq;
+using System.Reflection;
 using Ceriyo.Data.Engine;
 using NLua;
 
@@ -11,7 +13,7 @@ namespace Ceriyo.Library.ScriptEngine
         public ScriptManager()
         {
             _lua = new Lua();
-            _lua["game"] = new ScriptMethods();
+            RegisterScriptMethods();
         }
 
         public object[] RunEngineScript(string scriptName)
@@ -28,8 +30,23 @@ namespace Ceriyo.Library.ScriptEngine
             scriptName += EnginePaths.ScriptExtension;
             if (!File.Exists(WorkingPaths.ScriptsDirectory + scriptName)) return null;
             string filePath = EnginePaths.ScriptsDirectory + scriptName;
+            _lua["this"] = self;
 
             return _lua.DoFile(filePath);
+        }
+
+        private void RegisterScriptMethods()
+        {
+            ScriptMethods methodObj = new ScriptMethods();
+            MethodInfo[] methods = methodObj.GetType().GetMethods();
+
+            foreach (var method in methods)
+            {
+                if (method.GetCustomAttributes(typeof (LuaMethodAttribute), false).Any())
+                {
+                    _lua.RegisterFunction(method.Name, method);
+                }
+            }
         }
 
     }

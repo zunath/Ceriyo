@@ -104,6 +104,7 @@
     <Compile Include="DrawableBatches\GUIDrawableBatch.cs" />
     <Compile Include="DrawableBatches\MapDrawableBatch.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\CreatureEntity.cs" />
     <Compile Include="Entities\GraphicEntity.cs" />
     <Compile Include="Entities\LoadingEntity.cs" />
     <Compile Include="GUI\CharacterCreationMenuLogic.cs" />
