@@ -141,7 +141,7 @@
     <Compile Include="Processing\GameResourceProcessor.cs" />
     <Compile Include="Processing\SpriteAnimationProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScriptEngine\LuaMethodAttribute.cs" />
+    <Compile Include="ScriptEngine\ScriptMethodAttribute.cs" />
     <Compile Include="ScriptEngine\ScriptManager.cs" />
     <Compile Include="ScriptEngine\ScriptMethods.cs" />
     <Compile Include="SquidGUI\ChatBox.cs" />

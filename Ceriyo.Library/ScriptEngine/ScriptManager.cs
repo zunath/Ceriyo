@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Ceriyo.Data.Engine;
@@ -9,10 +10,12 @@ namespace Ceriyo.Library.ScriptEngine
     public class ScriptManager
     {
         private readonly Lua _lua;
+        private readonly ScriptMethods _scriptMethods;
 
         public ScriptManager()
         {
             _lua = new Lua();
+            _scriptMethods = new ScriptMethods();
             RegisterScriptMethods();
         }
 
@@ -29,22 +32,33 @@ namespace Ceriyo.Library.ScriptEngine
         {
             scriptName += EnginePaths.ScriptExtension;
             if (!File.Exists(WorkingPaths.ScriptsDirectory + scriptName)) return null;
-            string filePath = EnginePaths.ScriptsDirectory + scriptName;
+            string filePath = WorkingPaths.ScriptsDirectory + scriptName;
             _lua["this"] = self;
+            object[] result = null;
 
-            return _lua.DoFile(filePath);
+            // We have to be a little looser with module scripts because the end user may have written bad code.
+            try
+            {
+                result = _lua.DoFile(filePath);
+            }
+            catch (Exception)
+            {
+                // TODO: Handle script errors. Pop up? Log?
+            }
+
+            return result;
         }
 
         private void RegisterScriptMethods()
         {
-            ScriptMethods methodObj = new ScriptMethods();
-            MethodInfo[] methods = methodObj.GetType().GetMethods();
+            MethodInfo[] methods = _scriptMethods.GetType().GetMethods();
 
             foreach (var method in methods)
             {
-                if (method.GetCustomAttributes(typeof (LuaMethodAttribute), false).Any())
+                if (method.GetCustomAttributes(typeof (ScriptMethodAttribute), false).Any())
                 {
-                    _lua.RegisterFunction(method.Name, method);
+                    _lua.RegisterFunction(method.Name, _scriptMethods, method);
+                    
                 }
             }
         }

@@ -55,10 +55,14 @@ namespace Ceriyo.Data.GameObjects
 
         private void AddEventStubs()
         {
+            Scripts.Add(ScriptEventTypeEnum.OnAreaHeartbeat, string.Empty);
             Scripts.Add(ScriptEventTypeEnum.OnModuleLoad, string.Empty);
+            Scripts.Add(ScriptEventTypeEnum.OnPlayerDeath, string.Empty);
+            Scripts.Add(ScriptEventTypeEnum.OnPlayerDying, string.Empty);
             Scripts.Add(ScriptEventTypeEnum.OnModulePlayerEnter, string.Empty);
             Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeaving, string.Empty);
             Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeft, string.Empty);
+            Scripts.Add(ScriptEventTypeEnum.OnPlayerRespawn, string.Empty);
 
         }
     }

@@ -1,10 +1,11 @@
-﻿using Ceriyo.Data.GameObjects;
+﻿using System;
+using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Library.ScriptEngine
 {
     public class ScriptMethods
     {
-        [LuaMethod]
+        [ScriptMethod]
         public string GetName(IGameObject gameObject)
         {
             string result;
@@ -21,7 +22,7 @@ namespace Ceriyo.Library.ScriptEngine
             return result;
         }
 
-        [LuaMethod]
+        [ScriptMethod]
         public string GetTag(IGameObject gameObject)
         {
             string result;
@@ -38,7 +39,7 @@ namespace Ceriyo.Library.ScriptEngine
             return result;
         }
 
-        [LuaMethod]
+        [ScriptMethod]
         public string GetResref(IGameObject gameObject)
         {
             string result;
@@ -53,6 +54,12 @@ namespace Ceriyo.Library.ScriptEngine
             }
 
             return result;
+        }
+
+        [ScriptMethod]
+        public void Print(string message)
+        {
+            Console.WriteLine(message);
         }
 
     }

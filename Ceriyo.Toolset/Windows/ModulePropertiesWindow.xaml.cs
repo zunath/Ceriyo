@@ -56,14 +56,15 @@ namespace Ceriyo.Toolset.Windows
                 LocalVariables = Model.LocalVariables
             };
 
-            module.Scripts.Add(ScriptEventTypeEnum.OnAreaHeartbeat, Model.OnHeartbeatScript);
-            module.Scripts.Add(ScriptEventTypeEnum.OnModuleLoad, Model.OnModuleLoadScript);
-            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerDeath, Model.OnPlayerDeathScript);
-            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerDying, Model.OnPlayerDyingScript);
-            module.Scripts.Add(ScriptEventTypeEnum.OnModulePlayerEnter, Model.OnPlayerEnterScript);
-            module.Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeaving, Model.OnPlayerLeavingScript);
-            module.Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeft, Model.OnPlayerLeftScript);
-            module.Scripts.Add(ScriptEventTypeEnum.OnPlayerRespawn, Model.OnPlayerRespawnScript);
+            module.Scripts[ScriptEventTypeEnum.OnModuleLoad] = Model.OnModuleLoadScript;
+            module.Scripts[ScriptEventTypeEnum.OnAreaHeartbeat] = Model.OnHeartbeatScript;
+            module.Scripts[ScriptEventTypeEnum.OnModuleLoad] = Model.OnModuleLoadScript;
+            module.Scripts[ScriptEventTypeEnum.OnPlayerDeath] = Model.OnPlayerDeathScript;
+            module.Scripts[ScriptEventTypeEnum.OnPlayerDying] = Model.OnPlayerDyingScript;
+            module.Scripts[ScriptEventTypeEnum.OnModulePlayerEnter] = Model.OnPlayerEnterScript;
+            module.Scripts[ScriptEventTypeEnum.OnModulePlayerLeaving] = Model.OnPlayerLeavingScript;
+            module.Scripts[ScriptEventTypeEnum.OnModulePlayerLeft] = Model.OnPlayerLeftScript;
+            module.Scripts[ScriptEventTypeEnum.OnPlayerRespawn] = Model.OnPlayerRespawnScript;
 
             FileOperationResultTypeEnum result = WorkingDataManager.SaveModuleSettings(module);
 
