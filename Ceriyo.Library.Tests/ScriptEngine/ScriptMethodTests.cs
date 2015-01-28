@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ceriyo.Library.ScriptEngine;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.Server;
 
 namespace Ceriyo.Library.Tests.ScriptEngine
 {
@@ -106,6 +110,97 @@ namespace Ceriyo.Library.Tests.ScriptEngine
 
         #endregion
 
+        #region GetAreaByTag tests
+
+        private ScriptMethods BuildScriptMethods(params Area[] areaParams)
+        {
+            List<Area> areas = new List<Area>();
+
+            if (!areaParams.Any())
+            {
+                Area area = new Area("areaName", "areaTag", "areaResref", 10, 10, 1);
+                areas.Add(area);
+            }
+            else
+            {
+                areas.AddRange(areaParams);
+            }
+
+            ServerScriptData data = new ServerScriptData
+            {
+                Areas = areas
+            };
+
+            return new ScriptMethods(data);
+        }
+
+        [TestMethod]
+        public void GetAreaByTag_DoesNotExist()
+        {
+            ScriptMethods methods = BuildScriptMethods();
+            Area area = methods.GetAreaByTag("xxx");
+            Assert.IsNull(area);
+        }
+
+        [TestMethod]
+        public void GetAreaByTag_Exists()
+        {
+            ScriptMethods methods = BuildScriptMethods();
+            Area area = methods.GetAreaByTag("areaTag");
+            Assert.IsNotNull(area);
+        }
+
+        [TestMethod]
+        public void GetAreaByTag_FirstAreaShouldMatch()
+        {
+            Area area1 = new Area("area1Name", "area1Tag", "area1Resref", 0, 0, 0);
+            Area area2 = new Area("area2Name", "area1Tag", "area2Resref", 0, 0, 0);
+
+            ScriptMethods methods = BuildScriptMethods(area1, area2);
+
+            Area area = methods.GetAreaByTag("area1Tag");
+            Assert.AreSame(area1, area);
+        }
+
+        [TestMethod]
+        public void GetAreaByTag_SecondAreaShouldNotMatch()
+        {
+            Area area1 = new Area("area1Name", "area1Tag", "area1Resref", 0, 0, 0);
+            Area area2 = new Area("area2Name", "area1Tag", "area2Resref", 0, 0, 0);
+
+            ScriptMethods methods = BuildScriptMethods(area1, area2);
+
+            Area area = methods.GetAreaByTag("area1Tag");
+            Assert.AreNotSame(area2, area);
+        }
+
+        #endregion
+
+        #region GetAreas tests
+
+        #endregion
+
+        #region GetAreaWidth tests
+
+        [TestMethod]
+        public void GetAreaWidth_NullAreaEqualsNegative1()
+        {
+            ScriptMethods methods = new ScriptMethods();
+            int result = methods.GetAreaWidth(null);
+            Assert.AreEqual(result, -1);
+        }
+
+        [TestMethod]
+        public void GetAreaWidth_AreaWidthEquals()
+        {
+            Area area = new Area("areaName", "areaTag", "areaResref", 25, 10, 1);
+
+            ScriptMethods methods = new ScriptMethods();
+            int result = methods.GetAreaWidth(area);
+            Assert.AreEqual(result, 25);
+        }
+
+        #endregion
 
     }
 }

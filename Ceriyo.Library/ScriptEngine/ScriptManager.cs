@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Ceriyo.Data.Engine;
+using Ceriyo.Data.Server;
 using NLua;
 
 namespace Ceriyo.Library.ScriptEngine
@@ -16,6 +17,13 @@ namespace Ceriyo.Library.ScriptEngine
         {
             _lua = new Lua();
             _scriptMethods = new ScriptMethods();
+            RegisterScriptMethods();
+        }
+
+        public ScriptManager(ServerScriptData data)
+        {
+            _lua = new Lua();
+            _scriptMethods = new ScriptMethods(data);
             RegisterScriptMethods();
         }
 
@@ -58,9 +66,13 @@ namespace Ceriyo.Library.ScriptEngine
                 if (method.GetCustomAttributes(typeof (ScriptMethodAttribute), false).Any())
                 {
                     _lua.RegisterFunction(method.Name, _scriptMethods, method);
-                    
                 }
             }
+        }
+
+        public void Update(ServerScriptData data)
+        {
+            _scriptMethods.Update(ref data); // Don't copy the data again.
         }
 
     }

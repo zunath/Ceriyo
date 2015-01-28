@@ -32,17 +32,15 @@ namespace Ceriyo.Server
 
         private float SignalGUIUpdateTimer { get; set; }
         private const float SignalGUIUpdateSeconds = 2.0f;
-        public ConcurrentQueue<ServerGUIStatus> GUIStatusUpdateQueue
-        {
-            get;
-            private set;
-        }
+        public ConcurrentQueue<ServerGUIStatus> GUIStatusUpdateQueue { get; private set; }
         private Dictionary<NetConnection, ServerPlayer> Players { get; set; }
         private ServerSettings Settings { get; set; }
         private bool IsServerRunning { get; set; }
         private ScriptManager Scripts { get; set; }
+        private ServerScriptData ScriptData { get; set; }
         private BindingList<Area> Areas { get; set; }
         private GameModule Module { get; set; }
+
 
         #endregion
 
@@ -52,7 +50,6 @@ namespace Ceriyo.Server
         {
             Players = new Dictionary<NetConnection, ServerPlayer>();
             GUIStatusUpdateQueue = new ConcurrentQueue<ServerGUIStatus>();
-            Scripts = new ScriptManager();
 
             if (ModuleDataManager.LoadModule(args.ModuleFileName, true) != FileOperationResultTypeEnum.Success)
             {
@@ -67,6 +64,13 @@ namespace Ceriyo.Server
                 Port = args.Port,
                 PlayerPassword = args.ServerPassword
             };
+
+            ScriptData = new ServerScriptData
+            {
+                Areas = Areas
+            };
+
+            Scripts = new ScriptManager();
         }
 
         protected override void Initialize()
@@ -103,13 +107,13 @@ namespace Ceriyo.Server
         protected override void Update(GameTime gameTime)
         {
             FlatRedBallServices.UpdateCommandLine(gameTime);
-            
             ScreenManager.Activity();
 
             base.Update(gameTime);
             UpdateNetworkTransferData();
             CeriyoServices.Update();
             SuppressDraw();
+            UpdateScriptManager();
 
             SignalGUIUpdateTimer += TimeManager.SecondDifference;
             if (SignalGUIUpdateTimer >= SignalGUIUpdateSeconds)
@@ -130,6 +134,13 @@ namespace Ceriyo.Server
                 
                 SignalGUIUpdateTimer = 0.0f;
             }
+        }
+
+        private void UpdateScriptManager()
+        {
+            ScriptData.Areas = Areas;
+
+            Scripts.Update(ScriptData);
         }
 
         protected override void Draw(GameTime gameTime)
