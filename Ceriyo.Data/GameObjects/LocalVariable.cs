@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Ceriyo.Data.GameObjects
 {
     public class LocalVariable
@@ -12,6 +8,12 @@ namespace Ceriyo.Data.GameObjects
 
         public LocalVariable()
         {
+        }
+
+        public LocalVariable(string name, string value)
+        {
+            Name = name;
+            Value = value;
         }
     }
 }

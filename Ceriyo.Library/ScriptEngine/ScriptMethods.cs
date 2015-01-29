@@ -128,12 +128,12 @@ namespace Ceriyo.Library.ScriptEngine
         }
 
         [ScriptMethod]
-        public int GetLocalNumber(IGameObject gameObject, string variableName)
+        public double GetLocalNumber(IGameObject gameObject, string variableName)
         {
             try
             {
                 LocalVariable lv = gameObject.LocalVariables.SingleOrDefault(x => x.Name == variableName);
-                return lv == null ? 0 : Convert.ToInt32(lv.Value);
+                return lv == null ? 0 : Convert.ToDouble(lv.Value);
             }
             catch (Exception)
             {
