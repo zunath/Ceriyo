@@ -21,29 +21,5 @@ namespace Ceriyo.Library.Network.Packets
             CharacterResref = string.Empty;
         }
 
-        // Receiving from client
-        public override NetworkTransferData ServerReceive(NetworkTransferData data)
-        {
-            bool success = false;
-
-            if (data.Settings.AllowCharacterDeletion)
-            {
-                success = EngineDataManager.DeletePlayer(data.Players[SenderConnection].Username, CharacterResref);
-            }
-
-            DeleteCharacterPacket response = new DeleteCharacterPacket
-            {
-                IsDeleteSuccessful = success
-            };
-
-            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
-
-            return data;
-        }
-
-        public override NetworkTransferData ClientReceive(NetworkTransferData data)
-        {
-            return data;
-        }
     }
 }

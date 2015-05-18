@@ -22,31 +22,5 @@ namespace Ceriyo.Library.Network.Packets
             ResponsePlayer = new Player();
         }
 
-        // Receiving from client
-        public override NetworkTransferData ServerReceive(NetworkTransferData data)
-        {
-            Player pc = new Player
-            {
-                Name = Name,
-                Description = Description
-            };
-
-            string username = data.Players[SenderConnection].Username;
-            EngineDataManager.SavePlayer(username, pc, true);
-
-            CreateCharacterPacket response = new CreateCharacterPacket
-            {
-                ResponsePlayer = pc
-            };
-
-            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
-            
-            return data;
-        }
-
-        public override NetworkTransferData ClientReceive(NetworkTransferData data)
-        {
-            return data;
-        }
     }
 }

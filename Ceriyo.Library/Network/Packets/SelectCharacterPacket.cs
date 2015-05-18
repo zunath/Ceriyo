@@ -18,29 +18,5 @@ namespace Ceriyo.Library.Network.Packets
             Resref = string.Empty;
             IsSuccessful = false;
         }
-
-        // Receiving from client
-        public override NetworkTransferData ServerReceive(NetworkTransferData data)
-        {
-            string username = data.Players[SenderConnection].Username;
-            Player pc = EngineDataManager.GetPlayer(username, Resref);
-
-            SelectCharacterPacket response = new SelectCharacterPacket();
-
-            if (pc != null)
-            {
-                data.Players[SenderConnection].PC = pc;
-                response.IsSuccessful = true;
-            }
-
-            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
-            
-            return data;
-        }
-
-        public override NetworkTransferData ClientReceive(NetworkTransferData data)
-        {
-            return data;
-        }
     }
 }

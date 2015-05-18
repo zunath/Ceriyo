@@ -26,27 +26,5 @@ namespace Ceriyo.Library.Network.Packets
             CanDeleteCharacters = false;
         }
 
-        public override NetworkTransferData ServerReceive(NetworkTransferData data)
-        {
-            string username = data.Players[SenderConnection].Username;
-            List<Player> characters = EngineDataManager.GetPlayers(username);
-
-            CharacterSelectionScreenPacket response = new CharacterSelectionScreenPacket
-            {
-                CharacterList = characters,
-                Announcement = data.Settings.Announcement,
-                CanDeleteCharacters = data.Settings.AllowCharacterDeletion
-            };
-
-            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
-            
-            return data;
-            
-        }
-
-        public override NetworkTransferData ClientReceive(NetworkTransferData data)
-        {
-            return data;
-        }
     }
 }

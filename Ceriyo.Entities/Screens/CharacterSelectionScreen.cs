@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Entities.GUI;
-using Ceriyo.Library.Global;
+using Ceriyo.Library.Network;
 using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 
@@ -48,16 +48,16 @@ namespace Ceriyo.Entities.Screens
 
         private void SubscribePacketActions()
         {
-            CeriyoServices.SubscribePacketAction(typeof(DeleteCharacterPacket), ReceiveDeleteCharacterPacket);
-            CeriyoServices.SubscribePacketAction(typeof(CharacterSelectionScreenPacket), ReceiveCharacterSelectionScreenPacket);
-            CeriyoServices.SubscribePacketAction(typeof(SelectCharacterPacket), ReceiveSelectCharacterPacket);
+            NetworkManager.SubscribePacketAction(typeof(DeleteCharacterPacket), ReceiveDeleteCharacterPacket);
+            NetworkManager.SubscribePacketAction(typeof(CharacterSelectionScreenPacket), ReceiveCharacterSelectionScreenPacket);
+            NetworkManager.SubscribePacketAction(typeof(SelectCharacterPacket), ReceiveSelectCharacterPacket);
         }
 
         private void UnsubscribePacketActions()
         {
-            CeriyoServices.UnsubscribePacketAction(typeof(DeleteCharacterPacket), ReceiveDeleteCharacterPacket);
-            CeriyoServices.UnsubscribePacketAction(typeof(CharacterSelectionScreenPacket), ReceiveCharacterSelectionScreenPacket);
-            CeriyoServices.UnsubscribePacketAction(typeof(SelectCharacterPacket), ReceiveSelectCharacterPacket);
+            NetworkManager.UnsubscribePacketAction(typeof(DeleteCharacterPacket), ReceiveDeleteCharacterPacket);
+            NetworkManager.UnsubscribePacketAction(typeof(CharacterSelectionScreenPacket), ReceiveCharacterSelectionScreenPacket);
+            NetworkManager.UnsubscribePacketAction(typeof(SelectCharacterPacket), ReceiveSelectCharacterPacket);
         }
 
         #region Packet Processing
@@ -114,7 +114,7 @@ namespace Ceriyo.Entities.Screens
 
         private void GUI_OnDisconnected(object sender, EventArgs e)
         {
-            CeriyoServices.Agent.Disconnect();
+            NetworkManager.DisconnectFromServer();
             MoveToScreen(typeof(MainMenuScreen));
         }
 

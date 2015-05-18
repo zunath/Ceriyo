@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.GUI;
-using Ceriyo.Library.Global;
+using Ceriyo.Library.Network;
 using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 
@@ -36,14 +36,14 @@ namespace Ceriyo.Entities.Screens
 
         private void SubscribePacketActions()
         {
-            CeriyoServices.SubscribePacketAction(typeof(UserConnectedPacket), ReceiveUserConnectedPacket);
-            CeriyoServices.SubscribePacketAction(typeof(UserInfoPacket), ReceiveUserInfoPacket);
+            NetworkManager.SubscribePacketAction(typeof(UserConnectedPacket), ReceiveUserConnectedPacket);
+            NetworkManager.SubscribePacketAction(typeof(UserInfoPacket), ReceiveUserInfoPacket);
         }
 
         private void UnsubscribePacketActions()
         {
-            CeriyoServices.UnsubscribePacketAction(typeof(UserConnectedPacket), ReceiveUserConnectedPacket);
-            CeriyoServices.UnsubscribePacketAction(typeof(UserInfoPacket), ReceiveUserInfoPacket);
+            NetworkManager.UnsubscribePacketAction(typeof(UserConnectedPacket), ReceiveUserConnectedPacket);
+            NetworkManager.UnsubscribePacketAction(typeof(UserInfoPacket), ReceiveUserInfoPacket);
         }
 
         private void GUI_OnDirectConnect(object sender, DirectConnectEventArgs e)
@@ -52,7 +52,7 @@ namespace Ceriyo.Entities.Screens
 
             if (IPAddress.TryParse(e.IPAddress, out address))
             {
-                CeriyoServices.Agent.Connect(e.IPAddress, e.Password);
+                NetworkManager.ConnectToServer(e.IPAddress, e.Password);
             }
         }
 

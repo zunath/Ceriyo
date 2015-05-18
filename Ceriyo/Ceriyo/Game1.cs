@@ -1,7 +1,8 @@
+using System;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Entities.Screens;
-using Ceriyo.Library.Global;
+using Ceriyo.Library.Network;
 using FlatRedBall;
 using FlatRedBall.Screens;
 using Microsoft.Xna.Framework;
@@ -41,14 +42,14 @@ namespace Ceriyo
 
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
             SpriteManager.Camera.UsePixelCoordinates();
-            CeriyoServices.Initialize(NetworkAgentRoleEnum.Client, 5121); // TODO: Load port from settings
+            NetworkManager.Initialize(NetworkAgentRoleEnum.Client, 5121); // TODO: Load port from settings
             ScreenManager.Start(typeof(MainMenuScreen));
         }
 
 
         protected override void Update(GameTime gameTime)
         {
-            CeriyoServices.Update();
+            NetworkManager.Update();
             FlatRedBallServices.Update(gameTime);
             ScreenManager.Activity();
 
@@ -60,6 +61,12 @@ namespace Ceriyo
             FlatRedBallServices.Draw();
 
             base.Draw(gameTime);
+        }
+
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            NetworkManager.Shutdown();
+            base.OnExiting(sender, args);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Lidgren.Network;
@@ -35,35 +36,7 @@ namespace Ceriyo.Library.Network.Packets
             AreaTag = string.Empty;
             AreaResref = string.Empty;
             AreaDescription = string.Empty;
-
             AreaTiles = new BindingList<MapTile>();
-        }
-
-        public override NetworkTransferData ServerReceive(NetworkTransferData data)
-        {
-            GameResource tilesetGraphicResource = data.SelectedArea.AreaTileset.Graphic;
-
-            GameScreenInitPacket response = new GameScreenInitPacket
-            {
-                AreaDescription = data.SelectedArea.Description,
-                AreaName = data.SelectedArea.Name,
-                AreaResref = data.SelectedArea.Resref,
-                AreaTag = data.SelectedArea.Tag,
-                IsRequest = false,
-                AreaTiles = data.SelectedArea.MapTiles,
-                AreaLayers = data.SelectedArea.LayerCount,
-                TilesetGraphicResourceFileName = tilesetGraphicResource.FileName,
-                TilesetGraphicResourcePackage = tilesetGraphicResource.Package
-            };
-            
-            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
-            
-            return data;
-        }
-
-        public override NetworkTransferData ClientReceive(NetworkTransferData data)
-        {
-            return data;
         }
     }
 }

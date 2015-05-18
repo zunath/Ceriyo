@@ -2,7 +2,7 @@
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Entities.DrawableBatches;
-using Ceriyo.Library.Global;
+using Ceriyo.Library.Network;
 using Ceriyo.Library.Network.Packets;
 using FlatRedBall;
 using Lidgren.Network;
@@ -40,12 +40,12 @@ namespace Ceriyo.Entities.Screens
 
         private void SubscribePacketActions()
         {
-            CeriyoServices.SubscribePacketAction(typeof(GameScreenInitPacket), ReceiveGameScreenInitPacket);
+            NetworkManager.SubscribePacketAction(typeof(GameScreenInitPacket), ReceiveGameScreenInitPacket);
         }
 
         private void UnsubscribePacketActions()
         {
-            CeriyoServices.UnsubscribePacketAction(typeof(GameScreenInitPacket), ReceiveGameScreenInitPacket);
+            NetworkManager.UnsubscribePacketAction(typeof(GameScreenInitPacket), ReceiveGameScreenInitPacket);
         }
 
         private void ReceiveGameScreenInitPacket(PacketBase packetBase)

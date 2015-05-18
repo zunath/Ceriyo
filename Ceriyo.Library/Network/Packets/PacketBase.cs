@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Ceriyo.Data.Enumerations;
-using Ceriyo.Library.Global;
 using Lidgren.Network;
 using ProtoBuf;
 
@@ -24,24 +22,19 @@ namespace Ceriyo.Library.Network.Packets
         protected PacketBase()
         {
         }
-
-        public abstract NetworkTransferData ServerReceive(NetworkTransferData data);
-
-        public abstract NetworkTransferData ClientReceive(NetworkTransferData data);
-
-        public virtual void Send(NetDeliveryMethod deliveryMethod, NetConnection connection = null)
+        public void Send(NetDeliveryMethod deliveryMethod, NetConnection connection = null)
         {
-            if (CeriyoServices.Agent.Role == NetworkAgentRoleEnum.Server && connection == null)
+            if (NetworkManager.GetNetworkRole() == NetworkAgentRoleEnum.Server && connection == null)
             {
                 throw new Exception("A NetConnection must be specified when packets are sent from the server.");
             }
 
-            if (connection == null && CeriyoServices.Agent.Role == NetworkAgentRoleEnum.Client)
+            if (connection == null && NetworkManager.GetNetworkRole() == NetworkAgentRoleEnum.Client)
             {
-                connection = CeriyoServices.Agent.Connections[0];
+                connection = NetworkManager.GetConnectionToServer();
             }
 
-            CeriyoServices.Agent.SendPacket(this, connection, deliveryMethod);
+            NetworkManager.SendPacket(this, connection, deliveryMethod);
         }
     }
 }

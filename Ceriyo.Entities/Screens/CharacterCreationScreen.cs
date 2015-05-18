@@ -1,7 +1,7 @@
 ﻿using System;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.GUI;
-using Ceriyo.Library.Global;
+using Ceriyo.Library.Network;
 using Ceriyo.Library.Network.Packets;
 using Lidgren.Network;
 
@@ -74,14 +74,14 @@ namespace Ceriyo.Entities.Screens
 
         private void SubscribePacketActions()
         {
-            CeriyoServices.SubscribePacketAction(typeof(CharacterCreationScreenPacket), ReceiveCharacterCreationScreenPacket);
-            CeriyoServices.SubscribePacketAction(typeof(CreateCharacterPacket), ReceiveCreateCharacterPacket);
+            NetworkManager.SubscribePacketAction(typeof(CharacterCreationScreenPacket), ReceiveCharacterCreationScreenPacket);
+            NetworkManager.SubscribePacketAction(typeof(CreateCharacterPacket), ReceiveCreateCharacterPacket);
         }
 
         private void UnsubscribePacketActions()
         {
-            CeriyoServices.UnsubscribePacketAction(typeof(CharacterCreationScreenPacket), ReceiveCharacterCreationScreenPacket);
-            CeriyoServices.UnsubscribePacketAction(typeof(CreateCharacterPacket), ReceiveCreateCharacterPacket);
+            NetworkManager.UnsubscribePacketAction(typeof(CharacterCreationScreenPacket), ReceiveCharacterCreationScreenPacket);
+            NetworkManager.UnsubscribePacketAction(typeof(CreateCharacterPacket), ReceiveCreateCharacterPacket);
         }
     }
 }

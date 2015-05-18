@@ -54,15 +54,5 @@ namespace Ceriyo.Library.Network.Packets
             IsHotBar9KeyPressed = false;
             IsHotBar10KeyPressed = false;
         }
-
-        public override NetworkTransferData ServerReceive(NetworkTransferData data)
-        {
-            return data;
-        }
-
-        public override NetworkTransferData ClientReceive(NetworkTransferData data)
-        {
-            return data;
-        }
     }
 }

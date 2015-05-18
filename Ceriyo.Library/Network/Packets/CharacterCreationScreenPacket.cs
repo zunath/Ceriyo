@@ -26,25 +26,5 @@ namespace Ceriyo.Library.Network.Packets
             Abilities = new List<Ability>();
             Skills = new List<Skill>();
         }
-
-        // Receiving from client
-        public override NetworkTransferData ServerReceive(NetworkTransferData data)
-        {
-            CharacterCreationScreenPacket response = new CharacterCreationScreenPacket
-            {
-                Abilities = WorkingDataManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory).ToList(),
-                CharacterClasses = WorkingDataManager.GetAllGameObjects<CharacterClass>(ModulePaths.CharacterClassesDirectory).ToList(),
-                Skills = WorkingDataManager.GetAllGameObjects<Skill>(ModulePaths.SkillsDirectory).ToList()
-            };
-
-            response.Send(NetDeliveryMethod.ReliableUnordered, SenderConnection);
-
-            return data;
-        }
-
-        public override NetworkTransferData ClientReceive(NetworkTransferData data)
-        {
-            return data;
-        }
     }
 }

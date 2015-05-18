@@ -8,15 +8,5 @@ namespace Ceriyo.Library.Network.Packets
         public UserDisconnectedPacket()
         {
         }
-
-        public override NetworkTransferData ServerReceive(NetworkTransferData data)
-        {
-            return data;
-        }
-
-        public override NetworkTransferData ClientReceive(NetworkTransferData data)
-        {
-            return data;
-        }
     }
 }

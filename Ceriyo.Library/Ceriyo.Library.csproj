@@ -123,9 +123,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="Extensions\BindingListExtensions.cs" />
-    <Compile Include="Global\CeriyoServices.cs" />
+    <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\NetworkAgent.cs" />
-    <Compile Include="Network\NetworkTransferData.cs" />
+    <Compile Include="Network\NetworkDelegates.cs" />
     <Compile Include="Network\PacketEventArgs.cs" />
     <Compile Include="Network\Packets\CharacterCreationScreenPacket.cs" />
     <Compile Include="Network\Packets\CharacterSelectionScreenPacket.cs" />

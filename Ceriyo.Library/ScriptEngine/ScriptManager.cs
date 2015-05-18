@@ -8,26 +8,19 @@ using NLua;
 
 namespace Ceriyo.Library.ScriptEngine
 {
-    public class ScriptManager
+    public static class ScriptManager
     {
-        private readonly Lua _lua;
-        private readonly ScriptMethods _scriptMethods;
+        private static readonly Lua _lua;
+        private static readonly ScriptMethods _scriptMethods;
 
-        public ScriptManager()
+        static ScriptManager()
         {
             _lua = new Lua();
             _scriptMethods = new ScriptMethods();
             RegisterScriptMethods();
         }
 
-        public ScriptManager(ServerScriptData data)
-        {
-            _lua = new Lua();
-            _scriptMethods = new ScriptMethods(data);
-            RegisterScriptMethods();
-        }
-
-        public object[] RunEngineScript(string scriptName)
+        public static object[] RunEngineScript(string scriptName)
         {
             scriptName += EnginePaths.ScriptExtension;
             if (!File.Exists(EnginePaths.ScriptsDirectory + scriptName)) return null;
@@ -36,7 +29,7 @@ namespace Ceriyo.Library.ScriptEngine
             return _lua.DoFile(filePath);
         }
 
-        public object[] RunModuleScript(string scriptName, object self)
+        public static object[] RunModuleScript(string scriptName, object self)
         {
             scriptName += EnginePaths.ScriptExtension;
             if (!File.Exists(WorkingPaths.ScriptsDirectory + scriptName)) return null;
@@ -57,7 +50,7 @@ namespace Ceriyo.Library.ScriptEngine
             return result;
         }
 
-        private void RegisterScriptMethods()
+        private static void RegisterScriptMethods()
         {
             MethodInfo[] methods = _scriptMethods.GetType().GetMethods();
 
@@ -70,7 +63,7 @@ namespace Ceriyo.Library.ScriptEngine
             }
         }
 
-        public void Update(ServerScriptData data)
+        public static void Update(ServerScriptData data)
         {
             _scriptMethods.Update(ref data); // Don't copy the data again.
         }

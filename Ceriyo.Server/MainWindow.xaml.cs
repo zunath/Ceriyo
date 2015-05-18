@@ -1,7 +1,4 @@
-﻿using System.Net;
-using System.Net.Sockets;
-using Ceriyo.Data;
-using Ceriyo.Data.EventArguments;
+﻿using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.Server;
 using Ceriyo.Data.Settings;
 using Ceriyo.Data.ViewModels;
@@ -58,12 +55,11 @@ namespace Ceriyo.Server
             Game.OnGameStarting += Game_OnGameStarting;
             Game.OnGameExiting += Game_OnGameExiting;
 
-            Game.Run();
-                
+            Game.Run();    
+
             Game.OnSignalGUIUpdate -= GameToGUIUpdate;
             Game.OnGameStarting -= Game_OnGameStarting;
             Game.OnGameExiting -= Game_OnGameExiting;
-            
         }
 
         // Updates from the game thread are sent to the GUI thread every few seconds.
