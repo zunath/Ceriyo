@@ -1,1 +1,3 @@
-﻿print("Firing");
+﻿function Main()
+    print("Firing");
+end

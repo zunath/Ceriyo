@@ -26,7 +26,9 @@ namespace Ceriyo.Library.ScriptEngine
             if (!File.Exists(EnginePaths.ScriptsDirectory + scriptName)) return null;
             string filePath = EnginePaths.ScriptsDirectory + scriptName;
 
-            return _lua.DoFile(filePath);
+            _lua.DoFile(filePath);
+            LuaFunction function = _lua["Main"] as LuaFunction;
+            return function.Call();
         }
 
         public static object[] RunModuleScript(string scriptName, object self)
@@ -40,7 +42,9 @@ namespace Ceriyo.Library.ScriptEngine
             // We have to be a little looser with module scripts because the end user may have written bad code.
             try
             {
-                result = _lua.DoFile(filePath);
+                _lua.DoFile(filePath);
+                LuaFunction function = _lua["Main"] as LuaFunction;
+                result = function.Call();
             }
             catch (Exception)
             {
