@@ -143,7 +143,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptEngine\ScriptMethodAttribute.cs" />
     <Compile Include="ScriptEngine\ScriptManager.cs" />
+    <Compile Include="ScriptEngine\ScriptMethods.Area.cs" />
     <Compile Include="ScriptEngine\ScriptMethods.cs" />
+    <Compile Include="ScriptEngine\ScriptMethods.GameObject.cs" />
+    <Compile Include="ScriptEngine\ScriptMethods.Misc.cs" />
     <Compile Include="SquidGUI\ChatBox.cs" />
     <Compile Include="SquidGUI\Components\TitleBarUIComponent.cs" />
     <Compile Include="SquidGUI\FileDialog.cs" />
