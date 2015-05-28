@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Linq;
 using System.Xml.Serialization;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
@@ -45,49 +44,6 @@ namespace Ceriyo.Data.GameObjects
         public BindingList<string> SkillResrefs { get; set; }
         public BindingList<string> ItemResrefs { get; set; }
         public SerializableDictionary<InventorySlotEnum, string> EquippedItemResrefs { get; set; }
-
-
-        [XmlIgnore]
-        public Dialog ConversationDialog
-        {
-            get
-            {
-                return WorkingDataManager.GetGameObject<Dialog>(ModulePaths.DialogsDirectory, DialogResref);
-            }
-        }
-
-        [XmlIgnore]
-        public CharacterClass CharClass
-        {
-            get
-            {
-                return WorkingDataManager.GetGameObject<CharacterClass>(ModulePaths.CharacterClassesDirectory, this.CharacterClassResref);
-            }
-        }
-
-        [XmlIgnore]
-        public BindingList<Ability> Abilities
-        {
-            get
-            {
-                return new BindingList<Ability>(
-                    WorkingDataManager.GetAllGameObjects<Ability>(ModulePaths.AbilitiesDirectory)
-                        .Where(x => AbilityResrefs.Contains(x.Resref))
-                        .ToList());
-            }
-        }
-
-        [XmlIgnore]
-        public BindingList<Item> Items
-        {
-            get
-            {
-                return new BindingList<Item>(
-                    WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory)
-                        .Where(x => ItemResrefs.Contains(x.Resref))
-                        .ToList());
-            }
-        }
 
         public Creature()
         {

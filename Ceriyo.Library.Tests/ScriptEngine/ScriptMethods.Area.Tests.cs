@@ -12,32 +12,11 @@ namespace Ceriyo.Library.Tests.ScriptEngine
     {
         #region GetAreaByTag tests
 
-        private ScriptMethods BuildScriptMethods(params Area[] areaParams)
-        {
-            List<Area> areas = new List<Area>();
-
-            if (!areaParams.Any())
-            {
-                Area area = new Area("areaName", "areaTag", "areaResref", 10, 10, 1);
-                areas.Add(area);
-            }
-            else
-            {
-                areas.AddRange(areaParams);
-            }
-
-            ServerScriptData data = new ServerScriptData
-            {
-                Areas = areas
-            };
-
-            return new ScriptMethods(data);
-        }
 
         [TestMethod]
         public void GetAreaByTag_DoesNotExist()
         {
-            ScriptMethods methods = BuildScriptMethods();
+            ScriptMethods methods = BuildAreaScriptMethods();
             Area area = methods.GetAreaByTag("xxx");
             Assert.IsNull(area);
         }
@@ -45,7 +24,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
         [TestMethod]
         public void GetAreaByTag_Exists()
         {
-            ScriptMethods methods = BuildScriptMethods();
+            ScriptMethods methods = BuildAreaScriptMethods();
             Area area = methods.GetAreaByTag("areaTag");
             Assert.IsNotNull(area);
         }
@@ -56,7 +35,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             Area area1 = new Area("area1Name", "area1Tag", "area1Resref", 0, 0, 0);
             Area area2 = new Area("area2Name", "area1Tag", "area2Resref", 0, 0, 0);
 
-            ScriptMethods methods = BuildScriptMethods(area1, area2);
+            ScriptMethods methods = BuildAreaScriptMethods(area1, area2);
 
             Area area = methods.GetAreaByTag("area1Tag");
             Assert.AreSame(area1, area);
@@ -68,7 +47,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             Area area1 = new Area("area1Name", "area1Tag", "area1Resref", 0, 0, 0);
             Area area2 = new Area("area2Name", "area1Tag", "area2Resref", 0, 0, 0);
 
-            ScriptMethods methods = BuildScriptMethods(area1, area2);
+            ScriptMethods methods = BuildAreaScriptMethods(area1, area2);
 
             Area area = methods.GetAreaByTag("area1Tag");
             Assert.AreNotSame(area2, area);
@@ -95,7 +74,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             Area area4 = new Area();
             Area area5 = new Area();
 
-            ScriptMethods methods = BuildScriptMethods(area1, area2, area3, area4, area5);
+            ScriptMethods methods = BuildAreaScriptMethods(area1, area2, area3, area4, area5);
             int count = methods.GetAreas().Count();
             Assert.AreEqual(count, 5);
         }
@@ -107,7 +86,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             Area area2 = new Area("areaName2", "areaTag2", "areaResref2", 2, 2, 1);
             Area area3 = new Area("areaName3", "areaTag3", "areaResref3", 2, 2, 1);
 
-            ScriptMethods methods = BuildScriptMethods(area1, area2, area3);
+            ScriptMethods methods = BuildAreaScriptMethods(area1, area2, area3);
             Area[] areas = methods.GetAreas();
             Assert.AreSame(area1, areas[0]);
         }

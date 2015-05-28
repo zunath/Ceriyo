@@ -37,8 +37,9 @@ namespace Ceriyo.Server
         private ServerSettings Settings { get; set; }
         private bool IsServerRunning { get; set; }
         private ServerScriptData ScriptData { get; set; }
-        private BindingList<Area> Areas { get; set; }
         private GameModule Module { get; set; }
+        private BindingList<Area> Areas { get; set; }
+        private BindingList<Item> Items { get; set; } 
 
         #endregion
 
@@ -56,6 +57,7 @@ namespace Ceriyo.Server
 
             Module = WorkingDataManager.GetGameModule();
             Areas = WorkingDataManager.GetAllGameObjects<Area>(ModulePaths.AreasDirectory);
+            Items = WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
 
             Settings = new ServerSettings
             {
@@ -65,7 +67,8 @@ namespace Ceriyo.Server
 
             ScriptData = new ServerScriptData
             {
-                Areas = Areas
+                Areas = Areas,
+                Items = Items
             };
         }
 
@@ -134,6 +137,7 @@ namespace Ceriyo.Server
         private void UpdateScriptManager()
         {
             ScriptData.Areas = Areas;
+            ScriptData.Items = Items;
             ScriptManager.Update(ScriptData);
         }
 

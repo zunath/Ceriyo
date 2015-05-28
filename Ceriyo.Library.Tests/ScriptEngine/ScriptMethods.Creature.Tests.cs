@@ -1,6 +1,8 @@
 ﻿
+using System.Collections.Generic;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
+using Ceriyo.Data.Server;
 using Ceriyo.Library.ScriptEngine;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -233,6 +235,219 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             creature.Gender = GenderTypeEnum.Unknown;
             GenderTypeEnum result = methods.GetGender(creature);
             Assert.AreEqual(result, GenderTypeEnum.Unknown);
+        }
+
+        #endregion
+
+        #region GetItemInSlot tests
+
+        [TestMethod]
+        public void GetItemInSlot_NullCreatureIsNull()
+        {
+            ScriptMethods methods = new ScriptMethods();
+            Item result = methods.GetItemInSlot(null, InventorySlotEnum.Ammo);
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void GetItemInSlot_NoItemIsNull()
+        {
+            ScriptMethods methods = BuildItemScriptMethods();
+            Creature creature = new Creature();
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Ammo);
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void GetItemInSlot_AmmoSlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "AmmoResref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.Ammo] = "AmmoResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Ammo);
+
+            Assert.AreEqual(result.Resref, item.Resref);
+        }
+
+        [TestMethod]
+        public void GetItemInSlot_ArmsSlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "ArmsResref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.Arms] = "ArmsResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Arms);
+
+            Assert.AreEqual(result.Resref, item.Resref);
+        }
+
+
+        [TestMethod]
+        public void GetItemInSlot_BackSlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "BackResref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.Back] = "BackResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Back);
+
+            Assert.AreEqual(result.Resref, item.Resref);
+        }
+
+
+        [TestMethod]
+        public void GetItemInSlot_BodySlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "BodyResref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.Body] = "BodyResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Body);
+
+            Assert.AreEqual(result.Resref, item.Resref);
+        }
+
+
+
+        [TestMethod]
+        public void GetItemInSlot_HeadSlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "HeadResref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.Head] = "HeadResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Head);
+
+            Assert.AreEqual(result.Resref, item.Resref);
+        }
+
+
+        [TestMethod]
+        public void GetItemInSlot_MainHandSlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "MainHandResref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.MainHand] = "MainHandResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.MainHand);
+
+            Assert.AreEqual(result.Resref, item.Resref);
+        }
+
+        [TestMethod]
+        public void GetItemInSlot_NeckSlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "NeckResref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.Neck] = "NeckResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Neck);
+
+            Assert.AreEqual(result.Resref, item.Resref);
+        }
+
+        [TestMethod]
+        public void GetItemInSlot_OffHandSlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "OffHandResref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.OffHand] = "OffHandResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.OffHand);
+
+            Assert.AreEqual(result.Resref, item.Resref);
+        }
+
+        [TestMethod]
+        public void GetItemInSlot_Ring1SlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "Ring1Resref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.Ring1] = "Ring1Resref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Ring1);
+
+            Assert.AreEqual(result.Resref, item.Resref);
+        }
+
+        [TestMethod]
+        public void GetItemInSlot_Ring2SlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "Ring2Resref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.Ring2] = "Ring2Resref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Ring2);
+
+            Assert.AreEqual(result.Resref, item.Resref);
+        }
+
+        [TestMethod]
+        public void GetItemInSlot_WaistSlotMatches()
+        {
+            Item item = new Item
+            {
+                Name = "itemName",
+                Tag = "itemTag",
+                Resref = "WaistResref"
+            };
+            ScriptMethods methods = BuildItemScriptMethods(item);
+            Creature creature = new Creature();
+            creature.EquippedItemResrefs[InventorySlotEnum.Waist] = "WaistResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Waist);
+
+            Assert.AreEqual(result.Resref, item.Resref);
         }
 
         #endregion

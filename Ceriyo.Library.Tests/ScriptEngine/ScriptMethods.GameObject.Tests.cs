@@ -142,7 +142,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
         [TestMethod]
         public void GetLocalString_NullObjectEqualsEmptyString()
         {
-            string result = BuildScriptMethods().GetLocalString(null, "nullval");
+            string result = BuildAreaScriptMethods().GetLocalString(null, "nullval");
             Assert.AreEqual(result, string.Empty);
         }
 

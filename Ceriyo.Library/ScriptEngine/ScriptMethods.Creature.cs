@@ -1,4 +1,5 @@
-﻿using Ceriyo.Data.Enumerations;
+﻿using System.Linq;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 
 namespace Ceriyo.Library.ScriptEngine
@@ -79,7 +80,19 @@ namespace Ceriyo.Library.ScriptEngine
             }
         }
 
-
+        [ScriptMethod]
+        public Item GetItemInSlot(Creature creature, InventorySlotEnum slot)
+        {
+            try
+            {
+                string resref = creature.EquippedItemResrefs[slot];
+                return _items.SingleOrDefault(x => x.Resref == resref);
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
     }
 }
