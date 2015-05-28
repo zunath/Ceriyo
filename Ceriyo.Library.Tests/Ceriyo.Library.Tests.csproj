@@ -103,6 +103,7 @@
     <Compile Include="Processing\SpriteAnimationProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptEngine\ScriptMethods.Area.Tests.cs" />
+    <Compile Include="ScriptEngine\ScriptMethods.Creature.Tests.cs" />
     <Compile Include="ScriptEngine\ScriptMethods.GameObject.Tests.cs" />
   </ItemGroup>
   <ItemGroup>

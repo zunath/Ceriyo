@@ -2,7 +2,7 @@
 
 namespace Ceriyo.Data.Enumerations
 {
-    public enum GameTypeEnum : byte
+    public enum GameTypeEnum
     {
         [Description("Action")]
         Action = 1,

@@ -1,3 +1,3 @@
 ﻿function Main()
-    print(ScriptType.OnCreatureSpawned);
+    print(ScriptEventType.OnCreatureSpawned + ScriptEventType.Unknown);
 end

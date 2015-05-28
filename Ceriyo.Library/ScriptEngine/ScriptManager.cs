@@ -73,6 +73,11 @@ namespace Ceriyo.Library.ScriptEngine
         {
             _lua.DoString("import = function() end");
             EnumerationToTable("ScriptEventType", typeof(ScriptEventTypeEnum));
+            EnumerationToTable("InventorySlot", typeof(InventorySlotEnum));
+            EnumerationToTable("GenderType", typeof(GenderTypeEnum));
+            EnumerationToTable("PVPType", typeof(PVPTypeEnum));
+            EnumerationToTable("GameType", typeof(GameTypeEnum));
+            EnumerationToTable("ItemPropertyType", typeof(ItemPropertyTypeEnum));
         }
 
         private static void EnumerationToTable(string luaTableName, Type enumType)
@@ -80,9 +85,9 @@ namespace Ceriyo.Library.ScriptEngine
             _lua.NewTable(luaTableName);
             LuaTable lt = _lua[luaTableName] as LuaTable;
 
-            foreach (Enum val in Enum.GetValues(enumType))
+            foreach (var val in Enum.GetValues(enumType))
             {
-                lt[Enum.GetName(enumType, val)] = val;
+                lt[Enum.GetName(enumType, val)] = (int)val;
             }
         }
 

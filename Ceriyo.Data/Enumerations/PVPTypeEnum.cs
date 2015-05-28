@@ -2,7 +2,7 @@
 
 namespace Ceriyo.Data.Enumerations
 {
-    public enum PVPTypeEnum : byte
+    public enum PVPTypeEnum
     {
         [Description("None")]
         None = 1,
