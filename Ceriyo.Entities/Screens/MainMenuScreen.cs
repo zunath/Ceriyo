@@ -3,6 +3,7 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Entities.GUI;
 using Ceriyo.Library.Network;
 using Ceriyo.Library.Network.Packets;
+using Ceriyo.Library.ScriptEngine;
 using Lidgren.Network;
 
 namespace Ceriyo.Entities.Screens
@@ -21,6 +22,8 @@ namespace Ceriyo.Entities.Screens
         {
             SubscribePacketActions();
             GUI.OnDirectConnect += GUI_OnDirectConnect;
+
+            ScriptManager.RunEngineScript("test");
         }
 
         protected override void CustomActivity(bool firstTimeCalled)

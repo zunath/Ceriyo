@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Ceriyo.Data.Engine;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.Server;
 using NLua;
 
@@ -17,6 +18,7 @@ namespace Ceriyo.Library.ScriptEngine
         {
             _lua = new Lua();
             _scriptMethods = new ScriptMethods();
+            SandboxVM();
             RegisterScriptMethods();
         }
 
@@ -64,6 +66,23 @@ namespace Ceriyo.Library.ScriptEngine
                 {
                     _lua.RegisterFunction(method.Name, _scriptMethods, method);
                 }
+            }
+        }
+
+        private static void SandboxVM()
+        {
+            _lua.DoString("import = function() end");
+            EnumerationToTable("ScriptEventType", typeof(ScriptEventTypeEnum));
+        }
+
+        private static void EnumerationToTable(string luaTableName, Type enumType)
+        {
+            _lua.NewTable(luaTableName);
+            LuaTable lt = _lua[luaTableName] as LuaTable;
+
+            foreach (Enum val in Enum.GetValues(enumType))
+            {
+                lt[Enum.GetName(enumType, val)] = val;
             }
         }
 

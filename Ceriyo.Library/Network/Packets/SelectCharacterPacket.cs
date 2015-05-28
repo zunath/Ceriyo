@@ -1,7 +1,4 @@
-﻿using Ceriyo.Data.Engine;
-using Ceriyo.Data.GameObjects;
-using Lidgren.Network;
-using ProtoBuf;
+﻿using ProtoBuf;
 
 namespace Ceriyo.Library.Network.Packets
 {

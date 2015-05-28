@@ -19,9 +19,6 @@ namespace Ceriyo.Library.Network.Packets
     {
         public NetConnection SenderConnection { get; set; }
 
-        protected PacketBase()
-        {
-        }
         public void Send(NetDeliveryMethod deliveryMethod, NetConnection connection = null)
         {
             if (NetworkManager.GetNetworkRole() == NetworkAgentRoleEnum.Server && connection == null)

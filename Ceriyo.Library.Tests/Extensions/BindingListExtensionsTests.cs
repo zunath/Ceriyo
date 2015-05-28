@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.ComponentModel;
-using Ceriyo.Library.Extensions;
+﻿using System.ComponentModel;
 using System.Linq;
+using Ceriyo.Library.Extensions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Ceriyo.Library.Tests
+namespace Ceriyo.Library.Tests.Extensions
 {
     [TestClass]
     public class BindingListExtensionsTests
@@ -12,21 +11,11 @@ namespace Ceriyo.Library.Tests
         [TestMethod]
         public void BindingListExtensions_RemoveAll()
         {
-            BindingList<int> list = new BindingList<int>();
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
-            list.Add(4);
-            list.Add(5);
-            list.Add(6);
-            list.Add(7);
-            list.Add(8);
-            list.Add(9);
-            list.Add(10);
+            BindingList<int> list = new BindingList<int> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
             list.RemoveAll(x => x == 5);
 
-            Nullable<int> found = list.SingleOrDefault(x => x == 5);
+            int? found = list.SingleOrDefault(x => x == 5);
 
             Assert.AreEqual(0, found);
         }

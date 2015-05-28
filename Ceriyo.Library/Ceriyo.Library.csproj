@@ -126,7 +126,6 @@
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\NetworkAgent.cs" />
     <Compile Include="Network\NetworkDelegates.cs" />
-    <Compile Include="Network\PacketEventArgs.cs" />
     <Compile Include="Network\Packets\CharacterCreationScreenPacket.cs" />
     <Compile Include="Network\Packets\CharacterSelectionScreenPacket.cs" />
     <Compile Include="Network\Packets\CreateCharacterPacket.cs" />
@@ -144,6 +143,7 @@
     <Compile Include="ScriptEngine\ScriptMethodAttribute.cs" />
     <Compile Include="ScriptEngine\ScriptManager.cs" />
     <Compile Include="ScriptEngine\ScriptMethods.Area.cs" />
+    <Compile Include="ScriptEngine\ScriptMethods.Creature.cs" />
     <Compile Include="ScriptEngine\ScriptMethods.cs" />
     <Compile Include="ScriptEngine\ScriptMethods.GameObject.cs" />
     <Compile Include="ScriptEngine\ScriptMethods.Misc.cs" />

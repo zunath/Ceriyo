@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Ceriyo.Data.Engine;
 using Ceriyo.Data.GameObjects;
-using Lidgren.Network;
 using ProtoBuf;
 
 namespace Ceriyo.Library.Network.Packets

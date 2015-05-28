@@ -1,3 +1,3 @@
 ﻿function Main()
-    print("Firing");
+    print(ScriptType.OnCreatureSpawned);
 end
