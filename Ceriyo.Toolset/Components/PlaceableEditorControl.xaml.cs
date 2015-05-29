@@ -76,8 +76,8 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic);
-            GameResource graphic = new GameResource("", "(No Graphic)", ResourceType.None);
+            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic, ResourceSubType.Placeable);
+            GameResource graphic = new GameResource("", "(No Graphic)", ResourceType.None, ResourceSubType.None);
             Model.Graphics.Insert(0, graphic);
 
             Model.Placeables = WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);

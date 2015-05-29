@@ -125,7 +125,7 @@
                 		Margin="120,12,0,0" 
                 		VerticalAlignment="Top" 
                 		ItemsSource="{Binding Scripts}"
-                		SelectedValue="{Binding Path=SelectedSkill.Scripts[(enums:ScriptEventTypeEnum)OnSkillActivated]}"
+                		SelectedValue="{Binding Path=SelectedSkill.Scripts[(enums:ScriptEventType)OnSkillActivated]}"
                 		IsEnabled="{Binding IsSkillSelected}"
                 		Width="Auto"/>
 

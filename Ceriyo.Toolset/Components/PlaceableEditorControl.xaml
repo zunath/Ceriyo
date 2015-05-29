@@ -180,7 +180,7 @@
                 		Margin="120,12,0,0" 
                 		VerticalAlignment="Top" 
                 		ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableClose]}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventType)OnPlaceableClose]}"
                 		IsEnabled="{Binding IsPlaceableSelected}"
                 		Width="Auto"/>
                     <Label Content="On Open:" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
@@ -189,7 +189,7 @@
                     	Margin="120,39,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableOpen]}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventType)OnPlaceableOpen]}"
                     	IsEnabled="{Binding IsPlaceableSelected}"
                     	Width="Auto"/>
                     <Label Content="On Damaged:" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"/>
@@ -198,7 +198,7 @@
                     	Margin="120,66,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableDamaged]}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventType)OnPlaceableDamaged]}"
                     	IsEnabled="{Binding IsPlaceableSelected}"
                     	Width="Auto"/>
                     <Label Content="On Death:" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
@@ -207,7 +207,7 @@
                     	Margin="120,93,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableDeath]}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventType)OnPlaceableDeath]}"
                     	IsEnabled="{Binding IsPlaceableSelected}"
                     	Width="Auto"/>
                     <Label Content="On Heartbeat:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
@@ -216,7 +216,7 @@
                     	Margin="120,120,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableHeartbeat]}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventType)OnPlaceableHeartbeat]}"
                     	IsEnabled="{Binding IsPlaceableSelected}"
                     	Width="Auto"/>
                     <Label Content="On Disturbed:" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top"/>
@@ -225,7 +225,7 @@
                     	Margin="120,147,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableDisturbed]}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventType)OnPlaceableDisturbed]}"
                     	IsEnabled="{Binding IsPlaceableSelected}"
                     	Width="Auto"/>
                     <Label Content="On Locked:" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top"/>
@@ -234,7 +234,7 @@
                     	Margin="120,174,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableLocked]}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventType)OnPlaceableLocked]}"
                     	IsEnabled="{Binding IsPlaceableSelected}"
                     	Width="Auto"/>
                     <Label Content="On Unlocked:" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top"/>
@@ -243,7 +243,7 @@
                     	Margin="120,201,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableUnlocked]}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventType)OnPlaceableUnlocked]}"
                     	IsEnabled="{Binding IsPlaceableSelected}"
                     	Width="Auto"/>
                     <Label Content="On Attacked:" HorizontalAlignment="Left" Margin="10,228,0,0" VerticalAlignment="Top"/>
@@ -252,7 +252,7 @@
                     	Margin="120,228,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableAttacked]}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventType)OnPlaceableAttacked]}"
                     	IsEnabled="{Binding IsPlaceableSelected}"
                     	Width="Auto"/>
                     <Label Content="On Used:" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top"/>
@@ -261,7 +261,7 @@
                     	Margin="120,255,0,0" 
                     	VerticalAlignment="Top" 
                     	ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventTypeEnum)OnPlaceableUsed]}"
+                    	SelectedValue="{Binding Path=SelectedPlaceable.Scripts[(enums:ScriptEventType)OnPlaceableUsed]}"
                     	IsEnabled="{Binding IsPlaceableSelected}"
                     	Width="Auto"/>
 

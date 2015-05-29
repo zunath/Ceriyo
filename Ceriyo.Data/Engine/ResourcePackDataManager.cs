@@ -135,12 +135,13 @@ namespace Ceriyo.Data.Engine
 
                             switch (extension)
                             {
-                                case ".png":
-                                    resource.ResourceType = ResourceType.Graphic;
-                                    break;
-                                case ".mp3":
-                                    resource.ResourceType = ResourceType.Audio;
-                                    break;
+                                    // TODO: Force user to select type of resource
+                                //case ".png":
+                                //    resource.ResourceType = ResourceType.Graphic;
+                                //    break;
+                                //case ".mp3":
+                                //    resource.ResourceType = ResourceType.Audio;
+                                //    break;
                                 default:
                                     resource.ResourceType = ResourceType.Unknown;
                                     break;
@@ -167,11 +168,11 @@ namespace Ceriyo.Data.Engine
             return success;
         }
 
-        public static BindingList<GameResource> GetGameResources(ResourceType resourceType)
+        public static BindingList<GameResource> GetGameResources(ResourceType resourceType, ResourceSubType resourceSubType)
         {
             string path = EnginePaths.WorkingDirectory + EnginePaths.ResourceLinksDataFileName + EnginePaths.DataExtension;
             BindingList<GameResource> resources = FileManager.XmlDeserialize<BindingList<GameResource>>(path);
-            resources = new BindingList<GameResource>(resources.Where(x => x.ResourceType == resourceType).ToList());
+            resources = new BindingList<GameResource>(resources.Where(x => x.ResourceType == resourceType && x.ResourceSubType == resourceSubType).ToList());
             
             return resources;
         }

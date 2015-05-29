@@ -290,7 +290,7 @@
                               Margin="120,39,0,0" 
                               VerticalAlignment="Top" 
 							  ItemsSource="{Binding Scripts}"
-                    	      SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemAcquired]}"
+                    	      SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventType)OnItemAcquired]}"
                               IsEnabled="{Binding IsItemSelected}"
                               Width="Auto"/>
                     <Label Content="On Unacquired:" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
@@ -299,7 +299,7 @@
                               Margin="120,66,0,0" 
                               VerticalAlignment="Top" 
 							  ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemUnacquired]}"
+                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventType)OnItemUnacquired]}"
                               IsEnabled="{Binding IsItemSelected}"
                               Width="Auto"/>
                     <Label Content="On Equipped:" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
@@ -308,7 +308,7 @@
                     	Margin="120,93,0,0" 
                     	VerticalAlignment="Top" 
 						ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemEquipped]}"
+                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventType)OnItemEquipped]}"
                         IsEnabled="{Binding IsItemSelected}"
                     	Width="Auto"/>
                     <Label Content="On Unequipped:" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top"/>
@@ -317,7 +317,7 @@
                     	Margin="120,120,0,0" 
                     	VerticalAlignment="Top" 
 						ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemUnequipped]}"
+                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventType)OnItemUnequipped]}"
                         IsEnabled="{Binding IsItemSelected}"
                     	Width="Auto"/>
                     <Label Content="On Activated:" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top"/>
@@ -326,7 +326,7 @@
                     	Margin="120,12,0,0" 
                     	VerticalAlignment="Top" 
 						ItemsSource="{Binding Scripts}"
-                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventTypeEnum)OnItemActivated]}"
+                    	SelectedValue="{Binding Path=SelectedItem.Scripts[(enums:ScriptEventType)OnItemActivated]}"
                         IsEnabled="{Binding IsItemSelected}"
                     	Width="Auto"/>
                 </Grid>

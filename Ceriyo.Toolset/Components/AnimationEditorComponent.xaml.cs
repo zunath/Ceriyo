@@ -35,8 +35,8 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic);
-            GameResource graphic = new GameResource("", "(No Graphic)", ResourceType.None);
+            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic, ResourceSubType.Creature);
+            GameResource graphic = new GameResource("", "(No Graphic)", ResourceType.None, ResourceSubType.None);
             Model.Graphics.Insert(0, graphic);
 
             Model.Animations = WorkingDataManager.GetAllGameObjects<SpriteAnimation>(ModulePaths.AnimationsDirectory);

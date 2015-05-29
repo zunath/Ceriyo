@@ -269,7 +269,8 @@ namespace xTile.Format
             string imageSource = LoadString(stream);
             GameResource resource = new GameResource(imageSource.Split('|')[0], 
                 imageSource.Split('|')[1], 
-                ResourceType.Graphic);
+                ResourceType.Graphic,
+                ResourceSubType.Tileset);
 
             Size sheetSize = LoadSize(stream);
             Size tileSize = LoadSize(stream);

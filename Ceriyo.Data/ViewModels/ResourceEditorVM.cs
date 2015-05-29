@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.ResourceObjects;
 
 namespace Ceriyo.Data.ViewModels
@@ -24,9 +22,22 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
+        public static ObservableCollection<ResourceEditorType> ResourceTypes { get; set; }
+
         public ResourceEditorVM()
         {
-            this.Resources = new BindingList<ResourceEditorItem>();
+            Resources = new BindingList<ResourceEditorItem>();
+            ResourceTypes = new ObservableCollection<ResourceEditorType>
+            {
+                new ResourceEditorType("Graphics/Tileset", ResourceType.Graphic, ResourceSubType.Tileset),
+                new ResourceEditorType("Graphics/Creature", ResourceType.Graphic, ResourceSubType.Creature),
+                new ResourceEditorType("Graphics/Inventory Icon", ResourceType.Graphic, ResourceSubType.InventoryIcon),
+                new ResourceEditorType("Graphics/Equipment", ResourceType.Graphic, ResourceSubType.Equipment),
+                new ResourceEditorType("Graphics/Head", ResourceType.Graphic, ResourceSubType.Head),
+                new ResourceEditorType("Graphics/Placeable", ResourceType.Graphic, ResourceSubType.Placeable),
+                new ResourceEditorType("Audio/Music", ResourceType.Audio, ResourceSubType.Music)
+            };
+
         }
     }
 }

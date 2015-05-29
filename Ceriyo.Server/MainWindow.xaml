@@ -11,14 +11,14 @@
                         ObjectType="{x:Type sys:Enum}"
                         x:Key="GameTypes">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="dtos:GameTypeEnum" />
+                <x:Type TypeName="dtos:GameType" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
         <ObjectDataProvider MethodName="GetValues"
                             ObjectType="{x:Type sys:Enum}"
                             x:Key="PVPTypes">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="dtos:PVPTypeEnum" />
+                <x:Type TypeName="dtos:PVPType" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Window.Resources>

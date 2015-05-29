@@ -14,7 +14,7 @@ namespace Ceriyo.Toolset.Windows
     /// <summary>
     /// Interaction logic for ResourcePackEditorWindow.xaml
     /// </summary>
-    public partial class ResourcePackEditorWindow : Window
+    public partial class ResourcePackEditorWindow
     {
         private ResourceEditorVM Model { get; set; }
         private OpenFileDialog AddResourceFile { get; set; }
@@ -25,7 +25,7 @@ namespace Ceriyo.Toolset.Windows
         {
             InitializeComponent();
             Initialize();
-            this.DataContext = Model;
+            DataContext = Model;
         }
 
         private void Initialize()
@@ -45,7 +45,7 @@ namespace Ceriyo.Toolset.Windows
 
         public void Open()
         {
-            this.Show();
+            Show();
         }
 
         private void New(object sender, RoutedEventArgs e)
@@ -115,14 +115,14 @@ namespace Ceriyo.Toolset.Windows
         private void Exit(object sender, RoutedEventArgs e)
         {
             Model.Resources.Clear();
-            this.Hide();
+            Hide();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
             Model.Resources.Clear();
-            this.Hide();
+            Hide();
         }
     }
 }
