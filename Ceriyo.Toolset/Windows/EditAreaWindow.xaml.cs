@@ -40,19 +40,19 @@ namespace Ceriyo.Toolset.Windows
             Model.LocalVariables = area.LocalVariables;
             Model.SelectedTileset = Model.Tilesets.SingleOrDefault(x => x.Resref == area.AreaTilesetResref);
 
-            if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnAreaEnter))
+            if (area.Scripts.ContainsKey(ScriptEventType.OnAreaEnter))
             {
-                Model.OnAreaEnterScript = area.Scripts[ScriptEventTypeEnum.OnAreaEnter];
+                Model.OnAreaEnterScript = area.Scripts[ScriptEventType.OnAreaEnter];
             }
 
-            if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnAreaExit))
+            if (area.Scripts.ContainsKey(ScriptEventType.OnAreaExit))
             {
-                Model.OnAreaExitScript = area.Scripts[ScriptEventTypeEnum.OnAreaExit];
+                Model.OnAreaExitScript = area.Scripts[ScriptEventType.OnAreaExit];
             }
 
-            if (area.Scripts.ContainsKey(ScriptEventTypeEnum.OnAreaHeartbeat))
+            if (area.Scripts.ContainsKey(ScriptEventType.OnAreaHeartbeat))
             {
-                Model.OnAreaHeartbeatScript = area.Scripts[ScriptEventTypeEnum.OnAreaHeartbeat];
+                Model.OnAreaHeartbeatScript = area.Scripts[ScriptEventType.OnAreaHeartbeat];
             }
         }
 
@@ -102,14 +102,14 @@ namespace Ceriyo.Toolset.Windows
                 area.Comments = Model.Comments;
                 area.Description = Model.Description;
                 area.LocalVariables = Model.LocalVariables;
-                area.Scripts.Add(ScriptEventTypeEnum.OnAreaEnter, Model.OnAreaEnterScript);
-                area.Scripts.Add(ScriptEventTypeEnum.OnAreaExit, Model.OnAreaExitScript);
-                area.Scripts.Add(ScriptEventTypeEnum.OnAreaHeartbeat, Model.OnAreaHeartbeatScript);
+                area.Scripts.Add(ScriptEventType.OnAreaEnter, Model.OnAreaEnterScript);
+                area.Scripts.Add(ScriptEventType.OnAreaExit, Model.OnAreaExitScript);
+                area.Scripts.Add(ScriptEventType.OnAreaHeartbeat, Model.OnAreaHeartbeatScript);
                 area.AreaTilesetResref = Model.SelectedTileset.Resref;
 
-                FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(area);
+                FileOperationResultType result = WorkingDataManager.SaveGameObjectFile(area);
 
-                if (result == FileOperationResultTypeEnum.Success)
+                if (result == FileOperationResultType.Success)
                 {
                     if (OnSaveAreaProperties != null)
                     {
@@ -118,7 +118,7 @@ namespace Ceriyo.Toolset.Windows
 
                     Close();
                 }
-                else if (result == FileOperationResultTypeEnum.Failure)
+                else if (result == FileOperationResultType.Failure)
                 {
                     MessageBox.Show("Could not save area.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

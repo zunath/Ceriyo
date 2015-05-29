@@ -23,7 +23,7 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.ItemsDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
+        public SerializableDictionary<ScriptEventType, string> Scripts { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "Item"; } }
 
@@ -56,7 +56,7 @@ namespace Ceriyo.Data.GameObjects
             Description = string.Empty;
             Comments = string.Empty;
             LocalVariables = new BindingList<LocalVariable>();
-            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            Scripts = new SerializableDictionary<ScriptEventType, string>();
             ItemTypeResref = string.Empty;
             Price = 0;
             IsStolen = false;
@@ -67,11 +67,11 @@ namespace Ceriyo.Data.GameObjects
             AssignedItemProperties = new BindingList<AssignedItemProperty>();
             ItemRequirements = new BindingList<ItemClassRequirement>();
             
-            Scripts.Add(ScriptEventTypeEnum.OnItemAcquired, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnItemActivated, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnItemEquipped, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnItemUnacquired, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnItemUnequipped, string.Empty);
+            Scripts.Add(ScriptEventType.OnItemAcquired, string.Empty);
+            Scripts.Add(ScriptEventType.OnItemActivated, string.Empty);
+            Scripts.Add(ScriptEventType.OnItemEquipped, string.Empty);
+            Scripts.Add(ScriptEventType.OnItemUnacquired, string.Empty);
+            Scripts.Add(ScriptEventType.OnItemUnequipped, string.Empty);
         }
     }
 }

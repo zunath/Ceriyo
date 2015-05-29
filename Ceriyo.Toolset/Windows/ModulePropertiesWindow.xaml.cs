@@ -56,19 +56,19 @@ namespace Ceriyo.Toolset.Windows
                 LocalVariables = Model.LocalVariables
             };
 
-            module.Scripts[ScriptEventTypeEnum.OnModuleLoad] = Model.OnModuleLoadScript;
-            module.Scripts[ScriptEventTypeEnum.OnAreaHeartbeat] = Model.OnHeartbeatScript;
-            module.Scripts[ScriptEventTypeEnum.OnModuleLoad] = Model.OnModuleLoadScript;
-            module.Scripts[ScriptEventTypeEnum.OnPlayerDeath] = Model.OnPlayerDeathScript;
-            module.Scripts[ScriptEventTypeEnum.OnPlayerDying] = Model.OnPlayerDyingScript;
-            module.Scripts[ScriptEventTypeEnum.OnModulePlayerEnter] = Model.OnPlayerEnterScript;
-            module.Scripts[ScriptEventTypeEnum.OnModulePlayerLeaving] = Model.OnPlayerLeavingScript;
-            module.Scripts[ScriptEventTypeEnum.OnModulePlayerLeft] = Model.OnPlayerLeftScript;
-            module.Scripts[ScriptEventTypeEnum.OnPlayerRespawn] = Model.OnPlayerRespawnScript;
+            module.Scripts[ScriptEventType.OnModuleLoad] = Model.OnModuleLoadScript;
+            module.Scripts[ScriptEventType.OnAreaHeartbeat] = Model.OnHeartbeatScript;
+            module.Scripts[ScriptEventType.OnModuleLoad] = Model.OnModuleLoadScript;
+            module.Scripts[ScriptEventType.OnPlayerDeath] = Model.OnPlayerDeathScript;
+            module.Scripts[ScriptEventType.OnPlayerDying] = Model.OnPlayerDyingScript;
+            module.Scripts[ScriptEventType.OnModulePlayerEnter] = Model.OnPlayerEnterScript;
+            module.Scripts[ScriptEventType.OnModulePlayerLeaving] = Model.OnPlayerLeavingScript;
+            module.Scripts[ScriptEventType.OnModulePlayerLeft] = Model.OnPlayerLeftScript;
+            module.Scripts[ScriptEventType.OnPlayerRespawn] = Model.OnPlayerRespawnScript;
 
-            FileOperationResultTypeEnum result = WorkingDataManager.SaveModuleSettings(module);
+            FileOperationResultType result = WorkingDataManager.SaveModuleSettings(module);
 
-            if (result == FileOperationResultTypeEnum.Success)
+            if (result == FileOperationResultType.Success)
             {
                 Hide();
             }

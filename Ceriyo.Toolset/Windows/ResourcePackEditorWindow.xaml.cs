@@ -70,9 +70,9 @@ namespace Ceriyo.Toolset.Windows
 
             if (isSaving)
             {
-                FileOperationResultTypeEnum result = ResourcePackDataManager.SaveResourcePack(Model.Resources, SaveFile.FileName);
+                FileOperationResultType result = ResourcePackDataManager.SaveResourcePack(Model.Resources, SaveFile.FileName);
 
-                if (result != FileOperationResultTypeEnum.Success)
+                if (result != FileOperationResultType.Success)
                 {
                     MessageBox.Show("Unable to save resource package.", "Error saving!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

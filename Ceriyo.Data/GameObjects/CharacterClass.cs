@@ -24,7 +24,7 @@ namespace Ceriyo.Data.GameObjects
         public string WorkingDirectory { get { return WorkingPaths.CharacterClassesDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
         [XmlIgnore]
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts 
+        public SerializableDictionary<ScriptEventType, string> Scripts 
         { 
             get { throw new NotSupportedException(); }
             set { throw new NotSupportedException(); }

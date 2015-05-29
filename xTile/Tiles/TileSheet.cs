@@ -200,7 +200,7 @@ namespace xTile.Tiles
         public TileSheet(Map map, string resource, Size sheetSize, Size tileSize)
         {
             m_map = map;
-            m_imageSource = new GameResource(string.Empty, resource, ResourceTypeEnum.Graphic);
+            m_imageSource = new GameResource(string.Empty, resource, ResourceType.Graphic);
             m_sheetSize = sheetSize;
             m_tileSize = tileSize;
             m_margin = m_spacing = Size.Zero;

@@ -71,9 +71,9 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Tilesets.Cast<IGameObject>().ToList(), WorkingPaths.TilesetsDirectory);
+            FileOperationResultType result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Tilesets.Cast<IGameObject>().ToList(), WorkingPaths.TilesetsDirectory);
 
-            if (result != FileOperationResultTypeEnum.Success)
+            if (result != FileOperationResultType.Success)
             {
                 MessageBox.Show("Unable to save tilesets", "Saving tilesets failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -81,8 +81,8 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceTypeEnum.Graphic);
-            GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
+            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic);
+            GameResource graphic = new GameResource("", "(No Graphic)", ResourceType.None);
             Model.Graphics.Insert(0, graphic);
 
             Model.Tilesets = WorkingDataManager.GetAllGameObjects<Tileset>(ModulePaths.TilesetsDirectory);
@@ -117,7 +117,7 @@ namespace Ceriyo.Toolset.Components
 
             if (resource != null)
             {
-                if (resource.ResourceType == ResourceTypeEnum.None)
+                if (resource.ResourceType == ResourceType.None)
                 {
                     imgGraphic.Source = null;
                     ResizeTileList(null);
@@ -169,11 +169,11 @@ namespace Ceriyo.Toolset.Components
 
         private void ChangeTileMode(object sender, RoutedEventArgs e)
         {
-            if (Model.TileEditMode == TileEditModeEnum.Passability)
+            if (Model.TileEditMode == TileEditMode.Passability)
             {
                 LoadPassability();
             }
-            else if(Model.TileEditMode == TileEditModeEnum.Passability4Way)
+            else if(Model.TileEditMode == TileEditMode.Passability4Way)
             {
                 LoadPassability4Way();
             }

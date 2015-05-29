@@ -8,16 +8,16 @@ namespace Ceriyo.Data.ResourceObjects
         public string Name { get { return Path.GetFileNameWithoutExtension(FileName); } }
         public string Package { get; set; }
         public string FileName { get; set; }
-        public ResourceTypeEnum ResourceType { get; set; }
+        public ResourceType ResourceType { get; set; }
 
         public GameResource()
         {
             FileName = string.Empty;
             Package = string.Empty;
-            ResourceType = ResourceTypeEnum.Unknown;
+            ResourceType = ResourceType.Unknown;
         }
 
-        public GameResource(string package, string fileName, ResourceTypeEnum resourceType)
+        public GameResource(string package, string fileName, ResourceType resourceType)
         {
             FileName = fileName;
             Package = package;

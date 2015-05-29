@@ -21,12 +21,12 @@ namespace Ceriyo.Library.Network.Packets
 
         public void Send(NetDeliveryMethod deliveryMethod, NetConnection connection = null)
         {
-            if (NetworkManager.GetNetworkRole() == NetworkAgentRoleEnum.Server && connection == null)
+            if (NetworkManager.GetNetworkRole() == NetworkAgentRole.Server && connection == null)
             {
                 throw new Exception("A NetConnection must be specified when packets are sent from the server.");
             }
 
-            if (connection == null && NetworkManager.GetNetworkRole() == NetworkAgentRoleEnum.Client)
+            if (connection == null && NetworkManager.GetNetworkRole() == NetworkAgentRole.Client)
             {
                 connection = NetworkManager.GetConnectionToServer();
             }

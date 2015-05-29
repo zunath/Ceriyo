@@ -9,9 +9,9 @@ namespace Ceriyo.Data.Engine
 {
     public static class WorkingDataManager
     {
-        public static FileOperationResultTypeEnum ReplaceAllGameObjectFiles(IEnumerable<IGameObject> gameObjects, string directory)
+        public static FileOperationResultType ReplaceAllGameObjectFiles(IEnumerable<IGameObject> gameObjects, string directory)
         {
-            FileOperationResultTypeEnum result;
+            FileOperationResultType result;
             string[] existingFiles = Directory.GetFiles(directory, "*" + EnginePaths.DataExtension);
 
             try
@@ -39,7 +39,7 @@ namespace Ceriyo.Data.Engine
                     File.Delete(file);
                 }
 
-                result = FileOperationResultTypeEnum.Success;
+                result = FileOperationResultType.Success;
             }
             catch
             {
@@ -61,35 +61,35 @@ namespace Ceriyo.Data.Engine
                     }
                 }
 
-                result = FileOperationResultTypeEnum.Failure;
+                result = FileOperationResultType.Failure;
             }
 
             return result;
         }
 
 
-        public static FileOperationResultTypeEnum SaveGameObjectFile(IGameObject gameObject)
+        public static FileOperationResultType SaveGameObjectFile(IGameObject gameObject)
         {
-            FileOperationResultTypeEnum result;
+            FileOperationResultType result;
 
             try
             {
                 string filePath = gameObject.WorkingDirectory + gameObject.Resref + EnginePaths.DataExtension;
                 FileManager.XmlSerialize(gameObject.GetType(), gameObject, filePath);
 
-                result = FileOperationResultTypeEnum.Success;
+                result = FileOperationResultType.Success;
             }
             catch
             {
-                result = FileOperationResultTypeEnum.Failure;
+                result = FileOperationResultType.Failure;
             }
 
             return result;
         }
 
-        public static FileOperationResultTypeEnum DeleteGameObjectFile(IGameObject gameObject)
+        public static FileOperationResultType DeleteGameObjectFile(IGameObject gameObject)
         {
-            FileOperationResultTypeEnum result;
+            FileOperationResultType result;
 
             try
             {
@@ -97,17 +97,17 @@ namespace Ceriyo.Data.Engine
 
                 if (!File.Exists(filePath))
                 {
-                    result = FileOperationResultTypeEnum.FileDoesNotExist;
+                    result = FileOperationResultType.FileDoesNotExist;
                 }
                 else
                 {
                     File.Delete(filePath);
-                    result = FileOperationResultTypeEnum.Success;
+                    result = FileOperationResultType.Success;
                 }
             }
             catch
             {
-                result = FileOperationResultTypeEnum.Failure;
+                result = FileOperationResultType.Failure;
             }
 
             return result;
@@ -167,26 +167,26 @@ namespace Ceriyo.Data.Engine
             return scripts;
         }
 
-        public static FileOperationResultTypeEnum DeleteScript(string scriptName)
+        public static FileOperationResultType DeleteScript(string scriptName)
         {
-            FileOperationResultTypeEnum result;
+            FileOperationResultType result;
 
             try
             {
                 string path = WorkingPaths.ScriptsDirectory + scriptName + EnginePaths.ScriptExtension;
                 if (!File.Exists(path))
                 {
-                    result = FileOperationResultTypeEnum.FileDoesNotExist;
+                    result = FileOperationResultType.FileDoesNotExist;
                 }
                 else
                 {
                     File.Delete(path);
-                    result = FileOperationResultTypeEnum.Success;
+                    result = FileOperationResultType.Success;
                 }
             }
             catch
             {
-                result = FileOperationResultTypeEnum.Failure;
+                result = FileOperationResultType.Failure;
             }
 
             return result;
@@ -217,18 +217,18 @@ namespace Ceriyo.Data.Engine
             return module;
         }
 
-        public static FileOperationResultTypeEnum SaveModuleSettings(GameModule module)
+        public static FileOperationResultType SaveModuleSettings(GameModule module)
         {
-            FileOperationResultTypeEnum result;
+            FileOperationResultType result;
 
             try
             {
                 FileManager.XmlSerialize(module, EnginePaths.WorkingDirectory + EnginePaths.ModuleDataFileName + EnginePaths.DataExtension);
-                result = FileOperationResultTypeEnum.Success;
+                result = FileOperationResultType.Success;
             }
             catch
             {
-                result = FileOperationResultTypeEnum.Failure;
+                result = FileOperationResultType.Failure;
             }
 
             return result;

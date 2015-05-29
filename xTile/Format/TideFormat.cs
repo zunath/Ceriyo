@@ -324,7 +324,7 @@ namespace xTile.Format
             GameResource resource = new GameResource(
                 imageSource.Split(',')[0], 
                 imageSource.Split(',')[1], 
-                ResourceTypeEnum.Graphic);
+                ResourceType.Graphic);
             TileSheet tileSheet = new TileSheet(id, map, resource, sheetSize, tileSize);
             tileSheet.Margin = margin;
             tileSheet.Spacing = spacing;

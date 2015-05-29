@@ -42,7 +42,7 @@ namespace Ceriyo
 
             SpriteManager.Camera.BackgroundColor = Color.LightGray;
             SpriteManager.Camera.UsePixelCoordinates();
-            NetworkManager.Initialize(NetworkAgentRoleEnum.Client, 5121); // TODO: Load port from settings
+            NetworkManager.Initialize(NetworkAgentRole.Client, 5121); // TODO: Load port from settings
             ScreenManager.Start(typeof(MainMenuScreen));
         }
 

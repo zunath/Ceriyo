@@ -156,11 +156,11 @@ namespace Ceriyo.Toolset.Windows
             if (MessageBox.Show("Are you sure you want to delete the script " + scriptName + " ?", "Delete Script?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
 
-            FileOperationResultTypeEnum result = WorkingDataManager.DeleteScript(scriptName);
+            FileOperationResultType result = WorkingDataManager.DeleteScript(scriptName);
 
             switch (result)
             {
-                case FileOperationResultTypeEnum.Success:
+                case FileOperationResultType.Success:
                     Model.ScriptNames.Remove(scriptName);
                     GameScript existingScript = Model.OpenScripts.SingleOrDefault(x => x.Name == scriptName);
                     if (existingScript != null)
@@ -168,10 +168,10 @@ namespace Ceriyo.Toolset.Windows
                         Model.OpenScripts.Remove(existingScript);
                     }
                     break;
-                case FileOperationResultTypeEnum.FileDoesNotExist:
+                case FileOperationResultType.FileDoesNotExist:
                     MessageBox.Show("Unable to delete script. File does not exist.", "Unable to delete script", MessageBoxButton.OK);
                     break;
-                case FileOperationResultTypeEnum.Failure:
+                case FileOperationResultType.Failure:
                     MessageBox.Show("Unable to delete script. Deletion failed.", "Unable to delete script", MessageBoxButton.OK);
                     break;
             }

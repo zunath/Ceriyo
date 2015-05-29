@@ -72,12 +72,12 @@ namespace Ceriyo.Library.ScriptEngine
         private static void SandboxVM()
         {
             _lua.DoString("import = function() end");
-            EnumerationToTable("ScriptEventType", typeof(ScriptEventTypeEnum));
-            EnumerationToTable("InventorySlot", typeof(InventorySlotEnum));
-            EnumerationToTable("GenderType", typeof(GenderTypeEnum));
-            EnumerationToTable("PVPType", typeof(PVPTypeEnum));
-            EnumerationToTable("GameType", typeof(GameTypeEnum));
-            EnumerationToTable("ItemPropertyType", typeof(ItemPropertyTypeEnum));
+            EnumerationToTable("ScriptEventType", typeof(ScriptEventType));
+            EnumerationToTable("InventorySlot", typeof(InventorySlot));
+            EnumerationToTable("GenderType", typeof(GenderType));
+            EnumerationToTable("PVPType", typeof(PVPType));
+            EnumerationToTable("GameType", typeof(GameType));
+            EnumerationToTable("ItemPropertyType", typeof(ItemPropertyType));
         }
 
         private static void EnumerationToTable(string luaTableName, Type enumType)

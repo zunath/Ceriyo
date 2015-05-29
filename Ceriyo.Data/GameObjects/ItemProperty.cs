@@ -16,11 +16,11 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.ItemPropertiesDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
+        public SerializableDictionary<ScriptEventType, string> Scripts { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "ItemProperties"; } }
         public BindingList<ItemPropertyOption> Options { get; set; }
-        public ItemPropertyTypeEnum ItemPropertyType { get; set; }
+        public ItemPropertyType ItemPropertyType { get; set; }
 
         public ItemProperty()
         {
@@ -30,9 +30,9 @@ namespace Ceriyo.Data.GameObjects
             Description = string.Empty;
             Comments = string.Empty;
             LocalVariables = new BindingList<LocalVariable>();
-            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            Scripts = new SerializableDictionary<ScriptEventType, string>();
             Options = new BindingList<ItemPropertyOption>();
-            ItemPropertyType = ItemPropertyTypeEnum.Unknown;
+            ItemPropertyType = ItemPropertyType.Unknown;
         }
     }
 }

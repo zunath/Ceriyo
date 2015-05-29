@@ -99,7 +99,7 @@
                      Content="Passage"
                      HorizontalAlignment="Left" 
                      Margin="10,52,0,0" 
-                     IsChecked="{Binding Path=TileEditMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static data:TileEditModeEnum.Passability}}"
+                     IsChecked="{Binding Path=TileEditMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static data:TileEditMode.Passability}}"
                      IsEnabled="{Binding IsTilesetSelected}"
                      Checked="ChangeTileMode"
                      VerticalAlignment="Top" Height="16" Width="58"/>

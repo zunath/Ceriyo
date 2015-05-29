@@ -22,10 +22,10 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.CreaturesDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
+        public SerializableDictionary<ScriptEventType, string> Scripts { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "Creature"; } }
-        public SerializableDictionary<AnimationTypeEnum, string> AnimationResrefs { get; set; }
+        public SerializableDictionary<AnimationType, string> AnimationResrefs { get; set; }
 
         public string CharacterClassResref { get; set; }
         public int Level { get; set; }
@@ -37,13 +37,13 @@ namespace Ceriyo.Data.GameObjects
         public int Wisdom { get; set; }
         public int Intelligence { get; set; }
         public int Charisma { get; set; }
-        public GenderTypeEnum Gender { get; set; }
+        public GenderType Gender { get; set; }
 
         public string DialogResref { get; set; }
         public BindingList<string> AbilityResrefs { get; set; }
         public BindingList<string> SkillResrefs { get; set; }
         public BindingList<string> ItemResrefs { get; set; }
-        public SerializableDictionary<InventorySlotEnum, string> EquippedItemResrefs { get; set; }
+        public SerializableDictionary<InventorySlot, string> EquippedItemResrefs { get; set; }
 
         public Creature()
         {
@@ -53,8 +53,8 @@ namespace Ceriyo.Data.GameObjects
             Description = string.Empty;
             Comments = string.Empty;
             LocalVariables = new BindingList<LocalVariable>();
-            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
-            AnimationResrefs = new SerializableDictionary<AnimationTypeEnum, string>();
+            Scripts = new SerializableDictionary<ScriptEventType, string>();
+            AnimationResrefs = new SerializableDictionary<AnimationType, string>();
 
             CharacterClassResref = string.Empty;
             Level = 1;
@@ -67,48 +67,48 @@ namespace Ceriyo.Data.GameObjects
             Charisma = 0;
 
             DialogResref = string.Empty;
-            Gender = GenderTypeEnum.Male;
+            Gender = GenderType.Male;
             AbilityResrefs = new BindingList<string>();
             SkillResrefs = new BindingList<string>();
             ItemResrefs = new BindingList<string>();
-            EquippedItemResrefs = new SerializableDictionary<InventorySlotEnum, string>();
+            EquippedItemResrefs = new SerializableDictionary<InventorySlot, string>();
 
-            AnimationResrefs.Add(AnimationTypeEnum.MoveEast, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.MoveNorth, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.MoveNorthEast, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.MoveNorthWest, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.MoveSouth, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.MoveSouthEast, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.MoveSouthWest, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.MoveWest, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.IdleEast, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.IdleNorth, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.IdleNorthEast, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.IdleNorthWest, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.IdleSouth, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.IdleSouthEast, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.IdleSouthWest, string.Empty);
-            AnimationResrefs.Add(AnimationTypeEnum.IdleWest, string.Empty);
+            AnimationResrefs.Add(AnimationType.MoveEast, string.Empty);
+            AnimationResrefs.Add(AnimationType.MoveNorth, string.Empty);
+            AnimationResrefs.Add(AnimationType.MoveNorthEast, string.Empty);
+            AnimationResrefs.Add(AnimationType.MoveNorthWest, string.Empty);
+            AnimationResrefs.Add(AnimationType.MoveSouth, string.Empty);
+            AnimationResrefs.Add(AnimationType.MoveSouthEast, string.Empty);
+            AnimationResrefs.Add(AnimationType.MoveSouthWest, string.Empty);
+            AnimationResrefs.Add(AnimationType.MoveWest, string.Empty);
+            AnimationResrefs.Add(AnimationType.IdleEast, string.Empty);
+            AnimationResrefs.Add(AnimationType.IdleNorth, string.Empty);
+            AnimationResrefs.Add(AnimationType.IdleNorthEast, string.Empty);
+            AnimationResrefs.Add(AnimationType.IdleNorthWest, string.Empty);
+            AnimationResrefs.Add(AnimationType.IdleSouth, string.Empty);
+            AnimationResrefs.Add(AnimationType.IdleSouthEast, string.Empty);
+            AnimationResrefs.Add(AnimationType.IdleSouthWest, string.Empty);
+            AnimationResrefs.Add(AnimationType.IdleWest, string.Empty);
 
-            Scripts.Add(ScriptEventTypeEnum.OnCreatureConversation, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnCreatureAttacked, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnCreatureDamaged, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnCreatureDeath, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnCreatureDisturbed, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnCreatureHeartbeat, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnCreatureSpawned, string.Empty);
+            Scripts.Add(ScriptEventType.OnCreatureConversation, string.Empty);
+            Scripts.Add(ScriptEventType.OnCreatureAttacked, string.Empty);
+            Scripts.Add(ScriptEventType.OnCreatureDamaged, string.Empty);
+            Scripts.Add(ScriptEventType.OnCreatureDeath, string.Empty);
+            Scripts.Add(ScriptEventType.OnCreatureDisturbed, string.Empty);
+            Scripts.Add(ScriptEventType.OnCreatureHeartbeat, string.Empty);
+            Scripts.Add(ScriptEventType.OnCreatureSpawned, string.Empty);
 
-            EquippedItemResrefs.Add(InventorySlotEnum.Ammo, string.Empty);
-            EquippedItemResrefs.Add(InventorySlotEnum.Arms, string.Empty);
-            EquippedItemResrefs.Add(InventorySlotEnum.Back, string.Empty);
-            EquippedItemResrefs.Add(InventorySlotEnum.Body, string.Empty);
-            EquippedItemResrefs.Add(InventorySlotEnum.Head, string.Empty);
-            EquippedItemResrefs.Add(InventorySlotEnum.MainHand, string.Empty);
-            EquippedItemResrefs.Add(InventorySlotEnum.Neck, string.Empty);
-            EquippedItemResrefs.Add(InventorySlotEnum.OffHand, string.Empty);
-            EquippedItemResrefs.Add(InventorySlotEnum.Ring1, string.Empty);
-            EquippedItemResrefs.Add(InventorySlotEnum.Ring2, string.Empty);
-            EquippedItemResrefs.Add(InventorySlotEnum.Waist, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.Ammo, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.Arms, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.Back, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.Body, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.Head, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.MainHand, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.Neck, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.OffHand, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.Ring1, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.Ring2, string.Empty);
+            EquippedItemResrefs.Add(InventorySlot.Waist, string.Empty);
         }
     }
 }

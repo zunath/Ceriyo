@@ -16,11 +16,11 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.ItemTypesDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
+        public SerializableDictionary<ScriptEventType, string> Scripts { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "ItemTypes"; } }
         public int StackSize { get; set; }
-        public BindingList<InventorySlotEnum> WearableInventorySlots { get; set; }
+        public BindingList<InventorySlot> WearableInventorySlots { get; set; }
 
         public ItemType()
         {
@@ -30,9 +30,9 @@ namespace Ceriyo.Data.GameObjects
             Description = string.Empty;
             Comments = string.Empty;
             LocalVariables = new BindingList<LocalVariable>();
-            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            Scripts = new SerializableDictionary<ScriptEventType, string>();
             StackSize = 1;
-            WearableInventorySlots = new BindingList<InventorySlotEnum>();
+            WearableInventorySlots = new BindingList<InventorySlot>();
         }
     }
 }

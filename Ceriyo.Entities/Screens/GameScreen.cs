@@ -64,7 +64,7 @@ namespace Ceriyo.Entities.Screens
             _tilesetGraphicResource = new GameResource
                 (packet.TilesetGraphicResourcePackage, 
                 packet.TilesetGraphicResourceFileName, 
-                ResourceTypeEnum.Graphic);
+                ResourceType.Graphic);
 
             _map = new MapDrawableBatch(_area, _tilesetGraphicResource);
             SpriteManager.AddDrawableBatch(_map);

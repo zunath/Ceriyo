@@ -36,7 +36,7 @@ namespace Ceriyo.Data.GameObjects
         }
 
         [XmlIgnore]
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts
+        public SerializableDictionary<ScriptEventType, string> Scripts
         {
             get { throw new NotSupportedException(); }
             set { throw new NotSupportedException(); }

@@ -66,9 +66,9 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Placeables.Cast<IGameObject>().ToList(), WorkingPaths.PlaceablesDirectory);
+            FileOperationResultType result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Placeables.Cast<IGameObject>().ToList(), WorkingPaths.PlaceablesDirectory);
 
-            if (result != FileOperationResultTypeEnum.Success)
+            if (result != FileOperationResultType.Success)
             {
                 MessageBox.Show("Unable to save placeables.", "Saving placeables failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -76,8 +76,8 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceTypeEnum.Graphic);
-            GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
+            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic);
+            GameResource graphic = new GameResource("", "(No Graphic)", ResourceType.None);
             Model.Graphics.Insert(0, graphic);
 
             Model.Placeables = WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);

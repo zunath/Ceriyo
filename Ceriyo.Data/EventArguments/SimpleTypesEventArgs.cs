@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ceriyo.Data.Enumerations
+namespace Ceriyo.Data.EventArguments
 {
     public class SimpleTypesEventArgs : EventArgs
     {

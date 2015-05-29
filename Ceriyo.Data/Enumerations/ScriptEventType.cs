@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum ScriptEventTypeEnum
+    public enum ScriptEventType
     {
         Unknown = 0,
         OnAreaEnter = 1,

@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum ResourceTypeEnum
+    public enum ResourceType
     {
         Unknown = 0,
         None = 1,

@@ -18,7 +18,7 @@ namespace Ceriyo.Library.Network
         
         private NetPeer Peer { get; set; }
         private NetPeerConfiguration Configuration { get; set; }
-        public NetworkAgentRoleEnum Role { get; private set; }
+        public NetworkAgentRole Role { get; private set; }
         public int Port { get; private set; }
         private NetOutgoingMessage OutgoingMessage { get; set; }
         private List<NetIncomingMessage> IncomingMessages { get; set; }
@@ -33,7 +33,7 @@ namespace Ceriyo.Library.Network
             }
         }
 
-        public NetworkAgent(NetworkAgentRoleEnum role, string serverPassword = null, int port = 5121)
+        public NetworkAgent(NetworkAgentRole role, string serverPassword = null, int port = 5121)
         {
             Role = role;
             Configuration = new NetPeerConfiguration(EngineConstants.ApplicationIdentifier);
@@ -47,7 +47,7 @@ namespace Ceriyo.Library.Network
         {
             Encryption = new NetXtea(EngineConstants.PacketEncryptionKey);
 
-            if (Role == NetworkAgentRoleEnum.Server)
+            if (Role == NetworkAgentRole.Server)
             {
                 Configuration.EnableMessageType(NetIncomingMessageType.DiscoveryRequest);
                 Configuration.Port = Port;
@@ -57,7 +57,7 @@ namespace Ceriyo.Library.Network
                 Peer = new NetServer(Configuration);
             }
 
-            else if (Role == NetworkAgentRoleEnum.Client)
+            else if (Role == NetworkAgentRole.Client)
             {
                 Configuration.EnableMessageType(NetIncomingMessageType.DiscoveryResponse);
                 //Casts the NetPeer to a NetClient
@@ -75,7 +75,7 @@ namespace Ceriyo.Library.Network
         /// </summary>
         public NetConnection Connect(string ip, string serverPassword)
         {
-            if (Role != NetworkAgentRoleEnum.Client)
+            if (Role != NetworkAgentRole.Client)
             {
                 throw new SystemException("Attempted to connect as server. Only clients should connect.");
             }

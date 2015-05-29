@@ -102,7 +102,7 @@ namespace Ceriyo.Entities.GUI
         {
             if (CharacterSelectionListBox.SelectedItem != null)
             {
-                MessageBox popUp = MessageBox.Show(new Point(300, 150), "Really Delete?", "Are you sure you want to delete this character?", MessageBoxButtonTypeEnum.YesNo, _desktop);
+                MessageBox popUp = MessageBox.Show(new Point(300, 150), "Really Delete?", "Are you sure you want to delete this character?", MessageBoxButtonType.YesNo, _desktop);
                 popUp.OnYesClicked += ConfirmDelete;
             }
         }

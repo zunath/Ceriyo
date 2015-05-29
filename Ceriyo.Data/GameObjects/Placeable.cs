@@ -17,7 +17,7 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.PlaceablesDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
+        public SerializableDictionary<ScriptEventType, string> Scripts { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "Placeable"; } }
 
@@ -49,19 +49,19 @@ namespace Ceriyo.Data.GameObjects
             Description = string.Empty;
             Comments = string.Empty;
             LocalVariables = new BindingList<LocalVariable>();
-            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            Scripts = new SerializableDictionary<ScriptEventType, string>();
             Graphic = new GameResource();
             
-            Scripts.Add(ScriptEventTypeEnum.OnPlaceableAttacked, "");
-            Scripts.Add(ScriptEventTypeEnum.OnPlaceableClose, "");
-            Scripts.Add(ScriptEventTypeEnum.OnPlaceableDamaged, "");
-            Scripts.Add(ScriptEventTypeEnum.OnPlaceableDeath, "");
-            Scripts.Add(ScriptEventTypeEnum.OnPlaceableDisturbed, "");
-            Scripts.Add(ScriptEventTypeEnum.OnPlaceableHeartbeat, "");
-            Scripts.Add(ScriptEventTypeEnum.OnPlaceableLocked, "");
-            Scripts.Add(ScriptEventTypeEnum.OnPlaceableOpen, "");
-            Scripts.Add(ScriptEventTypeEnum.OnPlaceableUnlocked, "");
-            Scripts.Add(ScriptEventTypeEnum.OnPlaceableUsed, "");
+            Scripts.Add(ScriptEventType.OnPlaceableAttacked, "");
+            Scripts.Add(ScriptEventType.OnPlaceableClose, "");
+            Scripts.Add(ScriptEventType.OnPlaceableDamaged, "");
+            Scripts.Add(ScriptEventType.OnPlaceableDeath, "");
+            Scripts.Add(ScriptEventType.OnPlaceableDisturbed, "");
+            Scripts.Add(ScriptEventType.OnPlaceableHeartbeat, "");
+            Scripts.Add(ScriptEventType.OnPlaceableLocked, "");
+            Scripts.Add(ScriptEventType.OnPlaceableOpen, "");
+            Scripts.Add(ScriptEventType.OnPlaceableUnlocked, "");
+            Scripts.Add(ScriptEventType.OnPlaceableUsed, "");
         }
     }
 }

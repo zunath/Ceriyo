@@ -16,7 +16,7 @@ namespace Ceriyo.Data.ViewModels
         private BindingList<Tileset> _tilesets;
         private Tileset _selectedTileset;
         private bool _isTilesetSelected;
-        private TileEditModeEnum _tileEditMode;
+        private TileEditMode _tileEditMode;
 
         public BindingList<GameResource> Graphics
         {
@@ -83,7 +83,7 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        public TileEditModeEnum TileEditMode
+        public TileEditMode TileEditMode
         {
             get
             {
@@ -100,7 +100,7 @@ namespace Ceriyo.Data.ViewModels
         {
             this.LocalVariables = new BindingList<LocalVariable>();
             this.Graphics = new BindingList<GameResource>();
-            this.TileEditMode = TileEditModeEnum.Passability;
+            this.TileEditMode = TileEditMode.Passability;
         }
     }
 }

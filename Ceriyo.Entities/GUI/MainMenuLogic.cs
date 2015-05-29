@@ -96,7 +96,7 @@ namespace Ceriyo.Entities.GUI
 
         private void ExitButton_MouseClick(Control sender, MouseEventArgs args)
         {
-            MessageBox box = MessageBox.Show(new Point(200, 150), "Really Exit?", "Are you sure you want to exit?", MessageBoxButtonTypeEnum.YesNo, _desktop);
+            MessageBox box = MessageBox.Show(new Point(200, 150), "Really Exit?", "Are you sure you want to exit?", MessageBoxButtonType.YesNo, _desktop);
             box.OnYesClicked += ExitConfirmClicked;   
 
         }

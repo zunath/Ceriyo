@@ -16,7 +16,7 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string WorkingDirectory { get { throw new NotSupportedException(); } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
+        public SerializableDictionary<ScriptEventType, string> Scripts { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "Module"; } }
         public LevelChart Levels { get; set; }
@@ -30,7 +30,7 @@ namespace Ceriyo.Data.GameObjects
             Description = string.Empty;
             Comments = string.Empty;
             LocalVariables = new BindingList<LocalVariable>();
-            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            Scripts = new SerializableDictionary<ScriptEventType, string>();
             Levels = new LevelChart();
             ResourcePacks = new BindingList<string>();
 
@@ -45,7 +45,7 @@ namespace Ceriyo.Data.GameObjects
             Description = description;
             Comments = comments;
             LocalVariables = new BindingList<LocalVariable>();
-            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            Scripts = new SerializableDictionary<ScriptEventType, string>();
             Levels = new LevelChart();
             ResourcePacks = new BindingList<string>();
 
@@ -55,14 +55,14 @@ namespace Ceriyo.Data.GameObjects
 
         private void AddEventStubs()
         {
-            Scripts.Add(ScriptEventTypeEnum.OnAreaHeartbeat, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnModuleLoad, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnPlayerDeath, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnPlayerDying, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnModulePlayerEnter, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeaving, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnModulePlayerLeft, string.Empty);
-            Scripts.Add(ScriptEventTypeEnum.OnPlayerRespawn, string.Empty);
+            Scripts.Add(ScriptEventType.OnAreaHeartbeat, string.Empty);
+            Scripts.Add(ScriptEventType.OnModuleLoad, string.Empty);
+            Scripts.Add(ScriptEventType.OnPlayerDeath, string.Empty);
+            Scripts.Add(ScriptEventType.OnPlayerDying, string.Empty);
+            Scripts.Add(ScriptEventType.OnModulePlayerEnter, string.Empty);
+            Scripts.Add(ScriptEventType.OnModulePlayerLeaving, string.Empty);
+            Scripts.Add(ScriptEventType.OnModulePlayerLeft, string.Empty);
+            Scripts.Add(ScriptEventType.OnPlayerRespawn, string.Empty);
 
         }
     }

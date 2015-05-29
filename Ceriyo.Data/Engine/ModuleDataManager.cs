@@ -9,9 +9,9 @@ namespace Ceriyo.Data.Engine
 {
     public static class ModuleDataManager
     {
-        public static FileOperationResultTypeEnum CreateModule(string name, string tag, string resref)
+        public static FileOperationResultType CreateModule(string name, string tag, string resref)
         {
-            FileOperationResultTypeEnum result;
+            FileOperationResultType result;
 
             try
             {
@@ -24,7 +24,7 @@ namespace Ceriyo.Data.Engine
 
                 if (File.Exists(path))
                 {
-                    result = FileOperationResultTypeEnum.FileExists;
+                    result = FileOperationResultType.FileExists;
                 }
                 else
                 {
@@ -47,22 +47,22 @@ namespace Ceriyo.Data.Engine
                         zip.Save();
                     }
 
-                    result = FileOperationResultTypeEnum.Success;
+                    result = FileOperationResultType.Success;
                 }
 
             }
             catch
             {
-                result = FileOperationResultTypeEnum.Failure;
+                result = FileOperationResultType.Failure;
             }
 
             return result;
         }
 
 
-        public static FileOperationResultTypeEnum LoadModule(string fileName, bool forceDeleteWorkingDirectory = false)
+        public static FileOperationResultType LoadModule(string fileName, bool forceDeleteWorkingDirectory = false)
         {
-            FileOperationResultTypeEnum result = FileOperationResultTypeEnum.Unknown;
+            FileOperationResultType result = FileOperationResultType.Unknown;
 
             try
             {
@@ -74,7 +74,7 @@ namespace Ceriyo.Data.Engine
                 string path = EnginePaths.ModulesDirectory + fileName + EnginePaths.ModuleExtension;
                 if (!File.Exists(path))
                 {
-                    result = FileOperationResultTypeEnum.FileDoesNotExist;
+                    result = FileOperationResultType.FileDoesNotExist;
                 }
                 else
                 {
@@ -87,11 +87,11 @@ namespace Ceriyo.Data.Engine
                         }
                         else
                         {
-                            result = FileOperationResultTypeEnum.FileExists;
+                            result = FileOperationResultType.FileExists;
                         }
                     }
 
-                    if (result != FileOperationResultTypeEnum.FileExists)
+                    if (result != FileOperationResultType.FileExists)
                     {
                         using (ZipFile zip = new ZipFile(path))
                         {
@@ -101,21 +101,21 @@ namespace Ceriyo.Data.Engine
                             zip.ExtractAll(EnginePaths.WorkingDirectory);
                         }
 
-                        result = FileOperationResultTypeEnum.Success;
+                        result = FileOperationResultType.Success;
                     }
                 }
             }
             catch
             {
-                result = FileOperationResultTypeEnum.Failure;
+                result = FileOperationResultType.Failure;
             }
 
             return result;
         }
 
-        public static FileOperationResultTypeEnum CloseModule()
+        public static FileOperationResultType CloseModule()
         {
-            FileOperationResultTypeEnum result;
+            FileOperationResultType result;
 
             try
             {
@@ -125,11 +125,11 @@ namespace Ceriyo.Data.Engine
                     Directory.CreateDirectory(EnginePaths.WorkingDirectory);
                 }
 
-                result = FileOperationResultTypeEnum.Success;
+                result = FileOperationResultType.Success;
             }
             catch (Exception)
             {
-                result = FileOperationResultTypeEnum.Failure;
+                result = FileOperationResultType.Failure;
             }
 
             return result;
@@ -263,9 +263,9 @@ namespace Ceriyo.Data.Engine
             }
         }
 
-        public static FileOperationResultTypeEnum SaveModule(string fileName)
+        public static FileOperationResultType SaveModule(string fileName)
         {
-            FileOperationResultTypeEnum result;
+            FileOperationResultType result;
             string path = EnginePaths.ModulesDirectory + fileName + EnginePaths.ModuleExtension;
             string backup = EnginePaths.ModulesDirectory + fileName + EnginePaths.ModuleExtension + EnginePaths.BackupExtension;
                 
@@ -290,7 +290,7 @@ namespace Ceriyo.Data.Engine
                     File.Delete(backup);
                 }
 
-                result = FileOperationResultTypeEnum.Success;
+                result = FileOperationResultType.Success;
             }
             catch
             {
@@ -303,7 +303,7 @@ namespace Ceriyo.Data.Engine
                     File.Move(backup, path);
                 }
 
-                result = FileOperationResultTypeEnum.Failure;
+                result = FileOperationResultType.Failure;
             }
 
             return result;

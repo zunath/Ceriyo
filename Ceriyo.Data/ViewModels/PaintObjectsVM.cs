@@ -7,7 +7,7 @@ namespace Ceriyo.Data.ViewModels
 {
     public class PaintObjectsVM : BaseVM
     {
-        private PaintObjectModeTypeEnum _paintMode;
+        private PaintObjectModeType _paintMode;
         private BindingList<Creature> _creatures;
         private BindingList<Item> _items;
         private BindingList<Placeable> _placeables;
@@ -21,7 +21,7 @@ namespace Ceriyo.Data.ViewModels
         private int _selectionEndY;
         private bool _isMouseDown;
 
-        public PaintObjectModeTypeEnum PaintMode 
+        public PaintObjectModeType PaintMode 
         {
             get
             {
@@ -192,7 +192,7 @@ namespace Ceriyo.Data.ViewModels
 
         public PaintObjectsVM()
         {
-            PaintMode = PaintObjectModeTypeEnum.None;
+            PaintMode = PaintObjectModeType.None;
             Creatures = new BindingList<Creature>();
             Items = new BindingList<Item>();
             Placeables = new BindingList<Placeable>();

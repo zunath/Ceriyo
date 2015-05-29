@@ -11,9 +11,9 @@ namespace Ceriyo.Data.Engine
 {
     public static class ResourcePackDataManager
     {
-        public static FileOperationResultTypeEnum SaveResourcePack(BindingList<ResourceEditorItem> resources, string path)
+        public static FileOperationResultType SaveResourcePack(BindingList<ResourceEditorItem> resources, string path)
         {
-            FileOperationResultTypeEnum result;
+            FileOperationResultType result;
             string backupFilePath = path + EnginePaths.BackupExtension;
             
             try
@@ -39,11 +39,11 @@ namespace Ceriyo.Data.Engine
                 }
 
                 File.Delete(backupFilePath);
-                result = FileOperationResultTypeEnum.Success;
+                result = FileOperationResultType.Success;
             }
             catch
             {
-                result = FileOperationResultTypeEnum.Failure;
+                result = FileOperationResultType.Failure;
                 File.Delete(path);
                 File.Move(backupFilePath, path);
             }
@@ -136,18 +136,18 @@ namespace Ceriyo.Data.Engine
                             switch (extension)
                             {
                                 case ".png":
-                                    resource.ResourceType = ResourceTypeEnum.Graphic;
+                                    resource.ResourceType = ResourceType.Graphic;
                                     break;
                                 case ".mp3":
-                                    resource.ResourceType = ResourceTypeEnum.Audio;
+                                    resource.ResourceType = ResourceType.Audio;
                                     break;
                                 default:
-                                    resource.ResourceType = ResourceTypeEnum.Unknown;
+                                    resource.ResourceType = ResourceType.Unknown;
                                     break;
                             }
 
                             if (resources.SingleOrDefault(x => x.FileName == resource.FileName) == null && 
-                                resource.ResourceType != ResourceTypeEnum.Unknown)
+                                resource.ResourceType != ResourceType.Unknown)
                             {
                                 resources.Add(resource);
                             }
@@ -167,7 +167,7 @@ namespace Ceriyo.Data.Engine
             return success;
         }
 
-        public static BindingList<GameResource> GetGameResources(ResourceTypeEnum resourceType)
+        public static BindingList<GameResource> GetGameResources(ResourceType resourceType)
         {
             string path = EnginePaths.WorkingDirectory + EnginePaths.ResourceLinksDataFileName + EnginePaths.DataExtension;
             BindingList<GameResource> resources = FileManager.XmlDeserialize<BindingList<GameResource>>(path);

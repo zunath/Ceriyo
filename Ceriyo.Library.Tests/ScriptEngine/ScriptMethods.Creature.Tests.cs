@@ -114,7 +114,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             ScriptMethods methods = new ScriptMethods();
             Creature creature = new Creature();
             creature.Strength = 10;
-            int result = methods.GetAttributeLevel(creature, AttributeTypeEnum.Strength);
+            int result = methods.GetAttributeLevel(creature, AttributeType.Strength);
             Assert.AreEqual(result, 10);
         }
 
@@ -124,7 +124,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             ScriptMethods methods = new ScriptMethods();
             Creature creature = new Creature();
             creature.Dexterity = 10;
-            int result = methods.GetAttributeLevel(creature, AttributeTypeEnum.Dexterity);
+            int result = methods.GetAttributeLevel(creature, AttributeType.Dexterity);
             Assert.AreEqual(result, 10);
         }
 
@@ -134,7 +134,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             ScriptMethods methods = new ScriptMethods();
             Creature creature = new Creature();
             creature.Constitution = 10;
-            int result = methods.GetAttributeLevel(creature, AttributeTypeEnum.Constitution);
+            int result = methods.GetAttributeLevel(creature, AttributeType.Constitution);
             Assert.AreEqual(result, 10);
         }
 
@@ -144,7 +144,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             ScriptMethods methods = new ScriptMethods();
             Creature creature = new Creature();
             creature.Wisdom = 10;
-            int result = methods.GetAttributeLevel(creature, AttributeTypeEnum.Wisdom);
+            int result = methods.GetAttributeLevel(creature, AttributeType.Wisdom);
             Assert.AreEqual(result, 10);
         }
 
@@ -154,7 +154,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             ScriptMethods methods = new ScriptMethods();
             Creature creature = new Creature();
             creature.Intelligence = 10;
-            int result = methods.GetAttributeLevel(creature, AttributeTypeEnum.Intelligence);
+            int result = methods.GetAttributeLevel(creature, AttributeType.Intelligence);
             Assert.AreEqual(result, 10);
         }
 
@@ -164,7 +164,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             ScriptMethods methods = new ScriptMethods();
             Creature creature = new Creature();
             creature.Charisma = 10;
-            int result = methods.GetAttributeLevel(creature, AttributeTypeEnum.Charisma);
+            int result = methods.GetAttributeLevel(creature, AttributeType.Charisma);
             Assert.AreEqual(result, 10);
         }
 
@@ -183,7 +183,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
                 Intelligence = 15
             };
 
-            int result = methods.GetAttributeLevel(creature, AttributeTypeEnum.Unknown);
+            int result = methods.GetAttributeLevel(creature, AttributeType.Unknown);
             Assert.AreEqual(result, -1);
         }
 
@@ -191,7 +191,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
         public void GetAttributeLevel_NullEqualsNegative1()
         {
             ScriptMethods methods = new ScriptMethods();
-            int result = methods.GetAttributeLevel(null, AttributeTypeEnum.Charisma);
+            int result = methods.GetAttributeLevel(null, AttributeType.Charisma);
             Assert.AreEqual(result, -1);
         }
 
@@ -203,8 +203,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
         public void GetGender_NullEqualsUnknown()
         {
             ScriptMethods methods = new ScriptMethods();
-            GenderTypeEnum result = methods.GetGender(null);
-            Assert.AreEqual(result, GenderTypeEnum.Unknown);
+            GenderType result = methods.GetGender(null);
+            Assert.AreEqual(result, GenderType.Unknown);
         }
 
         [TestMethod]
@@ -212,9 +212,9 @@ namespace Ceriyo.Library.Tests.ScriptEngine
         {
             ScriptMethods methods = new ScriptMethods();
             Creature creature = new Creature();
-            creature.Gender = GenderTypeEnum.Male;
-            GenderTypeEnum result = methods.GetGender(creature);
-            Assert.AreEqual(result, GenderTypeEnum.Male);
+            creature.Gender = GenderType.Male;
+            GenderType result = methods.GetGender(creature);
+            Assert.AreEqual(result, GenderType.Male);
         }
 
         [TestMethod]
@@ -222,9 +222,9 @@ namespace Ceriyo.Library.Tests.ScriptEngine
         {
             ScriptMethods methods = new ScriptMethods();
             Creature creature = new Creature();
-            creature.Gender = GenderTypeEnum.Female;
-            GenderTypeEnum result = methods.GetGender(creature);
-            Assert.AreEqual(result, GenderTypeEnum.Female);
+            creature.Gender = GenderType.Female;
+            GenderType result = methods.GetGender(creature);
+            Assert.AreEqual(result, GenderType.Female);
         }
 
         [TestMethod]
@@ -232,9 +232,9 @@ namespace Ceriyo.Library.Tests.ScriptEngine
         {
             ScriptMethods methods = new ScriptMethods();
             Creature creature = new Creature();
-            creature.Gender = GenderTypeEnum.Unknown;
-            GenderTypeEnum result = methods.GetGender(creature);
-            Assert.AreEqual(result, GenderTypeEnum.Unknown);
+            creature.Gender = GenderType.Unknown;
+            GenderType result = methods.GetGender(creature);
+            Assert.AreEqual(result, GenderType.Unknown);
         }
 
         #endregion
@@ -245,7 +245,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
         public void GetItemInSlot_NullCreatureIsNull()
         {
             ScriptMethods methods = new ScriptMethods();
-            Item result = methods.GetItemInSlot(null, InventorySlotEnum.Ammo);
+            Item result = methods.GetItemInSlot(null, InventorySlot.Ammo);
             Assert.IsNull(result);
         }
 
@@ -254,7 +254,7 @@ namespace Ceriyo.Library.Tests.ScriptEngine
         {
             ScriptMethods methods = BuildItemScriptMethods();
             Creature creature = new Creature();
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Ammo);
+            Item result = methods.GetItemInSlot(creature, InventorySlot.Ammo);
             Assert.IsNull(result);
         }
 
@@ -269,8 +269,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.Ammo] = "AmmoResref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Ammo);
+            creature.EquippedItemResrefs[InventorySlot.Ammo] = "AmmoResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.Ammo);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }
@@ -286,8 +286,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.Arms] = "ArmsResref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Arms);
+            creature.EquippedItemResrefs[InventorySlot.Arms] = "ArmsResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.Arms);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }
@@ -304,8 +304,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.Back] = "BackResref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Back);
+            creature.EquippedItemResrefs[InventorySlot.Back] = "BackResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.Back);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }
@@ -322,8 +322,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.Body] = "BodyResref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Body);
+            creature.EquippedItemResrefs[InventorySlot.Body] = "BodyResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.Body);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }
@@ -341,8 +341,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.Head] = "HeadResref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Head);
+            creature.EquippedItemResrefs[InventorySlot.Head] = "HeadResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.Head);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }
@@ -359,8 +359,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.MainHand] = "MainHandResref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.MainHand);
+            creature.EquippedItemResrefs[InventorySlot.MainHand] = "MainHandResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.MainHand);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }
@@ -376,8 +376,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.Neck] = "NeckResref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Neck);
+            creature.EquippedItemResrefs[InventorySlot.Neck] = "NeckResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.Neck);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }
@@ -393,8 +393,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.OffHand] = "OffHandResref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.OffHand);
+            creature.EquippedItemResrefs[InventorySlot.OffHand] = "OffHandResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.OffHand);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }
@@ -410,8 +410,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.Ring1] = "Ring1Resref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Ring1);
+            creature.EquippedItemResrefs[InventorySlot.Ring1] = "Ring1Resref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.Ring1);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }
@@ -427,8 +427,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.Ring2] = "Ring2Resref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Ring2);
+            creature.EquippedItemResrefs[InventorySlot.Ring2] = "Ring2Resref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.Ring2);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }
@@ -444,8 +444,8 @@ namespace Ceriyo.Library.Tests.ScriptEngine
             };
             ScriptMethods methods = BuildItemScriptMethods(item);
             Creature creature = new Creature();
-            creature.EquippedItemResrefs[InventorySlotEnum.Waist] = "WaistResref";
-            Item result = methods.GetItemInSlot(creature, InventorySlotEnum.Waist);
+            creature.EquippedItemResrefs[InventorySlot.Waist] = "WaistResref";
+            Item result = methods.GetItemInSlot(creature, InventorySlot.Waist);
 
             Assert.AreEqual(result.Resref, item.Resref);
         }

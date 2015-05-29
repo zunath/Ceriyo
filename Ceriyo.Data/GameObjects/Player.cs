@@ -26,7 +26,7 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string WorkingDirectory { get { throw new NotSupportedException(); } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
+        public SerializableDictionary<ScriptEventType, string> Scripts { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "Player"; } }
 
@@ -38,7 +38,7 @@ namespace Ceriyo.Data.GameObjects
             this.Description = string.Empty;
             this.Comments = string.Empty;
             this.LocalVariables = new BindingList<LocalVariable>();
-            this.Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            this.Scripts = new SerializableDictionary<ScriptEventType, string>();
         }
     }
 }

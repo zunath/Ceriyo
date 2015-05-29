@@ -175,7 +175,7 @@ namespace Ceriyo.Toolset.Components
         {
             var result = ModuleDataManager.CloseModule();
 
-            if (result == FileOperationResultTypeEnum.Success)
+            if (result == FileOperationResultType.Success)
             {
                 Model.IsModuleLoaded = false;
 

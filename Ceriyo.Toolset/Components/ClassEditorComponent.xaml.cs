@@ -78,9 +78,9 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Classes.Cast<IGameObject>().ToList(), WorkingPaths.CharacterClassesDirectory);
+            FileOperationResultType result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Classes.Cast<IGameObject>().ToList(), WorkingPaths.CharacterClassesDirectory);
 
-            if (result != FileOperationResultTypeEnum.Success)
+            if (result != FileOperationResultType.Success)
             {
                 MessageBox.Show("Unable to save classes.", "Saving classes failed.", MessageBoxButton.OK, MessageBoxImage.Error);
             }

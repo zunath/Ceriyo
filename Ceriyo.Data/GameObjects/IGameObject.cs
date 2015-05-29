@@ -12,7 +12,7 @@ namespace Ceriyo.Data.GameObjects
         string Description { get; set; }
         string Comments { get; set; }
         BindingList<LocalVariable> LocalVariables { get; set; }
-        SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
+        SerializableDictionary<ScriptEventType, string> Scripts { get; set; }
         string WorkingDirectory { get; }
         string CategoryName { get; }
     }

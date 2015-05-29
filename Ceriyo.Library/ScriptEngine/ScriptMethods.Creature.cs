@@ -46,18 +46,18 @@ namespace Ceriyo.Library.ScriptEngine
         }
 
         [ScriptMethod]
-        public int GetAttributeLevel(Creature creature, AttributeTypeEnum type)
+        public int GetAttributeLevel(Creature creature, AttributeType type)
         {
             try
             {
                 switch (type)
                 {
-                    case AttributeTypeEnum.Charisma: return creature.Charisma;
-                    case AttributeTypeEnum.Constitution: return creature.Constitution;
-                    case AttributeTypeEnum.Dexterity: return creature.Dexterity;
-                    case AttributeTypeEnum.Intelligence: return creature.Intelligence;
-                    case AttributeTypeEnum.Strength: return creature.Strength;
-                    case AttributeTypeEnum.Wisdom: return creature.Wisdom;
+                    case AttributeType.Charisma: return creature.Charisma;
+                    case AttributeType.Constitution: return creature.Constitution;
+                    case AttributeType.Dexterity: return creature.Dexterity;
+                    case AttributeType.Intelligence: return creature.Intelligence;
+                    case AttributeType.Strength: return creature.Strength;
+                    case AttributeType.Wisdom: return creature.Wisdom;
                     default: return -1;
                 }
             }
@@ -68,7 +68,7 @@ namespace Ceriyo.Library.ScriptEngine
         }
 
         [ScriptMethod]
-        public GenderTypeEnum GetGender(Creature creature)
+        public GenderType GetGender(Creature creature)
         {
             try
             {
@@ -76,12 +76,12 @@ namespace Ceriyo.Library.ScriptEngine
             }
             catch
             {
-                return GenderTypeEnum.Unknown;
+                return GenderType.Unknown;
             }
         }
 
         [ScriptMethod]
-        public Item GetItemInSlot(Creature creature, InventorySlotEnum slot)
+        public Item GetItemInSlot(Creature creature, InventorySlot slot)
         {
             try
             {

@@ -87,17 +87,17 @@ namespace Ceriyo.Toolset.Components
                 {
                     if (MessageBox.Show("Are you sure you want to delete the dialog " + dialog.Name + " ?", "Delete Dialog?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
-                        FileOperationResultTypeEnum result = WorkingDataManager.DeleteGameObjectFile(dialog);
+                        FileOperationResultType result = WorkingDataManager.DeleteGameObjectFile(dialog);
 
-                        if (result == FileOperationResultTypeEnum.Success)
+                        if (result == FileOperationResultType.Success)
                         {
                             Model.Dialogs.Remove(dialog);
                         }
-                        else if (result == FileOperationResultTypeEnum.FileDoesNotExist)
+                        else if (result == FileOperationResultType.FileDoesNotExist)
                         {
                             MessageBox.Show("Unable to delete dialog. File does not exist.", "Unable to delete dialog", MessageBoxButton.OK);
                         }
-                        else if (result == FileOperationResultTypeEnum.Failure)
+                        else if (result == FileOperationResultType.Failure)
                         {
                             MessageBox.Show("Unable to delete dialog. Deletion failed.", "Unable to delete dialog", MessageBoxButton.OK);
                         }

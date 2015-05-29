@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum NetworkAgentRoleEnum
+    public enum NetworkAgentRole
     {
         Client,
         Server

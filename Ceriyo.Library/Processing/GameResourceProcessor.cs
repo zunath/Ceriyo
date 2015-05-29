@@ -58,7 +58,7 @@ namespace Ceriyo.Library.Processing
         {
 
             BitmapImage image = null;
-            if (resource.ResourceType != ResourceTypeEnum.None)
+            if (resource.ResourceType != ResourceType.None)
             {
                 image = new BitmapImage();
                 image.BeginInit();
@@ -86,7 +86,7 @@ namespace Ceriyo.Library.Processing
             Texture2D result = null;
 
             if (resource != null && 
-                resource.ResourceType == ResourceTypeEnum.Graphic)
+                resource.ResourceType == ResourceType.Graphic)
             {
                 byte[] imageData = ToBytes(resource);
 

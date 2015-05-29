@@ -111,9 +111,9 @@ namespace Ceriyo.Toolset.Components
             if (area == null) return;
             if (MessageBox.Show("Are you sure you want to delete the area " + area.Name + " ?", "Delete Area?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                FileOperationResultTypeEnum result = WorkingDataManager.DeleteGameObjectFile(area);
+                FileOperationResultType result = WorkingDataManager.DeleteGameObjectFile(area);
 
-                if (result == FileOperationResultTypeEnum.Success)
+                if (result == FileOperationResultType.Success)
                 {
                     Model.Areas.Remove(area);
                     Model.IsAreaLoaded = false;
@@ -123,11 +123,11 @@ namespace Ceriyo.Toolset.Components
                         OnAreaClosed(this, new EventArgs());
                     }
                 }
-                else if (result == FileOperationResultTypeEnum.FileDoesNotExist)
+                else if (result == FileOperationResultType.FileDoesNotExist)
                 {
                     MessageBox.Show("Unable to delete area. File does not exist.", "Unable to delete area", MessageBoxButton.OK);
                 }
-                else if (result == FileOperationResultTypeEnum.Failure)
+                else if (result == FileOperationResultType.Failure)
                 {
                     MessageBox.Show("Unable to delete area. Deletion failed.", "Unable to delete area", MessageBoxButton.OK);
                 }

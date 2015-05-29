@@ -62,9 +62,9 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Skills.Cast<IGameObject>().ToList(), WorkingPaths.SkillsDirectory);
+            FileOperationResultType result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Skills.Cast<IGameObject>().ToList(), WorkingPaths.SkillsDirectory);
 
-            if (result != FileOperationResultTypeEnum.Success)
+            if (result != FileOperationResultType.Success)
             {
                 MessageBox.Show("Unable to save skills.", "Saving skills failed.", MessageBoxButton.OK, MessageBoxImage.Error);
             }

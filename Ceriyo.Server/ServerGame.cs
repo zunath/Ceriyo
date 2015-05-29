@@ -50,7 +50,7 @@ namespace Ceriyo.Server
             Players = new Dictionary<NetConnection, ServerPlayer>();
             GUIStatusUpdateQueue = new ConcurrentQueue<ServerGUIStatus>();
 
-            if (ModuleDataManager.LoadModule(args.ModuleFileName, true) != FileOperationResultTypeEnum.Success)
+            if (ModuleDataManager.LoadModule(args.ModuleFileName, true) != FileOperationResultType.Success)
             {
                 throw new Exception("Server was unable to load module.");
             }
@@ -85,11 +85,11 @@ namespace Ceriyo.Server
             gameForm.Opacity = 0;
             gameForm.ShowInTaskbar = false;
 
-            NetworkManager.Initialize(NetworkAgentRoleEnum.Server, Settings.Port);
+            NetworkManager.Initialize(NetworkAgentRole.Server, Settings.Port);
             BindEvents();
             SubscribePacketActions();
 
-            ScriptManager.RunModuleScript(Module.Scripts[ScriptEventTypeEnum.OnModuleLoad], Module);
+            ScriptManager.RunModuleScript(Module.Scripts[ScriptEventType.OnModuleLoad], Module);
 
             if (OnGameStarting != null)
             {
@@ -201,12 +201,12 @@ namespace Ceriyo.Server
 
         private void Agent_OnDisconnecting(object sender, ConnectionStatusEventArgs e)
         {
-            ScriptManager.RunModuleScript(Module.Scripts[ScriptEventTypeEnum.OnModulePlayerLeaving], Players[e.Connection]);
+            ScriptManager.RunModuleScript(Module.Scripts[ScriptEventType.OnModulePlayerLeaving], Players[e.Connection]);
         }
 
         private void Agent_OnDisconnected(object sender, ConnectionStatusEventArgs e)
         {
-            ScriptManager.RunModuleScript(Module.Scripts[ScriptEventTypeEnum.OnModulePlayerLeft], Players[e.Connection]);
+            ScriptManager.RunModuleScript(Module.Scripts[ScriptEventType.OnModulePlayerLeft], Players[e.Connection]);
 
             if (Players.ContainsKey(e.Connection))
             {
@@ -367,7 +367,7 @@ namespace Ceriyo.Server
             if (packet == null) return;
 
             var player = Players[packet.SenderConnection];
-            ScriptManager.RunModuleScript(Module.Scripts[ScriptEventTypeEnum.OnModulePlayerEnter], player);
+            ScriptManager.RunModuleScript(Module.Scripts[ScriptEventType.OnModulePlayerEnter], player);
 
             GameResource tilesetGraphicResource = Areas[0].AreaTileset.Graphic;
             GameScreenInitPacket response = new GameScreenInitPacket

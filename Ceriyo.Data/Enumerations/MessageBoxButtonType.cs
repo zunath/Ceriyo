@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum MessageBoxButtonTypeEnum
+    public enum MessageBoxButtonType
     {
         OK = 0,
         OKCancel = 1,

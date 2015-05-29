@@ -45,27 +45,27 @@ namespace Ceriyo.Toolset.Components
         {
             if (Model.SelectedCreature != null)
             {
-                LoadAnimation(AnimationTypeEnum.MoveEast, ddlMoveEastAnimation);
-                LoadAnimation(AnimationTypeEnum.MoveWest, ddlMoveWestAnimation);
-                LoadAnimation(AnimationTypeEnum.MoveNorth, ddlMoveNorthAnimation);
-                LoadAnimation(AnimationTypeEnum.MoveSouth, ddlMoveSouthAnimation);
-                LoadAnimation(AnimationTypeEnum.MoveSouthEast, ddlMoveSoutheastAnimation);
-                LoadAnimation(AnimationTypeEnum.MoveSouthWest, ddlMoveSouthwestAnimation);
-                LoadAnimation(AnimationTypeEnum.MoveNorthEast, ddlMoveNortheastAnimation);
-                LoadAnimation(AnimationTypeEnum.MoveNorthWest, ddlMoveNorthwestAnimation);
+                LoadAnimation(AnimationType.MoveEast, ddlMoveEastAnimation);
+                LoadAnimation(AnimationType.MoveWest, ddlMoveWestAnimation);
+                LoadAnimation(AnimationType.MoveNorth, ddlMoveNorthAnimation);
+                LoadAnimation(AnimationType.MoveSouth, ddlMoveSouthAnimation);
+                LoadAnimation(AnimationType.MoveSouthEast, ddlMoveSoutheastAnimation);
+                LoadAnimation(AnimationType.MoveSouthWest, ddlMoveSouthwestAnimation);
+                LoadAnimation(AnimationType.MoveNorthEast, ddlMoveNortheastAnimation);
+                LoadAnimation(AnimationType.MoveNorthWest, ddlMoveNorthwestAnimation);
 
-                LoadAnimation(AnimationTypeEnum.IdleEast, ddlIdleEastAnimation);
-                LoadAnimation(AnimationTypeEnum.IdleNorth, ddlIdleNorthAnimation);
-                LoadAnimation(AnimationTypeEnum.IdleSouth, ddlIdleSouthAnimation);
-                LoadAnimation(AnimationTypeEnum.IdleWest, ddlIdleWestAnimation);
-                LoadAnimation(AnimationTypeEnum.IdleNorthEast, ddlIdleNortheastAnimation);
-                LoadAnimation(AnimationTypeEnum.IdleNorthWest, ddlIdleNorthwestAnimation);
-                LoadAnimation(AnimationTypeEnum.IdleSouthEast, ddlIdleSoutheastAnimation);
-                LoadAnimation(AnimationTypeEnum.IdleSouthWest, ddlIdleSouthwestAnimation);
+                LoadAnimation(AnimationType.IdleEast, ddlIdleEastAnimation);
+                LoadAnimation(AnimationType.IdleNorth, ddlIdleNorthAnimation);
+                LoadAnimation(AnimationType.IdleSouth, ddlIdleSouthAnimation);
+                LoadAnimation(AnimationType.IdleWest, ddlIdleWestAnimation);
+                LoadAnimation(AnimationType.IdleNorthEast, ddlIdleNortheastAnimation);
+                LoadAnimation(AnimationType.IdleNorthWest, ddlIdleNorthwestAnimation);
+                LoadAnimation(AnimationType.IdleSouthEast, ddlIdleSoutheastAnimation);
+                LoadAnimation(AnimationType.IdleSouthWest, ddlIdleSouthwestAnimation);
             }
         }
 
-        private void LoadAnimation(AnimationTypeEnum animationType, ComboBox box)
+        private void LoadAnimation(AnimationType animationType, ComboBox box)
         {
             if (Model.SelectedCreature.AnimationResrefs.ContainsKey(animationType))
             {
@@ -119,9 +119,9 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Creatures.Cast<IGameObject>().ToList(), WorkingPaths.CreaturesDirectory);
+            FileOperationResultType result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Creatures.Cast<IGameObject>().ToList(), WorkingPaths.CreaturesDirectory);
 
-            if (result != FileOperationResultTypeEnum.Success)
+            if (result != FileOperationResultType.Success)
             {
                 MessageBox.Show("Unable to save creatures.", "Saving creatures failed.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -218,7 +218,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlMoveNorthAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.MoveNorth] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.MoveNorth] = animation.Resref;
             }
         }
         private void MoveSouthAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -226,7 +226,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlMoveSouthAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.MoveSouth] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.MoveSouth] = animation.Resref;
             }
         }
         private void MoveEastAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -234,7 +234,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlMoveEastAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.MoveEast] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.MoveEast] = animation.Resref;
             }
         }
         private void MoveWestAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -242,7 +242,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlMoveWestAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.MoveWest] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.MoveWest] = animation.Resref;
             }
         }
         private void MoveNorthwestAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -250,7 +250,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlMoveNorthwestAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.MoveNorthWest] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.MoveNorthWest] = animation.Resref;
             }
         }
         private void MoveNortheastAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -258,7 +258,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlMoveNortheastAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.MoveNorthEast] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.MoveNorthEast] = animation.Resref;
             }
         }
         private void MoveSouthwestAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -266,7 +266,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlMoveSouthwestAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.MoveSouthWest] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.MoveSouthWest] = animation.Resref;
             }
         }
         private void MoveSoutheastAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -274,7 +274,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlMoveSoutheastAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.MoveSouthEast] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.MoveSouthEast] = animation.Resref;
             }
         }
         private void IdleNorthAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -282,7 +282,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlIdleNorthAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.IdleNorth] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.IdleNorth] = animation.Resref;
             }
         }
         private void IdleSouthAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -290,7 +290,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlIdleSouthAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.IdleSouth] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.IdleSouth] = animation.Resref;
             }
         }
         private void IdleEastAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -298,7 +298,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlIdleEastAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.IdleEast] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.IdleEast] = animation.Resref;
             }
         }
         private void IdleWestAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -306,7 +306,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlIdleWestAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.IdleWest] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.IdleWest] = animation.Resref;
             }
         }
         private void IdleNorthwestAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -314,7 +314,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlIdleNorthwestAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.IdleNorthWest] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.IdleNorthWest] = animation.Resref;
             }
         }
         private void IdleNortheastAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -322,7 +322,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlIdleNortheastAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.IdleNorthEast] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.IdleNorthEast] = animation.Resref;
             }
         }
         private void IdleSoutheastAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -330,7 +330,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlIdleSoutheastAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.IdleSouthEast] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.IdleSouthEast] = animation.Resref;
             }
         }
         private void IdleSouthwestAnimationChanged(object sender, SelectionChangedEventArgs e)
@@ -338,7 +338,7 @@ namespace Ceriyo.Toolset.Components
             SpriteAnimation animation = ddlIdleSouthwestAnimation.SelectedItem as SpriteAnimation;
             if (animation != null)
             {
-                Model.SelectedCreature.AnimationResrefs[AnimationTypeEnum.IdleSouthWest] = animation.Resref;
+                Model.SelectedCreature.AnimationResrefs[AnimationType.IdleSouthWest] = animation.Resref;
             }
         }
 

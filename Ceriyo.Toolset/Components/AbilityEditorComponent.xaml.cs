@@ -74,9 +74,9 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Abilities.Cast<IGameObject>().ToList(), WorkingPaths.AbilitiesDirectory);
+            FileOperationResultType result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Abilities.Cast<IGameObject>().ToList(), WorkingPaths.AbilitiesDirectory);
 
-            if (result != FileOperationResultTypeEnum.Success)
+            if (result != FileOperationResultType.Success)
             {
                 MessageBox.Show("Unable to save abilities.", "Saving abilities failed.", MessageBoxButton.OK, MessageBoxImage.Error);
             }

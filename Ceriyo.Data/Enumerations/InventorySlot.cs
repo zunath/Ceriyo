@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum InventorySlotEnum
+    public enum InventorySlot
     {
         Unknown = 0,
         MainHand = 1,

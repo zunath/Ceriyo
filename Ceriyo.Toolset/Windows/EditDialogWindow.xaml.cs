@@ -63,13 +63,13 @@ namespace Ceriyo.Toolset.Windows
             {
                 dialog.LocalVariables = Model.LocalVariables;
                 
-                FileOperationResultTypeEnum result = WorkingDataManager.SaveGameObjectFile(dialog);
+                FileOperationResultType result = WorkingDataManager.SaveGameObjectFile(dialog);
 
-                if (result == FileOperationResultTypeEnum.Success)
+                if (result == FileOperationResultType.Success)
                 {
                     Close();
                 }
-                else if (result == FileOperationResultTypeEnum.Failure)
+                else if (result == FileOperationResultType.Failure)
                 {
                     MessageBox.Show("Could not save dialog.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

@@ -27,7 +27,7 @@ namespace Ceriyo.Data.GameObjects
         public string ItemPropertyOptionResref { get; set; }
         public string ItemPropertyOptionValueName { get; set; }
         public string ItemPropertyOptionValueValue { get; set; }
-        public ItemPropertyTypeEnum ItemPropertyType { get; set; }
+        public ItemPropertyType ItemPropertyType { get; set; }
 
         public AssignedItemProperty()
         {
@@ -36,7 +36,7 @@ namespace Ceriyo.Data.GameObjects
             ItemPropertyOptionValueName = string.Empty;
             ItemPropertyOptionValueValue = string.Empty;
             ItemPropertyResref = string.Empty;
-            ItemPropertyType = ItemPropertyTypeEnum.Unknown;
+            ItemPropertyType = ItemPropertyType.Unknown;
         }
 
         private void GetName()

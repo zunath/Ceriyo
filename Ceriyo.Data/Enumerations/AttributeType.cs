@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ceriyo.Data.Enumerations
 {
-    public enum AttributeTypeEnum
+    public enum AttributeType
     {
         Unknown = 0,
         Strength = 1,

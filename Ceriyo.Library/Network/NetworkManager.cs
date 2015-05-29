@@ -16,7 +16,7 @@ namespace Ceriyo.Library.Network
         public static event EventHandler<ConnectionStatusEventArgs> OnDisconnected;
         public static event EventHandler<ConnectionStatusEventArgs> OnDisconnecting;
 
-        public static void Initialize(NetworkAgentRoleEnum networkRole, int port)
+        public static void Initialize(NetworkAgentRole networkRole, int port)
         {
             Agent = new NetworkAgent(networkRole, null, port);
             _packetActions = new List<Tuple<Type, PacketAction>>();
@@ -56,14 +56,14 @@ namespace Ceriyo.Library.Network
         }
 
 
-        public static NetworkAgentRoleEnum GetNetworkRole()
+        public static NetworkAgentRole GetNetworkRole()
         {
             return Agent.Role;
         }
 
         public static NetConnection GetConnectionToServer()
         {
-            if (Agent.Role == NetworkAgentRoleEnum.Server)
+            if (Agent.Role == NetworkAgentRole.Server)
             {
                 throw new Exception("Only clients can get the server connection.");
             }

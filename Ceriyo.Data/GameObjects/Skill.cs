@@ -25,7 +25,7 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.SkillsDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
+        public SerializableDictionary<ScriptEventType, string> Scripts { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "Skill"; } }
 
@@ -39,8 +39,8 @@ namespace Ceriyo.Data.GameObjects
             IsPassive = true;
 
             LocalVariables = new BindingList<LocalVariable>();
-            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
-            Scripts.Add(ScriptEventTypeEnum.OnSkillActivated, string.Empty);
+            Scripts = new SerializableDictionary<ScriptEventType, string>();
+            Scripts.Add(ScriptEventType.OnSkillActivated, string.Empty);
         }
     }
 }

@@ -87,9 +87,9 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Items.Cast<IGameObject>().ToList(), WorkingPaths.ItemsDirectory);
+            FileOperationResultType result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Items.Cast<IGameObject>().ToList(), WorkingPaths.ItemsDirectory);
 
-            if (result != FileOperationResultTypeEnum.Success)
+            if (result != FileOperationResultType.Success)
             {
                 MessageBox.Show("Unable to save items.", "Saving items failed", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -97,8 +97,8 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceTypeEnum.Graphic);
-            GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
+            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic);
+            GameResource graphic = new GameResource("", "(No Graphic)", ResourceType.None);
             Model.Graphics.Insert(0, graphic);
 
             Model.Items = WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
@@ -153,7 +153,7 @@ namespace Ceriyo.Toolset.Components
 
             if (resource != null)
             {
-                if (resource.ResourceType == ResourceTypeEnum.None)
+                if (resource.ResourceType == ResourceType.None)
                 {
                     imgInventoryGraphic.Source = null;
                 }
@@ -172,7 +172,7 @@ namespace Ceriyo.Toolset.Components
 
             if (resource != null)
             {
-                if (resource.ResourceType == ResourceTypeEnum.None)
+                if (resource.ResourceType == ResourceType.None)
                 {
                     imgWorldGraphic.Source = null;
                 }

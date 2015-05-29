@@ -51,7 +51,7 @@ namespace Ceriyo.Library.SquidGUI
             Controls.Add(MessageLabel);
         }
 
-        public static MessageBox Show(Point size, string title, string message, MessageBoxButtonTypeEnum buttons, Desktop target)
+        public static MessageBox Show(Point size, string title, string message, MessageBoxButtonType buttons, Desktop target)
         {
             MessageBox box = new MessageBox(title, message);
             box.Size = size;
@@ -61,31 +61,31 @@ namespace Ceriyo.Library.SquidGUI
             return box;
         }
 
-        private void InitButtons(MessageBoxButtonTypeEnum buttons)
+        private void InitButtons(MessageBoxButtonType buttons)
         {
             switch (buttons)
             {
-                case MessageBoxButtonTypeEnum.OK:
+                case MessageBoxButtonType.OK:
                     AddButton("OK", DialogResult.OK, 1);
                     break;
-                case MessageBoxButtonTypeEnum.OKCancel:
+                case MessageBoxButtonType.OKCancel:
                     AddButton("Cancel", DialogResult.Cancel, 2);
                     AddButton("OK", DialogResult.OK, 2);
                     break;
-                case MessageBoxButtonTypeEnum.RetryCancel:
+                case MessageBoxButtonType.RetryCancel:
                     AddButton("Cancel", DialogResult.Cancel, 2);
                     AddButton("Retry", DialogResult.Retry, 2);
                     break;
-                case MessageBoxButtonTypeEnum.YesNo:
+                case MessageBoxButtonType.YesNo:
                     AddButton("No", DialogResult.No, 2);
                     AddButton("Yes", DialogResult.Yes, 2);
                     break;
-                case MessageBoxButtonTypeEnum.YesNoCancel:
+                case MessageBoxButtonType.YesNoCancel:
                     AddButton("No", DialogResult.No, 3);
                     AddButton("Cancel", DialogResult.Cancel, 3);
                     AddButton("Yes", DialogResult.Yes, 3);
                     break;
-                case MessageBoxButtonTypeEnum.AbortRetryIgnore:
+                case MessageBoxButtonType.AbortRetryIgnore:
                     AddButton("Retry", DialogResult.Retry, 3);
                     AddButton("Ignore", DialogResult.Ignore, 3);
                     AddButton("Abort", DialogResult.Abort, 3);

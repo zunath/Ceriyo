@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum TileEditModeEnum
+    public enum TileEditMode
     {
         Unknown = 0,
         Passability = 1,

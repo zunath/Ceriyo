@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum ItemPropertyTypeEnum
+    public enum ItemPropertyType
     {
         Unknown = 0,
         AbilityBonus = 1,

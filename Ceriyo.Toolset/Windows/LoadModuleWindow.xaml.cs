@@ -46,9 +46,9 @@ namespace Ceriyo.Toolset.Windows
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(Model.SelectedFile)) return;
-            FileOperationResultTypeEnum result = ModuleDataManager.LoadModule(Model.SelectedFile);
+            FileOperationResultType result = ModuleDataManager.LoadModule(Model.SelectedFile);
 
-            if (result == FileOperationResultTypeEnum.FileExists)
+            if (result == FileOperationResultType.FileExists)
             {
                 if (MessageBox.Show("WARNING: A module's temporary files are located on disk. If you continue, you will lose them. Are you sure you want to continue?", "Temporary Files Found", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
@@ -60,15 +60,15 @@ namespace Ceriyo.Toolset.Windows
                 }
             }
 
-            if (result == FileOperationResultTypeEnum.FileDoesNotExist)
+            if (result == FileOperationResultType.FileDoesNotExist)
             {
                 MessageBox.Show("Module could not be found.", "Warning", MessageBoxButton.OK);
             }
-            else if (result == FileOperationResultTypeEnum.Failure)
+            else if (result == FileOperationResultType.Failure)
             {
                 MessageBox.Show("Failed to load module.", "Error", MessageBoxButton.OK);
             }
-            else if (result == FileOperationResultTypeEnum.Success)
+            else if (result == FileOperationResultType.Success)
             {
                 Close();
 

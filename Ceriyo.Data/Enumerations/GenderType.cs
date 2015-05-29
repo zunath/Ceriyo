@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum GenderTypeEnum
+    public enum GenderType
     {
         Unknown = 0,
         Male = 1,

@@ -31,7 +31,7 @@ namespace Ceriyo.Toolset.Components
             Model.Creatures = WorkingDataManager.GetAllGameObjects<Creature>(ModulePaths.CreaturesDirectory);
             Model.Items = WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
             Model.Placeables = WorkingDataManager.GetAllGameObjects<Placeable>(ModulePaths.PlaceablesDirectory);
-            Model.PaintMode = PaintObjectModeTypeEnum.Tile;
+            Model.PaintMode = PaintObjectModeType.Tile;
         }
 
         private void LoadComponent(object sender, RoutedEventArgs e)
@@ -46,7 +46,7 @@ namespace Ceriyo.Toolset.Components
             Model.Creatures.Clear();
             Model.Items.Clear();
             Model.Placeables.Clear();
-            Model.PaintMode = PaintObjectModeTypeEnum.None;
+            Model.PaintMode = PaintObjectModeType.None;
             rectSelectedTiles.Visibility = Visibility.Hidden;
         }
 

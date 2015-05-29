@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum PaintObjectModeTypeEnum
+    public enum PaintObjectModeType
     {
         None = 0,
         Tile = 1,

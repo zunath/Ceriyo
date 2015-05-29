@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum AnimationTypeEnum
+    public enum AnimationType
     {
         Unknown = 0,
         MoveNorth = 1,

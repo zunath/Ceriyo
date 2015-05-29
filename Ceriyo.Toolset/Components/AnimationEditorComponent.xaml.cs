@@ -35,8 +35,8 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceTypeEnum.Graphic);
-            GameResource graphic = new GameResource("", "(No Graphic)", ResourceTypeEnum.None);
+            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic);
+            GameResource graphic = new GameResource("", "(No Graphic)", ResourceType.None);
             Model.Graphics.Insert(0, graphic);
 
             Model.Animations = WorkingDataManager.GetAllGameObjects<SpriteAnimation>(ModulePaths.AnimationsDirectory);
@@ -63,9 +63,9 @@ namespace Ceriyo.Toolset.Components
 
         public void Save(object sender, EventArgs e)
         {
-            FileOperationResultTypeEnum result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Animations.Cast<IGameObject>().ToList(), WorkingPaths.AnimationsDirectory);
+            FileOperationResultType result = WorkingDataManager.ReplaceAllGameObjectFiles(Model.Animations.Cast<IGameObject>().ToList(), WorkingPaths.AnimationsDirectory);
 
-            if (result != FileOperationResultTypeEnum.Success)
+            if (result != FileOperationResultType.Success)
             {
                 MessageBox.Show("Unable to save animations.", "Animation save failed.", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -171,7 +171,7 @@ namespace Ceriyo.Toolset.Components
 
             if (resource != null)
             {
-                if (resource.ResourceType == ResourceTypeEnum.None)
+                if (resource.ResourceType == ResourceType.None)
                 {
                     imgGraphic.Source = null;
                 }
@@ -232,7 +232,7 @@ namespace Ceriyo.Toolset.Components
             if (Model.SelectedAnimation != null && 
                 Model.SelectedFrame != null && 
                 Model.SelectedAnimation.Graphic != null && 
-                Model.SelectedAnimation.Graphic.ResourceType == ResourceTypeEnum.Graphic)
+                Model.SelectedAnimation.Graphic.ResourceType == ResourceType.Graphic)
             {
                 Texture2D texture = GameResourceProcessor.GetSubTexture(Model.SelectedAnimation.Graphic,
                     Model.SelectedFrame.TextureCellX * EngineConstants.AnimationFrameWidth,

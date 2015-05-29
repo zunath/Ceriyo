@@ -1,7 +1,7 @@
 ﻿
 namespace Ceriyo.Data.Enumerations
 {
-    public enum FileOperationResultTypeEnum
+    public enum FileOperationResultType
     {
         Unknown = 0,
         Success = 1,

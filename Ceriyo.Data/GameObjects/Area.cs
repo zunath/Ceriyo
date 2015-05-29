@@ -45,7 +45,7 @@ namespace Ceriyo.Data.GameObjects
         [XmlIgnore]
         public string WorkingDirectory { get { return WorkingPaths.AreasDirectory; } }
         public BindingList<LocalVariable> LocalVariables { get; set; }
-        public SerializableDictionary<ScriptEventTypeEnum, string> Scripts { get; set; }
+        public SerializableDictionary<ScriptEventType, string> Scripts { get; set; }
         public BindingList<MapTile> MapTiles { get; set; }
         [XmlIgnore]
         public string CategoryName { get { return "Area"; } }
@@ -110,7 +110,7 @@ namespace Ceriyo.Data.GameObjects
             Comments = string.Empty;
             LayerCount = EngineConstants.AreaMaxLayers;
             LocalVariables = new BindingList<LocalVariable>();
-            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            Scripts = new SerializableDictionary<ScriptEventType, string>();
             MapTiles = new BindingList<MapTile>();
             AreaTilesetResref = string.Empty;
             BattleMusic = new GameResource();
@@ -131,7 +131,7 @@ namespace Ceriyo.Data.GameObjects
             LayerCount = numberOfLayers;
             MapTiles = new BindingList<MapTile>();
             LocalVariables = new BindingList<LocalVariable>();
-            Scripts = new SerializableDictionary<ScriptEventTypeEnum, string>();
+            Scripts = new SerializableDictionary<ScriptEventType, string>();
             CreatureInstancesResrefs = new BindingList<string>();
             ItemInstancesResrefs = new BindingList<string>();
             PlaceableInstancesResrefs = new BindingList<string>();
