@@ -22,12 +22,12 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        public static ObservableCollection<ResourceEditorType> ResourceTypes { get; set; }
+        public BindingList<ResourceEditorType> ResourceTypes { get; set; }
 
         public ResourceEditorVM()
         {
             Resources = new BindingList<ResourceEditorItem>();
-            ResourceTypes = new ObservableCollection<ResourceEditorType>
+            ResourceTypes = new BindingList<ResourceEditorType>
             {
                 new ResourceEditorType("Graphics/Tileset", ResourceType.Graphic, ResourceSubType.Tileset),
                 new ResourceEditorType("Graphics/Creature", ResourceType.Graphic, ResourceSubType.Creature),

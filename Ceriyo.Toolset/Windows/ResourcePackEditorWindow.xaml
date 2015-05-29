@@ -1,9 +1,8 @@
 ﻿<Window x:Class="Ceriyo.Toolset.Windows.ResourcePackEditorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Resource Pack Editor" Height="500" Width="400" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Closing="Window_Closing"
-        xmlns:vm="clr-namespace:Ceriyo.Data.ViewModels;assembly=Ceriyo.Data">
+        Title="Resource Pack Editor" Height="500" Width="550" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -49,7 +48,7 @@
                                     IsReadOnly="True"
                                     Binding="{Binding FileName}">
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Type"
+                <DataGridTextColumn Header="Extension"
                                     IsReadOnly="True"
                                     Binding="{Binding Extension}">
                 </DataGridTextColumn>
@@ -57,12 +56,17 @@
                                     IsReadOnly="True"
                                     Binding="{Binding SizeBytes}">
                 </DataGridTextColumn>
-                <DataGridComboBoxColumn Header="Type"
-                                        SelectedItemBinding="{Binding ResourceSubType}"
-                                        DisplayMemberPath="Name"
-                                        ItemsSource="{Binding Source={x:Static vm:ResourceEditorVM.ResourceTypes}}">
-                    
-                </DataGridComboBoxColumn>
+                <DataGridTemplateColumn Header="Resource Type">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding Path=DataContext.ResourceTypes,
+                                RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                      DisplayMemberPath="Name">
+                                
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
