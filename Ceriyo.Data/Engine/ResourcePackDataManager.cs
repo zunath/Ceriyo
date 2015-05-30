@@ -32,18 +32,17 @@ namespace Ceriyo.Data.Engine
 
             foreach (string package in resourcePackFileNames)
             {
-                List<ResourceEditorItem> resources =
-                    FileManager.XmlDeserialize<List<ResourceEditorItem>>(EnginePaths.ResourcePacksDirectory + package);
+                List<CPResource> resources =
+                    FileManager.XmlDeserialize<List<CPResource>>(EnginePaths.ResourcePacksDirectory + package);
 
-                foreach (ResourceEditorItem item in resources)
+                foreach (CPResource item in resources)
                 {
                     GameResource gameResource = new GameResource
                     {
                         Package = package,
                         FileName = item.FileName,
                         ResourceType = item.ResourceType,
-                        ResourceSubType = item.ResourceSubType,
-                        Contents = item.Contents
+                        ResourceSubType = item.ResourceSubType
                     };
 
                     if (gameResources.SingleOrDefault(x => x.FileName == item.FileName) == null &&

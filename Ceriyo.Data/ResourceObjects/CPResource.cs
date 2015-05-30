@@ -2,7 +2,7 @@
 
 namespace Ceriyo.Data.ResourceObjects
 {
-    public class ResourceEditorItem
+    public class CPResource
     {
         public string FileName { get; set; }
         public string Extension { get; set; }
@@ -18,16 +18,16 @@ namespace Ceriyo.Data.ResourceObjects
         {
             get { return ResourceEditorType.SubType; }
         }
-        public ResourceEditorType ResourceEditorType { get; set; }
+        public CPResourceType ResourceEditorType { get; set; }
 
 
-        public ResourceEditorItem()
+        public CPResource()
         {
             FileName = string.Empty;
             Extension = string.Empty;
             Contents = string.Empty;
             SizeBytes = 0;
-            ResourceEditorType = new ResourceEditorType();
+            ResourceEditorType = new CPResourceType();
         }
     }
 }

@@ -6,10 +6,10 @@ namespace Ceriyo.Data.ViewModels
 {
     public class ResourceEditorVM : BaseVM
     {
-        private BindingList<ResourceEditorItem> _resources;
-        private BindingList<ResourceEditorType> _resourceTypes; 
+        private BindingList<CPResource> _resources;
+        private BindingList<CPResourceType> _resourceTypes; 
 
-        public BindingList<ResourceEditorItem> Resources 
+        public BindingList<CPResource> Resources 
         {
             get
             {
@@ -22,7 +22,7 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        public BindingList<ResourceEditorType> ResourceTypes
+        public BindingList<CPResourceType> ResourceTypes
         {
             get
             {
@@ -37,17 +37,17 @@ namespace Ceriyo.Data.ViewModels
 
         public ResourceEditorVM()
         {
-            Resources = new BindingList<ResourceEditorItem>();
-            ResourceTypes = new BindingList<ResourceEditorType>
+            Resources = new BindingList<CPResource>();
+            ResourceTypes = new BindingList<CPResourceType>
             {
-                new ResourceEditorType(string.Empty, ResourceType.Unknown, ResourceSubType.Unknown),
-                new ResourceEditorType("Graphics/Tileset", ResourceType.Graphic, ResourceSubType.Tileset),
-                new ResourceEditorType("Graphics/Creature", ResourceType.Graphic, ResourceSubType.Creature),
-                new ResourceEditorType("Graphics/Inventory Icon", ResourceType.Graphic, ResourceSubType.InventoryIcon),
-                new ResourceEditorType("Graphics/Equipment", ResourceType.Graphic, ResourceSubType.Equipment),
-                new ResourceEditorType("Graphics/Head", ResourceType.Graphic, ResourceSubType.Head),
-                new ResourceEditorType("Graphics/Placeable", ResourceType.Graphic, ResourceSubType.Placeable),
-                new ResourceEditorType("Audio/Music", ResourceType.Audio, ResourceSubType.Music)
+                new CPResourceType(string.Empty, ResourceType.Unknown, ResourceSubType.Unknown),
+                new CPResourceType("Graphics/Tileset", ResourceType.Graphic, ResourceSubType.Tileset),
+                new CPResourceType("Graphics/Creature", ResourceType.Graphic, ResourceSubType.Creature),
+                new CPResourceType("Graphics/Inventory Icon", ResourceType.Graphic, ResourceSubType.InventoryIcon),
+                new CPResourceType("Graphics/Equipment", ResourceType.Graphic, ResourceSubType.Equipment),
+                new CPResourceType("Graphics/Head", ResourceType.Graphic, ResourceSubType.Head),
+                new CPResourceType("Graphics/Placeable", ResourceType.Graphic, ResourceSubType.Placeable),
+                new CPResourceType("Audio/Music", ResourceType.Audio, ResourceSubType.Music)
             };
 
         }

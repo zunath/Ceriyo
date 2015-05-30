@@ -60,7 +60,7 @@ namespace Ceriyo.Toolset.Windows
             if (!isOpening) return;
 
             Model.Resources.Clear();
-            Model.Resources = new BindingList<ResourceEditorItem>(FileManager.XmlDeserialize<List<ResourceEditorItem>>(OpenFile.FileName)); ;
+            Model.Resources = new BindingList<CPResource>(FileManager.XmlDeserialize<List<CPResource>>(OpenFile.FileName)); ;
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -80,7 +80,7 @@ namespace Ceriyo.Toolset.Windows
 
             foreach (string path in filePaths)
             {
-                ResourceEditorItem item = new ResourceEditorItem
+                CPResource item = new CPResource
                 {
                     FileName = Path.GetFileNameWithoutExtension(path),
                     Extension = Path.GetExtension(path),
@@ -88,7 +88,7 @@ namespace Ceriyo.Toolset.Windows
                     Contents = Convert.ToBase64String(File.ReadAllBytes(path))
                 };
 
-                ResourceEditorItem existingItem = Model.Resources.FirstOrDefault(x => x.FileName == item.FileName && x.Extension == item.Extension);
+                CPResource existingItem = Model.Resources.FirstOrDefault(x => x.FileName == item.FileName && x.Extension == item.Extension);
                 if (existingItem == null)
                 {
                     Model.Resources.Add(item);
