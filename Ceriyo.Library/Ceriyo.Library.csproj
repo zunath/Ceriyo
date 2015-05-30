@@ -123,6 +123,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="Extensions\BindingListExtensions.cs" />
+    <Compile Include="Extensions\Texture2DExtensions.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Network\NetworkAgent.cs" />
     <Compile Include="Network\NetworkDelegates.cs" />

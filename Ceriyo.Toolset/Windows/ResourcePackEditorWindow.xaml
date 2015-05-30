@@ -59,13 +59,19 @@
                 <DataGridTemplateColumn Header="Resource Type">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
+                            <Label Content="{Binding Path=ResourceEditorType.Name}"></Label>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
                             <ComboBox ItemsSource="{Binding Path=DataContext.ResourceTypes,
                                 RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                      DisplayMemberPath="Name">
+                                      DisplayMemberPath="Name"
+                                      SelectedItem="{Binding ResourceEditorType}">
                                 
                             </ComboBox>
                         </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>

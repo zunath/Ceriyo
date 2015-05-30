@@ -87,18 +87,10 @@ namespace Ceriyo.Toolset.Windows
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            bool success = ResourcePackDataManager.BuildModule(Model.AttachedResourcePackages);
-
-            if (success)
-            {
-                Model.AttachedResourcePackages.Clear();
-                Model.AvailableResourcePackages.Clear();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Unable to build module.", "Error building module", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            ResourcePackDataManager.BuildModule(Model.AttachedResourcePackages);
+            Model.AttachedResourcePackages.Clear();
+            Model.AvailableResourcePackages.Clear();
+            Hide();
         }
 
         private void Cancel(object sender, RoutedEventArgs e)

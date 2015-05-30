@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Ceriyo.Library.Extensions;
 
 namespace Ceriyo.Toolset.Components
 {
@@ -159,7 +160,7 @@ namespace Ceriyo.Toolset.Components
                 }
                 else
                 {
-                    BitmapImage image = GameResourceProcessor.ToBitmapImage(resource);
+                    BitmapImage image = resource.ToTexture2D().ToBitmapImage();
                     Model.SelectedItem.InventoryGraphic = resource;
                     imgInventoryGraphic.Source = image;
                 }
@@ -178,7 +179,7 @@ namespace Ceriyo.Toolset.Components
                 }
                 else
                 {
-                    BitmapImage image = GameResourceProcessor.ToBitmapImage(resource);
+                    BitmapImage image = resource.ToTexture2D().ToBitmapImage();
                     Model.SelectedItem.WorldGraphic = resource;
                     imgWorldGraphic.Source = image;
                 }

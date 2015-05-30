@@ -10,7 +10,7 @@ namespace Ceriyo.Library.Processing
         public static AnimationChain ToAnimationChain(SpriteAnimation animation)
         {
             AnimationChain chain = new AnimationChain();
-            Texture2D texture = GameResourceProcessor.ToTexture2D(animation.Graphic);
+            Texture2D texture = animation.Graphic.ToTexture2D();
 
             foreach (SpriteAnimationFrame spriteFrame in animation.Frames)
             {

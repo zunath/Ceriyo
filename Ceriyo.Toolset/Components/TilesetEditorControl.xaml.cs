@@ -125,7 +125,7 @@ namespace Ceriyo.Toolset.Components
                 }
                 else
                 {
-                    BitmapImage image = GameResourceProcessor.ToBitmapImage(resource);
+                    BitmapImage image = resource.ToTexture2D().ToBitmapImage();
                     Model.SelectedTileset.Graphic = resource;
                     imgGraphic.Source = image;
 

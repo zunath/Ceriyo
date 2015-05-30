@@ -9,7 +9,7 @@
   <Scripts />
   <StackSize>1</StackSize>
   <WearableInventorySlots>
-    <InventorySlotEnum>MainHand</InventorySlotEnum>
-    <InventorySlotEnum>OffHand</InventorySlotEnum>
+    <InventorySlot>MainHand</InventorySlot>
+    <InventorySlot>OffHand</InventorySlot>
   </WearableInventorySlots>
 </ItemType>

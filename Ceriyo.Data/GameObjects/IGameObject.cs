@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
+using Ceriyo.Data.DataObjects;
 using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.Extensions;
 
 namespace Ceriyo.Data.GameObjects
 {

@@ -1,8 +1,8 @@
-﻿using Ceriyo.Data.Enumerations;
+﻿using System.Collections.Generic;
+using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using FlatRedBall.IO;
-using Ionic.Zip;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -11,161 +11,51 @@ namespace Ceriyo.Data.Engine
 {
     public static class ResourcePackDataManager
     {
-        public static FileOperationResultType SaveResourcePack(BindingList<ResourceEditorItem> resources, string path)
-        {
-            FileOperationResultType result;
-            string backupFilePath = path + EnginePaths.BackupExtension;
-            
-            try
-            {
-                if (File.Exists(path))
-                {
-                    File.Move(path, backupFilePath);
-                }
-
-                using (ZipFile file = new ZipFile(path))
-                {
-                    string xml;
-                    FileManager.XmlSerialize(resources, out xml);
-
-                    file.AddEntry(EnginePaths.ResourcePackDataFileName + EnginePaths.DataExtension, xml);
-
-                    foreach (ResourceEditorItem item in resources)
-                    {
-                        file.AddEntry(item.FileName + item.Extension, item.Contents);
-                    }
-
-                    file.Save();
-                }
-
-                File.Delete(backupFilePath);
-                result = FileOperationResultType.Success;
-            }
-            catch
-            {
-                result = FileOperationResultType.Failure;
-                File.Delete(path);
-                File.Move(backupFilePath, path);
-            }
-
-            return result;
-        }
-
-        public static BindingList<ResourceEditorItem> OpenResourcePack(string path)
-        {
-            BindingList<ResourceEditorItem> resources = new BindingList<ResourceEditorItem>();
-
-            try
-            {
-                using (ZipFile file = new ZipFile(path))
-                {
-                    foreach (ZipEntry entry in file.Entries)
-                    {
-                        if (entry.FileName != EnginePaths.ResourcePackDataFileName + EnginePaths.DataExtension)
-                        {
-                            ResourceEditorItem item = new ResourceEditorItem
-                            {
-                                FileName = Path.GetFileNameWithoutExtension(entry.FileName),
-                                Extension = Path.GetExtension(entry.FileName),
-                                SizeBytes = entry.UncompressedSize
-                            };
-
-                            using (MemoryStream stream = new MemoryStream())
-                            {
-                                entry.Extract(stream);
-                                item.Contents = stream.ToArray();
-                            }
-
-                            resources.Add(item);
-                        }
-                    }
-                    
-                }
-            }
-            catch
-            {
-                resources = null;
-            }
-
-            return resources;
-        }
-
         public static BindingList<string> GetAllResourcePackNames()
         {
+            string[] files = Directory.GetFiles(EnginePaths.ResourcePacksDirectory, "*" + EnginePaths.ResourcePackExtension);
             BindingList<string> result = new BindingList<string>();
 
-            try
+            foreach (string item in files)
             {
-                string[] files = Directory.GetFiles(EnginePaths.ResourcePacksDirectory, "*" + EnginePaths.ResourcePackExtension);
-                
-                foreach (string file in files)
-                {
-                    result.Add(Path.GetFileName(file));
-                }
-            }
-            catch
-            {
-                result = null;
+                result.Add(Path.GetFileName(item));
             }
 
             return result;
         }
 
-        public static bool BuildModule(BindingList<string> resourcePackFileNames)
+        public static void BuildModule(BindingList<string> resourcePackFileNames)
         {
-            bool success;
-            BindingList<GameResource> resources = new BindingList<GameResource>();
+            BindingList<GameResource> gameResources = new BindingList<GameResource>();
             GameModule module = WorkingDataManager.GetGameModule();
             module.ResourcePacks = resourcePackFileNames;
 
-            try
+            foreach (string package in resourcePackFileNames)
             {
-                foreach (string package in resourcePackFileNames)
+                List<ResourceEditorItem> resources =
+                    FileManager.XmlDeserialize<List<ResourceEditorItem>>(EnginePaths.ResourcePacksDirectory + package);
+
+                foreach (ResourceEditorItem item in resources)
                 {
-                    using (ZipFile zip = new ZipFile(EnginePaths.ResourcePacksDirectory + package))
+                    GameResource gameResource = new GameResource
                     {
-                        foreach (ZipEntry resourceFile in zip.Entries)
-                        {
-                            string extension = Path.GetExtension(resourceFile.FileName);
-                            GameResource resource = new GameResource
-                            {
-                                Package = package,
-                                FileName = resourceFile.FileName
-                            };
+                        Package = package,
+                        FileName = item.FileName,
+                        ResourceType = item.ResourceType,
+                        ResourceSubType = item.ResourceSubType,
+                        Contents = item.Contents
+                    };
 
-                            switch (extension)
-                            {
-                                    // TODO: Force user to select type of resource
-                                //case ".png":
-                                //    resource.ResourceType = ResourceType.Graphic;
-                                //    break;
-                                //case ".mp3":
-                                //    resource.ResourceType = ResourceType.Audio;
-                                //    break;
-                                default:
-                                    resource.ResourceType = ResourceType.Unknown;
-                                    break;
-                            }
-
-                            if (resources.SingleOrDefault(x => x.FileName == resource.FileName) == null && 
-                                resource.ResourceType != ResourceType.Unknown)
-                            {
-                                resources.Add(resource);
-                            }
-                        }
+                    if (gameResources.SingleOrDefault(x => x.FileName == item.FileName) == null &&
+                        item.ResourceType != ResourceType.Unknown)
+                    {
+                        gameResources.Add(gameResource);
                     }
                 }
-
-                WorkingDataManager.SaveModuleSettings(module);
-                FileManager.XmlSerialize(resources, WorkingPaths.ResourceLinksFile);
-                success = true;
-            }
-            catch
-            {
-                success = false;
             }
 
-            return success;
+            WorkingDataManager.SaveModuleSettings(module);
+            FileManager.XmlSerialize(gameResources, WorkingPaths.ResourceLinksFile);
         }
 
         public static BindingList<GameResource> GetGameResources(ResourceType resourceType, ResourceSubType resourceSubType)

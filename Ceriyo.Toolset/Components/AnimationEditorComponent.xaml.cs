@@ -12,6 +12,7 @@ using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ResourceObjects;
 using Ceriyo.Data.ViewModels;
+using Ceriyo.Library.Extensions;
 using Ceriyo.Library.Processing;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -177,7 +178,7 @@ namespace Ceriyo.Toolset.Components
                 }
                 else
                 {
-                    BitmapImage image = GameResourceProcessor.ToBitmapImage(resource);
+                    BitmapImage image = resource.ToTexture2D().ToBitmapImage();
                     Model.SelectedAnimation.Graphic = resource;
                     imgGraphic.Source = image;
                 }
@@ -234,13 +235,14 @@ namespace Ceriyo.Toolset.Components
                 Model.SelectedAnimation.Graphic != null && 
                 Model.SelectedAnimation.Graphic.ResourceType == ResourceType.Graphic)
             {
-                Texture2D texture = GameResourceProcessor.GetSubTexture(Model.SelectedAnimation.Graphic,
+                
+                Texture2D texture = Model.SelectedAnimation.Graphic.GetSubTexture(
                     Model.SelectedFrame.TextureCellX * EngineConstants.AnimationFrameWidth,
                     Model.SelectedFrame.TextureCellY * EngineConstants.AnimationFrameHeight,
                     EngineConstants.AnimationFrameWidth,
                     EngineConstants.AnimationFrameHeight);
 
-                imgPreview.Source = GameResourceProcessor.ToBitmapImage(texture);
+                imgPreview.Source = texture.ToBitmapImage();
                 imgPreview.RenderTransformOrigin = new Point(0.5, 0.5);
 
                 float xTransform = Model.SelectedFrame.FlipHorizontal ? -1.0f : 1.0f;

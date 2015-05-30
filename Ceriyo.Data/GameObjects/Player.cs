@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using Ceriyo.Data.DataObjects;
 using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.Extensions;
 using Lidgren.Network;
 using ProtoBuf;
 

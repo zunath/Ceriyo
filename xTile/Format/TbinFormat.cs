@@ -265,7 +265,6 @@ namespace xTile.Format
         private void LoadTileSheet(Stream stream, Map map)
         {
             string id = LoadString(stream);
-            string description = LoadString(stream);
             string imageSource = LoadString(stream);
             GameResource resource = new GameResource(imageSource.Split('|')[0], 
                 imageSource.Split('|')[1], 

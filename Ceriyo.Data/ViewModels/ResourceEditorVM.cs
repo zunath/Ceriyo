@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.ResourceObjects;
 
@@ -8,6 +7,7 @@ namespace Ceriyo.Data.ViewModels
     public class ResourceEditorVM : BaseVM
     {
         private BindingList<ResourceEditorItem> _resources;
+        private BindingList<ResourceEditorType> _resourceTypes; 
 
         public BindingList<ResourceEditorItem> Resources 
         {
@@ -22,13 +22,25 @@ namespace Ceriyo.Data.ViewModels
             }
         }
 
-        public BindingList<ResourceEditorType> ResourceTypes { get; set; }
+        public BindingList<ResourceEditorType> ResourceTypes
+        {
+            get
+            {
+                return _resourceTypes;
+            }
+            set
+            {
+                _resourceTypes = value;
+                OnPropertyChanged("ResourceTypes");
+            }
+        }
 
         public ResourceEditorVM()
         {
             Resources = new BindingList<ResourceEditorItem>();
             ResourceTypes = new BindingList<ResourceEditorType>
             {
+                new ResourceEditorType(string.Empty, ResourceType.Unknown, ResourceSubType.Unknown),
                 new ResourceEditorType("Graphics/Tileset", ResourceType.Graphic, ResourceSubType.Tileset),
                 new ResourceEditorType("Graphics/Creature", ResourceType.Graphic, ResourceSubType.Creature),
                 new ResourceEditorType("Graphics/Inventory Icon", ResourceType.Graphic, ResourceSubType.InventoryIcon),

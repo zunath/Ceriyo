@@ -7,6 +7,7 @@ using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Data.ViewModels;
+using Ceriyo.Library.Extensions;
 using Ceriyo.Library.Processing;
 
 namespace Ceriyo.Toolset.Components
@@ -65,7 +66,7 @@ namespace Ceriyo.Toolset.Components
             {
                 if (!string.IsNullOrWhiteSpace(area.AreaTileset.Graphic.FileName))
                 {
-                    imgTiles.Source = GameResourceProcessor.ToBitmapImage(area.AreaTileset.Graphic);
+                    imgTiles.Source = area.AreaTileset.Graphic.ToTexture2D().ToBitmapImage();
                 }
             }
 

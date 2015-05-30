@@ -101,6 +101,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -142,7 +143,7 @@
     <Compile Include="EventArguments\ObjectPainterEventArgs.cs" />
     <Compile Include="EventArguments\ServerStatusUpdateEventArgs.cs" />
     <Compile Include="EventArguments\TilePaintEventArgs.cs" />
-    <Compile Include="Extensions\SerializableDictionary.cs" />
+    <Compile Include="DataObjects\SerializableDictionary.cs" />
     <Compile Include="GameObjects\Ability.cs" />
     <Compile Include="GameObjects\Area.cs" />
     <Compile Include="GameObjects\AssignedItemProperty.cs" />

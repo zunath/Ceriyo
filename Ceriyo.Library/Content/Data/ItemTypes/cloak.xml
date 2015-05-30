@@ -9,6 +9,6 @@
   <Scripts />
   <StackSize>1</StackSize>
   <WearableInventorySlots>
-    <InventorySlotEnum>Back</InventorySlotEnum>
+    <InventorySlot>Back</InventorySlot>
   </WearableInventorySlots>
 </ItemType>

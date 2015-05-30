@@ -1,8 +1,8 @@
 ﻿using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.Extensions;
 using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using Ceriyo.Data.DataObjects;
 
 namespace Ceriyo.Data.GameObjects
 {

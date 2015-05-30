@@ -124,16 +124,8 @@ namespace Ceriyo.Toolset.Components
         private void BuildModule(object sender, RoutedEventArgs e)
         {
             GameModule module = WorkingDataManager.GetGameModule();
-            bool success = ResourcePackDataManager.BuildModule(module.ResourcePacks);
-
-            if (success)
-            {
-                MessageBox.Show("Module built successfully!", "Success", MessageBoxButton.OK);
-            }
-            else
-            {
-                MessageBox.Show("Module failed to build.", "Failure", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            ResourcePackDataManager.BuildModule(module.ResourcePacks);
+            MessageBox.Show("Module built successfully!", "Success", MessageBoxButton.OK);
         }
 
         private void SaveModule(object sender, RoutedEventArgs e)

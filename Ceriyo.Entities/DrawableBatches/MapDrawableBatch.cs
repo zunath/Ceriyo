@@ -60,7 +60,7 @@ namespace Ceriyo.Entities.DrawableBatches
 
         private void LoadTileSheets()
         {
-            Texture2D texture = GameResourceProcessor.ToTexture2D(_graphicResource);
+            Texture2D texture = _graphicResource.ToTexture2D();
 
             _areaTileSheet = new TileSheet(AreaMap,
                 _graphicResource,

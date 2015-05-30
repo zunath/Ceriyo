@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using Ceriyo.Data.DataObjects;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
-using Ceriyo.Data.Extensions;
 using Ceriyo.Data.ResourceObjects;
 
 namespace Ceriyo.Data.GameObjects

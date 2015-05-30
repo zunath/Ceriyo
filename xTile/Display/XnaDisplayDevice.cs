@@ -136,7 +136,7 @@ namespace xTile.Display
             }
             else
             {
-                m_tileSheetTextures[tileSheet] = GameResourceProcessor.ToTexture2D(tileSheet.ImageSource);    
+                m_tileSheetTextures[tileSheet] = tileSheet.ImageSource.ToTexture2D();
             }
         }
 

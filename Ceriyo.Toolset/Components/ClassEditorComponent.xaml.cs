@@ -98,14 +98,15 @@ namespace Ceriyo.Toolset.Components
 
         private void ChangeClassName(object sender, TextChangedEventArgs e)
         {
-            if (OnClassesListChanged != null)
-            {
-                EditorItemChangedEventArgs args = new EditorItemChangedEventArgs(Model.SelectedClass,
-                    Model.SelectedClass.Resref, false, true);
-                args.GameObject.Name = txtName.Text;
+            if (OnClassesListChanged == null || Model.SelectedClass == null) return;
 
-                OnClassesListChanged(this, args);
-            }
+            EditorItemChangedEventArgs args = new EditorItemChangedEventArgs(Model.SelectedClass,
+                Model.SelectedClass.Resref, false, true)
+            {
+                GameObject = {Name = txtName.Text}
+            };
+
+            OnClassesListChanged(this, args);
         }
     }
 }
