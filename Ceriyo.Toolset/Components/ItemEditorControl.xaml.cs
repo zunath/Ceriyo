@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Ceriyo.Data;
-using Ceriyo.Data.Engine;
+﻿using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.EventArguments;
 using Ceriyo.Data.GameObjects;
@@ -39,7 +37,7 @@ namespace Ceriyo.Toolset.Components
             item.Resref = resref;
 
             item.InventoryGraphic = lbInventoryGraphic.Items[0] as GameResource;
-            item.WorldGraphic = lbWorldGraphic.Items[0] as GameResource;
+            item.EquippedGraphic = lbEquippedGraphic.Items[0] as GameResource;
             item.ItemTypeResref = ((ItemType) lbItemType.Items[0]).Resref;
             item.ItemRequirements = BuildItemRequirements();
             Model.Items.Add(item);
@@ -81,7 +79,7 @@ namespace Ceriyo.Toolset.Components
                     Model.SelectedItem = null;
                     Model.IsItemSelected = false;
                     imgInventoryGraphic.Source = null;
-                    imgWorldGraphic.Source = null;
+                    imgEquippedGraphic.Source = null;
                 }
             }
         }
@@ -98,9 +96,12 @@ namespace Ceriyo.Toolset.Components
 
         public void Open(object sender, EventArgs e)
         {
-            Model.Graphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic, ResourceSubType.InventoryIcon);
+            Model.InventoryItemGraphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic, ResourceSubType.InventoryIcon);
             GameResource graphic = new GameResource("", "(No Graphic)", ResourceType.None, ResourceSubType.None);
-            Model.Graphics.Insert(0, graphic);
+            Model.InventoryItemGraphics.Insert(0, graphic);
+
+            Model.EquippedItemGraphics = ResourcePackDataManager.GetGameResources(ResourceType.Graphic, ResourceSubType.Equipment);
+            Model.EquippedItemGraphics.Insert(0, graphic);
 
             Model.Items = WorkingDataManager.GetAllGameObjects<Item>(ModulePaths.ItemsDirectory);
             Model.ItemTypes = WorkingDataManager.GetAllGameObjects<ItemType>(ModulePaths.ItemTypesDirectory);
@@ -110,15 +111,15 @@ namespace Ceriyo.Toolset.Components
 
             foreach (Item item in Model.Items)
             {
-                GameResource resource = Model.Graphics.SingleOrDefault(x => x.FileName == item.InventoryGraphic.FileName);
+                GameResource resource = Model.InventoryItemGraphics.SingleOrDefault(x => x.FileName == item.InventoryGraphic.FileName);
                 if (resource != null)
                 {
                     item.InventoryGraphic = resource;
                 }
-                resource = Model.Graphics.SingleOrDefault(x => x.FileName == item.WorldGraphic.FileName);
+                resource = Model.EquippedItemGraphics.SingleOrDefault(x => x.FileName == item.EquippedGraphic.FileName);
                 if (resource != null)
                 {
-                    item.WorldGraphic = resource;
+                    item.EquippedGraphic = resource;
                 }
             }
 
@@ -167,21 +168,21 @@ namespace Ceriyo.Toolset.Components
             }
         }
 
-        private void WorldGraphicSelected(object sender, SelectionChangedEventArgs e)
+        private void EquippedGraphicSelected(object sender, SelectionChangedEventArgs e)
         {
-            GameResource resource = lbWorldGraphic.SelectedItem as GameResource;
+            GameResource resource = lbEquippedGraphic.SelectedItem as GameResource;
 
             if (resource != null)
             {
                 if (resource.ResourceType == ResourceType.None)
                 {
-                    imgWorldGraphic.Source = null;
+                    imgEquippedGraphic.Source = null;
                 }
                 else
                 {
                     BitmapImage image = resource.ToTexture2D().ToBitmapImage();
-                    Model.SelectedItem.WorldGraphic = resource;
-                    imgWorldGraphic.Source = image;
+                    Model.SelectedItem.EquippedGraphic = resource;
+                    imgEquippedGraphic.Source = image;
                 }
             }
         }

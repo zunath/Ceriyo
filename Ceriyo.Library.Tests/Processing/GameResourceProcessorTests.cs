@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Ceriyo.Data.GameObjects;
 using Ceriyo.Library.Processing;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Ceriyo.Library.Tests
+namespace Ceriyo.Library.Tests.Processing
 {
     [TestClass]
     public class GameResourceProcessorTests

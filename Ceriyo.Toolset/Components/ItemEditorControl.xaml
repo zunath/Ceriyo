@@ -150,29 +150,29 @@
                     Width="Auto">
             <TabItem Header="Appearance">
                 <Grid Background="#FFE5E5E5">
-                    <Label Content="World Graphic:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                    <Image Name="imgWorldGraphic"
+                    <Label Content="Equipped Graphic:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Image Name="imgEquippedGraphic"
                            HorizontalAlignment="Left" 
                            Height="64" Margin="149,5,0,0" 
                            VerticalAlignment="Top" 
                            Width="64"/>
-                    <ListBox Name="lbWorldGraphic"
+                    <ListBox Name="lbEquippedGraphic"
                              HorizontalAlignment="Stretch" 
                              Height="100" 
                              Margin="10,74,0,0" 
                              VerticalAlignment="Top" 
                              DisplayMemberPath="Name"
                              IsEnabled="{Binding IsItemSelected}"
-                             ItemsSource="{Binding Graphics}"
-                             SelectedItem="{Binding Path=SelectedItem.WorldGraphic}"
-                             SelectionChanged="WorldGraphicSelected"
+                             ItemsSource="{Binding EquippedItemGraphics}"
+                             SelectedItem="{Binding Path=SelectedItem.EquippedGraphic}"
+                             SelectionChanged="EquippedGraphicSelected"
                              Width="Auto"/>
                     <Label Content="Inventory Graphic:" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top"/>
                     <Image x:Name="imgInventoryGraphic"
                     	HorizontalAlignment="Left" 
-                    	Height="64" Margin="149,219,0,0" 
+                    	Height="60" Margin="149,219,0,0" 
                     	VerticalAlignment="Top" 
-                    	Width="64"/>
+                    	Width="60"/>
                     <ListBox x:Name="lbInventoryGraphic"
                     	HorizontalAlignment="Stretch" 
                     	Height="100" 
@@ -180,7 +180,7 @@
                     	VerticalAlignment="Top" 
                         DisplayMemberPath="Name"
                         IsEnabled="{Binding IsItemSelected}"
-                        ItemsSource="{Binding Graphics}"
+                        ItemsSource="{Binding InventoryItemGraphics}"
                         SelectedItem="{Binding Path=SelectedItem.InventoryGraphic}"
                         SelectionChanged="InventoryGraphicSelected"
                     	Width="Auto"/>

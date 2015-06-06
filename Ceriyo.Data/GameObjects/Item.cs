@@ -38,7 +38,7 @@ namespace Ceriyo.Data.GameObjects
         }
         public int Price { get; set; }
         public GameResource InventoryGraphic { get; set; }
-        public GameResource WorldGraphic { get; set; }
+        public GameResource EquippedGraphic { get; set; }
 
         public bool IsStolen { get; set; }
         public bool IsPlot { get; set; }
@@ -63,7 +63,7 @@ namespace Ceriyo.Data.GameObjects
             IsPlot = false;
             IsUndroppable = false;
             InventoryGraphic = new GameResource();
-            WorldGraphic = new GameResource();
+            EquippedGraphic = new GameResource();
             AssignedItemProperties = new BindingList<AssignedItemProperty>();
             ItemRequirements = new BindingList<ItemClassRequirement>();
             

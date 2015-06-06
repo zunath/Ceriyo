@@ -6,10 +6,11 @@ namespace Ceriyo.Data.ViewModels
 {
     public class ItemEditorVM : BaseVM
     {
-        private BindingList<GameResource> _graphics;
+        private BindingList<GameResource> _inventoryItemGraphics;
+        private BindingList<GameResource> _equippedItemGraphics; 
         private BindingList<Item> _items;
         private BindingList<ItemType> _itemTypes;
-        private GameResource _worldGraphic;
+        private GameResource _equippedGraphic;
         private GameResource _inventoryGraphic;
         private Item _selectedItem;
         private BindingList<ItemProperty> _availableItemProperties;
@@ -21,29 +22,42 @@ namespace Ceriyo.Data.ViewModels
         private AssignedItemProperty _selectedAssignedItemProperty;
         private BindingList<CharacterClass> _characterClasses; 
 
-        public BindingList<GameResource> Graphics
+        public BindingList<GameResource> InventoryItemGraphics
         {
             get
             {
-                return _graphics;
+                return _inventoryItemGraphics;
             }
             set
             {
-                _graphics = value;
-                OnPropertyChanged("Graphics");
+                _inventoryItemGraphics = value;
+                OnPropertyChanged("InventoryItemGraphics");
             }
         }
 
-        public GameResource WorldGraphic
+        public BindingList<GameResource> EquippedItemGraphics
         {
             get
             {
-                return _worldGraphic;
+                return _equippedItemGraphics;
             }
             set
             {
-                _worldGraphic = value;
-                OnPropertyChanged("WorldGraphic");
+                _equippedItemGraphics = value;
+                OnPropertyChanged("EquippedItemGraphics");
+            }
+        }
+
+        public GameResource EquippedGraphic
+        {
+            get
+            {
+                return _equippedGraphic;
+            }
+            set
+            {
+                _equippedGraphic = value;
+                OnPropertyChanged("EquippedGraphic");
             }
         }
 
@@ -206,7 +220,8 @@ namespace Ceriyo.Data.ViewModels
 
         public ItemEditorVM()
         {
-            Graphics = new BindingList<GameResource>();
+            InventoryItemGraphics = new BindingList<GameResource>();
+            EquippedItemGraphics = new BindingList<GameResource>();
             Items = new BindingList<Item>();
             ItemTypes = new BindingList<ItemType>();
             AvailableItemProperties = new BindingList<ItemProperty>();

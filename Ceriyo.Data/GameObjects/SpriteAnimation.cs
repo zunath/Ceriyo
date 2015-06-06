@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
 using Ceriyo.Data.DataObjects;
 using Ceriyo.Data.Engine;
 using Ceriyo.Data.Enumerations;
 using Ceriyo.Data.ResourceObjects;
-using FlatRedBall;
-using FlatRedBall.Graphics.Animation;
-using FlatRedBall.IO;
 
 namespace Ceriyo.Data.GameObjects
 {
@@ -44,13 +38,13 @@ namespace Ceriyo.Data.GameObjects
 
         public SpriteAnimation()
         {
-            this.Name = string.Empty;
-            this.Tag = string.Empty;
-            this.Resref = string.Empty;
-            this.Description = string.Empty;
-            this.Comments = string.Empty;
-            this.Frames = new BindingList<SpriteAnimationFrame>();
-            this.Graphic = new GameResource();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comments = string.Empty;
+            Frames = new BindingList<SpriteAnimationFrame>();
+            Graphic = new GameResource();
         }
     }
 }
