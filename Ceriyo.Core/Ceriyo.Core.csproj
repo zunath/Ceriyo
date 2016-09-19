@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{552B7FD3-DEF9-433E-A069-771CCDBC3C58}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ceriyo.Core</RootNamespace>
+    <AssemblyName>Ceriyo.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="artemis">
+      <HintPath>..\Ceriyo.Content\Libraries\artemis.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MonoGame.Extended, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Extended.0.5.149\lib\MonoGame.Extended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\ColorTypeAttribute.cs" />
+    <Compile Include="Components\CollisionBox.cs" />
+    <Compile Include="Components\Heartbeat.cs" />
+    <Compile Include="Components\LocalData.cs" />
+    <Compile Include="Components\Nameable.cs" />
+    <Compile Include="Components\Position.cs" />
+    <Compile Include="Components\Renderable.cs" />
+    <Compile Include="Components\Resref.cs" />
+    <Compile Include="Components\Script.cs" />
+    <Compile Include="Components\Tag.cs" />
+    <Compile Include="Components\Velocity.cs" />
+    <Compile Include="Constants\ColorType.cs" />
+    <Compile Include="Constants\Direction.cs" />
+    <Compile Include="Constants\GameCategory.cs" />
+    <Compile Include="Constants\Gender.cs" />
+    <Compile Include="Constants\InventorySlot.cs" />
+    <Compile Include="Constants\PVPType.cs" />
+    <Compile Include="Constants\ScriptEvent.cs" />
+    <Compile Include="Contracts\ICameraService.cs" />
+    <Compile Include="Contracts\IComponentFactory.cs" />
+    <Compile Include="Contracts\IDataService.cs" />
+    <Compile Include="Contracts\IEntityFactory.cs" />
+    <Compile Include="Contracts\IGameEntity.cs" />
+    <Compile Include="Contracts\IGameService.cs" />
+    <Compile Include="Contracts\IGraphicsService.cs" />
+    <Compile Include="Contracts\ILogger.cs" />
+    <Compile Include="Contracts\IScreenFactory.cs" />
+    <Compile Include="Contracts\IScreenService.cs" />
+    <Compile Include="Contracts\IScriptMethodGroup.cs" />
+    <Compile Include="Contracts\IScriptService.cs" />
+    <Compile Include="Entities\Area.cs" />
+    <Compile Include="Entities\ClassLevel.cs" />
+    <Compile Include="Entities\Creature.cs" />
+    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\Module.cs" />
+    <Compile Include="Entities\Placeable.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Extensions\EntityWorldExtensions.cs" />
+    <Compile Include="Extensions\EnumerationExtensions.cs" />
+    <Compile Include="Extensions\SpriteBatchExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\GameScreen.cs" />
+    <Compile Include="Contracts\IScreen.cs" />
+    <Compile Include="Services\ScreenService.cs" />
+    <Compile Include="Scripting\EntityMethods.cs" />
+    <Compile Include="Scripting\LocalDataMethods.cs" />
+    <Compile Include="Scripting\MiscellaneousMethods.cs" />
+    <Compile Include="Scripting\PhysicsMethods.cs" />
+    <Compile Include="Services\CameraService.cs" />
+    <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\GameService.cs" />
+    <Compile Include="Services\GraphicsService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Systems\" />
+    <Folder Include="Validators\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
+      <Project>{a59bd6d2-8e98-4a48-9528-dec1139994a1}</Project>
+      <Name>Ceriyo.Content</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

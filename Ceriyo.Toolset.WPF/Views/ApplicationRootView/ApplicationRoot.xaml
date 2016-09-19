@@ -1,0 +1,62 @@
+﻿<Window x:Class="Ceriyo.Toolset.WPF.Views.ApplicationRootView.ApplicationRoot"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ceriyo.Toolset.WPF"
+        xmlns:menuBarView="clr-namespace:Ceriyo.Toolset.WPF.Views.MenuBarView"
+        xmlns:areaEditorView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaEditorView"
+        xmlns:toolbarView="clr-namespace:Ceriyo.Toolset.WPF.Views.ToolbarView"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24"></RowDefinition>
+            <RowDefinition Height="24"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <menuBarView:MenuBar
+            Grid.Column="0"
+            Grid.Row="0">
+        </menuBarView:MenuBar>
+
+        <toolbarView:Toolbar
+            Grid.Column="0"
+            Grid.Row="1">
+        </toolbarView:Toolbar>
+
+        <Grid
+            Grid.Row="2"
+            Grid.Column="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <GridSplitter
+                Grid.Column="1"
+                Width="5"
+                HorizontalAlignment="Center">
+            </GridSplitter>
+
+            <areaEditorView:AreaEditor
+                Grid.Row="0"
+                Grid.Column="2">
+            </areaEditorView:AreaEditor>
+
+            <GridSplitter
+                Grid.Column="3"
+                Width="5"
+                HorizontalAlignment="Center">
+            </GridSplitter>
+        </Grid>
+        
+        
+    </Grid>
+</Window>

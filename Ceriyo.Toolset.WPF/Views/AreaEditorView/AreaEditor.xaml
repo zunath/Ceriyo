@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="Ceriyo.Toolset.WPF.Views.AreaEditorView.AreaEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:wpf="clr-namespace:Ceriyo.Toolset.WPF"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <wpf:ToolsetGame></wpf:ToolsetGame>
+    </Grid>
+</UserControl>

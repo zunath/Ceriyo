@@ -1,0 +1,39 @@
+﻿<Window x:Class="Ceriyo.Server.WPF.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ceriyo.Server.WPF"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:detailsView="clr-namespace:Ceriyo.Server.WPF.Views.DetailsView"
+        xmlns:descriptionView="clr-namespace:Ceriyo.Server.WPF.Views.DescriptionView"
+        xmlns:playerBlacklistView="clr-namespace:Ceriyo.Server.WPF.Views.PlayerBlacklistView"
+        xmlns:logView="clr-namespace:Ceriyo.Server.WPF.Views.LogView"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        ResizeMode="NoResize"
+        Height="430" 
+        Width="600"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Details">
+                <DockPanel
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                    <detailsView:Details></detailsView:Details>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Description">
+                <descriptionView:Description></descriptionView:Description>
+            </TabItem>
+            <TabItem Header="Player Blacklist">
+                <playerBlacklistView:PlayerBlacklist></playerBlacklistView:PlayerBlacklist>
+            </TabItem>
+            <TabItem Header="Log">
+                <logView:Log></logView:Log>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
