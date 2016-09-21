@@ -34,6 +34,14 @@ namespace Ceriyo.Server.WPF.Views.PlayerBlacklistView
             set { SetProperty(ref _blacklistUsername, value); }
         }
 
+        private string _selectedPlayer;
+
+        public string SelectedPlayer
+        {
+            get { return _selectedPlayer; }
+            set { SetProperty(ref _selectedPlayer, value); }
+        }
+
         public DelegateCommand AddToBlacklistCommand { get; set; }
         public DelegateCommand RemoveSelectedCommand { get; set; }
 

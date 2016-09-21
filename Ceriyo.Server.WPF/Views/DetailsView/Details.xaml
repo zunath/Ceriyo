@@ -165,7 +165,8 @@
             Margin="5,5,0,0"
             Grid.Row="5"
             Grid.Column="4"
-            Grid.ColumnSpan="2">
+            Grid.ColumnSpan="2"
+            IsChecked="{Binding Settings.AllowFileDownloading}">
             Allow File Downloading
         </CheckBox>
     

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Entities;
 using Ceriyo.Core.Settings;
 using Prism.Commands;
@@ -8,13 +9,16 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
 {
     public class DetailsViewModel : BindableBase
     {
+        private readonly IDataService _dataService;
         public DetailsViewModel()
         {
             
         }
 
-        public DetailsViewModel(ServerSettings settings)
+        public DetailsViewModel(IDataService dataService, 
+            ServerSettings settings)
         {
+            _dataService = dataService;
             _settings = settings;
             Modules = new BindingList<Module>();
             MaximumPortNumber = short.MaxValue;
@@ -129,6 +133,7 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
 
         private void SaveSettings()
         {
+            _dataService.Save(_settings);
         }
 
         private void StartServer()

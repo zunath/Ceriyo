@@ -11,7 +11,7 @@
         xmlns:logView="clr-namespace:Ceriyo.Server.WPF.Views.LogView"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="Ceriyo Game Server" 
         ResizeMode="NoResize"
         Height="430" 
         Width="600"

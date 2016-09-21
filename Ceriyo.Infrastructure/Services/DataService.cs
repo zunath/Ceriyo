@@ -6,23 +6,41 @@ using Newtonsoft.Json;
 
 namespace Ceriyo.Infrastructure.Services
 {
-    public class DataService: IDataService
+    public class DataService : IDataService
     {
+        private readonly ILogger _logger;
+
+        public DataService(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         public T Load<T>(string filePath = null)
-            where T: class
+            where T : class
         {
             if (string.IsNullOrWhiteSpace(filePath))
             {
-                var attribute = (FilePathAttribute)Attribute.GetCustomAttribute(typeof(T), typeof(FilePathAttribute));
+                var attribute = (FilePathAttribute) Attribute.GetCustomAttribute(typeof(T), typeof(FilePathAttribute));
                 filePath = attribute.FilePath;
             }
 
-            if(string.IsNullOrWhiteSpace(filePath))
+            if (string.IsNullOrWhiteSpace(filePath))
                 throw new ArgumentException("Invalid file path.");
 
-            return File.Exists(filePath) ?
-                JsonConvert.DeserializeObject<T>(filePath) :
-                Activator.CreateInstance<T>();
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    string json = File.ReadAllText(filePath);
+                    return JsonConvert.DeserializeObject<T>(json);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error("Unable to load server settings file. Defaulting to normal settings.", ex);
+                }
+            }
+            
+            return Activator.CreateInstance<T>();
         }
 
         public void Save<T>(T obj, string filePath = null) 
@@ -36,8 +54,16 @@ namespace Ceriyo.Infrastructure.Services
 
             if(string.IsNullOrWhiteSpace(filePath))
                 throw new ArgumentException("Invalid file path.");
-            
-            string json = JsonConvert.SerializeObject(obj);
+
+            var directory = Path.GetDirectoryName(filePath);
+            if(directory == null) throw new ArgumentException("Path supplied does not have a valid directory.");
+
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
             File.WriteAllText(filePath, json);
         }
     }
