@@ -20,18 +20,171 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="64"></ColumnDefinition>
             <ColumnDefinition Width="64"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="128"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="2">
+            Grid.ColumnSpan="2"
+            Margin="4,4,4,4">
             Abilities:
         </Label>
         
+        <ListBox
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="3"
+            SelectionMode="Single"
+            ItemsSource="{Binding Abilities}"
+            SelectedItem="{Binding SelectedAbility}">
+            
+        </ListBox>
         
+        <Button
+            Grid.Row="4"
+            Grid.Column="0"
+            Margin="5,5,5,5"
+            Command="{Binding NewCommand}">
+            New
+        </Button>
+        
+        <Button
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="5,5,5,5"
+            Command="{Binding DeleteCommand}">
+            Delete
+        </Button>
+        
+        <TabControl
+            Grid.Row="0"
+            Grid.Column="3"
+            Grid.RowSpan="5">
+            <TabItem Header="Scripts">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="128"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="4,4,4,4">
+                        On Activated:
+                    </Label>
+
+                    <ComboBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="4,4,4,4"
+                        ItemsSource="{Binding Scripts}"
+                        SelectedItem="{Binding SelectedAbility.OnActivated}">
+                    </ComboBox>
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Description">
+                <TextBox 
+                		AcceptsReturn="True"
+                		TextWrapping="Wrap"
+                        IsEnabled="{Binding IsAbilitySelected}"
+                		Text="{Binding SelectedAbility.Description}" />
+            </TabItem>
+            <TabItem Header="Comments">
+                <TextBox 
+                		AcceptsReturn="True"
+                		TextWrapping="Wrap"
+                        IsEnabled="{Binding IsAbilitySelected}"
+                		Text="{Binding SelectedAbility.Comment}" />
+            </TabItem>
+        </TabControl>
+        
+        
+        <Grid
+            Grid.Row="0"
+            Grid.Column="2"
+            Grid.RowSpan="5">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="32"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Label
+                Grid.Column="0"
+                Grid.Row="1">
+                Name:
+            </Label>
+
+            <TextBox
+                Grid.Column="0"
+                Grid.Row="2"
+                Margin="4,4,4,4"
+                Text="{Binding SelectedAbility.Name}"
+                IsEnabled="{Binding IsAbilitySelected}">
+            </TextBox>
+            
+            <Label
+                Grid.Column="0"
+                Grid.Row="3">
+                Tag:
+            </Label>
+
+            <TextBox
+                Grid.Column="0"
+                Grid.Row="4"
+                Margin="4,4,4,4"
+                Text="{Binding SelectedAbility.Tag}"
+                IsEnabled="{Binding IsAbilitySelected}">
+            </TextBox>
+            
+            <Label
+                Grid.Column="0"
+                Grid.Row="5">
+                Resref:
+            </Label>
+
+            <TextBox
+                Grid.Column="0"
+                Grid.Row="6"
+                Margin="4,4,4,4"
+                Text="{Binding SelectedAbility.Resref}"
+                IsEnabled="{Binding IsAbilitySelected}">
+            </TextBox>
+            
+            <CheckBox
+                Grid.Column="0"
+                Grid.Row="8"
+                Margin="4,4,4,4"
+                IsChecked="{Binding SelectedAbility.IsPassive}"
+                IsEnabled="{Binding IsAbilitySelected}">
+                Is Passive
+            </CheckBox>
+            
+        </Grid>
         
     </Grid>
 </UserControl>

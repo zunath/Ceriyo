@@ -101,6 +101,7 @@
     <Compile Include="Data\ItemPropertyData.cs" />
     <Compile Include="Data\LocalVariableData.cs" />
     <Compile Include="Data\PlaceableData.cs" />
+    <Compile Include="Data\ScriptData.cs" />
     <Compile Include="Data\SkillData.cs" />
     <Compile Include="Data\TilesetData.cs" />
     <Compile Include="Entities\Ability.cs" />
