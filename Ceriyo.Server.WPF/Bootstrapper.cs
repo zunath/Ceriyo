@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Windows;
 using Autofac;
 using Ceriyo.Infrastructure.IOC;
+using Ceriyo.Server.WPF.Views.ApplicationRootView;
 using Microsoft.Practices.ServiceLocation;
 using Prism.Autofac;
 using Prism.Mvvm;
@@ -13,7 +14,7 @@ namespace Ceriyo.Server.WPF
     {
         protected override DependencyObject CreateShell()
         {
-            return ServiceLocator.Current.GetInstance<Windows.MainWindow>();
+            return ServiceLocator.Current.GetInstance<ApplicationRoot>();
         }
 
         protected override void InitializeShell()
@@ -40,7 +41,7 @@ namespace Ceriyo.Server.WPF
         protected override void ConfigureContainerBuilder(ContainerBuilder builder)
         {
             base.ConfigureContainerBuilder(builder);
-            IOCConfig.Initialize(builder);
+            IOCConfig.InitializeServer(builder);
         }
     }
 }

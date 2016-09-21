@@ -1,4 +1,4 @@
-﻿<Window x:Class="Ceriyo.Server.WPF.Windows.MainWindow"
+﻿<Window x:Class="Ceriyo.Server.WPF.Views.ApplicationRootView.ApplicationRoot"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,6 +9,7 @@
         xmlns:descriptionView="clr-namespace:Ceriyo.Server.WPF.Views.DescriptionView"
         xmlns:playerBlacklistView="clr-namespace:Ceriyo.Server.WPF.Views.PlayerBlacklistView"
         xmlns:logView="clr-namespace:Ceriyo.Server.WPF.Views.LogView"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" 
         ResizeMode="NoResize"
@@ -35,5 +36,10 @@
             </TabItem>
         </TabControl>
 
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding ApplicationLoadedCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
     </Grid>
 </Window>

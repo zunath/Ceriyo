@@ -1,28 +1,34 @@
-﻿using Prism.Mvvm;
+﻿using Ceriyo.Core.Settings;
+using Prism.Commands;
+using Prism.Mvvm;
 
 namespace Ceriyo.Server.WPF.Views.DescriptionView
 {
     public class DescriptionViewModel : BindableBase
     {
+        private ServerSettings _settings;
+
         public DescriptionViewModel()
         {
-
         }
 
-        private string _serverDescription;
-
-        public string ServerDescription
+        public DescriptionViewModel(ServerSettings settings)
         {
-            get { return _serverDescription; }
-            set { SetProperty(ref _serverDescription, value); }
+            _settings = settings;
+            TestCommand = new DelegateCommand(Test);
         }
 
-        private string _serverAnnouncement;
-
-        public string ServerAnnouncement
+        public ServerSettings Settings
         {
-            get { return _serverAnnouncement; }
-            set { SetProperty(ref _serverAnnouncement, value); }
+            get { return _settings; }
+            set { SetProperty(ref _settings, value); }
+        }
+        
+        public DelegateCommand TestCommand { get; set; }
+
+        private void Test()
+        {
+            
         }
 
     }

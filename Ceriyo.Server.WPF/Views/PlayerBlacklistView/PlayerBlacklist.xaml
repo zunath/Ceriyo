@@ -28,7 +28,7 @@
             Grid.Row="0"
             Grid.RowSpan="2"
             Grid.ColumnSpan="4"
-            ItemsSource="{Binding Players}"
+            ItemsSource="{Binding Settings.Blacklist}"
             SelectedItem="{Binding SelectedPlayer}">
             
         </ListBox>

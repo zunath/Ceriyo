@@ -45,6 +45,10 @@
       <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MonoGame.Extended.0.5.149\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ColorTypeAttribute.cs" />
+    <Compile Include="Attributes\FilePathAttribute.cs" />
     <Compile Include="Components\CollisionBox.cs" />
     <Compile Include="Components\Heartbeat.cs" />
     <Compile Include="Components\LocalData.cs" />
@@ -104,9 +109,11 @@
     <Compile Include="Scripting\MiscellaneousMethods.cs" />
     <Compile Include="Scripting\PhysicsMethods.cs" />
     <Compile Include="Services\CameraService.cs" />
-    <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\GameService.cs" />
     <Compile Include="Services\GraphicsService.cs" />
+    <Compile Include="Settings\GameSettings.cs" />
+    <Compile Include="Settings\ServerSettings.cs" />
+    <Compile Include="Settings\ToolsetSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Systems\" />

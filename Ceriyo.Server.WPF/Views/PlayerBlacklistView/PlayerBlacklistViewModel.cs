@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using Ceriyo.Core.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
 
@@ -8,20 +8,24 @@ namespace Ceriyo.Server.WPF.Views.PlayerBlacklistView
     {
         public PlayerBlacklistViewModel()
         {
-            Players = new BindingList<string>();
+            
+        }
+
+        public PlayerBlacklistViewModel(ServerSettings settings)
+        {
+            _settings = settings;
             AddToBlacklistCommand = new DelegateCommand(AddToBlacklist);
             RemoveSelectedCommand = new DelegateCommand(RemoveSelected);
             BlacklistUsername = string.Empty;
         }
 
-        private BindingList<string> _players;
+        private ServerSettings _settings;
 
-        public BindingList<string> Players
+        public ServerSettings Settings
         {
-            get { return _players; }
-            set { SetProperty(ref _players, value); }
+            get { return _settings; }
+            set { SetProperty(ref _settings, value); }
         }
-
         private string _blacklistUsername;
 
         public string BlacklistUsername
@@ -42,6 +46,5 @@ namespace Ceriyo.Server.WPF.Views.PlayerBlacklistView
         {
             
         }
-
     }
 }

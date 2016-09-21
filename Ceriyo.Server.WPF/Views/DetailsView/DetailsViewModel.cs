@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
-using Ceriyo.Core.Constants;
 using Ceriyo.Core.Entities;
+using Ceriyo.Core.Settings;
 using Prism.Commands;
 using Prism.Mvvm;
 
@@ -10,18 +10,28 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
     {
         public DetailsViewModel()
         {
+            
+        }
+
+        public DetailsViewModel(ServerSettings settings)
+        {
+            _settings = settings;
             Modules = new BindingList<Module>();
             MaximumPortNumber = short.MaxValue;
-            SelectedPortNumber = 5121;
-            SelectedPVPType = PVPType.None;
-            SelectedGameCategory = GameCategory.Action;
+            MaximumPlayers = 50;
 
             BanAccountCommand = new DelegateCommand(BanAccount);
             BootPlayerCommand = new DelegateCommand(BootPlayer);
             SendMessageCommand = new DelegateCommand(SendMessage);
             SaveSettingsCommand = new DelegateCommand(SaveSettings);
             StartServerCommand = new DelegateCommand(StartServer);
+        }
 
+        private ServerSettings _settings;
+        public ServerSettings Settings
+        {
+            get { return _settings; }
+            set { SetProperty(ref _settings, value); }
         }
 
         private string _ipAddress;
@@ -31,15 +41,7 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             get { return _ipAddress; }
             set { SetProperty(ref _ipAddress, value); }
         }
-
-        private string _serverName;
-
-        public string ServerName
-        {
-            get { return _serverName; }
-            set { SetProperty(ref _serverName, value); }
-        }
-
+        
         private BindingList<Module> _modules;
 
         public BindingList<Module> Modules
@@ -63,23 +65,7 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             get { return _maximumPortNumber; }
             set { SetProperty(ref _maximumPortNumber, value); }
         }
-
-        private int _selectedPortNumber;
-
-        public int SelectedPortNumber
-        {
-            get { return _selectedPortNumber; }
-            set { SetProperty(ref _selectedPortNumber, value); }
-        }
-
-        private PVPType _selectedPVPType;
-
-        public PVPType SelectedPVPType
-        {
-            get { return _selectedPVPType; }
-            set { SetProperty(ref _selectedPVPType, value); }
-        }
-
+        
         private BindingList<string> _players;
 
         public BindingList<string> Players
@@ -95,15 +81,7 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             get { return _selectedPlayer; }
             set { SetProperty(ref _selectedPlayer, value); }
         }
-
-        private GameCategory _selectedGameCategory;
-
-        public GameCategory SelectedGameCategory
-        {
-            get { return _selectedGameCategory; }
-            set { SetProperty(ref _selectedGameCategory, value); }
-        }
-
+        
         private int _maximumPlayers;
 
         public int MaximumPlayers
@@ -111,47 +89,7 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             get { return _maximumPlayers; }
             set { SetProperty(ref _maximumPlayers, value); }
         }
-
-        private int _selectedMaxPlayers;
-
-        public int SelectedMaxPlayers
-        {
-            get { return _selectedMaxPlayers; }
-            set { SetProperty(ref _selectedMaxPlayers, value); }
-        }
-
-        private bool _allowCharacterDeletion;
-
-        public bool AllowCharacterDeletion
-        {
-            get { return _allowCharacterDeletion; }
-            set { SetProperty(ref _allowCharacterDeletion, value); }
-        }
-
-        private bool _allowFileDownloading;
-
-        public bool AllowFileDownloading
-        {
-            get { return _allowFileDownloading; }
-            set { SetProperty(ref _allowFileDownloading, value); }
-        }
-
-        private string _playerPassword;
-
-        public string PlayerPassword
-        {
-            get { return _playerPassword; }
-            set { SetProperty(ref _playerPassword, value); }
-        }
-
-        private string _gmPassword;
-
-        public string GMPassword
-        {
-            get { return _gmPassword; }
-            set { SetProperty(ref _gmPassword, value); }
-        }
-
+        
         private string _serverMessage;
 
         public string ServerMessage
@@ -191,13 +129,14 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
 
         private void SaveSettings()
         {
-            
         }
 
         private void StartServer()
         {
             
         }
+        
+
 
     }
 }

@@ -17,7 +17,7 @@ namespace Ceriyo.Game.Windows
         
         protected override void Initialize()
         {
-            IOCConfig.Initialize(this);
+            IOCConfig.InitializeGame(this);
             _gameService = GameFactory.GetGameService();
             _gameService.Initialize(_graphics);
 

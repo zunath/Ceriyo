@@ -1,5 +1,4 @@
-﻿using Ceriyo.Toolset.WPF.Events;
-using Prism.Events;
+﻿using Prism.Events;
 using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView

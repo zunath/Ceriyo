@@ -6,9 +6,11 @@ using Artemis.System;
 using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services;
+using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Scripting;
+using Ceriyo.Infrastructure.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -23,14 +25,22 @@ namespace Ceriyo.Infrastructure.IOC
             return _container.Resolve<T>();
         }
 
-        // WPF Initialization
-        public static void Initialize(ContainerBuilder builder)
+        // Server app specific registrations
+        public static void InitializeServer(ContainerBuilder builder)
         {
             RegisterCommon(builder);
+            builder.RegisterInstance(new ServerSettings());
+        }
+
+        // Toolset app specific registrations
+        public static void InitializeToolset(ContainerBuilder builder)
+        {
+            RegisterCommon(builder);
+            builder.RegisterInstance(new ToolsetSettings());
         }
         
-        // MonoGame Initialization
-        public static void Initialize(Game game)
+        // Game app specific registrations
+        public static void InitializeGame(Game game)
         {
             var builder = new ContainerBuilder();
             game.Content.RootDirectory = "Content";
@@ -38,6 +48,7 @@ namespace Ceriyo.Infrastructure.IOC
             builder.RegisterInstance(new SpriteBatch(game.GraphicsDevice)).AsSelf();
             builder.RegisterInstance(game.Content).AsSelf();
             builder.RegisterInstance(game.GraphicsDevice).AsSelf();
+            builder.RegisterInstance(new GameSettings());
 
             RegisterCommon(builder);
 
