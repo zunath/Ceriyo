@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using System.ComponentModel;
+using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
 {
@@ -8,5 +9,8 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
         {
 
         }
+
+        private BindingList<Ability>
+
     }
 }

@@ -62,6 +62,7 @@
     <Compile Include="Attributes\ColorTypeAttribute.cs" />
     <Compile Include="Attributes\FilePathAttribute.cs" />
     <Compile Include="Components\CollisionBox.cs" />
+    <Compile Include="Components\Description.cs" />
     <Compile Include="Components\Heartbeat.cs" />
     <Compile Include="Components\LocalData.cs" />
     <Compile Include="Components\Nameable.cs" />
@@ -90,6 +91,19 @@
     <Compile Include="Contracts\IScreenService.cs" />
     <Compile Include="Contracts\IScriptMethodGroup.cs" />
     <Compile Include="Contracts\IScriptService.cs" />
+    <Compile Include="Data\AbilityData.cs" />
+    <Compile Include="Data\AnimationData.cs" />
+    <Compile Include="Data\ClassData.cs" />
+    <Compile Include="Data\ClassRequirementData.cs" />
+    <Compile Include="Data\CreatureData.cs" />
+    <Compile Include="Data\FrameData.cs" />
+    <Compile Include="Data\ItemData.cs" />
+    <Compile Include="Data\ItemPropertyData.cs" />
+    <Compile Include="Data\LocalVariableData.cs" />
+    <Compile Include="Data\PlaceableData.cs" />
+    <Compile Include="Data\SkillData.cs" />
+    <Compile Include="Data\TilesetData.cs" />
+    <Compile Include="Entities\Ability.cs" />
     <Compile Include="Entities\Area.cs" />
     <Compile Include="Entities\ClassLevel.cs" />
     <Compile Include="Entities\Creature.cs" />
