@@ -65,6 +65,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Attributes\ColorTypeAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripting\EntityMethodsTests.cs" />
     <Compile Include="Scripting\LocalDataMethodsTests.cs" />
