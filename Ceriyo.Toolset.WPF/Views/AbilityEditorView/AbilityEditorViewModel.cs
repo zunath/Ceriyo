@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
 using Ceriyo.Toolset.WPF.Events;

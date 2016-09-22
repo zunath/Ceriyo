@@ -8,7 +8,7 @@
         xmlns:areaEditorView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaEditorView"
         xmlns:toolbarView="clr-namespace:Ceriyo.Toolset.WPF.Views.ToolbarView"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Ceriyo Toolset" Height="350" Width="525">
     <Grid>
 
         <Grid.RowDefinitions>

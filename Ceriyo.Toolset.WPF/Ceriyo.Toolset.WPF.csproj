@@ -124,6 +124,9 @@
     </ApplicationDefinition>
     <Compile Include="Events\AbilityChangedEvent.cs" />
     <Compile Include="Events\AbilityDeletedEvent.cs" />
+    <Compile Include="Events\ClassChangedEvent.cs" />
+    <Compile Include="Events\ClassCreatedEvent.cs" />
+    <Compile Include="Events\ClassDeletedEvent.cs" />
     <Compile Include="Events\DataEditorClosedEvent.cs" />
     <Compile Include="Events\ModuleLoadedEvent.cs" />
     <Compile Include="Events\AbilityCreatedEvent.cs" />

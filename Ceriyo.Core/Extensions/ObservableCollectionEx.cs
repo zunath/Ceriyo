@@ -264,23 +264,11 @@ namespace Ceriyo.Core.Extensions
             }
         }
 
-        public bool IsSynchronized
-        {
-            get { return false; }
-        }
+        public bool IsSynchronized => false;
 
-        public bool IsReadOnly
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsReadOnly => false;
 
-        public bool IsFixedSize
-        {
-            get { return false; }
-        }
+        public bool IsFixedSize => false;
 
         public bool Remove(T item)
         {
@@ -289,7 +277,7 @@ namespace Ceriyo.Core.Extensions
             else
             {
                 var op = _dispatcher.BeginInvoke(new Func<T, bool>(DoRemove), item);
-                if (op == null || op.Result == null)
+                if (op.Result == null)
                     return false;
                 return (bool)op.Result;
             }
@@ -337,7 +325,7 @@ namespace Ceriyo.Core.Extensions
             return _collection.GetEnumerator();
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return _collection.GetEnumerator();
         }
@@ -504,8 +492,9 @@ namespace Ceriyo.Core.Extensions
             var containsAfter = ApplyFilter(item);
 
             if (containsAfter)
-                if (ItemPropertyChanged != null)
-                    ItemPropertyChanged(sender, e);
+            {
+                ItemPropertyChanged?.Invoke(sender, e);
+            }
 
             _sync.ReleaseWriterLock();
         }
@@ -547,8 +536,7 @@ namespace Ceriyo.Core.Extensions
 
         private void RaisePropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void InitFrom(IEnumerable<T> source)
@@ -571,8 +559,7 @@ namespace Ceriyo.Core.Extensions
 
         private void RaiseCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            if (CollectionChanged != null)
-                CollectionChanged(this, e);
+            CollectionChanged?.Invoke(this, e);
         }
 
         public void ApplyFilter()
@@ -586,6 +573,7 @@ namespace Ceriyo.Core.Extensions
 
             _sync.ReleaseWriterLock();
         }
+        
 
         #endregion
 
@@ -601,7 +589,7 @@ namespace Ceriyo.Core.Extensions
 
         #region Event handlers
 
-        void Source_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Source_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             _sync.AcquireWriterLock(Timeout.Infinite);
 
