@@ -5,11 +5,21 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+
              mc:Ignorable="d"
              d:DesignHeight="600"
              d:DesignWidth="600"
              Background="LightGray">
+
     <Grid>
+
+        <i:Interaction.Triggers>
+            <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmDeleteRequest, Mode=OneWay}">
+                <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            </prism:InteractionRequestTrigger>
+        </i:Interaction.Triggers>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="32"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -23,7 +33,7 @@
             <ColumnDefinition Width="128"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <Label
             Grid.Row="0"
             Grid.Column="0"
@@ -31,16 +41,17 @@
             Margin="4,4,4,4">
             Abilities:
         </Label>
-        
+
+
         <ListBox
             Grid.Column="0"
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Grid.RowSpan="3"
+            DisplayMemberPath="Name"
             SelectionMode="Single"
             ItemsSource="{Binding Abilities}"
             SelectedItem="{Binding SelectedAbility}">
-            
         </ListBox>
         
         <Button
@@ -91,6 +102,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         Margin="4,4,4,4"
+                        IsEnabled="{Binding IsAbilitySelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedAbility.OnActivated}">
                     </ComboBox>
@@ -187,4 +199,5 @@
         </Grid>
         
     </Grid>
+    
 </UserControl>

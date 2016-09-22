@@ -25,7 +25,7 @@ namespace Ceriyo.Core.Entities
             script.Event = ScriptEvent.OnAbilityActivated;
 
             entity.AddComponent(script);
-
+            
         }
     }
 }

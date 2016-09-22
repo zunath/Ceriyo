@@ -5,6 +5,7 @@ using Artemis.Interface;
 using Artemis.System;
 using Autofac;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Factory;
@@ -37,6 +38,7 @@ namespace Ceriyo.Infrastructure.IOC
         {
             RegisterCommon(builder);
             builder.RegisterInstance(new ToolsetSettings());
+            builder.RegisterInstance(new ModuleData());
         }
         
         // Game app specific registrations

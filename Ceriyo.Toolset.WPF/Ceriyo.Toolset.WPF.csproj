@@ -122,6 +122,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Events\AbilityChangedEvent.cs" />
+    <Compile Include="Events\AbilityDeletedEvent.cs" />
+    <Compile Include="Events\DataEditorClosedEvent.cs" />
+    <Compile Include="Events\ModuleLoadedEvent.cs" />
+    <Compile Include="Events\AbilityCreatedEvent.cs" />
     <Compile Include="ToolsetGame.cs" />
     <Compile Include="Views\ApplicationRootView\ApplicationRootViewModel.cs" />
     <Page Include="Views\AbilityEditorView\AbilityEditor.xaml">
