@@ -216,6 +216,7 @@ namespace Ceriyo.Core.Data
         {
             GlobalID = Guid.NewGuid().ToString();
             LocalVariables = new LocalVariableData();
+            Level = 1;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

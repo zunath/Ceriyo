@@ -102,6 +102,7 @@
     <Compile Include="Data\FrameData.cs" />
     <Compile Include="Data\ItemData.cs" />
     <Compile Include="Data\ItemPropertyData.cs" />
+    <Compile Include="Data\ItemTypeData.cs" />
     <Compile Include="Data\LocalVariableData.cs" />
     <Compile Include="Data\ModuleData.cs" />
     <Compile Include="Data\PlaceableData.cs" />

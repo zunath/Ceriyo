@@ -19,7 +19,7 @@ namespace Ceriyo.Infrastructure.Mapping
 
         public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
         {
-            return AutoMapper.Mapper.Map<TSource, TDestination>(source, destination);
+            return AutoMapper.Mapper.Map(source, destination);
         }
     }
 }

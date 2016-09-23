@@ -131,6 +131,9 @@
     <Compile Include="Events\CreatureCreatedEvent.cs" />
     <Compile Include="Events\CreatureDeletedEvent.cs" />
     <Compile Include="Events\DataEditorClosedEvent.cs" />
+    <Compile Include="Events\ItemChangedEvent.cs" />
+    <Compile Include="Events\ItemCreatedEvent.cs" />
+    <Compile Include="Events\ItemDeletedEvent.cs" />
     <Compile Include="Events\ModuleLoadedEvent.cs" />
     <Compile Include="Events\AbilityCreatedEvent.cs" />
     <Compile Include="ToolsetGame.cs" />

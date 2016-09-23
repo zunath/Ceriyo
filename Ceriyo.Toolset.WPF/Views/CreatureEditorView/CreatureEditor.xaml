@@ -349,7 +349,7 @@
                 Grid.RowSpan="3"
                 Margin="2,2,2,2"
                 DisplayMemberPath="Name"
-                IsEnabled="{Binding IsClassSelected}"
+                IsEnabled="{Binding IsCreatureSelected}"
                 ItemsSource="{Binding Classes}"
                 SelectedItem="{Binding SelectedCreature.ClassResref}">
             </ListBox>
