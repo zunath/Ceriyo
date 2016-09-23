@@ -38,8 +38,8 @@
     <Reference Include="artemis">
       <HintPath>..\Ceriyo.Content\Libraries\artemis.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac, Version=4.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.1.0\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -127,6 +127,9 @@
     <Compile Include="Events\ClassChangedEvent.cs" />
     <Compile Include="Events\ClassCreatedEvent.cs" />
     <Compile Include="Events\ClassDeletedEvent.cs" />
+    <Compile Include="Events\CreatureChangedEvent.cs" />
+    <Compile Include="Events\CreatureCreatedEvent.cs" />
+    <Compile Include="Events\CreatureDeletedEvent.cs" />
     <Compile Include="Events\DataEditorClosedEvent.cs" />
     <Compile Include="Events\ModuleLoadedEvent.cs" />
     <Compile Include="Events\AbilityCreatedEvent.cs" />

@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Windows;
 using Autofac;
+using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.IOC;
 using Ceriyo.Toolset.WPF.Views.ApplicationRootView;
 using Microsoft.Practices.ServiceLocation;
@@ -19,11 +20,10 @@ namespace Ceriyo.Toolset.WPF
 
         protected override void InitializeShell()
         {
-
+            ServiceLocator.Current.TryResolve<IObjectMapper>().Initialize();
+            
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
-
-
         }
 
         protected override void ConfigureViewModelLocator()

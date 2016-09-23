@@ -88,6 +88,7 @@
     <Compile Include="Contracts\IGameService.cs" />
     <Compile Include="Contracts\IGraphicsService.cs" />
     <Compile Include="Contracts\ILogger.cs" />
+    <Compile Include="Contracts\IObjectMapper.cs" />
     <Compile Include="Contracts\IScreenFactory.cs" />
     <Compile Include="Contracts\IScreenService.cs" />
     <Compile Include="Contracts\IScriptMethodGroup.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Data\ClassData.cs" />
     <Compile Include="Data\ClassRequirementData.cs" />
     <Compile Include="Data\CreatureData.cs" />
+    <Compile Include="Data\DialogData.cs" />
     <Compile Include="Data\FrameData.cs" />
     <Compile Include="Data\ItemData.cs" />
     <Compile Include="Data\ItemPropertyData.cs" />

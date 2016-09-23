@@ -10,6 +10,7 @@ using Ceriyo.Core.Services;
 using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
+using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Scripting;
 using Ceriyo.Infrastructure.Services;
 using Microsoft.Xna.Framework;
@@ -39,6 +40,7 @@ namespace Ceriyo.Infrastructure.IOC
             RegisterCommon(builder);
             builder.RegisterInstance(new ToolsetSettings());
             builder.RegisterInstance(new ModuleData());
+            builder.RegisterType<ObjectMapper>().As<IObjectMapper>();
         }
         
         // Game app specific registrations
