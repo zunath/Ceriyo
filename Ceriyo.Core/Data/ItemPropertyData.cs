@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Ceriyo.Core.Annotations;
+using Ceriyo.Core.Properties;
 
 namespace Ceriyo.Core.Data
 {

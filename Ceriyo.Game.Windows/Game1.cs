@@ -1,7 +1,10 @@
-﻿using Ceriyo.Core.Contracts;
+﻿using System;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Game.Windows.UI;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.IOC;
 using Microsoft.Xna.Framework;
+using Squid;
 
 namespace Ceriyo.Game.Windows
 {
@@ -10,13 +13,43 @@ namespace Ceriyo.Game.Windows
         private readonly GraphicsDeviceManager _graphics;
         private IGameService _gameService;
 
+        private int _backupWidth;
+        private int _backupHeight;
+
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this)
+            {
+                SynchronizeWithVerticalRetrace = false
+            };
+            Window.AllowUserResizing = true;
+            Window.ClientSizeChanged += WindowOnClientSizeChanged;
+            Content.RootDirectory = "Compiled";
         }
-        
+
+        private void WindowOnClientSizeChanged(object sender, EventArgs eventArgs)
+        {
+            // Workaround for minimizing window.
+            if (Window.ClientBounds.Width == 0 && Window.ClientBounds.Height == 0)
+            {
+                _graphics.PreferredBackBufferWidth = _backupWidth;
+                _graphics.PreferredBackBufferHeight = _backupHeight;
+            }
+            else
+            {
+                _graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
+                _graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
+            }
+
+            
+        }
+
         protected override void Initialize()
         {
+            GuiHost.Renderer = new SquidRenderer(this);
+            Components.Add(new SquidInputManager(this));
+            Components.Add(new SampleScene(this));
+
             IOCConfig.InitializeGame(this);
             _gameService = GameFactory.GetGameService();
             _gameService.Initialize(_graphics);
@@ -26,6 +59,7 @@ namespace Ceriyo.Game.Windows
         
         protected override void LoadContent()
         {
+
         }
         
         protected override void UnloadContent()
@@ -34,8 +68,12 @@ namespace Ceriyo.Game.Windows
         
         protected override void Update(GameTime gameTime)
         {
+            _backupHeight = _graphics.PreferredBackBufferHeight;
+            _backupWidth = _graphics.PreferredBackBufferWidth;
+
             _gameService.Update(gameTime);
             base.Update(gameTime);
+            _graphics.ApplyChanges();
         }
         
         protected override void Draw(GameTime gameTime)

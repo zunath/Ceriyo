@@ -45,6 +45,19 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Controls\Atlas.cs" />
+    <Compile Include="UI\Controls\ChatBox.cs" />
+    <Compile Include="UI\Controls\FileDialog.cs" />
+    <Compile Include="UI\Controls\GridColumn.cs" />
+    <Compile Include="UI\Controls\GridView.cs" />
+    <Compile Include="UI\Controls\GridViewItem.cs" />
+    <Compile Include="UI\Controls\MessageBox.cs" />
+    <Compile Include="UI\Controls\SampleWindow.cs" />
+    <Compile Include="UI\SampleDesktop.cs" />
+    <Compile Include="UI\SampleScene.cs" />
+    <Compile Include="UI\SquidInputManager.cs" />
+    <Compile Include="UI\SquidRenderer.cs" />
+    <Compile Include="UI\Views\MainMenuView\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="artemis">
@@ -66,7 +79,11 @@
       <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Squid">
+      <HintPath>..\Ceriyo.Content\Libraries\Squid.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
