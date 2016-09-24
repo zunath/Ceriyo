@@ -98,7 +98,7 @@ namespace Ceriyo.Infrastructure.Services
                 }
                 else if (script.EngineType == ScriptEngine.Lua)
                 {
-                    _luaEngine["this"] = script.TargetObject;
+                    _luaEngine["self"] = script.TargetObject;
                     _luaEngine.DoFile(script.FilePath);
                     try
                     {
