@@ -102,7 +102,7 @@
     <Compile Include="UI\Controls\SampleWindow.cs" />
     <Compile Include="UI\SampleDesktop.cs" />
     <Compile Include="UI\SquidRenderer.cs" />
-    <Compile Include="UI\UIService.cs" />
+    <Compile Include="Services\UIService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contract\" />

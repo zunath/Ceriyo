@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Infrastructure.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,7 +9,7 @@ using Squid;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
-namespace Ceriyo.Infrastructure.UI
+namespace Ceriyo.Infrastructure.Services
 {
     public class UIService: IUIService
     {
@@ -30,12 +31,12 @@ namespace Ceriyo.Infrastructure.UI
 
         private readonly ISquidRenderer _renderer;
         private readonly GraphicsDevice _graphicsDevice;
-        private readonly Microsoft.Xna.Framework.Game _game;
+        private readonly Game _game;
         private Desktop _activeDesktop;
 
         public UIService(ISquidRenderer renderer,
             GraphicsDevice graphicsDevice,
-            Microsoft.Xna.Framework.Game game)
+            Game game)
         {
             _game = game;
             _renderer = renderer;
@@ -54,7 +55,7 @@ namespace Ceriyo.Infrastructure.UI
             SpecialKeys.Add(Keys.Delete, 0xD3);
             SpecialKeys.Add(Keys.MediaPreviousTrack, 0x90);
 
-            foreach (Keys k in System.Enum.GetValues(typeof(Keys)))
+            foreach (Keys k in Enum.GetValues(typeof(Keys)))
             {
                 InputKey key = new InputKey
                 {
@@ -115,14 +116,14 @@ namespace Ceriyo.Infrastructure.UI
             int wheel = mouseState.ScrollWheelValue > _lastScroll ? -1 : (mouseState.ScrollWheelValue < _lastScroll ? 1 : 0);
             _lastScroll = mouseState.ScrollWheelValue;
 
-            Squid.GuiHost.SetMouse(mouseState.X, mouseState.Y, wheel);
-            Squid.GuiHost.SetButtons(mouseState.LeftButton == ButtonState.Pressed, mouseState.RightButton == ButtonState.Pressed);
+            GuiHost.SetMouse(mouseState.X, mouseState.Y, wheel);
+            GuiHost.SetButtons(mouseState.LeftButton == ButtonState.Pressed, mouseState.RightButton == ButtonState.Pressed);
 
             // Keyboard
             KeyboardState keyboardState = Keyboard.GetState();
-            List<Squid.KeyData> squidKeys = new List<Squid.KeyData>();
+            List<KeyData> squidKeys = new List<KeyData>();
 
-            double ms = Squid.GuiHost.TimeElapsed;
+            double ms = GuiHost.TimeElapsed;
 
             Keys[] now = keyboardState.GetPressedKeys();
             Keys[] last = _lastKeyboardState.GetPressedKeys();
@@ -135,7 +136,7 @@ namespace Ceriyo.Infrastructure.UI
 
                 if (_inputKeys[key].Repeat < 0 || !wasDown)
                 {
-                    squidKeys.Add(new Squid.KeyData()
+                    squidKeys.Add(new KeyData()
                     {
                         Scancode = _inputKeys[key].ScanCode,
                         Pressed = true
@@ -150,7 +151,7 @@ namespace Ceriyo.Infrastructure.UI
 
                 if (!isDown)
                 {
-                    squidKeys.Add(new Squid.KeyData()
+                    squidKeys.Add(new KeyData()
                     {
                         Scancode = _inputKeys[key].ScanCode,
                         Released = true
@@ -161,8 +162,8 @@ namespace Ceriyo.Infrastructure.UI
 
             _lastKeyboardState = keyboardState;
 
-            Squid.GuiHost.SetKeyboard(squidKeys.ToArray());
-            Squid.GuiHost.TimeElapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            GuiHost.SetKeyboard(squidKeys.ToArray());
+            GuiHost.TimeElapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
         }
 
         public void Draw(GameTime gameTime)
