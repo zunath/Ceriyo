@@ -30,6 +30,9 @@ namespace Ceriyo.Infrastructure.Services
             _luaEngine = new Lua();
             _scriptQueue = new Queue<ScriptQueueObject>();
 
+            // Sandbox Lua
+            _luaEngine.DoString("import = function() end");
+
             if (isServer)
             {
                 RegisterServerMethods();
@@ -40,8 +43,6 @@ namespace Ceriyo.Infrastructure.Services
                 RegisterClientMethods();
             }
 
-            // Sandbox Lua
-            _luaEngine.DoString("import = function() end");
         }
 
         public void QueueScript(string fileName, Entity entity, string methodName = "Main")
