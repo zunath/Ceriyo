@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using Ceriyo.Core.Contracts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Squid;
+using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
 
-namespace Ceriyo.Game.Windows.UI
+namespace Ceriyo.Infrastructure.UI
 {
-    public class SquidInputManager : GameComponent
+    public class UIService: IUIService
     {
         private class InputKey
         {
@@ -22,8 +26,14 @@ namespace Ceriyo.Game.Windows.UI
         private const int RepeatDelay = 500;
         private const int RepeatRate = 25;
 
-        public SquidInputManager(Microsoft.Xna.Framework.Game game)
-            : base(game)
+        private readonly ISquidRenderer _renderer;
+
+        public UIService(ISquidRenderer renderer)
+        {
+            _renderer = renderer;
+        }
+
+        public void Initialize()
         {
             SpecialKeys.Add(Keys.Home, 0xC7);
             SpecialKeys.Add(Keys.Up, 0xC8);
@@ -37,14 +47,19 @@ namespace Ceriyo.Game.Windows.UI
 
             foreach (Keys k in System.Enum.GetValues(typeof(Keys)))
             {
-                InputKey key = new InputKey();
-                key.Key = k;
-                key.ScanCode = VirtualKeyToScancode(k);
+                InputKey key = new InputKey
+                {
+                    Key = k,
+                    ScanCode = VirtualKeyToScancode(k)
+                };
                 _inputKeys.Add(k, key);
             }
+
+            GuiHost.Renderer = _renderer;
+
         }
 
-        private int VirtualKeyToScancode(Keys key)
+        private static int VirtualKeyToScancode(Keys key)
         {
             int sc = SquidRenderer.VirtualKeyToScancode((int)key);
 
@@ -54,8 +69,12 @@ namespace Ceriyo.Game.Windows.UI
             return sc;
         }
 
+        public void Update(GameTime gameTime)
+        {
+            UpdateInput(gameTime);
+        }
 
-        public override void Update(GameTime gameTime)
+        private void UpdateInput(GameTime gameTime)
         {
             // Mouse
             MouseState mouseState = Mouse.GetState();
@@ -114,8 +133,12 @@ namespace Ceriyo.Game.Windows.UI
 
             Squid.GuiHost.SetKeyboard(squidKeys.ToArray());
             Squid.GuiHost.TimeElapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            base.Update(gameTime);
         }
+
+        public void Draw(GameTime gameTime)
+        {
+            
+        }
+
     }
 }

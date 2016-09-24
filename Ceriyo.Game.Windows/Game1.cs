@@ -3,6 +3,7 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Game.Windows.UI;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.IOC;
+using Ceriyo.Infrastructure.UI;
 using Microsoft.Xna.Framework;
 using Squid;
 
@@ -46,8 +47,6 @@ namespace Ceriyo.Game.Windows
 
         protected override void Initialize()
         {
-            GuiHost.Renderer = new SquidRenderer(this);
-            Components.Add(new SquidInputManager(this));
             Components.Add(new SampleScene(this));
 
             IOCConfig.InitializeGame(this);
@@ -79,7 +78,7 @@ namespace Ceriyo.Game.Windows
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            _gameService.Draw();
+            _gameService.Draw(gameTime);
             base.Draw(gameTime);
         }
     }

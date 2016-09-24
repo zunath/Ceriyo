@@ -6,8 +6,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Squid;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
+#pragma warning disable 612 // Disable obsolete warnings on Font
 
-namespace Ceriyo.Game.Windows.UI
+namespace Ceriyo.Infrastructure.UI
 {
     public class SquidRenderer : ISquidRenderer
     {
@@ -31,7 +32,7 @@ namespace Ceriyo.Game.Windows.UI
 
         private readonly Dictionary<string, Font> _fontTypes = new Dictionary<string, Font>();
 
-        private readonly Microsoft.Xna.Framework.Game _game;
+        private readonly Game _game;
         private readonly SpriteBatch _batch;
 
         private int _fontIndex;
@@ -42,7 +43,7 @@ namespace Ceriyo.Game.Windows.UI
         private readonly RasterizerState _rasterizer;
         private readonly SamplerState _sampler;
 
-        public SquidRenderer(Microsoft.Xna.Framework.Game game)
+        public SquidRenderer(Game game)
         {
             _game = game;
             _batch = new SpriteBatch(game.GraphicsDevice);

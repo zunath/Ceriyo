@@ -2,11 +2,10 @@
 
 namespace Ceriyo.Core.Contracts
 {
-    public interface IGameService
+    public interface IUIService
     {
-        void Initialize(GraphicsDeviceManager graphics);
+        void Initialize();
         void Update(GameTime gameTime);
         void Draw(GameTime gameTime);
-        void Exit();
     }
 }

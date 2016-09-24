@@ -55,8 +55,6 @@
     <Compile Include="UI\Controls\SampleWindow.cs" />
     <Compile Include="UI\SampleDesktop.cs" />
     <Compile Include="UI\SampleScene.cs" />
-    <Compile Include="UI\SquidInputManager.cs" />
-    <Compile Include="UI\SquidRenderer.cs" />
     <Compile Include="UI\Views\MainMenuView\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>

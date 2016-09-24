@@ -13,8 +13,10 @@ using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Scripting;
 using Ceriyo.Infrastructure.Services;
+using Ceriyo.Infrastructure.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Squid;
 
 namespace Ceriyo.Infrastructure.IOC
 {
@@ -49,12 +51,16 @@ namespace Ceriyo.Infrastructure.IOC
             var builder = new ContainerBuilder();
             game.Content.RootDirectory = "Content";
 
+            builder.RegisterInstance(game);
             builder.RegisterInstance(new SpriteBatch(game.GraphicsDevice)).AsSelf();
             builder.RegisterInstance(game.Content).AsSelf();
             builder.RegisterInstance(game.GraphicsDevice).AsSelf();
             builder.RegisterInstance(new GameSettings());
 
             RegisterCommon(builder);
+
+            builder.RegisterType<SquidRenderer>().As<ISquidRenderer>();
+            builder.RegisterType<UIService>().As<IUIService>();
 
             _container = builder.Build();
         }

@@ -93,6 +93,7 @@
     <Compile Include="Contracts\IScreenService.cs" />
     <Compile Include="Contracts\IScriptMethodGroup.cs" />
     <Compile Include="Contracts\IScriptService.cs" />
+    <Compile Include="Contracts\IUIService.cs" />
     <Compile Include="Data\AbilityData.cs" />
     <Compile Include="Data\AnimationData.cs" />
     <Compile Include="Data\ClassData.cs" />
