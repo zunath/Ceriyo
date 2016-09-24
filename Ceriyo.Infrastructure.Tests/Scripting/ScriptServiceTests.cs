@@ -16,22 +16,25 @@ namespace Ceriyo.Infrastructure.Tests.Scripting
         }
 
         [Test]
-        public void QueueScript_ShouldNotThrowExceptions()
+        public void QueueScriptLua_ShouldNotThrowExceptions()
         {
-            string tempFilePath = "./Scripts/TestFile.lua";
-            Directory.CreateDirectory("./Scripts");
+            string tempFilePath = "./Scripts/Tests/TestScript.lua";
+            Directory.CreateDirectory("./Scripts/Tests");
             FileStream stream = File.Create(tempFilePath);
             stream.Close();
             Assert.DoesNotThrow(delegate
             {
-                _service.QueueScript("TestFile.lua", null);
+                _service.QueueScript("Tests/TestScript.lua", null);
             });
+
+            var fullPath = Path.GetFullPath(tempFilePath);
+
             File.Delete(tempFilePath);
-            Directory.Delete("./Scripts");
+            Directory.Delete("./Scripts/Tests/");
         }
 
         [Test]
-        public void QueueScript_NoFile_ShouldThrowException()
+        public void QueueScriptLua_NoFile_ShouldThrowException()
         {
             Assert.Throws(typeof(FileNotFoundException), delegate
             {
@@ -40,22 +43,22 @@ namespace Ceriyo.Infrastructure.Tests.Scripting
         }
 
         [Test]
-        public void ExecuteScript_ShouldNotThrowException()
+        public void ExecuteScriptLua_ShouldNotThrowException()
         {
-            string tempFilePath = "./Scripts/TestScript.lua";
+            string tempFilePath = "./Scripts/Tests/TestScript.lua";
             string scriptBody = "function Main() end";
-            Directory.CreateDirectory("./Scripts");
+            Directory.CreateDirectory("./Scripts/Tests");
             File.WriteAllText(tempFilePath, scriptBody);
 
             Assert.DoesNotThrow(delegate
             {
-                _service.QueueScript("TestScript.lua", null);
+                _service.QueueScript("Tests/TestScript.lua", null);
                 _service.ExecuteQueuedScripts();
             });
 
 
             File.Delete(tempFilePath);
-            Directory.Delete("./Scripts");
+            Directory.Delete("./Scripts/Tests/");
         }
 
     }

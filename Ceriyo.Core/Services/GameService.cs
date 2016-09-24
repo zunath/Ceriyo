@@ -39,6 +39,8 @@ namespace Ceriyo.Core.Services
             _graphicsService.Initialize(graphics);
             _uiService.Initialize();
             _screenService.ChangeScreen<GameScreen>();
+
+            _scriptService.QueueScript("TestJS.js", _world.CreateEntity());
         }
 
         public void Update(GameTime gameTime)

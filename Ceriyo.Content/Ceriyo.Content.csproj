@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Graphics\UI\Cursors\Arrow.png" />
@@ -63,6 +62,9 @@
     <Content Include="Graphics\UI\xna_logo.png" />
     <Content Include="Libraries\artemis.dll" />
     <Content Include="Libraries\Squid.dll" />
+    <Content Include="Scripts\TestJS.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Compiled\Graphics\Cursors\Arrow.xnb">
