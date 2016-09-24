@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Squid;
 
-namespace Ceriyo.Game.Windows.UI.Controls
+namespace Ceriyo.Infrastructure.UI.Controls
 {
     public class PathInfo
     {

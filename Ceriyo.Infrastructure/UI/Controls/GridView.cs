@@ -1,7 +1,7 @@
 ﻿using System;
 using Squid;
 
-namespace Ceriyo.Game.Windows.UI.Controls
+namespace Ceriyo.Infrastructure.UI.Controls
 {
     public class GridViewItemCollection : ActiveList<GridViewItem> { }
     public class GridColumnCollection : ActiveList<GridColumn> { }

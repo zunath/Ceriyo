@@ -7,5 +7,6 @@ namespace Ceriyo.Core.Contracts
         void Initialize();
         void Update(GameTime gameTime);
         void Draw(GameTime gameTime);
+        void ChangeDesktop<T>();
     }
 }

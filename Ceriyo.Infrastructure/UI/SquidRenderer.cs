@@ -32,7 +32,7 @@ namespace Ceriyo.Infrastructure.UI
 
         private readonly Dictionary<string, Font> _fontTypes = new Dictionary<string, Font>();
 
-        private readonly Game _game;
+        private readonly Microsoft.Xna.Framework.Game _game;
         private readonly SpriteBatch _batch;
 
         private int _fontIndex;
@@ -43,7 +43,7 @@ namespace Ceriyo.Infrastructure.UI
         private readonly RasterizerState _rasterizer;
         private readonly SamplerState _sampler;
 
-        public SquidRenderer(Game game)
+        public SquidRenderer(Microsoft.Xna.Framework.Game game)
         {
             _game = game;
             _batch = new SpriteBatch(game.GraphicsDevice);

@@ -46,7 +46,7 @@ namespace Ceriyo.Infrastructure.IOC
         }
         
         // Game app specific registrations
-        public static void InitializeGame(Game game)
+        public static void InitializeGame(Microsoft.Xna.Framework.Game game)
         {
             var builder = new ContainerBuilder();
             game.Content.RootDirectory = "Content";

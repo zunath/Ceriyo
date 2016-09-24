@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ceriyo.Core.Contracts;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Squid;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
@@ -27,10 +29,17 @@ namespace Ceriyo.Infrastructure.UI
         private const int RepeatRate = 25;
 
         private readonly ISquidRenderer _renderer;
+        private readonly GraphicsDevice _graphicsDevice;
+        private readonly Microsoft.Xna.Framework.Game _game;
+        private Desktop _activeDesktop;
 
-        public UIService(ISquidRenderer renderer)
+        public UIService(ISquidRenderer renderer,
+            GraphicsDevice graphicsDevice,
+            Microsoft.Xna.Framework.Game game)
         {
+            _game = game;
             _renderer = renderer;
+            _graphicsDevice = graphicsDevice;
         }
 
         public void Initialize()
@@ -56,7 +65,27 @@ namespace Ceriyo.Infrastructure.UI
             }
 
             GuiHost.Renderer = _renderer;
+            ChangeDesktop<SampleDesktop>();
 
+            _game.Window.ClientSizeChanged += WindowOnClientSizeChanged;
+            _game.IsMouseVisible = true;
+        }
+
+        private void WindowOnClientSizeChanged(object sender, EventArgs eventArgs)
+        {
+            if (_activeDesktop != null)
+            {
+                _activeDesktop.Size = new Squid.Point(_graphicsDevice.Viewport.Width, _graphicsDevice.Viewport.Height);
+            }
+        }
+
+        public void ChangeDesktop<T>()
+        {
+            if(typeof(Desktop).IsSubclassOf(typeof(T)))
+                throw new ArgumentException("Type T must inherit from type Desktop.");
+            
+            _activeDesktop = (Desktop)Activator.CreateInstance(typeof(T));
+            _activeDesktop.Size = new Squid.Point(_graphicsDevice.Viewport.Width, _graphicsDevice.Viewport.Height); 
         }
 
         private static int VirtualKeyToScancode(Keys key)
@@ -72,6 +101,7 @@ namespace Ceriyo.Infrastructure.UI
         public void Update(GameTime gameTime)
         {
             UpdateInput(gameTime);
+            _activeDesktop?.Update();
         }
 
         private void UpdateInput(GameTime gameTime)
@@ -137,7 +167,7 @@ namespace Ceriyo.Infrastructure.UI
 
         public void Draw(GameTime gameTime)
         {
-            
+            _activeDesktop?.Draw();
         }
 
     }

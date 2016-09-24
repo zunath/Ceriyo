@@ -1,6 +1,6 @@
 ﻿using Squid;
 
-namespace Ceriyo.Game.Windows.UI.Controls
+namespace Ceriyo.Infrastructure.UI.Controls
 {
     public class MessageBox : Dialog
     {

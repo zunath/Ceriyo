@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Squid;
 
-namespace Ceriyo.Game.Windows.UI.Controls
+namespace Ceriyo.Infrastructure.UI.Controls
 {
     public class GridViewItem : GridViewSubItem
     {

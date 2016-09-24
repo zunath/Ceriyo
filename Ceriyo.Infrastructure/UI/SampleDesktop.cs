@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ceriyo.Game.Windows.UI.Controls;
-using SampleControls;
+using Ceriyo.Infrastructure.UI.Controls;
 using Squid;
 
-namespace Ceriyo.Game.Windows.UI
+namespace Ceriyo.Infrastructure.UI
 {
     public class SampleDesktop : Desktop
     {

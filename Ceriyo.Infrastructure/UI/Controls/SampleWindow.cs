@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Squid;
+﻿using Squid;
 
-namespace SampleControls
+namespace Ceriyo.Infrastructure.UI.Controls
 {
     public class SampleWindow : Window
     {

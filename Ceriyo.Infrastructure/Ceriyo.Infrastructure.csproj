@@ -93,6 +93,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripting\ScriptService.cs" />
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="UI\Controls\ChatBox.cs" />
+    <Compile Include="UI\Controls\FileDialog.cs" />
+    <Compile Include="UI\Controls\GridColumn.cs" />
+    <Compile Include="UI\Controls\GridView.cs" />
+    <Compile Include="UI\Controls\GridViewItem.cs" />
+    <Compile Include="UI\Controls\MessageBox.cs" />
+    <Compile Include="UI\Controls\SampleWindow.cs" />
+    <Compile Include="UI\SampleDesktop.cs" />
     <Compile Include="UI\SquidRenderer.cs" />
     <Compile Include="UI\UIService.cs" />
   </ItemGroup>

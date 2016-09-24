@@ -47,8 +47,6 @@ namespace Ceriyo.Game.Windows
 
         protected override void Initialize()
         {
-            Components.Add(new SampleScene(this));
-
             IOCConfig.InitializeGame(this);
             _gameService = GameFactory.GetGameService();
             _gameService.Initialize(_graphics);

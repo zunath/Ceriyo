@@ -45,16 +45,6 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Controls\Atlas.cs" />
-    <Compile Include="UI\Controls\ChatBox.cs" />
-    <Compile Include="UI\Controls\FileDialog.cs" />
-    <Compile Include="UI\Controls\GridColumn.cs" />
-    <Compile Include="UI\Controls\GridView.cs" />
-    <Compile Include="UI\Controls\GridViewItem.cs" />
-    <Compile Include="UI\Controls\MessageBox.cs" />
-    <Compile Include="UI\Controls\SampleWindow.cs" />
-    <Compile Include="UI\SampleDesktop.cs" />
-    <Compile Include="UI\SampleScene.cs" />
     <Compile Include="UI\Views\MainMenuView\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
