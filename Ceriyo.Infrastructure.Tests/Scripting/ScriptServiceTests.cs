@@ -26,9 +26,7 @@ namespace Ceriyo.Infrastructure.Tests.Scripting
             {
                 _service.QueueScript("Tests/TestScript.lua", null);
             });
-
-            var fullPath = Path.GetFullPath(tempFilePath);
-
+            
             File.Delete(tempFilePath);
             Directory.Delete("./Scripts/Tests/");
         }
@@ -57,6 +55,49 @@ namespace Ceriyo.Infrastructure.Tests.Scripting
             });
 
 
+            File.Delete(tempFilePath);
+            Directory.Delete("./Scripts/Tests/");
+        }
+
+        [Test]
+        public void QueueScriptJavaScript_ShouldNotThrowExceptions()
+        {
+            string tempFilePath = "./Scripts/Tests/TestScript.js";
+            Directory.CreateDirectory("./Scripts/Tests");
+            FileStream stream = File.Create(tempFilePath);
+            stream.Close();
+            Assert.DoesNotThrow(delegate
+            {
+                _service.QueueScript("Tests/TestScript.js", null);
+            });
+
+            File.Delete(tempFilePath);
+            Directory.Delete("./Scripts/Tests/");
+        }
+
+        [Test]
+        public void QueueScriptJavaScript_NoFile_ShouldThrowException()
+        {
+            Assert.Throws(typeof(FileNotFoundException), delegate
+            {
+                _service.QueueScript("nonexistentfile.js", null);
+            });
+        }
+
+        [Test]
+        public void ExecuteScriptJavaScript_ShouldNotThrowException()
+        {
+            string tempFilePath = "./Scripts/Tests/TestScript.js";
+            string scriptBody = "function Main() {}";
+            Directory.CreateDirectory("./Scripts/Tests");
+            File.WriteAllText(tempFilePath, scriptBody);
+
+            Assert.DoesNotThrow(delegate
+            {
+                _service.QueueScript("Tests/TestScript.js", null);
+                _service.ExecuteQueuedScripts();
+            });
+            
             File.Delete(tempFilePath);
             Directory.Delete("./Scripts/Tests/");
         }
