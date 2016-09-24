@@ -288,22 +288,27 @@
             
         </TabControl>
 
-        <Button
-            Margin="35,5,40,5"
+        <StackPanel
             Grid.Row="1"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
-            Command="{Binding SaveCommand}">
-            Save Changes
-        </Button>
-        <Button
-            Margin="50,5, 25,5"
-            Grid.Row="1"
-            Grid.Column="2"
-            Grid.ColumnSpan="2"
-            Command="{Binding CancelCommand}">
-            Cancel
-        </Button>
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+
+            <Button
+                MinWidth="92"    
+                Margin="4,4,4,4"
+                Command="{Binding SaveCommand}">
+                Save Changes
+            </Button>
+            <Button
+                MinWidth="92"    
+                Margin="4,4,4,4"
+                Command="{Binding CancelCommand}">
+                Cancel
+            </Button>
+
+        </StackPanel>
         
     </Grid>
 </UserControl>

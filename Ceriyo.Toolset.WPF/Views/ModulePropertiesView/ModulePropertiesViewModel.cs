@@ -190,7 +190,8 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 
         private void Save()
         {
-            
+
+            FinishInteraction();
         }
 
         public DelegateCommand CancelCommand { get; set; }
@@ -198,6 +199,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
         private void Cancel()
         {
 
+            FinishInteraction();
         }
 
         public INotification Notification { get; set; }

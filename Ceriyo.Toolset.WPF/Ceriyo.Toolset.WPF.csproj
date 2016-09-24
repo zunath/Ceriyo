@@ -139,6 +139,9 @@
     <Compile Include="Events\PlaceableChangedEvent.cs" />
     <Compile Include="Events\PlaceableCreatedEvent.cs" />
     <Compile Include="Events\PlaceableDeletedEvent.cs" />
+    <Compile Include="Events\SkillChangedEvent.cs" />
+    <Compile Include="Events\SkillCreatedEvent.cs" />
+    <Compile Include="Events\SkillDeletedEvent.cs" />
     <Compile Include="ToolsetGame.cs" />
     <Compile Include="Views\ApplicationRootView\ApplicationRootViewModel.cs" />
     <Page Include="Views\AbilityEditorView\AbilityEditor.xaml">

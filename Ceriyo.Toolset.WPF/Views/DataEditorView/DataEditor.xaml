@@ -15,9 +15,25 @@
              mc:Ignorable="d"
              d:DesignHeight="600"
              d:DesignWidth="600"
+             Background="LightGray"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-        <TabControl>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <TabControl
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.ColumnSpan="3">
             <TabItem
                 Header="Creatures">
                 <creatureEditorView:CreatureEditor></creatureEditorView:CreatureEditor>
@@ -51,5 +67,26 @@
                 <skillEditorView:SkillEditor></skillEditorView:SkillEditor>
             </TabItem>
         </TabControl>
+        
+        <StackPanel
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right">
+            <Button 
+                MinWidth="92"    
+                Margin="4,4,4,4"
+                Command="{Binding OkCommand}">
+                OK
+            </Button>
+            <Button
+                MinWidth="92"
+                Margin="4,4,4,4"
+                Command="{Binding CancelCommand}">
+                Cancel
+            </Button>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

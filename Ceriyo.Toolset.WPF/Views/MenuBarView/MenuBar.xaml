@@ -110,17 +110,13 @@
                 <prism:PopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
-                        <DockPanel 
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            MinHeight="600"
-                            MinWidth="600">
-                            <dataEditorView:DataEditor 
-                                Width="Auto"  
-                                Height="Auto"
+                        <dataEditorView:DataEditor
                                 MinWidth="600"
-                                MinHeight="600"/>
-                        </DockPanel>
+                                MinHeight="600"
+                                Width="Auto"
+                                Height="Auto"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
                     </prism:PopupWindowAction.WindowContent>
                 </prism:PopupWindowAction>
             </prism:InteractionRequestTrigger>
@@ -129,17 +125,11 @@
                 <prism:PopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
-                        <DockPanel 
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            MinHeight="600"
-                            MinWidth="600">
-                            <manageResourcesView:ManageResources 
+                        <manageResourcesView:ManageResources 
                                 Width="Auto"  
                                 Height="Auto"
                                 MinWidth="600"
                                 MinHeight="600"/>
-                        </DockPanel>
                     </prism:PopupWindowAction.WindowContent>
                 </prism:PopupWindowAction>
             </prism:InteractionRequestTrigger>
@@ -148,17 +138,11 @@
                 <prism:PopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
-                        <DockPanel 
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            MinHeight="600"
-                            MinWidth="600">
-                            <resourceEditorView:ResourceEditor
+                        <resourceEditorView:ResourceEditor
                                 Width="Auto"  
                                 Height="Auto"
                                 MinWidth="600"
                                 MinHeight="600"/>
-                        </DockPanel>
                     </prism:PopupWindowAction.WindowContent>
                 </prism:PopupWindowAction>
             </prism:InteractionRequestTrigger>
@@ -167,17 +151,12 @@
                 <prism:PopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
-                        <DockPanel 
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            MinHeight="600"
-                            MinWidth="600">
-                            <buildModuleView:BuildModule 
+
+                        <buildModuleView:BuildModule 
                                 Width="Auto"  
                                 Height="Auto"
                                 MinWidth="600"
                                 MinHeight="600"/>
-                        </DockPanel>
                     </prism:PopupWindowAction.WindowContent>
                 </prism:PopupWindowAction>
             </prism:InteractionRequestTrigger>
@@ -186,17 +165,12 @@
                 <prism:PopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
-                        <DockPanel 
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            MinHeight="600"
-                            MinWidth="600">
-                            <aboutView:About 
+
+                        <aboutView:About 
                                 Width="Auto"  
                                 Height="Auto"
                                 MinWidth="600"
                                 MinHeight="600"/>
-                        </DockPanel>
                     </prism:PopupWindowAction.WindowContent>
                 </prism:PopupWindowAction>
             </prism:InteractionRequestTrigger>
@@ -205,17 +179,12 @@
                 <prism:PopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
-                        <DockPanel 
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            MinHeight="600"
-                            MinWidth="600">
-                            <modulePropertiesView:ModuleProperties
+
+                        <modulePropertiesView:ModuleProperties
                                 Width="Auto"  
                                 Height="Auto"
                                 MinWidth="600"
                                 MinHeight="600"/>
-                        </DockPanel>
                     </prism:PopupWindowAction.WindowContent>
                 </prism:PopupWindowAction>
             </prism:InteractionRequestTrigger>
