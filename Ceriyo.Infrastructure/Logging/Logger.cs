@@ -10,6 +10,7 @@ namespace Ceriyo.Infrastructure.Logging
         public Logger()
         {
             _log = log4net.LogManager.GetLogger(typeof(Logger));
+            log4net.Config.XmlConfigurator.Configure();
         }
 
         public void Error(object message)

@@ -4,9 +4,9 @@ using Ceriyo.Core.Components;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 
-namespace Ceriyo.Core.Scripting
+namespace Ceriyo.Core.Scripting.Server
 {
-    public class PhysicsMethods: IScriptMethodGroup
+    public class PhysicsMethods: IServerScriptMethodGroup
     {
 
         public static float GetVelocityX(Entity entity)

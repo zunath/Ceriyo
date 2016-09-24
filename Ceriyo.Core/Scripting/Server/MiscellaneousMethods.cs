@@ -3,9 +3,9 @@ using Artemis;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Contracts;
 
-namespace Ceriyo.Core.Scripting
+namespace Ceriyo.Core.Scripting.Server
 {
-    public class MiscellaneousMethods: IScriptMethodGroup
+    public class MiscellaneousMethods: IServerScriptMethodGroup
     {
         public static void Print(string message)
         {

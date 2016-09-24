@@ -1,6 +1,6 @@
 ﻿namespace Ceriyo.Core.Contracts
 {
-    public interface IScriptMethodGroup
+    public interface IServerScriptMethodGroup
     {
     }
 }

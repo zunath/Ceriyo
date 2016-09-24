@@ -2,9 +2,9 @@
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Contracts;
 
-namespace Ceriyo.Core.Scripting
+namespace Ceriyo.Core.Scripting.Server
 {
-    public class LocalDataMethods: IScriptMethodGroup
+    public class LocalDataMethods: IServerScriptMethodGroup
     {
         public static void SetLocalValue(Entity entity, string key, string value)
         {

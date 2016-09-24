@@ -11,7 +11,6 @@ using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Mapping;
-using Ceriyo.Infrastructure.Scripting;
 using Ceriyo.Infrastructure.Services;
 using Ceriyo.Infrastructure.UI;
 using Microsoft.Xna.Framework;
@@ -34,6 +33,8 @@ namespace Ceriyo.Infrastructure.IOC
         {
             RegisterCommon(builder);
             builder.RegisterInstance(new ServerSettings());
+            builder.RegisterType<ScriptService>().As<IScriptService>()
+                .WithParameter("isServer", true);
         }
 
         // Toolset app specific registrations
@@ -61,6 +62,8 @@ namespace Ceriyo.Infrastructure.IOC
 
             builder.RegisterType<SquidRenderer>().As<ISquidRenderer>();
             builder.RegisterType<UIService>().As<IUIService>();
+            builder.RegisterType<ScriptService>().As<IScriptService>()
+                .WithParameter("isServer", false);
 
             _container = builder.Build();
         }
@@ -68,13 +71,12 @@ namespace Ceriyo.Infrastructure.IOC
         private static void RegisterCommon(ContainerBuilder builder)
         {
             // Logging
-            builder.RegisterType<Logger>().As<ILogger>();
+            builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
 
             // MonoGame
             builder.RegisterType<Texture2D>();
 
             // Services
-            builder.RegisterType<ScriptService>().As<IScriptService>();
             builder.RegisterType<CameraService>().As<ICameraService>();
             builder.RegisterType<DataService>().As<IDataService>();
             builder.RegisterType<GameService>().As<IGameService>();

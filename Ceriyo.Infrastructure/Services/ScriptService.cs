@@ -10,24 +10,35 @@ using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Scripting;
 using Jint;
-using Jint.Native;
+using Newtonsoft.Json.Converters;
 using NLua;
 
-namespace Ceriyo.Infrastructure.Scripting
+namespace Ceriyo.Infrastructure.Services
 {
     public class ScriptService: IScriptService
     {
         private readonly Lua _luaEngine;
         private readonly Engine _javaScriptEngine;
         private readonly Queue<ScriptQueueObject> _scriptQueue;
+        private readonly ILogger _logger;
 
-        public ScriptService()
+        public ScriptService(bool isServer,
+            ILogger logger)
         {
+            _logger = logger;
             _javaScriptEngine = new Engine();
             _luaEngine = new Lua();
             _scriptQueue = new Queue<ScriptQueueObject>();
-            RegisterMethods();
-            RegisterEnumerations();
+
+            if (isServer)
+            {
+                RegisterServerMethods();
+                RegisterServerEnumerations();
+            }
+            else
+            {
+                RegisterClientMethods();
+            }
 
             // Sandbox Lua
             _luaEngine.DoString("import = function() end");
@@ -74,26 +85,47 @@ namespace Ceriyo.Infrastructure.Scripting
                     string text = File.ReadAllText(script.FilePath);
                     _javaScriptEngine.SetValue("self", script.TargetObject);
                     _javaScriptEngine.Execute(text);
-                    _javaScriptEngine.Invoke(script.MethodName);
+
+                    try
+                    {
+                        _javaScriptEngine.Invoke(script.MethodName);
+                    }
+                    catch (Exception ex)
+                    {
+                        string fileName = Path.GetFileName(script.FilePath);
+                        _logger.Error($"JavaScript error: {fileName}. Details: {ex.Message}");
+                    }
                 }
                 else if (script.EngineType == ScriptEngine.Lua)
                 {
                     _luaEngine["this"] = script.TargetObject;
                     _luaEngine.DoFile(script.FilePath);
-                    ((LuaFunction) _luaEngine[script.MethodName]).Call();
+                    try
+                    {
+                        ((LuaFunction)_luaEngine[script.MethodName]).Call();
+                    }
+                    catch (Exception ex)
+                    {
+                        string fileName = Path.GetFileName(script.FilePath);
+                        _logger.Error($"Lua error: {fileName}. Details: {ex.Message}");
+                    }
                 }
             }
         }
         
-        private void RegisterMethods()
+        private void RegisterServerMethods()
         {
             var methods = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(x => x.GetTypes())
-                .Where(p => typeof(IScriptMethodGroup).IsAssignableFrom(p))
+                .Where(p => typeof(IServerScriptMethodGroup).IsAssignableFrom(p))
                 .SelectMany(m => m.GetMethods())
                 .Where(p => p.DeclaringType != typeof(object))
                 .ToList();
+            RegisterMethods(methods);
+        }
 
+        private void RegisterMethods(List<MethodInfo> methods)
+        {
             foreach (var method in methods)
             {
                 // Lua
@@ -117,7 +149,8 @@ namespace Ceriyo.Infrastructure.Scripting
             }
         }
 
-        private void RegisterEnumerations()
+
+        private void RegisterServerEnumerations()
         {
             RegisterEnumeration("Color", typeof(ColorType));
         }
@@ -138,7 +171,18 @@ namespace Ceriyo.Infrastructure.Scripting
 
 
         }
-        
+
+
+        private void RegisterClientMethods()
+        {
+            var methods = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(x => x.GetTypes())
+                .Where(p => typeof(IClientScriptMethodGroup).IsAssignableFrom(p))
+                .SelectMany(m => m.GetMethods())
+                .Where(p => p.DeclaringType != typeof(object))
+                .ToList();
+            RegisterMethods(methods);
+        }
 
 
     }

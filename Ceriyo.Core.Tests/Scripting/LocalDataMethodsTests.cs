@@ -2,6 +2,7 @@
 using Artemis;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Scripting;
+using Ceriyo.Core.Scripting.Server;
 using Ceriyo.Testing.Shared;
 using NUnit.Framework;
 

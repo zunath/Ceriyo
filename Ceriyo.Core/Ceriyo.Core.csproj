@@ -82,6 +82,7 @@
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Contracts\ICameraService.cs" />
+    <Compile Include="Contracts\IClientScriptMethodGroup.cs" />
     <Compile Include="Contracts\IComponentFactory.cs" />
     <Compile Include="Contracts\IDataService.cs" />
     <Compile Include="Contracts\IEntityFactory.cs" />
@@ -92,7 +93,7 @@
     <Compile Include="Contracts\IObjectMapper.cs" />
     <Compile Include="Contracts\IScreenFactory.cs" />
     <Compile Include="Contracts\IScreenService.cs" />
-    <Compile Include="Contracts\IScriptMethodGroup.cs" />
+    <Compile Include="Contracts\IServerScriptMethodGroup.cs" />
     <Compile Include="Contracts\IScriptService.cs" />
     <Compile Include="Contracts\IUIService.cs" />
     <Compile Include="Data\AbilityData.cs" />
@@ -129,10 +130,10 @@
     <Compile Include="Contracts\IScreen.cs" />
     <Compile Include="Scripting\ScriptQueueObject.cs" />
     <Compile Include="Services\ScreenService.cs" />
-    <Compile Include="Scripting\EntityMethods.cs" />
-    <Compile Include="Scripting\LocalDataMethods.cs" />
-    <Compile Include="Scripting\MiscellaneousMethods.cs" />
-    <Compile Include="Scripting\PhysicsMethods.cs" />
+    <Compile Include="Scripting\Server\EntityMethods.cs" />
+    <Compile Include="Scripting\Server\LocalDataMethods.cs" />
+    <Compile Include="Scripting\Server\MiscellaneousMethods.cs" />
+    <Compile Include="Scripting\Server\PhysicsMethods.cs" />
     <Compile Include="Services\CameraService.cs" />
     <Compile Include="Services\GameService.cs" />
     <Compile Include="Services\GraphicsService.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Settings\ToolsetSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Scripting\Client\" />
     <Folder Include="Systems\" />
     <Folder Include="Validators\" />
   </ItemGroup>

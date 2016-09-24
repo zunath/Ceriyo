@@ -95,7 +95,7 @@
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Mapping\ObjectMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scripting\ScriptService.cs" />
+    <Compile Include="Services\ScriptService.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="UI\Controls\ChatBox.cs" />
     <Compile Include="UI\Controls\FileDialog.cs" />

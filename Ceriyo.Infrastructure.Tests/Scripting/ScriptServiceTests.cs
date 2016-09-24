@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Ceriyo.Infrastructure.Scripting;
+using Ceriyo.Infrastructure.Services;
 using NUnit.Framework;
 
 namespace Ceriyo.Infrastructure.Tests.Scripting
