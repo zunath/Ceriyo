@@ -1,10 +1,7 @@
 ﻿using System.IO;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Scripting;
 using Ceriyo.Core.Scripting.Client;
 using Ceriyo.Core.Scripting.Common;
 using Ceriyo.Core.Scripting.Server;
-using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Services;
@@ -26,12 +23,13 @@ namespace Ceriyo.Infrastructure.Tests.Scripting
             _service = new ScriptService(false, 
                 new Logger(),
                 new LoggingMethods(), 
-                new ControlMethods(mockUIService.Object),
+                new ControlMethods(),
                 new StyleMethods(), 
                 new EntityMethods(), 
                 new LocalDataMethods(), 
                 new PhysicsMethods(), 
-                new ScriptingMethods());
+                new ScriptingMethods(),
+                new SceneMethods(mockUIService.Object));
         }
 
         [Test]

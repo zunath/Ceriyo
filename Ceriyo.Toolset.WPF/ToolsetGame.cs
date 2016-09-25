@@ -1,5 +1,4 @@
-﻿using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Services.Contracts;
+﻿using Ceriyo.Core.Services.Contracts;
 using Microsoft.Xna.Framework;
 using MonoGame.Framework.WpfInterop;
 using MonoGame.Framework.WpfInterop.Input;

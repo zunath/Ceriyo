@@ -2,7 +2,6 @@
 using Artemis;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Constants;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Scripting.Server.Contracts;
 
 namespace Ceriyo.Core.Scripting.Server

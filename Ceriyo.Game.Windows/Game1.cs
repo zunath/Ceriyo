@@ -1,11 +1,8 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Game.Windows.UI;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.IOC;
 using Microsoft.Xna.Framework;
-using Squid;
 
 namespace Ceriyo.Game.Windows
 {

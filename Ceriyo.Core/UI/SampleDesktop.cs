@@ -174,7 +174,7 @@ namespace Ceriyo.Core.UI
 
             #region sample window 1 - Anchoring, DropDown, Modal Dialog
 
-            SampleWindow window1 = new SampleWindow();
+            TitledWindow window1 = new TitledWindow();
             window1.Size = new Squid.Point(440, 340);
             window1.Position = new Squid.Point(40, 40);
             window1.Titlebar.Text = "Anchoring, [color=FfFfFf00]DropDown, Modal Dialog[/color]";
@@ -274,7 +274,7 @@ namespace Ceriyo.Core.UI
 
             #region sample window 2 - SplitContainer, TreeView, ListBox
 
-            SampleWindow window2 = new SampleWindow();
+            TitledWindow window2 = new TitledWindow();
             window2.Size = new Squid.Point(440, 340);
             window2.Position = new Squid.Point(500, 40);
             window2.Titlebar.Text = "SplitContainer, TreeView, ListBox";
@@ -372,7 +372,7 @@ namespace Ceriyo.Core.UI
 
             #region sample window 3 - Custom Control (Inheritance)
 
-            SampleWindow window3 = new SampleWindow();
+            TitledWindow window3 = new TitledWindow();
             window3.Size = new Point(440, 340);
             window3.Position = new Point(40, 400);
             window3.Resizable = true;
@@ -402,7 +402,7 @@ namespace Ceriyo.Core.UI
 
             #region sample window 4 - TabControl, TextAlign
 
-            SampleWindow window4 = new SampleWindow();
+            TitledWindow window4 = new TitledWindow();
             window4.Size = new Point(440, 340);
             window4.Position = new Point(500, 400);
             window4.Resizable = true;
@@ -439,7 +439,7 @@ namespace Ceriyo.Core.UI
 
             #region sample window 5 - Panel, TextBox
 
-            SampleWindow window5 = new SampleWindow();
+            TitledWindow window5 = new TitledWindow();
             window5.Size = new Point(440, 340);
             window5.Position = new Point(960, 40);
             window5.Resizable = true;
@@ -498,7 +498,7 @@ namespace Ceriyo.Core.UI
 
             #region sample window 6 - ListView
 
-            SampleWindow window6 = new SampleWindow();
+            TitledWindow window6 = new TitledWindow();
             window6.Size = new Point(440, 340);
             window6.Position = new Point(960, 400);
             window6.Resizable = true;

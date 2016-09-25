@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using Artemis;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Scripting;
-using Ceriyo.Core.Scripting.Client;
 using Ceriyo.Core.Scripting.Client.Contracts;
 using Ceriyo.Core.Scripting.Common.Contracts;
 using Ceriyo.Core.Scripting.Server.Contracts;
 using Jint;
-using Jint.Native.Global;
 using Jint.Runtime.Descriptors;
 using NLua;
 
@@ -33,6 +29,7 @@ namespace Ceriyo.Infrastructure.Services
         // Client Methods
         private readonly IControlMethods _controlMethods;
         private readonly IStyleMethods _styleMethods;
+        private readonly ISceneMethods _sceneMethods;
 
         // Server Methods
         private readonly IEntityMethods _entityMethods;
@@ -48,7 +45,8 @@ namespace Ceriyo.Infrastructure.Services
             IEntityMethods entityMethods,
             ILocalDataMethods localDataMethods,
             IPhysicsMethods physicsMethods,
-            IScriptingMethods scriptingMethods)
+            IScriptingMethods scriptingMethods,
+            ISceneMethods sceneMethods)
         {
             _logger = logger;
 
@@ -59,6 +57,7 @@ namespace Ceriyo.Infrastructure.Services
             _localDataMethods = localDataMethods;
             _physicsMethods = physicsMethods;
             _scriptingMethods = scriptingMethods;
+            _sceneMethods = sceneMethods;
 
             _javaScriptEngine = new Engine();
             _luaEngine = new Lua();
@@ -191,10 +190,12 @@ namespace Ceriyo.Infrastructure.Services
             // Lua
             _luaEngine["Control"] = _controlMethods;
             _luaEngine["Style"] = _styleMethods;
+            _luaEngine["Scene"] = _sceneMethods;
 
             // JavaScript
             _javaScriptEngine.SetValue("Control", _controlMethods);
             _javaScriptEngine.SetValue("Style", _styleMethods);
+            _javaScriptEngine.SetValue("Scene", _sceneMethods);
         }
 
         private void RegisterServerEnumerations()

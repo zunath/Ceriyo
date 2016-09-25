@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.UI;
 using Microsoft.Xna.Framework;
@@ -67,7 +66,6 @@ namespace Ceriyo.Core.Services
             }
 
             GuiHost.Renderer = _renderer;
-            ChangeDesktop<SampleDesktop>();
 
             _game.Window.ClientSizeChanged += WindowOnClientSizeChanged;
             _game.IsMouseVisible = true;

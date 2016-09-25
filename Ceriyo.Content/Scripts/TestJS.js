@@ -2,7 +2,7 @@
 
     Logging.Print("firing logging");
 
-    var desktop = Control.CreateNewDesktop();
+    var desktop = Scene.CreateScene();
     var window = Control.CreateWindow(200, 200, 20, 20, "the title", true);
 
     desktop.ShowCursor = true;
@@ -10,6 +10,6 @@
     desktop.Update();
 
     Logging.Print(desktop.ShowCursor);
-    Control.AddWindowToDesktop(desktop, window);
-    Control.ChangeDesktop(desktop);
+    Scene.AddControlToScene(desktop, window);
+    Scene.ChangeScene(desktop);
 }

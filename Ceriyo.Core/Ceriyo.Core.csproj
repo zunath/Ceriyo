@@ -85,6 +85,8 @@
     <Compile Include="Constants\PVPType.cs" />
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
+    <Compile Include="Scripting\Client\Contracts\ISceneMethods.cs" />
+    <Compile Include="Scripting\Client\SceneMethods.cs" />
     <Compile Include="Services\Contracts\ICameraService.cs" />
     <Compile Include="Contracts\IComponentFactory.cs" />
     <Compile Include="Contracts\IDataService.cs" />
@@ -158,7 +160,8 @@
     <Compile Include="UI\Controls\GridView.cs" />
     <Compile Include="UI\Controls\GridViewItem.cs" />
     <Compile Include="UI\Controls\MessageBox.cs" />
-    <Compile Include="UI\Controls\SampleWindow.cs" />
+    <Compile Include="UI\Controls\TitledWindow.cs" />
+    <Compile Include="UI\Controls\TitleBar.cs" />
     <Compile Include="UI\SampleDesktop.cs" />
     <Compile Include="UI\SquidRenderer.cs" />
     <Compile Include="Services\UIService.cs" />

@@ -7,7 +7,6 @@ using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities.Contracts;
-using Ceriyo.Core.Scripting;
 using Ceriyo.Core.Scripting.Client;
 using Ceriyo.Core.Scripting.Client.Contracts;
 using Ceriyo.Core.Scripting.Common;
@@ -118,6 +117,7 @@ namespace Ceriyo.Infrastructure.IOC
             builder.RegisterType<ScriptingMethods>().As<IScriptingMethods>().SingleInstance();
             builder.RegisterType<ControlMethods>().As<IControlMethods>().SingleInstance();
             builder.RegisterType<StyleMethods>().As<IStyleMethods>().SingleInstance();
+            builder.RegisterType<SceneMethods>().As<ISceneMethods>().SingleInstance();
 
             RegisterGameEntities(builder);
             RegisterComponents(builder);
