@@ -34,16 +34,13 @@ namespace Ceriyo.Core.Scripting.Client
                         Resizable = isResizeable
                     };
                 }
-                else
+                return new TitledWindow
                 {
-                    return new TitledWindow
-                    {
-                        Size = new Point(width, height),
-                        Position = new Point(x, y),
-                        Titlebar = {Text = header},
-                        Resizable = isResizeable
-                    };
-                }
+                    Size = new Point(width, height),
+                    Position = new Point(x, y),
+                    Titlebar = {Text = header},
+                    Resizable = isResizeable
+                };
             }
             catch
             {
