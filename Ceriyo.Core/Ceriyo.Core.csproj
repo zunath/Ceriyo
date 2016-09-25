@@ -78,6 +78,7 @@
     <Compile Include="Components\Tag.cs" />
     <Compile Include="Components\Velocity.cs" />
     <Compile Include="Constants\ColorType.cs" />
+    <Compile Include="Constants\CursorType.cs" />
     <Compile Include="Constants\Direction.cs" />
     <Compile Include="Constants\GameCategory.cs" />
     <Compile Include="Constants\Gender.cs" />

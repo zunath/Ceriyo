@@ -13,6 +13,7 @@ using Ceriyo.Core.Scripting.Server.Contracts;
 using Jint;
 using Jint.Runtime.Descriptors;
 using NLua;
+using Squid;
 
 namespace Ceriyo.Infrastructure.Services
 {
@@ -74,6 +75,7 @@ namespace Ceriyo.Infrastructure.Services
             else
             {
                 RegisterClientMethods();
+                RegisterClientEnumerations();
             }
 
         }
@@ -201,6 +203,13 @@ namespace Ceriyo.Infrastructure.Services
         private void RegisterServerEnumerations()
         {
             RegisterEnumeration("Color", typeof(ColorType));
+        }
+
+        private void RegisterClientEnumerations()
+        {
+            RegisterEnumeration("TextureMode", typeof(TextureMode));
+            RegisterEnumeration("Alignment", typeof(Alignment));
+            RegisterEnumeration("Cursor", typeof(CursorType));
         }
 
 
