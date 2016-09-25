@@ -14,6 +14,8 @@ using Ceriyo.Core.Scripting.Client.Contracts;
 using Ceriyo.Core.Scripting.Common.Contracts;
 using Ceriyo.Core.Scripting.Server.Contracts;
 using Jint;
+using Jint.Native.Global;
+using Jint.Runtime.Descriptors;
 using NLua;
 
 namespace Ceriyo.Infrastructure.Services
@@ -62,9 +64,7 @@ namespace Ceriyo.Infrastructure.Services
             _luaEngine = new Lua();
             _scriptQueue = new Queue<ScriptQueueObject>();
 
-            // Sandbox Lua
-            _luaEngine.DoString("import = function() end");
-
+            SandboxEngines();
             RegisterCommonMethods();
 
             if (isServer)
@@ -144,6 +144,20 @@ namespace Ceriyo.Infrastructure.Services
                         _logger.Error($"Lua error: {fileName}. Details: {ex.Message}");
                     }
                 }
+            }
+        }
+
+        private void SandboxEngines()
+        {
+            // Sandbox Lua
+            _luaEngine.DoString("import = function() end");
+
+            // Sandbox JavaScript
+            List<KeyValuePair<string, PropertyDescriptor>> methods = _javaScriptEngine.Global.GetOwnProperties().ToList();
+            for (int index = methods.Count() - 1; index > 0; index--)
+            {
+                string propName = methods[index].Key;
+                _javaScriptEngine.Global.RemoveOwnProperty(propName);
             }
         }
 
