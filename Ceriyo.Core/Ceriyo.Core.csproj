@@ -49,6 +49,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MonoGame.Extended.0.5.149\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Squid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5ba804b1072f6e05, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Ceriyo.Content\Libraries\Squid.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -81,21 +85,26 @@
     <Compile Include="Constants\PVPType.cs" />
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
-    <Compile Include="Contracts\ICameraService.cs" />
-    <Compile Include="Contracts\IClientScriptMethodGroup.cs" />
+    <Compile Include="Services\Contracts\ICameraService.cs" />
     <Compile Include="Contracts\IComponentFactory.cs" />
     <Compile Include="Contracts\IDataService.cs" />
     <Compile Include="Contracts\IEntityFactory.cs" />
-    <Compile Include="Contracts\IGameEntity.cs" />
-    <Compile Include="Contracts\IGameService.cs" />
-    <Compile Include="Contracts\IGraphicsService.cs" />
+    <Compile Include="Scripting\Client\Contracts\IControlMethods.cs" />
+    <Compile Include="Scripting\Client\Contracts\IStyleMethods.cs" />
+    <Compile Include="Scripting\Common\Contracts\ILoggingMethods.cs" />
+    <Compile Include="Scripting\Server\Contracts\IEntityMethods.cs" />
+    <Compile Include="Entities\Contracts\IGameEntity.cs" />
+    <Compile Include="Services\Contracts\IGameService.cs" />
+    <Compile Include="Services\Contracts\IGraphicsService.cs" />
+    <Compile Include="Scripting\Server\Contracts\ILocalDataMethods.cs" />
     <Compile Include="Contracts\ILogger.cs" />
     <Compile Include="Contracts\IObjectMapper.cs" />
+    <Compile Include="Scripting\Server\Contracts\IPhysicsMethods.cs" />
     <Compile Include="Contracts\IScreenFactory.cs" />
-    <Compile Include="Contracts\IScreenService.cs" />
-    <Compile Include="Contracts\IServerScriptMethodGroup.cs" />
+    <Compile Include="Services\Contracts\IScreenService.cs" />
+    <Compile Include="Scripting\Server\Contracts\IScriptingMethods.cs" />
     <Compile Include="Contracts\IScriptService.cs" />
-    <Compile Include="Contracts\IUIService.cs" />
+    <Compile Include="Services\Contracts\IUIService.cs" />
     <Compile Include="Data\AbilityData.cs" />
     <Compile Include="Data\AnimationData.cs" />
     <Compile Include="Data\ClassData.cs" />
@@ -128,21 +137,33 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Contracts\IScreen.cs" />
+    <Compile Include="Scripting\Client\ControlMethods.cs" />
+    <Compile Include="Scripting\Client\StyleMethods.cs" />
+    <Compile Include="Scripting\Common\LoggingMethods.cs" />
     <Compile Include="Scripting\ScriptQueueObject.cs" />
-    <Compile Include="Services\ScreenService.cs" />
     <Compile Include="Scripting\Server\EntityMethods.cs" />
     <Compile Include="Scripting\Server\LocalDataMethods.cs" />
-    <Compile Include="Scripting\Server\MiscellaneousMethods.cs" />
+    <Compile Include="Scripting\Server\ScriptingMethods.cs" />
     <Compile Include="Scripting\Server\PhysicsMethods.cs" />
+    <Compile Include="Services\ScreenService.cs" />
     <Compile Include="Services\CameraService.cs" />
     <Compile Include="Services\GameService.cs" />
     <Compile Include="Services\GraphicsService.cs" />
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />
+    <Compile Include="UI\Controls\ChatBox.cs" />
+    <Compile Include="UI\Controls\FileDialog.cs" />
+    <Compile Include="UI\Controls\GridColumn.cs" />
+    <Compile Include="UI\Controls\GridView.cs" />
+    <Compile Include="UI\Controls\GridViewItem.cs" />
+    <Compile Include="UI\Controls\MessageBox.cs" />
+    <Compile Include="UI\Controls\SampleWindow.cs" />
+    <Compile Include="UI\SampleDesktop.cs" />
+    <Compile Include="UI\SquidRenderer.cs" />
+    <Compile Include="Services\UIService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripting\Client\" />
     <Folder Include="Systems\" />
     <Folder Include="Validators\" />
   </ItemGroup>

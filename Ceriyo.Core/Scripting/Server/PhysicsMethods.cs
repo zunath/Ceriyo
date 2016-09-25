@@ -3,13 +3,14 @@ using Artemis;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Scripting.Server.Contracts;
 
 namespace Ceriyo.Core.Scripting.Server
 {
-    public class PhysicsMethods: IServerScriptMethodGroup
+    public class PhysicsMethods: IPhysicsMethods
     {
 
-        public static float GetVelocityX(Entity entity)
+        public float GetVelocityX(Entity entity)
         {
             try
             {
@@ -21,7 +22,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
-        public static float GetVelocityY(Entity entity)
+        public float GetVelocityY(Entity entity)
         {
             try
             {
@@ -33,7 +34,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
-        public static void SetVelocityX(Entity entity, float x)
+        public void SetVelocityX(Entity entity, float x)
         {
             if (entity.HasComponent<Velocity>())
             {
@@ -41,7 +42,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
-        public static void SetVelocityY(Entity entity, float y)
+        public void SetVelocityY(Entity entity, float y)
         {
             if (entity.HasComponent<Velocity>())
             {
@@ -49,7 +50,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
-        public static float GetPositionX(Entity entity)
+        public float GetPositionX(Entity entity)
         {
             try
             {
@@ -61,7 +62,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
-        public static float GetPositionY(Entity entity)
+        public float GetPositionY(Entity entity)
         {
             try
             {
@@ -73,7 +74,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
-        public static Direction GetFacing(Entity entity)
+        public Direction GetFacing(Entity entity)
         {
             try
             {
@@ -85,7 +86,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
-        public static void SetFacing(Entity entity, Direction facing)
+        public void SetFacing(Entity entity, Direction facing)
         {
             if (entity.HasComponent<Position>())
             {

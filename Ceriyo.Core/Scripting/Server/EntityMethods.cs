@@ -2,12 +2,13 @@
 using Artemis;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Scripting.Server.Contracts;
 
 namespace Ceriyo.Core.Scripting.Server
 {
-    public class EntityMethods : IServerScriptMethodGroup
+    public class EntityMethods : IEntityMethods
     {
-        public static string GetName(Entity entity)
+        public string GetName(Entity entity)
         {
             try
             {

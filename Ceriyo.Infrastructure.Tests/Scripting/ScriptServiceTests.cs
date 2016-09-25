@@ -1,5 +1,14 @@
 ﻿using System.IO;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Scripting;
+using Ceriyo.Core.Scripting.Client;
+using Ceriyo.Core.Scripting.Common;
+using Ceriyo.Core.Scripting.Server;
+using Ceriyo.Core.Services;
+using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Services;
+using Moq;
 using NUnit.Framework;
 
 namespace Ceriyo.Infrastructure.Tests.Scripting
@@ -12,7 +21,17 @@ namespace Ceriyo.Infrastructure.Tests.Scripting
         [SetUp]
         public void Setup()
         {
-            _service = new ScriptService();
+            var mockUIService = new Mock<IUIService>();
+
+            _service = new ScriptService(false, 
+                new Logger(),
+                new LoggingMethods(), 
+                new ControlMethods(mockUIService.Object),
+                new StyleMethods(), 
+                new EntityMethods(), 
+                new LocalDataMethods(), 
+                new PhysicsMethods(), 
+                new ScriptingMethods());
         }
 
         [Test]

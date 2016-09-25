@@ -1,5 +1,6 @@
 ﻿using Artemis;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Entities.Contracts;
 
 namespace Ceriyo.Core.Entities
 {

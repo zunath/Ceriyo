@@ -1,6 +1,7 @@
 ﻿using Artemis;
 using Autofac;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Entities.Contracts;
 
 namespace Ceriyo.Infrastructure.Factory
 {

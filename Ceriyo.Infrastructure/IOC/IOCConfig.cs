@@ -6,13 +6,22 @@ using Artemis.System;
 using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Entities.Contracts;
+using Ceriyo.Core.Scripting;
+using Ceriyo.Core.Scripting.Client;
+using Ceriyo.Core.Scripting.Client.Contracts;
+using Ceriyo.Core.Scripting.Common;
+using Ceriyo.Core.Scripting.Common.Contracts;
+using Ceriyo.Core.Scripting.Server;
+using Ceriyo.Core.Scripting.Server.Contracts;
 using Ceriyo.Core.Services;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Settings;
+using Ceriyo.Core.UI;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Services;
-using Ceriyo.Infrastructure.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Squid;
@@ -33,8 +42,11 @@ namespace Ceriyo.Infrastructure.IOC
         {
             RegisterCommon(builder);
             builder.RegisterInstance(new ServerSettings());
+
+            // Scripting
             builder.RegisterType<ScriptService>().As<IScriptService>()
-                .WithParameter("isServer", true);
+                .WithParameter("isServer", true)
+                .SingleInstance();
         }
 
         // Toolset app specific registrations
@@ -47,23 +59,30 @@ namespace Ceriyo.Infrastructure.IOC
         }
         
         // Game app specific registrations
-        public static void InitializeGame(Microsoft.Xna.Framework.Game game)
+        public static void InitializeGame(Game game)
         {
             var builder = new ContainerBuilder();
             game.Content.RootDirectory = "Content";
 
+            // Monogame 
             builder.RegisterInstance(game);
             builder.RegisterInstance(new SpriteBatch(game.GraphicsDevice)).AsSelf();
             builder.RegisterInstance(game.Content).AsSelf();
             builder.RegisterInstance(game.GraphicsDevice).AsSelf();
             builder.RegisterInstance(new GameSettings());
 
+            // Common
             RegisterCommon(builder);
 
+            // UI
             builder.RegisterType<SquidRenderer>().As<ISquidRenderer>();
-            builder.RegisterType<UIService>().As<IUIService>();
+            builder.RegisterType<UIService>().As<IUIService>().SingleInstance();
+
+            // Scripting
             builder.RegisterType<ScriptService>().As<IScriptService>()
-                .WithParameter("isServer", false);
+                .WithParameter("isServer", false)
+                .SingleInstance();
+            
 
             _container = builder.Build();
         }
@@ -90,6 +109,15 @@ namespace Ceriyo.Infrastructure.IOC
             builder.RegisterType<EntityFactory>().As<IEntityFactory>().SingleInstance();
             builder.RegisterType<ComponentFactory>().As<IComponentFactory>().SingleInstance();
             builder.RegisterType<ScreenFactory>().As<IScreenFactory>();
+
+            // Scripting
+            builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();
+            builder.RegisterType<EntityMethods>().As<IEntityMethods>().SingleInstance();
+            builder.RegisterType<LocalDataMethods>().As<ILocalDataMethods>().SingleInstance();
+            builder.RegisterType<PhysicsMethods>().As<IPhysicsMethods>().SingleInstance();
+            builder.RegisterType<ScriptingMethods>().As<IScriptingMethods>().SingleInstance();
+            builder.RegisterType<ControlMethods>().As<IControlMethods>().SingleInstance();
+            builder.RegisterType<StyleMethods>().As<IStyleMethods>().SingleInstance();
 
             RegisterGameEntities(builder);
             RegisterComponents(builder);

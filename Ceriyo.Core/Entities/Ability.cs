@@ -2,6 +2,7 @@
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Entities.Contracts;
 
 namespace Ceriyo.Core.Entities
 {

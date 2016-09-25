@@ -1,4 +1,5 @@
 ﻿using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.IOC;
 
 namespace Ceriyo.Infrastructure.Factory

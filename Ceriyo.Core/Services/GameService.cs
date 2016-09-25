@@ -1,6 +1,7 @@
 ﻿using Artemis;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Screens;
+using Ceriyo.Core.Services.Contracts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -41,6 +42,7 @@ namespace Ceriyo.Core.Services
             _screenService.ChangeScreen<GameScreen>();
 
             _scriptService.QueueScript("TestJS.js", _world.CreateEntity());
+            _scriptService.QueueScript("TestLua.lua", _world.CreateEntity());
         }
 
         public void Update(GameTime gameTime)

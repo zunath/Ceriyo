@@ -63,7 +63,7 @@
     <Content Include="Libraries\artemis.dll" />
     <Content Include="Libraries\Squid.dll" />
     <None Include="Scripts\TestJS.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +256,9 @@
     <None Include="Graphics\UI\vscroll_button_hot.dds" />
     <None Include="Graphics\UI\vscroll_track.dds" />
     <None Include="Graphics\UI\window.dds" />
+    <None Include="Scripts\TestLua.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Spritefonts\Arial10.spritefont" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

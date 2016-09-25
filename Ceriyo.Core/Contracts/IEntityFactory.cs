@@ -1,4 +1,5 @@
 ﻿using Artemis;
+using Ceriyo.Core.Entities.Contracts;
 
 namespace Ceriyo.Core.Contracts
 {
