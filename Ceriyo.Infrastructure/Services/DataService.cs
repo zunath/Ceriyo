@@ -2,7 +2,10 @@
 using System.IO;
 using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
+using Ceriyo.Infrastructure.Serialization;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace Ceriyo.Infrastructure.Services
 {
@@ -13,6 +16,27 @@ namespace Ceriyo.Infrastructure.Services
         public DataService(ILogger logger)
         {
             _logger = logger;
+        }
+
+        public void Initialize()
+        {
+            ProtobufBuilder.Build<AbilityData>();
+            //ProtobufBuilder.Build<AnimationData>();
+            //ProtobufBuilder.Build<ClassData>();
+            //ProtobufBuilder.Build<ClassRequirementData>();
+            //ProtobufBuilder.Build<CreatureData>();
+            //ProtobufBuilder.Build<DialogData>();
+            //ProtobufBuilder.Build<FrameData>();
+            //ProtobufBuilder.Build<ItemData>();
+            //ProtobufBuilder.Build<ItemPropertyData>();
+            //ProtobufBuilder.Build<ItemTypeData>();
+            //ProtobufBuilder.Build<LocalVariableData>();
+            //ProtobufBuilder.Build<ModuleData>();
+            //ProtobufBuilder.Build<ModuleFileData>();
+            //ProtobufBuilder.Build<PlaceableData>();
+            //ProtobufBuilder.Build<ScriptData>();
+            //ProtobufBuilder.Build<SkillData>();
+            //ProtobufBuilder.Build<TilesetData>();
         }
 
         public T Load<T>(string filePath = null)
@@ -65,6 +89,16 @@ namespace Ceriyo.Infrastructure.Services
 
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
             File.WriteAllText(filePath, json);
+        }
+
+        public void PackageDirectory(string directoryPath, string filePath)
+        {
+            
+        }
+
+        public void UnpackageDirectory(string destinationDirectoryPath, string filePath)
+        {
+            
         }
     }
 }

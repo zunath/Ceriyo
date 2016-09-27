@@ -21,7 +21,7 @@ namespace Ceriyo.Toolset.WPF
         protected override void InitializeShell()
         {
             ServiceLocator.Current.TryResolve<IObjectMapper>().Initialize();
-            
+            ServiceLocator.Current.TryResolve<IDataService>().Initialize();
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
         }

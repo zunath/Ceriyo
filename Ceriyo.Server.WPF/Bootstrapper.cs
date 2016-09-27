@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Windows;
 using Autofac;
+using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.IOC;
 using Ceriyo.Server.WPF.Views.ApplicationRootView;
 using Microsoft.Practices.ServiceLocation;
@@ -19,7 +20,7 @@ namespace Ceriyo.Server.WPF
 
         protected override void InitializeShell()
         {
-
+            ServiceLocator.Current.TryResolve<IDataService>().Initialize();
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
 

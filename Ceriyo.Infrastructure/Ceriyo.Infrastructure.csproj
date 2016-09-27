@@ -95,6 +95,7 @@
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Mapping\ObjectMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\ProtobufBuilder.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\ScriptService.cs" />
   </ItemGroup>
