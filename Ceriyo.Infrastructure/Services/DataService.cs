@@ -114,9 +114,30 @@ namespace Ceriyo.Infrastructure.Services
         }
 
 
-        public void UnpackageDirectory(string destinationDirectoryPath, string filePath)
+        public void UnpackageDirectory(string destinationDirectoryPath, string sourceFilePath)
         {
-            
+            if (!Directory.Exists(destinationDirectoryPath))
+            {
+                Directory.CreateDirectory(destinationDirectoryPath);
+            }
+
+            using (var stream = File.OpenRead(sourceFilePath))
+            {
+                foreach(var fileData in Serializer.DeserializeItems<ModuleFileData>(stream, PrefixStyle.Base128, 0))
+                {
+                    string destinationPath = destinationDirectoryPath + fileData.FilePath;
+
+                    if (!Directory.Exists(Path.GetDirectoryName(destinationPath)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
+                    }
+
+                    File.WriteAllBytes(destinationDirectoryPath + fileData.FilePath, fileData.Data);
+                }
+                
+                
+            }
+
         }
     }
 }

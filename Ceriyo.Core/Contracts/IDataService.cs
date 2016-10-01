@@ -11,6 +11,6 @@
             where T : class;
 
         void PackageDirectory(string directoryPath, string serializedFilePath);
-        void UnpackageDirectory(string destinationDirectoryPath, string filePath);
+        void UnpackageDirectory(string destinationDirectoryPath, string sourceFilePath);
     }
 }
