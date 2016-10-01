@@ -1,7 +1,6 @@
 ﻿using System;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Infrastructure.Factory;
-using Ceriyo.Infrastructure.IOC;
+using Ceriyo.Game.Windows.Factory;
 using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Game.Windows
@@ -44,7 +43,7 @@ namespace Ceriyo.Game.Windows
 
         protected override void Initialize()
         {
-            IOCConfig.InitializeGame(this);
+            GameIOCConfig.Initialize(this);
             _gameService = GameFactory.GetGameService();
             _gameService.Initialize(_graphics);
 

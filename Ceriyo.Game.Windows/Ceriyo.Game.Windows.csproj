@@ -42,7 +42,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Factory\GameFactory.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameIOCConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Views\MainMenuView\MainMenuViewModel.cs" />

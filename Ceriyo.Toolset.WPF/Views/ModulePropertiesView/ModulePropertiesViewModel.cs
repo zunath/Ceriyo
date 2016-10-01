@@ -14,7 +14,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 {
     public class ModulePropertiesViewModel : BindableBase, IInteractionRequestAware
     {
-        private IEventAggregator _eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
 
         public ModulePropertiesViewModel()
         {

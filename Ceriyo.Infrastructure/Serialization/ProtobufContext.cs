@@ -1,5 +1,6 @@
 ﻿using System;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Entities;
 using ProtoBuf.Meta;
 
 namespace Ceriyo.Infrastructure.Serialization
@@ -12,6 +13,7 @@ namespace Ceriyo.Infrastructure.Serialization
             Map<AnimationData>();
             Map<ClassData>();
             Map<ClassRequirementData>();
+            Map<ClassLevel>();
             Map<CreatureData>();
             Map<DialogData>();
             Map<FrameData>();

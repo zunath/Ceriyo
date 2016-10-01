@@ -3,7 +3,6 @@ using System.Reflection;
 using System.Windows;
 using Autofac;
 using Ceriyo.Core.Contracts;
-using Ceriyo.Infrastructure.IOC;
 using Ceriyo.Toolset.WPF.Views.ApplicationRootView;
 using Microsoft.Practices.ServiceLocation;
 using Prism.Autofac;
@@ -41,7 +40,7 @@ namespace Ceriyo.Toolset.WPF
         protected override void ConfigureContainerBuilder(ContainerBuilder builder)
         {
             base.ConfigureContainerBuilder(builder);
-            IOCConfig.InitializeToolset(builder);
+            ToolsetIOCConfig.Initialize(builder);
         }
     }
 }

@@ -34,6 +34,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="artemis">
       <HintPath>..\Ceriyo.Content\Libraries\artemis.dll</HintPath>
@@ -123,6 +143,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Components\CustomPopupWindowAction.cs" />
+    <Compile Include="DomainServiceNotifier.cs" />
+    <Compile Include="EventArgs\ModuleEventArgs.cs" />
     <Compile Include="Events\AbilityChangedEvent.cs" />
     <Compile Include="Events\AbilityDeletedEvent.cs" />
     <Compile Include="Events\ClassChangedEvent.cs" />
@@ -136,6 +158,7 @@
     <Compile Include="Events\ItemCreatedEvent.cs" />
     <Compile Include="Events\ItemDeletedEvent.cs" />
     <Compile Include="Events\ModuleClosedEvent.cs" />
+    <Compile Include="Events\ModuleCreatedEvent.cs" />
     <Compile Include="Events\ModuleLoadedEvent.cs" />
     <Compile Include="Events\AbilityCreatedEvent.cs" />
     <Compile Include="Events\ModulePropertiesChangedEvent.cs" />
@@ -146,6 +169,7 @@
     <Compile Include="Events\SkillCreatedEvent.cs" />
     <Compile Include="Events\SkillDeletedEvent.cs" />
     <Compile Include="ToolsetGame.cs" />
+    <Compile Include="ToolsetIOCConfig.cs" />
     <Compile Include="Views\ApplicationRootView\ApplicationRootViewModel.cs" />
     <Page Include="Views\AbilityEditorView\AbilityEditor.xaml">
       <SubType>Designer</SubType>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
 using Ceriyo.Core.Data;
+using Ceriyo.Domain.Services.DataServices;
+using Ceriyo.Toolset.WPF.EventArgs;
 using Ceriyo.Toolset.WPF.Events;
 using Prism.Commands;
 using Prism.Events;
@@ -11,18 +13,15 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
 {
     public class NewModuleViewModel : BindableBase, IInteractionRequestAware
     {
-        private ModuleData _moduleData;
         private readonly IEventAggregator _eventAggregator;
-        
+
         public NewModuleViewModel()
         {
         }
 
-        public NewModuleViewModel(IEventAggregator eventAggregator,
-            ModuleData moduleData)
+        public NewModuleViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            _moduleData = moduleData;
             CreateModuleCommand = new DelegateCommand(CreateModule);
             CancelCommand = new DelegateCommand(Cancel);
         }
@@ -52,10 +51,7 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
         public DelegateCommand CreateModuleCommand { get; set; }
         private void CreateModule()
         {
-            _moduleData.Name = Name;
-            _moduleData.Tag = Tag;
-            _moduleData.Resref = Resref;
-            
+            _eventAggregator.GetEvent<ModuleCreatedEvent>().Publish(new ModuleEventArgs(Name, Tag, Resref));
             FinishInteraction();
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Publish();
             ClearFields();

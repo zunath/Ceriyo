@@ -1,7 +1,6 @@
 ﻿using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Infrastructure.IOC;
 
-namespace Ceriyo.Infrastructure.Factory
+namespace Ceriyo.Game.Windows.Factory
 {
     public static class GameFactory
     {
@@ -9,7 +8,7 @@ namespace Ceriyo.Infrastructure.Factory
 
         public static IGameService GetGameService()
         {
-            return _gameService ?? (_gameService = IOCConfig.Resolve<IGameService>());
+            return _gameService ?? (_gameService = GameIOCConfig.Resolve<IGameService>());
         }
     }
 }
