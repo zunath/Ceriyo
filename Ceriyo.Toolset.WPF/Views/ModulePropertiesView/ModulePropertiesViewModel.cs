@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using Ceriyo.Core.Components;
+using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
+using Ceriyo.Toolset.WPF.Events;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
 
@@ -11,18 +14,36 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 {
     public class ModulePropertiesViewModel : BindableBase, IInteractionRequestAware
     {
+        private IEventAggregator _eventAggregator;
+
         public ModulePropertiesViewModel()
         {
-            Tag = new Tag();
-            Resref = new Resref();
+            
+        }
+
+        public ModulePropertiesViewModel(ModuleData moduleData,
+            IEventAggregator eventAggregator)
+        {
             Scripts = new BindingList<Script>();
             MaximumPossibleLevel = 99;
 
-            LocalNumbers = new Dictionary<string, float>();
-            LocalStrings = new Dictionary<string, string>();
+
 
             SaveCommand = new DelegateCommand(Save);
             CancelCommand = new DelegateCommand(Cancel);
+            _moduleData = moduleData;
+
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
+        }
+
+
+        private ModuleData _moduleData;
+
+        public ModuleData ModuleData
+        {
+            get { return _moduleData;}
+            set { SetProperty(ref _moduleData, value); }
         }
 
         private string _name;
@@ -33,17 +54,17 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             set { SetProperty(ref _name, value); }
         }
 
-        private Tag _tag;
+        private string _tag;
 
-        public Tag Tag
+        public string Tag
         {
             get { return _tag; }
             set { SetProperty(ref _tag, value); }
         }
 
-        private Resref _resref;
+        private string _resref;
 
-        public Resref Resref
+        public string Resref
         {
             get { return _resref; }
             set { SetProperty(ref _resref, value); }
@@ -81,21 +102,13 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             set { SetProperty(ref _comments, value); }
         }
 
-        private Dictionary<string, string> _localStrings;
+        private LocalVariableData _localVariables;
 
-        public Dictionary<string, string> LocalStrings
+        public LocalVariableData LocalVariables
         {
-            get { return _localStrings; }
-            set { SetProperty(ref _localStrings, value); }
+            get { return _localVariables; }
+            set { SetProperty(ref _localVariables, value); }
         }
-
-        private Dictionary<string, float> _localNumbers;
-        public Dictionary<string, float> LocalNumbers
-        {
-            get { return _localNumbers; }
-            set { SetProperty(ref _localNumbers, value); }
-        }
-
 
         private BindingList<Script> _scripts;
 
@@ -105,73 +118,73 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             set { SetProperty(ref _scripts, value); }
         }
 
-        private Script _onPlayerEnter;
+        private string _onPlayerEnter;
 
-        public Script OnPlayerEnter
+        public string OnPlayerEnter
         {
             get { return _onPlayerEnter; }
             set { SetProperty(ref _onPlayerEnter, value); }
         }
 
-        private Script _onPlayerLeaving;
+        private string _onPlayerLeaving;
 
-        public Script OnPlayerLeaving
+        public string OnPlayerLeaving
         {
             get { return _onPlayerLeaving; }
             set { SetProperty(ref _onPlayerLeaving, value); }
         }
 
-        private Script _onPlayerLeft;
+        private string _onPlayerLeft;
 
-        public Script OnPlayerLeft
+        public string OnPlayerLeft
         {
             get { return _onPlayerLeft; }
             set { SetProperty(ref _onPlayerLeft, value); }
         }
 
-        private Script _onHeartbeat;
+        private string _onHeartbeat;
 
-        public Script OnHeartbeat
+        public string OnHeartbeat
         {
             get { return _onHeartbeat; }
             set { SetProperty(ref _onHeartbeat, value); }
         }
 
-        private Script _onModuleLoad;
+        private string _onModuleLoad;
 
-        public Script OnModuleLoad
+        public string OnModuleLoad
         {
             get { return _onModuleLoad; }
             set { SetProperty(ref _onModuleLoad, value); }
         }
 
-        private Script _onPlayerDying;
+        private string _onPlayerDying;
 
-        public Script OnPlayerDying
+        public string OnPlayerDying
         {
             get { return _onPlayerDying; }
             set { SetProperty(ref _onPlayerDying, value); }
         }
 
-        private Script _onPlayerDeath;
+        private string _onPlayerDeath;
 
-        public Script OnPlayerDeath
+        public string OnPlayerDeath
         {
             get { return _onPlayerDeath; }
             set { SetProperty(ref _onPlayerDeath, value); }
         }
 
-        private Script _onPlayerRespawn;
+        private string _onPlayerRespawn;
 
-        public Script OnPlayerRespawn
+        public string OnPlayerRespawn
         {
             get { return _onPlayerRespawn; }
             set { SetProperty(ref _onPlayerRespawn, value); }
         }
 
-        private Script _onPlayerLevelUp;
+        private string _onPlayerLevelUp;
 
-        public Script OnPlayerLevelUp
+        public string OnPlayerLevelUp
         {
             get { return _onPlayerLevelUp; }
             set { SetProperty(ref _onPlayerLevelUp, value); }
@@ -190,16 +203,65 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 
         private void Save()
         {
+            ModuleData.Name = Name;
+            ModuleData.Tag = Tag;
+            ModuleData.Resref = Resref;
+            ModuleData.Description = Description;
+            ModuleData.Comments = Comments;
+            ModuleData.MaxLevel = MaxLevel;
+
+            ModuleData.OnPlayerEnter = OnPlayerEnter;
+            ModuleData.OnPlayerLeaving = OnPlayerLeaving;
+            ModuleData.OnPlayerLeft = OnPlayerLeft;
+            ModuleData.OnHeartbeat = OnHeartbeat;
+            ModuleData.OnModuleLoad = OnModuleLoad;
+            ModuleData.OnPlayerDying = OnPlayerDying;
+            ModuleData.OnPlayerDeath = OnPlayerDeath;
+            ModuleData.OnPlayerRespawn = OnPlayerRespawn;
+            ModuleData.OnPlayerLevelUp = OnPlayerLevelUp;
+
+            ModuleData.LocalVariables = LocalVariables;
+            ModuleData.LevelChart = LevelChart;
 
             FinishInteraction();
+
+            _eventAggregator.GetEvent<ModulePropertiesChangedEvent>().Publish();
         }
 
         public DelegateCommand CancelCommand { get; set; }
 
         private void Cancel()
         {
-
+            CopyPropertiesFromModuleData();
             FinishInteraction();
+        }
+
+        private void CopyPropertiesFromModuleData()
+        {
+            Name = ModuleData.Name;
+            Tag = ModuleData.Tag;
+            Resref = ModuleData.Resref;
+            Description = ModuleData.Description;
+            Comments = ModuleData.Comments;
+            MaxLevel = ModuleData.MaxLevel;
+
+            OnPlayerEnter = ModuleData.OnPlayerEnter;
+            OnPlayerLeaving = ModuleData.OnPlayerLeaving;
+            OnPlayerLeft = ModuleData.OnPlayerLeft;
+            OnHeartbeat = ModuleData.OnHeartbeat;
+            OnModuleLoad = ModuleData.OnModuleLoad;
+            OnPlayerDying = ModuleData.OnPlayerDying;
+            OnPlayerDeath = ModuleData.OnPlayerDeath;
+            OnPlayerRespawn = ModuleData.OnPlayerRespawn;
+            OnPlayerLevelUp = ModuleData.OnPlayerLevelUp;
+
+            LocalVariables = ModuleData.LocalVariables;
+            LevelChart = ModuleData.LevelChart;
+        }
+
+        private void ModuleLoaded()
+        {
+            CopyPropertiesFromModuleData();
         }
 
         public INotification Notification { get; set; }

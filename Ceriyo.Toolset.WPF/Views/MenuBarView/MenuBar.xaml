@@ -9,6 +9,8 @@
              xmlns:buildModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.BuildModuleView"
              xmlns:aboutView="clr-namespace:Ceriyo.Toolset.WPF.Views.AboutView"
              xmlns:modulePropertiesView="clr-namespace:Ceriyo.Toolset.WPF.Views.ModulePropertiesView"
+             xmlns:newModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.NewModuleView"
+             xmlns:components="clr-namespace:Ceriyo.Toolset.WPF.Components"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Menu>
@@ -23,25 +25,30 @@
                 </MenuItem>
                 <MenuItem
                     Header="Close Module"
-                    Command="{Binding CloseModuleCommand}">
+                    Command="{Binding CloseModuleCommand}"
+                    IsEnabled="{Binding IsModuleLoaded}">
                 </MenuItem>
                 <Separator></Separator>
                 <MenuItem
                     Header="Save"
-                    Command="{Binding SaveCommand}">
+                    Command="{Binding SaveCommand}"
+                    IsEnabled="{Binding IsModuleLoaded}">
                 </MenuItem>
                 <MenuItem
                     Header="Save As..."
-                    Command="{Binding SaveAsCommand}">
+                    Command="{Binding SaveAsCommand}"
+                    IsEnabled="{Binding IsModuleLoaded}">
                 </MenuItem>
                 <Separator></Separator>
                 <MenuItem
                     Header="Import..."
-                    Command="{Binding ImportCommand}">
+                    Command="{Binding ImportCommand}"
+                    IsEnabled="{Binding IsModuleLoaded}">
                 </MenuItem>
                 <MenuItem
                     Header="Export..."
-                    Command="{Binding ExportCommand}">
+                    Command="{Binding ExportCommand}"
+                    IsEnabled="{Binding IsModuleLoaded}">
                 </MenuItem>
                 <Separator></Separator>
                 <MenuItem
@@ -73,11 +80,13 @@
                 <Separator></Separator>
                 <MenuItem
                     Header="Module Properties"
-                    Command="{Binding ModulePropertiesCommand}">
+                    Command="{Binding ModulePropertiesCommand}"
+                    IsEnabled="{Binding IsModuleLoaded}">
                 </MenuItem>
                 <MenuItem
                     Header="Data Editor"
-                    Command="{Binding DataEditorCommand}">
+                    Command="{Binding DataEditorCommand}"
+                    IsEnabled="{Binding IsModuleLoaded}">
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Resources">
@@ -87,12 +96,14 @@
                 </MenuItem>
                 <MenuItem
                     Header="Manage Resources"
-                    Command="{Binding ManageResourcesCommand}">
+                    Command="{Binding ManageResourcesCommand}"
+                    IsEnabled="{Binding IsModuleLoaded}">
                 </MenuItem>
                 <Separator></Separator>
                 <MenuItem
                     Header="Build Module"
-                    Command="{Binding BuildModuleCommand}">
+                    Command="{Binding BuildModuleCommand}"
+                    IsEnabled="{Binding IsModuleLoaded}">
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
@@ -106,6 +117,23 @@
 
 
         <i:Interaction.Triggers>
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding NewModuleRequest, Mode=OneWay}">
+                <components:CustomPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
+                    <prism:PopupWindowAction.WindowContent>
+                        <newModuleView:NewModule
+                                MinWidth="223"
+                                MinHeight="128"
+                                Width="Auto"
+                                Height="Auto"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    </prism:PopupWindowAction.WindowContent>
+                </components:CustomPopupWindowAction>
+            </prism:InteractionRequestTrigger>
+
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenDataEditorRequest, Mode=OneWay}">
                 <prism:PopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">

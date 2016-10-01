@@ -1,6 +1,5 @@
 ﻿using System;
 using Ceriyo.Core.Scripting.Client.Contracts;
-using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.UI.Controls;
 using Squid;
 

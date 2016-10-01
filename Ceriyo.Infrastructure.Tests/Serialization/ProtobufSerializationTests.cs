@@ -6,7 +6,6 @@ using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using ProtoBuf;
-using ProtoBuf.Meta;
 
 namespace Ceriyo.Infrastructure.Tests.Serialization
 {

@@ -47,7 +47,7 @@
 						Height="23" 
 						Margin="103,38,0,0" 
 						TextWrapping="Wrap" 
-						Text="{Binding Tag.Value}" 
+						Text="{Binding Tag}" 
 						VerticalAlignment="Top" 
 						Width="271"/>
                     <TextBox 
@@ -55,7 +55,7 @@
 						Height="23" 
 						Margin="103,66,0,0" 
 						TextWrapping="Wrap" 
-						Text="{Binding Resref.Value}" 
+						Text="{Binding Resref}" 
 						VerticalAlignment="Top" 
 						Width="271"/>
                     <xctk:IntegerUpDown 
@@ -220,7 +220,7 @@
                     
                     <DataGrid 
                         Grid.Row="1"
-                        ItemsSource="{Binding LocalStrings}"
+                        ItemsSource="{Binding LocalVariables.LocalStrings}"
                         CanUserAddRows="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
@@ -236,7 +236,7 @@
                     
                     <DataGrid 
                         Grid.Row="3"
-                        ItemsSource="{Binding LocalNumbers}"
+                        ItemsSource="{Binding LocalVariables.LocalFloats}"
                         CanUserAddRows="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>

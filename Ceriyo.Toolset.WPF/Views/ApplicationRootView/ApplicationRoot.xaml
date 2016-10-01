@@ -8,7 +8,9 @@
         xmlns:areaEditorView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaEditorView"
         xmlns:toolbarView="clr-namespace:Ceriyo.Toolset.WPF.Views.ToolbarView"
         mc:Ignorable="d"
-        Title="Ceriyo Toolset" Height="350" Width="525">
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding WindowTitle}" Height="350" Width="525">
     <Grid>
 
         <Grid.RowDefinitions>

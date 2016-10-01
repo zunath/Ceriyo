@@ -122,6 +122,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\CustomPopupWindowAction.cs" />
     <Compile Include="Events\AbilityChangedEvent.cs" />
     <Compile Include="Events\AbilityDeletedEvent.cs" />
     <Compile Include="Events\ClassChangedEvent.cs" />
@@ -134,8 +135,10 @@
     <Compile Include="Events\ItemChangedEvent.cs" />
     <Compile Include="Events\ItemCreatedEvent.cs" />
     <Compile Include="Events\ItemDeletedEvent.cs" />
+    <Compile Include="Events\ModuleClosedEvent.cs" />
     <Compile Include="Events\ModuleLoadedEvent.cs" />
     <Compile Include="Events\AbilityCreatedEvent.cs" />
+    <Compile Include="Events\ModulePropertiesChangedEvent.cs" />
     <Compile Include="Events\PlaceableChangedEvent.cs" />
     <Compile Include="Events\PlaceableCreatedEvent.cs" />
     <Compile Include="Events\PlaceableDeletedEvent.cs" />
@@ -189,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModulePropertiesView\ModuleProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewModuleView\NewModule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -274,6 +281,10 @@
       <DependentUpon>ModuleProperties.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ModulePropertiesView\ModulePropertiesViewModel.cs" />
+    <Compile Include="Views\NewModuleView\NewModule.xaml.cs">
+      <DependentUpon>NewModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewModuleView\NewModuleViewModel.cs" />
     <Compile Include="Views\PlaceableEditorView\PlaceableEditor.xaml.cs">
       <DependentUpon>PlaceableEditor.xaml</DependentUpon>
     </Compile>

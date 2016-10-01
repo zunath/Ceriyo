@@ -39,19 +39,27 @@ namespace Ceriyo.Toolset.WPF.Views.MenuBarView
             ManageResourcesCommand = new DelegateCommand(ManageResources);
             AboutCommand = new DelegateCommand(About);
 
+            NewModuleRequest = new InteractionRequest<INotification>();
             OpenModulePropertiesRequest = new InteractionRequest<INotification>();
             OpenDataEditorRequest = new InteractionRequest<INotification>();
             OpenManageResourcesRequest = new InteractionRequest<INotification>();
             OpenResourceEditorRequest = new InteractionRequest<INotification>();
             OpenBuildModuleRequest = new InteractionRequest<INotification>();
             OpenAboutRequest = new InteractionRequest<INotification>();
+
+            _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(() => IsModuleLoaded = true);
+            _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(() => IsModuleLoaded = false);
         }
 
         public DelegateCommand NewModuleCommand { get; set; }
-
+        public InteractionRequest<INotification> NewModuleRequest { get; }
         private void NewModule()
         {
-            
+            NewModuleRequest.Raise(new Notification
+            {
+                Content = "New Module",
+                Title = "New Module"
+            });
         }
 
         public DelegateCommand OpenModuleCommand { get; set; }
@@ -207,6 +215,16 @@ namespace Ceriyo.Toolset.WPF.Views.MenuBarView
             });
         }
 
+        private bool _isModuleLoaded;
+
+        public bool IsModuleLoaded
+        {
+            get { return _isModuleLoaded; }
+            set { SetProperty(ref _isModuleLoaded, value); }
+        }
+        
+
+        
 
     }
 }

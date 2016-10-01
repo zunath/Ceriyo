@@ -1,11 +1,19 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Ceriyo.Core.Entities;
 using Ceriyo.Core.Properties;
 
 namespace Ceriyo.Core.Data
 {
     public class ModuleData: INotifyPropertyChanged
     {
+        private string _name;
+        private string _tag;
+        private string _resref;
+        private int _maxLevel;
+        private string _description;
+        private string _comments;
+
         private BindingList<string> _tilesetIDs;
         private BindingList<string> _skillIDs;
         private BindingList<string> _scriptIDs;
@@ -15,6 +23,76 @@ namespace Ceriyo.Core.Data
         private BindingList<string> _creatureIDs;
         private BindingList<string> _classIDs;
         private BindingList<string> _abilityIDs;
+
+        private string _onPlayerEnter;
+        private string _onPlayerLeaving;
+        private string _onPlayerLeft;
+        private string _onHeartbeat;
+        private string _onModuleLoad;
+        private string _onPlayerDying;
+        private string _onPlayerDeath;
+        private string _onPlayerRespawn;
+        private string _onPlayerLevelUp;
+
+        private LocalVariableData _localVariables;
+        private BindingList<ClassLevel> _levelChart;
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Tag
+        {
+            get { return _tag; }
+            set
+            {
+                _tag = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Resref
+        {
+            get { return _resref; }
+            set
+            {
+                _resref = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int MaxLevel
+        {
+            get { return _maxLevel; }
+            set
+            {
+                _maxLevel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Comments
+        {
+            get { return _comments; }
+            set
+            {
+                _comments = value;
+                OnPropertyChanged();
+            }
+        }
 
         public BindingList<string> AbilityIDs
         {
@@ -115,6 +193,116 @@ namespace Ceriyo.Core.Data
             }
         }
 
+        public string OnPlayerLevelUp
+        {
+            get { return _onPlayerLevelUp; }
+            set
+            {
+                _onPlayerLevelUp = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string OnPlayerEnter
+        {
+            get { return _onPlayerEnter; }
+            set
+            {
+                _onPlayerEnter = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string OnPlayerLeaving
+        {
+            get { return _onPlayerLeaving; }
+            set
+            {
+                _onPlayerLeaving = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string OnPlayerLeft
+        {
+            get { return _onPlayerLeft; }
+            set
+            {
+                _onPlayerLeft = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string OnHeartbeat
+        {
+            get { return _onHeartbeat; }
+            set
+            {
+                _onHeartbeat = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string OnModuleLoad
+        {
+            get { return _onModuleLoad; }
+            set
+            {
+                _onModuleLoad = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string OnPlayerDying
+        {
+            get { return _onPlayerDying; }
+            set
+            {
+                _onPlayerDying = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string OnPlayerDeath
+        {
+            get { return _onPlayerDeath; }
+            set
+            {
+                _onPlayerDeath = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string OnPlayerRespawn
+        {
+            get { return _onPlayerRespawn; }
+            set
+            {
+                _onPlayerRespawn = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public LocalVariableData LocalVariables
+        {
+            get { return _localVariables; }
+            set
+            {
+                _localVariables = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public BindingList<ClassLevel> LevelChart
+        {
+            get { return _levelChart; }
+            set
+            {
+                _levelChart = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ModuleData()
         {
             AbilityIDs = new BindingList<string>();
@@ -126,6 +314,9 @@ namespace Ceriyo.Core.Data
             ScriptIDs = new BindingList<string>();
             SkillIDs = new BindingList<string>();
             TilesetIDs = new BindingList<string>();
+            MaxLevel = 99;
+            LocalVariables = new LocalVariableData();
+            LevelChart = new BindingList<ClassLevel>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
