@@ -6,6 +6,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.Serialization;
 using Newtonsoft.Json;
 using ProtoBuf;
+using ProtoBuf.Meta;
 
 namespace Ceriyo.Infrastructure.Services
 {
@@ -20,7 +21,9 @@ namespace Ceriyo.Infrastructure.Services
 
         public void Initialize()
         {
-            ProtobufBuilder.Build<AbilityData>();
+            ProtobufContext.Build();
+
+            //ProtobufBuilder.Build<AbilityData>();
             //ProtobufBuilder.Build<AnimationData>();
             //ProtobufBuilder.Build<ClassData>();
             //ProtobufBuilder.Build<ClassRequirementData>();

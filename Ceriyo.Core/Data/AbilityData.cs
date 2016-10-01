@@ -15,7 +15,7 @@ namespace Ceriyo.Core.Data
         private string _comment;
         private string _description;
         private string _onActivated;
-
+        
         public string GlobalID
         {
             get { return _globalID; }
