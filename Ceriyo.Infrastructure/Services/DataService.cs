@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
@@ -22,24 +23,6 @@ namespace Ceriyo.Infrastructure.Services
         public void Initialize()
         {
             ProtobufContext.Build();
-
-            //ProtobufBuilder.Build<AbilityData>();
-            //ProtobufBuilder.Build<AnimationData>();
-            //ProtobufBuilder.Build<ClassData>();
-            //ProtobufBuilder.Build<ClassRequirementData>();
-            //ProtobufBuilder.Build<CreatureData>();
-            //ProtobufBuilder.Build<DialogData>();
-            //ProtobufBuilder.Build<FrameData>();
-            //ProtobufBuilder.Build<ItemData>();
-            //ProtobufBuilder.Build<ItemPropertyData>();
-            //ProtobufBuilder.Build<ItemTypeData>();
-            //ProtobufBuilder.Build<LocalVariableData>();
-            //ProtobufBuilder.Build<ModuleData>();
-            //ProtobufBuilder.Build<ModuleFileData>();
-            //ProtobufBuilder.Build<PlaceableData>();
-            //ProtobufBuilder.Build<ScriptData>();
-            //ProtobufBuilder.Build<SkillData>();
-            //ProtobufBuilder.Build<TilesetData>();
         }
 
         public T Load<T>(string filePath = null)
@@ -94,10 +77,42 @@ namespace Ceriyo.Infrastructure.Services
             File.WriteAllText(filePath, json);
         }
 
-        public void PackageDirectory(string directoryPath, string filePath)
+        public void PackageDirectory(string directoryPath, string serializedFilePath)
         {
+            var destinationDirectory = Path.GetDirectoryName(serializedFilePath);
+            if (string.IsNullOrWhiteSpace(destinationDirectory))
+                throw new Exception("filePath's destination directory must exist.");
+
+            if (!Directory.Exists(Path.GetDirectoryName(serializedFilePath)))
+            {
+                Directory.CreateDirectory(destinationDirectory);
+            }
             
+            using (var stream = File.Create(serializedFilePath))
+            {
+                foreach (var file in Directory.EnumerateFiles(directoryPath, "*.*", SearchOption.AllDirectories))
+                {
+                    string cleanedFilePath = file.Replace("\\", "/");
+                    if (cleanedFilePath != serializedFilePath)
+                    {
+                        PackageFile(file, directoryPath, stream);
+                    }
+                }
+            }
         }
+
+        private void PackageFile(string filePath, string directoryPath, Stream stream)
+        {
+            string trimmedFile = filePath.Replace(directoryPath, string.Empty);
+            ModuleFileData fileData = new ModuleFileData
+            {
+                FilePath = trimmedFile,
+                Data = File.ReadAllBytes(filePath)
+            };
+
+            Serializer.SerializeWithLengthPrefix(stream, fileData, PrefixStyle.Base128);
+        }
+
 
         public void UnpackageDirectory(string destinationDirectoryPath, string filePath)
         {

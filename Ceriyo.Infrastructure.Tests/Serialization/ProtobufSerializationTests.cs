@@ -6,6 +6,7 @@ using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using ProtoBuf;
+using ProtoBuf.Meta;
 
 namespace Ceriyo.Infrastructure.Tests.Serialization
 {
@@ -14,7 +15,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         private Mock<ILogger> _mockLogger;
         private IDataService _dataService;
         
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
             _mockLogger = new Mock<ILogger>();
@@ -25,7 +26,6 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [TearDown]
         public void TearDown()
         {
-            
         }
 
 
@@ -400,7 +400,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         {
             ModuleFileData data = new ModuleFileData()
             {
-                FileName = "new file name",
+                FilePath = "new file name",
                 Data = new byte[] {123,232,234,2,92}
             };
             ModuleFileData result;

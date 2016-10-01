@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Ceriyo.Core.Data;
 using ProtoBuf.Meta;
@@ -32,6 +34,15 @@ namespace Ceriyo.Infrastructure.Serialization
             where T: class
         {
             Type type = typeof(T);
+            var registeredTypes = RuntimeTypeModel.Default.GetTypes();
+
+            // Don't register the same type twice.
+            foreach (MetaType registeredType in registeredTypes)
+            {
+                if (registeredType.Type == type) return;
+            }
+            
+
             var meta = RuntimeTypeModel.Default.Add(type, false);
             var properties = type.GetProperties();
 
