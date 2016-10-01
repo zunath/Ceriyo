@@ -83,6 +83,7 @@
     <Compile Include="Scripting\Server\LocalDataMethodsTests.cs" />
     <Compile Include="Scripting\Server\ScriptingMethodsTests.cs" />
     <Compile Include="Scripting\Server\PhysicsMethodsTests.cs" />
+    <Compile Include="TestSetUp.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">

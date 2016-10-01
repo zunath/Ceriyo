@@ -91,6 +91,7 @@
     <Compile Include="Scripting\ScriptServiceTests.cs" />
     <Compile Include="Serialization\ProtobufSerializationTests.cs" />
     <Compile Include="Services\DataServiceTests.cs" />
+    <Compile Include="TestSetUp.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
