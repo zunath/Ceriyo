@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"       
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -72,5 +73,10 @@
         </StackPanel>
 
 
+        <i:Interaction.Triggers>
+            <prism:InteractionRequestTrigger SourceObject="{Binding SaveModuleConfirmationRequest, Mode=OneWay}">
+                <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            </prism:InteractionRequestTrigger>
+        </i:Interaction.Triggers>
     </Grid>
 </UserControl>
