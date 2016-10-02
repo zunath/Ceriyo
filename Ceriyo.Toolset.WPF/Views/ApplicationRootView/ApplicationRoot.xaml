@@ -9,6 +9,7 @@
         xmlns:toolbarView="clr-namespace:Ceriyo.Toolset.WPF.Views.ToolbarView"
         mc:Ignorable="d"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding WindowTitle}" Height="350" Width="525">
     <Grid>
@@ -58,7 +59,12 @@
                 HorizontalAlignment="Center">
             </GridSplitter>
         </Grid>
-        
-        
+
+
+        <i:Interaction.Triggers>
+            <prism:InteractionRequestTrigger SourceObject="{Binding ErrorNotificationRequest, Mode=OneWay}">
+                <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            </prism:InteractionRequestTrigger>
+        </i:Interaction.Triggers>
     </Grid>
 </Window>

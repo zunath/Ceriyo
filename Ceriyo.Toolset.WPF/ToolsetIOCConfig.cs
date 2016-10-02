@@ -11,7 +11,9 @@ using Ceriyo.Core.Scripting.Server.Contracts;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Settings;
-using Ceriyo.Domain.Services.Contract;
+using Ceriyo.Domain.Services.Contracts;
+using Ceriyo.Domain.Services.DataServices;
+using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Mapping;
@@ -63,6 +65,7 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<ObjectMapper>().As<IObjectMapper>();
 
             // Domain Services
+            builder.RegisterType<ModuleDomainService>().As<IModuleDomainService>();
             builder.RegisterType<DomainServiceNotifier>().As<IDomainServiceNotifier>().SingleInstance();
 
         }

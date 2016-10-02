@@ -2,7 +2,7 @@
 
 namespace Ceriyo.Toolset.WPF.Events
 {
-    public class ModuleLoadedEvent: PubSubEvent<string>
+    public class ModuleSavedEvent: PubSubEvent<string>
     {
     }
 }

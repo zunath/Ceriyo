@@ -11,6 +11,8 @@
              xmlns:modulePropertiesView="clr-namespace:Ceriyo.Toolset.WPF.Views.ModulePropertiesView"
              xmlns:newModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.NewModuleView"
              xmlns:components="clr-namespace:Ceriyo.Toolset.WPF.Components"
+             xmlns:openModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.OpenModuleView"
+             xmlns:saveModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.SaveModuleView"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Menu>
@@ -134,6 +136,38 @@
                 </components:CustomPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
+            <prism:InteractionRequestTrigger SourceObject="{Binding OpenModuleRequest, Mode=OneWay}">
+                <components:CustomPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
+                    <prism:PopupWindowAction.WindowContent>
+                        <openModuleView:OpenModule
+                                MinWidth="300"
+                                MinHeight="300"
+                                Width="Auto"
+                                Height="Auto"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    </prism:PopupWindowAction.WindowContent>
+                </components:CustomPopupWindowAction>
+            </prism:InteractionRequestTrigger>
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding SaveModuleAsRequest, Mode=OneWay}">
+                <components:CustomPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
+                    <prism:PopupWindowAction.WindowContent>
+                        <saveModuleView:SaveModule
+                                MinWidth="300"
+                                MinHeight="300"
+                                Width="Auto"
+                                Height="Auto"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    </prism:PopupWindowAction.WindowContent>
+                </components:CustomPopupWindowAction>
+            </prism:InteractionRequestTrigger>
+            
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenDataEditorRequest, Mode=OneWay}">
                 <prism:PopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">

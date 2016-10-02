@@ -62,8 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contract\IDomainServiceNotifier.cs" />
-    <Compile Include="DataServices\IModuleDomainService.cs" />
+    <Compile Include="Contracts\IDomainServiceNotifier.cs" />
+    <Compile Include="DataServices\Contracts\IModuleDomainService.cs" />
     <Compile Include="DataServices\ModuleDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

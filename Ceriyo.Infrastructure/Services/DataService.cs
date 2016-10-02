@@ -44,27 +44,28 @@ namespace Ceriyo.Infrastructure.Services
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error("Unable to load server settings file. Defaulting to normal settings.", ex);
+                    _logger.Error("Unable to load file.", ex);
+                    throw new Exception("Unable to load file.", ex);
                 }
             }
-            
+
             return Activator.CreateInstance<T>();
         }
 
-        public void Save<T>(T obj, string filePath = null) 
+        public void Save<T>(T obj, string filePath = null)
             where T : class
         {
             if (string.IsNullOrWhiteSpace(filePath))
             {
-                var attribute = (FilePathAttribute)Attribute.GetCustomAttribute(typeof(T), typeof(FilePathAttribute));
+                var attribute = (FilePathAttribute) Attribute.GetCustomAttribute(typeof(T), typeof(FilePathAttribute));
                 filePath = attribute.FilePath;
             }
 
-            if(string.IsNullOrWhiteSpace(filePath))
+            if (string.IsNullOrWhiteSpace(filePath))
                 throw new ArgumentException("Invalid file path.");
 
             var directory = Path.GetDirectoryName(filePath);
-            if(directory == null) throw new ArgumentException("Path supplied does not have a valid directory.");
+            if (directory == null) throw new ArgumentException("Path supplied does not have a valid directory.");
 
             if (!Directory.Exists(directory))
             {
@@ -85,7 +86,7 @@ namespace Ceriyo.Infrastructure.Services
             {
                 Directory.CreateDirectory(destinationDirectory);
             }
-            
+
             using (var stream = File.Create(serializedFilePath))
             {
                 foreach (var file in Directory.EnumerateFiles(directoryPath, "*.*", SearchOption.AllDirectories))
@@ -114,26 +115,36 @@ namespace Ceriyo.Infrastructure.Services
 
         public void UnpackageDirectory(string destinationDirectoryPath, string sourceFilePath)
         {
-            if (!Directory.Exists(destinationDirectoryPath))
+            try
             {
-                Directory.CreateDirectory(destinationDirectoryPath);
-            }
-
-            using (var stream = File.OpenRead(sourceFilePath))
-            {
-                foreach(var fileData in Serializer.DeserializeItems<ModuleFileData>(stream, PrefixStyle.Base128, 0))
+                if (!Directory.Exists(destinationDirectoryPath))
                 {
-                    string destinationPath = destinationDirectoryPath + fileData.FilePath;
-
-                    if (!Directory.Exists(Path.GetDirectoryName(destinationPath)))
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
-                    }
-
-                    File.WriteAllBytes(destinationDirectoryPath + fileData.FilePath, fileData.Data);
+                    Directory.CreateDirectory(destinationDirectoryPath);
                 }
-                
-                
+
+                using (var stream = File.OpenRead(sourceFilePath))
+                {
+                    foreach (var fileData in Serializer.DeserializeItems<ModuleFileData>(stream, PrefixStyle.Base128, 0))
+                    {
+                        string destinationPath = destinationDirectoryPath + fileData.FilePath;
+
+                        if (!Directory.Exists(Path.GetDirectoryName(destinationPath)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(destinationPath));
+                        }
+
+                        File.WriteAllBytes(destinationDirectoryPath + fileData.FilePath, fileData.Data);
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+                if (Directory.Exists(destinationDirectoryPath))
+                {
+                    Directory.Delete(destinationDirectoryPath, true);
+                }
+                throw;
             }
 
         }

@@ -2,24 +2,29 @@
 using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Domain.Services.DataServices.Contracts;
 
 namespace Ceriyo.Domain.Services.DataServices
 {
-    public class ModuleDomainService: IModuleDomainService
+    public class ModuleDomainService : IModuleDomainService
     {
-        const string BaseDirectory = "./temp0/";
+        private const string BaseDirectory = "./Modules/temp0/";
         private readonly ModuleData _moduleData;
         private readonly IDataService _dataService;
+        private readonly IObjectMapper _objectMapper;
+        
 
         public ModuleDomainService(ModuleData moduleData,
-            IDataService dataService)
+            IDataService dataService,
+            IObjectMapper objectMapper)
         {
             _moduleData = moduleData;
             _dataService = dataService;
+            _objectMapper = objectMapper;
         }
 
-        public void CreateModule(string name, 
-            string tag, 
+        public void CreateModule(string name,
+            string tag,
             string resref)
         {
             _moduleData.Name = name;
@@ -34,29 +39,71 @@ namespace Ceriyo.Domain.Services.DataServices
         {
             if (Directory.Exists(BaseDirectory))
             {
-                throw new Exception("An unsaved module already exists."); // TODO: Prompt user to remove unsaved module.
+                throw new Exception("An unsaved module already exists.");
             }
 
             Directory.CreateDirectory(BaseDirectory);
-            Directory.CreateDirectory($"{BaseDirectory}Ability");
-            Directory.CreateDirectory($"{BaseDirectory}Animation");
-            Directory.CreateDirectory($"{BaseDirectory}Class");
-            Directory.CreateDirectory($"{BaseDirectory}Creature");
-            Directory.CreateDirectory($"{BaseDirectory}Dialog");
-            Directory.CreateDirectory($"{BaseDirectory}Item");
-            Directory.CreateDirectory($"{BaseDirectory}ItemProperty");
-            Directory.CreateDirectory($"{BaseDirectory}ItemType");
-            Directory.CreateDirectory($"{BaseDirectory}Placeable");
-            Directory.CreateDirectory($"{BaseDirectory}Script");
-            Directory.CreateDirectory($"{BaseDirectory}Skill");
-            Directory.CreateDirectory($"{BaseDirectory}Tileset");
+            CreateModuleDirectories();
 
             SaveModuleProperties();
+        }
+
+        private void LoadModuleProperties()
+        {
+            ModuleData moduleData = _dataService.Load<ModuleData>($"{BaseDirectory}Module.json");
+            _objectMapper.Map(moduleData, _moduleData);
         }
 
         public void SaveModuleProperties()
         {
             _dataService.Save(_moduleData, $"{BaseDirectory}Module.json");
+        }
+
+        public void CloseModule()
+        {
+            if (Directory.Exists(BaseDirectory))
+            {
+                Directory.Delete(BaseDirectory, true);
+            }
+
+            ModuleData moduleData = new ModuleData();
+            _objectMapper.Map(moduleData, _moduleData);
+        }
+
+        public void OpenModule(string fileName)
+        {
+            CloseModule();
+            string filePath = $"./Modules/{fileName}.mod";
+            _dataService.UnpackageDirectory(BaseDirectory, filePath);
+            CreateModuleDirectories();
+            LoadModuleProperties();
+        }
+
+        public void PackModule(string fileName)
+        {
+            _dataService.PackageDirectory(BaseDirectory, $"./Modules/{fileName}.mod");
+        }
+
+        private void CreateModuleDirectories()
+        {
+            CreateDirectoryIfNotExist("Ability");
+            CreateDirectoryIfNotExist("Animation");
+            CreateDirectoryIfNotExist("Class");
+            CreateDirectoryIfNotExist("Creature");
+            CreateDirectoryIfNotExist("Dialog");
+            CreateDirectoryIfNotExist("Item");
+            CreateDirectoryIfNotExist("ItemProperty");
+            CreateDirectoryIfNotExist("ItemType");
+            CreateDirectoryIfNotExist("Placeable");
+            CreateDirectoryIfNotExist("Script");
+            CreateDirectoryIfNotExist("Skill");
+            CreateDirectoryIfNotExist("Tileset");
+        }
+
+        private void CreateDirectoryIfNotExist(string directory)
+        {
+            if (Directory.Exists($"{BaseDirectory}{directory}")) return;
+            Directory.CreateDirectory($"{BaseDirectory}{directory}");
         }
     }
 }

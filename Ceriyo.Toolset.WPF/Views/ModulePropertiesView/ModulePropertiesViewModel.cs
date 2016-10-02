@@ -259,7 +259,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             LevelChart = ModuleData.LevelChart;
         }
 
-        private void ModuleLoaded()
+        private void ModuleLoaded(string moduleFileName)
         {
             CopyPropertiesFromModuleData();
         }

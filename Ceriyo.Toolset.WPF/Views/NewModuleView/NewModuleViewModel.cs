@@ -53,7 +53,7 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
         {
             _eventAggregator.GetEvent<ModuleCreatedEvent>().Publish(new ModuleEventArgs(Name, Tag, Resref));
             FinishInteraction();
-            _eventAggregator.GetEvent<ModuleLoadedEvent>().Publish();
+            _eventAggregator.GetEvent<ModuleLoadedEvent>().Publish(null);
             ClearFields();
         }
 

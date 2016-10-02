@@ -1,4 +1,5 @@
 ﻿using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
 
 namespace Ceriyo.Infrastructure.Mapping
 {
@@ -8,7 +9,7 @@ namespace Ceriyo.Infrastructure.Mapping
         {
             AutoMapper.Mapper.Initialize(c =>
             {
-                // Mappings go here.
+                c.CreateMap<ModuleData, ModuleData>();
             });
         }
 

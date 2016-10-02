@@ -58,11 +58,6 @@ namespace Ceriyo.Server.WPF
             builder.RegisterType<ScriptService>().As<IScriptService>()
                 .WithParameter("isServer", true)
                 .SingleInstance();
-
-            // Domain Services
-            builder.RegisterType<ModuleDomainService>().As<IModuleDomainService>();
-
-
         }
     }
 }

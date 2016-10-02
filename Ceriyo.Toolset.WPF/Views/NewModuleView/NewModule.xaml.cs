@@ -10,6 +10,8 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
         public NewModule()
         {
             InitializeComponent();
+
+            TxtName.Focus();
         }
     }
 }

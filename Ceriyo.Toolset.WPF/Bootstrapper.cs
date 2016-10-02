@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Windows;
 using Autofac;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Domain.Services.Contracts;
 using Ceriyo.Toolset.WPF.Views.ApplicationRootView;
 using Microsoft.Practices.ServiceLocation;
 using Prism.Autofac;
@@ -21,6 +22,7 @@ namespace Ceriyo.Toolset.WPF
         {
             ServiceLocator.Current.TryResolve<IObjectMapper>().Initialize();
             ServiceLocator.Current.TryResolve<IDataService>().Initialize();
+            ServiceLocator.Current.TryResolve<IDomainServiceNotifier>().Initialize();
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
         }
