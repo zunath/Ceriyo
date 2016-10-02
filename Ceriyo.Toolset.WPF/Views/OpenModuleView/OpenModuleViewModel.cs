@@ -1,12 +1,9 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
+using System.Windows;
 using Ceriyo.Toolset.WPF.Events;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -17,6 +14,7 @@ namespace Ceriyo.Toolset.WPF.Views.OpenModuleView
     {
         private readonly IEventAggregator _eventAggregator;
         private const string ModulesDirectory = "./Modules/";
+        private readonly FileSystemWatcher _fileSystemWatcher;
 
         public OpenModuleViewModel()
         {
@@ -26,12 +24,55 @@ namespace Ceriyo.Toolset.WPF.Views.OpenModuleView
         public OpenModuleViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            _fileSystemWatcher = new FileSystemWatcher(ModulesDirectory);
             OpenModuleCommand = new DelegateCommand(OpenModule);
             CancelCommand = new DelegateCommand(Cancel);
             Modules = new BindingList<string>();
             LoadFiles();
+            _fileSystemWatcher.Created += FileSystemWatcherOnCreated;
+            _fileSystemWatcher.Deleted += FileSystemWatcherOnDeleted;
+            _fileSystemWatcher.Renamed += FileSystemWatcherOnRenamed;
+            _fileSystemWatcher.EnableRaisingEvents = true;
+        }
+
+        private void FileSystemWatcherOnRenamed(object sender, RenamedEventArgs e)
+        {
+            string oldName = Path.GetFileNameWithoutExtension(e.OldName);
+            string newName = Path.GetFileNameWithoutExtension(e.Name);
+            
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                if(Path.GetExtension(e.OldName) == ".mod")
+                    Modules.Remove(oldName);
+                if(Path.GetExtension(e.Name) == ".mod")
+                    Modules.Add(newName);
+            });
+        }
+
+        private void FileSystemWatcherOnDeleted(object sender, FileSystemEventArgs e)
+        {
+            string name = Path.GetFileNameWithoutExtension(e.Name);
+            if (Path.GetExtension(e.Name) != ".mod") return;
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Modules.Remove(name);
+            });
+        }
+
+        private void FileSystemWatcherOnCreated(object sender, FileSystemEventArgs e)
+        {
+            string name = Path.GetFileNameWithoutExtension(e.Name);
+            if (Path.GetExtension(e.Name) != ".mod") return;
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Modules.Add(name);
+            });
         }
         
+
         private void LoadFiles()
         {
             Modules.Clear();

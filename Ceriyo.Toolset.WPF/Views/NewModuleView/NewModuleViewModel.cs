@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Windows.Input;
-using Ceriyo.Core.Data;
-using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Toolset.WPF.EventArgs;
 using Ceriyo.Toolset.WPF.Events;
 using Prism.Commands;
