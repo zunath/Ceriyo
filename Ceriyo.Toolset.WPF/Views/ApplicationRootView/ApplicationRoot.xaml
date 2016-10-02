@@ -11,7 +11,10 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding WindowTitle}" Height="350" Width="525">
+        Title="{Binding WindowTitle}" 
+        Height="350" 
+        Width="525"
+        Closing="ApplicationRoot_OnClosing">
     <Grid>
 
         <Grid.RowDefinitions>

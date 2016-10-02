@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using Ceriyo.Toolset.WPF.Events.Application;
+using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Events;
 
 namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
@@ -23,8 +25,14 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
 
         private void CloseApplication()
         {
+            _eventAggregator.GetEvent<ModuleClosedEvent>().Publish();
             Application.Current.Shutdown();
         }
 
+        private void ApplicationRoot_OnClosing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            _eventAggregator.GetEvent<ApplicationClosedEvent>().Publish();
+        }
     }
 }

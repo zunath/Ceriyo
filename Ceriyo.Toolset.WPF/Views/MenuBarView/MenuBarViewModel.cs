@@ -136,7 +136,6 @@ namespace Ceriyo.Toolset.WPF.Views.MenuBarView
 
         private void Exit()
         {
-            _eventAggregator.GetEvent<ModuleClosedEvent>().Publish();
             _eventAggregator.GetEvent<ApplicationClosedEvent>().Publish();
         }
 
