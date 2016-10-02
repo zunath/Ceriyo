@@ -1,4 +1,5 @@
-﻿using Ceriyo.Toolset.WPF.Events;
+﻿using Ceriyo.Toolset.WPF.Events.Ability;
+using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Views.AbilityEditorView;
 using Moq;
 using NUnit.Framework;

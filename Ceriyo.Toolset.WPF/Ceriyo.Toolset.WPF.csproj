@@ -145,31 +145,31 @@
     <Compile Include="Components\CustomPopupWindowAction.cs" />
     <Compile Include="DomainServiceNotifier.cs" />
     <Compile Include="EventArgs\ModuleEventArgs.cs" />
-    <Compile Include="Events\AbilityChangedEvent.cs" />
-    <Compile Include="Events\AbilityDeletedEvent.cs" />
-    <Compile Include="Events\ClassChangedEvent.cs" />
-    <Compile Include="Events\ClassCreatedEvent.cs" />
-    <Compile Include="Events\ClassDeletedEvent.cs" />
-    <Compile Include="Events\CreatureChangedEvent.cs" />
-    <Compile Include="Events\CreatureCreatedEvent.cs" />
-    <Compile Include="Events\CreatureDeletedEvent.cs" />
-    <Compile Include="Events\DataEditorClosedEvent.cs" />
-    <Compile Include="Events\ItemChangedEvent.cs" />
-    <Compile Include="Events\ItemCreatedEvent.cs" />
-    <Compile Include="Events\ItemDeletedEvent.cs" />
-    <Compile Include="Events\ModuleClosedEvent.cs" />
-    <Compile Include="Events\ModuleCreatedEvent.cs" />
-    <Compile Include="Events\ModuleLoadedEvent.cs" />
-    <Compile Include="Events\AbilityCreatedEvent.cs" />
-    <Compile Include="Events\ModuleOpenedEvent.cs" />
-    <Compile Include="Events\ModulePropertiesChangedEvent.cs" />
-    <Compile Include="Events\ModuleSavedEvent.cs" />
-    <Compile Include="Events\PlaceableChangedEvent.cs" />
-    <Compile Include="Events\PlaceableCreatedEvent.cs" />
-    <Compile Include="Events\PlaceableDeletedEvent.cs" />
-    <Compile Include="Events\SkillChangedEvent.cs" />
-    <Compile Include="Events\SkillCreatedEvent.cs" />
-    <Compile Include="Events\SkillDeletedEvent.cs" />
+    <Compile Include="Events\Ability\AbilityChangedEvent.cs" />
+    <Compile Include="Events\Ability\AbilityDeletedEvent.cs" />
+    <Compile Include="Events\Class\ClassChangedEvent.cs" />
+    <Compile Include="Events\Class\ClassCreatedEvent.cs" />
+    <Compile Include="Events\Class\ClassDeletedEvent.cs" />
+    <Compile Include="Events\Creature\CreatureChangedEvent.cs" />
+    <Compile Include="Events\Creature\CreatureCreatedEvent.cs" />
+    <Compile Include="Events\Creature\CreatureDeletedEvent.cs" />
+    <Compile Include="Events\DataEditor\DataEditorClosedEvent.cs" />
+    <Compile Include="Events\Item\ItemChangedEvent.cs" />
+    <Compile Include="Events\Item\ItemCreatedEvent.cs" />
+    <Compile Include="Events\Item\ItemDeletedEvent.cs" />
+    <Compile Include="Events\Module\ModuleClosedEvent.cs" />
+    <Compile Include="Events\Module\ModuleCreatedEvent.cs" />
+    <Compile Include="Events\Module\ModuleLoadedEvent.cs" />
+    <Compile Include="Events\Ability\AbilityCreatedEvent.cs" />
+    <Compile Include="Events\Module\ModuleOpenedEvent.cs" />
+    <Compile Include="Events\Module\ModulePropertiesChangedEvent.cs" />
+    <Compile Include="Events\Module\ModuleSavedEvent.cs" />
+    <Compile Include="Events\Placeable\PlaceableChangedEvent.cs" />
+    <Compile Include="Events\Placeable\PlaceableCreatedEvent.cs" />
+    <Compile Include="Events\Placeable\PlaceableDeletedEvent.cs" />
+    <Compile Include="Events\Skill\SkillChangedEvent.cs" />
+    <Compile Include="Events\Skill\SkillCreatedEvent.cs" />
+    <Compile Include="Events\Skill\SkillDeletedEvent.cs" />
     <Compile Include="ToolsetGame.cs" />
     <Compile Include="ToolsetIOCConfig.cs" />
     <Compile Include="Views\ApplicationRootView\ApplicationRootViewModel.cs" />
@@ -266,7 +266,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Events\ApplicationClosedEvent.cs" />
+    <Compile Include="Events\Application\ApplicationClosedEvent.cs" />
     <Compile Include="Views\AbilityEditorView\AbilityEditor.xaml.cs">
       <DependentUpon>AbilityEditor.xaml</DependentUpon>
     </Compile>
@@ -278,7 +278,7 @@
     <Compile Include="Views\AnimationEditorView\AnimationEditor.xaml.cs">
       <DependentUpon>AnimationEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AnimationEditorView\AbilityEditorViewModel.cs" />
+    <Compile Include="Views\AnimationEditorView\AnimationEditorViewModel.cs" />
     <Compile Include="Views\AreaEditorView\AreaEditor.xaml.cs">
       <DependentUpon>AreaEditor.xaml</DependentUpon>
     </Compile>

@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
-using Ceriyo.Toolset.WPF.Events;
+using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;

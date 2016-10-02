@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
-using Ceriyo.Toolset.WPF.Events;
+using Ceriyo.Toolset.WPF.Events.Item;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -26,9 +26,7 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
             ItemTypes = new BindingList<ItemTypeData>();
 
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
-
-            _eventAggregator.GetEvent<DataEditorClosedEvent>().Subscribe(DataEditorClosed);
-
+            
             Items.ItemPropertyChanged += ItemsOnItemPropertyChanged;
         }
 
@@ -109,20 +107,11 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
                 }, c =>
                 {
                     if (!c.Confirmed) return;
-                    string globalID = SelectedItem.GlobalID;
+                    _eventAggregator.GetEvent<ItemDeletedEvent>().Publish(SelectedItem);
                     Items.Remove(SelectedItem);
-                    _eventAggregator.GetEvent<ItemDeletedEvent>().Publish(globalID);
                 });
         }
-
-        private void DataEditorClosed(bool saveData)
-        {
-            if (saveData)
-            {
-
-            }
-        }
-
+        
         public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
 
     }

@@ -76,6 +76,17 @@ namespace Ceriyo.Infrastructure.Services
             File.WriteAllText(filePath, json);
         }
 
+        public void Delete(string filePath)
+        {
+            if(string.IsNullOrWhiteSpace(filePath))
+                throw new ArgumentException("filePath must not be blank or null.");
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+        }
+
         public void PackageDirectory(string directoryPath, string serializedFilePath)
         {
             var destinationDirectory = Path.GetDirectoryName(serializedFilePath);

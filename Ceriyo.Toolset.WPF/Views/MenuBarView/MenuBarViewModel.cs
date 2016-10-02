@@ -1,4 +1,5 @@
-﻿using Ceriyo.Toolset.WPF.Events;
+﻿using Ceriyo.Toolset.WPF.Events.Application;
+using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;

@@ -1,5 +1,5 @@
 ﻿using System;
-using Ceriyo.Toolset.WPF.Events;
+using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;

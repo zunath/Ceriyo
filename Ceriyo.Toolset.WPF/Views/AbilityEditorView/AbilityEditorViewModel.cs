@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
-using Ceriyo.Toolset.WPF.Events;
+using Ceriyo.Toolset.WPF.Events.Ability;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -25,9 +25,6 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
             Scripts = new Dictionary<string, ScriptData>();
 
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
-
-            _eventAggregator.GetEvent<DataEditorClosedEvent>().Subscribe(DataEditorClosed);
-
             Abilities.ItemPropertyChanged += AbilitiesOnItemPropertyChanged;    
         }
 
@@ -92,19 +89,11 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
                 }, c =>
                 {
                     if (!c.Confirmed) return;
-                    string globalID = SelectedAbility.GlobalID;
+                    _eventAggregator.GetEvent<AbilityDeletedEvent>().Publish(SelectedAbility);
                     Abilities.Remove(SelectedAbility);
-                    _eventAggregator.GetEvent<AbilityDeletedEvent>().Publish(globalID);
                 });
         }
-
-        private void DataEditorClosed(bool saveData)
-        {
-            if (saveData)
-            {
-                
-            }
-        }
+        
 
         public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
 

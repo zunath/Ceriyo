@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
-using Ceriyo.Toolset.WPF.Events;
+using Ceriyo.Toolset.WPF.Events.Placeable;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -25,9 +25,7 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
             Scripts = new Dictionary<string, ScriptData>();
 
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
-
-            _eventAggregator.GetEvent<DataEditorClosedEvent>().Subscribe(DataEditorClosed);
-
+            
             Placeables.ItemPropertyChanged += PlaceablesOnItemPropertyChanged;
         }
 
@@ -92,18 +90,9 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
                 }, c =>
                 {
                     if (!c.Confirmed) return;
-                    string globalID = SelectedPlaceable.GlobalID;
+                    _eventAggregator.GetEvent<PlaceableDeletedEvent>().Publish(SelectedPlaceable);
                     Placeables.Remove(SelectedPlaceable);
-                    _eventAggregator.GetEvent<PlaceableDeletedEvent>().Publish(globalID);
                 });
-        }
-
-        private void DataEditorClosed(bool saveData)
-        {
-            if (saveData)
-            {
-
-            }
         }
 
         public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }

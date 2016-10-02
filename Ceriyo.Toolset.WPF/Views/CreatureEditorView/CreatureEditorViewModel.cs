@@ -4,7 +4,8 @@ using System.Linq;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
-using Ceriyo.Toolset.WPF.Events;
+using Ceriyo.Toolset.WPF.Events.Class;
+using Ceriyo.Toolset.WPF.Events.Creature;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -33,9 +34,7 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             Dialogs = new BindingList<DialogData>();
 
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
-
-            _eventAggregator.GetEvent<DataEditorClosedEvent>().Subscribe(DataEditorClosed);
-
+            
             Creatures.ItemPropertyChanged += CreaturesOnItemPropertyChanged;
             _eventAggregator.GetEvent<ClassCreatedEvent>().Subscribe(ClassCreated);
             _eventAggregator.GetEvent<ClassChangedEvent>().Subscribe(ClassChanged);
@@ -59,10 +58,10 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             _objectMapper.Map(@class, existing);
         }
 
-        private void ClassDeleted(string globalID)
+        private void ClassDeleted(ClassData @class)
         {
-            var @class = Classes.Single(x => x.GlobalID == globalID);
-            Classes.Remove(@class);
+            var existingClass = Classes.Single(x => x.GlobalID == @class.GlobalID);
+            Classes.Remove(existingClass);
         }
 
         private ObservableCollectionEx<CreatureData> _creatures;
@@ -144,20 +143,11 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
                 }, c =>
                 {
                     if (!c.Confirmed) return;
-                    string globalID = SelectedCreature.GlobalID;
+                    _eventAggregator.GetEvent<CreatureDeletedEvent>().Publish(SelectedCreature);
                     Creatures.Remove(SelectedCreature);
-                    _eventAggregator.GetEvent<CreatureDeletedEvent>().Publish(globalID);
                 });
         }
-
-        private void DataEditorClosed(bool saveData)
-        {
-            if (saveData)
-            {
-
-            }
-        }
-
+        
         public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
 
     }

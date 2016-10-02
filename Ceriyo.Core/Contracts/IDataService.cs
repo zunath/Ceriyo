@@ -10,6 +10,8 @@
         void Save<T>(T obj, string filePath = null)
             where T : class;
 
+        void Delete(string filePath);
+
         void PackageDirectory(string directoryPath, string serializedFilePath);
         void UnpackageDirectory(string destinationDirectoryPath, string sourceFilePath);
     }

@@ -63,7 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IDomainServiceNotifier.cs" />
+    <Compile Include="DataServices\Contracts\IDataEditorDomainService.cs" />
     <Compile Include="DataServices\Contracts\IModuleDomainService.cs" />
+    <Compile Include="DataServices\DataEditorDomainService.cs" />
     <Compile Include="DataServices\ModuleDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using Ceriyo.Toolset.WPF.Events;
+using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
-using Ceriyo.Toolset.WPF.Events;
+using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
