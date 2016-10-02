@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Ceriyo.Core.Entities;
 using Ceriyo.Core.Properties;
@@ -36,6 +37,7 @@ namespace Ceriyo.Core.Data
 
         private LocalVariableData _localVariables;
         private BindingList<ClassLevel> _levelChart;
+        private string _globalID;
 
         public string Name
         {
@@ -303,8 +305,20 @@ namespace Ceriyo.Core.Data
             }
         }
 
+        public string GlobalID
+        {
+            get { return _globalID; }
+            set
+            {
+                _globalID = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ModuleData()
         {
+            GlobalID = Guid.NewGuid().ToString();
+
             AbilityIDs = new BindingList<string>();
             ClassIDs = new BindingList<string>();
             CreatureIDs = new BindingList<string>();
