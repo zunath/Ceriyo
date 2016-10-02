@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
+using Ceriyo.Toolset.WPF.Events.DataEditor;
+using Ceriyo.Toolset.WPF.Events.Module;
 using Ceriyo.Toolset.WPF.Events.Skill;
 using Prism.Commands;
 using Prism.Events;
@@ -13,10 +17,13 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
     public class SkillEditorViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly IDataService _dataService;
 
-        public SkillEditorViewModel(IEventAggregator eventAggregator)
+        public SkillEditorViewModel(IEventAggregator eventAggregator,
+            IDataService dataService)
         {
             _eventAggregator = eventAggregator;
+            _dataService = dataService;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -27,8 +34,37 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
             
             Skills.ItemPropertyChanged += SkillsOnItemPropertyChanged;
+
+            _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
+            _eventAggregator.GetEvent<DataEditorClosedEvent>().Subscribe(DataEditorClosed);
+            _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ModuleClosed);
         }
 
+        private void ModuleLoaded(string moduleFileName)
+        {
+            LoadExistingData();
+        }
+
+        private void ModuleClosed()
+        {
+            Skills.Clear();
+        }
+
+        private void DataEditorClosed(bool doSave)
+        {
+            LoadExistingData();
+        }
+
+        private void LoadExistingData()
+        {
+            Skills.Clear();
+            string[] files = Directory.GetFiles("./Modules/temp0/Skill/", "*.dat");
+
+            foreach (var file in files)
+            {
+                Skills.Add(_dataService.Load<SkillData>(file));
+            }
+        }
         private void SkillsOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             SkillData skillChanged = sender as SkillData;

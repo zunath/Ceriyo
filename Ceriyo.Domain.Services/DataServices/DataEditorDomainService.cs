@@ -116,38 +116,38 @@ namespace Ceriyo.Domain.Services.DataServices
         {
             foreach (var record in DirtyAbilities)
             {
-                SaveFile(record.Key, record.Key.Resref, record.Value, "Ability");
+                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Ability");
             }
             foreach (var record in DirtyClasses)
             {
-                SaveFile(record.Key, record.Key.Resref, record.Value, "Class");
+                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Class");
             }
             foreach (var record in DirtyCreatures)
             {
-                SaveFile(record.Key, record.Key.Resref, record.Value, "Creature");
+                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Creature");
             }
             foreach (var record in DirtyItems)
             {
-                SaveFile(record.Key, record.Key.Resref, record.Value, "Item");
+                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Item");
             }
             foreach (var record in DirtyPlaceables)
             {
-                SaveFile(record.Key, record.Key.Resref, record.Value, "Placeable");
+                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Placeable");
             }
             foreach (var record in DirtySkills)
             {
-                SaveFile(record.Key, record.Key.Resref, record.Value, "Skill");
+                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Skill");
             }
             
             ClearQueuedChanges();
         }
 
-        private void SaveFile(object obj, string resref, ActionType action, string directoryName)
+        private void SaveFile(object obj, string globalID, ActionType action, string directoryName)
         {
             if (action == ActionType.AddOrChanged)
-                _dataService.Save(obj, $"{BaseDirectory}{directoryName}/{resref}.dat");
+                _dataService.Save(obj, $"{BaseDirectory}{directoryName}/{globalID}.dat");
             else
-                _dataService.Delete($"{BaseDirectory}{directoryName}/{resref}.dat");
+                _dataService.Delete($"{BaseDirectory}{directoryName}/{globalID}.dat");
         }
 
     }

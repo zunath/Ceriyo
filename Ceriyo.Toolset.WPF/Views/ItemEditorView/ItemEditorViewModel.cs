@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
+using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Item;
+using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -13,10 +17,13 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
     public class ItemEditorViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly IDataService _dataService;
 
-        public ItemEditorViewModel(IEventAggregator eventAggregator)
+        public ItemEditorViewModel(IEventAggregator eventAggregator,
+            IDataService dataService)
         {
             _eventAggregator = eventAggregator;
+            _dataService = dataService;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -28,6 +35,37 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
             
             Items.ItemPropertyChanged += ItemsOnItemPropertyChanged;
+
+            _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
+            _eventAggregator.GetEvent<DataEditorClosedEvent>().Subscribe(DataEditorClosed);
+            _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ModuleClosed);
+        }
+
+
+        private void ModuleLoaded(string moduleFileName)
+        {
+            LoadExistingData();
+        }
+
+        private void ModuleClosed()
+        {
+            Items.Clear();
+        }
+
+        private void DataEditorClosed(bool doSave)
+        {
+            LoadExistingData();
+        }
+
+        private void LoadExistingData()
+        {
+            Items.Clear();
+            string[] files = Directory.GetFiles("./Modules/temp0/Item/", "*.dat");
+
+            foreach (var file in files)
+            {
+                Items.Add(_dataService.Load<ItemData>(file));
+            }
         }
 
         private void ItemsOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

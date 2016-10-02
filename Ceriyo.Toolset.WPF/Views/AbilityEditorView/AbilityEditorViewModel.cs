@@ -36,6 +36,7 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
 
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
             _eventAggregator.GetEvent<DataEditorClosedEvent>().Subscribe(DataEditorClosed);
+            _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ModuleClosed);
         }
 
         private void ModuleLoaded(string moduleFileName)
@@ -43,12 +44,14 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
             LoadExistingData();
         }
 
+        private void ModuleClosed()
+        {
+            Abilities.Clear();
+        }
+
         private void DataEditorClosed(bool doSave)
         {
-            if (!doSave)
-            {
-                LoadExistingData();
-            }
+            LoadExistingData();
         }
 
         private void LoadExistingData()

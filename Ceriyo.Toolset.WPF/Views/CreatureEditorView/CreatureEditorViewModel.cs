@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
 using Ceriyo.Toolset.WPF.Events.Class;
 using Ceriyo.Toolset.WPF.Events.Creature;
+using Ceriyo.Toolset.WPF.Events.DataEditor;
+using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -16,12 +19,15 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
     public class CreatureEditorViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly IDataService _dataService;
         private readonly IObjectMapper _objectMapper;
 
         public CreatureEditorViewModel(IEventAggregator eventAggregator,
+            IDataService dataService,
             IObjectMapper objectMapper)
         {
             _eventAggregator = eventAggregator;
+            _dataService = dataService;
             _objectMapper = objectMapper;
 
             NewCommand = new DelegateCommand(New);
@@ -39,7 +45,47 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             _eventAggregator.GetEvent<ClassCreatedEvent>().Subscribe(ClassCreated);
             _eventAggregator.GetEvent<ClassChangedEvent>().Subscribe(ClassChanged);
             _eventAggregator.GetEvent<ClassDeletedEvent>().Subscribe(ClassDeleted);
+
+            _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
+            _eventAggregator.GetEvent<DataEditorClosedEvent>().Subscribe(DataEditorClosed);
+            _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ModuleClosed);
         }
+
+
+        private void ModuleLoaded(string moduleFileName)
+        {
+            LoadExistingData();
+        }
+
+        private void ModuleClosed()
+        {
+            Creatures.Clear();
+            Classes.Clear();
+        }
+
+        private void DataEditorClosed(bool doSave)
+        {
+            LoadExistingData();
+        }
+
+        private void LoadExistingData()
+        {
+            Creatures.Clear();
+            Classes.Clear();
+
+            string[] files = Directory.GetFiles("./Modules/temp0/Creature/", "*.dat");
+            foreach (var file in files)
+            {
+                Creatures.Add(_dataService.Load<CreatureData>(file));
+            }
+
+            files = Directory.GetFiles("./Modules/temp0/Class/", "*.dat");
+            foreach (var file in files)
+            {
+                Classes.Add(_dataService.Load<ClassData>(file));
+            }
+        }
+
 
         private void CreaturesOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
