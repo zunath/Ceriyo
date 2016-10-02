@@ -4,7 +4,6 @@ using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.Serialization;
-using Newtonsoft.Json;
 using ProtoBuf;
 
 namespace Ceriyo.Infrastructure.Services
@@ -39,8 +38,10 @@ namespace Ceriyo.Infrastructure.Services
             {
                 try
                 {
-                    string json = File.ReadAllText(filePath);
-                    return JsonConvert.DeserializeObject<T>(json);
+                    using (FileStream stream = File.OpenRead(filePath))
+                    {
+                        return Serializer.Deserialize<T>(stream);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -72,8 +73,10 @@ namespace Ceriyo.Infrastructure.Services
                 Directory.CreateDirectory(directory);
             }
 
-            string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-            File.WriteAllText(filePath, json);
+            using (FileStream stream = File.Create(filePath))
+            {
+                Serializer.Serialize(stream, obj);
+            }
         }
 
         public void Delete(string filePath)

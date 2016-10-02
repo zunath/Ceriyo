@@ -145,9 +145,9 @@ namespace Ceriyo.Domain.Services.DataServices
         private void SaveFile(object obj, string resref, ActionType action, string directoryName)
         {
             if (action == ActionType.AddOrChanged)
-                _dataService.Save(obj, $"{BaseDirectory}{directoryName}/{resref}.json");
+                _dataService.Save(obj, $"{BaseDirectory}{directoryName}/{resref}.dat");
             else
-                _dataService.Delete($"{BaseDirectory}{directoryName}/{resref}.json");
+                _dataService.Delete($"{BaseDirectory}{directoryName}/{resref}.dat");
         }
 
     }

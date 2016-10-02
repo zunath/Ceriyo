@@ -50,13 +50,13 @@ namespace Ceriyo.Domain.Services.DataServices
 
         private void LoadModuleProperties()
         {
-            ModuleData moduleData = _dataService.Load<ModuleData>($"{BaseDirectory}Module.json");
+            ModuleData moduleData = _dataService.Load<ModuleData>($"{BaseDirectory}Module.dat");
             _objectMapper.Map(moduleData, _moduleData);
         }
 
         public void SaveModuleProperties()
         {
-            _dataService.Save(_moduleData, $"{BaseDirectory}Module.json");
+            _dataService.Save(_moduleData, $"{BaseDirectory}Module.dat");
         }
 
         public void CloseModule()

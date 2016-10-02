@@ -71,8 +71,8 @@ namespace Ceriyo.Infrastructure.Tests.Services
         public void PackageDirectory_RootFilesOnly_ShouldNotThrow()
         {
             // Set up
-            _dataService.Save(_testClassData, TempDirectoryPath + _testClassData.Resref + ".json");
-            _dataService.Save(_testItemTypeData, TempDirectoryPath + _testItemTypeData.Resref + ".json");
+            _dataService.Save(_testClassData, TempDirectoryPath + _testClassData.Resref + ".dat");
+            _dataService.Save(_testItemTypeData, TempDirectoryPath + _testItemTypeData.Resref + ".dat");
             
             // Act/Assert
             Assert.DoesNotThrow(() =>
@@ -81,16 +81,16 @@ namespace Ceriyo.Infrastructure.Tests.Services
             });
             
             // Clean up
-            File.Delete(TempDirectoryPath + _testClassData.Resref + ".json");
-            File.Delete(TempDirectoryPath + _testItemTypeData.Resref + ".json");
+            File.Delete(TempDirectoryPath + _testClassData.Resref + ".dat");
+            File.Delete(TempDirectoryPath + _testItemTypeData.Resref + ".dat");
         }
 
         [Test]
         public void PackageDirectory_WithSubDirectories_ShouldNotThrow()
         {
             // Set up
-            _dataService.Save(_testClassData, TempDirectoryPath + "Classes/" + _testClassData.Resref + ".json");
-            _dataService.Save(_testItemTypeData, TempDirectoryPath + "ItemTypes/" + _testItemTypeData.Resref + ".json");
+            _dataService.Save(_testClassData, TempDirectoryPath + "Classes/" + _testClassData.Resref + ".dat");
+            _dataService.Save(_testItemTypeData, TempDirectoryPath + "ItemTypes/" + _testItemTypeData.Resref + ".dat");
 
             // Act/Assert
             Assert.DoesNotThrow(() =>
@@ -99,8 +99,8 @@ namespace Ceriyo.Infrastructure.Tests.Services
             });
 
             // Clean up
-            File.Delete(TempDirectoryPath + "Classes/" + _testClassData.Resref + ".json");
-            File.Delete(TempDirectoryPath + "ItemTypes/" + _testItemTypeData.Resref + ".json");
+            File.Delete(TempDirectoryPath + "Classes/" + _testClassData.Resref + ".dat");
+            File.Delete(TempDirectoryPath + "ItemTypes/" + _testItemTypeData.Resref + ".dat");
             Directory.Delete(TempDirectoryPath + "Classes/");
             Directory.Delete(TempDirectoryPath + "ItemTypes/");
         }
@@ -109,8 +109,8 @@ namespace Ceriyo.Infrastructure.Tests.Services
         public void UnpackageDirectory_RootFilesOnly_ShouldNotThrow()
         {
             // Set up
-            _dataService.Save(_testClassData, TempDirectoryPath + _testClassData.Resref + ".json");
-            _dataService.Save(_testItemTypeData, TempDirectoryPath + _testItemTypeData.Resref + ".json");
+            _dataService.Save(_testClassData, TempDirectoryPath + _testClassData.Resref + ".dat");
+            _dataService.Save(_testItemTypeData, TempDirectoryPath + _testItemTypeData.Resref + ".dat");
 
             // Act/Assert
             _dataService.PackageDirectory(TempDirectoryPath, SerializedFilePath);
@@ -120,11 +120,11 @@ namespace Ceriyo.Infrastructure.Tests.Services
             });
 
             // Clean up
-            File.Delete(TempDirectoryPath + _testClassData.Resref + ".json");
-            File.Delete(TempDirectoryPath + _testItemTypeData.Resref + ".json");
+            File.Delete(TempDirectoryPath + _testClassData.Resref + ".dat");
+            File.Delete(TempDirectoryPath + _testItemTypeData.Resref + ".dat");
 
-            File.Delete(TempDirectoryPath + "output/" + _testClassData.Resref + ".json");
-            File.Delete(TempDirectoryPath + "output/" + _testItemTypeData.Resref + ".json");
+            File.Delete(TempDirectoryPath + "output/" + _testClassData.Resref + ".dat");
+            File.Delete(TempDirectoryPath + "output/" + _testItemTypeData.Resref + ".dat");
             Directory.Delete(TempDirectoryPath + "output/");
         }
 
@@ -132,8 +132,8 @@ namespace Ceriyo.Infrastructure.Tests.Services
         public void UnpackageDirectory_WithSubDirectoriesOnly_ShouldNotThrow()
         {
             // Set up
-            _dataService.Save(_testClassData, TempDirectoryPath + "Classes/" + _testClassData.Resref + ".json");
-            _dataService.Save(_testItemTypeData, TempDirectoryPath + "ItemTypes/" + _testItemTypeData.Resref + ".json");
+            _dataService.Save(_testClassData, TempDirectoryPath + "Classes/" + _testClassData.Resref + ".dat");
+            _dataService.Save(_testItemTypeData, TempDirectoryPath + "ItemTypes/" + _testItemTypeData.Resref + ".dat");
 
             // Act/Assert
             _dataService.PackageDirectory(TempDirectoryPath, SerializedFilePath);
@@ -143,10 +143,10 @@ namespace Ceriyo.Infrastructure.Tests.Services
             });
 
             // Clean up
-            File.Delete(TempDirectoryPath + "Classes/" + _testClassData.Resref + ".json");
-            File.Delete(TempDirectoryPath + "ItemTypes/" + _testItemTypeData.Resref + ".json");
-            File.Delete(TempDirectoryPath + "output/Classes/" + _testClassData.Resref + ".json");
-            File.Delete(TempDirectoryPath + "output/ItemTypes/" + _testItemTypeData.Resref + ".json");
+            File.Delete(TempDirectoryPath + "Classes/" + _testClassData.Resref + ".dat");
+            File.Delete(TempDirectoryPath + "ItemTypes/" + _testItemTypeData.Resref + ".dat");
+            File.Delete(TempDirectoryPath + "output/Classes/" + _testClassData.Resref + ".dat");
+            File.Delete(TempDirectoryPath + "output/ItemTypes/" + _testItemTypeData.Resref + ".dat");
 
             Directory.Delete(TempDirectoryPath + "Classes/");
             Directory.Delete(TempDirectoryPath + "ItemTypes/");

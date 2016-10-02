@@ -2,7 +2,7 @@
 
 namespace Ceriyo.Core.Settings
 {
-    [FilePath("./Settings/Game.json")]
+    [FilePath("./Settings/Game.settings")]
     public class GameSettings
     {
     }

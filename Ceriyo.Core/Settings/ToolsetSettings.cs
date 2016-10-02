@@ -2,7 +2,7 @@
 
 namespace Ceriyo.Core.Settings
 {
-    [FilePath("./Settings/Toolset.json")]
+    [FilePath("./Settings/Toolset.settings")]
     public class ToolsetSettings
     {
     }

@@ -5,7 +5,7 @@ using Ceriyo.Core.Constants;
 
 namespace Ceriyo.Core.Settings
 {
-    [FilePath("./Settings/Server.json")]
+    [FilePath("./Settings/Server.settings")]
     public class ServerSettings: INotifyPropertyChanged
     {
         private string _serverName;

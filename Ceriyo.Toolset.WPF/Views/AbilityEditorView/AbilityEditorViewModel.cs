@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
 using Ceriyo.Toolset.WPF.Events.Ability;
+using Ceriyo.Toolset.WPF.Events.DataEditor;
+using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -13,10 +17,13 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
     public class AbilityEditorViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly IDataService _dataService;
 
-        public AbilityEditorViewModel(IEventAggregator eventAggregator)
+        public AbilityEditorViewModel(IEventAggregator eventAggregator,
+            IDataService dataService)
         {
             _eventAggregator = eventAggregator;
+            _dataService = dataService;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -25,7 +32,34 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
             Scripts = new Dictionary<string, ScriptData>();
 
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
-            Abilities.ItemPropertyChanged += AbilitiesOnItemPropertyChanged;    
+            Abilities.ItemPropertyChanged += AbilitiesOnItemPropertyChanged;
+
+            _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
+            _eventAggregator.GetEvent<DataEditorClosedEvent>().Subscribe(DataEditorClosed);
+        }
+
+        private void ModuleLoaded(string moduleFileName)
+        {
+            LoadExistingData();
+        }
+
+        private void DataEditorClosed(bool doSave)
+        {
+            if (!doSave)
+            {
+                LoadExistingData();
+            }
+        }
+
+        private void LoadExistingData()
+        {
+            Abilities.Clear();
+            string[] files = Directory.GetFiles("./Modules/temp0/Ability/", "*.dat");
+
+            foreach (var file in files)
+            {
+                Abilities.Add(_dataService.Load<AbilityData>(file));
+            }
         }
 
         private void AbilitiesOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

@@ -29,6 +29,8 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
             _objectMapper = new ObjectMapper();
             _objectMapper.Initialize();
             _moduleDomainService = new ModuleDomainService(_moduleData, _dataService, _objectMapper);
+
+            _dataService.Initialize();
         }
 
         [TearDown]
@@ -58,7 +60,7 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
             Assert.IsTrue(Directory.Exists($"{BaseDirectory}Script"));
             Assert.IsTrue(Directory.Exists($"{BaseDirectory}Skill"));
             Assert.IsTrue(Directory.Exists($"{BaseDirectory}Tileset"));
-            Assert.IsTrue(File.Exists($"{BaseDirectory}Module.json"));
+            Assert.IsTrue(File.Exists($"{BaseDirectory}Module.dat"));
         }
 
         [Test]
