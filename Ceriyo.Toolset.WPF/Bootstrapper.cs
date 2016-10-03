@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Windows;
 using Autofac;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.Contracts;
 using Ceriyo.Toolset.WPF.Views.ApplicationRootView;
 using Microsoft.Practices.ServiceLocation;
@@ -15,6 +16,7 @@ namespace Ceriyo.Toolset.WPF
     {
         protected override DependencyObject CreateShell()
         {
+            ServiceLocator.Current.TryResolve<IAppService>().CreateAppDirectoryStructure();
             return ServiceLocator.Current.GetInstance<ApplicationRoot>();
         }
 

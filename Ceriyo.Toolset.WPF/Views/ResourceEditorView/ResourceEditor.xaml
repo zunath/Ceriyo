@@ -4,6 +4,10 @@
              xmlns:prism="http://prismlibrary.com/"             
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:components="clr-namespace:Ceriyo.Toolset.WPF.Components"
+             xmlns:openModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.OpenModuleView"
+             xmlns:openResourcePackView="clr-namespace:Ceriyo.Toolset.WPF.Views.OpenResourcePackView"
              mc:Ignorable="d"
              d:DesignWidth="500"
              d:DesignHeight="500"
@@ -246,6 +250,28 @@
             </TabItem>
             
         </TabControl>
-        
+
+
+        <i:Interaction.Triggers>
+
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding OpenResourcePackRequest, Mode=OneWay}">
+                <components:CustomPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
+                    <prism:PopupWindowAction.WindowContent>
+                        <openResourcePackView:OpenResourcePack
+                                MinWidth="300"
+                                MinHeight="300"
+                                Width="Auto"
+                                Height="Auto"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    </prism:PopupWindowAction.WindowContent>
+                </components:CustomPopupWindowAction>
+            </prism:InteractionRequestTrigger>
+
+
+        </i:Interaction.Triggers>
     </Grid>
 </UserControl>

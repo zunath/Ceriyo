@@ -43,8 +43,7 @@ namespace Ceriyo.Game.Windows
             builder.RegisterInstance(game.Content).AsSelf();
             builder.RegisterInstance(game.GraphicsDevice).AsSelf();
             builder.RegisterInstance(new GameSettings());
-
-            // Common
+            
             // Logging
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
 
@@ -52,6 +51,7 @@ namespace Ceriyo.Game.Windows
             builder.RegisterType<Texture2D>();
 
             // Services
+            builder.RegisterType<AppService>().As<IAppService>();
             builder.RegisterType<CameraService>().As<ICameraService>();
             builder.RegisterType<DataService>().As<IDataService>();
             builder.RegisterType<GameService>().As<IGameService>();

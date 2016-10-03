@@ -108,6 +108,8 @@
     <Compile Include="Data\ResourceItemData.cs" />
     <Compile Include="Scripting\Client\Contracts\ISceneMethods.cs" />
     <Compile Include="Scripting\Client\SceneMethods.cs" />
+    <Compile Include="Services\AppService.cs" />
+    <Compile Include="Services\Contracts\IAppService.cs" />
     <Compile Include="Services\Contracts\ICameraService.cs" />
     <Compile Include="Contracts\IComponentFactory.cs" />
     <Compile Include="Contracts\IDataService.cs" />

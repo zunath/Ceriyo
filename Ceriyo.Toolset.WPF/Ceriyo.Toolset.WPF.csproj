@@ -232,6 +232,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\OpenResourcePackView\OpenResourcePack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PlaceableEditorView\PlaceableEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,6 +330,10 @@
       <DependentUpon>OpenModule.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OpenModuleView\OpenModuleViewModel.cs" />
+    <Compile Include="Views\OpenResourcePackView\OpenResourcePack.xaml.cs">
+      <DependentUpon>OpenResourcePack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OpenResourcePackView\OpenResourcePackViewModel.cs" />
     <Compile Include="Views\PlaceableEditorView\PlaceableEditor.xaml.cs">
       <DependentUpon>PlaceableEditor.xaml</DependentUpon>
     </Compile>

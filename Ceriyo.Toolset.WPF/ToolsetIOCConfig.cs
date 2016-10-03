@@ -37,6 +37,7 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<Texture2D>();
 
             // Services
+            builder.RegisterType<AppService>().As<IAppService>();
             builder.RegisterType<CameraService>().As<ICameraService>();
             builder.RegisterType<DataService>().As<IDataService>();
             builder.RegisterType<GameService>().As<IGameService>();

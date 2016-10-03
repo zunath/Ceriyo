@@ -17,6 +17,7 @@ namespace Ceriyo.Core.Services
         private readonly IScreenService _screenService;
         private readonly IUIService _uiService;
         private readonly IDataService _dataService;
+        private readonly IAppService _appService;
 
         public GameService(
             EntityWorld world,
@@ -26,7 +27,8 @@ namespace Ceriyo.Core.Services
             IScriptService scriptService,
             IScreenService screenService,
             IUIService uiService,
-            IDataService dataService)
+            IDataService dataService,
+            IAppService appService)
         {
             _world = world;
             _spriteBatch = spriteBatch;
@@ -36,10 +38,12 @@ namespace Ceriyo.Core.Services
             _screenService = screenService;
             _uiService = uiService;
             _dataService = dataService;
+            _appService = appService;
         }
 
         public void Initialize(GraphicsDeviceManager graphics)
         {
+            _appService.CreateAppDirectoryStructure();
             _dataService.Initialize();
             _graphicsService.Initialize(graphics);
             _uiService.Initialize();

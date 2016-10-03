@@ -2,6 +2,7 @@
 using Ceriyo.Core.Data;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
@@ -30,6 +31,14 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
         {
             _eventAggregator = eventAggregator;
 
+            CreatureResources = new BindingList<ResourceItemData>();
+            IconResources = new BindingList<ResourceItemData>();
+            ItemResources = new BindingList<ResourceItemData>();
+            PortraitResources = new BindingList<ResourceItemData>();
+            TilesetResources = new BindingList<ResourceItemData>();
+            BGMResources = new BindingList<ResourceItemData>();
+            SFXResources = new BindingList<ResourceItemData>();
+
             NewCommand = new DelegateCommand(New);
             OpenCommand = new DelegateCommand(Open);
             SaveCommand = new DelegateCommand(Save);
@@ -38,6 +47,8 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
 
             AddResourceCommand = new DelegateCommand(AddResource);
             RemoveResourcesCommand = new DelegateCommand(RemoveResources);
+
+            OpenResourcePackRequest = new InteractionRequest<INotification>();
         }
 
         public DelegateCommand NewCommand { get; set; }
@@ -48,10 +59,19 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
         }
 
         public DelegateCommand OpenCommand { get; set; }
+        public InteractionRequest<INotification> OpenResourcePackRequest { get; }
 
         private void Open()
         {
-            
+            OpenResourcePackRequest.Raise(new Notification
+            {
+                Content = "Open Resource Pack",
+                Title = "Open Resource Pack"
+            }, delegate(INotification notification)
+            {
+                // TODO: Load resource pack
+
+            });
         }
 
         public DelegateCommand SaveCommand { get; set; }
@@ -147,6 +167,7 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
             set { SetProperty(ref _sfxResources, value); }
         }
 
+        
 
     }
 }
