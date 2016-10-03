@@ -105,6 +105,7 @@
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Data\ModuleFileData.cs" />
+    <Compile Include="Data\ResourceItemData.cs" />
     <Compile Include="Scripting\Client\Contracts\ISceneMethods.cs" />
     <Compile Include="Scripting\Client\SceneMethods.cs" />
     <Compile Include="Services\Contracts\ICameraService.cs" />

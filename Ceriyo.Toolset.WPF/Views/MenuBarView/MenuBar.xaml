@@ -201,8 +201,6 @@
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
                         <resourceEditorView:ResourceEditor
-                                Width="Auto"  
-                                Height="Auto"
                                 MinWidth="600"
                                 MinHeight="600"/>
                     </prism:PopupWindowAction.WindowContent>

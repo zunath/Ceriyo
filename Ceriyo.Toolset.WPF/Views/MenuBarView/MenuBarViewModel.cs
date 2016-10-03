@@ -1,5 +1,8 @@
 ﻿using Ceriyo.Toolset.WPF.Events.Application;
+using Ceriyo.Toolset.WPF.Events.DataEditor;
+using Ceriyo.Toolset.WPF.Events.ManageResources;
 using Ceriyo.Toolset.WPF.Events.Module;
+using Ceriyo.Toolset.WPF.Events.ResourceEditor;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -183,6 +186,9 @@ namespace Ceriyo.Toolset.WPF.Views.MenuBarView
             {
                 Title = "Module Properties",
                 Content = "Module Properties"
+            }, delegate
+            {
+                _eventAggregator.GetEvent<ModulePropertiesClosedEvent>().Publish();
             });
         }
 
@@ -194,6 +200,8 @@ namespace Ceriyo.Toolset.WPF.Views.MenuBarView
             {
                 Title = "Data Editor",
                 Content = "Data Editor"
+            }, delegate {
+                _eventAggregator.GetEvent<DataEditorClosedEvent>().Publish(false);
             });
         }
 
@@ -205,6 +213,8 @@ namespace Ceriyo.Toolset.WPF.Views.MenuBarView
             {
                 Title = "Resource Editor",
                 Content = "Resource Editor"
+            }, delegate {
+                _eventAggregator.GetEvent<ResourceEditorClosedEvent>().Publish();
             });
         }
 
@@ -217,6 +227,9 @@ namespace Ceriyo.Toolset.WPF.Views.MenuBarView
             {
                 Title = "Manage Resources",
                 Content = "Manage Resources"
+            }, delegate
+            {
+                _eventAggregator.GetEvent<ManageResourcesClosedEvent>().Publish();
             });
         }
 

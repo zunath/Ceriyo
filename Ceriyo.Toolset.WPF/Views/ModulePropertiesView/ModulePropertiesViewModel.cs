@@ -34,6 +34,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
+            _eventAggregator.GetEvent<ModulePropertiesClosedEvent>().Subscribe(Cancel);
         }
 
 

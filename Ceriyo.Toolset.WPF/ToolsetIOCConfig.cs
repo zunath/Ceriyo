@@ -68,6 +68,7 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<DomainServiceNotifier>().As<IDomainServiceNotifier>().SingleInstance();
             builder.RegisterType<ModuleDomainService>().As<IModuleDomainService>();
             builder.RegisterType<DataEditorDomainService>().As<IDataEditorDomainService>();
+            builder.RegisterType<ResourceEditorDomainService>().As<IResourceEditorDomainService>();
 
 
         }
