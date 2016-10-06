@@ -6,9 +6,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:components="clr-namespace:Ceriyo.Toolset.WPF.Components"
-             xmlns:openModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.OpenModuleView"
              xmlns:openResourcePackView="clr-namespace:Ceriyo.Toolset.WPF.Views.OpenResourcePackView"
              xmlns:detailedErrorView="clr-namespace:Ceriyo.Toolset.WPF.Views.DetailedErrorView"
+             xmlns:saveResourcePackView="clr-namespace:Ceriyo.Toolset.WPF.Views.SaveResourcePackView"
              mc:Ignorable="d"
              d:DesignWidth="500"
              d:DesignHeight="500"
@@ -60,10 +60,6 @@
                 <MenuItem 
                     Header="Add Resource..."
                     Command="{Binding AddResourceCommand}">
-                </MenuItem>
-                <MenuItem 
-                    Header="Remove Resources"
-                    Command="{Binding RemoveResourcesCommand}">
                 </MenuItem>
             </MenuItem>
         </Menu>
@@ -126,7 +122,7 @@
             </TabItem>
             
             <TabItem Header="Items">
-                <DataGrid 
+                <DataGrid
                   ItemsSource="{Binding ItemResources}"
                   AutoGenerateColumns="False"
                   CanUserDeleteRows="True"
@@ -151,7 +147,7 @@
             </TabItem>
             
             <TabItem Header="Portraits">
-                <DataGrid 
+                <DataGrid
                   ItemsSource="{Binding PortraitResources}"
                   AutoGenerateColumns="False"
                   CanUserDeleteRows="True"
@@ -176,7 +172,7 @@
             </TabItem>
             
             <TabItem Header="Tilesets">
-                <DataGrid 
+                <DataGrid
                   ItemsSource="{Binding TilesetResources}"
                   AutoGenerateColumns="False"
                   CanUserDeleteRows="True"
@@ -226,7 +222,7 @@
             </TabItem>
 
             <TabItem Header="SFX">
-                <DataGrid 
+                <DataGrid
                   ItemsSource="{Binding SFXResources}"
                   AutoGenerateColumns="False"
                   CanUserDeleteRows="True"
@@ -255,6 +251,10 @@
 
         <i:Interaction.Triggers>
 
+            <prism:InteractionRequestTrigger SourceObject="{Binding NewResourcePackRequest, Mode=OneWay}">
+                <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            </prism:InteractionRequestTrigger>
+            
             <prism:InteractionRequestTrigger SourceObject="{Binding DetailedErrorRequest, Mode=OneWay}">
                 <components:CustomPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True"
@@ -271,6 +271,21 @@
                 </components:CustomPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
+            <prism:InteractionRequestTrigger SourceObject="{Binding SaveResourcePackAsRequest, Mode=OneWay}">
+                <components:CustomPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
+                    <prism:PopupWindowAction.WindowContent>
+                        <saveResourcePackView:SaveResourcePack
+                                MinWidth="300"
+                                MinHeight="300"
+                                Width="Auto"
+                                Height="Auto"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    </prism:PopupWindowAction.WindowContent>
+                </components:CustomPopupWindowAction>
+            </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenResourcePackRequest, Mode=OneWay}">
                 <components:CustomPopupWindowAction IsModal="True" 

@@ -1,23 +1,26 @@
-﻿using System;
+﻿using Prism.Commands;
+using Prism.Mvvm;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using Prism.Commands;
+using Ceriyo.Toolset.WPF.Events.ResourceEditor;
 using Prism.Interactivity.InteractionRequest;
-using Prism.Mvvm;
 
-namespace Ceriyo.Toolset.WPF.Views.OpenResourcePackView
+namespace Ceriyo.Toolset.WPF.Views.SaveResourcePackView
 {
-    public class OpenResourcePackViewModel : BindableBase, IInteractionRequestAware
+    public class SaveResourcePackViewModel : BindableBase, IInteractionRequestAware
     {
-        private const string ResourcePacksDirectory = "./ResourcePacks/";
         private readonly FileSystemWatcher _fileSystemWatcher;
+        private const string ResourcePacksDirectory = "./ResourcePacks/";
         
-        public OpenResourcePackViewModel()
+        public SaveResourcePackViewModel()
         {
             _fileSystemWatcher = new FileSystemWatcher(ResourcePacksDirectory);
-            OpenModuleCommand = new DelegateCommand(OpenResourcePack);
+            SaveResourcePackCommand = new DelegateCommand(SaveResourcePack);
             CancelCommand = new DelegateCommand(Cancel);
+            SaveResourcePackConfirmationRequest = new InteractionRequest<IConfirmation>();
+
             ResourcePacks = new BindingList<string>();
             LoadFiles();
             _fileSystemWatcher.Created += FileSystemWatcherOnCreated;
@@ -30,8 +33,7 @@ namespace Ceriyo.Toolset.WPF.Views.OpenResourcePackView
         {
             string oldName = Path.GetFileNameWithoutExtension(e.OldName);
             string newName = Path.GetFileNameWithoutExtension(e.Name);
-
-
+            
             Application.Current.Dispatcher.Invoke(() =>
             {
                 if (Path.GetExtension(e.OldName) == ".rpk")
@@ -63,7 +65,6 @@ namespace Ceriyo.Toolset.WPF.Views.OpenResourcePackView
             });
         }
 
-
         private void LoadFiles()
         {
             ResourcePacks.Clear();
@@ -74,14 +75,6 @@ namespace Ceriyo.Toolset.WPF.Views.OpenResourcePackView
             }
         }
 
-        private string _selectedResourcePack;
-
-        public string SelectedResourcePack
-        {
-            get { return _selectedResourcePack; }
-            set { SetProperty(ref _selectedResourcePack, value); }
-        }
-
         private BindingList<string> _resourcePacks;
 
         public BindingList<string> ResourcePacks
@@ -90,26 +83,63 @@ namespace Ceriyo.Toolset.WPF.Views.OpenResourcePackView
             set { SetProperty(ref _resourcePacks, value); }
         }
 
-        public DelegateCommand OpenModuleCommand { get; set; }
+        private string _resourcePackName;
 
-        private void OpenResourcePack()
+        public string ResourcePackName
         {
-            if (string.IsNullOrWhiteSpace(SelectedResourcePack)) return;
+            get { return _resourcePackName; }
+            set { SetProperty(ref _resourcePackName, value); }
+        }
 
-            Notification.Content = SelectedResourcePack;
-            FinishInteraction();
+        private string _selectedResourcePack;
+
+        public string SelectedResourcePack
+        {
+            get { return _selectedResourcePack; }
+            set
+            {
+                SetProperty(ref _selectedResourcePack, value);
+                ResourcePackName = value;
+            }
+        }
+
+        public DelegateCommand SaveResourcePackCommand { get; set; }
+        public InteractionRequest<IConfirmation> SaveResourcePackConfirmationRequest { get; }
+
+        private void SaveResourcePack()
+        {
+            if (string.IsNullOrWhiteSpace(ResourcePackName)) return;
+            bool doSave = true;
+
+            if (ResourcePacks.Contains(ResourcePackName))
+            {
+                SaveResourcePackConfirmationRequest.Raise(new Confirmation
+                {
+                    Title = "Overwrite Resource Pack?",
+                    Content = "A resource pack with that name already exists.\n\nAre you sure you want to overwrite it?"
+                }, delegate (IConfirmation confirmation)
+                {
+                    doSave = confirmation.Confirmed;
+                });
+            }
+
+            if (doSave)
+            {
+                Notification.Content = ResourcePackName;
+                ResourcePackName = string.Empty;
+                FinishInteraction();
+            }
         }
 
         public DelegateCommand CancelCommand { get; set; }
 
         private void Cancel()
         {
-            Notification.Content = null;
+            ResourcePackName = string.Empty;
             FinishInteraction();
         }
 
         public INotification Notification { get; set; }
         public Action FinishInteraction { get; set; }
-
     }
 }

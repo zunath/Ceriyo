@@ -253,6 +253,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SaveResourcePackView\SaveResourcePack.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ScriptEditorView\ScriptEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -355,6 +359,10 @@
       <DependentUpon>SaveModule.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SaveModuleView\SaveModuleViewModel.cs" />
+    <Compile Include="Views\SaveResourcePackView\SaveResourcePack.xaml.cs">
+      <DependentUpon>SaveResourcePack.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaveResourcePackView\SaveResourcePackViewModel.cs" />
     <Compile Include="Views\ScriptEditorView\ScriptEditor.xaml.cs">
       <DependentUpon>ScriptEditor.xaml</DependentUpon>
     </Compile>

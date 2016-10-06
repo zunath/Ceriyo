@@ -7,7 +7,9 @@ using System.Linq;
 using System.Windows.Media.Imaging;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Data;
+using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Toolset.WPF.Events.Error;
+using Ceriyo.Toolset.WPF.Events.ResourceEditor;
 using Microsoft.Win32;
 using Prism.Commands;
 using Prism.Events;
@@ -16,7 +18,7 @@ using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
 {
-    public class ResourceEditorViewModel : BindableBase
+    public class ResourceEditorViewModel : BindableBase, IInteractionRequestAware
     {
         private enum Tab
         {
@@ -30,16 +32,20 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
         }
 
         private readonly IEventAggregator _eventAggregator;
-        private OpenFileDialog _addResourceDialog;
+        private readonly IResourceEditorDomainService _domainService;
+        private readonly OpenFileDialog _addResourceDialog;
+        private string _loadedResourcePackFileName;
 
         public ResourceEditorViewModel()
         {
 
         }
 
-        public ResourceEditorViewModel(IEventAggregator eventAggregator)
+        public ResourceEditorViewModel(IEventAggregator eventAggregator,
+            IResourceEditorDomainService domainService)
         {
             _eventAggregator = eventAggregator;
+            _domainService = domainService;
 
             _addResourceDialog = new OpenFileDialog
             {
@@ -61,10 +67,12 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
             ExitCommand = new DelegateCommand(Exit);
 
             AddResourceCommand = new DelegateCommand(AddResource);
-            RemoveResourcesCommand = new DelegateCommand(RemoveResources);
 
+            NewResourcePackRequest = new InteractionRequest<IConfirmation>();
             OpenResourcePackRequest = new InteractionRequest<INotification>();
             DetailedErrorRequest = new InteractionRequest<INotification>();
+            SaveResourcePackAsRequest = new InteractionRequest<INotification>();
+            _eventAggregator.GetEvent<ResourceEditorClosedEvent>().Subscribe(ClearLoadedData);
         }
 
         private string BuildFilter()
@@ -92,10 +100,42 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
             }
         }
 
+        private void ClearLoadedData()
+        {
+            BGMResources.Clear();
+            CreatureResources.Clear();
+            ItemResources.Clear();
+            SFXResources.Clear();
+            IconResources.Clear();
+            PortraitResources.Clear();
+            TilesetResources.Clear();
+        }
+
         public DelegateCommand NewCommand { get; set; }
+        public InteractionRequest<IConfirmation> NewResourcePackRequest { get; }
 
         private void New()
         {
+            if (!string.IsNullOrWhiteSpace(_loadedResourcePackFileName))
+            {
+                NewResourcePackRequest.Raise(new Confirmation
+                {
+                    Title = "Create New Resource Pack?",
+                    Content = "Any unsaved changes will be lost. Are you sure you want to create a new resource pack?"
+                }, delegate(IConfirmation confirmation)
+                {
+                    if (confirmation.Confirmed)
+                    {
+                        ClearLoadedData();
+                        _loadedResourcePackFileName = string.Empty;
+                    }
+                });
+            }
+            else
+            {
+                ClearLoadedData();
+                _loadedResourcePackFileName = string.Empty;
+            }
 
         }
 
@@ -110,7 +150,17 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
                 Title = "Open Resource Pack"
             }, delegate(INotification notification)
             {
-                // TODO: Load resource pack
+                _loadedResourcePackFileName = notification.Content as string;
+                if (_loadedResourcePackFileName == null) return;
+
+                var resources = _domainService.LoadResourcePack(_loadedResourcePackFileName).ToList();
+                BGMResources.AddRange(resources.Where(x => x.ResourceType == ResourceType.BGM));
+                SFXResources.AddRange(resources.Where(x => x.ResourceType == ResourceType.SFX));
+                CreatureResources.AddRange(resources.Where(x => x.ResourceType == ResourceType.Creature));
+                IconResources.AddRange(resources.Where(x => x.ResourceType == ResourceType.Icon));
+                ItemResources.AddRange(resources.Where(x => x.ResourceType == ResourceType.Item));
+                PortraitResources.AddRange(resources.Where(x => x.ResourceType == ResourceType.Portrait));
+                TilesetResources.AddRange(resources.Where(x => x.ResourceType == ResourceType.Tileset));
 
             });
         }
@@ -119,21 +169,53 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
 
         private void Save()
         {
+            if (string.IsNullOrWhiteSpace(_loadedResourcePackFileName))
+            {
+                SaveAs();
+                return;
+            }
 
+            DoSave();
         }
 
         public DelegateCommand SaveAsCommand { get; set; }
+        public InteractionRequest<INotification> SaveResourcePackAsRequest { get; }
 
         private void SaveAs()
         {
+            SaveResourcePackAsRequest.Raise(new Notification
+            {
+                Title = "Save Resource Pack",
+                Content = "Save Resource Pack"
+            }, (notification) =>
+            {
+                _loadedResourcePackFileName = notification.Content as string;
+                if (_loadedResourcePackFileName == null) return;
 
+                DoSave();
+            });
+        }
+
+        private void DoSave()
+        {
+            List<ResourceItemData> masterList = new List<ResourceItemData>();
+            masterList.AddRange(BGMResources);
+            masterList.AddRange(SFXResources);
+            masterList.AddRange(CreatureResources);
+            masterList.AddRange(IconResources);
+            masterList.AddRange(ItemResources);
+            masterList.AddRange(TilesetResources);
+            masterList.AddRange(PortraitResources);
+
+            _domainService.SaveResourcePack(masterList, _loadedResourcePackFileName);
         }
 
         public DelegateCommand ExitCommand { get; set; }
 
         private void Exit()
         {
-
+            ClearLoadedData();
+            FinishInteraction();
         }
 
         public DelegateCommand AddResourceCommand { get; set; }
@@ -286,13 +368,7 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
                     break;
             }
         }
-
-        public DelegateCommand RemoveResourcesCommand { get; set; }
-
-        private void RemoveResources()
-        {
-
-        }
+        
 
         private Tab SelectedTab => (Tab) SelectedTabIndex;
 
@@ -329,6 +405,7 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
             get { return _creatureResources; }
             set { SetProperty(ref _creatureResources, value); }
         }
+        
         private BindingList<ResourceItemData> _iconResources;
 
         public BindingList<ResourceItemData> IconResources
@@ -336,6 +413,7 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
             get { return _iconResources; }
             set { SetProperty(ref _iconResources, value); }
         }
+        
         private BindingList<ResourceItemData> _itemResources;
 
         public BindingList<ResourceItemData> ItemResources
@@ -343,6 +421,7 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
             get { return _itemResources; }
             set { SetProperty(ref _itemResources, value); }
         }
+        
         private BindingList<ResourceItemData> _portraitResources;
 
         public BindingList<ResourceItemData> PortraitResources
@@ -350,6 +429,7 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
             get { return _portraitResources; }
             set { SetProperty(ref _portraitResources, value); }
         }
+        
         private BindingList<ResourceItemData> _tilesetResources;
 
         public BindingList<ResourceItemData> TilesetResources
@@ -357,6 +437,7 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
             get { return _tilesetResources; }
             set { SetProperty(ref _tilesetResources, value); }
         }
+        
         private BindingList<ResourceItemData> _bgmResources;
 
         public BindingList<ResourceItemData> BGMResources
@@ -364,6 +445,7 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
             get { return _bgmResources; }
             set { SetProperty(ref _bgmResources, value); }
         }
+        
         private BindingList<ResourceItemData> _sfxResources;
 
         public BindingList<ResourceItemData> SFXResources
@@ -371,8 +453,8 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
             get { return _sfxResources; }
             set { SetProperty(ref _sfxResources, value); }
         }
-
         
+
         public InteractionRequest<INotification> DetailedErrorRequest { get; }
 
         private void RaiseDetailedError(string header, string detailedError)
@@ -385,5 +467,8 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
                 Content = header
             });
         }
+
+        public INotification Notification { get; set; }
+        public Action FinishInteraction { get; set; }
     }
 }
