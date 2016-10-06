@@ -155,5 +155,17 @@ namespace Ceriyo.Infrastructure.Tests.Services
 
             Directory.Delete(TempDirectoryPath + "output/");
         }
+
+        [Test]
+        public void DataService_DeleteFile_ShouldDeleteFile()
+        {
+            const string path = "./testFile.dat";
+            var stream = File.Create(path);
+            stream.Close();
+
+            _dataService.Delete(path);
+
+            Assert.IsFalse(File.Exists(path));
+        }
     }
 }
