@@ -397,18 +397,18 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [Test]
         public void SerializerConfig_ModuleFileData_ShouldBeEqual()
         {
-            ModuleFileData data = new ModuleFileData()
+            SerializedFileData data = new SerializedFileData()
             {
                 FilePath = "new file name",
                 Data = new byte[] {123,232,234,2,92}
             };
-            ModuleFileData result;
+            SerializedFileData result;
             using (MemoryStream stream = new MemoryStream())
             {
                 Serializer.Serialize(stream, data);
                 stream.Position = 0;
 
-                result = Serializer.Deserialize<ModuleFileData>(stream);
+                result = Serializer.Deserialize<SerializedFileData>(stream);
             }
 
             var dataJson = JsonConvert.SerializeObject(data);

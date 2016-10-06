@@ -3,8 +3,10 @@ using System.IO;
 using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
-using Ceriyo.Infrastructure.Serialization;
+using Ceriyo.Core.Entities;
+using Ceriyo.Core.Settings;
 using ProtoBuf;
+using ProtoBuf.Meta;
 
 namespace Ceriyo.Infrastructure.Services
 {
@@ -19,7 +21,57 @@ namespace Ceriyo.Infrastructure.Services
 
         public void Initialize()
         {
-            ProtobufContext.Build();
+            // Settings
+            Map<ToolsetSettings>();
+            Map<ServerSettings>();
+            Map<GameSettings>();
+
+            // Data
+            Map<AbilityData>();
+            Map<AnimationData>();
+            Map<ClassData>();
+            Map<ClassRequirementData>();
+            Map<ClassLevel>();
+            Map<CreatureData>();
+            Map<DialogData>();
+            Map<FrameData>();
+            Map<ItemData>();
+            Map<ItemPropertyData>();
+            Map<ItemTypeData>();
+            Map<LocalVariableData>();
+            Map<ModuleData>();
+            Map<SerializedFileData>();
+            Map<SerializedManifestData>();
+            Map<PlaceableData>();
+            Map<ResourceItemData>();
+            Map<ScriptData>();
+            Map<SkillData>();
+            Map<TilesetData>();
+        }
+
+        private static void Map<T>()
+            where T : class
+        {
+            Type type = typeof(T);
+            var registeredTypes = RuntimeTypeModel.Default.GetTypes();
+
+            // Don't register the same type twice.
+            foreach (MetaType registeredType in registeredTypes)
+            {
+                if (registeredType.Type == type) return;
+            }
+
+
+            var meta = RuntimeTypeModel.Default.Add(type, false);
+            var properties = type.GetProperties();
+
+            for (int x = 0; x < properties.Length; x++)
+            {
+                var prop = properties[x];
+
+                meta.Add(x + 1, prop.Name);
+            }
+
         }
 
         public T Load<T>(string filePath = null)
@@ -81,8 +133,8 @@ namespace Ceriyo.Infrastructure.Services
 
         public void Delete(string filePath)
         {
-            if(string.IsNullOrWhiteSpace(filePath))
-                throw new ArgumentException("filePath must not be blank or null.");
+            if (string.IsNullOrWhiteSpace(filePath))
+                throw new ArgumentException($"{nameof(filePath)} must not be blank or null.");
 
             if (File.Exists(filePath))
             {
@@ -117,7 +169,7 @@ namespace Ceriyo.Infrastructure.Services
         private void PackageFile(string filePath, string directoryPath, Stream stream)
         {
             string trimmedFile = filePath.Replace(directoryPath, string.Empty);
-            ModuleFileData fileData = new ModuleFileData
+            SerializedFileData fileData = new SerializedFileData
             {
                 FilePath = trimmedFile,
                 Data = File.ReadAllBytes(filePath)
@@ -126,6 +178,61 @@ namespace Ceriyo.Infrastructure.Services
             Serializer.SerializeWithLengthPrefix(stream, fileData, PrefixStyle.Base128);
         }
 
+        public void PackageFile<T>(T data, Stream stream)
+        {
+            SerializedManifestData manifest = null;
+            if (stream.Length > 0)
+            {
+                try
+                {
+                    long currentPosition = stream.Position;
+                    stream.Position = 0;
+                    manifest = Serializer.DeserializeWithLengthPrefix<SerializedManifestData>(stream, PrefixStyle.Base128, 0);
+                    if (manifest == null)
+                    {
+                        throw new Exception($"An instance of {nameof(SerializedManifestData)} must be the first packaged file.");
+                    }
+
+                    stream.Position = currentPosition;
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"An instance of {nameof(SerializedManifestData)} must be the first packaged file.", ex);
+                }
+            }
+            else
+            {
+                if (data.GetType() != typeof(SerializedManifestData))
+                {
+                    throw new Exception($"An instance of {nameof(SerializedManifestData)} must be the first packaged file.");
+                }
+            }
+
+            int fieldNumber = 0;
+            if (manifest != null)
+                fieldNumber = manifest.Count + 1;
+
+            Serializer.SerializeWithLengthPrefix(stream, data, PrefixStyle.Base128, fieldNumber);
+        }
+
+        public SerializedManifestData RetrieveManifest(string serializedFilePath)
+        {
+            using (var stream = File.OpenRead(serializedFilePath))
+            {
+                return Serializer.DeserializeWithLengthPrefix<SerializedManifestData>(stream, PrefixStyle.Base128, 0);
+            }
+        }
+
+        public T RetrieveSingleFile<T>(string serializedFilePath, string key)
+        {
+            using (var stream = File.OpenRead(serializedFilePath))
+            {
+                var manifest = Serializer.DeserializeWithLengthPrefix<SerializedManifestData>(stream, PrefixStyle.Base128, 0);
+                int fileIndex = manifest[key] + 1;
+                return Serializer.DeserializeWithLengthPrefix<T>(stream, PrefixStyle.Base128, fileIndex);
+            }
+        }
 
         public void UnpackageDirectory(string destinationDirectoryPath, string sourceFilePath)
         {
@@ -138,7 +245,7 @@ namespace Ceriyo.Infrastructure.Services
 
                 using (var stream = File.OpenRead(sourceFilePath))
                 {
-                    foreach (var fileData in Serializer.DeserializeItems<ModuleFileData>(stream, PrefixStyle.Base128, 0))
+                    foreach (var fileData in Serializer.DeserializeItems<SerializedFileData>(stream, PrefixStyle.Base128, 0))
                     {
                         string destinationPath = destinationDirectoryPath + fileData.FilePath;
 

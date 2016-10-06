@@ -246,6 +246,7 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
                 {
                     ResourceItemData item = new ResourceItemData
                     {
+                        FilePath = filePath,
                         Extension = Path.GetExtension(filePath),
                         FileName = Path.GetFileNameWithoutExtension(filePath),
                         Size = new FileInfo(filePath).Length,

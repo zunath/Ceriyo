@@ -1,4 +1,7 @@
-﻿namespace Ceriyo.Core.Contracts
+﻿using System.IO;
+using Ceriyo.Core.Data;
+
+namespace Ceriyo.Core.Contracts
 {
     public interface IDataService
     {
@@ -12,7 +15,13 @@
 
         void Delete(string filePath);
 
+        void PackageFile<T>(T data, Stream stream);
+        SerializedManifestData RetrieveManifest(string serializedFilePath);
+        T RetrieveSingleFile<T>(string serializedFilePath, string key);
+
         void PackageDirectory(string directoryPath, string serializedFilePath);
         void UnpackageDirectory(string destinationDirectoryPath, string sourceFilePath);
+
+
     }
 }

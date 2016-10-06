@@ -16,7 +16,7 @@ namespace Ceriyo.Toolset.WPF.Views.OpenResourcePackView
         public OpenResourcePackViewModel()
         {
             _fileSystemWatcher = new FileSystemWatcher(ResourcePacksDirectory);
-            OpenModuleCommand = new DelegateCommand(OpenResourcePack);
+            OpenResourcePackCommand = new DelegateCommand(OpenResourcePack);
             CancelCommand = new DelegateCommand(Cancel);
             ResourcePacks = new BindingList<string>();
             LoadFiles();
@@ -90,7 +90,7 @@ namespace Ceriyo.Toolset.WPF.Views.OpenResourcePackView
             set { SetProperty(ref _resourcePacks, value); }
         }
 
-        public DelegateCommand OpenModuleCommand { get; set; }
+        public DelegateCommand OpenResourcePackCommand { get; set; }
 
         private void OpenResourcePack()
         {
