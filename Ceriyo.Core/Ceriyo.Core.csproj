@@ -102,6 +102,7 @@
     <Compile Include="Constants\Gender.cs" />
     <Compile Include="Constants\InventorySlot.cs" />
     <Compile Include="Constants\PVPType.cs" />
+    <Compile Include="Constants\ResourceType.cs" />
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Data\ModuleFileData.cs" />

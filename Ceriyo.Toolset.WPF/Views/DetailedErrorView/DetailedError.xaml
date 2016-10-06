@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Ceriyo.Toolset.WPF.Views.DetailedErrorView.DetailedError"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="300"
+             d:DesignHeight="400"
+             Background="White"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            Content="{Binding HeaderMessage}">
+        </Label>
+        
+        <TextBox
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            Grid.RowSpan="2"
+            Text="{Binding DetailedErrorMessage}">
+            
+        </TextBox>
+
+        <Button
+            Grid.Column="1"
+            Grid.Row="3"
+            Margin="5,5,5,5"
+            Command="{Binding OkCommand}">
+            OK
+        </Button>
+        
+    </Grid>
+</UserControl>

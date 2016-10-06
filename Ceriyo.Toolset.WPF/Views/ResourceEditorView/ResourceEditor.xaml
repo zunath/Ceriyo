@@ -8,6 +8,7 @@
              xmlns:components="clr-namespace:Ceriyo.Toolset.WPF.Components"
              xmlns:openModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.OpenModuleView"
              xmlns:openResourcePackView="clr-namespace:Ceriyo.Toolset.WPF.Views.OpenResourcePackView"
+             xmlns:detailedErrorView="clr-namespace:Ceriyo.Toolset.WPF.Views.DetailedErrorView"
              mc:Ignorable="d"
              d:DesignWidth="500"
              d:DesignHeight="500"
@@ -93,7 +94,7 @@
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Size (Bytes)"
                                     IsReadOnly="True"
-                                    Binding="{Binding SizeBytes}">
+                                    Binding="{Binding Size}">
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -118,7 +119,7 @@
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Size (Bytes)"
                                     IsReadOnly="True"
-                                    Binding="{Binding SizeBytes}">
+                                    Binding="{Binding Size}">
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -143,7 +144,7 @@
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Size (Bytes)"
                                     IsReadOnly="True"
-                                    Binding="{Binding SizeBytes}">
+                                    Binding="{Binding Size}">
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -168,7 +169,7 @@
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Size (Bytes)"
                                     IsReadOnly="True"
-                                    Binding="{Binding SizeBytes}">
+                                    Binding="{Binding Size}">
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -193,7 +194,7 @@
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Size (Bytes)"
                                     IsReadOnly="True"
-                                    Binding="{Binding SizeBytes}">
+                                    Binding="{Binding Size}">
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -218,7 +219,7 @@
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Size (Bytes)"
                                     IsReadOnly="True"
-                                    Binding="{Binding SizeBytes}">
+                                    Binding="{Binding Size}">
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -243,7 +244,7 @@
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Size (Bytes)"
                                     IsReadOnly="True"
-                                    Binding="{Binding SizeBytes}">
+                                    Binding="{Binding Size}">
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -253,6 +254,22 @@
 
 
         <i:Interaction.Triggers>
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding DetailedErrorRequest, Mode=OneWay}">
+                <components:CustomPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
+                    <prism:PopupWindowAction.WindowContent>
+                        <detailedErrorView:DetailedError
+                                MinWidth="400"
+                                MinHeight="300"
+                                Width="Auto"
+                                Height="Auto"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    </prism:PopupWindowAction.WindowContent>
+                </components:CustomPopupWindowAction>
+            </prism:InteractionRequestTrigger>
 
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenResourcePackRequest, Mode=OneWay}">

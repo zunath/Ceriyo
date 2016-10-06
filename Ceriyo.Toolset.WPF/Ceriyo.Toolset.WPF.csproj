@@ -154,6 +154,7 @@
     <Compile Include="Events\Creature\CreatureCreatedEvent.cs" />
     <Compile Include="Events\Creature\CreatureDeletedEvent.cs" />
     <Compile Include="Events\DataEditor\DataEditorClosedEvent.cs" />
+    <Compile Include="Events\Error\DetailedErrorEvent.cs" />
     <Compile Include="Events\Item\ItemChangedEvent.cs" />
     <Compile Include="Events\Item\ItemCreatedEvent.cs" />
     <Compile Include="Events\Item\ItemDeletedEvent.cs" />
@@ -205,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DataEditorView\DataEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailedErrorView\DetailedError.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,6 +311,10 @@
       <DependentUpon>DataEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DataEditorView\DataEditorViewModel.cs" />
+    <Compile Include="Views\DetailedErrorView\DetailedError.xaml.cs">
+      <DependentUpon>DetailedError.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailedErrorView\DetailedErrorViewModel.cs" />
     <Compile Include="Views\ItemEditorView\ItemEditor.xaml.cs">
       <DependentUpon>ItemEditor.xaml</DependentUpon>
     </Compile>
