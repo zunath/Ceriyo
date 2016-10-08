@@ -136,6 +136,7 @@ namespace Ceriyo.Toolset.WPF.Views.SaveResourcePackView
         private void Cancel()
         {
             ResourcePackName = string.Empty;
+            Notification.Content = null;
             FinishInteraction();
         }
 

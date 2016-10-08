@@ -49,7 +49,7 @@ namespace Ceriyo.Domain.Services.DataServices
                         // Load data - either from the file system or from the existing rpk file.
                         if (string.IsNullOrWhiteSpace(resource.FilePath))
                         {
-                            var backupEntry = _dataService.RetrieveSingleFile<ResourceItemData>(backupFilePath, GetKeyOfResourceItem(resource));
+                            var backupEntry = _dataService.RetrieveSingleFile<ResourceItemData>(BaseDirectory + backupFilePath, GetKeyOfResourceItem(resource));
                             resource.Data = backupEntry.Data;
                         }
                         else

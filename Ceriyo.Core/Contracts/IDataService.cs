@@ -17,7 +17,9 @@ namespace Ceriyo.Core.Contracts
 
         void PackageFile<T>(T data, Stream stream);
         SerializedManifestData RetrieveManifest(string serializedFilePath);
-        T RetrieveSingleFile<T>(string serializedFilePath, string key);
+
+        T RetrieveSingleFile<T>(string serializedFilePath, string key)
+            where T : class;
 
         void PackageDirectory(string directoryPath, string serializedFilePath);
         void UnpackageDirectory(string destinationDirectoryPath, string sourceFilePath);

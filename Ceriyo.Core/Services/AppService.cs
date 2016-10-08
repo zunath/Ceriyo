@@ -9,6 +9,7 @@ namespace Ceriyo.Core.Services
         {
             CreateDirectoryIfNotExists("Modules");
             CreateDirectoryIfNotExists("ResourcePacks");
+            CreateDirectoryIfNotExists("ServerVault");
         }
 
         private void CreateDirectoryIfNotExists(string directoryName)

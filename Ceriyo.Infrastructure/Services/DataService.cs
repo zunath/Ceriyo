@@ -211,9 +211,10 @@ namespace Ceriyo.Infrastructure.Services
 
             int fieldNumber = 0;
             if (manifest != null)
-                fieldNumber = manifest.Count + 1;
+                fieldNumber = 1;
 
             Serializer.SerializeWithLengthPrefix(stream, data, PrefixStyle.Base128, fieldNumber);
+            
         }
 
         public SerializedManifestData RetrieveManifest(string serializedFilePath)
@@ -225,13 +226,24 @@ namespace Ceriyo.Infrastructure.Services
         }
 
         public T RetrieveSingleFile<T>(string serializedFilePath, string key)
+            where T: class
         {
             using (var stream = File.OpenRead(serializedFilePath))
             {
                 var manifest = Serializer.DeserializeWithLengthPrefix<SerializedManifestData>(stream, PrefixStyle.Base128, 0);
-                int fileIndex = manifest[key] + 1;
-                return Serializer.DeserializeWithLengthPrefix<T>(stream, PrefixStyle.Base128, fileIndex);
+
+                for (int index = 0; index <= manifest[key]; index++)
+                {
+                    var result = Serializer.DeserializeWithLengthPrefix<T>(stream, PrefixStyle.Base128, 1);
+
+                    if (index == manifest[key])
+                    {
+                        return result;
+                    }
+                }
             }
+
+            return null;
         }
 
         public void UnpackageDirectory(string destinationDirectoryPath, string sourceFilePath)
