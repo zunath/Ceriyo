@@ -4,6 +4,7 @@ using System.Windows.Threading;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Domain.Services.DataServices.Contracts;
+using Ceriyo.Toolset.WPF.Events.Application;
 using Ceriyo.Toolset.WPF.Events.Error;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Events;
@@ -14,7 +15,6 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
 {
     public class ApplicationRootViewModel : BindableBase
     {
-        private readonly IEventAggregator _eventAggregator;
         private readonly ILogger _logger;
         private readonly IModuleDomainService _moduleDomainService;
 
@@ -29,14 +29,14 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
             IModuleDomainService moduleDomainService)
         {
             _logger = logger;
-            _eventAggregator = eventAggregator;
             _moduleDomainService = moduleDomainService;
-            ChangeWindowTitle();
+            
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
             Application.Current.Dispatcher.UnhandledException += DispatcherOnUnhandledException;
 
             ErrorNotificationRequest = new InteractionRequest<INotification>();
-            
+
+            eventAggregator.GetEvent<ApplicationLoadedEvent>().Subscribe(ChangeWindowTitle);
             eventAggregator.GetEvent<ModulePropertiesChangedEvent>().Subscribe(ChangeWindowTitle);
             eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
             eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ChangeWindowTitle);

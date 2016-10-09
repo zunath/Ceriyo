@@ -233,7 +233,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
         private void CopyPropertiesFromModuleData()
         {
             ModuleData moduleData = _domainService.GetLoadedModuleData();
-
+            
             Name = moduleData.Name;
             Tag = moduleData.Tag;
             Resref = moduleData.Resref;

@@ -147,6 +147,7 @@
     <Compile Include="EventArgs\ModuleEventArgs.cs" />
     <Compile Include="Events\Ability\AbilityChangedEvent.cs" />
     <Compile Include="Events\Ability\AbilityDeletedEvent.cs" />
+    <Compile Include="Events\Application\ApplicationLoadedEvent.cs" />
     <Compile Include="Events\Class\ClassChangedEvent.cs" />
     <Compile Include="Events\Class\ClassCreatedEvent.cs" />
     <Compile Include="Events\Class\ClassDeletedEvent.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 
 namespace Ceriyo.Domain.Services.DataServices
@@ -105,7 +106,7 @@ namespace Ceriyo.Domain.Services.DataServices
 
         public ModuleData GetLoadedModuleData()
         {
-            return _moduleData;
+            return _objectMapper.Map<ModuleData>(_moduleData);
         }
         
         public string GetLoadedModuleName()

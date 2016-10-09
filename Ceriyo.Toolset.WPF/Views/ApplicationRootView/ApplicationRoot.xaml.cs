@@ -34,5 +34,10 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
             e.Cancel = true;
             _eventAggregator.GetEvent<ApplicationClosedEvent>().Publish();
         }
+
+        private void ApplicationRoot_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            _eventAggregator.GetEvent<ApplicationLoadedEvent>().Publish();
+        }
     }
 }
