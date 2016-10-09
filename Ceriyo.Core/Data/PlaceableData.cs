@@ -1,11 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Ceriyo.Core.Properties;
 
 namespace Ceriyo.Core.Data
 {
-    public class PlaceableData: INotifyPropertyChanged
+    public class PlaceableData: BaseDataRecord
     {
         private LocalVariableData _localVariables;
         private string _onUsed;
@@ -301,14 +298,6 @@ namespace Ceriyo.Core.Data
         {
             GlobalID = Guid.NewGuid().ToString();
             LocalVariables = new LocalVariableData();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

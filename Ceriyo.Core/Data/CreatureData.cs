@@ -1,11 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Ceriyo.Core.Properties;
 
 namespace Ceriyo.Core.Data
 {
-    public class CreatureData: INotifyPropertyChanged
+    public class CreatureData: BaseDataRecord
     {
         private string _comment;
         private string _description;
@@ -218,13 +215,6 @@ namespace Ceriyo.Core.Data
             LocalVariables = new LocalVariableData();
             Level = 1;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
     }
 }

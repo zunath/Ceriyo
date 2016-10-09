@@ -4,6 +4,7 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
+using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Services;
 using Moq;
@@ -28,7 +29,7 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
             _dataService = new DataService(_mockLogger.Object);
             _objectMapper = new ObjectMapper();
             _objectMapper.Initialize();
-            _moduleDomainService = new ModuleDomainService(_dataService, _objectMapper);
+            _moduleDomainService = new ModuleDomainService(_dataService, _objectMapper, new ModuleFactory(new Mock<IValidatorFactory>().Object));
 
             _dataService.Initialize();
         }

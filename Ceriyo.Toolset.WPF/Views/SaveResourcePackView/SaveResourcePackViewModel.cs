@@ -4,7 +4,6 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using Ceriyo.Toolset.WPF.Events.ResourceEditor;
 using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.SaveResourcePackView

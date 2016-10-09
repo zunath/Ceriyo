@@ -1,8 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Ceriyo.Toolset.WPF.Events.Error;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;

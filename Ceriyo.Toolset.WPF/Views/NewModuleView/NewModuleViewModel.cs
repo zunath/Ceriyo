@@ -1,4 +1,6 @@
 ﻿using System;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
 using Ceriyo.Toolset.WPF.EventArgs;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
@@ -16,39 +18,27 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
         {
         }
 
-        public NewModuleViewModel(IEventAggregator eventAggregator)
+        public NewModuleViewModel(IEventAggregator eventAggregator, IModuleFactory moduleFactory)
         {
             _eventAggregator = eventAggregator;
+            ModuleData = moduleFactory.Create();
             CreateModuleCommand = new DelegateCommand(CreateModule);
             CancelCommand = new DelegateCommand(Cancel);
         }
 
-        private string _name;
+        private ModuleData _moduleData;
 
-        public string Name
+        public ModuleData ModuleData
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return _moduleData; }
+            set { SetProperty(ref _moduleData, value); }
         }
-        private string _tag;
-
-        public string Tag
-        {
-            get { return _tag; }
-            set { SetProperty(ref _tag, value); }
-        }
-        private string _resref;
-
-        public string Resref
-        {
-            get { return _resref; }
-            set { SetProperty(ref _resref, value); }
-        }
-
+        
         public DelegateCommand CreateModuleCommand { get; set; }
         private void CreateModule()
         {
-            _eventAggregator.GetEvent<ModuleCreatedEvent>().Publish(new ModuleEventArgs(Name, Tag, Resref));
+            _eventAggregator.GetEvent<ModuleClosedEvent>().Publish();
+            _eventAggregator.GetEvent<ModuleCreatedEvent>().Publish(new ModuleEventArgs(ModuleData.Name, ModuleData.Tag, ModuleData.Resref));
             FinishInteraction();
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Publish(null);
             ClearFields();
@@ -63,9 +53,9 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
 
         private void ClearFields()
         {
-            Name = string.Empty;
-            Tag = string.Empty;
-            Resref = string.Empty;
+            ModuleData.Name = string.Empty;
+            ModuleData.Tag = string.Empty;
+            ModuleData.Resref = string.Empty;
         }
 
         public INotification Notification { get; set; }

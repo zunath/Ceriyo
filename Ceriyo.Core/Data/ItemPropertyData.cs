@@ -1,11 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Ceriyo.Core.Properties;
 
 namespace Ceriyo.Core.Data
 {
-    public class ItemPropertyData: INotifyPropertyChanged
+    public class ItemPropertyData: BaseDataRecord
     {
         private string _comment;
         private string _description;
@@ -84,13 +81,6 @@ namespace Ceriyo.Core.Data
         {
             GlobalID = Guid.NewGuid().ToString();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
     }
 }

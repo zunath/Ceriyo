@@ -59,6 +59,10 @@
       <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Jint, Version=2.9.1.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
       <HintPath>..\packages\Jint.2.9.1\lib\portable-net40+sl50+win+WindowsPhoneApp81+wp80\Jint.dll</HintPath>
       <Private>True</Private>
@@ -107,7 +111,9 @@
   <ItemGroup>
     <Compile Include="Factory\ComponentFactory.cs" />
     <Compile Include="Factory\EntityFactory.cs" />
+    <Compile Include="Factory\ModuleFactory.cs" />
     <Compile Include="Factory\ScreenFactory.cs" />
+    <Compile Include="Factory\ValidatorFactory.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Mapping\ObjectMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

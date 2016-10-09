@@ -2,7 +2,7 @@
 
 namespace Ceriyo.Core.Data
 {
-    public class ItemTypeData
+    public class ItemTypeData: BaseDataRecord
     {
         public string GlobalID { get; set; }
         public string Name { get; set; }

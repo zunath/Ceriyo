@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ColorTypeAttribute.cs" />
     <Compile Include="Attributes\FilePathAttribute.cs" />
+    <Compile Include="Attributes\SerializationIgnoreAttribute.cs" />
     <Compile Include="Components\CollisionBox.cs" />
     <Compile Include="Components\Description.cs" />
     <Compile Include="Components\Heartbeat.cs" />
@@ -105,6 +106,9 @@
     <Compile Include="Constants\ResourceType.cs" />
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
+    <Compile Include="Contracts\IModuleFactory.cs" />
+    <Compile Include="Contracts\IValidatorFactory.cs" />
+    <Compile Include="Data\BaseDataRecord.cs" />
     <Compile Include="Data\SerializedFileData.cs" />
     <Compile Include="Data\ResourceItemData.cs" />
     <Compile Include="Data\SerializedManifestData.cs" />
@@ -190,10 +194,26 @@
     <Compile Include="UI\SampleDesktop.cs" />
     <Compile Include="UI\SquidRenderer.cs" />
     <Compile Include="Services\UIService.cs" />
+    <Compile Include="Validators\Components\ClassLevelValidator.cs" />
+    <Compile Include="Validators\Data\AbilityDataValidator.cs" />
+    <Compile Include="Validators\Data\AnimationDataValidator.cs" />
+    <Compile Include="Validators\Data\ClassDataValidator.cs" />
+    <Compile Include="Validators\Data\ClassRequirementDataValidator.cs" />
+    <Compile Include="Validators\Data\CreatureDataValidator.cs" />
+    <Compile Include="Validators\Data\DialogDataValidator.cs" />
+    <Compile Include="Validators\Data\FrameDataValidator.cs" />
+    <Compile Include="Validators\Data\ItemDataValidator.cs" />
+    <Compile Include="Validators\Data\ItemPropertyDataValidator.cs" />
+    <Compile Include="Validators\Data\ItemTypeDataValidator.cs" />
+    <Compile Include="Validators\Data\LocalVariableDataValidator.cs" />
+    <Compile Include="Validators\Data\ModuleDataValidator.cs" />
+    <Compile Include="Validators\Data\PlaceableDataValidator.cs" />
+    <Compile Include="Validators\Data\ScriptDataValidator.cs" />
+    <Compile Include="Validators\Data\SkillDataValidator.cs" />
+    <Compile Include="Validators\Data\TilesetDataValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Systems\" />
-    <Folder Include="Validators\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">

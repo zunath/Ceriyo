@@ -1,19 +1,17 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Ceriyo.Core.Entities;
-using Ceriyo.Core.Properties;
 
 namespace Ceriyo.Core.Data
 {
-    public class ModuleData: INotifyPropertyChanged
+    public class ModuleData: BaseDataRecord
     {
         private string _name;
         private string _tag;
         private string _resref;
         private int _maxLevel;
         private string _description;
-        private string _comments;
+        private string _comment;
 
         private BindingList<string> _tilesetIDs;
         private BindingList<string> _skillIDs;
@@ -98,12 +96,12 @@ namespace Ceriyo.Core.Data
                 OnPropertyChanged();
             }
         }
-        public string Comments
+        public string Comment
         {
-            get { return _comments; }
+            get { return _comment; }
             set
             {
-                _comments = value;
+                _comment = value;
                 OnPropertyChanged();
             }
         }
@@ -346,12 +344,5 @@ namespace Ceriyo.Core.Data
             ResourcePacks = new BindingList<string>();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

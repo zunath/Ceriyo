@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
-using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 
 namespace Ceriyo.Domain.Services.DataServices
@@ -14,26 +13,25 @@ namespace Ceriyo.Domain.Services.DataServices
         private ModuleData _moduleData;
         private readonly IDataService _dataService;
         private readonly IObjectMapper _objectMapper;
+        private readonly IModuleFactory _moduleFactory;
 
         public ModuleDomainService(IDataService dataService,
-            IObjectMapper objectMapper)
+            IObjectMapper objectMapper,
+            IModuleFactory moduleFactory)
         {
             _objectMapper = objectMapper;
             _dataService = dataService;
+            _moduleFactory = moduleFactory;
         }
 
         public void CreateModule(string name,
             string tag,
             string resref)
         {
-            CloseModule();
-
-            _moduleData = new ModuleData
-            {
-                Name = name,
-                Tag = tag,
-                Resref = resref
-            };
+            _moduleData = _moduleFactory.Create();
+            _moduleData.Name = name;
+            _moduleData.Tag = tag;
+            _moduleData.Resref = resref;
             
             CreateProjectStructure();
         }
@@ -69,7 +67,7 @@ namespace Ceriyo.Domain.Services.DataServices
                 Directory.Delete(BaseDirectory, true);
             }
 
-            _moduleData = new ModuleData();
+            _moduleData = _moduleFactory.Create();
         }
 
         public void OpenModule(string fileName)

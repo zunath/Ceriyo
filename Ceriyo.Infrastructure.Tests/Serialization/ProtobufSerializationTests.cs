@@ -464,7 +464,6 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         {
             ScriptData data = new ScriptData()
             {
-                FileName = "new file name",
                 Resref = "it's a resref",
                 Name = "it's a name"
             };

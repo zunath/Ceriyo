@@ -1,11 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Ceriyo.Core.Properties;
 
 namespace Ceriyo.Core.Data
 {
-    public class ItemData: INotifyPropertyChanged
+    public class ItemData: BaseDataRecord
     {
         private BindingList<string> _itemPropertyResrefs;
         private BindingList<ClassRequirementData> _classRequirements;
@@ -231,13 +229,6 @@ namespace Ceriyo.Core.Data
             LocalVariables = new LocalVariableData();
             ClassRequirements = new BindingList<ClassRequirementData>();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
     }
 }

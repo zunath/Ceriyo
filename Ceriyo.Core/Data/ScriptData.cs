@@ -1,13 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Ceriyo.Core.Properties;
 
 namespace Ceriyo.Core.Data
 {
-    public class ScriptData: INotifyPropertyChanged
+    public class ScriptData: BaseDataRecord
     {
-        private string _fileName;
         private string _resref;
         private string _name;
         private string _globalID;
@@ -44,29 +40,11 @@ namespace Ceriyo.Core.Data
                 OnPropertyChanged();
             }
         }
-
-        public string FileName
-        {
-            get { return _fileName; }
-            set
-            {
-                if (value == _fileName) return;
-                _fileName = value;
-                OnPropertyChanged();
-            }
-        }
-
+        
         public ScriptData()
         {
             GlobalID = Guid.NewGuid().ToString();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
     }
 }

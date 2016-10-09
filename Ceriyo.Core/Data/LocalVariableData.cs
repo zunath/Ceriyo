@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Ceriyo.Core.Properties;
 
 namespace Ceriyo.Core.Data
 {
-    public class LocalVariableData: INotifyPropertyChanged
+    public class LocalVariableData: BaseDataRecord
     {
         private Dictionary<string, float> _localFloats;
         private Dictionary<string, string> _localStrings;
@@ -51,13 +48,6 @@ namespace Ceriyo.Core.Data
             LocalStrings = new Dictionary<string, string>();
             LocalFloats = new Dictionary<string, float>();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
     }
 }

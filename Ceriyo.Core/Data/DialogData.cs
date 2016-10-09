@@ -2,7 +2,7 @@
 
 namespace Ceriyo.Core.Data
 {
-    public class DialogData
+    public class DialogData: BaseDataRecord
     {
         public string GlobalID { get; set; }
         public string Name { get; set; }

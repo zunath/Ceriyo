@@ -74,7 +74,7 @@
 
 
         <i:Interaction.Triggers>
-            <prism:InteractionRequestTrigger SourceObject="{Binding SaveModuleConfirmationRequest, Mode=OneWay}">
+            <prism:InteractionRequestTrigger SourceObject="{Binding SaveResourcePackConfirmationRequest, Mode=OneWay}">
                 <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
             </prism:InteractionRequestTrigger>
         </i:Interaction.Triggers>

@@ -5,7 +5,6 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Toolset.WPF.Events.Application;
-using Ceriyo.Toolset.WPF.Events.Error;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -30,7 +29,9 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
         {
             _logger = logger;
             _moduleDomainService = moduleDomainService;
-            
+
+            WindowTitle = string.Empty;
+
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
             Application.Current.Dispatcher.UnhandledException += DispatcherOnUnhandledException;
 

@@ -11,6 +11,7 @@ using Ceriyo.Core.Scripting.Server.Contracts;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Settings;
+using Ceriyo.Core.Validators.Data;
 using Ceriyo.Domain.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
@@ -18,7 +19,9 @@ using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Services;
+using FluentValidation;
 using Microsoft.Xna.Framework.Graphics;
+using IValidatorFactory = Ceriyo.Core.Contracts.IValidatorFactory;
 
 namespace Ceriyo.Toolset.WPF
 {
@@ -50,6 +53,8 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<EntityFactory>().As<IEntityFactory>().SingleInstance();
             builder.RegisterType<ComponentFactory>().As<IComponentFactory>().SingleInstance();
             builder.RegisterType<ScreenFactory>().As<IScreenFactory>();
+            builder.RegisterType<ValidatorFactory>().As<IValidatorFactory>();
+            builder.RegisterType<ModuleFactory>().As<IModuleFactory>();
 
             // Scripting
             builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();
@@ -70,6 +75,11 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<DataEditorDomainService>().As<IDataEditorDomainService>();
             builder.RegisterType<ResourceEditorDomainService>().As<IResourceEditorDomainService>();
 
+            // Validators
+            builder.RegisterType<ModuleDataValidator>()
+                .Keyed<IValidator>(typeof(IValidator<ModuleData>))
+                .As<IValidator>();
+            
 
         }
     }

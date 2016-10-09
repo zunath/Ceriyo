@@ -184,8 +184,9 @@
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenManageResourcesRequest, Mode=OneWay}">
-                <prism:PopupWindowAction IsModal="True" 
-                                         CenterOverAssociatedObject="True">
+                <components:CustomPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
                     <prism:PopupWindowAction.WindowContent>
                         <manageResourcesView:ManageResources 
                                 Width="Auto"  
@@ -193,7 +194,7 @@
                                 MinWidth="400"
                                 MinHeight="500"/>
                     </prism:PopupWindowAction.WindowContent>
-                </prism:PopupWindowAction>
+                </components:CustomPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenResourceEditorRequest, Mode=OneWay}">
@@ -253,4 +254,6 @@
 
     </Grid>
 </UserControl>
+
+
 

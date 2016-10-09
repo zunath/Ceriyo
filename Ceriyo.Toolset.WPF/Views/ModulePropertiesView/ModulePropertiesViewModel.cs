@@ -199,7 +199,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             moduleData.Tag = Tag;
             moduleData.Resref = Resref;
             moduleData.Description = Description;
-            moduleData.Comments = Comments;
+            moduleData.Comment = Comments;
             moduleData.MaxLevel = MaxLevel;
 
             moduleData.OnPlayerEnter = OnPlayerEnter;
@@ -238,7 +238,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             Tag = moduleData.Tag;
             Resref = moduleData.Resref;
             Description = moduleData.Description;
-            Comments = moduleData.Comments;
+            Comments = moduleData.Comment;
             MaxLevel = moduleData.MaxLevel;
 
             OnPlayerEnter = moduleData.OnPlayerEnter;

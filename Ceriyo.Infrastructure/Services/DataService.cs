@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
@@ -69,7 +70,10 @@ namespace Ceriyo.Infrastructure.Services
             {
                 var prop = properties[x];
 
-                meta.Add(x + 1, prop.Name);
+                if (prop.CustomAttributes.FirstOrDefault(a => a.AttributeType == typeof(SerializationIgnoreAttribute)) == null)
+                {
+                    meta.Add(x + 1, prop.Name);
+                }
             }
 
         }
