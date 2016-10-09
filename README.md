@@ -12,37 +12,39 @@ It aims to offer a range of tools which will allow end-users to create, host, an
 ### Toolset
 
 #### Editors
-- [] Animation Editor
+- [ ] Animation Editor
 - [x] Creature Editor
 - [x] Placeable Editor
 - [x] Item Editor
-	- [] Item Type Editor
-	- [] Item Property Editor
-- [] Class Editor
+	- [ ] Item Type Editor
+	- [ ] Item Property Editor
+- [ ] Class Editor
 - [x] Ability Editor
 - [x] Skill Editor
-- [] Tileset Editor
+- [ ] Tileset Editor
 - [x] Module Properties
-- [] Script Editor
-- [] Dialog Editor
-- [] Area Editor
+- [ ] Script Editor
+- [ ] Dialog Editor
+- [ ] Area Editor
 
 #### Resources
 - [x] Resource Editor
-- [] Module Resource Management**
-- [] Encapsulated Resource Import
-- [] Encapsulated Resource Export
+- [ ] Module Resource Management**
+- [ ] Encapsulated Resource Import
+- [ ] Encapsulated Resource Export
 
 
 ### Server
+
 #### UI
-	- [x] Server Details & Description
-	- [x] Player Blacklist
-	- [x] Logging
-	- [x] Settings Saving/Loading
+- [x] Server Details & Description
+- [x] Player Blacklist
+- [x] Logging
+- [x] Settings Saving/Loading
+		
 #### Server Logic
-	- [] Game Host Engine
-	- [x] Script Engine
+- [ ] Game Host Engine
+- [x] Script Engine
 
 ### Game (To be updated)
 - [x] Script Engine
