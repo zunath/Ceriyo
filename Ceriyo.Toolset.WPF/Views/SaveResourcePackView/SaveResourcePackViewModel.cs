@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using Ceriyo.Core.Services.Contracts;
 using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.SaveResourcePackView
@@ -11,11 +12,12 @@ namespace Ceriyo.Toolset.WPF.Views.SaveResourcePackView
     public class SaveResourcePackViewModel : BindableBase, IInteractionRequestAware
     {
         private readonly FileSystemWatcher _fileSystemWatcher;
-        private const string ResourcePacksDirectory = "./ResourcePacks/";
+        private readonly IPathService _pathService;
         
-        public SaveResourcePackViewModel()
+        public SaveResourcePackViewModel(IPathService pathService)
         {
-            _fileSystemWatcher = new FileSystemWatcher(ResourcePacksDirectory);
+            _pathService = pathService;
+            _fileSystemWatcher = new FileSystemWatcher(_pathService.ResourcePackDirectory);
             SaveResourcePackCommand = new DelegateCommand(SaveResourcePack);
             CancelCommand = new DelegateCommand(Cancel);
             SaveResourcePackConfirmationRequest = new InteractionRequest<IConfirmation>();
@@ -68,7 +70,7 @@ namespace Ceriyo.Toolset.WPF.Views.SaveResourcePackView
         {
             ResourcePacks.Clear();
 
-            foreach (var file in Directory.GetFiles(ResourcePacksDirectory, "*.rpk"))
+            foreach (var file in Directory.GetFiles(_pathService.ResourcePackDirectory, "*.rpk"))
             {
                 ResourcePacks.Add(Path.GetFileNameWithoutExtension(file));
             }

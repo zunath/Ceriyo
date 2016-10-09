@@ -5,6 +5,7 @@ using System.Linq;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 
 namespace Ceriyo.Domain.Services.DataServices
@@ -12,11 +13,13 @@ namespace Ceriyo.Domain.Services.DataServices
     public class ResourceEditorDomainService : IResourceEditorDomainService
     {
         private readonly IDataService _dataService;
-        private const string BaseDirectory = "./ResourcePacks/";
+        private readonly IPathService _pathService;
 
-        public ResourceEditorDomainService(IDataService dataService)
+        public ResourceEditorDomainService(IDataService dataService, 
+            IPathService pathService)
         {
             _dataService = dataService;
+            _pathService = pathService;
         }
 
         public void SaveResourcePack(IEnumerable<ResourceItemData> resources, string resourcePackName)
@@ -24,9 +27,9 @@ namespace Ceriyo.Domain.Services.DataServices
             var resourceList = resources.ToList();
             string backupFilePath = resourcePackName + ".rpbk";
             resourcePackName = resourcePackName + ".rpk";
-            if (File.Exists(BaseDirectory + resourcePackName))
+            if (File.Exists(_pathService.ResourcePackDirectory + resourcePackName))
             {
-                File.Move(BaseDirectory + resourcePackName, BaseDirectory + backupFilePath);
+                File.Move(_pathService.ResourcePackDirectory + resourcePackName, _pathService.ResourcePackDirectory + backupFilePath);
             }
             else
             {
@@ -34,7 +37,7 @@ namespace Ceriyo.Domain.Services.DataServices
             }
             try
             {
-                using (var stream = File.Create(BaseDirectory + resourcePackName))
+                using (var stream = File.Create(_pathService.ResourcePackDirectory + resourcePackName))
                 {
                     SerializedManifestData manifest = new SerializedManifestData();
                     for (int index = 0; index < resourceList.Count(); index++)
@@ -49,7 +52,7 @@ namespace Ceriyo.Domain.Services.DataServices
                         // Load data - either from the file system or from the existing rpk file.
                         if (string.IsNullOrWhiteSpace(resource.FilePath))
                         {
-                            var backupEntry = _dataService.RetrieveSingleFile<ResourceItemData>(BaseDirectory + backupFilePath, GetKeyOfResourceItem(resource));
+                            var backupEntry = _dataService.RetrieveSingleFile<ResourceItemData>(_pathService.ResourcePackDirectory + backupFilePath, GetKeyOfResourceItem(resource));
                             resource.Data = backupEntry.Data;
                         }
                         else
@@ -68,21 +71,21 @@ namespace Ceriyo.Domain.Services.DataServices
                 // Restore backup, if any.
                 if (backupFilePath != null)
                 {
-                    if (File.Exists(BaseDirectory + resourcePackName))
+                    if (File.Exists(_pathService.ResourcePackDirectory + resourcePackName))
                     {
-                        File.Delete(BaseDirectory + resourcePackName);
+                        File.Delete(_pathService.ResourcePackDirectory + resourcePackName);
                     }
 
-                    File.Move(BaseDirectory + backupFilePath, BaseDirectory + resourcePackName);
+                    File.Move(_pathService.ResourcePackDirectory + backupFilePath, _pathService.ResourcePackDirectory + resourcePackName);
                 }
                 
                 throw new Exception("Unable to save resource pack.", ex);
             }
             
 
-            if (File.Exists(BaseDirectory + backupFilePath))
+            if (File.Exists(_pathService.ResourcePackDirectory + backupFilePath))
             {
-                File.Delete(BaseDirectory + backupFilePath);
+                File.Delete(_pathService.ResourcePackDirectory + backupFilePath);
             }
 
         }
@@ -94,7 +97,7 @@ namespace Ceriyo.Domain.Services.DataServices
 
         public IEnumerable<ResourceItemData> LoadResourcePack(string resourcePackName)
         {
-            string filePath = BaseDirectory + resourcePackName + ".rpk";
+            string filePath = _pathService.ResourcePackDirectory + resourcePackName + ".rpk";
             var manifest = _dataService.RetrieveManifest(filePath);
             List<ResourceItemData> resources = new List<ResourceItemData>();
 

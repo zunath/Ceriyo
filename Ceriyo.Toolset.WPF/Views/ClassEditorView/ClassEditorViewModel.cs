@@ -3,6 +3,7 @@ using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Toolset.WPF.Events.Class;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -17,12 +18,15 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
+        private readonly IPathService _pathService;
 
         public ClassEditorViewModel(IEventAggregator eventAggregator,
-            IDataService dataService)
+            IDataService dataService,
+            IPathService pathService)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
+            _pathService = pathService;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -57,7 +61,7 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
         private void LoadExistingData()
         {
             Classes.Clear();
-            string[] files = Directory.GetFiles("./Modules/temp0/Class/", "*.dat");
+            string[] files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Class/", "*.dat");
 
             foreach (var file in files)
             {

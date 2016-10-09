@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 
 namespace Ceriyo.Domain.Services.DataServices
 {
     public class ModuleDomainService : IModuleDomainService
     {
-        private const string BaseDirectory = "./Modules/temp0/";
         private ModuleData _moduleData;
         private readonly IDataService _dataService;
         private readonly IObjectMapper _objectMapper;
         private readonly IModuleFactory _moduleFactory;
+        private readonly IPathService _pathService;
 
         public ModuleDomainService(IDataService dataService,
             IObjectMapper objectMapper,
-            IModuleFactory moduleFactory)
+            IModuleFactory moduleFactory,
+            IPathService pathService)
         {
             _objectMapper = objectMapper;
             _dataService = dataService;
             _moduleFactory = moduleFactory;
+            _pathService = pathService;
         }
 
         public void CreateModule(string name,
@@ -39,12 +42,12 @@ namespace Ceriyo.Domain.Services.DataServices
 
         private void CreateProjectStructure()
         {
-            if (Directory.Exists(BaseDirectory))
+            if (Directory.Exists(_pathService.ModulesTempDirectory))
             {
                 throw new Exception("An unsaved module already exists.");
             }
 
-            Directory.CreateDirectory(BaseDirectory);
+            Directory.CreateDirectory(_pathService.ModulesTempDirectory);
             CreateModuleDirectories();
 
             SaveModuleProperties();
@@ -52,19 +55,19 @@ namespace Ceriyo.Domain.Services.DataServices
 
         private void LoadModuleProperties()
         {
-            _moduleData = _dataService.Load<ModuleData>($"{BaseDirectory}Module.dat");
+            _moduleData = _dataService.Load<ModuleData>($"{_pathService.ModulesTempDirectory}Module.dat");
         }
 
         public void SaveModuleProperties()
         {
-            _dataService.Save(_moduleData, $"{BaseDirectory}Module.dat");
+            _dataService.Save(_moduleData, $"{_pathService.ModulesTempDirectory}Module.dat");
         }
 
         public void CloseModule()
         {
-            if (Directory.Exists(BaseDirectory))
+            if (Directory.Exists(_pathService.ModulesTempDirectory))
             {
-                Directory.Delete(BaseDirectory, true);
+                Directory.Delete(_pathService.ModulesTempDirectory, true);
             }
 
             _moduleData = _moduleFactory.Create();
@@ -73,15 +76,15 @@ namespace Ceriyo.Domain.Services.DataServices
         public void OpenModule(string fileName)
         {
             CloseModule();
-            string filePath = $"./Modules/{fileName}.mod";
-            _dataService.UnpackageDirectory(BaseDirectory, filePath);
+            string filePath = $"{_pathService.ModuleDirectory}{fileName}.mod";
+            _dataService.UnpackageDirectory(_pathService.ModulesTempDirectory, filePath);
             CreateModuleDirectories();
             LoadModuleProperties();
         }
 
         public void PackModule(string fileName)
         {
-            _dataService.PackageDirectory(BaseDirectory, $"./Modules/{fileName}.mod");
+            _dataService.PackageDirectory(_pathService.ModulesTempDirectory, $"{_pathService.ModuleDirectory}{fileName}.mod");
         }
 
         public void ReplaceResourcePacks(IEnumerable<string> resourcePacks)
@@ -135,8 +138,8 @@ namespace Ceriyo.Domain.Services.DataServices
 
         private void CreateDirectoryIfNotExist(string directory)
         {
-            if (Directory.Exists($"{BaseDirectory}{directory}")) return;
-            Directory.CreateDirectory($"{BaseDirectory}{directory}");
+            if (Directory.Exists($"{_pathService.ModulesTempDirectory}{directory}")) return;
+            Directory.CreateDirectory($"{_pathService.ModulesTempDirectory}{directory}");
         }
     }
 }

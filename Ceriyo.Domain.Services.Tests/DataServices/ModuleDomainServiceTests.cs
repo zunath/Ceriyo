@@ -2,6 +2,8 @@
 using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Services;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.Factory;
@@ -14,22 +16,21 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
 {
     public class ModuleDomainServiceTests
     {
-        private const string BaseDirectory = "./Modules/temp0/";
-        private ModuleData _moduleData;
         private IDataService _dataService;
         private Mock<ILogger> _mockLogger;
         private IModuleDomainService _moduleDomainService;
         private IObjectMapper _objectMapper;
+        private IPathService _pathService;
 
         [SetUp]
         public void SetUp()
         {
-            _moduleData = new ModuleData();
             _mockLogger = new Mock<ILogger>();
             _dataService = new DataService(_mockLogger.Object);
             _objectMapper = new ObjectMapper();
             _objectMapper.Initialize();
-            _moduleDomainService = new ModuleDomainService(_dataService, _objectMapper, new ModuleFactory(new Mock<IValidatorFactory>().Object));
+            _pathService = new PathService();
+            _moduleDomainService = new ModuleDomainService(_dataService, _objectMapper, new ModuleFactory(new Mock<IValidatorFactory>().Object), _pathService);
 
             _dataService.Initialize();
         }
@@ -37,9 +38,9 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
         [TearDown]
         public void TearDown()
         {
-            if (Directory.Exists(BaseDirectory))
+            if (Directory.Exists(_pathService.ModulesTempDirectory))
             {
-                Directory.Delete(BaseDirectory, true);
+                Directory.Delete(_pathService.ModulesTempDirectory, true);
             }
         }
 
@@ -48,20 +49,20 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
         {
             _moduleDomainService.CreateModule("name", "tag", "resref");
 
-            Assert.IsTrue(Directory.Exists(BaseDirectory));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}Ability"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}Animation"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}Class"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}Creature"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}Dialog"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}Item"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}ItemProperty"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}ItemType"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}Placeable"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}Script"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}Skill"));
-            Assert.IsTrue(Directory.Exists($"{BaseDirectory}Tileset"));
-            Assert.IsTrue(File.Exists($"{BaseDirectory}Module.dat"));
+            Assert.IsTrue(Directory.Exists(_pathService.ModulesTempDirectory));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}Ability"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}Animation"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}Class"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}Creature"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}Dialog"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}Item"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}ItemProperty"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}ItemType"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}Placeable"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}Script"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}Skill"));
+            Assert.IsTrue(Directory.Exists($"{_pathService.ModulesTempDirectory}Tileset"));
+            Assert.IsTrue(File.Exists($"{_pathService.ModulesTempDirectory}Module.dat"));
         }
 
         [Test]
@@ -81,7 +82,7 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
             _moduleDomainService.CreateModule("name", "tag", "resref");
             _moduleDomainService.CloseModule();
 
-            Assert.IsFalse(Directory.Exists(BaseDirectory));
+            Assert.IsFalse(Directory.Exists(_pathService.ModulesTempDirectory));
         }
 
     }

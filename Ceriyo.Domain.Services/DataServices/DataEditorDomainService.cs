@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 
 namespace Ceriyo.Domain.Services.DataServices
@@ -14,7 +15,7 @@ namespace Ceriyo.Domain.Services.DataServices
         }
 
         private readonly IDataService _dataService;
-        private const string BaseDirectory = "./Modules/temp0/";
+        private readonly IPathService _pathService;
 
         private Dictionary<AbilityData, ActionType> DirtyAbilities { get; set; }
         private Dictionary<ClassData, ActionType> DirtyClasses { get; set; }
@@ -23,9 +24,11 @@ namespace Ceriyo.Domain.Services.DataServices
         private Dictionary<PlaceableData, ActionType> DirtyPlaceables { get; set; }
         private Dictionary<SkillData, ActionType> DirtySkills { get; set; }
 
-        public DataEditorDomainService(IDataService dataService)
+        public DataEditorDomainService(IDataService dataService,
+            IPathService pathService)
         {
             _dataService = dataService;
+            _pathService = pathService;
             DirtyAbilities = new Dictionary<AbilityData, ActionType>();
             DirtyClasses = new Dictionary<ClassData, ActionType>();
             DirtyCreatures = new Dictionary<CreatureData, ActionType>();
@@ -145,9 +148,9 @@ namespace Ceriyo.Domain.Services.DataServices
         private void SaveFile(object obj, string globalID, ActionType action, string directoryName)
         {
             if (action == ActionType.AddOrChanged)
-                _dataService.Save(obj, $"{BaseDirectory}{directoryName}/{globalID}.dat");
+                _dataService.Save(obj, $"{_pathService.ModulesTempDirectory}{directoryName}/{globalID}.dat");
             else
-                _dataService.Delete($"{BaseDirectory}{directoryName}/{globalID}.dat");
+                _dataService.Delete($"{_pathService.ModulesTempDirectory}{directoryName}/{globalID}.dat");
         }
 
     }

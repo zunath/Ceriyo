@@ -5,6 +5,7 @@ using System.Linq;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Toolset.WPF.Events.Class;
 using Ceriyo.Toolset.WPF.Events.Creature;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
@@ -21,14 +22,17 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IObjectMapper _objectMapper;
+        private readonly IPathService _pathService;
 
         public CreatureEditorViewModel(IEventAggregator eventAggregator,
             IDataService dataService,
-            IObjectMapper objectMapper)
+            IObjectMapper objectMapper,
+            IPathService pathService)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _objectMapper = objectMapper;
+            _pathService = pathService;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -73,13 +77,13 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             Creatures.Clear();
             Classes.Clear();
 
-            string[] files = Directory.GetFiles("./Modules/temp0/Creature/", "*.dat");
+            string[] files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Creature/", "*.dat");
             foreach (var file in files)
             {
                 Creatures.Add(_dataService.Load<CreatureData>(file));
             }
 
-            files = Directory.GetFiles("./Modules/temp0/Class/", "*.dat");
+            files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Class/", "*.dat");
             foreach (var file in files)
             {
                 Classes.Add(_dataService.Load<ClassData>(file));

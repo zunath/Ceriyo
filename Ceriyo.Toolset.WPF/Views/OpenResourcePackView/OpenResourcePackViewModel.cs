@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using Ceriyo.Core.Services.Contracts;
 using Prism.Commands;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
@@ -10,12 +11,18 @@ namespace Ceriyo.Toolset.WPF.Views.OpenResourcePackView
 {
     public class OpenResourcePackViewModel : BindableBase, IInteractionRequestAware
     {
-        private const string ResourcePacksDirectory = "./ResourcePacks/";
         private readonly FileSystemWatcher _fileSystemWatcher;
-        
+        private readonly IPathService _pathService;
+
         public OpenResourcePackViewModel()
         {
-            _fileSystemWatcher = new FileSystemWatcher(ResourcePacksDirectory);
+            
+        }
+
+        public OpenResourcePackViewModel(IPathService pathService)
+        {
+            _pathService = pathService;
+            _fileSystemWatcher = new FileSystemWatcher(_pathService.ResourcePackDirectory);
             OpenResourcePackCommand = new DelegateCommand(OpenResourcePack);
             CancelCommand = new DelegateCommand(Cancel);
             ResourcePacks = new BindingList<string>();
@@ -68,7 +75,7 @@ namespace Ceriyo.Toolset.WPF.Views.OpenResourcePackView
         {
             ResourcePacks.Clear();
 
-            foreach (var file in Directory.GetFiles(ResourcePacksDirectory, "*.rpk"))
+            foreach (var file in Directory.GetFiles(_pathService.ResourcePackDirectory, "*.rpk"))
             {
                 ResourcePacks.Add(Path.GetFileNameWithoutExtension(file));
             }

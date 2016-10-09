@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
 using Prism.Events;
@@ -14,17 +15,19 @@ namespace Ceriyo.Toolset.WPF.Views.SaveModuleView
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly FileSystemWatcher _fileSystemWatcher;
-        private const string ModulesDirectory = "./Modules/";
+        private readonly IPathService _pathService;
 
         public SaveModuleViewModel()
         {
             
         }
 
-        public SaveModuleViewModel(IEventAggregator eventAggregator)
+        public SaveModuleViewModel(IEventAggregator eventAggregator,
+            IPathService pathService)
         {
             _eventAggregator = eventAggregator;
-            _fileSystemWatcher = new FileSystemWatcher(ModulesDirectory);
+            _pathService = pathService;
+            _fileSystemWatcher = new FileSystemWatcher(_pathService.ModuleDirectory);
             SaveModuleCommand = new DelegateCommand(SaveModule);
             CancelCommand = new DelegateCommand(Cancel);
             SaveModuleConfirmationRequest = new InteractionRequest<IConfirmation>();
@@ -78,7 +81,7 @@ namespace Ceriyo.Toolset.WPF.Views.SaveModuleView
         {
             Modules.Clear();
 
-            foreach (var file in Directory.GetFiles(ModulesDirectory, "*.mod"))
+            foreach (var file in Directory.GetFiles(_pathService.ModuleDirectory, "*.mod"))
             {
                 Modules.Add(Path.GetFileNameWithoutExtension(file));
             }

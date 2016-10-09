@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Toolset.WPF.Events.ManageResources;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -16,17 +17,19 @@ namespace Ceriyo.Toolset.WPF.Views.ManageResourcesView
 {
     public class ManageResourcesViewModel : BindableBase, IInteractionRequestAware
     {
-        private const string ResourcePacksDirectory = "./ResourcePacks/";
         private readonly FileSystemWatcher _fileSystemWatcher;
-        private IEventAggregator _eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
         private readonly IModuleDomainService _domainService;
+        private readonly IPathService _pathService;
 
         public ManageResourcesViewModel(IEventAggregator eventAggregator,
-            IModuleDomainService domainService)
+            IModuleDomainService domainService,
+            IPathService pathService)
         {
             _eventAggregator = eventAggregator;
             _domainService = domainService;
-            _fileSystemWatcher = new FileSystemWatcher(ResourcePacksDirectory);
+            _pathService = pathService;
+            _fileSystemWatcher = new FileSystemWatcher(_pathService.ResourcePackDirectory);
 
             ResourcePacks = new BindingList<string>();
             AvailableResourcePacks = new BindingList<string>();
@@ -113,7 +116,7 @@ namespace Ceriyo.Toolset.WPF.Views.ManageResourcesView
             AvailableResourcePacks.Clear();
             AvailableResourcePacks.Add(string.Empty);
 
-            foreach (var file in Directory.GetFiles(ResourcePacksDirectory, "*.rpk"))
+            foreach (var file in Directory.GetFiles(_pathService.ResourcePackDirectory, "*.rpk"))
             {
                 AvailableResourcePacks.Add(Path.GetFileNameWithoutExtension(file));
             }

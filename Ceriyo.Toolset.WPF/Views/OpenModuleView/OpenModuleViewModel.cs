@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -13,7 +14,7 @@ namespace Ceriyo.Toolset.WPF.Views.OpenModuleView
     public class OpenModuleViewModel : BindableBase, IInteractionRequestAware
     {
         private readonly IEventAggregator _eventAggregator;
-        private const string ModulesDirectory = "./Modules/";
+        private readonly IPathService _pathService;
         private readonly FileSystemWatcher _fileSystemWatcher;
 
         public OpenModuleViewModel()
@@ -21,10 +22,12 @@ namespace Ceriyo.Toolset.WPF.Views.OpenModuleView
             
         }
 
-        public OpenModuleViewModel(IEventAggregator eventAggregator)
+        public OpenModuleViewModel(IEventAggregator eventAggregator,
+            IPathService pathService)
         {
             _eventAggregator = eventAggregator;
-            _fileSystemWatcher = new FileSystemWatcher(ModulesDirectory);
+            _pathService = pathService;
+            _fileSystemWatcher = new FileSystemWatcher(_pathService.ModuleDirectory);
             OpenModuleCommand = new DelegateCommand(OpenModule);
             CancelCommand = new DelegateCommand(Cancel);
             Modules = new BindingList<string>();
@@ -77,7 +80,7 @@ namespace Ceriyo.Toolset.WPF.Views.OpenModuleView
         {
             Modules.Clear();
 
-            foreach (var file in Directory.GetFiles(ModulesDirectory, "*.mod"))
+            foreach (var file in Directory.GetFiles(_pathService.ModuleDirectory, "*.mod"))
             {
                 Modules.Add(Path.GetFileNameWithoutExtension(file));
             }
