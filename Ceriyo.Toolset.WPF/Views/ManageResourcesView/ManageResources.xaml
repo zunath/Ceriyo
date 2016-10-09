@@ -2,8 +2,104 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="500"
+             d:DesignWidth="400"
+             Background="White"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Label 
+            Grid.Column="0"
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Content="Use the following tool to add resource packages to your module." />
+        <Label 
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Content="If a file conflict occurs, the top-most package's file will be used." />
+        
+        <ListBox Grid.Column="0"
+                 Grid.Row="2"
+                 ItemsSource="{Binding ResourcePacks}"
+                 SelectedItem="{Binding SelectedResourcePack}"/>
+
+        <Button 
+            Content="Move Up" 
+            Grid.Column="1" 
+            Grid.Row="2" 
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Left" 
+            Margin="5,29,0,0" 
+            Width="129"
+            Command="{Binding MoveUpCommand}"/>
+        <Button 
+            Content="Move Down" 
+            Grid.Column="1" 
+            Grid.Row="2" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Margin="5,56,0,0" 
+            Width="129"
+            Command="{Binding MoveDownCommand}"/>
+        <Button 
+            Content="Remove Selected" 
+            Grid.Column="1" 
+            Grid.Row="2" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Margin="5,133,0,0" 
+            Width="129"
+            Command="{Binding RemoveSelectedCommand}"/>
+
+        <ComboBox       
+            Grid.Row="3" 
+            Grid.Column="0"
+            Margin="5,5,5,5" 
+            ItemsSource="{Binding AvailableResourcePacks}"
+            SelectedItem="{Binding SelectedAvailableResourcePack}"/>
+        
+        <Button Content="Add Package" 
+                Grid.Column="1" 
+                Grid.Row="3"
+                Margin="5,5,5,5"
+                Command="{Binding AddPackageCommand}"/>
+
+        <StackPanel
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right">
+
+            <Button
+                MinWidth="92"    
+                Margin="4,4,4,4"
+                Command="{Binding SaveChangesCommand}">
+                Save Changes
+            </Button>
+            <Button
+                MinWidth="92"    
+                Margin="4,4,4,4"
+                Command="{Binding CancelCommand}">
+                Cancel
+            </Button>
+
+        </StackPanel>
+
     </Grid>
 </UserControl>

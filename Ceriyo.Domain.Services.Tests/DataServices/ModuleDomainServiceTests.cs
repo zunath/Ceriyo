@@ -28,7 +28,7 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
             _dataService = new DataService(_mockLogger.Object);
             _objectMapper = new ObjectMapper();
             _objectMapper.Initialize();
-            _moduleDomainService = new ModuleDomainService(_moduleData, _dataService, _objectMapper);
+            _moduleDomainService = new ModuleDomainService(_dataService, _objectMapper);
 
             _dataService.Initialize();
         }

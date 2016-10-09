@@ -28,7 +28,6 @@ namespace Ceriyo.Toolset.WPF
         {
             // Instances
             builder.RegisterInstance(new ToolsetSettings());
-            builder.RegisterInstance(new ModuleData());
 
             // Logging
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
@@ -67,7 +66,7 @@ namespace Ceriyo.Toolset.WPF
 
             // Domain Services
             builder.RegisterType<DomainServiceNotifier>().As<IDomainServiceNotifier>().SingleInstance();
-            builder.RegisterType<ModuleDomainService>().As<IModuleDomainService>();
+            builder.RegisterType<ModuleDomainService>().As<IModuleDomainService>().SingleInstance();
             builder.RegisterType<DataEditorDomainService>().As<IDataEditorDomainService>();
             builder.RegisterType<ResourceEditorDomainService>().As<IResourceEditorDomainService>();
 

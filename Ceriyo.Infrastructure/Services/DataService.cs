@@ -232,6 +232,8 @@ namespace Ceriyo.Infrastructure.Services
             {
                 var manifest = Serializer.DeserializeWithLengthPrefix<SerializedManifestData>(stream, PrefixStyle.Base128, 0);
 
+                // TODO: There's room for improvement here. Need to figure out how to access a specific object in Protobuf's deserialization process.
+                // TODO: Possible solution involves tracking the size of each object on serialization and jumping the stream to that position.
                 for (int index = 0; index <= manifest[key]; index++)
                 {
                     var result = Serializer.DeserializeWithLengthPrefix<T>(stream, PrefixStyle.Base128, 1);

@@ -190,8 +190,8 @@
                         <manageResourcesView:ManageResources 
                                 Width="Auto"  
                                 Height="Auto"
-                                MinWidth="600"
-                                MinHeight="600"/>
+                                MinWidth="400"
+                                MinHeight="500"/>
                     </prism:PopupWindowAction.WindowContent>
                 </prism:PopupWindowAction>
             </prism:InteractionRequestTrigger>

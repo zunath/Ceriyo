@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
@@ -9,28 +10,30 @@ namespace Ceriyo.Domain.Services.DataServices
     public class ModuleDomainService : IModuleDomainService
     {
         private const string BaseDirectory = "./Modules/temp0/";
-        private readonly ModuleData _moduleData;
+        private ModuleData _moduleData;
         private readonly IDataService _dataService;
         private readonly IObjectMapper _objectMapper;
-        
 
-        public ModuleDomainService(ModuleData moduleData,
-            IDataService dataService,
+        public ModuleDomainService(IDataService dataService,
             IObjectMapper objectMapper)
         {
-            _moduleData = moduleData;
-            _dataService = dataService;
             _objectMapper = objectMapper;
+            _dataService = dataService;
         }
 
         public void CreateModule(string name,
             string tag,
             string resref)
         {
-            _moduleData.Name = name;
-            _moduleData.Tag = tag;
-            _moduleData.Resref = resref;
+            CloseModule();
 
+            _moduleData = new ModuleData
+            {
+                Name = name,
+                Tag = tag,
+                Resref = resref
+            };
+            
             CreateProjectStructure();
         }
 
@@ -50,8 +53,7 @@ namespace Ceriyo.Domain.Services.DataServices
 
         private void LoadModuleProperties()
         {
-            ModuleData moduleData = _dataService.Load<ModuleData>($"{BaseDirectory}Module.dat");
-            _objectMapper.Map(moduleData, _moduleData);
+            _moduleData = _dataService.Load<ModuleData>($"{BaseDirectory}Module.dat");
         }
 
         public void SaveModuleProperties()
@@ -66,8 +68,7 @@ namespace Ceriyo.Domain.Services.DataServices
                 Directory.Delete(BaseDirectory, true);
             }
 
-            ModuleData moduleData = new ModuleData();
-            _objectMapper.Map(moduleData, _moduleData);
+            _moduleData = new ModuleData();
         }
 
         public void OpenModule(string fileName)
@@ -82,6 +83,39 @@ namespace Ceriyo.Domain.Services.DataServices
         public void PackModule(string fileName)
         {
             _dataService.PackageDirectory(BaseDirectory, $"./Modules/{fileName}.mod");
+        }
+
+        public void ReplaceResourcePacks(IEnumerable<string> resourcePacks)
+        {
+            _moduleData.ResourcePacks.Clear();
+
+            foreach (var pack in resourcePacks)
+            {
+                _moduleData.ResourcePacks.Add(pack);
+            }
+            SaveModuleProperties();
+
+            BuildModule();
+        }
+
+        public void UpdateLoadedModuleData(ModuleData moduleData)
+        {
+            _objectMapper.Map(moduleData, _moduleData);
+        }
+
+        public ModuleData GetLoadedModuleData()
+        {
+            return _moduleData;
+        }
+        
+        public string GetLoadedModuleName()
+        {
+            return _moduleData.Name;
+        }
+
+        private void BuildModule()
+        {
+            
         }
 
         private void CreateModuleDirectories()

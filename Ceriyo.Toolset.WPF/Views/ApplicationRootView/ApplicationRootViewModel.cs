@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Toolset.WPF.Events.Error;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Events;
@@ -14,8 +15,8 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
     public class ApplicationRootViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly ModuleData _moduleData;
         private readonly ILogger _logger;
+        private readonly IModuleDomainService _moduleDomainService;
 
         public ApplicationRootViewModel()
         {
@@ -25,11 +26,11 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
         public ApplicationRootViewModel(
             ILogger logger,
             IEventAggregator eventAggregator,
-            ModuleData moduleData)
+            IModuleDomainService moduleDomainService)
         {
             _logger = logger;
             _eventAggregator = eventAggregator;
-            _moduleData = moduleData;
+            _moduleDomainService = moduleDomainService;
             ChangeWindowTitle();
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
             Application.Current.Dispatcher.UnhandledException += DispatcherOnUnhandledException;
@@ -81,13 +82,15 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
 
         private void ChangeWindowTitle()
         {
-            if (string.IsNullOrWhiteSpace(_moduleData.Name))
+            ModuleData moduleData = _moduleDomainService.GetLoadedModuleData();
+
+            if (string.IsNullOrWhiteSpace(moduleData?.Name))
             {
                 WindowTitle = "Ceriyo Toolset";
             }
             else
             {
-                WindowTitle = "Ceriyo Toolset - " + _moduleData.Name;
+                WindowTitle = "Ceriyo Toolset - " + moduleData.Name;
             }
         }
 

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
+using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
 using Prism.Events;
@@ -14,38 +15,28 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
     public class ModulePropertiesViewModel : BindableBase, IInteractionRequestAware
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly IModuleDomainService _domainService;
 
         public ModulePropertiesViewModel()
         {
             
         }
 
-        public ModulePropertiesViewModel(ModuleData moduleData,
-            IEventAggregator eventAggregator)
+        public ModulePropertiesViewModel(IEventAggregator eventAggregator,
+            IModuleDomainService domainService)
         {
+            _eventAggregator = eventAggregator;
+            _domainService = domainService;
             Scripts = new BindingList<Script>();
             MaximumPossibleLevel = 99;
-
-
-
+            
             SaveCommand = new DelegateCommand(Save);
             CancelCommand = new DelegateCommand(Cancel);
-            _moduleData = moduleData;
-
-            _eventAggregator = eventAggregator;
+            
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
             _eventAggregator.GetEvent<ModulePropertiesClosedEvent>().Subscribe(Cancel);
         }
-
-
-        private ModuleData _moduleData;
-
-        public ModuleData ModuleData
-        {
-            get { return _moduleData;}
-            set { SetProperty(ref _moduleData, value); }
-        }
-
+        
         private string _name;
 
         public string Name
@@ -203,25 +194,28 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 
         private void Save()
         {
-            ModuleData.Name = Name;
-            ModuleData.Tag = Tag;
-            ModuleData.Resref = Resref;
-            ModuleData.Description = Description;
-            ModuleData.Comments = Comments;
-            ModuleData.MaxLevel = MaxLevel;
+            ModuleData moduleData = _domainService.GetLoadedModuleData();
+            moduleData.Name = Name;
+            moduleData.Tag = Tag;
+            moduleData.Resref = Resref;
+            moduleData.Description = Description;
+            moduleData.Comments = Comments;
+            moduleData.MaxLevel = MaxLevel;
 
-            ModuleData.OnPlayerEnter = OnPlayerEnter;
-            ModuleData.OnPlayerLeaving = OnPlayerLeaving;
-            ModuleData.OnPlayerLeft = OnPlayerLeft;
-            ModuleData.OnHeartbeat = OnHeartbeat;
-            ModuleData.OnModuleLoad = OnModuleLoad;
-            ModuleData.OnPlayerDying = OnPlayerDying;
-            ModuleData.OnPlayerDeath = OnPlayerDeath;
-            ModuleData.OnPlayerRespawn = OnPlayerRespawn;
-            ModuleData.OnPlayerLevelUp = OnPlayerLevelUp;
+            moduleData.OnPlayerEnter = OnPlayerEnter;
+            moduleData.OnPlayerLeaving = OnPlayerLeaving;
+            moduleData.OnPlayerLeft = OnPlayerLeft;
+            moduleData.OnHeartbeat = OnHeartbeat;
+            moduleData.OnModuleLoad = OnModuleLoad;
+            moduleData.OnPlayerDying = OnPlayerDying;
+            moduleData.OnPlayerDeath = OnPlayerDeath;
+            moduleData.OnPlayerRespawn = OnPlayerRespawn;
+            moduleData.OnPlayerLevelUp = OnPlayerLevelUp;
 
-            ModuleData.LocalVariables = LocalVariables;
-            ModuleData.LevelChart = LevelChart;
+            moduleData.LocalVariables = LocalVariables;
+            moduleData.LevelChart = LevelChart;
+
+            _domainService.UpdateLoadedModuleData(moduleData);
 
             FinishInteraction();
 
@@ -238,25 +232,27 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 
         private void CopyPropertiesFromModuleData()
         {
-            Name = ModuleData.Name;
-            Tag = ModuleData.Tag;
-            Resref = ModuleData.Resref;
-            Description = ModuleData.Description;
-            Comments = ModuleData.Comments;
-            MaxLevel = ModuleData.MaxLevel;
+            ModuleData moduleData = _domainService.GetLoadedModuleData();
 
-            OnPlayerEnter = ModuleData.OnPlayerEnter;
-            OnPlayerLeaving = ModuleData.OnPlayerLeaving;
-            OnPlayerLeft = ModuleData.OnPlayerLeft;
-            OnHeartbeat = ModuleData.OnHeartbeat;
-            OnModuleLoad = ModuleData.OnModuleLoad;
-            OnPlayerDying = ModuleData.OnPlayerDying;
-            OnPlayerDeath = ModuleData.OnPlayerDeath;
-            OnPlayerRespawn = ModuleData.OnPlayerRespawn;
-            OnPlayerLevelUp = ModuleData.OnPlayerLevelUp;
+            Name = moduleData.Name;
+            Tag = moduleData.Tag;
+            Resref = moduleData.Resref;
+            Description = moduleData.Description;
+            Comments = moduleData.Comments;
+            MaxLevel = moduleData.MaxLevel;
 
-            LocalVariables = ModuleData.LocalVariables;
-            LevelChart = ModuleData.LevelChart;
+            OnPlayerEnter = moduleData.OnPlayerEnter;
+            OnPlayerLeaving = moduleData.OnPlayerLeaving;
+            OnPlayerLeft = moduleData.OnPlayerLeft;
+            OnHeartbeat = moduleData.OnHeartbeat;
+            OnModuleLoad = moduleData.OnModuleLoad;
+            OnPlayerDying = moduleData.OnPlayerDying;
+            OnPlayerDeath = moduleData.OnPlayerDeath;
+            OnPlayerRespawn = moduleData.OnPlayerRespawn;
+            OnPlayerLevelUp = moduleData.OnPlayerLevelUp;
+
+            LocalVariables = moduleData.LocalVariables;
+            LevelChart = moduleData.LevelChart;
         }
 
         private void ModuleLoaded(string moduleFileName)

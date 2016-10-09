@@ -39,6 +39,18 @@ namespace Ceriyo.Core.Data
         private BindingList<ClassLevel> _levelChart;
         private string _globalID;
 
+        private BindingList<string> _resourcePacks;
+
+        public BindingList<string> ResourcePacks
+        {
+            get { return _resourcePacks; }
+            set
+            {
+                _resourcePacks = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string Name
         {
             get { return _name; }
@@ -331,6 +343,7 @@ namespace Ceriyo.Core.Data
             MaxLevel = 99;
             LocalVariables = new LocalVariableData();
             LevelChart = new BindingList<ClassLevel>();
+            ResourcePacks = new BindingList<string>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
