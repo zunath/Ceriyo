@@ -15,7 +15,8 @@ namespace Ceriyo.Infrastructure.Factory
 
         public override IValidator CreateInstance(Type validatorType)
         {
-            var validator = _context.ResolveOptionalKeyed<IValidator>(validatorType);
+            Type concreteType = validatorType.GetGenericArguments()[0];
+            var validator = _context.ResolveOptionalKeyed<IValidator>(concreteType);
             return validator;
         }
     }

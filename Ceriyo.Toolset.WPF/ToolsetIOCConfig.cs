@@ -1,7 +1,8 @@
-﻿using Artemis;
+﻿using System;
+using System.Linq;
+using Artemis;
 using Autofac;
 using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Core.Scripting.Client;
 using Ceriyo.Core.Scripting.Client.Contracts;
 using Ceriyo.Core.Scripting.Common;
@@ -11,7 +12,6 @@ using Ceriyo.Core.Scripting.Server.Contracts;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Settings;
-using Ceriyo.Core.Validators.Data;
 using Ceriyo.Domain.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
@@ -77,11 +77,30 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<ResourceEditorDomainService>().As<IResourceEditorDomainService>();
 
             // Validators
-            builder.RegisterType<ModuleDataValidator>()
-                .Keyed<IValidator>(typeof(IValidator<ModuleData>))
-                .As<IValidator>();
-            
+            RegisterValidators(builder);
 
         }
+
+        private static void RegisterValidators(ContainerBuilder builder)
+        {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var validators = assemblies
+                .SelectMany(x => x.GetTypes())
+                .Where(p =>
+                    p.BaseType != null &&
+                    p.BaseType.IsGenericType &&
+                    p.BaseType.GetGenericTypeDefinition() == typeof(AbstractValidator<>));
+
+            foreach (var validator in validators)
+            {
+                if (validator.BaseType == null) continue;
+                var type = validator.BaseType.GetGenericArguments()[0];
+
+                builder.RegisterType(validator)
+                    .Keyed<IValidator>(type)
+                    .As<IValidator>();
+            }
+        }
+
     }
 }
