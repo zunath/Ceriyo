@@ -108,6 +108,7 @@
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Contracts\IModuleFactory.cs" />
     <Compile Include="Contracts\IValidatorFactory.cs" />
+    <Compile Include="Data\AreaData.cs" />
     <Compile Include="Data\BaseDataRecord.cs" />
     <Compile Include="Data\SerializedFileData.cs" />
     <Compile Include="Data\ResourceItemData.cs" />

@@ -39,13 +39,29 @@
             Grid.Column="0">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="155"></ColumnDefinition>
                 <ColumnDefinition Width="5"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="5"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
+            <TabControl
+                Grid.Column="0"
+                Grid.Row="0">
+                <TabItem Header="Areas">
+                    
+                </TabItem>
+
+                <TabItem Header="Dialogs">
+                </TabItem>
+                
+                <TabItem Header="Scripts">
+                    
+                </TabItem>
+                
+            </TabControl>
+            
             <GridSplitter
                 Grid.Column="1"
                 Width="5"

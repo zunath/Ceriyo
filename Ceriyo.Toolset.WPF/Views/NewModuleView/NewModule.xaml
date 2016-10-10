@@ -36,7 +36,14 @@
             Grid.ColumnSpan="2"
             Grid.Row="0"
             Margin="5,5,5,5"
-            Text="{Binding Path=ModuleData.Name, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+            MaxLength="256"
+            Text="{Binding 
+                Path=ModuleData.Name, 
+                Mode=TwoWay, 
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True,
+                UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
             TabIndex="0">
         </TextBox>
         
@@ -51,7 +58,13 @@
             Grid.ColumnSpan="2"
             Grid.Row="1"
             Margin="5,5,5,5"
-            Text="{Binding Path=ModuleData.Tag, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+            MaxLength="64"
+            Text="{Binding Path=ModuleData.Tag, 
+                Mode=TwoWay, 
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True,
+                UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
             TabIndex="1">
         </TextBox>
         
@@ -66,7 +79,13 @@
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Margin="5,5,5,5"
-            Text="{Binding Path=ModuleData.Resref, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+            MaxLength="32"
+            Text="{Binding Path=ModuleData.Resref, 
+                Mode=TwoWay, 
+                ValidatesOnDataErrors=True, 
+                NotifyOnValidationError=True,
+                UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
             TabIndex="2">
         </TextBox>
 

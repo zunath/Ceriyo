@@ -198,6 +198,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AreaSelectorView\AreaSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BuildModuleView\BuildModule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DetailedErrorView\DetailedError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogSelectorView\DialogSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -266,6 +274,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ScriptSelectorView\ScriptSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SkillEditorView\SkillEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -304,6 +316,10 @@
       <DependentUpon>AreaEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AreaEditorView\AreaEditorViewModel.cs" />
+    <Compile Include="Views\AreaSelectorView\AreaSelector.xaml.cs">
+      <DependentUpon>AreaSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AreaSelectorView\AreaSelectorViewModel.cs" />
     <Compile Include="Views\BuildModuleView\BuildModule.xaml.cs">
       <DependentUpon>BuildModule.xaml</DependentUpon>
     </Compile>
@@ -324,6 +340,10 @@
       <DependentUpon>DetailedError.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DetailedErrorView\DetailedErrorViewModel.cs" />
+    <Compile Include="Views\DialogSelectorView\DialogSelector.xaml.cs">
+      <DependentUpon>DialogSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogSelectorView\DialogSelectorViewModel.cs" />
     <Compile Include="Views\ItemEditorView\ItemEditor.xaml.cs">
       <DependentUpon>ItemEditor.xaml</DependentUpon>
     </Compile>
@@ -372,6 +392,10 @@
       <DependentUpon>ScriptEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ScriptEditorView\ScriptEditorViewModel.cs" />
+    <Compile Include="Views\ScriptSelectorView\ScriptSelector.xaml.cs">
+      <DependentUpon>ScriptSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScriptSelectorView\ScriptSelectorViewModel.cs" />
     <Compile Include="Views\SkillEditorView\SkillEditorViewModel.cs" />
     <Compile Include="Views\SkillEditorView\SkillEditor.xaml.cs">
       <DependentUpon>SkillEditor.xaml</DependentUpon>

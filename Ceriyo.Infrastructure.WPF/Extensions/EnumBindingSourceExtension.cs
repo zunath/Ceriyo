@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Markup;
 
-namespace Ceriyo.Infrastructure.WPF.Extension
+namespace Ceriyo.Infrastructure.WPF.Extensions
 {
     public class EnumBindingSourceExtension : MarkupExtension
     {

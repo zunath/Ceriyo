@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:extension="clr-namespace:Ceriyo.Infrastructure.WPF.Extension;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:extension="clr-namespace:Ceriyo.Infrastructure.WPF.Extensions;assembly=Ceriyo.Infrastructure.WPF"
              xmlns:constants="clr-namespace:Ceriyo.Core.Constants;assembly=Ceriyo.Core"
              mc:Ignorable="d"
              d:DesignHeight="370"

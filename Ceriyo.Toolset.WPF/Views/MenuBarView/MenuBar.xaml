@@ -128,8 +128,8 @@
                         <newModuleView:NewModule
                                 MinWidth="223"
                                 MinHeight="128"
-                                Width="Auto"
-                                Height="Auto"
+                                Width="223"
+                                Height="128"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"/>
                     </prism:PopupWindowAction.WindowContent>

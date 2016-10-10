@@ -37,6 +37,8 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
         public DelegateCommand CreateModuleCommand { get; set; }
         private void CreateModule()
         {
+            if (!ModuleData.IsValid) return;
+
             _eventAggregator.GetEvent<ModuleClosedEvent>().Publish();
             _eventAggregator.GetEvent<ModuleCreatedEvent>().Publish(new ModuleEventArgs(ModuleData.Name, ModuleData.Tag, ModuleData.Resref));
             FinishInteraction();
