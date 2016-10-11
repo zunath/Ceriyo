@@ -4,7 +4,9 @@ using Ceriyo.Core.Components;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
 using Ceriyo.Domain.Services.DataServices.Contracts;
+using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.Module;
+using FluentValidation;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -12,7 +14,7 @@ using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 {
-    public class ModulePropertiesViewModel : BindableBase, IInteractionRequestAware
+    public class ModulePropertiesViewModel : ValidatableBindableBase, IInteractionRequestAware
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IModuleDomainService _domainService;
@@ -35,11 +37,18 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
             _eventAggregator.GetEvent<ModulePropertiesClosedEvent>().Subscribe(Cancel);
+
+            PropertyChanged += OnPropertyChanged;
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        {
+            SaveCommand.RaiseCanExecuteChanged();
         }
 
         private bool CanSave()
         {
-            return false; // TODO: implement
+            return _validator.Validate(this).IsValid;
         }
 
         private string _name;
@@ -199,6 +208,8 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 
         private void Save()
         {
+            if (!_validator.Validate(this).IsValid) return;
+
             ModuleData moduleData = _domainService.GetLoadedModuleData();
             moduleData.Name = Name;
             moduleData.Tag = Tag;
@@ -267,5 +278,9 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 
         public INotification Notification { get; set; }
         public Action FinishInteraction { get; set; }
+
+        private IValidator _validator;
+
+        protected override IValidator Validator => _validator ?? (_validator = new ModulePropertiesViewModelValidator());
     }
 }

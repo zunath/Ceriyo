@@ -39,6 +39,7 @@
 						Height="23" 
 						Margin="103,10,0,0" 
 						TextWrapping="Wrap" 
+                        MaxLength="256"
 						Text="{Binding 
                             Path=Name,
                             Mode=TwoWay,
@@ -53,6 +54,7 @@
 						Height="23" 
 						Margin="103,38,0,0" 
 						TextWrapping="Wrap" 
+                        MaxLength="64"
 						Text="{Binding Path=Tag,
                             Mode=TwoWay,
                             ValidatesOnDataErrors=True,
@@ -66,6 +68,7 @@
 						Height="23" 
 						Margin="103,66,0,0" 
 						TextWrapping="Wrap" 
+                        MaxLength="32"
 						Text="{Binding Path=Resref,
                             Mode=TwoWay,
                             ValidatesOnDataErrors=True,
@@ -368,6 +371,7 @@
 						 AcceptsReturn="True"
 						 HorizontalAlignment="Stretch" 
 						 VerticalAlignment="Stretch"
+                         MaxLength="2000"
 						 Text="{Binding Path=Description,
                             Mode=TwoWay,
                             ValidatesOnDataErrors=True,
@@ -380,6 +384,7 @@
 						 AcceptsReturn="True"
 						 HorizontalAlignment="Stretch" 
 						 VerticalAlignment="Stretch"
+                         MaxLength="5000"
 						 Text="{Binding Path=Comments,
                             Mode=TwoWay,
                             ValidatesOnDataErrors=True,

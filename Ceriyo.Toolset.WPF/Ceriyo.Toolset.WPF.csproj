@@ -360,6 +360,7 @@
       <DependentUpon>ModuleProperties.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ModulePropertiesView\ModulePropertiesViewModel.cs" />
+    <Compile Include="Views\ModulePropertiesView\ModulePropertiesViewModelValidator.cs" />
     <Compile Include="Views\NewModuleView\NewModule.xaml.cs">
       <DependentUpon>NewModule.xaml</DependentUpon>
     </Compile>
