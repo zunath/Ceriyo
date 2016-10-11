@@ -1,12 +1,9 @@
 ﻿using System.IO;
-using System.Linq;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.Services;
-using Ceriyo.Testing.Shared;
 using KellermanSoftware.CompareNetObjects;
 using Moq;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using ProtoBuf;
 
