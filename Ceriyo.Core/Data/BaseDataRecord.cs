@@ -25,6 +25,8 @@ namespace Ceriyo.Core.Data
         {
             get
             {
+                if (ValidatorFactory == null) return string.Empty;
+
                 if (string.IsNullOrWhiteSpace(columnName))
                 {
                     var context = new ValidationContext(this);
@@ -51,11 +53,7 @@ namespace Ceriyo.Core.Data
         [SerializationIgnore]
         public string Error => this[null];
 
-        public bool IsValid()
-        {
-            return string.IsNullOrWhiteSpace(Error);
-        }
-
-        
+        [SerializationIgnore]
+        public bool IsValid => string.IsNullOrWhiteSpace(Error);
     }
 }

@@ -23,10 +23,15 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
         {
             _eventAggregator = eventAggregator;
             ModuleData = moduleFactory.Create();
-            CreateModuleCommand = new DelegateCommand(CreateModule, ModuleData.IsValid);
+            CreateModuleCommand = new DelegateCommand(CreateModule, CanCreateModule);
             CancelCommand = new DelegateCommand(Cancel);
 
             ModuleData.PropertyChanged += OnPropertyChanged;
+        }
+
+        private bool CanCreateModule()
+        {
+            return ModuleData.IsValid;
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -45,7 +50,7 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
         public DelegateCommand CreateModuleCommand { get; set; }
         private void CreateModule()
         {
-            if (!ModuleData.IsValid()) return;
+            if (!ModuleData.IsValid) return;
 
             _eventAggregator.GetEvent<ModuleClosedEvent>().Publish();
             _eventAggregator.GetEvent<ModuleCreatedEvent>().Publish(new ModuleEventArgs(ModuleData.Name, ModuleData.Tag, ModuleData.Resref));

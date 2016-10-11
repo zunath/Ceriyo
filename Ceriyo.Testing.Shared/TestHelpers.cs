@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Artemis;
+using Ceriyo.Core.Attributes;
+using Ceriyo.Core.Data;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Ceriyo.Testing.Shared
 {

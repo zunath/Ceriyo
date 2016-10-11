@@ -1,7 +1,10 @@
 ﻿using System.IO;
+using System.Linq;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.Services;
+using Ceriyo.Testing.Shared;
+using KellermanSoftware.CompareNetObjects;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -13,6 +16,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
     {
         private Mock<ILogger> _mockLogger;
         private IDataService _dataService;
+        private CompareLogic _compareLogic;
         
         [SetUp]
         public void SetUp()
@@ -20,6 +24,8 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
             _mockLogger = new Mock<ILogger>();
             _dataService = new DataService(_mockLogger.Object);
             _dataService.Initialize();
+            _compareLogic = new CompareLogic();
+            _compareLogic.Config.MembersToIgnore.Add("Item");
         }
 
         [TearDown]
@@ -49,11 +55,8 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
 
                 result = Serializer.Deserialize<AbilityData>(stream);
             }
-
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
         [Test]
@@ -76,10 +79,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<AnimationData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
 
@@ -100,11 +100,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
 
                 result = Serializer.Deserialize<ClassData>(stream);
             }
-
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
 
@@ -125,10 +121,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<ClassRequirementData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
 
@@ -162,10 +155,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<CreatureData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
 
@@ -186,11 +176,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
 
                 result = Serializer.Deserialize<DialogData>(stream);
             }
-
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
 
@@ -215,10 +201,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<FrameData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
 
@@ -251,10 +234,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<ItemData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
 
@@ -278,10 +258,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<ItemPropertyData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
 
@@ -304,10 +281,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<ItemTypeData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
 
@@ -333,10 +307,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<LocalVariableData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
         [Test]
         public void SerializerConfig_ModuleData_ShouldBeEqual()
@@ -387,10 +358,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<ModuleData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
 
@@ -411,10 +379,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<SerializedFileData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
         [Test]
@@ -454,10 +419,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<PlaceableData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
         [Test]
         public void SerializerConfig_ScriptData_ShouldBeEqual()
@@ -476,10 +438,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<ScriptData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
         [Test]
@@ -504,10 +463,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<SkillData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
 
         [Test]
@@ -530,10 +486,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
                 result = Serializer.Deserialize<TilesetData>(stream);
             }
 
-            var dataJson = JsonConvert.SerializeObject(data);
-            var resultJson = JsonConvert.SerializeObject(result);
-
-            Assert.AreEqual(dataJson, resultJson);
+            Assert.IsTrue(_compareLogic.Compare(data, result).AreEqual);
         }
     }
 }
