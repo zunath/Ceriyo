@@ -5,6 +5,7 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Extensions;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Toolset.WPF.Events.Ability;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;

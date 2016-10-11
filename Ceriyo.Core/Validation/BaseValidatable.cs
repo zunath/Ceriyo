@@ -7,12 +7,13 @@ using Ceriyo.Core.Properties;
 using FluentValidation;
 using FluentValidation.Internal;
 
-namespace Ceriyo.Core.Data
+namespace Ceriyo.Core.Validation
 {
-    public abstract class BaseDataRecord : IDataErrorInfo, INotifyPropertyChanged
-    {
+    public abstract class BaseValidatable : IDataErrorInfo, INotifyPropertyChanged
+    {   
         [SerializationIgnore]
-        public Contracts.IValidatorFactory ValidatorFactory { get; set; }
+        protected abstract IValidator Validator { get; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
@@ -25,22 +26,17 @@ namespace Ceriyo.Core.Data
         {
             get
             {
-                if (ValidatorFactory == null) return string.Empty;
-
                 if (string.IsNullOrWhiteSpace(columnName))
                 {
                     var context = new ValidationContext(this);
-                    var validator = ValidatorFactory.GetValidator(GetType());
-                    var result = validator.Validate(context);
+                    var result = Validator.Validate(context);
                     return string.Join(Environment.NewLine, result.Errors);
                 }
                 else
                 {
                     var context = new ValidationContext(this, new PropertyChain(),
                         new MemberNameValidatorSelector(new[] { columnName }));
-
-                    var validator = ValidatorFactory.GetValidator(GetType());
-                    var result = validator.Validate(context);
+                    var result = Validator.Validate(context);
 
                     return result.Errors.Any() ?
                         result.Errors.First().ErrorMessage :

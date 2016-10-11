@@ -30,13 +30,18 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             Scripts = new BindingList<Script>();
             MaximumPossibleLevel = 99;
             
-            SaveCommand = new DelegateCommand(Save);
+            SaveCommand = new DelegateCommand(Save, CanSave);
             CancelCommand = new DelegateCommand(Cancel);
             
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
             _eventAggregator.GetEvent<ModulePropertiesClosedEvent>().Subscribe(Cancel);
         }
-        
+
+        private bool CanSave()
+        {
+            return false; // TODO: implement
+        }
+
         private string _name;
 
         public string Name

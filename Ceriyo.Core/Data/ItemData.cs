@@ -1,9 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Validation;
+using Ceriyo.Core.Validation.Data;
+using FluentValidation;
 
 namespace Ceriyo.Core.Data
 {
-    public class ItemData: BaseDataRecord
+    public class ItemData: BaseValidatable
     {
         private BindingList<string> _itemPropertyResrefs;
         private BindingList<ClassRequirementData> _classRequirements;
@@ -229,6 +233,10 @@ namespace Ceriyo.Core.Data
             LocalVariables = new LocalVariableData();
             ClassRequirements = new BindingList<ClassRequirementData>();
         }
-        
+
+
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new ItemDataValidator());
+
     }
 }

@@ -1,12 +1,13 @@
 ﻿using Ceriyo.Core.Data;
 using FluentValidation;
 
-namespace Ceriyo.Core.Validators.Data
+namespace Ceriyo.Core.Validation.Data
 {
-    public class AbilityDataValidator: AbstractValidator<AbilityData>
+    public class SkillDataValidator: AbstractValidator<SkillData>
     {
-        public AbilityDataValidator()
+        public SkillDataValidator()
         {
+
             RuleFor(x => x.GlobalID)
                 .NotNull()
                 .NotEmpty();
@@ -31,6 +32,8 @@ namespace Ceriyo.Core.Validators.Data
 
             RuleFor(x => x.Description)
                 .Length(0, 2000);
+
+
 
         }
     }

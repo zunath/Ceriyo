@@ -1,7 +1,7 @@
 ﻿using Ceriyo.Core.Data;
 using FluentValidation;
 
-namespace Ceriyo.Core.Validators.Data
+namespace Ceriyo.Core.Validation.Data
 {
     public class AnimationDataValidator: AbstractValidator<AnimationData>
     {

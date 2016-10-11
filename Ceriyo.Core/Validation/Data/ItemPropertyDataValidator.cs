@@ -1,11 +1,11 @@
 ﻿using Ceriyo.Core.Data;
 using FluentValidation;
 
-namespace Ceriyo.Core.Validators.Data
+namespace Ceriyo.Core.Validation.Data
 {
-    public class SkillDataValidator: AbstractValidator<SkillData>
+    public class ItemPropertyDataValidator: AbstractValidator<ItemPropertyData>
     {
-        public SkillDataValidator()
+        public ItemPropertyDataValidator()
         {
 
             RuleFor(x => x.GlobalID)
@@ -32,9 +32,6 @@ namespace Ceriyo.Core.Validators.Data
 
             RuleFor(x => x.Description)
                 .Length(0, 2000);
-
-
-
         }
     }
 }

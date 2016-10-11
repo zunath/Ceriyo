@@ -1,8 +1,8 @@
 ﻿using Ceriyo.Core.Data;
-using Ceriyo.Core.Validators.Components;
+using Ceriyo.Core.Validation.Components;
 using FluentValidation;
 
-namespace Ceriyo.Core.Validators.Data
+namespace Ceriyo.Core.Validation.Data
 {
     public class ModuleDataValidator: AbstractValidator<ModuleData>
     {

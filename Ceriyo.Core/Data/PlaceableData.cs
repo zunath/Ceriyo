@@ -1,8 +1,12 @@
 ﻿using System;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Validation;
+using Ceriyo.Core.Validation.Data;
+using FluentValidation;
 
 namespace Ceriyo.Core.Data
 {
-    public class PlaceableData: BaseDataRecord
+    public class PlaceableData: BaseValidatable
     {
         private LocalVariableData _localVariables;
         private string _onUsed;
@@ -299,5 +303,9 @@ namespace Ceriyo.Core.Data
             GlobalID = Guid.NewGuid().ToString();
             LocalVariables = new LocalVariableData();
         }
+
+
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new PlaceableDataValidator());
     }
 }

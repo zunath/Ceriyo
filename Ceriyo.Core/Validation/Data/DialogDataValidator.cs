@@ -1,13 +1,12 @@
 ﻿using Ceriyo.Core.Data;
 using FluentValidation;
 
-namespace Ceriyo.Core.Validators.Data
+namespace Ceriyo.Core.Validation.Data
 {
-    public class ItemPropertyDataValidator: AbstractValidator<ItemPropertyData>
+    public class DialogDataValidator: AbstractValidator<DialogData>
     {
-        public ItemPropertyDataValidator()
+        public DialogDataValidator()
         {
-
             RuleFor(x => x.GlobalID)
                 .NotNull()
                 .NotEmpty();
@@ -26,12 +25,6 @@ namespace Ceriyo.Core.Validators.Data
                 .NotNull()
                 .NotEmpty()
                 .Length(1, 32);
-
-            RuleFor(x => x.Comment)
-                .Length(0, 5000);
-
-            RuleFor(x => x.Description)
-                .Length(0, 2000);
         }
     }
 }

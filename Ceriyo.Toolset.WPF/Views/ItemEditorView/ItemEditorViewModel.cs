@@ -28,7 +28,7 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _pathService = pathService;
-
+            
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
 

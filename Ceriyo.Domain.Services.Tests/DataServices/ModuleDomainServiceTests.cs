@@ -29,7 +29,7 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
             _objectMapper = new ObjectMapper();
             _objectMapper.Initialize();
             _pathService = new PathService();
-            _moduleDomainService = new ModuleDomainService(_dataService, _objectMapper, new ModuleFactory(new Mock<IValidatorFactory>().Object), _pathService);
+            _moduleDomainService = new ModuleDomainService(_dataService, _objectMapper, _pathService);
 
             _dataService.Initialize();
         }

@@ -1,8 +1,12 @@
 ﻿using System;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Validation;
+using Ceriyo.Core.Validation.Data;
+using FluentValidation;
 
 namespace Ceriyo.Core.Data
 {
-    public class TilesetData: BaseDataRecord
+    public class TilesetData: BaseValidatable
     {
         private string _comment;
         private string _description;
@@ -81,6 +85,9 @@ namespace Ceriyo.Core.Data
         {
             GlobalID = Guid.NewGuid().ToString();
         }
-        
+
+
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new TilesetDataValidator());
     }
 }

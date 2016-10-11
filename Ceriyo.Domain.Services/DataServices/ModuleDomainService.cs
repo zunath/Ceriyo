@@ -13,17 +13,14 @@ namespace Ceriyo.Domain.Services.DataServices
         private ModuleData _moduleData;
         private readonly IDataService _dataService;
         private readonly IObjectMapper _objectMapper;
-        private readonly IModuleFactory _moduleFactory;
         private readonly IPathService _pathService;
 
         public ModuleDomainService(IDataService dataService,
             IObjectMapper objectMapper,
-            IModuleFactory moduleFactory,
             IPathService pathService)
         {
             _objectMapper = objectMapper;
             _dataService = dataService;
-            _moduleFactory = moduleFactory;
             _pathService = pathService;
         }
 
@@ -31,11 +28,13 @@ namespace Ceriyo.Domain.Services.DataServices
             string tag,
             string resref)
         {
-            _moduleData = _moduleFactory.Create();
-            _moduleData.Name = name;
-            _moduleData.Tag = tag;
-            _moduleData.Resref = resref;
-            
+            _moduleData = new ModuleData
+            {
+                Name = name,
+                Tag = tag,
+                Resref = resref
+            };
+
             CreateProjectStructure();
         }
 
@@ -70,7 +69,7 @@ namespace Ceriyo.Domain.Services.DataServices
                 Directory.Delete(_pathService.ModulesTempDirectory, true);
             }
 
-            _moduleData = _moduleFactory.Create();
+            _moduleData = new ModuleData();
         }
 
         public void OpenModule(string fileName)

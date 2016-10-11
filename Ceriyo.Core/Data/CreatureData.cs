@@ -1,8 +1,12 @@
 ﻿using System;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Validation;
+using Ceriyo.Core.Validation.Data;
+using FluentValidation;
 
 namespace Ceriyo.Core.Data
 {
-    public class CreatureData: BaseDataRecord
+    public class CreatureData: BaseValidatable
     {
         private string _comment;
         private string _description;
@@ -215,6 +219,9 @@ namespace Ceriyo.Core.Data
             LocalVariables = new LocalVariableData();
             Level = 1;
         }
-        
+
+
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new CreatureDataValidator());
     }
 }

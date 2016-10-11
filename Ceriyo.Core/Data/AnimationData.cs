@@ -1,9 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Validation;
+using Ceriyo.Core.Validation.Data;
+using FluentValidation;
 
 namespace Ceriyo.Core.Data
 {
-    public class AnimationData: BaseDataRecord
+    public class AnimationData: BaseValidatable
     {
         private BindingList<FrameData> _frames;
         private string _comment;
@@ -96,6 +100,9 @@ namespace Ceriyo.Core.Data
             GlobalID = Guid.NewGuid().ToString();
             Frames = new BindingList<FrameData>();
         }
-        
+
+
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new AnimationDataValidator());
     }
 }

@@ -104,7 +104,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [Test]
         public void SerializerConfig_ClassRequirementData_ShouldBeEqual()
         {
-            ClassRequirementData data = new ClassRequirementData()
+            ClassRequirementData data = new ClassRequirementData
             {
                 ClassResref = "parentresref",
                 LevelRequired = 35
@@ -125,7 +125,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [Test]
         public void SerializerConfig_CreatureData_ShouldBeEqual()
         {
-            CreatureData data = new CreatureData()
+            CreatureData data = new CreatureData
             {
                 Comment = "it's a comment",
                 Description = "it's a description",
@@ -205,7 +205,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [Test]
         public void SerializerConfig_ItemData_ShouldBeEqual()
         {
-            ItemData data = new ItemData()
+            ItemData data = new ItemData
             {
                 Comment = "it's a comment",
                 Description = "it's a description",
@@ -238,7 +238,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [Test]
         public void SerializerConfig_ItemPropertyData_ShouldBeEqual()
         {
-            ItemPropertyData data = new ItemPropertyData()
+            ItemPropertyData data = new ItemPropertyData
             {
                 Comment = "it's a comment",
                 Description = "it's a description",
@@ -263,7 +263,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [Test]
         public void SerializerConfig_ItemTypeData_ShouldBeEqual()
         {
-            ItemTypeData data = new ItemTypeData()
+            ItemTypeData data = new ItemTypeData
             {
                 Name = "it's a name",
                 Resref = "it's a resref",
@@ -382,7 +382,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [Test]
         public void SerializerConfig_PlaceableFileData_ShouldBeEqual()
         {
-            PlaceableData data = new PlaceableData()
+            PlaceableData data = new PlaceableData
             {
                 AutoRemoveKey = true,
                 Comment = "it's a comment",
@@ -421,7 +421,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [Test]
         public void SerializerConfig_ScriptData_ShouldBeEqual()
         {
-            ScriptData data = new ScriptData()
+            ScriptData data = new ScriptData
             {
                 Resref = "it's a resref",
                 Name = "it's a name"
@@ -441,7 +441,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [Test]
         public void SerializerConfig_SkillData_ShouldBeEqual()
         {
-            SkillData data = new SkillData()
+            SkillData data = new SkillData
             {
                 Name = "it's a name",
                 Resref = "it's a resref",
@@ -466,7 +466,7 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         [Test]
         public void SerializerConfig_TilesetData_ShouldBeEqual()
         {
-            TilesetData data = new TilesetData()
+            TilesetData data = new TilesetData
             {
                 Name = "it's a name",
                 Resref = "it's a resref",

@@ -13,7 +13,7 @@ namespace Ceriyo.Infrastructure.Tests.Services
         private IDataService _dataService;
         private ClassData _testClassData;
         private ItemTypeData _testItemTypeData;
-
+        
         const string TempDirectoryPath = "./Testing/PackageDirectory/";
         const string SerializedFilePath = "./Testing/PackageDirectory/Serialized/Serialized.bin";
 

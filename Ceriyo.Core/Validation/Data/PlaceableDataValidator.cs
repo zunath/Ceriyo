@@ -1,13 +1,12 @@
 ﻿using Ceriyo.Core.Data;
 using FluentValidation;
 
-namespace Ceriyo.Core.Validators.Data
+namespace Ceriyo.Core.Validation.Data
 {
-    public class TilesetDataValidator: AbstractValidator<TilesetData>
+    public class PlaceableDataValidator: AbstractValidator<PlaceableData>
     {
-        public TilesetDataValidator()
+        public PlaceableDataValidator()
         {
-
             RuleFor(x => x.GlobalID)
                 .NotNull()
                 .NotEmpty();
@@ -32,6 +31,10 @@ namespace Ceriyo.Core.Validators.Data
 
             RuleFor(x => x.Description)
                 .Length(0, 2000);
+
+            RuleFor(x => x.LocalVariables)
+                .SetValidator(new LocalVariableDataValidator());
+
         }
     }
 }

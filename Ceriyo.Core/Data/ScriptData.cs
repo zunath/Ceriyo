@@ -1,8 +1,12 @@
 ﻿using System;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Validation;
+using Ceriyo.Core.Validation.Data;
+using FluentValidation;
 
 namespace Ceriyo.Core.Data
 {
-    public class ScriptData: BaseDataRecord
+    public class ScriptData: BaseValidatable
     {
         private string _resref;
         private string _name;
@@ -45,6 +49,9 @@ namespace Ceriyo.Core.Data
         {
             GlobalID = Guid.NewGuid().ToString();
         }
-        
+
+
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new ScriptDataValidator());
     }
 }

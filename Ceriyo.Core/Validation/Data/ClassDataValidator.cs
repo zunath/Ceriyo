@@ -1,13 +1,12 @@
 ﻿using Ceriyo.Core.Data;
 using FluentValidation;
 
-namespace Ceriyo.Core.Validators.Data
+namespace Ceriyo.Core.Validation.Data
 {
-    public class ItemTypeDataValidator: AbstractValidator<ItemTypeData>
+    public class ClassDataValidator: AbstractValidator<ClassData>
     {
-        public ItemTypeDataValidator()
+        public ClassDataValidator()
         {
-
             RuleFor(x => x.GlobalID)
                 .NotNull()
                 .NotEmpty();
@@ -26,6 +25,7 @@ namespace Ceriyo.Core.Validators.Data
                 .NotNull()
                 .NotEmpty()
                 .Length(1, 32);
+
         }
     }
 }

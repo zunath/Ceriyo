@@ -39,7 +39,13 @@
 						Height="23" 
 						Margin="103,10,0,0" 
 						TextWrapping="Wrap" 
-						Text="{Binding Name}" 
+						Text="{Binding 
+                            Path=Name,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}" 
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
 						VerticalAlignment="Top" 
 						Width="271"/>
                     <TextBox 
@@ -47,7 +53,12 @@
 						Height="23" 
 						Margin="103,38,0,0" 
 						TextWrapping="Wrap" 
-						Text="{Binding Tag}" 
+						Text="{Binding Path=Tag,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}" 
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
 						VerticalAlignment="Top" 
 						Width="271"/>
                     <TextBox 
@@ -55,7 +66,12 @@
 						Height="23" 
 						Margin="103,66,0,0" 
 						TextWrapping="Wrap" 
-						Text="{Binding Resref}" 
+						Text="{Binding Path=Resref,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}" 
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
 						VerticalAlignment="Top" 
 						Width="271"/>
                     <xctk:IntegerUpDown 
@@ -65,7 +81,12 @@
                         Width="70"
                         Minimum="1"
                         Maximum="{Binding MaximumPossibleLevel}"
-                        Value="{Binding MaxLevel}">
+                        Value="{Binding Path=MaxLevel,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </xctk:IntegerUpDown>
                     <Label Content="Max Level:" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
                 </Grid>
@@ -99,7 +120,12 @@
                         Grid.Column="1"
                         Grid.Row="0"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding OnPlayerEnter}">
+                        SelectedItem="{Binding Path=OnPlayerEnter,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
                     
                     <Label
@@ -112,7 +138,12 @@
                         Grid.Column="1"
                         Grid.Row="1"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding OnPlayerLeaving}">
+                        SelectedItem="{Binding Path=OnPlayerLeaving,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
                     <Label
                         Grid.Column="0"
@@ -124,7 +155,12 @@
                         Grid.Column="1"
                         Grid.Row="2"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding OnPlayerLeft}">
+                        SelectedItem="{Binding Path=OnPlayerLeft,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
                     <Label
                         Grid.Column="0"
@@ -136,7 +172,12 @@
                         Grid.Column="1"
                         Grid.Row="3"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding OnHeartbeat}">
+                        SelectedItem="{Binding Path=OnHeartbeat,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
                     <Label
                         Grid.Column="0"
@@ -148,7 +189,12 @@
                         Grid.Column="1"
                         Grid.Row="4"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding OnModuleLoad}">
+                        SelectedItem="{Binding Path=OnModuleLoad,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
                     <Label
                         Grid.Column="0"
@@ -160,7 +206,12 @@
                         Grid.Column="1"
                         Grid.Row="5"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding OnPlayerDying}">
+                        SelectedItem="{Binding Path=OnPlayerDying,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
                     <Label
                         Grid.Column="0"
@@ -172,7 +223,12 @@
                         Grid.Column="1"
                         Grid.Row="6"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding OnPlayerDeath}">
+                        SelectedItem="{Binding Path=OnPlayerDeath,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
                     <Label
                         Grid.Column="0"
@@ -184,7 +240,12 @@
                         Grid.Column="1"
                         Grid.Row="7"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding OnPlayerRespawn}">
+                        SelectedItem="{Binding Path=OnPlayerRespawn,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
 
 
@@ -198,7 +259,12 @@
                         Grid.Column="1"
                         Grid.Row="8"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding OnPlayerLevelUp}">
+                        SelectedItem="{Binding Path=OnPlayerLevelUp,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
                 </Grid>
                 
@@ -224,7 +290,15 @@
                         CanUserAddRows="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Value}"></DataGridTextColumn>
+                            <DataGridTextColumn 
+                                Header="Value" 
+                                Binding="{Binding Path=Value,
+                                            Mode=TwoWay,
+                                            ValidatesOnDataErrors=True,
+                                            NotifyOnValidationError=True,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                                Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
 
                     </DataGrid>
@@ -240,7 +314,15 @@
                         CanUserAddRows="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Value}"></DataGridTextColumn>
+                            <DataGridTextColumn 
+                                Header="Value" 
+                                Binding="{Binding Path=Value,
+                                            Mode=TwoWay,
+                                            ValidatesOnDataErrors=True,
+                                            NotifyOnValidationError=True,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                                Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                            </DataGridTextColumn>
                         </DataGrid.Columns>
                         
                     </DataGrid>
@@ -262,11 +344,21 @@
                         <DataGridTextColumn
                             Header="Level"
                             IsReadOnly="True"
-                            Binding="{Binding Level}">
+                            Binding="{Binding Path=Level,
+                                        Mode=TwoWay,
+                                        ValidatesOnDataErrors=True,
+                                        NotifyOnValidationError=True,
+                                        UpdateSourceTrigger=PropertyChanged}"
+                            Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                         </DataGridTextColumn>
                         <DataGridTextColumn
                             Header="Exp Req."
-                            Binding="{Binding ExperienceRequired}">
+                            Binding="{Binding Path=ExperienceRequired,
+                                        Mode=TwoWay,
+                                        ValidatesOnDataErrors=True,
+                                        NotifyOnValidationError=True,
+                                        UpdateSourceTrigger=PropertyChanged}"
+                            Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -276,14 +368,24 @@
 						 AcceptsReturn="True"
 						 HorizontalAlignment="Stretch" 
 						 VerticalAlignment="Stretch"
-						 Text="{Binding Description}"/>
+						 Text="{Binding Path=Description,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
             </TabItem>
             <TabItem Header="Comments">
                 <TextBox TextWrapping="Wrap"
 						 AcceptsReturn="True"
 						 HorizontalAlignment="Stretch" 
 						 VerticalAlignment="Stretch"
-						 Text="{Binding Comments}"/>
+						 Text="{Binding Path=Comments,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
             </TabItem>
             
         </TabControl>

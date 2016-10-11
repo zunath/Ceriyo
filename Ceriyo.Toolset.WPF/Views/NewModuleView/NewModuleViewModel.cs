@@ -19,10 +19,10 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
         {
         }
 
-        public NewModuleViewModel(IEventAggregator eventAggregator, IModuleFactory moduleFactory)
+        public NewModuleViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            ModuleData = moduleFactory.Create();
+            ModuleData = new ModuleData();
             CreateModuleCommand = new DelegateCommand(CreateModule, CanCreateModule);
             CancelCommand = new DelegateCommand(Cancel);
 

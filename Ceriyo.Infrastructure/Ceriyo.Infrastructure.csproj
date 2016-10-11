@@ -107,9 +107,7 @@
   <ItemGroup>
     <Compile Include="Factory\ComponentFactory.cs" />
     <Compile Include="Factory\EntityFactory.cs" />
-    <Compile Include="Factory\ModuleFactory.cs" />
     <Compile Include="Factory\ScreenFactory.cs" />
-    <Compile Include="Factory\ValidatorFactory.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Mapping\ObjectMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

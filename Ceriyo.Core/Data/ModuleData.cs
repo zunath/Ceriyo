@@ -1,10 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Entities;
+using Ceriyo.Core.Validation;
+using Ceriyo.Core.Validation.Data;
+using FluentValidation;
 
 namespace Ceriyo.Core.Data
 {
-    public class ModuleData: BaseDataRecord
+    public class ModuleData: BaseValidatable
     {
         private string _name;
         private string _tag;
@@ -344,5 +348,8 @@ namespace Ceriyo.Core.Data
             ResourcePacks = new BindingList<string>();
         }
 
+
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new ModuleDataValidator());
     }
 }

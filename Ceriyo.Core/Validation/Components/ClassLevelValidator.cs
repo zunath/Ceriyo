@@ -1,7 +1,7 @@
 ﻿using Ceriyo.Core.Entities;
 using FluentValidation;
 
-namespace Ceriyo.Core.Validators.Components
+namespace Ceriyo.Core.Validation.Components
 {
     public class ClassLevelValidator: AbstractValidator<ClassLevel>
     {

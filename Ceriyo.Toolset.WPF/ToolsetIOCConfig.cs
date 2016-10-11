@@ -21,7 +21,6 @@ using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Services;
 using FluentValidation;
 using Microsoft.Xna.Framework.Graphics;
-using IValidatorFactory = Ceriyo.Core.Contracts.IValidatorFactory;
 
 namespace Ceriyo.Toolset.WPF
 {
@@ -54,8 +53,6 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<EntityFactory>().As<IEntityFactory>().SingleInstance();
             builder.RegisterType<ComponentFactory>().As<IComponentFactory>().SingleInstance();
             builder.RegisterType<ScreenFactory>().As<IScreenFactory>();
-            builder.RegisterType<ValidatorFactory>().As<IValidatorFactory>();
-            builder.RegisterType<ModuleFactory>().As<IModuleFactory>();
 
             // Scripting
             builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();
