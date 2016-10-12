@@ -8,7 +8,7 @@ using Prism.Mvvm;
 
 namespace Ceriyo.Infrastructure.WPF.BindableBases
 {
-    public abstract class ValidatableBindableBase: BindableBase, IDataErrorInfo, INotifyPropertyChanged
+    public abstract class ValidatableBindableBase: BindableBase, IDataErrorInfo
     {
         protected abstract IValidator Validator { get; }
         

@@ -10,7 +10,9 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              Background="White"
              prism:ViewModelLocator.AutoWireViewModel="True">
+
     <Grid>
+
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -84,6 +86,11 @@
                         Width="70"
                         Minimum="1"
                         Maximum="{Binding MaximumPossibleLevel}"
+                        Text="{Binding Path=MaxLevelString,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
                         Value="{Binding Path=MaxLevel,
                             Mode=TwoWay,
                             ValidatesOnDataErrors=True,
@@ -286,48 +293,68 @@
                         Grid.Row="0">
                         Local Strings:
                     </Label>
-                    
-                    <DataGrid 
+
+                    <DataGrid
                         Grid.Row="1"
-                        ItemsSource="{Binding LocalVariables.LocalStrings}"
-                        CanUserAddRows="True">
+                        ItemsSource="{Binding LocalStrings}" 
+                        CanUserAddRows="True"
+                        CanUserDeleteRows="True"
+                        CanUserResizeRows="False"
+                        CanUserReorderColumns="False"
+                        AutoGenerateColumns="False">
+                        
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
-                            <DataGridTextColumn 
-                                Header="Value" 
-                                Binding="{Binding Path=Value,
-                                            Mode=TwoWay,
-                                            ValidatesOnDataErrors=True,
-                                            NotifyOnValidationError=True,
-                                            UpdateSourceTrigger=PropertyChanged}"
-                                Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                            <DataGridTextColumn Header="Key"
+                                                Binding="{Binding Key,
+                                                    Mode=TwoWay,
+                                                    ValidatesOnDataErrors=True,
+                                                    NotifyOnValidationError=True,
+                                                    UpdateSourceTrigger=PropertyChanged}"
+                                                Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Value"
+                                                Binding="{Binding Value,
+                                                    Mode=TwoWay,
+                                                    ValidatesOnDataErrors=True,
+                                                    NotifyOnValidationError=True,
+                                                    UpdateSourceTrigger=PropertyChanged}"
+                                                Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+
                             </DataGridTextColumn>
                         </DataGrid.Columns>
-
+                        
                     </DataGrid>
 
                     <Label
                         Grid.Row="2">
                         Local Numbers:
                     </Label>
-                    
-                    <DataGrid 
+
+                    <DataGrid
                         Grid.Row="3"
-                        ItemsSource="{Binding LocalVariables.LocalFloats}"
-                        CanUserAddRows="True">
+                        ItemsSource="{Binding LocalFloats}"
+                        CanUserAddRows="True"
+                        CanUserDeleteRows="True"
+                        CanUserResizeRows="False"
+                        CanUserReorderColumns="False"
+                        AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
-                            <DataGridTextColumn 
-                                Header="Value" 
-                                Binding="{Binding Path=Value,
-                                            Mode=TwoWay,
-                                            ValidatesOnDataErrors=True,
-                                            NotifyOnValidationError=True,
-                                            UpdateSourceTrigger=PropertyChanged}"
-                                Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+                            <DataGridTextColumn Header="Key"
+                                                Binding="{Binding Key,
+                                                    Mode=TwoWay,
+                                                    ValidatesOnDataErrors=True,
+                                                    NotifyOnValidationError=True,
+                                                    UpdateSourceTrigger=PropertyChanged}">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Value"
+                                                Binding="{Binding Value,
+                                                    Mode=TwoWay,
+                                                    ValidatesOnDataErrors=True,
+                                                    NotifyOnValidationError=True,
+                                                    UpdateSourceTrigger=PropertyChanged}">
+
                             </DataGridTextColumn>
                         </DataGrid.Columns>
-                        
                     </DataGrid>
                     
                 </Grid>

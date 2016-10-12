@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Validation;
 using Ceriyo.Core.Validation.Data;
 using FluentValidation;
@@ -29,7 +28,6 @@ namespace Ceriyo.Core.Data
             get { return _localStrings; }
             set
             {
-                if (Equals(value, _localStrings)) return;
                 _localStrings = value;
                 OnPropertyChanged();
             }
@@ -40,7 +38,6 @@ namespace Ceriyo.Core.Data
             get { return _localFloats; }
             set
             {
-                if (Equals(value, _localFloats)) return;
                 _localFloats = value;
                 OnPropertyChanged();
             }

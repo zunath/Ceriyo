@@ -240,12 +240,11 @@
                 <prism:PopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
-
                         <modulePropertiesView:ModuleProperties
-                                Width="Auto"  
-                                Height="Auto"
-                                MinWidth="600"
-                                MinHeight="600"/>
+                            Width="Auto"
+                            Height="Auto"
+                            MinWidth="600"
+                            MinHeight="600"/>
                     </prism:PopupWindowAction.WindowContent>
                 </prism:PopupWindowAction>
             </prism:InteractionRequestTrigger>

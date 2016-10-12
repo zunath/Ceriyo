@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Windows.Threading;
 
-namespace Ceriyo.Core.Extensions
+namespace Ceriyo.Core.Observables
 {
     public class ObservableCollectionEx<T>
         : IList<T>, IList

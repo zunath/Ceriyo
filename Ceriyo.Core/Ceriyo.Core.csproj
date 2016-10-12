@@ -111,6 +111,9 @@
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Data\AreaData.cs" />
+    <Compile Include="Data\LocalFloatData.cs" />
+    <Compile Include="Data\LocalStringData.cs" />
+    <Compile Include="Observables\ObservablePair.cs" />
     <Compile Include="Validation\BaseValidatable.cs" />
     <Compile Include="Data\SerializedFileData.cs" />
     <Compile Include="Data\ResourceItemData.cs" />
@@ -166,7 +169,7 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Extensions\EntityWorldExtensions.cs" />
     <Compile Include="Extensions\EnumerationExtensions.cs" />
-    <Compile Include="Extensions\ObservableCollectionEx.cs" />
+    <Compile Include="Observables\ObservableCollectionEx.cs" />
     <Compile Include="Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -211,6 +214,8 @@
     <Compile Include="Validation\Data\ItemDataValidator.cs" />
     <Compile Include="Validation\Data\ItemPropertyDataValidator.cs" />
     <Compile Include="Validation\Data\ItemTypeDataValidator.cs" />
+    <Compile Include="Validation\Data\LocalFloatDataValidator.cs" />
+    <Compile Include="Validation\Data\LocalStringDataValidator.cs" />
     <Compile Include="Validation\Data\LocalVariableDataValidator.cs" />
     <Compile Include="Validation\Data\ModuleDataValidator.cs" />
     <Compile Include="Validation\Data\PlaceableDataValidator.cs" />

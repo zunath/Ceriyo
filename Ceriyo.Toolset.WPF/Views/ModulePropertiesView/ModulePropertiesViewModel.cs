@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
+using Ceriyo.Core.Observables;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -30,6 +33,9 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             _eventAggregator = eventAggregator;
             _domainService = domainService;
             Scripts = new BindingList<Script>();
+            LocalStrings = new ObservableCollectionEx<LocalStringData>();
+            LocalFloats = new ObservableCollectionEx<LocalFloatData>();
+
             MaximumPossibleLevel = 99;
             
             SaveCommand = new DelegateCommand(Save, CanSave);
@@ -39,16 +45,22 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             _eventAggregator.GetEvent<ModulePropertiesClosedEvent>().Subscribe(Cancel);
 
             PropertyChanged += OnPropertyChanged;
+            LocalStrings.PropertyChanged += OnPropertyChanged;
+            LocalStrings.ItemPropertyChanged += OnPropertyChanged;
+            LocalFloats.PropertyChanged += OnPropertyChanged;
+            LocalFloats.ItemPropertyChanged += OnPropertyChanged;
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             SaveCommand.RaiseCanExecuteChanged();
         }
+        
 
         private bool CanSave()
         {
-            return _validator.Validate(this).IsValid;
+            var result = _validator.Validate(this);
+            return result.IsValid;
         }
 
         private string _name;
@@ -88,7 +100,32 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
         public int MaxLevel
         {
             get { return _maxLevel; }
-            set { SetProperty(ref _maxLevel, value); }
+            set
+            {
+                SetProperty(ref _maxLevel, value);
+                SetProperty(ref _maxLevelString, Convert.ToString(value));
+            }
+        }
+
+        private string _maxLevelString;
+
+        public string MaxLevelString
+        {
+            get
+            {
+                return _maxLevelString;
+            }
+            set
+            {
+                int intVal;
+                string val = value;
+                if (string.IsNullOrWhiteSpace(val) ||
+                    !int.TryParse(val, out intVal)) 
+                    val = Convert.ToString(MaxLevel);
+
+                SetProperty(ref _maxLevelString, val);
+                SetProperty(ref _maxLevel, Convert.ToInt32(val));
+            }
         }
 
         private string _description;
@@ -107,12 +144,20 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             set { SetProperty(ref _comments, value); }
         }
 
-        private LocalVariableData _localVariables;
+        private ObservableCollectionEx<LocalStringData> _localStrings;
 
-        public LocalVariableData LocalVariables
+        public ObservableCollectionEx<LocalStringData> LocalStrings
         {
-            get { return _localVariables; }
-            set { SetProperty(ref _localVariables, value); }
+            get { return _localStrings; }
+            set { SetProperty(ref _localStrings, value); }
+        }
+
+        private ObservableCollectionEx<LocalFloatData> _localFloats;
+
+        public ObservableCollectionEx<LocalFloatData> LocalFloats
+        {
+            get { return _localFloats; }
+            set { SetProperty(ref _localFloats, value); }
         }
 
         private BindingList<Script> _scripts;
@@ -227,8 +272,19 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             moduleData.OnPlayerDeath = OnPlayerDeath;
             moduleData.OnPlayerRespawn = OnPlayerRespawn;
             moduleData.OnPlayerLevelUp = OnPlayerLevelUp;
+            
+            moduleData.LocalVariables.LocalStrings.Clear();
+            foreach (var record in LocalStrings)
+            {
+                moduleData.LocalVariables.LocalStrings.Add(record.Key, record.Value);
+            }
+            
+            moduleData.LocalVariables.LocalFloats.Clear();
+            foreach (var record in LocalFloats)
+            {
+                moduleData.LocalVariables.LocalFloats.Add(record.Key, record.Value);
+            }
 
-            moduleData.LocalVariables = LocalVariables;
             moduleData.LevelChart = LevelChart;
 
             _domainService.UpdateLoadedModuleData(moduleData);
@@ -266,8 +322,19 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             OnPlayerDeath = moduleData.OnPlayerDeath;
             OnPlayerRespawn = moduleData.OnPlayerRespawn;
             OnPlayerLevelUp = moduleData.OnPlayerLevelUp;
+            
+            LocalStrings.Clear();
+            foreach (var record in moduleData.LocalVariables.LocalStrings)
+            {
+                LocalStrings.Add(new LocalStringData(record.Key, record.Value));
+            }
+            
+            LocalFloats.Clear();
+            foreach (var record in moduleData.LocalVariables.LocalFloats)
+            {
+                LocalFloats.Add(new LocalFloatData(record.Key, record.Value));
+            }
 
-            LocalVariables = moduleData.LocalVariables;
             LevelChart = moduleData.LevelChart;
         }
 
