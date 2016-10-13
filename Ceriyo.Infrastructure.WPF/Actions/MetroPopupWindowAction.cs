@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Windows;
+using Ceriyo.Infrastructure.WPF.Windows;
+using MahApps.Metro.Controls;
 using Prism.Interactivity;
 using Prism.Interactivity.InteractionRequest;
 
-namespace Ceriyo.Toolset.WPF.Components
+namespace Ceriyo.Infrastructure.WPF.Actions
 {
-    public class CustomPopupWindowAction : PopupWindowAction
+    public class MetroPopupWindowAction: PopupWindowAction
     {
         public ResizeMode ResizeMode { get; set; }
 
-        public CustomPopupWindowAction()
+        public MetroPopupWindowAction()
         {
             ResizeMode = ResizeMode.CanResizeWithGrip;
         }
@@ -18,10 +20,10 @@ namespace Ceriyo.Toolset.WPF.Components
         {
             var args = parameter as InteractionRequestedEventArgs;
             if (args == null) return;
-        
+
             // If the WindowContent shouldn't be part of another visual tree.
             if (WindowContent?.Parent != null) return;
-            
+
             Window wrapperWindow = GetWindow(args.Context);
             wrapperWindow.ResizeMode = ResizeMode;
             wrapperWindow.SizeToContent = SizeToContent.WidthAndHeight;
@@ -63,6 +65,44 @@ namespace Ceriyo.Toolset.WPF.Components
             {
                 wrapperWindow.Show();
             }
+        }
+
+        protected override Window GetWindow(INotification notification)
+        {
+            MetroWindow wrapperWindow;
+
+            if (this.WindowContent != null)
+            {
+                wrapperWindow = new MetroWindow();
+
+                // If the WindowContent does not have its own DataContext, it will inherit this one.
+                wrapperWindow.DataContext = notification;
+                wrapperWindow.Title = notification.Title;
+
+                this.PrepareContentForWindow(notification, wrapperWindow);
+            }
+            else
+            {
+                wrapperWindow = this.CreateDefaultWindow(notification);
+            }
+
+            return wrapperWindow;
+        }
+
+        protected new MetroWindow CreateDefaultWindow(INotification notification)
+        {
+            MetroWindow window = null;
+
+            if (notification is IConfirmation)
+            {
+                window = new MetroConfirmationWindow() { Confirmation = (IConfirmation)notification };
+            }
+            else
+            {
+                window = new MetroNotificationWindow() { Notification = notification };
+            }
+
+            return window;
         }
     }
 }

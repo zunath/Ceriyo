@@ -6,11 +6,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 
              mc:Ignorable="d"
              d:DesignHeight="600"
-             d:DesignWidth="600"
-             Background="LightGray">
+             d:DesignWidth="600">
 
     <Grid>
 
@@ -38,7 +38,7 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Margin="4,4,4,4">
+            Margin="2,2,2,2">
             Skills:
         </Label>
 
@@ -51,13 +51,15 @@
             DisplayMemberPath="Name"
             SelectionMode="Single"
             ItemsSource="{Binding Skills}"
-            SelectedItem="{Binding SelectedSkill}">
+            SelectedItem="{Binding SelectedSkill}"
+            BorderThickness="1"
+            BorderBrush="{DynamicResource AccentColorBrush}">
         </ListBox>
 
         <Button
             Grid.Row="4"
             Grid.Column="0"
-            Margin="5,5,5,5"
+            Margin="2,2,2,2"
             Command="{Binding NewCommand}">
             New
         </Button>
@@ -65,7 +67,7 @@
         <Button
             Grid.Row="4"
             Grid.Column="1"
-            Margin="5,5,5,5"
+            Margin="2,2,2,2"
             Command="{Binding DeleteCommand}">
             Delete
         </Button>
@@ -73,8 +75,11 @@
         <TabControl
             Grid.Row="0"
             Grid.Column="3"
-            Grid.RowSpan="5">
-            <TabItem Header="Scripts">
+            Grid.RowSpan="5"
+            BorderThickness="1"
+            BorderBrush="{DynamicResource AccentColorBrush}">
+            <TabItem Header="Scripts"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="128"></ColumnDefinition>
@@ -94,14 +99,14 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Activated:
                     </Label>
 
                     <ComboBox
                         Grid.Row="0"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsSkillSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedSkill.OnActivated}">
@@ -109,14 +114,16 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Description">
+            <TabItem Header="Description"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsSkillSelected}"
                 		Text="{Binding SelectedSkill.Description}" />
             </TabItem>
-            <TabItem Header="Comments">
+            <TabItem Header="Comments"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
@@ -154,7 +161,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="2"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedSkill.Name}"
                 IsEnabled="{Binding IsSkillSelected}">
             </TextBox>
@@ -168,7 +175,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="4"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedSkill.Tag}"
                 IsEnabled="{Binding IsSkillSelected}">
             </TextBox>
@@ -182,7 +189,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="6"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedSkill.Resref}"
                 IsEnabled="{Binding IsSkillSelected}">
             </TextBox>
@@ -190,7 +197,7 @@
             <CheckBox
                 Grid.Column="0"
                 Grid.Row="8"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 IsChecked="{Binding SelectedSkill.IsPassive}"
                 IsEnabled="{Binding IsSkillSelected}">
                 Is Passive

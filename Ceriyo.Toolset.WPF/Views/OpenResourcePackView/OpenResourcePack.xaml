@@ -49,14 +49,14 @@
 
             <Button
                 MinWidth="92"    
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Command="{Binding OpenResourcePackCommand}"
                 IsDefault="True">
                 Open Resource Pack
             </Button>
             <Button
                 MinWidth="92"    
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Command="{Binding CancelCommand}"
                 IsCancel="True">
                 Cancel

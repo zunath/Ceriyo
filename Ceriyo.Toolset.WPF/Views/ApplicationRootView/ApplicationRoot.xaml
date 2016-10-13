@@ -1,4 +1,4 @@
-﻿<Window x:Class="Ceriyo.Toolset.WPF.Views.ApplicationRootView.ApplicationRoot"
+﻿<controls:MetroWindow x:Class="Ceriyo.Toolset.WPF.Views.ApplicationRootView.ApplicationRoot"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,16 +10,20 @@
         mc:Ignorable="d"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding WindowTitle}" 
         Height="350" 
         Width="525"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="2"
         Loaded="ApplicationRoot_OnLoaded"
-        Closing="ApplicationRoot_OnClosing">
+        Closing="ApplicationRoot_OnClosing"
+        WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="24"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
             <RowDefinition Height="24"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -39,7 +43,7 @@
             Grid.Column="0">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="155"></ColumnDefinition>
+                <ColumnDefinition Width="160"></ColumnDefinition>
                 <ColumnDefinition Width="5"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="5"></ColumnDefinition>
@@ -49,14 +53,14 @@
             <TabControl
                 Grid.Column="0"
                 Grid.Row="0">
-                <TabItem Header="Areas">
+                <TabItem Header="Areas" controls:ControlsHelper.HeaderFontSize="14">
                     
                 </TabItem>
 
-                <TabItem Header="Dialogs">
+                <TabItem Header="Dialogs" controls:ControlsHelper.HeaderFontSize="14">
                 </TabItem>
                 
-                <TabItem Header="Scripts">
+                <TabItem Header="Scripts" controls:ControlsHelper.HeaderFontSize="14">
                     
                 </TabItem>
                 
@@ -87,4 +91,5 @@
             </prism:InteractionRequestTrigger>
         </i:Interaction.Triggers>
     </Grid>
-</Window>
+</controls:MetroWindow>
+

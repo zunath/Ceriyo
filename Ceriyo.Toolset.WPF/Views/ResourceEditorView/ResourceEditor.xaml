@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:components="clr-namespace:Ceriyo.Toolset.WPF.Components"
              xmlns:openResourcePackView="clr-namespace:Ceriyo.Toolset.WPF.Views.OpenResourcePackView"
              xmlns:detailedErrorView="clr-namespace:Ceriyo.Toolset.WPF.Views.DetailedErrorView"
              xmlns:saveResourcePackView="clr-namespace:Ceriyo.Toolset.WPF.Views.SaveResourcePackView"
+             xmlns:actions="clr-namespace:Ceriyo.Infrastructure.WPF.Actions;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"
              d:DesignWidth="500"
              d:DesignHeight="500"
@@ -21,7 +22,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="24"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -71,7 +72,8 @@
             Grid.RowSpan="3"
             SelectedIndex="{Binding SelectedTabIndex}">
 
-            <TabItem Header="Creatures">
+            <TabItem Header="Creatures"
+                     controls:ControlsHelper.HeaderFontSize="16">
                 <DataGrid 
                   ItemsSource="{Binding CreatureResources}"
                   AutoGenerateColumns="False"
@@ -95,8 +97,9 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            
-            <TabItem Header="Icons">
+
+            <TabItem Header="Icons"
+                     controls:ControlsHelper.HeaderFontSize="16">
                 <DataGrid 
                   ItemsSource="{Binding IconResources}"
                   AutoGenerateColumns="False"
@@ -120,8 +123,9 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            
-            <TabItem Header="Items">
+
+            <TabItem Header="Items"
+                     controls:ControlsHelper.HeaderFontSize="16">
                 <DataGrid
                   ItemsSource="{Binding ItemResources}"
                   AutoGenerateColumns="False"
@@ -145,8 +149,9 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            
-            <TabItem Header="Portraits">
+
+            <TabItem Header="Portraits"
+                     controls:ControlsHelper.HeaderFontSize="16">
                 <DataGrid
                   ItemsSource="{Binding PortraitResources}"
                   AutoGenerateColumns="False"
@@ -170,8 +175,9 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            
-            <TabItem Header="Tilesets">
+
+            <TabItem Header="Tilesets"
+                     controls:ControlsHelper.HeaderFontSize="16">
                 <DataGrid
                   ItemsSource="{Binding TilesetResources}"
                   AutoGenerateColumns="False"
@@ -196,7 +202,8 @@
                 </DataGrid>
             </TabItem>
 
-            <TabItem Header="BGM">
+            <TabItem Header="BGM"
+                     controls:ControlsHelper.HeaderFontSize="16">
                 <DataGrid 
                   ItemsSource="{Binding BGMResources}"
                   AutoGenerateColumns="False"
@@ -221,7 +228,8 @@
                 </DataGrid>
             </TabItem>
 
-            <TabItem Header="SFX">
+            <TabItem Header="SFX"
+                     controls:ControlsHelper.HeaderFontSize="16">
                 <DataGrid
                   ItemsSource="{Binding SFXResources}"
                   AutoGenerateColumns="False"
@@ -256,7 +264,7 @@
             </prism:InteractionRequestTrigger>
             
             <prism:InteractionRequestTrigger SourceObject="{Binding DetailedErrorRequest, Mode=OneWay}">
-                <components:CustomPopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True"
                                          ResizeMode="NoResize">
                     <prism:PopupWindowAction.WindowContent>
@@ -268,11 +276,11 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"/>
                     </prism:PopupWindowAction.WindowContent>
-                </components:CustomPopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding SaveResourcePackAsRequest, Mode=OneWay}">
-                <components:CustomPopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True"
                                          ResizeMode="NoResize">
                     <prism:PopupWindowAction.WindowContent>
@@ -284,11 +292,11 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"/>
                     </prism:PopupWindowAction.WindowContent>
-                </components:CustomPopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenResourcePackRequest, Mode=OneWay}">
-                <components:CustomPopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True"
                                          ResizeMode="NoResize">
                     <prism:PopupWindowAction.WindowContent>
@@ -300,7 +308,7 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"/>
                     </prism:PopupWindowAction.WindowContent>
-                </components:CustomPopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
 

@@ -10,9 +10,9 @@
              xmlns:aboutView="clr-namespace:Ceriyo.Toolset.WPF.Views.AboutView"
              xmlns:modulePropertiesView="clr-namespace:Ceriyo.Toolset.WPF.Views.ModulePropertiesView"
              xmlns:newModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.NewModuleView"
-             xmlns:components="clr-namespace:Ceriyo.Toolset.WPF.Components"
              xmlns:openModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.OpenModuleView"
              xmlns:saveModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.SaveModuleView"
+             xmlns:actions="clr-namespace:Ceriyo.Infrastructure.WPF.Actions;assembly=Ceriyo.Infrastructure.WPF"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <Menu>
@@ -121,7 +121,7 @@
         <i:Interaction.Triggers>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding NewModuleRequest, Mode=OneWay}">
-                <components:CustomPopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True"
                                          ResizeMode="NoResize">
                     <prism:PopupWindowAction.WindowContent>
@@ -133,11 +133,11 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"/>
                     </prism:PopupWindowAction.WindowContent>
-                </components:CustomPopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenModuleRequest, Mode=OneWay}">
-                <components:CustomPopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True"
                                          ResizeMode="NoResize">
                     <prism:PopupWindowAction.WindowContent>
@@ -149,11 +149,11 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"/>
                     </prism:PopupWindowAction.WindowContent>
-                </components:CustomPopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding SaveModuleAsRequest, Mode=OneWay}">
-                <components:CustomPopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True"
                                          ResizeMode="NoResize">
                     <prism:PopupWindowAction.WindowContent>
@@ -165,11 +165,11 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"/>
                     </prism:PopupWindowAction.WindowContent>
-                </components:CustomPopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
-            
+
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenDataEditorRequest, Mode=OneWay}">
-                <prism:PopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
                         <dataEditorView:DataEditor
@@ -180,11 +180,11 @@
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"/>
                     </prism:PopupWindowAction.WindowContent>
-                </prism:PopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenManageResourcesRequest, Mode=OneWay}">
-                <components:CustomPopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True"
                                          ResizeMode="NoResize">
                     <prism:PopupWindowAction.WindowContent>
@@ -194,22 +194,22 @@
                                 MinWidth="400"
                                 MinHeight="500"/>
                     </prism:PopupWindowAction.WindowContent>
-                </components:CustomPopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenResourceEditorRequest, Mode=OneWay}">
-                <prism:PopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
                         <resourceEditorView:ResourceEditor
                                 MinWidth="600"
                                 MinHeight="600"/>
                     </prism:PopupWindowAction.WindowContent>
-                </prism:PopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenBuildModuleRequest, Mode=OneWay}">
-                <prism:PopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
 
@@ -219,11 +219,11 @@
                                 MinWidth="600"
                                 MinHeight="600"/>
                     </prism:PopupWindowAction.WindowContent>
-                </prism:PopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenAboutRequest, Mode=OneWay}">
-                <prism:PopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
 
@@ -233,11 +233,11 @@
                                 MinWidth="600"
                                 MinHeight="600"/>
                     </prism:PopupWindowAction.WindowContent>
-                </prism:PopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenModulePropertiesRequest, Mode=OneWay}">
-                <prism:PopupWindowAction IsModal="True" 
+                <actions:MetroPopupWindowAction IsModal="True" 
                                          CenterOverAssociatedObject="True">
                     <prism:PopupWindowAction.WindowContent>
                         <modulePropertiesView:ModuleProperties
@@ -246,13 +246,10 @@
                             MinWidth="600"
                             MinHeight="600"/>
                     </prism:PopupWindowAction.WindowContent>
-                </prism:PopupWindowAction>
+                </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
 
         </i:Interaction.Triggers>
 
     </Grid>
 </UserControl>
-
-
-

@@ -7,11 +7,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 
              mc:Ignorable="d"
              d:DesignHeight="600"
-             d:DesignWidth="600"
-             Background="LightGray">
+             d:DesignWidth="600">
     <Grid>
 
         <i:Interaction.Triggers>
@@ -38,7 +38,7 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Margin="4,4,4,4">
+            Margin="2,2,2,2">
             Creatures:
         </Label>
 
@@ -51,13 +51,15 @@
             DisplayMemberPath="Name"
             SelectionMode="Single"
             ItemsSource="{Binding Creatures}"
-            SelectedItem="{Binding SelectedCreature}">
+            SelectedItem="{Binding SelectedCreature}"
+            BorderThickness="1"
+            BorderBrush="{DynamicResource AccentColorBrush}">
         </ListBox>
 
         <Button
             Grid.Row="4"
             Grid.Column="0"
-            Margin="5,5,5,5"
+            Margin="2,2,2,2"
             Command="{Binding NewCommand}">
             New
         </Button>
@@ -65,7 +67,7 @@
         <Button
             Grid.Row="4"
             Grid.Column="1"
-            Margin="5,5,5,5"
+            Margin="2,2,2,2"
             Command="{Binding DeleteCommand}">
             Delete
         </Button>
@@ -73,8 +75,11 @@
         <TabControl
             Grid.Row="0"
             Grid.Column="3"
-            Grid.RowSpan="5">
-            <TabItem Header="Scripts">
+            Grid.RowSpan="5"
+            BorderThickness="1"
+            BorderBrush="{DynamicResource AccentColorBrush}">
+            <TabItem Header="Scripts"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="128"></ColumnDefinition>
@@ -94,14 +99,14 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Conversation:
                     </Label>
 
                     <ComboBox
                         Grid.Row="0"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsCreatureSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedCreature.OnConversation}">
@@ -110,14 +115,14 @@
                     <Label
                         Grid.Column="0"
                         Grid.Row="1"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Attacked:
                     </Label>
 
                     <ComboBox
                         Grid.Row="1"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsCreatureSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedCreature.OnAttacked}">
@@ -126,14 +131,14 @@
                     <Label
                         Grid.Column="0"
                         Grid.Row="2"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Damaged:
                     </Label>
 
                     <ComboBox
                         Grid.Row="2"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsCreatureSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedCreature.OnDamaged}">
@@ -142,14 +147,14 @@
                     <Label
                         Grid.Column="0"
                         Grid.Row="3"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Death:
                     </Label>
 
                     <ComboBox
                         Grid.Row="3"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsCreatureSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedCreature.OnDeath}">
@@ -158,14 +163,14 @@
                     <Label
                         Grid.Column="0"
                         Grid.Row="4"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Disturbed:
                     </Label>
 
                     <ComboBox
                         Grid.Row="4"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsCreatureSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedCreature.OnDisturbed}">
@@ -174,14 +179,14 @@
                     <Label
                         Grid.Column="0"
                         Grid.Row="5"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Heartbeat:
                     </Label>
 
                     <ComboBox
                         Grid.Row="5"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsCreatureSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedCreature.OnHeartbeat}">
@@ -190,14 +195,14 @@
                     <Label
                         Grid.Column="0"
                         Grid.Row="6"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Spawned:
                     </Label>
 
                     <ComboBox
                         Grid.Row="6"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsCreatureSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedCreature.OnSpawned}">
@@ -205,7 +210,8 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Variables">
+            <TabItem Header="Variables"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <Grid>
 
                     <Grid.RowDefinitions>
@@ -251,15 +257,17 @@
 
                 </Grid>
             </TabItem>
-            
-            <TabItem Header="Description">
+
+            <TabItem Header="Description"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsCreatureSelected}"
                 		Text="{Binding SelectedCreature.Description}" />
             </TabItem>
-            <TabItem Header="Comments">
+            <TabItem Header="Comments"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
@@ -303,7 +311,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="2"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedCreature.Name}"
                 IsEnabled="{Binding IsCreatureSelected}">
             </TextBox>
@@ -317,7 +325,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="4"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedCreature.Tag}"
                 IsEnabled="{Binding IsCreatureSelected}">
             </TextBox>
@@ -331,7 +339,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="6"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedCreature.Resref}"
                 IsEnabled="{Binding IsCreatureSelected}">
             </TextBox>
@@ -363,7 +371,7 @@
             <xctk:IntegerUpDown
                 Grid.Column="0"
                 Grid.Row="13"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 IsEnabled="{Binding IsCreatureSelected}"
                 Minimum="1"
                 Maximum="{Binding MaximumLevel}"
@@ -379,7 +387,7 @@
             <ComboBox
                 Grid.Column="0"
                 Grid.Row="15"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 IsEnabled="{Binding IsCreatureSelected}"
                 ItemsSource="{Binding Dialogs}"
                 SelectedItem="{Binding SelectedCreature.DialogResref}">

@@ -260,7 +260,7 @@
         </TextBox>
 
         <Button
-            Margin="7,4,5,4"
+            Margin="0,4,5,4"
             Grid.Column="4"
             Grid.Row="10"
             Command="{Binding SaveSettingsCommand}">

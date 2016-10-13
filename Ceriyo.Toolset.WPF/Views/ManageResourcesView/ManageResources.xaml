@@ -18,7 +18,7 @@
             <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="36"></RowDefinition>
             <RowDefinition Height="32"></RowDefinition>
         </Grid.RowDefinitions>
         
@@ -36,7 +36,9 @@
         <ListBox Grid.Column="0"
                  Grid.Row="2"
                  ItemsSource="{Binding ResourcePacks}"
-                 SelectedItem="{Binding SelectedResourcePack}"/>
+                 SelectedItem="{Binding SelectedResourcePack}"
+                 BorderThickness="1"
+                 BorderBrush="{DynamicResource AccentColorBrush}"/>
 
         <Button 
             Content="Move Up" 
@@ -69,14 +71,14 @@
         <ComboBox       
             Grid.Row="3" 
             Grid.Column="0"
-            Margin="5,5,5,5" 
+            Margin="2,2,2,2" 
             ItemsSource="{Binding AvailableResourcePacks}"
             SelectedItem="{Binding SelectedAvailableResourcePack}"/>
         
         <Button Content="Add Package" 
                 Grid.Column="1" 
                 Grid.Row="3"
-                Margin="5,5,5,5"
+                Margin="2,2,2,2"
                 Command="{Binding AddPackageCommand}"/>
 
         <StackPanel
@@ -88,13 +90,13 @@
 
             <Button
                 MinWidth="92"    
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Command="{Binding SaveChangesCommand}">
                 Save Changes
             </Button>
             <Button
                 MinWidth="92"    
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Command="{Binding CancelCommand}">
                 Cancel
             </Button>

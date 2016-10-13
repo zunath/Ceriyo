@@ -8,6 +8,7 @@
              d:DesignHeight="500"
              d:DesignWidth="400"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              Background="White"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
@@ -31,7 +32,8 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="5">
-            <TabItem Header="Details">
+            <TabItem Header="Details"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <Grid>
                     <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.211,-1.423"/>
                     <Label Content="Tag:" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.474,-1.692"/>
@@ -101,7 +103,8 @@
                     <Label Content="Max Level:" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Scripts">
+            <TabItem Header="Scripts"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -279,7 +282,8 @@
                 </Grid>
                 
             </TabItem>
-            <TabItem Header="Variables">
+            <TabItem Header="Variables"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <Grid Background="LightGray">
 
                     <Grid.RowDefinitions>
@@ -359,7 +363,8 @@
                     
                 </Grid>
             </TabItem>
-            <TabItem Header="Level Chart">
+            <TabItem Header="Level Chart"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <DataGrid 
                     ItemsSource="{Binding LevelChart}"
                     AutoGenerateColumns="False"
@@ -393,7 +398,8 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="Description">
+            <TabItem Header="Description"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <TextBox TextWrapping="Wrap"
 						 AcceptsReturn="True"
 						 HorizontalAlignment="Stretch" 
@@ -406,7 +412,8 @@
                             UpdateSourceTrigger=PropertyChanged}"
                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
             </TabItem>
-            <TabItem Header="Comments">
+            <TabItem Header="Comments"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <TextBox TextWrapping="Wrap"
 						 AcceptsReturn="True"
 						 HorizontalAlignment="Stretch" 

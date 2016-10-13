@@ -12,10 +12,10 @@
              xmlns:animationEditorView="clr-namespace:Ceriyo.Toolset.WPF.Views.AnimationEditorView"
              xmlns:abilityEditorView="clr-namespace:Ceriyo.Toolset.WPF.Views.AbilityEditorView"
              xmlns:skillEditorView="clr-namespace:Ceriyo.Toolset.WPF.Views.SkillEditorView"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"
              d:DesignHeight="600"
              d:DesignWidth="600"
-             Background="LightGray"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
 
@@ -35,35 +35,43 @@
             Grid.Row="0"
             Grid.ColumnSpan="3">
             <TabItem
-                Header="Creatures">
+                Header="Creatures"
+                controls:ControlsHelper.HeaderFontSize="16">
                 <creatureEditorView:CreatureEditor></creatureEditorView:CreatureEditor>
             </TabItem>
             <TabItem
-                Header="Classes">
+                Header="Classes"
+                controls:ControlsHelper.HeaderFontSize="16">
                 <classEditorView:ClassEditor></classEditorView:ClassEditor>
             </TabItem>
             <TabItem
-                Header="Items">
+                Header="Items"
+                controls:ControlsHelper.HeaderFontSize="16">
                 <itemEditorView:ItemEditor></itemEditorView:ItemEditor>
             </TabItem>
             <TabItem
-                Header="Placeables">
+                Header="Placeables"
+                controls:ControlsHelper.HeaderFontSize="16">
                 <placeableEditorView:PlaceableEditor></placeableEditorView:PlaceableEditor>
             </TabItem>
             <TabItem
-                Header="Tilesets">
+                Header="Tilesets"
+                controls:ControlsHelper.HeaderFontSize="16">
                 <tilesetEditorView:TilesetEditor></tilesetEditorView:TilesetEditor>
             </TabItem>
             <TabItem
-                Header="Animations">
+                Header="Animations"
+                controls:ControlsHelper.HeaderFontSize="16">
                 <animationEditorView:AnimationEditor></animationEditorView:AnimationEditor>
             </TabItem>
             <TabItem
-                Header="Abilities">
+                Header="Abilities"
+                controls:ControlsHelper.HeaderFontSize="16">
                 <abilityEditorView:AbilityEditor></abilityEditorView:AbilityEditor>
             </TabItem>
             <TabItem
-                Header="Skills">
+                Header="Skills"
+                controls:ControlsHelper.HeaderFontSize="16">
                 <skillEditorView:SkillEditor></skillEditorView:SkillEditor>
             </TabItem>
         </TabControl>
@@ -76,13 +84,13 @@
             HorizontalAlignment="Right">
             <Button 
                 MinWidth="92"    
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Command="{Binding OkCommand}">
                 OK
             </Button>
             <Button
                 MinWidth="92"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Command="{Binding CancelCommand}">
                 Cancel
             </Button>

@@ -6,11 +6,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 
              mc:Ignorable="d"
              d:DesignHeight="600"
-             d:DesignWidth="600"
-             Background="LightGray">
+             d:DesignWidth="600">
 
     <Grid>
 
@@ -38,7 +38,7 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Margin="4,4,4,4">
+            Margin="2,2,2,2">
             Items:
         </Label>
 
@@ -51,13 +51,15 @@
             DisplayMemberPath="Name"
             SelectionMode="Single"
             ItemsSource="{Binding Items}"
-            SelectedItem="{Binding SelectedItem}">
+            SelectedItem="{Binding SelectedItem}"
+            BorderThickness="1"
+            BorderBrush="{DynamicResource AccentColorBrush}">
         </ListBox>
 
         <Button
             Grid.Row="4"
             Grid.Column="0"
-            Margin="5,5,5,5"
+            Margin="2,2,2,2"
             Command="{Binding NewCommand}">
             New
         </Button>
@@ -65,7 +67,7 @@
         <Button
             Grid.Row="4"
             Grid.Column="1"
-            Margin="5,5,5,5"
+            Margin="2,2,2,2"
             Command="{Binding DeleteCommand}">
             Delete
         </Button>
@@ -73,11 +75,15 @@
         <TabControl
             Grid.Row="0"
             Grid.Column="3"
-            Grid.RowSpan="5">
-            <TabItem Header="Appearance">
+            Grid.RowSpan="5"
+            BorderThickness="1"
+            BorderBrush="{DynamicResource AccentColorBrush}">
+            <TabItem Header="Appearance"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 
             </TabItem>
-            <TabItem Header="Class Requirements">
+            <TabItem Header="Class Requirements"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <DataGrid 
                     ItemsSource="{Binding SelectedItem.ClassRequirements}"
                     AutoGenerateColumns="False"
@@ -100,10 +106,12 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="Properties">
+            <TabItem Header="Properties"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 
             </TabItem>
-            <TabItem Header="Scripts">
+            <TabItem Header="Scripts"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="128"></ColumnDefinition>
@@ -123,14 +131,14 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Activated:
                     </Label>
 
                     <ComboBox
                         Grid.Row="0"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsItemSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedItem.OnActivated}">
@@ -139,14 +147,14 @@
                     <Label
                         Grid.Row="1"
                         Grid.Column="0"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Acquired:
                     </Label>
 
                     <ComboBox
                         Grid.Row="1"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsItemSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedItem.OnAcquired}">
@@ -155,14 +163,14 @@
                     <Label
                         Grid.Row="2"
                         Grid.Column="0"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Unacquired:
                     </Label>
 
                     <ComboBox
                         Grid.Row="2"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsItemSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedItem.OnUnacquired}">
@@ -171,14 +179,14 @@
                     <Label
                         Grid.Row="3"
                         Grid.Column="0"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Equipped:
                     </Label>
 
                     <ComboBox
                         Grid.Row="3"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsItemSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedItem.OnEquipped}">
@@ -187,14 +195,14 @@
                     <Label
                         Grid.Row="4"
                         Grid.Column="0"
-                        Margin="4,4,4,4">
+                        Margin="2,2,2,2">
                         On Unequipped:
                     </Label>
 
                     <ComboBox
                         Grid.Row="4"
                         Grid.Column="1"
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         IsEnabled="{Binding IsItemSelected}"
                         ItemsSource="{Binding Scripts}"
                         SelectedItem="{Binding SelectedItem.OnUnequipped}">
@@ -202,7 +210,8 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Variables">
+            <TabItem Header="Variables"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <Grid>
 
                     <Grid.RowDefinitions>
@@ -248,14 +257,16 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Header="Description">
+            <TabItem Header="Description"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsItemSelected}"
                 		Text="{Binding SelectedItem.Description}" />
             </TabItem>
-            <TabItem Header="Comments">
+            <TabItem Header="Comments"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
@@ -299,7 +310,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="2"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedItem.Name}"
                 IsEnabled="{Binding IsItemSelected}">
             </TextBox>
@@ -313,7 +324,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="4"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedItem.Tag}"
                 IsEnabled="{Binding IsItemSelected}">
             </TextBox>
@@ -327,7 +338,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="6"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedItem.Resref}"
                 IsEnabled="{Binding IsItemSelected}">
             </TextBox>
@@ -351,7 +362,7 @@
             <CheckBox
                 Grid.Column="0"
                 Grid.Row="11"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 IsEnabled="{Binding IsItemSelected}"
                 IsChecked="{Binding SelectedItem.IsUndroppable}">
                 Is Undroppable
@@ -361,7 +372,7 @@
             <CheckBox
                 Grid.Column="0"
                 Grid.Row="12"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 IsEnabled="{Binding IsItemSelected}"
                 IsChecked="{Binding SelectedItem.IsStolen}">
                 Is Stolen
@@ -370,7 +381,7 @@
             <CheckBox
                 Grid.Column="0"
                 Grid.Row="13"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 IsEnabled="{Binding IsItemSelected}"
                 IsChecked="{Binding SelectedItem.IsPlot}">
                 Is Plot

@@ -9,8 +9,7 @@
 
              mc:Ignorable="d"
              d:DesignHeight="600"
-             d:DesignWidth="600"
-             Background="LightGray">
+             d:DesignWidth="600">
 
     <Grid>
 
@@ -38,7 +37,7 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Margin="4,4,4,4">
+            Margin="2,2,2,2">
             Classes:
         </Label>
 
@@ -51,13 +50,15 @@
             DisplayMemberPath="Name"
             SelectionMode="Single"
             ItemsSource="{Binding Classes}"
-            SelectedItem="{Binding SelectedClass}">
+            SelectedItem="{Binding SelectedClass}"
+            BorderBrush="{DynamicResource AccentColorBrush}"
+            BorderThickness="1">
         </ListBox>
 
         <Button
             Grid.Row="4"
             Grid.Column="0"
-            Margin="5,5,5,5"
+            Margin="2,2,2,2"
             Command="{Binding NewCommand}">
             New
         </Button>
@@ -65,7 +66,7 @@
         <Button
             Grid.Row="4"
             Grid.Column="1"
-            Margin="5,5,5,5"
+            Margin="2,2,2,2"
             Command="{Binding DeleteCommand}">
             Delete
         </Button>
@@ -100,7 +101,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="2"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedClass.Name}"
                 IsEnabled="{Binding IsClassSelected}">
             </TextBox>
@@ -114,7 +115,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="4"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedClass.Tag}"
                 IsEnabled="{Binding IsClassSelected}">
             </TextBox>
@@ -128,7 +129,7 @@
             <TextBox
                 Grid.Column="0"
                 Grid.Row="6"
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Text="{Binding SelectedClass.Resref}"
                 IsEnabled="{Binding IsClassSelected}">
             </TextBox>
