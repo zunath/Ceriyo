@@ -9,6 +9,7 @@
              d:DesignWidth="400"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:controls1="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
              Background="White"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
@@ -129,7 +130,7 @@
                         OnPlayerEnter:
                     </Label>
                     <ComboBox
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         Grid.Column="1"
                         Grid.Row="0"
                         ItemsSource="{Binding Scripts}"
@@ -147,7 +148,7 @@
                         OnPlayerLeaving:
                     </Label>
                     <ComboBox
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         Grid.Column="1"
                         Grid.Row="1"
                         ItemsSource="{Binding Scripts}"
@@ -164,7 +165,7 @@
                         OnPlayerLeft:
                     </Label>
                     <ComboBox
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         Grid.Column="1"
                         Grid.Row="2"
                         ItemsSource="{Binding Scripts}"
@@ -181,7 +182,7 @@
                         OnHeartbeat:
                     </Label>
                     <ComboBox
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         Grid.Column="1"
                         Grid.Row="3"
                         ItemsSource="{Binding Scripts}"
@@ -198,7 +199,7 @@
                         OnModuleLoad:
                     </Label>
                     <ComboBox
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         Grid.Column="1"
                         Grid.Row="4"
                         ItemsSource="{Binding Scripts}"
@@ -215,7 +216,7 @@
                         OnPlayerDying:
                     </Label>
                     <ComboBox
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         Grid.Column="1"
                         Grid.Row="5"
                         ItemsSource="{Binding Scripts}"
@@ -232,7 +233,7 @@
                         OnPlayerDeath:
                     </Label>
                     <ComboBox
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         Grid.Column="1"
                         Grid.Row="6"
                         ItemsSource="{Binding Scripts}"
@@ -249,7 +250,7 @@
                         OnPlayerRespawn:
                     </Label>
                     <ComboBox
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         Grid.Column="1"
                         Grid.Row="7"
                         ItemsSource="{Binding Scripts}"
@@ -268,7 +269,7 @@
                         OnPlayerLevelUp:
                     </Label>
                     <ComboBox
-                        Margin="4,4,4,4"
+                        Margin="2,2,2,2"
                         Grid.Column="1"
                         Grid.Row="8"
                         ItemsSource="{Binding Scripts}"
@@ -298,7 +299,14 @@
                         Local Strings:
                     </Label>
 
-                    <DataGrid
+                    <controls1:LocalStringEditor
+                        ItemsSource="{Binding LocalStrings}"
+                        Grid.Column="0"
+                        Grid.Row="1">
+                        
+                    </controls1:LocalStringEditor>
+                    
+                    <!--<DataGrid
                         Grid.Row="1"
                         ItemsSource="{Binding LocalStrings}" 
                         CanUserAddRows="True"
@@ -327,7 +335,7 @@
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                         
-                    </DataGrid>
+                    </DataGrid>-->
 
                     <Label
                         Grid.Row="2">
@@ -438,13 +446,13 @@
 
             <Button
                 MinWidth="92"    
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Command="{Binding SaveCommand}">
                 Save Changes
             </Button>
             <Button
                 MinWidth="92"    
-                Margin="4,4,4,4"
+                Margin="2,2,2,2"
                 Command="{Binding CancelCommand}">
                 Cancel
             </Button>

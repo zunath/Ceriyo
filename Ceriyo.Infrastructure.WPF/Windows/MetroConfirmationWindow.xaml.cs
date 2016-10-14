@@ -25,20 +25,20 @@ namespace Ceriyo.Infrastructure.WPF.Windows
             }
             set
             {
-                this.DataContext = value;
+                DataContext = value;
             }
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Confirmation.Confirmed = true;
-            this.Close();
+            Confirmation.Confirmed = true;
+            Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Confirmation.Confirmed = false;
-            this.Close();
+            Confirmation.Confirmed = false;
+            Close();
         }
     }
 }

@@ -328,7 +328,10 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             {
                 LocalStrings.Add(new LocalStringData(record.Key, record.Value));
             }
-            
+            LocalStrings.Add(new LocalStringData("key1", "val1"));
+            LocalStrings.Add(new LocalStringData("key2", "val2"));
+            LocalStrings.Add(new LocalStringData("key3", "val3"));
+
             LocalFloats.Clear();
             foreach (var record in moduleData.LocalVariables.LocalFloats)
             {
