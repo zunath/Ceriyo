@@ -287,13 +287,13 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
         public void SerializerConfig_LocalVariableData_ShouldBeEqual()
         {
             LocalVariableData data = new LocalVariableData();
-            data.LocalStrings.Add("stringkey1", "stringval1");
-            data.LocalStrings.Add("stringkey2", "stringval2");
-            data.LocalStrings.Add("stringkey3", "stringval3");
+            data.LocalStrings.Add(new LocalStringData("stringkey1", "stringval1"));
+            data.LocalStrings.Add(new LocalStringData("stringkey2", "stringval2"));
+            data.LocalStrings.Add(new LocalStringData("stringkey3", "stringval3"));
 
-            data.LocalFloats.Add("floatkey1", 1.23f);
-            data.LocalFloats.Add("floatkey2", 34.3f);
-            data.LocalFloats.Add("floatkey3", 55.24235f);
+            data.LocalFloats.Add(new LocalFloatData("floatkey1", 1.23f));
+            data.LocalFloats.Add(new LocalFloatData("floatkey1", 34.3f));
+            data.LocalFloats.Add(new LocalFloatData("floatkey1", 55.24235f));
 
             LocalVariableData result;
             using (MemoryStream stream = new MemoryStream())

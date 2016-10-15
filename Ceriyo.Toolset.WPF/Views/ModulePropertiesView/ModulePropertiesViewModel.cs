@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
 using Ceriyo.Core.Observables;
+using Ceriyo.Core.Validation;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -13,7 +13,6 @@ using FluentValidation;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
-using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 {
@@ -33,8 +32,16 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             _eventAggregator = eventAggregator;
             _domainService = domainService;
             Scripts = new BindingList<Script>();
-            LocalStrings = new ObservableCollectionEx<LocalStringData>();
-            LocalFloats = new ObservableCollectionEx<LocalFloatData>();
+            LocalVariables = new LocalVariableData
+            {
+                LocalStrings = new ObservableCollectionEx<LocalStringData>(),
+                LocalFloats = new ObservableCollectionEx<LocalFloatData>()
+            };
+            ((ObservableCollectionEx<LocalStringData>)LocalVariables.LocalStrings).PropertyChanged += OnPropertyChanged;
+            ((ObservableCollectionEx<LocalStringData>)LocalVariables.LocalStrings).ItemPropertyChanged += OnPropertyChanged;
+
+            ((ObservableCollectionEx<LocalFloatData>)LocalVariables.LocalFloats).PropertyChanged += OnPropertyChanged;
+            ((ObservableCollectionEx<LocalFloatData>)LocalVariables.LocalFloats).ItemPropertyChanged += OnPropertyChanged;
 
             MaximumPossibleLevel = 99;
             
@@ -45,22 +52,18 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             _eventAggregator.GetEvent<ModulePropertiesClosedEvent>().Subscribe(Cancel);
 
             PropertyChanged += OnPropertyChanged;
-            LocalStrings.PropertyChanged += OnPropertyChanged;
-            LocalStrings.ItemPropertyChanged += OnPropertyChanged;
-            LocalFloats.PropertyChanged += OnPropertyChanged;
-            LocalFloats.ItemPropertyChanged += OnPropertyChanged;
+            LocalVariables.PropertyChanged += OnPropertyChanged;
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            Validator.Validate(this);
             SaveCommand.RaiseCanExecuteChanged();
         }
         
-
         private bool CanSave()
         {
-            var result = _validator.Validate(this);
-            return result.IsValid;
+            return !HasErrors;
         }
 
         private string _name;
@@ -144,22 +147,14 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             set { SetProperty(ref _comments, value); }
         }
 
-        private ObservableCollectionEx<LocalStringData> _localStrings;
+        private LocalVariableData _localVariables;
 
-        public ObservableCollectionEx<LocalStringData> LocalStrings
+        public LocalVariableData LocalVariables
         {
-            get { return _localStrings; }
-            set { SetProperty(ref _localStrings, value); }
+            get { return _localVariables; }
+            set { SetProperty(ref _localVariables, value); }
         }
-
-        private ObservableCollectionEx<LocalFloatData> _localFloats;
-
-        public ObservableCollectionEx<LocalFloatData> LocalFloats
-        {
-            get { return _localFloats; }
-            set { SetProperty(ref _localFloats, value); }
-        }
-
+        
         private BindingList<Script> _scripts;
 
         public BindingList<Script> Scripts
@@ -253,7 +248,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 
         private void Save()
         {
-            if (!_validator.Validate(this).IsValid) return;
+            if (HasErrors) return;
 
             ModuleData moduleData = _domainService.GetLoadedModuleData();
             moduleData.Name = Name;
@@ -274,15 +269,14 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             moduleData.OnPlayerLevelUp = OnPlayerLevelUp;
             
             moduleData.LocalVariables.LocalStrings.Clear();
-            foreach (var record in LocalStrings)
+            foreach (var localString in LocalVariables.LocalStrings)
             {
-                moduleData.LocalVariables.LocalStrings.Add(record.Key, record.Value);
+                moduleData.LocalVariables.LocalStrings.Add(localString);
             }
-            
             moduleData.LocalVariables.LocalFloats.Clear();
-            foreach (var record in LocalFloats)
+            foreach (var localFloat in LocalVariables.LocalFloats)
             {
-                moduleData.LocalVariables.LocalFloats.Add(record.Key, record.Value);
+                moduleData.LocalVariables.LocalFloats.Add(localFloat);
             }
 
             moduleData.LevelChart = LevelChart;
@@ -323,23 +317,21 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             OnPlayerRespawn = moduleData.OnPlayerRespawn;
             OnPlayerLevelUp = moduleData.OnPlayerLevelUp;
             
-            LocalStrings.Clear();
-            foreach (var record in moduleData.LocalVariables.LocalStrings)
+            LocalVariables.LocalStrings.Clear();
+            foreach (var localString in moduleData.LocalVariables.LocalStrings)
             {
-                LocalStrings.Add(new LocalStringData(record.Key, record.Value));
-            }
-            LocalStrings.Add(new LocalStringData("key1", "val1"));
-            LocalStrings.Add(new LocalStringData("key2", "val2"));
-            LocalStrings.Add(new LocalStringData("key3", "val3"));
-
-            LocalFloats.Clear();
-            foreach (var record in moduleData.LocalVariables.LocalFloats)
-            {
-                LocalFloats.Add(new LocalFloatData(record.Key, record.Value));
+                LocalVariables.LocalStrings.Add(localString);
             }
 
+            LocalVariables.LocalFloats.Clear();
+            foreach (var localFloat in moduleData.LocalVariables.LocalFloats)
+            {
+                LocalVariables.LocalFloats.Add(localFloat);
+            }
+            
             LevelChart = moduleData.LevelChart;
         }
+
 
         private void ModuleLoaded(string moduleFileName)
         {

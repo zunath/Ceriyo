@@ -71,7 +71,8 @@ namespace Ceriyo.Core.Validation.Data
                 .NotNull();
 
             RuleFor(x => x.LocalVariables)
-                .SetValidator(new LocalVariableDataValidator());
+                .Must(x => !x.HasErrors)
+                .WithMessage("Local variables invalid.");
 
             RuleForEach(x => x.LevelChart)
                 .SetValidator(new ClassLevelValidator());

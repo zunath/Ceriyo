@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Toolset.WPF.EventArgs;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -31,7 +30,7 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
 
         private bool CanCreateModule()
         {
-            return ModuleData.IsValid;
+            return !ModuleData.HasErrors;
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -50,7 +49,7 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
         public DelegateCommand CreateModuleCommand { get; set; }
         private void CreateModule()
         {
-            if (!ModuleData.IsValid) return;
+            if (ModuleData.HasErrors) return;
 
             _eventAggregator.GetEvent<ModuleClosedEvent>().Publish();
             _eventAggregator.GetEvent<ModuleCreatedEvent>().Publish(new ModuleEventArgs(ModuleData.Name, ModuleData.Tag, ModuleData.Resref));

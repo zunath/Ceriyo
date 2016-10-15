@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
-using Ceriyo.Core.Extensions;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Toolset.WPF.Events.DataEditor;

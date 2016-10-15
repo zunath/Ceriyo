@@ -5,7 +5,6 @@ using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
-using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Services;
 using Moq;

@@ -10,6 +10,10 @@ namespace Ceriyo.Core.Validation.Data
             RuleFor(x => x.Key)
                 .NotNull()
                 .NotEmpty();
+
+            RuleFor(x => x.Value)
+                .NotNull();
         }
+
     }
 }

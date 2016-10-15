@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using Ceriyo.Core.Validation.Data;
 using FluentValidation;
 
 namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
@@ -33,19 +33,9 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             RuleFor(x => x.Comments)
                 .Length(0, 5000);
 
-            //RuleForEach(x => x.LocalStrings)
-            //    .Must(x => !string.IsNullOrWhiteSpace(x.Key))
-            //    .WithMessage("Key must not be blank.");
-
-            //RuleFor(x => x.LocalStrings)
-            //    .Must(x => x.SelectMany(y => y.Key).Count() == x.SelectMany(y => y.Key).Distinct().Count())
-            //    .WithMessage("Keys must be unique.");
-
-            //RuleFor(x => x.LocalFloats)
-            //    .Must(x => x.SelectMany(y => y.Key).Count() == x.SelectMany(y => y.Key).Distinct().Count())
-            //    .WithMessage("Keys must be unique.");
-
-
+            RuleFor(x => x.LocalVariables)
+                .SetValidator(new LocalVariableDataValidator());
         }
+
     }
 }

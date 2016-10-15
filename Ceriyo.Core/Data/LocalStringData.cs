@@ -6,14 +6,35 @@ namespace Ceriyo.Core.Data
 {
     public class LocalStringData: BaseValidatable
     {
-        public string Key { get; set; }
-        public string Value { get; set; }
+        private string _key;
+        private string _value;
+
+        public string Key
+        {
+            get { return _key; }
+            set
+            {
+                _key = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Value
+        {
+            get { return _value; }
+            set
+            {
+                _value = value;
+                OnPropertyChanged();
+            }
+        }
 
         public LocalStringData()
         {
-            
+            Key = string.Empty;
+            Value = string.Empty;
         }
-
+        
         public LocalStringData(string key, string value)
         {
             Key = key;

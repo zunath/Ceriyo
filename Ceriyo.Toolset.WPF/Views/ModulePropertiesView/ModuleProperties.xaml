@@ -8,8 +8,8 @@
              d:DesignHeight="500"
              d:DesignWidth="400"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:controls1="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:controls="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
              Background="White"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
@@ -34,7 +34,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="5">
             <TabItem Header="Details"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <Grid>
                     <Label Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.211,-1.423"/>
                     <Label Content="Tag:" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" RenderTransformOrigin="-3.474,-1.692"/>
@@ -60,7 +60,8 @@
 						Margin="103,38,0,0" 
 						TextWrapping="Wrap" 
                         MaxLength="64"
-						Text="{Binding Path=Tag,
+						Text="{Binding 
+                            Path=Tag,
                             Mode=TwoWay,
                             ValidatesOnDataErrors=True,
                             NotifyOnValidationError=True,
@@ -74,7 +75,8 @@
 						Margin="103,66,0,0" 
 						TextWrapping="Wrap" 
                         MaxLength="32"
-						Text="{Binding Path=Resref,
+						Text="{Binding 
+                            Path=Resref,
                             Mode=TwoWay,
                             ValidatesOnDataErrors=True,
                             NotifyOnValidationError=True,
@@ -105,7 +107,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Scripts"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -284,7 +286,7 @@
                 
             </TabItem>
             <TabItem Header="Variables"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <Grid Background="LightGray">
 
                     <Grid.RowDefinitions>
@@ -299,43 +301,17 @@
                         Local Strings:
                     </Label>
 
-                    <controls1:LocalStringEditor
-                        ItemsSource="{Binding LocalStrings}"
+                    <controls:LocalStringEditor
+                        ItemsSource="{Binding Path=LocalVariables.LocalStrings,
+                                            Mode=TwoWay,
+                                            ValidatesOnDataErrors=True,
+                                            NotifyOnValidationError=True,
+                                            UpdateSourceTrigger=PropertyChanged}"
                         Grid.Column="0"
                         Grid.Row="1">
                         
-                    </controls1:LocalStringEditor>
+                    </controls:LocalStringEditor>
                     
-                    <!--<DataGrid
-                        Grid.Row="1"
-                        ItemsSource="{Binding LocalStrings}" 
-                        CanUserAddRows="True"
-                        CanUserDeleteRows="True"
-                        CanUserResizeRows="False"
-                        CanUserReorderColumns="False"
-                        AutoGenerateColumns="False">
-                        
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Key"
-                                                Binding="{Binding Key,
-                                                    Mode=TwoWay,
-                                                    ValidatesOnDataErrors=True,
-                                                    NotifyOnValidationError=True,
-                                                    UpdateSourceTrigger=PropertyChanged}"
-                                                Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Value"
-                                                Binding="{Binding Value,
-                                                    Mode=TwoWay,
-                                                    ValidatesOnDataErrors=True,
-                                                    NotifyOnValidationError=True,
-                                                    UpdateSourceTrigger=PropertyChanged}"
-                                                Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-
-                            </DataGridTextColumn>
-                        </DataGrid.Columns>
-                        
-                    </DataGrid>-->
 
                     <Label
                         Grid.Row="2">
@@ -344,7 +320,7 @@
 
                     <DataGrid
                         Grid.Row="3"
-                        ItemsSource="{Binding LocalFloats}"
+                        ItemsSource="{Binding Path=LocalVariables.LocalFloats}"
                         CanUserAddRows="True"
                         CanUserDeleteRows="True"
                         CanUserResizeRows="False"
@@ -372,7 +348,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Level Chart"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <DataGrid 
                     ItemsSource="{Binding LevelChart}"
                     AutoGenerateColumns="False"
@@ -407,7 +383,7 @@
                 </DataGrid>
             </TabItem>
             <TabItem Header="Description"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <TextBox TextWrapping="Wrap"
 						 AcceptsReturn="True"
 						 HorizontalAlignment="Stretch" 
@@ -421,7 +397,7 @@
                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
             </TabItem>
             <TabItem Header="Comments"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <TextBox TextWrapping="Wrap"
 						 AcceptsReturn="True"
 						 HorizontalAlignment="Stretch" 

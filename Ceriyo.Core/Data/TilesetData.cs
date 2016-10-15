@@ -1,5 +1,4 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Validation;
 using Ceriyo.Core.Validation.Data;
 using FluentValidation;
