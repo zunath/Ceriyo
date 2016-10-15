@@ -13,11 +13,11 @@ namespace Ceriyo.Core.Scripting.Server
             data.LocalStrings[key] = value;
         }
 
-        public void SetLocalValue(Entity entity, string key, float value)
+        public void SetLocalValue(Entity entity, string key, double value)
         {
             if (!entity.HasComponent<LocalData>()) return;
             LocalData data = entity.GetComponent<LocalData>();
-            data.LocalFloats[key] = value;
+            data.LocalDoubles[key] = value;
         }
 
         public string GetLocalString(Entity entity, string key)
@@ -27,11 +27,11 @@ namespace Ceriyo.Core.Scripting.Server
             return data.LocalStrings.ContainsKey(key) ? data.LocalStrings[key] : string.Empty;
         }
 
-        public float GetLocalNumber(Entity entity, string key)
+        public double GetLocalNumber(Entity entity, string key)
         {
-            if (!entity.HasComponent<LocalData>()) return 0.0f;
+            if (!entity.HasComponent<LocalData>()) return 0.0;
             LocalData data = entity.GetComponent<LocalData>();
-            return data.LocalFloats.ContainsKey(key) ? data.LocalFloats[key] : 0.0f;
+            return data.LocalDoubles.ContainsKey(key) ? data.LocalDoubles[key] : 0.0;
         }
 
         public void DeleteLocalString(Entity entity, string key)
@@ -45,8 +45,8 @@ namespace Ceriyo.Core.Scripting.Server
         {
             if (!entity.HasComponent<LocalData>()) return;
             LocalData data = entity.GetComponent<LocalData>();
-            if (data.LocalFloats.ContainsKey(key))
-                data.LocalFloats.Remove(key);
+            if (data.LocalDoubles.ContainsKey(key))
+                data.LocalDoubles.Remove(key);
         }
     }
 }

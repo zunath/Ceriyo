@@ -291,9 +291,9 @@ namespace Ceriyo.Infrastructure.Tests.Serialization
             data.LocalStrings.Add(new LocalStringData("stringkey2", "stringval2"));
             data.LocalStrings.Add(new LocalStringData("stringkey3", "stringval3"));
 
-            data.LocalFloats.Add(new LocalFloatData("floatkey1", 1.23f));
-            data.LocalFloats.Add(new LocalFloatData("floatkey1", 34.3f));
-            data.LocalFloats.Add(new LocalFloatData("floatkey1", 55.24235f));
+            data.LocalDoubles.Add(new LocalDoubleData("floatkey1", 1.23f));
+            data.LocalDoubles.Add(new LocalDoubleData("floatkey1", 34.3f));
+            data.LocalDoubles.Add(new LocalDoubleData("floatkey1", 55.24235f));
 
             LocalVariableData result;
             using (MemoryStream stream = new MemoryStream())

@@ -245,7 +245,7 @@
 
                     <DataGrid 
                         Grid.Row="3"
-                        ItemsSource="{Binding SelectedItem.LocalVariables.LocalFloats}"
+                        ItemsSource="{Binding SelectedItem.LocalVariables.LocalDoubles}"
                         IsEnabled="{Binding IsItemSelected}"
                         CanUserAddRows="True">
                         <DataGrid.Columns>

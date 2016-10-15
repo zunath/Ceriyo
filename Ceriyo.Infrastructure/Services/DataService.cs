@@ -40,7 +40,7 @@ namespace Ceriyo.Infrastructure.Services
             Map<ItemPropertyData>();
             Map<ItemTypeData>();
             Map<LocalStringData>();
-            Map<LocalFloatData>();
+            Map<LocalDoubleData>();
             Map<LocalVariableData>();
             Map<ModuleData>();
             Map<SerializedFileData>();

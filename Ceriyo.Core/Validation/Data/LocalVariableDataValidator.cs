@@ -18,14 +18,14 @@ namespace Ceriyo.Core.Validation.Data
                 .Must(NotADuplicate)
                 .WithMessage("Keys must be unique.");
 
-            RuleFor(x => x.LocalFloats)
+            RuleFor(x => x.LocalDoubles)
                 .Must(NotADuplicate)
                 .WithMessage("Keys must be unique.");
 
             RuleForEach(x => x.LocalStrings)
                 .SetValidator(new LocalStringDataValidator());
 
-            RuleForEach(x => x.LocalFloats)
+            RuleForEach(x => x.LocalDoubles)
                 .SetValidator(new LocalFloatDataValidator());
         }
 
@@ -55,10 +55,10 @@ namespace Ceriyo.Core.Validation.Data
             return !dupes.Any();
         }
 
-        private static bool NotADuplicate(IEnumerable<LocalFloatData> localFloats)
+        private static bool NotADuplicate(IEnumerable<LocalDoubleData> localDoubles)
         {
             var dupes =
-                (from s in localFloats.Where(x => !string.IsNullOrWhiteSpace(x.Key))
+                (from s in localDoubles.Where(x => !string.IsNullOrWhiteSpace(x.Key))
                  group s by s.Key
                  into grouped
                  where grouped.Skip(1).Any()

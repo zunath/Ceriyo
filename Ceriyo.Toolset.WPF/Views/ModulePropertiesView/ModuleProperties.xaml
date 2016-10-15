@@ -318,32 +318,15 @@
                         Local Numbers:
                     </Label>
 
-                    <DataGrid
-                        Grid.Row="3"
-                        ItemsSource="{Binding Path=LocalVariables.LocalFloats}"
-                        CanUserAddRows="True"
-                        CanUserDeleteRows="True"
-                        CanUserResizeRows="False"
-                        CanUserReorderColumns="False"
-                        AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Key"
-                                                Binding="{Binding Key,
-                                                    Mode=TwoWay,
-                                                    ValidatesOnDataErrors=True,
-                                                    NotifyOnValidationError=True,
-                                                    UpdateSourceTrigger=PropertyChanged}">
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Value"
-                                                Binding="{Binding Value,
-                                                    Mode=TwoWay,
-                                                    ValidatesOnDataErrors=True,
-                                                    NotifyOnValidationError=True,
-                                                    UpdateSourceTrigger=PropertyChanged}">
-
-                            </DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <controls:LocalDoubleEditor
+                        ItemsSource="{Binding Path=LocalVariables.LocalDoubles,
+                                              Mode=TwoWay,
+                                              ValidatesOnDataErrors=True,
+                                              NotifyOnValidationError=True,
+                                              UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Column="0"
+                        Grid.Row="3">
+                    </controls:LocalDoubleEditor>
                     
                 </Grid>
             </TabItem>

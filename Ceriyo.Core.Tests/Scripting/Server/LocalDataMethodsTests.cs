@@ -37,7 +37,7 @@ namespace Ceriyo.Core.Tests.Scripting.Server
         {
             Entity entity = BuildValidEntity();
             _localDataMethods.SetLocalValue(entity, "Test", 100);
-            int value = Convert.ToInt32(entity.GetComponent<LocalData>().LocalFloats["Test"]);
+            int value = Convert.ToInt32(entity.GetComponent<LocalData>().LocalDoubles["Test"]);
 
             Assert.AreEqual(value, 100);
         }
@@ -46,7 +46,7 @@ namespace Ceriyo.Core.Tests.Scripting.Server
         {
             Entity entity = BuildValidEntity();
             _localDataMethods.SetLocalValue(entity, "Test", 50.0f);
-            float value = entity.GetComponent<LocalData>().LocalFloats["Test"];
+            double value = entity.GetComponent<LocalData>().LocalDoubles["Test"];
 
             Assert.AreEqual(value, 50.0f);
         }
@@ -91,7 +91,7 @@ namespace Ceriyo.Core.Tests.Scripting.Server
         public void GetLocalFloat_NoComponent_ShouldReturn0Point0()
         {
             Entity entity = BuildInvalidEntity();
-            float value = _localDataMethods.GetLocalNumber(entity, "nocomponent");
+            double value = _localDataMethods.GetLocalNumber(entity, "nocomponent");
             Assert.AreEqual(value, 0.0f);
         }
         [Test]
@@ -106,7 +106,7 @@ namespace Ceriyo.Core.Tests.Scripting.Server
         public void GetLocalFloat_NoKey_ShouldReturn0Point0()
         {
             Entity entity = BuildValidEntity();
-            float value = _localDataMethods.GetLocalNumber(entity, "nokey");
+            double value = _localDataMethods.GetLocalNumber(entity, "nokey");
             Assert.AreEqual(value, 0.0f);
         }
         [Test]
@@ -122,7 +122,7 @@ namespace Ceriyo.Core.Tests.Scripting.Server
         {
             Entity entity = BuildValidEntity();
             _localDataMethods.SetLocalValue(entity, "Key", 123);
-            float result = _localDataMethods.GetLocalNumber(entity, "Key");
+            double result = _localDataMethods.GetLocalNumber(entity, "Key");
             Assert.AreEqual(result, 123.0f);
         }
 
@@ -160,7 +160,7 @@ namespace Ceriyo.Core.Tests.Scripting.Server
         {
             Entity entity = BuildValidEntity();
             _localDataMethods.SetLocalValue(entity, "key", 2345);
-            float value = _localDataMethods.GetLocalNumber(entity, "key");
+            double value = _localDataMethods.GetLocalNumber(entity, "key");
             Assert.AreEqual(value, 2345);
 
             _localDataMethods.DeleteLocalNumber(entity, "key");

@@ -8,7 +8,6 @@ using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Properties;
 using FluentValidation;
 using FluentValidation.Internal;
-using FluentValidation.Results;
 
 namespace Ceriyo.Core.Validation
 {

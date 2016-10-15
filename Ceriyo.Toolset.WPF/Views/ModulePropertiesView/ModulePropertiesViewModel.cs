@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
 using Ceriyo.Core.Observables;
-using Ceriyo.Core.Validation;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -35,13 +33,13 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             LocalVariables = new LocalVariableData
             {
                 LocalStrings = new ObservableCollectionEx<LocalStringData>(),
-                LocalFloats = new ObservableCollectionEx<LocalFloatData>()
+                LocalDoubles = new ObservableCollectionEx<LocalDoubleData>()
             };
             ((ObservableCollectionEx<LocalStringData>)LocalVariables.LocalStrings).PropertyChanged += OnPropertyChanged;
             ((ObservableCollectionEx<LocalStringData>)LocalVariables.LocalStrings).ItemPropertyChanged += OnPropertyChanged;
 
-            ((ObservableCollectionEx<LocalFloatData>)LocalVariables.LocalFloats).PropertyChanged += OnPropertyChanged;
-            ((ObservableCollectionEx<LocalFloatData>)LocalVariables.LocalFloats).ItemPropertyChanged += OnPropertyChanged;
+            ((ObservableCollectionEx<LocalDoubleData>)LocalVariables.LocalDoubles).PropertyChanged += OnPropertyChanged;
+            ((ObservableCollectionEx<LocalDoubleData>)LocalVariables.LocalDoubles).ItemPropertyChanged += OnPropertyChanged;
 
             MaximumPossibleLevel = 99;
             
@@ -273,10 +271,10 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             {
                 moduleData.LocalVariables.LocalStrings.Add(localString);
             }
-            moduleData.LocalVariables.LocalFloats.Clear();
-            foreach (var localFloat in LocalVariables.LocalFloats)
+            moduleData.LocalVariables.LocalDoubles.Clear();
+            foreach (var localFloat in LocalVariables.LocalDoubles)
             {
-                moduleData.LocalVariables.LocalFloats.Add(localFloat);
+                moduleData.LocalVariables.LocalDoubles.Add(localFloat);
             }
 
             moduleData.LevelChart = LevelChart;
@@ -323,10 +321,10 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
                 LocalVariables.LocalStrings.Add(localString);
             }
 
-            LocalVariables.LocalFloats.Clear();
-            foreach (var localFloat in moduleData.LocalVariables.LocalFloats)
+            LocalVariables.LocalDoubles.Clear();
+            foreach (var localFloat in moduleData.LocalVariables.LocalDoubles)
             {
-                LocalVariables.LocalFloats.Add(localFloat);
+                LocalVariables.LocalDoubles.Add(localFloat);
             }
             
             LevelChart = moduleData.LevelChart;

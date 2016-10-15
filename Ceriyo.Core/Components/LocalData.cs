@@ -6,12 +6,12 @@ namespace Ceriyo.Core.Components
     public class LocalData: IComponent
     {
         public Dictionary<string, string> LocalStrings { get; set; }
-        public Dictionary<string, float> LocalFloats { get; set; }
+        public Dictionary<string, double> LocalDoubles { get; set; }
 
         public LocalData()
         {
             LocalStrings = new Dictionary<string, string>();
-            LocalFloats = new Dictionary<string, float>();
+            LocalDoubles = new Dictionary<string, double>();
         }
     }
 }

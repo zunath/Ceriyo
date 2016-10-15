@@ -301,7 +301,7 @@
 
                     <DataGrid 
                         Grid.Row="3"
-                        ItemsSource="{Binding SelectedPlaceable.LocalVariables.LocalFloats}"
+                        ItemsSource="{Binding SelectedPlaceable.LocalVariables.LocalDoubles}"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         CanUserAddRows="True">
                         <DataGrid.Columns>

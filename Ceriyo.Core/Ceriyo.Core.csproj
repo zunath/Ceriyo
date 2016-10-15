@@ -111,7 +111,7 @@
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Data\AreaData.cs" />
-    <Compile Include="Data\LocalFloatData.cs" />
+    <Compile Include="Data\LocalDoubleData.cs" />
     <Compile Include="Data\LocalStringData.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
     <Compile Include="Validation\BaseValidatable.cs" />

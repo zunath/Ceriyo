@@ -7,11 +7,11 @@ using Ceriyo.Core.Data;
 namespace Ceriyo.Infrastructure.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for LocalStringEditor.xaml
+    /// Interaction logic for LocalFloatEditor.xaml
     /// </summary>
-    public partial class LocalStringEditor
+    public partial class LocalDoubleEditor
     {
-        public LocalStringEditor()
+        public LocalDoubleEditor()
         {
             InitializeComponent();
             ItemsListView.DataContext = ItemsSource;
@@ -24,21 +24,22 @@ namespace Ceriyo.Infrastructure.WPF.Controls
         }
 
         public static readonly DependencyProperty ItemsSourceProperty =
-            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(LocalStringEditor));
+            DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(LocalDoubleEditor));
+        
         
         private void DeleteButtonClicked(object sender, RoutedEventArgs e)
         {
             Button button = (Button) sender;
-            LocalStringData data = (LocalStringData) button.DataContext;
+            LocalDoubleData data = (LocalDoubleData) button.DataContext;
 
-            IList<LocalStringData> list = (IList<LocalStringData>) ItemsSource;
+            IList<LocalDoubleData> list = (IList<LocalDoubleData>) ItemsSource;
             list.Remove(data);
         }
 
         private void AddButtonClicked(object sender, RoutedEventArgs e)
         {
-            IList<LocalStringData> list = (IList<LocalStringData>) ItemsSource;
-            list.Add(new LocalStringData());
+            IList<LocalDoubleData> list = (IList<LocalDoubleData>) ItemsSource;
+            list.Add(new LocalDoubleData());
         }
     }
 }

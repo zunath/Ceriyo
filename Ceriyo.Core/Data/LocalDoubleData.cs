@@ -4,10 +4,10 @@ using FluentValidation;
 
 namespace Ceriyo.Core.Data
 {
-    public class LocalFloatData: BaseValidatable
+    public class LocalDoubleData: BaseValidatable
     {
         private string _key;
-        private float _value;
+        private double _value;
 
         public string Key
         {
@@ -19,7 +19,7 @@ namespace Ceriyo.Core.Data
             }
         }
 
-        public float Value
+        public double Value
         {
             get { return _value; }
             set
@@ -29,13 +29,13 @@ namespace Ceriyo.Core.Data
             }
         }
 
-        public LocalFloatData()
+        public LocalDoubleData()
         {
             Key = string.Empty;
             Value = 0.0f;
         }
 
-        public LocalFloatData(string key, float value)
+        public LocalDoubleData(string key, double value)
         {
             Key = key;
             Value = value;

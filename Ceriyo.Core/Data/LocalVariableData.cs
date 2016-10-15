@@ -8,7 +8,7 @@ namespace Ceriyo.Core.Data
 {
     public class LocalVariableData: BaseValidatable
     {
-        private IList<LocalFloatData> _localFloats;
+        private IList<LocalDoubleData> _localDoubles;
         private IList<LocalStringData> _localStrings;
         private string _globalID;
 
@@ -33,12 +33,12 @@ namespace Ceriyo.Core.Data
             }
         }
 
-        public IList<LocalFloatData> LocalFloats
+        public IList<LocalDoubleData> LocalDoubles
         {
-            get { return _localFloats; }
+            get { return _localDoubles; }
             set
             {
-                _localFloats = value;
+                _localDoubles = value;
                 OnPropertyChanged();
             }
         }
@@ -47,7 +47,7 @@ namespace Ceriyo.Core.Data
         {
             GlobalID = Guid.NewGuid().ToString();
             LocalStrings = new List<LocalStringData>();
-            LocalFloats = new List<LocalFloatData>();
+            LocalDoubles = new List<LocalDoubleData>();
         }
 
 
