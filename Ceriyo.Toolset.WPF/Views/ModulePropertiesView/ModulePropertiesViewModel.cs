@@ -30,16 +30,10 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             _eventAggregator = eventAggregator;
             _domainService = domainService;
             Scripts = new BindingList<Script>();
-            LocalVariables = new LocalVariableData
-            {
-                LocalStrings = new ObservableCollectionEx<LocalStringData>(),
-                LocalDoubles = new ObservableCollectionEx<LocalDoubleData>()
-            };
-            ((ObservableCollectionEx<LocalStringData>)LocalVariables.LocalStrings).PropertyChanged += OnPropertyChanged;
-            ((ObservableCollectionEx<LocalStringData>)LocalVariables.LocalStrings).ItemPropertyChanged += OnPropertyChanged;
+            LocalVariables = new LocalVariableData();
 
-            ((ObservableCollectionEx<LocalDoubleData>)LocalVariables.LocalDoubles).PropertyChanged += OnPropertyChanged;
-            ((ObservableCollectionEx<LocalDoubleData>)LocalVariables.LocalDoubles).ItemPropertyChanged += OnPropertyChanged;
+            LocalVariables.LocalStrings.ListChanged += LocalVariableListChanged;
+            LocalVariables.LocalDoubles.ListChanged += LocalVariableListChanged;
 
             MaximumPossibleLevel = 99;
             
@@ -53,9 +47,13 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             LocalVariables.PropertyChanged += OnPropertyChanged;
         }
 
+        private void LocalVariableListChanged(object sender, ListChangedEventArgs e)
+        {
+            SaveCommand.RaiseCanExecuteChanged();
+        }
+
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Validator.Validate(this);
             SaveCommand.RaiseCanExecuteChanged();
         }
         

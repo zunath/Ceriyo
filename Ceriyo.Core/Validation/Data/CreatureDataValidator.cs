@@ -12,17 +12,14 @@ namespace Ceriyo.Core.Validation.Data
                 .NotEmpty();
 
             RuleFor(x => x.Name)
-                .NotNull()
                 .NotEmpty()
                 .Length(1, 256);
 
             RuleFor(x => x.Tag)
-                .NotNull()
                 .NotEmpty()
                 .Length(1, 64);
 
             RuleFor(x => x.Resref)
-                .NotNull()
                 .NotEmpty()
                 .Length(1, 32);
             
@@ -36,12 +33,13 @@ namespace Ceriyo.Core.Validation.Data
                 .InclusiveBetween(1, 99);
 
             RuleFor(x => x.ClassResref)
-                .NotNull()
                 .NotEmpty()
-                .Length(1, 32);
+                .Length(1, 32)
+                .WithMessage("A class must be selected.");
 
             RuleFor(x => x.LocalVariables)
-                .NotNull();
+                .NotNull()
+                .SetValidator(new LocalVariableDataValidator());
 
 
         }

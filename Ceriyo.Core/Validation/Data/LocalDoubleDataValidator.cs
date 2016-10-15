@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Ceriyo.Core.Validation.Data
 {
-    public class LocalFloatDataValidator: AbstractValidator<LocalDoubleData>
+    public class LocalDoubleDataValidator: AbstractValidator<LocalDoubleData>
     {
-        public LocalFloatDataValidator()
+        public LocalDoubleDataValidator()
         {
             RuleFor(x => x.Key)
                 .NotNull()

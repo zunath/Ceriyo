@@ -158,18 +158,23 @@
     <Compile Include="EventArgs\ModuleEventArgs.cs" />
     <Compile Include="Events\Ability\AbilityChangedEvent.cs" />
     <Compile Include="Events\Ability\AbilityDeletedEvent.cs" />
+    <Compile Include="Events\Ability\AbilityEditorValidityChangedEvent.cs" />
+    <Compile Include="Events\Animation\AnimationEditorValidityChangedEvent.cs" />
     <Compile Include="Events\Application\ApplicationLoadedEvent.cs" />
     <Compile Include="Events\Class\ClassChangedEvent.cs" />
     <Compile Include="Events\Class\ClassCreatedEvent.cs" />
     <Compile Include="Events\Class\ClassDeletedEvent.cs" />
+    <Compile Include="Events\Class\ClassEditorValidityChangedEvent.cs" />
     <Compile Include="Events\Creature\CreatureChangedEvent.cs" />
     <Compile Include="Events\Creature\CreatureCreatedEvent.cs" />
     <Compile Include="Events\Creature\CreatureDeletedEvent.cs" />
+    <Compile Include="Events\Creature\CreatureEditorValidityChangedEvent.cs" />
     <Compile Include="Events\DataEditor\DataEditorClosedEvent.cs" />
     <Compile Include="Events\Error\DetailedErrorEvent.cs" />
     <Compile Include="Events\Item\ItemChangedEvent.cs" />
     <Compile Include="Events\Item\ItemCreatedEvent.cs" />
     <Compile Include="Events\Item\ItemDeletedEvent.cs" />
+    <Compile Include="Events\Item\ItemEditorValidityChangedEvent.cs" />
     <Compile Include="Events\ManageResources\ManageResourcesClosedEvent.cs" />
     <Compile Include="Events\Module\ModuleClosedEvent.cs" />
     <Compile Include="Events\Module\ModuleCreatedEvent.cs" />
@@ -182,12 +187,17 @@
     <Compile Include="Events\Placeable\PlaceableChangedEvent.cs" />
     <Compile Include="Events\Placeable\PlaceableCreatedEvent.cs" />
     <Compile Include="Events\Placeable\PlaceableDeletedEvent.cs" />
+    <Compile Include="Events\Placeable\PlaceableEditorValidityChangedEvent.cs" />
     <Compile Include="Events\ResourceEditor\ResourceEditorClosedEvent.cs" />
     <Compile Include="Events\Skill\SkillChangedEvent.cs" />
     <Compile Include="Events\Skill\SkillCreatedEvent.cs" />
     <Compile Include="Events\Skill\SkillDeletedEvent.cs" />
+    <Compile Include="Events\Skill\SkillEditorValidityChangedEvent.cs" />
+    <Compile Include="Events\Tileset\TilesetEditorValidityChangedEvent.cs" />
     <Compile Include="ToolsetGame.cs" />
     <Compile Include="ToolsetIOCConfig.cs" />
+    <Compile Include="Views\AbilityEditorView\AbilityEditorViewModelValidator.cs" />
+    <Compile Include="Views\AnimationEditorView\AnimationEditorViewModelValidator.cs" />
     <Compile Include="Views\ApplicationRootView\ApplicationRootViewModel.cs" />
     <Page Include="Views\AbilityEditorView\AbilityEditor.xaml">
       <SubType>Designer</SubType>
@@ -335,10 +345,12 @@
       <DependentUpon>ClassEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ClassEditorView\ClassEditorViewModel.cs" />
+    <Compile Include="Views\ClassEditorView\ClassEditorViewModelValidator.cs" />
     <Compile Include="Views\CreatureEditorView\CreatureEditor.xaml.cs">
       <DependentUpon>CreatureEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CreatureEditorView\CreatureEditorViewModel.cs" />
+    <Compile Include="Views\CreatureEditorView\CreatureEditorViewModelValidator.cs" />
     <Compile Include="Views\DataEditorView\DataEditor.xaml.cs">
       <DependentUpon>DataEditor.xaml</DependentUpon>
     </Compile>
@@ -355,6 +367,7 @@
       <DependentUpon>ItemEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ItemEditorView\ItemEditorViewModel.cs" />
+    <Compile Include="Views\ItemEditorView\ItemEditorViewModelValidator.cs" />
     <Compile Include="Views\ManageResourcesView\ManageResources.xaml.cs">
       <DependentUpon>ManageResources.xaml</DependentUpon>
     </Compile>
@@ -372,6 +385,7 @@
       <DependentUpon>NewModule.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewModuleView\NewModuleViewModel.cs" />
+    <Compile Include="Views\NewModuleView\NewModuleViewModelValidator.cs" />
     <Compile Include="Views\OpenModuleView\OpenModule.xaml.cs">
       <DependentUpon>OpenModule.xaml</DependentUpon>
     </Compile>
@@ -384,6 +398,7 @@
       <DependentUpon>PlaceableEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlaceableEditorView\PlaceableEditorViewModel.cs" />
+    <Compile Include="Views\PlaceableEditorView\PlaceableEditorViewModelValidator.cs" />
     <Compile Include="Views\ResourceEditorView\ResourceEditor.xaml.cs">
       <DependentUpon>ResourceEditor.xaml</DependentUpon>
     </Compile>
@@ -408,10 +423,12 @@
     <Compile Include="Views\SkillEditorView\SkillEditor.xaml.cs">
       <DependentUpon>SkillEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SkillEditorView\SkillEditorViewModelValidator.cs" />
     <Compile Include="Views\TilesetEditorView\TilesetEditor.xaml.cs">
       <DependentUpon>TilesetEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TilesetEditorView\TilesetEditorViewModel.cs" />
+    <Compile Include="Views\TilesetEditorView\TilesetEditorViewModelValidator.cs" />
     <Compile Include="Views\ToolbarView\Toolbar.xaml.cs">
       <DependentUpon>Toolbar.xaml</DependentUpon>
     </Compile>

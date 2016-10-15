@@ -51,7 +51,11 @@
             DisplayMemberPath="Name"
             SelectionMode="Single"
             ItemsSource="{Binding Abilities}"
-            SelectedItem="{Binding SelectedAbility}"
+            SelectedItem="{Binding SelectedAbility,
+                                Mode=TwoWay,
+                                ValidatesOnDataErrors=True,
+                                NotifyOnValidationError=True,
+                                UpdateSourceTrigger=PropertyChanged}"
             BorderBrush="{DynamicResource AccentColorBrush}"
             BorderThickness="1">
         </ListBox>
@@ -109,7 +113,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsAbilitySelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedAbility.OnActivated}">
+                        SelectedItem="{Binding SelectedAbility.OnActivated,
+                                               Mode=TwoWay,
+                                               ValidatesOnDataErrors=True,
+                                               NotifyOnValidationError=True,
+                                               UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
                     
                 </Grid>
@@ -120,7 +128,11 @@
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsAbilitySelected}"
-                		Text="{Binding SelectedAbility.Description}" />
+                		Text="{Binding SelectedAbility.Description,
+                                       Mode=TwoWay,
+                                       ValidatesOnDataErrors=True,
+                                       NotifyOnValidationError=True,
+                                       UpdateSourceTrigger=PropertyChanged}" />
             </TabItem>
             <TabItem Header="Comments"
                      controls:ControlsHelper.HeaderFontSize="14">
@@ -128,7 +140,11 @@
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsAbilitySelected}"
-                		Text="{Binding SelectedAbility.Comment}" />
+                		Text="{Binding SelectedAbility.Comment,
+                                       Mode=TwoWay,
+                                       ValidatesOnDataErrors=True,
+                                       NotifyOnValidationError=True,
+                                       UpdateSourceTrigger=PropertyChanged}" />
             </TabItem>
         </TabControl>
         
@@ -162,7 +178,11 @@
                 Grid.Column="0"
                 Grid.Row="2"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedAbility.Name}"
+                Text="{Binding SelectedAbility.Name,
+                               Mode=TwoWay,
+                               ValidatesOnDataErrors=True,
+                               NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsAbilitySelected}">
             </TextBox>
             
@@ -176,7 +196,11 @@
                 Grid.Column="0"
                 Grid.Row="4"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedAbility.Tag}"
+                Text="{Binding SelectedAbility.Tag,
+                               Mode=TwoWay,
+                               ValidatesOnDataErrors=True,
+                               NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsAbilitySelected}">
             </TextBox>
             
@@ -190,7 +214,11 @@
                 Grid.Column="0"
                 Grid.Row="6"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedAbility.Resref}"
+                Text="{Binding SelectedAbility.Resref,
+                               Mode=TwoWay,
+                               ValidatesOnDataErrors=True,
+                               NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsAbilitySelected}">
             </TextBox>
             
@@ -198,7 +226,11 @@
                 Grid.Column="0"
                 Grid.Row="8"
                 Margin="2,2,2,2"
-                IsChecked="{Binding SelectedAbility.IsPassive}"
+                IsChecked="{Binding SelectedAbility.IsPassive,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsAbilitySelected}">
                 Is Passive
             </CheckBox>

@@ -5,17 +5,18 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.Ability;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
+using FluentValidation;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
-using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
 {
-    public class AbilityEditorViewModel : BindableBase
+    public class AbilityEditorViewModel : ValidatableBindableBase
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
@@ -69,10 +70,16 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
             }
         }
 
+        private void RaiseValidityChangedEvent()
+        {
+            _eventAggregator.GetEvent<AbilityEditorValidityChangedEvent>().Publish(!HasErrors);
+        }
+
         private void AbilitiesOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             AbilityData abilityChanged = sender as AbilityData;
             _eventAggregator.GetEvent<AbilityChangedEvent>().Publish(abilityChanged);
+            RaiseValidityChangedEvent();
         }
         
         private ObservableCollectionEx<AbilityData> _abilities;
@@ -118,6 +125,7 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
             Abilities.Add(ability);
             
             _eventAggregator.GetEvent<AbilityCreatedEvent>().Publish(ability);
+            RaiseValidityChangedEvent();
         }
 
         private void Delete()
@@ -132,11 +140,15 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
                     if (!c.Confirmed) return;
                     _eventAggregator.GetEvent<AbilityDeletedEvent>().Publish(SelectedAbility);
                     Abilities.Remove(SelectedAbility);
+                    RaiseValidityChangedEvent();
                 });
         }
         
 
         public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
 
+
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new AbilityEditorViewModelValidator());
     }
 }

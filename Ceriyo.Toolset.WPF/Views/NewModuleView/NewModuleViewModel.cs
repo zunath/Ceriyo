@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using Ceriyo.Core.Data;
+using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.EventArgs;
 using Ceriyo.Toolset.WPF.Events.Module;
+using FluentValidation;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
@@ -10,7 +12,7 @@ using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.NewModuleView
 {
-    public class NewModuleViewModel : BindableBase, IInteractionRequestAware
+    public class NewModuleViewModel : ValidatableBindableBase, IInteractionRequestAware
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -21,38 +23,29 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
         public NewModuleViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            ModuleData = new ModuleData();
             CreateModuleCommand = new DelegateCommand(CreateModule, CanCreateModule);
             CancelCommand = new DelegateCommand(Cancel);
 
-            ModuleData.PropertyChanged += OnPropertyChanged;
+            PropertyChanged += OnPropertyChanged;
         }
 
         private bool CanCreateModule()
         {
-            return !ModuleData.HasErrors;
+            return !HasErrors;
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             CreateModuleCommand.RaiseCanExecuteChanged();
         }
-
-        private ModuleData _moduleData;
-
-        public ModuleData ModuleData
-        {
-            get { return _moduleData; }
-            set { SetProperty(ref _moduleData, value); }
-        }
         
         public DelegateCommand CreateModuleCommand { get; set; }
         private void CreateModule()
         {
-            if (ModuleData.HasErrors) return;
+            if (HasErrors) return;
 
             _eventAggregator.GetEvent<ModuleClosedEvent>().Publish();
-            _eventAggregator.GetEvent<ModuleCreatedEvent>().Publish(new ModuleEventArgs(ModuleData.Name, ModuleData.Tag, ModuleData.Resref));
+            _eventAggregator.GetEvent<ModuleCreatedEvent>().Publish(new ModuleEventArgs(Name, Tag, Resref));
             FinishInteraction();
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Publish(null);
             ClearFields();
@@ -65,14 +58,41 @@ namespace Ceriyo.Toolset.WPF.Views.NewModuleView
             ClearFields();
         }
 
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
+        }
+
+        private string _tag;
+
+        public string Tag
+        {
+            get { return _tag; }
+            set { SetProperty(ref _tag, value); }
+        }
+
+        private string _resref;
+
+        public string Resref
+        {
+            get { return _resref; }
+            set { SetProperty(ref _resref, value); }
+        }
+
         private void ClearFields()
         {
-            ModuleData.Name = string.Empty;
-            ModuleData.Tag = string.Empty;
-            ModuleData.Resref = string.Empty;
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
         }
 
         public INotification Notification { get; set; }
         public Action FinishInteraction { get; set; }
+
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new NewModuleViewModelValidator());
     }
 }

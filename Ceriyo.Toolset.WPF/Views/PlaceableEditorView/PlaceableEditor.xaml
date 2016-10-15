@@ -6,7 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:controls="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
 
              mc:Ignorable="d"
              d:DesignHeight="600"
@@ -51,7 +52,11 @@
             DisplayMemberPath="Name"
             SelectionMode="Single"
             ItemsSource="{Binding Placeables}"
-            SelectedItem="{Binding SelectedPlaceable}"
+            SelectedItem="{Binding SelectedPlaceable,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
             BorderThickness="1"
             BorderBrush="{DynamicResource AccentColorBrush}">
         </ListBox>
@@ -79,12 +84,12 @@
             BorderThickness="1"
             BorderBrush="{DynamicResource AccentColorBrush}">
             <TabItem Header="Appearance"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 
             </TabItem>
 
             <TabItem Header="Scripts"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="128"></ColumnDefinition>
@@ -116,7 +121,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedPlaceable.OnClosed}">
+                        SelectedItem="{Binding SelectedPlaceable.OnClosed,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -132,7 +141,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedPlaceable.OnOpened}">
+                        SelectedItem="{Binding SelectedPlaceable.OnOpened,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -148,7 +161,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedPlaceable.OnDamaged}">
+                        SelectedItem="{Binding SelectedPlaceable.OnDamaged,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -164,7 +181,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedPlaceable.OnDeath}">
+                        SelectedItem="{Binding SelectedPlaceable.OnDeath,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -180,7 +201,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedPlaceable.OnHeartbeat}">
+                        SelectedItem="{Binding SelectedPlaceable.OnHeartbeat,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -196,7 +221,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedPlaceable.OnDisturbed}">
+                        SelectedItem="{Binding SelectedPlaceable.OnDisturbed,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -212,7 +241,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedPlaceable.OnLocked}">
+                        SelectedItem="{Binding SelectedPlaceable.OnLocked,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -228,7 +261,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedPlaceable.OnUnlocked}">
+                        SelectedItem="{Binding SelectedPlaceable.OnUnlocked,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -244,7 +281,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedPlaceable.OnAttacked}">
+                        SelectedItem="{Binding SelectedPlaceable.OnAttacked,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -260,14 +301,18 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsPlaceableSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedPlaceable.OnUsed}">
+                        SelectedItem="{Binding SelectedPlaceable.OnUsed,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                 </Grid>
             </TabItem>
 
             <TabItem Header="Variables"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <Grid>
 
                     <Grid.RowDefinitions>
@@ -282,53 +327,57 @@
                         Local Strings:
                     </Label>
 
-                    <DataGrid 
+                    <controls:LocalStringEditor
                         Grid.Row="1"
-                        ItemsSource="{Binding SelectedPlaceable.LocalVariables.LocalStrings}"
-                        IsEnabled="{Binding IsPlaceableSelected}"
-                        CanUserAddRows="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Value}"></DataGridTextColumn>
-                        </DataGrid.Columns>
-
-                    </DataGrid>
+                        ItemsSource="{Binding SelectedPlaceable.LocalVariables.LocalStrings,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
+                    </controls:LocalStringEditor>
+                    
 
                     <Label
                         Grid.Row="2">
                         Local Numbers:
                     </Label>
 
-                    <DataGrid 
+                    <controls:LocalDoubleEditor
                         Grid.Row="3"
-                        ItemsSource="{Binding SelectedPlaceable.LocalVariables.LocalDoubles}"
-                        IsEnabled="{Binding IsPlaceableSelected}"
-                        CanUserAddRows="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Value}"></DataGridTextColumn>
-                        </DataGrid.Columns>
-
-                    </DataGrid>
+                        ItemsSource="{Binding SelectedPlaceable.LocalVariables.LocalDoubles,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
+                        
+                    </controls:LocalDoubleEditor>
 
                 </Grid>
             </TabItem>
 
             <TabItem Header="Description"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsPlaceableSelected}"
-                		Text="{Binding SelectedPlaceable.Description}" />
+                		Text="{Binding SelectedPlaceable.Description,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}" />
             </TabItem>
             <TabItem Header="Comments"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsPlaceableSelected}"
-                		Text="{Binding SelectedPlaceable.Comment}" />
+                		Text="{Binding SelectedPlaceable.Comment,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}" />
             </TabItem>
         </TabControl>
 
@@ -368,7 +417,11 @@
                 Grid.Column="0"
                 Grid.Row="2"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedPlaceable.Name}"
+                Text="{Binding SelectedPlaceable.Name,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsPlaceableSelected}">
             </TextBox>
 
@@ -382,7 +435,11 @@
                 Grid.Column="0"
                 Grid.Row="4"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedPlaceable.Tag}"
+                Text="{Binding SelectedPlaceable.Tag,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsPlaceableSelected}">
             </TextBox>
 
@@ -396,7 +453,11 @@
                 Grid.Column="0"
                 Grid.Row="6"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedPlaceable.Resref}"
+                Text="{Binding SelectedPlaceable.Resref,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsPlaceableSelected}">
             </TextBox>
 
@@ -404,7 +465,11 @@
                 Grid.Column="0"
                 Grid.Row="8"
                 Margin="2,2,2,2"
-                IsChecked="{Binding SelectedPlaceable.IsStatic}"
+                IsChecked="{Binding SelectedPlaceable.IsStatic,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsPlaceableSelected}">
                 Static
             </CheckBox>
@@ -413,7 +478,11 @@
                 Grid.Column="0"
                 Grid.Row="9"
                 Margin="2,2,2,2"
-                IsChecked="{Binding SelectedPlaceable.IsPlot}"
+                IsChecked="{Binding SelectedPlaceable.IsPlot,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsPlaceableSelected}">
                 Plot
             </CheckBox>
@@ -422,7 +491,11 @@
                 Grid.Column="0"
                 Grid.Row="10"
                 Margin="2,2,2,2"
-                IsChecked="{Binding SelectedPlaceable.IsUseable}"
+                IsChecked="{Binding SelectedPlaceable.IsUseable,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsPlaceableSelected}">
                 Useable
             </CheckBox>
@@ -431,7 +504,11 @@
                 Grid.Column="0"
                 Grid.Row="11"
                 Margin="2,2,2,2"
-                IsChecked="{Binding SelectedPlaceable.IsLocked}"
+                IsChecked="{Binding SelectedPlaceable.IsLocked,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsPlaceableSelected}">
                 Locked
             </CheckBox>
@@ -440,7 +517,11 @@
                 Grid.Column="0"
                 Grid.Row="12"
                 Margin="2,2,2,2"
-                IsChecked="{Binding SelectedPlaceable.IsKeyRequired}"
+                IsChecked="{Binding SelectedPlaceable.IsKeyRequired,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsPlaceableSelected}">
                 Key Required
             </CheckBox>
@@ -449,7 +530,11 @@
                 Grid.Column="0"
                 Grid.Row="13"
                 Margin="2,2,2,2"
-                IsChecked="{Binding SelectedPlaceable.AutoRemoveKey}"
+                IsChecked="{Binding SelectedPlaceable.AutoRemoveKey,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsPlaceableSelected}">
                 Auto Remove Key
             </CheckBox>
@@ -464,7 +549,11 @@
                 Grid.Column="0"
                 Grid.Row="16"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedPlaceable.KeyTag}">
+                Text="{Binding SelectedPlaceable.KeyTag,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
             
         </Grid>

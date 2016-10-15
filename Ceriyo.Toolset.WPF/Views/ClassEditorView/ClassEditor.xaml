@@ -50,7 +50,11 @@
             DisplayMemberPath="Name"
             SelectionMode="Single"
             ItemsSource="{Binding Classes}"
-            SelectedItem="{Binding SelectedClass}"
+            SelectedItem="{Binding SelectedClass,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
             BorderBrush="{DynamicResource AccentColorBrush}"
             BorderThickness="1">
         </ListBox>
@@ -102,7 +106,11 @@
                 Grid.Column="0"
                 Grid.Row="2"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedClass.Name}"
+                Text="{Binding SelectedClass.Name,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsClassSelected}">
             </TextBox>
 
@@ -116,7 +124,11 @@
                 Grid.Column="0"
                 Grid.Row="4"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedClass.Tag}"
+                Text="{Binding SelectedClass.Tag,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsClassSelected}">
             </TextBox>
 
@@ -130,7 +142,11 @@
                 Grid.Column="0"
                 Grid.Row="6"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedClass.Resref}"
+                Text="{Binding SelectedClass.Resref,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsClassSelected}">
             </TextBox>
 

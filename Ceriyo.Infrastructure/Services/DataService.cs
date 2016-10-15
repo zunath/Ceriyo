@@ -5,6 +5,7 @@ using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
+using Ceriyo.Core.Observables;
 using Ceriyo.Core.Settings;
 using ProtoBuf;
 using ProtoBuf.Meta;

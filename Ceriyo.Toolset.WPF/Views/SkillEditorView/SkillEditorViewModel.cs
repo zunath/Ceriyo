@@ -5,17 +5,18 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Ceriyo.Toolset.WPF.Events.Skill;
+using FluentValidation;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
-using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
 {
-    public class SkillEditorViewModel : BindableBase
+    public class SkillEditorViewModel : ValidatableBindableBase
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
@@ -137,5 +138,7 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
         
         public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
 
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new SkillEditorViewModelValidator());
     }
 }

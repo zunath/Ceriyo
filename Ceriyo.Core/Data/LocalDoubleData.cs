@@ -42,6 +42,6 @@ namespace Ceriyo.Core.Data
         }
 
         private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new LocalFloatDataValidator());
+        protected override IValidator Validator => _validator ?? (_validator = new LocalDoubleDataValidator());
     }
 }

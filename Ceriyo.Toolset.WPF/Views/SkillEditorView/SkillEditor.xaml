@@ -51,7 +51,11 @@
             DisplayMemberPath="Name"
             SelectionMode="Single"
             ItemsSource="{Binding Skills}"
-            SelectedItem="{Binding SelectedSkill}"
+            SelectedItem="{Binding SelectedSkill,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
             BorderThickness="1"
             BorderBrush="{DynamicResource AccentColorBrush}">
         </ListBox>
@@ -109,7 +113,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsSkillSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedSkill.OnActivated}">
+                        SelectedItem="{Binding SelectedSkill.OnActivated,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                 </Grid>
@@ -120,7 +128,11 @@
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsSkillSelected}"
-                		Text="{Binding SelectedSkill.Description}" />
+                		Text="{Binding SelectedSkill.Description,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}" />
             </TabItem>
             <TabItem Header="Comments"
                      controls:ControlsHelper.HeaderFontSize="14">
@@ -128,7 +140,11 @@
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsSkillSelected}"
-                		Text="{Binding SelectedSkill.Comment}" />
+                		Text="{Binding SelectedSkill.Comment,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}" />
             </TabItem>
         </TabControl>
 
@@ -162,7 +178,11 @@
                 Grid.Column="0"
                 Grid.Row="2"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedSkill.Name}"
+                Text="{Binding SelectedSkill.Name,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsSkillSelected}">
             </TextBox>
 
@@ -176,7 +196,11 @@
                 Grid.Column="0"
                 Grid.Row="4"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedSkill.Tag}"
+                Text="{Binding SelectedSkill.Tag,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsSkillSelected}">
             </TextBox>
 
@@ -190,7 +214,11 @@
                 Grid.Column="0"
                 Grid.Row="6"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedSkill.Resref}"
+                Text="{Binding SelectedSkill.Resref,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsSkillSelected}">
             </TextBox>
 
@@ -198,7 +226,11 @@
                 Grid.Column="0"
                 Grid.Row="8"
                 Margin="2,2,2,2"
-                IsChecked="{Binding SelectedSkill.IsPassive}"
+                IsChecked="{Binding SelectedSkill.IsPassive,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsSkillSelected}">
                 Is Passive
             </CheckBox>

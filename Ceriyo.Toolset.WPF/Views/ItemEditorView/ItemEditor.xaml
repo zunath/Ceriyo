@@ -6,7 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:controls="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
 
              mc:Ignorable="d"
              d:DesignHeight="600"
@@ -51,7 +52,11 @@
             DisplayMemberPath="Name"
             SelectionMode="Single"
             ItemsSource="{Binding Items}"
-            SelectedItem="{Binding SelectedItem}"
+            SelectedItem="{Binding SelectedItem,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
             BorderThickness="1"
             BorderBrush="{DynamicResource AccentColorBrush}">
         </ListBox>
@@ -79,13 +84,17 @@
             BorderThickness="1"
             BorderBrush="{DynamicResource AccentColorBrush}">
             <TabItem Header="Appearance"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 
             </TabItem>
             <TabItem Header="Class Requirements"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <DataGrid 
-                    ItemsSource="{Binding SelectedItem.ClassRequirements}"
+                    ItemsSource="{Binding SelectedItem.ClassRequirements,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                     AutoGenerateColumns="False"
                     AlternatingRowBackground="#ddd"
                     CanUserDeleteRows="False"
@@ -107,11 +116,11 @@
                 </DataGrid>
             </TabItem>
             <TabItem Header="Properties"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 
             </TabItem>
             <TabItem Header="Scripts"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="128"></ColumnDefinition>
@@ -141,7 +150,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsItemSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedItem.OnActivated}">
+                        SelectedItem="{Binding SelectedItem.OnActivated,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -157,7 +170,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsItemSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedItem.OnAcquired}">
+                        SelectedItem="{Binding SelectedItem.OnAcquired,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -173,7 +190,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsItemSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedItem.OnUnacquired}">
+                        SelectedItem="{Binding SelectedItem.OnUnacquired,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -189,7 +210,11 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsItemSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedItem.OnEquipped}">
+                        SelectedItem="{Binding SelectedItem.OnEquipped,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                     <Label
@@ -205,13 +230,17 @@
                         Margin="2,2,2,2"
                         IsEnabled="{Binding IsItemSelected}"
                         ItemsSource="{Binding Scripts}"
-                        SelectedItem="{Binding SelectedItem.OnUnequipped}">
+                        SelectedItem="{Binding SelectedItem.OnUnequipped,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
 
                 </Grid>
             </TabItem>
             <TabItem Header="Variables"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <Grid>
 
                     <Grid.RowDefinitions>
@@ -226,52 +255,55 @@
                         Local Strings:
                     </Label>
 
-                    <DataGrid 
+                    <controls:LocalStringEditor
                         Grid.Row="1"
-                        ItemsSource="{Binding SelectedItem.LocalVariables.LocalStrings}"
-                        IsEnabled="{Binding IsItemSelected}"
-                        CanUserAddRows="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Value}"></DataGridTextColumn>
-                        </DataGrid.Columns>
-
-                    </DataGrid>
+                        ItemsSource="{Binding SelectedItem.LocalVariables.LocalStrings,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
+                        
+                    </controls:LocalStringEditor>
 
                     <Label
                         Grid.Row="2">
                         Local Numbers:
                     </Label>
 
-                    <DataGrid 
+                    <controls:LocalDoubleEditor
                         Grid.Row="3"
-                        ItemsSource="{Binding SelectedItem.LocalVariables.LocalDoubles}"
-                        IsEnabled="{Binding IsItemSelected}"
-                        CanUserAddRows="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Value}"></DataGridTextColumn>
-                        </DataGrid.Columns>
-
-                    </DataGrid>
+                        ItemsSource="{Binding SelectedItem.LocalVariables.LocalDoubles,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
+                    </controls:LocalDoubleEditor>
 
                 </Grid>
             </TabItem>
             <TabItem Header="Description"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsItemSelected}"
-                		Text="{Binding SelectedItem.Description}" />
+                		Text="{Binding SelectedItem.Description,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}" />
             </TabItem>
             <TabItem Header="Comments"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
                         IsEnabled="{Binding IsItemSelected}"
-                		Text="{Binding SelectedItem.Comment}" />
+                		Text="{Binding SelectedItem.Comment,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}" />
             </TabItem>
         </TabControl>
 
@@ -311,7 +343,11 @@
                 Grid.Column="0"
                 Grid.Row="2"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedItem.Name}"
+                Text="{Binding SelectedItem.Name,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsItemSelected}">
             </TextBox>
 
@@ -325,7 +361,11 @@
                 Grid.Column="0"
                 Grid.Row="4"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedItem.Tag}"
+                Text="{Binding SelectedItem.Tag,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsItemSelected}">
             </TextBox>
 
@@ -339,7 +379,11 @@
                 Grid.Column="0"
                 Grid.Row="6"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedItem.Resref}"
+                Text="{Binding SelectedItem.Resref,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsItemSelected}">
             </TextBox>
 
@@ -356,7 +400,11 @@
                 Margin="2,2,2,2"
                 IsEnabled="{Binding IsItemSelected}"
                 ItemsSource="{Binding ItemTypes}"
-                SelectedItem="{Binding SelectedItem.ItemTypeResref}">
+                SelectedItem="{Binding SelectedItem.ItemTypeResref,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
             </ListBox>
 
             <CheckBox
@@ -364,7 +412,11 @@
                 Grid.Row="11"
                 Margin="2,2,2,2"
                 IsEnabled="{Binding IsItemSelected}"
-                IsChecked="{Binding SelectedItem.IsUndroppable}">
+                IsChecked="{Binding SelectedItem.IsUndroppable,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                 Is Undroppable
             </CheckBox>
 
@@ -374,7 +426,11 @@
                 Grid.Row="12"
                 Margin="2,2,2,2"
                 IsEnabled="{Binding IsItemSelected}"
-                IsChecked="{Binding SelectedItem.IsStolen}">
+                IsChecked="{Binding SelectedItem.IsStolen,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                 Is Stolen
             </CheckBox>
 
@@ -383,7 +439,11 @@
                 Grid.Row="13"
                 Margin="2,2,2,2"
                 IsEnabled="{Binding IsItemSelected}"
-                IsChecked="{Binding SelectedItem.IsPlot}">
+                IsChecked="{Binding SelectedItem.IsPlot,
+                                    Mode=TwoWay,
+                                    ValidatesOnDataErrors=True,
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}">
                 Is Plot
             </CheckBox>
         </Grid>

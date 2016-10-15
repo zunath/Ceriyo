@@ -14,17 +14,14 @@ namespace Ceriyo.Core.Validation.Data
                 .NotEmpty();
 
             RuleFor(x => x.Name)
-                .NotNull()
                 .NotEmpty()
                 .Length(1, 256);
 
             RuleFor(x => x.Tag)
-                .NotNull()
                 .NotEmpty()
                 .Length(1, 64);
 
             RuleFor(x => x.Resref)
-                .NotNull()
                 .NotEmpty()
                 .Length(1, 32);
 
@@ -71,8 +68,7 @@ namespace Ceriyo.Core.Validation.Data
                 .NotNull();
 
             RuleFor(x => x.LocalVariables)
-                .Must(x => !x.HasErrors)
-                .WithMessage("Local variables invalid.");
+                .SetValidator(new LocalVariableDataValidator());
 
             RuleForEach(x => x.LevelChart)
                 .SetValidator(new ClassLevelValidator());

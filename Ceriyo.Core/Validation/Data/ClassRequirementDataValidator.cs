@@ -8,7 +8,6 @@ namespace Ceriyo.Core.Validation.Data
         public ClassRequirementDataValidator()
         {
             RuleFor(x => x.ClassResref)
-                .NotNull()
                 .NotEmpty()
                 .Length(1, 32);
 

@@ -38,7 +38,7 @@
             Margin="2,2,2,2"
             MaxLength="256"
             Text="{Binding 
-                Path=ModuleData.Name, 
+                Path=Name, 
                 Mode=TwoWay, 
                 ValidatesOnDataErrors=True, 
                 NotifyOnValidationError=True,
@@ -59,7 +59,7 @@
             Grid.Row="1"
             Margin="2,2,2,2"
             MaxLength="64"
-            Text="{Binding Path=ModuleData.Tag, 
+            Text="{Binding Path=Tag, 
                 Mode=TwoWay, 
                 ValidatesOnDataErrors=True, 
                 NotifyOnValidationError=True,
@@ -80,7 +80,7 @@
             Grid.ColumnSpan="2"
             Margin="2,2,2,2"
             MaxLength="32"
-            Text="{Binding Path=ModuleData.Resref, 
+            Text="{Binding Path=Resref, 
                 Mode=TwoWay, 
                 ValidatesOnDataErrors=True, 
                 NotifyOnValidationError=True,

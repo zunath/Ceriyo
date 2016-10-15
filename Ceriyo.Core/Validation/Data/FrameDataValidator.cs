@@ -12,7 +12,6 @@ namespace Ceriyo.Core.Validation.Data
                 .NotEmpty();
 
             RuleFor(x => x.Name)
-                .NotNull()
                 .NotEmpty()
                 .Length(1, 256);
 

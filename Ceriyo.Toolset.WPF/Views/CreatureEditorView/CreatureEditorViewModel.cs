@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -6,18 +8,19 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.Class;
 using Ceriyo.Toolset.WPF.Events.Creature;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
+using FluentValidation;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
-using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
 {
-    public class CreatureEditorViewModel : BindableBase
+    public class CreatureEditorViewModel : ValidatableBindableBase
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
@@ -54,6 +57,7 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             _eventAggregator.GetEvent<DataEditorClosedEvent>().Subscribe(DataEditorClosed);
             _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ModuleClosed);
         }
+        
 
 
         private void ModuleLoaded(string moduleFileName)
@@ -90,11 +94,16 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             }
         }
 
-
+        private void RaiseValidityChangedEvent()
+        {
+            _eventAggregator.GetEvent<CreatureEditorValidityChangedEvent>().Publish(!HasErrors);
+        }
+        
         private void CreaturesOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             CreatureData creatureChanged = sender as CreatureData;
             _eventAggregator.GetEvent<CreatureChangedEvent>().Publish(creatureChanged);
+            RaiseValidityChangedEvent();
         }
 
         private void ClassCreated(ClassData @class)
@@ -128,9 +137,26 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             get { return _selectedCreature; }
             set
             {
+                if (_selectedCreature != null)
+                {
+                    _selectedCreature.LocalVariables.LocalStrings.ListChanged -= LocalVariableListChanged;
+                    _selectedCreature.LocalVariables.LocalDoubles.ListChanged -= LocalVariableListChanged;
+                }
+
                 SetProperty(ref _selectedCreature, value);
+
+                if (_selectedCreature != null)
+                {
+                    _selectedCreature.LocalVariables.LocalStrings.ListChanged += LocalVariableListChanged;
+                    _selectedCreature.LocalVariables.LocalDoubles.ListChanged += LocalVariableListChanged;
+                }
                 OnPropertyChanged("IsCreatureSelected");
             }
+        }
+
+        private void LocalVariableListChanged(object sender, ListChangedEventArgs listChangedEventArgs)
+        {
+            RaiseValidityChangedEvent();
         }
 
         private Dictionary<string, ScriptData> _scripts;
@@ -181,6 +207,7 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             Creatures.Add(creature);
 
             _eventAggregator.GetEvent<CreatureCreatedEvent>().Publish(creature);
+            RaiseValidityChangedEvent();
         }
 
         private void Delete()
@@ -195,10 +222,13 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
                     if (!c.Confirmed) return;
                     _eventAggregator.GetEvent<CreatureDeletedEvent>().Publish(SelectedCreature);
                     Creatures.Remove(SelectedCreature);
+                    RaiseValidityChangedEvent();
                 });
         }
         
         public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
 
+        private IValidator _validator;
+        protected override IValidator Validator => _validator ?? (_validator = new CreatureEditorViewModelValidator());
     }
 }

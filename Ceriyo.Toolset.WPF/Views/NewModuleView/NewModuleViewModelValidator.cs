@@ -1,16 +1,11 @@
-﻿using Ceriyo.Core.Data;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Ceriyo.Core.Validation.Data
+namespace Ceriyo.Toolset.WPF.Views.NewModuleView
 {
-    public class ClassDataValidator: AbstractValidator<ClassData>
+    public class NewModuleViewModelValidator: AbstractValidator<NewModuleViewModel>
     {
-        public ClassDataValidator()
+        public NewModuleViewModelValidator()
         {
-            RuleFor(x => x.GlobalID)
-                .NotNull()
-                .NotEmpty();
-
             RuleFor(x => x.Name)
                 .NotEmpty()
                 .Length(1, 256);
@@ -22,7 +17,6 @@ namespace Ceriyo.Core.Validation.Data
             RuleFor(x => x.Resref)
                 .NotEmpty()
                 .Length(1, 32);
-
         }
     }
 }

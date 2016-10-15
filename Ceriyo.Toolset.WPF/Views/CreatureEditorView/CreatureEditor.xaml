@@ -7,7 +7,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:controls="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
 
              mc:Ignorable="d"
              d:DesignHeight="600"
@@ -79,7 +80,7 @@
             BorderThickness="1"
             BorderBrush="{DynamicResource AccentColorBrush}">
             <TabItem Header="Scripts"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="128"></ColumnDefinition>
@@ -211,7 +212,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Variables"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <Grid>
 
                     <Grid.RowDefinitions>
@@ -226,40 +227,39 @@
                         Local Strings:
                     </Label>
 
-                    <DataGrid 
-                        Grid.Row="1"
-                        ItemsSource="{Binding SelectedCreature.LocalVariables.LocalStrings}"
+                    <controls:LocalStringEditor
                         IsEnabled="{Binding IsCreatureSelected}"
-                        CanUserAddRows="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Value}"></DataGridTextColumn>
-                        </DataGrid.Columns>
+                        ItemsSource="{Binding Path=SelectedCreature.LocalVariables.LocalStrings,
+                                            Mode=TwoWay,
+                                            ValidatesOnDataErrors=True,
+                                            NotifyOnValidationError=True,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Column="0"
+                        Grid.Row="1">
 
-                    </DataGrid>
+                    </controls:LocalStringEditor>
 
                     <Label
                         Grid.Row="2">
                         Local Numbers:
                     </Label>
 
-                    <DataGrid 
-                        Grid.Row="3"
-                        ItemsSource="{Binding SelectedCreature.LocalVariables.LocalDoubles}"
+                    <controls:LocalDoubleEditor
                         IsEnabled="{Binding IsCreatureSelected}"
-                        CanUserAddRows="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Key" Binding="{Binding Key}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Value}"></DataGridTextColumn>
-                        </DataGrid.Columns>
-
-                    </DataGrid>
+                        ItemsSource="{Binding Path=SelectedCreature.LocalVariables.LocalDoubles,
+                                              Mode=TwoWay,
+                                              ValidatesOnDataErrors=True,
+                                              NotifyOnValidationError=True,
+                                              UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Column="0"
+                        Grid.Row="3">
+                    </controls:LocalDoubleEditor>
 
                 </Grid>
             </TabItem>
 
             <TabItem Header="Description"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
@@ -267,7 +267,7 @@
                 		Text="{Binding SelectedCreature.Description}" />
             </TabItem>
             <TabItem Header="Comments"
-                     controls:ControlsHelper.HeaderFontSize="14">
+                     mah:ControlsHelper.HeaderFontSize="14">
                 <TextBox 
                 		AcceptsReturn="True"
                 		TextWrapping="Wrap"
@@ -312,7 +312,11 @@
                 Grid.Column="0"
                 Grid.Row="2"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedCreature.Name}"
+                Text="{Binding SelectedCreature.Name,
+                               Mode=TwoWay,
+                               ValidatesOnDataErrors=True,
+                               NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsCreatureSelected}">
             </TextBox>
 
@@ -326,7 +330,11 @@
                 Grid.Column="0"
                 Grid.Row="4"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedCreature.Tag}"
+                Text="{Binding SelectedCreature.Tag,
+                               Mode=TwoWay,
+                               ValidatesOnDataErrors=True,
+                               NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsCreatureSelected}">
             </TextBox>
 
@@ -340,7 +348,11 @@
                 Grid.Column="0"
                 Grid.Row="6"
                 Margin="2,2,2,2"
-                Text="{Binding SelectedCreature.Resref}"
+                Text="{Binding SelectedCreature.Resref,
+                               Mode=TwoWay,
+                               ValidatesOnDataErrors=True,
+                               NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsCreatureSelected}">
             </TextBox>
 
@@ -359,7 +371,11 @@
                 DisplayMemberPath="Name"
                 IsEnabled="{Binding IsCreatureSelected}"
                 ItemsSource="{Binding Classes}"
-                SelectedItem="{Binding SelectedCreature.ClassResref}">
+                SelectedItem="{Binding SelectedCreature.ClassResref,
+                               Mode=TwoWay,
+                               ValidatesOnDataErrors=True,
+                               NotifyOnValidationError=True,
+                               UpdateSourceTrigger=PropertyChanged}">
             </ListBox>
             
             <Label
@@ -375,7 +391,11 @@
                 IsEnabled="{Binding IsCreatureSelected}"
                 Minimum="1"
                 Maximum="{Binding MaximumLevel}"
-                Value="{Binding SelectedCreature.Level}">
+                Value="{Binding SelectedCreature.Level,
+                                Mode=TwoWay,
+                                ValidatesOnDataErrors=True,
+                                NotifyOnValidationError=True,
+                                UpdateSourceTrigger=PropertyChanged}">
             </xctk:IntegerUpDown>
 
             <Label
@@ -390,7 +410,11 @@
                 Margin="2,2,2,2"
                 IsEnabled="{Binding IsCreatureSelected}"
                 ItemsSource="{Binding Dialogs}"
-                SelectedItem="{Binding SelectedCreature.DialogResref}">
+                SelectedItem="{Binding SelectedCreature.DialogResref,
+                                       Mode=TwoWay,
+                                       ValidatesOnDataErrors=True,
+                                       NotifyOnValidationError=True,
+                                       UpdateSourceTrigger=PropertyChanged}">
             </ComboBox>
             
             

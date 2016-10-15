@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Ceriyo.Core.Observables;
 using Ceriyo.Core.Validation;
 using Ceriyo.Core.Validation.Data;
 using FluentValidation;
@@ -8,8 +10,8 @@ namespace Ceriyo.Core.Data
 {
     public class LocalVariableData: BaseValidatable
     {
-        private IList<LocalDoubleData> _localDoubles;
-        private IList<LocalStringData> _localStrings;
+        private BindingList<LocalDoubleData> _localDoubles;
+        private BindingList<LocalStringData> _localStrings;
         private string _globalID;
 
         public string GlobalID
@@ -23,7 +25,7 @@ namespace Ceriyo.Core.Data
             }
         }
 
-        public IList<LocalStringData> LocalStrings
+        public BindingList<LocalStringData> LocalStrings
         {
             get { return _localStrings; }
             set
@@ -33,7 +35,7 @@ namespace Ceriyo.Core.Data
             }
         }
 
-        public IList<LocalDoubleData> LocalDoubles
+        public BindingList<LocalDoubleData> LocalDoubles
         {
             get { return _localDoubles; }
             set
@@ -46,8 +48,8 @@ namespace Ceriyo.Core.Data
         public LocalVariableData()
         {
             GlobalID = Guid.NewGuid().ToString();
-            LocalStrings = new List<LocalStringData>();
-            LocalDoubles = new List<LocalDoubleData>();
+            LocalStrings = new BindingList<LocalStringData>();
+            LocalDoubles = new BindingList<LocalDoubleData>();
         }
 
 

@@ -214,7 +214,7 @@
     <Compile Include="Validation\Data\ItemDataValidator.cs" />
     <Compile Include="Validation\Data\ItemPropertyDataValidator.cs" />
     <Compile Include="Validation\Data\ItemTypeDataValidator.cs" />
-    <Compile Include="Validation\Data\LocalFloatDataValidator.cs" />
+    <Compile Include="Validation\Data\LocalDoubleDataValidator.cs" />
     <Compile Include="Validation\Data\LocalStringDataValidator.cs" />
     <Compile Include="Validation\Data\LocalVariableDataValidator.cs" />
     <Compile Include="Validation\Data\ModuleDataValidator.cs" />
@@ -222,6 +222,7 @@
     <Compile Include="Validation\Data\ScriptDataValidator.cs" />
     <Compile Include="Validation\Data\SkillDataValidator.cs" />
     <Compile Include="Validation\Data\TilesetDataValidator.cs" />
+    <Compile Include="Validation\ValidationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Systems\" />
