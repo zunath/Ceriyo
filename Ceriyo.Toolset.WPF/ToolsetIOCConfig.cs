@@ -91,11 +91,7 @@ namespace Ceriyo.Toolset.WPF
             foreach (var validator in validators)
             {
                 if (validator.BaseType == null) continue;
-                var type = validator.BaseType.GetGenericArguments()[0];
-
-                builder.RegisterType(validator)
-                    .Keyed<IValidator>(type)
-                    .As<IValidator>();
+                builder.RegisterType(validator).SingleInstance();
             }
         }
 
