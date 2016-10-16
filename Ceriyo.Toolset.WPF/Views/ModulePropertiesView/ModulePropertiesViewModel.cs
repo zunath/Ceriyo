@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Data;
-using Ceriyo.Core.Entities;
+using Ceriyo.Core.Observables;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -30,9 +30,12 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             _domainService = domainService;
             Scripts = new BindingList<Script>();
             LocalVariables = new LocalVariableData();
+            LevelChart = new ObservableCollectionEx<ClassLevelData>();
 
-            LocalVariables.LocalStrings.ListChanged += LocalVariableListChanged;
-            LocalVariables.LocalDoubles.ListChanged += LocalVariableListChanged;
+            LocalVariables.LocalStrings.ListChanged += ChildListChanged;
+            LocalVariables.LocalDoubles.ListChanged += ChildListChanged;
+            LevelChart.PropertyChanged += OnPropertyChanged;
+            LevelChart.ItemPropertyChanged += OnPropertyChanged;
 
             MaximumPossibleLevel = 99;
             
@@ -45,8 +48,8 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             PropertyChanged += OnPropertyChanged;
             LocalVariables.PropertyChanged += OnPropertyChanged;
         }
-
-        private void LocalVariableListChanged(object sender, ListChangedEventArgs e)
+        
+        private void ChildListChanged(object sender, ListChangedEventArgs e)
         {
             SaveCommand.RaiseCanExecuteChanged();
         }
@@ -230,9 +233,9 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             set { SetProperty(ref _onPlayerLevelUp, value); }
         }
 
-        private BindingList<ClassLevel> _levelChart;
+        private ObservableCollectionEx<ClassLevelData> _levelChart;
 
-        public BindingList<ClassLevel> LevelChart
+        public ObservableCollectionEx<ClassLevelData> LevelChart
         {
             get { return _levelChart; }
             set { SetProperty(ref _levelChart, value); }
@@ -274,7 +277,11 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
                 moduleData.LocalVariables.LocalDoubles.Add(localFloat);
             }
 
-            moduleData.LevelChart = LevelChart;
+            moduleData.LevelChart.Clear();
+            foreach (var level in LevelChart)
+            {
+                moduleData.LevelChart.Add(level);
+            }
 
             _domainService.UpdateLoadedModuleData(moduleData);
 
@@ -324,7 +331,12 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
                 LocalVariables.LocalDoubles.Add(localFloat);
             }
             
-            LevelChart = moduleData.LevelChart;
+            LevelChart.Clear();
+            foreach (var level in moduleData.LevelChart)
+            {
+                LevelChart.Add(level);
+            }
+
         }
 
 

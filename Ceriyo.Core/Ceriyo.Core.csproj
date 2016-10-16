@@ -111,6 +111,8 @@
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Data\AreaData.cs" />
+    <Compile Include="Data\ClassLevelData.cs" />
+    <Compile Include="Data\LevelChartData.cs" />
     <Compile Include="Data\LocalDoubleData.cs" />
     <Compile Include="Data\LocalStringData.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
@@ -161,7 +163,7 @@
     <Compile Include="Data\TilesetData.cs" />
     <Compile Include="Entities\Ability.cs" />
     <Compile Include="Entities\Area.cs" />
-    <Compile Include="Entities\ClassLevel.cs" />
+    <Compile Include="Components\ClassLevel.cs" />
     <Compile Include="Entities\Creature.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Module.cs" />
@@ -202,11 +204,11 @@
     <Compile Include="UI\SampleDesktop.cs" />
     <Compile Include="UI\SquidRenderer.cs" />
     <Compile Include="Services\UIService.cs" />
-    <Compile Include="Validation\Components\ClassLevelValidator.cs" />
     <Compile Include="Validation\Data\AbilityDataValidator.cs" />
     <Compile Include="Validation\Data\AnimationDataValidator.cs" />
     <Compile Include="Validation\Data\AreaDataValidator.cs" />
     <Compile Include="Validation\Data\ClassDataValidator.cs" />
+    <Compile Include="Validation\Data\ClassLevelDataValidator.cs" />
     <Compile Include="Validation\Data\ClassRequirementDataValidator.cs" />
     <Compile Include="Validation\Data\CreatureDataValidator.cs" />
     <Compile Include="Validation\Data\DialogDataValidator.cs" />
@@ -226,6 +228,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Systems\" />
+    <Folder Include="Validation\Components\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">

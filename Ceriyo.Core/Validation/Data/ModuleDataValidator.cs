@@ -1,5 +1,4 @@
 ﻿using Ceriyo.Core.Data;
-using Ceriyo.Core.Validation.Components;
 using FluentValidation;
 
 namespace Ceriyo.Core.Validation.Data
@@ -71,7 +70,7 @@ namespace Ceriyo.Core.Validation.Data
                 .SetValidator(new LocalVariableDataValidator());
 
             RuleForEach(x => x.LevelChart)
-                .SetValidator(new ClassLevelValidator());
+                .SetValidator(new ClassLevelDataValidator());
 
             RuleForEach(x => x.ResourcePacks)
                 .NotNull()

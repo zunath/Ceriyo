@@ -1,6 +1,6 @@
 ﻿using Artemis.Interface;
 
-namespace Ceriyo.Core.Entities
+namespace Ceriyo.Core.Components
 {
     public class ClassLevel: IComponent
     {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using Ceriyo.Core.Entities;
 using Ceriyo.Core.Validation;
 using Ceriyo.Core.Validation.Data;
 using FluentValidation;
@@ -37,7 +36,7 @@ namespace Ceriyo.Core.Data
         private string _onPlayerLevelUp;
 
         private LocalVariableData _localVariables;
-        private BindingList<ClassLevel> _levelChart;
+        private LevelChartData _levelChart;
         private string _globalID;
 
         private BindingList<string> _resourcePacks;
@@ -308,7 +307,7 @@ namespace Ceriyo.Core.Data
             }
         }
 
-        public BindingList<ClassLevel> LevelChart
+        public LevelChartData LevelChart
         {
             get { return _levelChart; }
             set
@@ -343,7 +342,7 @@ namespace Ceriyo.Core.Data
             TilesetIDs = new BindingList<string>();
             MaxLevel = 99;
             LocalVariables = new LocalVariableData();
-            LevelChart = new BindingList<ClassLevel>();
+            LevelChart = new LevelChartData();
             ResourcePacks = new BindingList<string>();
         }
 

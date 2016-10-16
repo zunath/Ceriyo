@@ -10,6 +10,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:controls="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:data="clr-namespace:Ceriyo.Core.Data;assembly=Ceriyo.Core"
              Background="White"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
@@ -23,14 +24,13 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="32"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <TabControl Background="LightGray"
-                    Grid.Row="0"
+
+        <TabControl Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="5">
             <TabItem Header="Details"
@@ -84,7 +84,7 @@
                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
 						VerticalAlignment="Top" 
 						Width="271"/>
-                    <xctk:IntegerUpDown 
+                    <controls:IntegerUpDownEx
                         HorizontalAlignment="Left" 
                         Margin="103,94,0,0" 
                         VerticalAlignment="Top" 
@@ -102,13 +102,13 @@
                             NotifyOnValidationError=True,
                             UpdateSourceTrigger=PropertyChanged}"
                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-                    </xctk:IntegerUpDown>
+                    </controls:IntegerUpDownEx>
                     <Label Content="Max Level:" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Scripts"
                      mah:ControlsHelper.HeaderFontSize="14">
-                
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="110"></ColumnDefinition>
@@ -143,7 +143,7 @@
                             UpdateSourceTrigger=PropertyChanged}"
                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
-                    
+
                     <Label
                         Grid.Column="0"
                         Grid.Row="1">
@@ -283,7 +283,7 @@
                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
                     </ComboBox>
                 </Grid>
-                
+
             </TabItem>
             <TabItem Header="Variables"
                      mah:ControlsHelper.HeaderFontSize="14">
@@ -309,9 +309,9 @@
                                             UpdateSourceTrigger=PropertyChanged}"
                         Grid.Column="0"
                         Grid.Row="1">
-                        
+
                     </controls:LocalStringEditor>
-                    
+
 
                     <Label
                         Grid.Row="2">
@@ -327,43 +327,50 @@
                         Grid.Column="0"
                         Grid.Row="3">
                     </controls:LocalDoubleEditor>
-                    
+
                 </Grid>
             </TabItem>
             <TabItem Header="Level Chart"
                      mah:ControlsHelper.HeaderFontSize="14">
-                <DataGrid 
-                    ItemsSource="{Binding LevelChart}"
-                    AutoGenerateColumns="False"
-                    AlternatingRowBackground="#ddd"
-                    CanUserDeleteRows="False"
-                    CanUserReorderColumns="False"
-                    CanUserResizeColumns="True"
-                    CanUserResizeRows="False"
-                    CanUserSortColumns="True"
-                    CanUserAddRows="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn
-                            Header="Level"
-                            IsReadOnly="True"
-                            Binding="{Binding Path=Level,
-                                        Mode=TwoWay,
-                                        ValidatesOnDataErrors=True,
-                                        NotifyOnValidationError=True,
-                                        UpdateSourceTrigger=PropertyChanged}"
-                            Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-                        </DataGridTextColumn>
-                        <DataGridTextColumn
-                            Header="Exp Req."
-                            Binding="{Binding Path=ExperienceRequired,
-                                        Mode=TwoWay,
-                                        ValidatesOnDataErrors=True,
-                                        NotifyOnValidationError=True,
-                                        UpdateSourceTrigger=PropertyChanged}"
-                            Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ListView 
+                      ItemsSource="{Binding LevelChart}">
+
+
+                    <ListView.View>
+
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn Header="Level" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate DataType="{x:Type data:LevelChartData}">
+                                        <Label Content="{Binding Level}"></Label>
+                                    </DataTemplate>
+                                    
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Exp. Required" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate DataType="{x:Type data:LevelChartData}">
+                                        <controls:IntegerUpDownEx Value="{Binding Path=ExperienceRequired,
+                                                                        Mode=TwoWay,
+                                                                        ValidatesOnDataErrors=True,
+                                                                        NotifyOnValidationError=True,
+                                                                        UpdateSourceTrigger=PropertyChanged}"
+                                                            Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                                                            Minimum="1"
+                                                            Maximum="999999999"></controls:IntegerUpDownEx>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+
+                        </GridView>
+
+
+
+                    </ListView.View>
+
+                </ListView>
+
             </TabItem>
             <TabItem Header="Description"
                      mah:ControlsHelper.HeaderFontSize="14">
@@ -393,7 +400,7 @@
                             UpdateSourceTrigger=PropertyChanged}"
                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
             </TabItem>
-            
+
         </TabControl>
 
         <StackPanel
@@ -417,6 +424,7 @@
             </Button>
 
         </StackPanel>
-        
+
     </Grid>
 </UserControl>
+

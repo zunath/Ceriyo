@@ -384,7 +384,7 @@
                 Level:
             </Label>
 
-            <xctk:IntegerUpDown
+            <controls:IntegerUpDownEx
                 Grid.Column="0"
                 Grid.Row="13"
                 Margin="2,2,2,2"
@@ -396,7 +396,7 @@
                                 ValidatesOnDataErrors=True,
                                 NotifyOnValidationError=True,
                                 UpdateSourceTrigger=PropertyChanged}">
-            </xctk:IntegerUpDown>
+            </controls:IntegerUpDownEx>
 
             <Label
                 Grid.Column="0"

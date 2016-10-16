@@ -175,8 +175,6 @@
                         <dataEditorView:DataEditor
                                 MinWidth="600"
                                 MinHeight="600"
-                                Width="Auto"
-                                Height="Auto"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"/>
                     </prism:PopupWindowAction.WindowContent>
@@ -238,11 +236,12 @@
 
             <prism:InteractionRequestTrigger SourceObject="{Binding OpenModulePropertiesRequest, Mode=OneWay}">
                 <actions:MetroPopupWindowAction IsModal="True" 
-                                         CenterOverAssociatedObject="True">
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
                     <prism:PopupWindowAction.WindowContent>
                         <modulePropertiesView:ModuleProperties
-                            Width="Auto"
-                            Height="Auto"
+                            Width="600"
+                            Height="600"
                             MinWidth="600"
                             MinHeight="600"/>
                     </prism:PopupWindowAction.WindowContent>

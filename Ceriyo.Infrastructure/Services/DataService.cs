@@ -4,7 +4,6 @@ using System.Linq;
 using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
-using Ceriyo.Core.Entities;
 using Ceriyo.Core.Settings;
 using ProtoBuf;
 using ProtoBuf.Meta;
@@ -32,7 +31,7 @@ namespace Ceriyo.Infrastructure.Services
             Map<AnimationData>();
             Map<ClassData>();
             Map<ClassRequirementData>();
-            Map<ClassLevel>();
+            Map<ClassLevelData>();
             Map<CreatureData>();
             Map<DialogData>();
             Map<FrameData>();

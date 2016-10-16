@@ -44,7 +44,7 @@
                 <ListView.View>
 
                     <GridView AllowsColumnReorder="False">
-                        <GridViewColumn Header="Key" Width="Auto">
+                        <GridViewColumn Header="Key" Width="75">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ContentControl Content="{Binding}">
@@ -62,7 +62,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Value" Width="Auto">
+                        <GridViewColumn Header="Value" Width="75">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ContentControl Content="{Binding}">
@@ -80,7 +80,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Action" Width="Auto">
+                        <GridViewColumn Header="Action" Width="75">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Click="DeleteButtonClicked"

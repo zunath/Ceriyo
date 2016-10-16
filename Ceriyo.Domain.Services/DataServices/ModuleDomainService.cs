@@ -36,6 +36,16 @@ namespace Ceriyo.Domain.Services.DataServices
             };
 
             CreateProjectStructure();
+
+
+            for (int x = 1; x <= _moduleData.MaxLevel; x++)
+            {
+                _moduleData.LevelChart.Add(new ClassLevelData
+                {
+                    Level = x,
+                    ExperienceRequired = x * 100
+                });
+            }
         }
 
 
@@ -101,6 +111,7 @@ namespace Ceriyo.Domain.Services.DataServices
 
         public void UpdateLoadedModuleData(ModuleData moduleData)
         {
+            _moduleData.LevelChart.Clear();
             _objectMapper.Map(moduleData, _moduleData);
         }
 

@@ -7,6 +7,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:extension="clr-namespace:Ceriyo.Infrastructure.WPF.Extensions;assembly=Ceriyo.Infrastructure.WPF"
              xmlns:constants="clr-namespace:Ceriyo.Core.Constants;assembly=Ceriyo.Core"
+             xmlns:controls="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
              mc:Ignorable="d"
              d:DesignHeight="370"
              d:DesignWidth="600"
@@ -77,14 +78,14 @@
             Port:
         </Label>
 
-        <xctk:IntegerUpDown
+        <controls:IntegerUpDownEx
             Margin="10,4,5,4"
             Grid.Column="5"
             Grid.Row="1"
             Minimum="0"
             Maximum="{Binding MaximumPortNumber}"
             Value="{Binding Settings.Port}">
-        </xctk:IntegerUpDown>
+        </controls:IntegerUpDownEx>
 
         <Label
             Margin="0,6,0,0"
@@ -143,14 +144,14 @@
             Max Players:
         </Label>
 
-        <xctk:IntegerUpDown
+        <controls:IntegerUpDownEx
             Margin="10,4,5,4"
             Grid.Column="5"
             Grid.Row="3"
             Minimum="1"
             Maximum="{Binding MaximumPlayers}"
             Value="{Binding Settings.MaxPlayers}">
-        </xctk:IntegerUpDown>
+        </controls:IntegerUpDownEx>
         
         <CheckBox
             Margin="5,15,0,0"
@@ -279,5 +280,7 @@
 
     </Grid>
 </UserControl>
+
+    
 
     

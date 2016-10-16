@@ -116,6 +116,7 @@
     <Compile Include="Actions\MetroPopupWindowAction.cs" />
     <Compile Include="Behaviors\RepositionPopupBehavior.cs" />
     <Compile Include="BindableBases\ValidatableBindableBase.cs" />
+    <Compile Include="Controls\IntegerUpDownEx.cs" />
     <Compile Include="Controls\LocalDoubleEditor.xaml.cs">
       <DependentUpon>LocalDoubleEditor.xaml</DependentUpon>
     </Compile>
