@@ -8,6 +8,8 @@ namespace Ceriyo.Infrastructure.WPF.Controls
         {
             base.OnTextChanged(oldValue, newValue);
 
+            if (string.IsNullOrWhiteSpace(oldValue)) return;
+
             int val;
             if (!int.TryParse(newValue, out val))
             {
