@@ -58,7 +58,6 @@ namespace Ceriyo.Core.Validation
             if (string.IsNullOrWhiteSpace(propertyName) ||
                 string.IsNullOrWhiteSpace(error)) return;
             ExternalErrors[propertyName] = error;
-            RaiseErrorsChanged(propertyName);
         }
 
         public void ClearExternalError(string propertyName)
@@ -66,7 +65,6 @@ namespace Ceriyo.Core.Validation
             if (string.IsNullOrWhiteSpace(propertyName) ||
                 !ExternalErrors.ContainsKey(propertyName)) return;
             ExternalErrors.Remove(propertyName);
-            RaiseErrorsChanged(propertyName);
         }
 
         private Dictionary<string, List<string>> _errors;
@@ -76,7 +74,7 @@ namespace Ceriyo.Core.Validation
         [SerializationIgnore]
         public bool HasErrors => Errors.Count > 0 || ExternalErrors.Count > 0;
 
-        private void RaiseErrorsChanged(string propertyName)
+        public void RaiseErrorsChanged(string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }

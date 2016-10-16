@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Core.Validation;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -70,10 +72,17 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
                 Placeables.Add(_dataService.Load<PlaceableData>(file));
             }
         }
+
+        private void RaiseValidityChangedEvent()
+        {
+            _eventAggregator.GetEvent<PlaceableEditorValidityChangedEvent>().Publish(!HasErrors);
+        }
+
         private void PlaceablesOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             PlaceableData placeableChanged = sender as PlaceableData;
             _eventAggregator.GetEvent<PlaceableChangedEvent>().Publish(placeableChanged);
+            RaiseValidityChangedEvent();
         }
 
         private ObservableCollectionEx<PlaceableData> _placeables;
@@ -90,8 +99,31 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
             get { return _selectedPlaceable; }
             set
             {
+                if (_selectedPlaceable != null)
+                {
+                    _selectedPlaceable.LocalVariables.LocalStrings.ListChanged -= LocalVariableListChanged;
+                    _selectedPlaceable.LocalVariables.LocalDoubles.ListChanged -= LocalVariableListChanged;
+                }
+
                 SetProperty(ref _selectedPlaceable, value);
+
+                if (_selectedPlaceable != null)
+                {
+                    _selectedPlaceable.LocalVariables.LocalStrings.ListChanged += LocalVariableListChanged;
+                    _selectedPlaceable.LocalVariables.LocalDoubles.ListChanged += LocalVariableListChanged;
+                }
+
                 OnPropertyChanged("IsPlaceableSelected");
+            }
+        }
+
+        private void LocalVariableListChanged(object sender, ListChangedEventArgs e)
+        {
+            RaiseValidityChangedEvent();
+
+            foreach (var obj in (IEnumerable)sender)
+            {
+                ((BaseValidatable)obj).RaiseErrorsChanged(e.PropertyDescriptor?.Name);
             }
         }
 
@@ -119,6 +151,7 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
             Placeables.Add(placeable);
 
             _eventAggregator.GetEvent<PlaceableCreatedEvent>().Publish(placeable);
+            RaiseValidityChangedEvent();
         }
 
         private void Delete()
@@ -133,6 +166,7 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
                     if (!c.Confirmed) return;
                     _eventAggregator.GetEvent<PlaceableDeletedEvent>().Publish(SelectedPlaceable);
                     Placeables.Remove(SelectedPlaceable);
+                    RaiseValidityChangedEvent();
                 });
         }
 

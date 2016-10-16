@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Core.Validation;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Item;
@@ -73,10 +75,16 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
             }
         }
 
+        private void RaiseValidityChangedEvent()
+        {
+            _eventAggregator.GetEvent<ItemEditorValidityChangedEvent>().Publish(!HasErrors);
+        }
+
         private void ItemsOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             ItemData itemChanged = sender as ItemData;
             _eventAggregator.GetEvent<ItemChangedEvent>().Publish(itemChanged);
+            RaiseValidityChangedEvent();
         }
 
         private ObservableCollectionEx<ItemData> _items;
@@ -93,8 +101,31 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
             get { return _selectedItem; }
             set
             {
+                if(_selectedItem != null)
+                {
+                    _selectedItem.LocalVariables.LocalStrings.ListChanged -= LocalVariableListChanged;
+                    _selectedItem.LocalVariables.LocalDoubles.ListChanged -= LocalVariableListChanged;
+                }
+
                 SetProperty(ref _selectedItem, value);
+
+                if (_selectedItem != null)
+                {
+                    _selectedItem.LocalVariables.LocalStrings.ListChanged += LocalVariableListChanged;
+                    _selectedItem.LocalVariables.LocalDoubles.ListChanged += LocalVariableListChanged;
+                }
+
                 OnPropertyChanged("IsItemSelected");
+            }
+        }
+
+        private void LocalVariableListChanged(object sender, ListChangedEventArgs e)
+        {
+            RaiseValidityChangedEvent();
+
+            foreach (var obj in (IEnumerable)sender)
+            {
+                ((BaseValidatable)obj).RaiseErrorsChanged(e.PropertyDescriptor?.Name);
             }
         }
 
@@ -138,6 +169,7 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
             Items.Add(item);
 
             _eventAggregator.GetEvent<ItemCreatedEvent>().Publish(item);
+            RaiseValidityChangedEvent();
         }
 
         private void Delete()
@@ -152,6 +184,7 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
                     if (!c.Confirmed) return;
                     _eventAggregator.GetEvent<ItemDeletedEvent>().Publish(SelectedItem);
                     Items.Remove(SelectedItem);
+                    RaiseValidityChangedEvent();
                 });
         }
         

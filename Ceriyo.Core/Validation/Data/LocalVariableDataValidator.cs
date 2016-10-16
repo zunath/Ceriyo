@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Ceriyo.Core.Data;
+﻿using Ceriyo.Core.Data;
 using FluentValidation;
 
 namespace Ceriyo.Core.Validation.Data

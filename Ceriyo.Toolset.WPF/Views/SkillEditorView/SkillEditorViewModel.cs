@@ -70,10 +70,17 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
                 Skills.Add(_dataService.Load<SkillData>(file));
             }
         }
+
+        private void RaiseValidityChangedEvent()
+        {
+            _eventAggregator.GetEvent<SkillEditorValidityChangedEvent>().Publish(!HasErrors);
+        }
+
         private void SkillsOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             SkillData skillChanged = sender as SkillData;
             _eventAggregator.GetEvent<SkillChangedEvent>().Publish(skillChanged);
+            RaiseValidityChangedEvent();
         }
 
         private ObservableCollectionEx<SkillData> _skills;
@@ -119,6 +126,7 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
             Skills.Add(skill);
 
             _eventAggregator.GetEvent<SkillCreatedEvent>().Publish(skill);
+            RaiseValidityChangedEvent();
         }
 
         private void Delete()
@@ -133,6 +141,7 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
                     if (!c.Confirmed) return;
                     _eventAggregator.GetEvent<SkillDeletedEvent>().Publish(SelectedSkill);
                     Skills.Remove(SelectedSkill);
+                    RaiseValidityChangedEvent();
                 });
         }
         

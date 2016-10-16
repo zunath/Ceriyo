@@ -54,6 +54,8 @@ namespace Ceriyo.Core.Validation.Data
                 .NotEmpty()
                 .Length(1, 32);
 
+            RuleFor(x => x.LocalVariables)
+                .SetValidator(new LocalVariableDataValidator());
         }
     }
 }

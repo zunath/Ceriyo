@@ -70,11 +70,17 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
             }
         }
 
+        private void RaiseValidityChangedEvent()
+        {
+            _eventAggregator.GetEvent<ClassEditorValidityChangedEvent>().Publish(!HasErrors);
+        }
+
         private void ClassesOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             ClassData classChanged = sender as ClassData;
             
             _eventAggregator.GetEvent<ClassChangedEvent>().Publish(classChanged);
+            RaiseValidityChangedEvent();
         }
 
         private ObservableCollectionEx<ClassData> _classes;
@@ -111,6 +117,7 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
             Classes.Add(@class);
 
             _eventAggregator.GetEvent<ClassCreatedEvent>().Publish(@class);
+            RaiseValidityChangedEvent();
         }
 
         private void Delete()
@@ -125,6 +132,7 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
                     if (!c.Confirmed) return;
                     _eventAggregator.GetEvent<ClassDeletedEvent>().Publish(SelectedClass);
                     Classes.Remove(SelectedClass);
+                    RaiseValidityChangedEvent();
                 });
         }
         

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using Ceriyo.Core.Observables;
 using Ceriyo.Core.Validation;
 using Ceriyo.Core.Validation.Data;
 using FluentValidation;

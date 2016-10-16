@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -8,6 +7,7 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Core.Validation;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.Events.Class;
 using Ceriyo.Toolset.WPF.Events.Creature;
@@ -154,9 +154,14 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             }
         }
 
-        private void LocalVariableListChanged(object sender, ListChangedEventArgs listChangedEventArgs)
+        private void LocalVariableListChanged(object sender, ListChangedEventArgs e)
         {
             RaiseValidityChangedEvent();
+
+            foreach (var obj in (IEnumerable) sender)
+            {
+                ((BaseValidatable)obj).RaiseErrorsChanged(e.PropertyDescriptor?.Name);
+            }
         }
 
         private Dictionary<string, ScriptData> _scripts;
