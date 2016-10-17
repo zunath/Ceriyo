@@ -1,11 +1,11 @@
-﻿using Ceriyo.Core.Validation.Data;
+﻿using Ceriyo.Infrastructure.WPF.Validation.Validators;
 using FluentValidation;
 
 namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 {
     public class ModulePropertiesViewModelValidator: AbstractValidator<ModulePropertiesViewModel>
     {
-        public ModulePropertiesViewModelValidator()
+        public ModulePropertiesViewModelValidator(LocalVariableDataObservableValidator localValidator)
         {
             RuleFor(x => x.Name)
                 .NotNull()
@@ -34,7 +34,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
                 .Length(0, 5000);
 
             RuleFor(x => x.LocalVariables)
-                .SetValidator(new LocalVariableDataValidator());
+                .SetValidator(localValidator);
         }
 
     }

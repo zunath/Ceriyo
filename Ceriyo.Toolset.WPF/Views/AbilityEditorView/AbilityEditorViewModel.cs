@@ -6,35 +6,42 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.Ability;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
-using FluentValidation;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
 {
-    public class AbilityEditorViewModel : ValidatableBindableBase
+    public class AbilityEditorViewModel : ValidatableBindableBase<AbilityEditorViewModel>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
+        private readonly AbilityDataObservable.Factory _abilityFactory;
 
-        public AbilityEditorViewModel(IEventAggregator eventAggregator,
+        public AbilityEditorViewModel(
+            IObjectMapper objectMapper,
+            IEventAggregator eventAggregator,
             IDataService dataService,
-            IPathService pathService)
+            IPathService pathService,
+            AbilityEditorViewModelValidator validator,
+            AbilityDataObservable.Factory abilityFactory)
+            : base(objectMapper, validator)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _pathService = pathService;
+            _abilityFactory = abilityFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
 
-            Abilities = new ObservableCollectionEx<AbilityData>();
-            Scripts = new Dictionary<string, ScriptData>();
+            Abilities = new ObservableCollectionEx<AbilityDataObservable>();
+            Scripts = new Dictionary<string, ScriptDataObservable>();
 
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
             Abilities.ItemPropertyChanged += AbilitiesOnItemPropertyChanged;
@@ -66,7 +73,9 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
 
             foreach (var file in files)
             {
-                Abilities.Add(_dataService.Load<AbilityData>(file));
+                var loaded = _dataService.Load<AbilityData>(file);
+                var ability = _abilityFactory.Invoke(loaded);
+                Abilities.Add(ability);
             }
         }
 
@@ -77,21 +86,21 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
 
         private void AbilitiesOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            AbilityData abilityChanged = sender as AbilityData;
-            _eventAggregator.GetEvent<AbilityChangedEvent>().Publish(abilityChanged);
+            AbilityDataObservable ability = (AbilityDataObservable) sender;
+            _eventAggregator.GetEvent<AbilityChangedEvent>().Publish(ability);
             RaiseValidityChangedEvent();
         }
         
-        private ObservableCollectionEx<AbilityData> _abilities;
+        private ObservableCollectionEx<AbilityDataObservable> _abilities;
 
-        public ObservableCollectionEx<AbilityData> Abilities
+        public ObservableCollectionEx<AbilityDataObservable> Abilities
         {
             get { return _abilities; }
             set { SetProperty(ref _abilities, value); }
         }
 
-        private AbilityData _selectedAbility;
-        public AbilityData SelectedAbility
+        private AbilityDataObservable _selectedAbility;
+        public AbilityDataObservable SelectedAbility
         {
             get { return _selectedAbility; }
             set
@@ -101,9 +110,9 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
             }
         }
 
-        private Dictionary<string, ScriptData> _scripts;
+        private Dictionary<string, ScriptDataObservable> _scripts;
 
-        public Dictionary<string, ScriptData> Scripts
+        public Dictionary<string, ScriptDataObservable> Scripts
         {
             get { return _scripts; }
             set { SetProperty(ref _scripts, value); }
@@ -118,10 +127,8 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
 
         private void New()
         {
-            AbilityData ability = new AbilityData
-            {
-                Name = "Ability" + (Abilities.Count+1)
-            };
+            AbilityDataObservable ability = _abilityFactory.Invoke();
+            ability.Name = "Ability" + (Abilities.Count + 1);
             Abilities.Add(ability);
             
             _eventAggregator.GetEvent<AbilityCreatedEvent>().Publish(ability);
@@ -146,9 +153,5 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
         
 
         public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
-
-
-        private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new AbilityEditorViewModelValidator());
     }
 }

@@ -1,9 +1,10 @@
 ﻿using Ceriyo.Core.Data;
+using Ceriyo.Infrastructure.WPF.Observables;
 using Prism.Events;
 
 namespace Ceriyo.Toolset.WPF.Events.Creature
 {
-    public class CreatureDeletedEvent: PubSubEvent<CreatureData>
+    public class CreatureDeletedEvent: PubSubEvent<CreatureDataObservable>
     {
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -7,50 +6,69 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Core.Validation;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.Class;
 using Ceriyo.Toolset.WPF.Events.Creature;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
-using FluentValidation;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
 {
-    public class CreatureEditorViewModel : ValidatableBindableBase
+    public class CreatureEditorViewModel : ValidatableBindableBase<CreatureEditorViewModel>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IObjectMapper _objectMapper;
         private readonly IPathService _pathService;
+        private readonly CreatureDataObservable.Factory _creatureFactory;
+        private readonly ClassDataObservable.Factory _classFactory;
+        private readonly LocalStringDataObservable.Factory _localStringFactory;
+        private readonly LocalDoubleDataObservable.Factory _localDoubleFactory;
 
-        public CreatureEditorViewModel(IEventAggregator eventAggregator,
+        public CreatureEditorViewModel(
+            CreatureEditorViewModelValidator validator,
+            IEventAggregator eventAggregator,
             IDataService dataService,
             IObjectMapper objectMapper,
-            IPathService pathService)
+            IPathService pathService,
+            CreatureDataObservable.Factory creatureFactory,
+            ClassDataObservable.Factory classFactory,
+            LocalStringDataObservable.Factory localStringFactory,
+            LocalDoubleDataObservable.Factory localDoubleFactory)
+            :base(objectMapper, validator)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _objectMapper = objectMapper;
             _pathService = pathService;
+            _creatureFactory = creatureFactory;
+            _classFactory = classFactory;
+            _localStringFactory = localStringFactory;
+            _localDoubleFactory = localDoubleFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
 
-            Creatures = new ObservableCollectionEx<CreatureData>();
-            Scripts = new Dictionary<string, ScriptData>();
-            Classes = new BindingList<ClassData>();
+            AddLocalStringCommand = new DelegateCommand(AddLocalString);
+            AddLocalDoubleCommand = new DelegateCommand(AddLocalDouble);
+            DeleteLocalStringCommand = new DelegateCommand<LocalStringDataObservable>(DeleteLocalString);
+            DeleteLocalDoubleCommand = new DelegateCommand<LocalDoubleDataObservable>(DeleteLocalDouble);
+
+            Creatures = new ObservableCollectionEx<CreatureDataObservable>();
+            Scripts = new Dictionary<string, ScriptDataObservable>();
+            Classes = new ObservableCollectionEx<ClassDataObservable>();
             MaximumLevel = 50;
-            Dialogs = new BindingList<DialogData>();
+            Dialogs = new ObservableCollectionEx<DialogDataObservable>();
 
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
             
             Creatures.ItemPropertyChanged += CreaturesOnItemPropertyChanged;
             _eventAggregator.GetEvent<ClassCreatedEvent>().Subscribe(ClassCreated);
-            _eventAggregator.GetEvent<ClassChangedEvent>().Subscribe(ClassChanged);
+            //_eventAggregator.GetEvent<ClassChangedEvent>().Subscribe(ClassChanged);
             _eventAggregator.GetEvent<ClassDeletedEvent>().Subscribe(ClassDeleted);
 
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
@@ -84,13 +102,17 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             string[] files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Creature/", "*.dat");
             foreach (var file in files)
             {
-                Creatures.Add(_dataService.Load<CreatureData>(file));
+                CreatureData data = _dataService.Load<CreatureData>(file);
+                CreatureDataObservable creature = _creatureFactory.Invoke(data);
+                Creatures.Add(creature);
             }
 
             files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Class/", "*.dat");
             foreach (var file in files)
             {
-                Classes.Add(_dataService.Load<ClassData>(file));
+                ClassData data = _dataService.Load<ClassData>(file);
+                ClassDataObservable @class = _classFactory.Invoke(data);
+                Classes.Add(@class);
             }
         }
 
@@ -101,80 +123,52 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
         
         private void CreaturesOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            CreatureData creatureChanged = sender as CreatureData;
+            CreatureDataObservable creatureChanged = (CreatureDataObservable)sender;
             _eventAggregator.GetEvent<CreatureChangedEvent>().Publish(creatureChanged);
             RaiseValidityChangedEvent();
         }
 
-        private void ClassCreated(ClassData @class)
+        private void ClassCreated(ClassDataObservable @class)
         {
             Classes.Add(@class);
         }
-
-        private void ClassChanged(ClassData @class)
-        {
-            var existing = Classes.Single(x => x.GlobalID == @class.GlobalID);
-            _objectMapper.Map(@class, existing);
-        }
-
-        private void ClassDeleted(ClassData @class)
+        
+        private void ClassDeleted(ClassDataObservable @class)
         {
             var existingClass = Classes.Single(x => x.GlobalID == @class.GlobalID);
             Classes.Remove(existingClass);
         }
 
-        private ObservableCollectionEx<CreatureData> _creatures;
+        private ObservableCollectionEx<CreatureDataObservable> _creatures;
 
-        public ObservableCollectionEx<CreatureData> Creatures
+        public ObservableCollectionEx<CreatureDataObservable> Creatures
         {
             get { return _creatures; }
             set { SetProperty(ref _creatures, value); }
         }
 
-        private CreatureData _selectedCreature;
-        public CreatureData SelectedCreature
+        private CreatureDataObservable _selectedCreature;
+        public CreatureDataObservable SelectedCreature
         {
             get { return _selectedCreature; }
             set
             {
-                if (_selectedCreature != null)
-                {
-                    _selectedCreature.LocalVariables.LocalStrings.ListChanged -= LocalVariableListChanged;
-                    _selectedCreature.LocalVariables.LocalDoubles.ListChanged -= LocalVariableListChanged;
-                }
-
                 SetProperty(ref _selectedCreature, value);
-
-                if (_selectedCreature != null)
-                {
-                    _selectedCreature.LocalVariables.LocalStrings.ListChanged += LocalVariableListChanged;
-                    _selectedCreature.LocalVariables.LocalDoubles.ListChanged += LocalVariableListChanged;
-                }
                 OnPropertyChanged("IsCreatureSelected");
             }
         }
 
-        private void LocalVariableListChanged(object sender, ListChangedEventArgs e)
-        {
-            RaiseValidityChangedEvent();
+        private Dictionary<string, ScriptDataObservable> _scripts;
 
-            foreach (var obj in (IEnumerable) sender)
-            {
-                ((BaseValidatable)obj).RaiseErrorsChanged(e.PropertyDescriptor?.Name);
-            }
-        }
-
-        private Dictionary<string, ScriptData> _scripts;
-
-        public Dictionary<string, ScriptData> Scripts
+        public Dictionary<string, ScriptDataObservable> Scripts
         {
             get { return _scripts; }
             set { SetProperty(ref _scripts, value); }
         }
 
-        private BindingList<DialogData> _dialogs;
+        private ObservableCollectionEx<DialogDataObservable> _dialogs;
 
-        public BindingList<DialogData> Dialogs
+        public ObservableCollectionEx<DialogDataObservable> Dialogs
         {
             get { return _dialogs; }
             set { SetProperty(ref _dialogs, value); }
@@ -188,9 +182,9 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             set { SetProperty(ref _maximumLevel, value); }
         }
 
-        private BindingList<ClassData> _classes;
+        private ObservableCollectionEx<ClassDataObservable> _classes;
 
-        public BindingList<ClassData> Classes
+        public ObservableCollectionEx<ClassDataObservable> Classes
         {
             get { return _classes; }
             set { SetProperty(ref _classes, value); }
@@ -205,10 +199,8 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
 
         private void New()
         {
-            CreatureData creature = new CreatureData
-            {
-                Name = "Creature" + (Creatures.Count + 1)
-            };
+            var creature = _creatureFactory.Invoke();
+            creature.Name = "Creature" + (Creatures.Count + 1);
             Creatures.Add(creature);
 
             _eventAggregator.GetEvent<CreatureCreatedEvent>().Publish(creature);
@@ -230,10 +222,34 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
                     RaiseValidityChangedEvent();
                 });
         }
-        
-        public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
 
-        private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new CreatureEditorViewModelValidator());
+        public DelegateCommand AddLocalStringCommand { get; }
+
+        private void AddLocalString()
+        {
+            SelectedCreature.LocalVariables.LocalStrings.Add(_localStringFactory.Invoke());
+        }
+
+        public DelegateCommand<LocalStringDataObservable> DeleteLocalStringCommand { get; }
+
+        private void DeleteLocalString(LocalStringDataObservable localString)
+        {
+            SelectedCreature.LocalVariables.LocalStrings.Remove(localString);
+        }
+
+        public DelegateCommand AddLocalDoubleCommand { get; }
+
+        private void AddLocalDouble()
+        {
+            SelectedCreature.LocalVariables.LocalDoubles.Add(_localDoubleFactory.Invoke());
+        }
+
+        public DelegateCommand<LocalDoubleDataObservable> DeleteLocalDoubleCommand { get; }
+
+        private void DeleteLocalDouble(LocalDoubleDataObservable localDouble)
+        {
+            SelectedCreature.LocalVariables.LocalDoubles.Remove(localDouble);
+        }
+        public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
     }
 }

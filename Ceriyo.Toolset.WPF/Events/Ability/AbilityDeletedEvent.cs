@@ -1,9 +1,10 @@
 ﻿using Ceriyo.Core.Data;
+using Ceriyo.Infrastructure.WPF.Observables;
 using Prism.Events;
 
 namespace Ceriyo.Toolset.WPF.Events.Ability
 {
-    public class AbilityDeletedEvent: PubSubEvent<AbilityData>
+    public class AbilityDeletedEvent: PubSubEvent<AbilityDataObservable>
     {
     }
 }

@@ -1,9 +1,9 @@
-﻿using Ceriyo.Core.Data;
+﻿using Ceriyo.Infrastructure.WPF.Observables;
 using Prism.Events;
 
 namespace Ceriyo.Toolset.WPF.Events.Ability
 {
-    public class AbilityChangedEvent: PubSubEvent<AbilityData>
+    public class AbilityChangedEvent: PubSubEvent<AbilityDataObservable>
     {
     }
 }

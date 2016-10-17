@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Services.Contracts;
@@ -14,95 +15,103 @@ namespace Ceriyo.Domain.Services.DataServices
             Delete = 2
         }
 
+        private class DirtyGroup<T>: Dictionary<string, Tuple<T, ActionType>>
+        {
+            public void Add(string globalID, T obj, ActionType action)
+            {
+                Add(globalID, new Tuple<T, ActionType>(obj, action));
+            }
+        }
+
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
 
-        private Dictionary<AbilityData, ActionType> DirtyAbilities { get; set; }
-        private Dictionary<ClassData, ActionType> DirtyClasses { get; set; }
-        private Dictionary<CreatureData, ActionType> DirtyCreatures { get; set; }
-        private Dictionary<ItemData, ActionType> DirtyItems { get; set; }
-        private Dictionary<PlaceableData, ActionType> DirtyPlaceables { get; set; }
-        private Dictionary<SkillData, ActionType> DirtySkills { get; set; }
+        private DirtyGroup<AbilityData> DirtyAbilities { get; set; }
+        private DirtyGroup<ClassData> DirtyClasses { get; set; }
+        private DirtyGroup<CreatureData> DirtyCreatures { get; set; }
+        private DirtyGroup<ItemData> DirtyItems { get; set; }
+        private DirtyGroup<PlaceableData> DirtyPlaceables { get; set; }
+        private DirtyGroup<SkillData> DirtySkills { get; set; }
 
         public DataEditorDomainService(IDataService dataService,
             IPathService pathService)
         {
             _dataService = dataService;
             _pathService = pathService;
-            DirtyAbilities = new Dictionary<AbilityData, ActionType>();
-            DirtyClasses = new Dictionary<ClassData, ActionType>();
-            DirtyCreatures = new Dictionary<CreatureData, ActionType>();
-            DirtyItems = new Dictionary<ItemData, ActionType>();
-            DirtyPlaceables = new Dictionary<PlaceableData, ActionType>();
-            DirtySkills = new Dictionary<SkillData, ActionType>();
+            DirtyAbilities = new DirtyGroup<AbilityData>();
+            DirtyClasses = new DirtyGroup<ClassData>();
+            DirtyCreatures = new DirtyGroup<CreatureData>();
+            DirtyItems = new DirtyGroup<ItemData>();
+            DirtyPlaceables = new DirtyGroup<PlaceableData>();
+            DirtySkills = new DirtyGroup<SkillData>();
         }
 
         public void AddOrUpdateDirty(AbilityData data)
         {
-            DirtyAbilities.Remove(data);
-            DirtyAbilities.Add(data, ActionType.AddOrChanged);
+            DirtyAbilities.Remove(data.GlobalID);
+            DirtyAbilities.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
         public void AddOrUpdateDirty(ClassData data)
         {
-            DirtyClasses.Remove(data);
-            DirtyClasses.Add(data, ActionType.AddOrChanged);
+            DirtyClasses.Remove(data.GlobalID);
+            DirtyClasses.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
         public void AddOrUpdateDirty(CreatureData data)
         {
-            DirtyCreatures.Remove(data);
-            DirtyCreatures.Add(data, ActionType.AddOrChanged);
+            DirtyCreatures.Remove(data.GlobalID);
+            DirtyCreatures.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
         public void AddOrUpdateDirty(ItemData data)
         {
-            DirtyItems.Remove(data);
-            DirtyItems.Add(data, ActionType.AddOrChanged);
+            DirtyItems.Remove(data.GlobalID);
+            DirtyItems.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
         public void AddOrUpdateDirty(PlaceableData data)
         {
-            DirtyPlaceables.Remove(data);
-            DirtyPlaceables.Add(data, ActionType.AddOrChanged);
+            DirtyPlaceables.Remove(data.GlobalID);
+            DirtyPlaceables.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
         public void AddOrUpdateDirty(SkillData data)
         {
-            DirtySkills.Remove(data);
-            DirtySkills.Add(data, ActionType.AddOrChanged);
+            DirtySkills.Remove(data.GlobalID);
+            DirtySkills.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
         public void MarkForDeletion(AbilityData data)
         {
-            DirtyAbilities.Remove(data);
-            DirtyAbilities.Add(data, ActionType.Delete);
+            DirtyAbilities.Remove(data.GlobalID);
+            DirtyAbilities.Add(data.GlobalID, data, ActionType.Delete);
         }
 
         public void MarkForDeletion(ClassData data)
         {
-            DirtyClasses.Remove(data);
-            DirtyClasses.Add(data, ActionType.Delete);
+            DirtyClasses.Remove(data.GlobalID);
+            DirtyClasses.Add(data.GlobalID, data, ActionType.Delete);
         }
         public void MarkForDeletion(CreatureData data)
         {
-            DirtyCreatures.Remove(data);
-            DirtyCreatures.Add(data, ActionType.Delete);
+            DirtyCreatures.Remove(data.GlobalID);
+            DirtyCreatures.Add(data.GlobalID, data, ActionType.Delete);
         }
         public void MarkForDeletion(ItemData data)
         {
-            DirtyItems.Remove(data);
-            DirtyItems.Add(data, ActionType.Delete);
+            DirtyItems.Remove(data.GlobalID);
+            DirtyItems.Add(data.GlobalID, data, ActionType.Delete);
         }
         public void MarkForDeletion(PlaceableData data)
         {
-            DirtyPlaceables.Remove(data);
-            DirtyPlaceables.Add(data, ActionType.Delete);
+            DirtyPlaceables.Remove(data.GlobalID);
+            DirtyPlaceables.Add(data.GlobalID, data, ActionType.Delete);
         }
         public void MarkForDeletion(SkillData data)
         {
-            DirtySkills.Remove(data);
-            DirtySkills.Add(data, ActionType.Delete);
+            DirtySkills.Remove(data.GlobalID);
+            DirtySkills.Add(data.GlobalID, data, ActionType.Delete);
         }
 
         public void ClearQueuedChanges()
@@ -119,27 +128,27 @@ namespace Ceriyo.Domain.Services.DataServices
         {
             foreach (var record in DirtyAbilities)
             {
-                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Ability");
+                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Ability");
             }
             foreach (var record in DirtyClasses)
             {
-                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Class");
+                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Class");
             }
             foreach (var record in DirtyCreatures)
             {
-                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Creature");
+                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Creature");
             }
             foreach (var record in DirtyItems)
             {
-                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Item");
+                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Item");
             }
             foreach (var record in DirtyPlaceables)
             {
-                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Placeable");
+                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Placeable");
             }
             foreach (var record in DirtySkills)
             {
-                SaveFile(record.Key, record.Key.GlobalID, record.Value, "Skill");
+                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Skill");
             }
             
             ClearQueuedChanges();

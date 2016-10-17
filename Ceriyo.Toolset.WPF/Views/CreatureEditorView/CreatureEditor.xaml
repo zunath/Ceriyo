@@ -9,6 +9,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:controls="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:observables="clr-namespace:Ceriyo.Infrastructure.WPF.Observables;assembly=Ceriyo.Infrastructure.WPF"
 
              mc:Ignorable="d"
              d:DesignHeight="600"
@@ -219,7 +220,9 @@
                         <RowDefinition Height="32"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <Label
@@ -227,33 +230,199 @@
                         Local Strings:
                     </Label>
 
-                    <controls:LocalStringEditor
-                        IsEnabled="{Binding IsCreatureSelected}"
-                        ItemsSource="{Binding Path=SelectedCreature.LocalVariables.LocalStrings,
-                                            Mode=TwoWay,
-                                            ValidatesOnDataErrors=True,
-                                            NotifyOnValidationError=True,
-                                            UpdateSourceTrigger=PropertyChanged}"
-                        Grid.Column="0"
+
+                    <ScrollViewer
                         Grid.Row="1">
 
-                    </controls:LocalStringEditor>
+                        <ListView 
+                            ItemsSource="{Binding Path=SelectedCreature.LocalVariables.LocalStrings}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected"
+                             Value="True">
+                                            <Setter Property="Background"
+                                Value="{x:Null}" />
+                                            <Setter Property="BorderBrush"
+                                Value="{x:Null}" />
+                                        </Trigger>
+
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.View>
+
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Header="Key" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Content="{Binding}">
+                                                    <ContentControl.Resources>
+                                                        <DataTemplate DataType="{x:Type observables:LocalStringDataObservable}">
+                                                            <TextBox Text="{Binding Path=Key,
+                                                                        Mode=TwoWay,
+                                                                        ValidatesOnDataErrors=True,
+                                                                        NotifyOnValidationError=True,
+                                                                        UpdateSourceTrigger=PropertyChanged}"
+                                                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"></TextBox>
+                                                        </DataTemplate>
+                                                    </ContentControl.Resources>
+                                                </ContentControl>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Value" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Content="{Binding}">
+                                                    <ContentControl.Resources>
+                                                        <DataTemplate DataType="{x:Type observables:LocalStringDataObservable}">
+                                                            <TextBox Text="{Binding Path=Value,
+                                                                        Mode=TwoWay,
+                                                                        ValidatesOnDataErrors=True,
+                                                                        NotifyOnValidationError=True,
+                                                                        UpdateSourceTrigger=PropertyChanged}"
+                                                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"></TextBox>
+                                                        </DataTemplate>
+                                                    </ContentControl.Resources>
+                                                </ContentControl>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Action" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Width="Auto" 
+                                                        Command="{Binding Path=DataContext.DeleteLocalStringCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}">
+                                                    Delete
+                                                </Button>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+
+                                </GridView>
+
+
+
+                            </ListView.View>
+
+                        </ListView>
+
+                    </ScrollViewer>
+
+                    <Button
+                        Grid.Row="2"
+                        Command="{Binding AddLocalStringCommand}"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+                        Add
+                    </Button>
 
                     <Label
-                        Grid.Row="2">
+                        Grid.Row="3">
                         Local Numbers:
                     </Label>
 
-                    <controls:LocalDoubleEditor
-                        IsEnabled="{Binding IsCreatureSelected}"
-                        ItemsSource="{Binding Path=SelectedCreature.LocalVariables.LocalDoubles,
-                                              Mode=TwoWay,
-                                              ValidatesOnDataErrors=True,
-                                              NotifyOnValidationError=True,
-                                              UpdateSourceTrigger=PropertyChanged}"
-                        Grid.Column="0"
-                        Grid.Row="3">
-                    </controls:LocalDoubleEditor>
+                    <ScrollViewer
+                        Grid.Row="4">
+                        <ListView x:Name="ItemsListView"
+                      ItemsSource="{Binding Path=SelectedCreature.LocalVariables.LocalDoubles}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected"
+                             Value="True">
+                                            <Setter Property="Background"
+                                Value="{x:Null}" />
+                                            <Setter Property="BorderBrush"
+                                Value="{x:Null}" />
+                                        </Trigger>
+
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.View>
+
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Header="Key" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Content="{Binding}">
+                                                    <ContentControl.Resources>
+                                                        <DataTemplate DataType="{x:Type observables:LocalDoubleDataObservable}">
+                                                            <TextBox Text="{Binding Path=Key,
+                                                                        Mode=TwoWay,
+                                                                        ValidatesOnDataErrors=True,
+                                                                        NotifyOnValidationError=True,
+                                                                        UpdateSourceTrigger=PropertyChanged}"
+                                                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"></TextBox>
+                                                        </DataTemplate>
+                                                    </ContentControl.Resources>
+                                                </ContentControl>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Value" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Content="{Binding}">
+                                                    <ContentControl.Resources>
+                                                        <DataTemplate DataType="{x:Type observables:LocalDoubleDataObservable}">
+                                                            <controls:DoubleUpDownEx Text="{Binding Path=Value,
+                                                                        Mode=TwoWay,
+                                                                        ValidatesOnDataErrors=True,
+                                                                        NotifyOnValidationError=True,
+                                                                        UpdateSourceTrigger=PropertyChanged}"
+                                                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"></controls:DoubleUpDownEx>
+                                                        </DataTemplate>
+                                                    </ContentControl.Resources>
+                                                </ContentControl>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Action" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Width="Auto" 
+                                                        
+                                                        Command="{Binding Path=DataContext.DeleteLocalDoubleCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}">
+                                                    Delete
+                                                </Button>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+
+                                </GridView>
+
+
+
+                            </ListView.View>
+
+                        </ListView>
+
+                    </ScrollViewer>
+
+                    <Button
+                        Grid.Row="5"
+                        Command="{Binding AddLocalDoubleCommand}"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+                        Add
+                    </Button>
 
                 </Grid>
             </TabItem>
@@ -422,3 +591,10 @@
 
     </Grid>
 </UserControl>
+
+
+
+
+
+
+

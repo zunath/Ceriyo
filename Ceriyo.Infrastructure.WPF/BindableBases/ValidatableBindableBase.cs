@@ -4,17 +4,46 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Ceriyo.Core.Attributes;
+using Ceriyo.Core.Contracts;
 using FluentValidation;
 using FluentValidation.Internal;
 using Prism.Mvvm;
 
 namespace Ceriyo.Infrastructure.WPF.BindableBases
 {
-    public abstract class ValidatableBindableBase: BindableBase, INotifyDataErrorInfo
+    public abstract class ValidatableBindableBase<TObservable>: BindableBase, INotifyDataErrorInfo
     {
+        private readonly bool _serializationOnly;
+
+        public TObservable Observable => _objectMapper.Map<TObservable>(this);
+
+        private readonly IObjectMapper _objectMapper;
+        protected ValidatableBindableBase(IObjectMapper objectMapper,
+            IValidator validator,
+            TObservable mapObservable = default(TObservable))
+        {
+            _objectMapper = objectMapper;
+            Validator = validator;
+
+            if (mapObservable != null)
+            {
+                _objectMapper.Map(mapObservable, this);
+            }
+
+            Validator.Validate(this);
+        }
+
+        protected ValidatableBindableBase()
+        {
+            _serializationOnly = true;
+        }
+
         protected override bool SetProperty<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
         {
             var result = base.SetProperty(ref storage, value, propertyName);
+
+            if (_serializationOnly) return true;
+
             if (result && !string.IsNullOrWhiteSpace(propertyName))
             {
                 ValidateProperty(propertyName);
@@ -32,7 +61,7 @@ namespace Ceriyo.Infrastructure.WPF.BindableBases
             ErrorsContainer.SetErrors(propertyName, errors);
         }
 
-        protected abstract IValidator Validator { get; }
+        private IValidator Validator { get; }
         
         public IEnumerable GetErrors(string propertyName)
         {
@@ -57,6 +86,19 @@ namespace Ceriyo.Infrastructure.WPF.BindableBases
         protected virtual void OnErrorsChanged(DataErrorsChangedEventArgs e)
         {
             ErrorsChanged(this, e);
+        }
+
+        public void SetExternalError(string propertyName, string error)
+        {
+            if (string.IsNullOrWhiteSpace(propertyName) ||
+                string.IsNullOrWhiteSpace(error)) return;
+
+            ErrorsContainer.SetErrors(propertyName, new []{error});
+        }
+
+        public void ClearExternalError(string propertyName)
+        {
+            // TODO: Implement
         }
     }
 }

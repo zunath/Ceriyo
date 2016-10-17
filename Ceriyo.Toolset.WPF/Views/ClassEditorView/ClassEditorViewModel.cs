@@ -5,6 +5,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.Class;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -15,24 +16,31 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
 {
-    public class ClassEditorViewModel : ValidatableBindableBase
+    public class ClassEditorViewModel : ValidatableBindableBase<ClassEditorViewModel>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
+        private readonly ClassDataObservable.Factory _classDataFactory;
 
-        public ClassEditorViewModel(IEventAggregator eventAggregator,
+        public ClassEditorViewModel(
+            IObjectMapper objectMapper, 
+            IEventAggregator eventAggregator,
             IDataService dataService,
-            IPathService pathService)
+            IPathService pathService,
+            ClassEditorViewModelValidator validator,
+            ClassDataObservable.Factory classDataFactory)
+            :base(objectMapper, validator)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _pathService = pathService;
+            _classDataFactory = classDataFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
 
-            Classes = new ObservableCollectionEx<ClassData>();
+            Classes = new ObservableCollectionEx<ClassDataObservable>();
 
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
             
@@ -66,7 +74,9 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
 
             foreach (var file in files)
             {
-                Classes.Add(_dataService.Load<ClassData>(file));
+                ClassData loaded = _dataService.Load<ClassData>(file);
+                ClassDataObservable @class = _classDataFactory.Invoke(loaded);
+                Classes.Add(@class);
             }
         }
 
@@ -77,22 +87,21 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
 
         private void ClassesOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            ClassData classChanged = sender as ClassData;
-            
+            ClassDataObservable classChanged = (ClassDataObservable)sender;
             _eventAggregator.GetEvent<ClassChangedEvent>().Publish(classChanged);
             RaiseValidityChangedEvent();
         }
 
-        private ObservableCollectionEx<ClassData> _classes;
+        private ObservableCollectionEx<ClassDataObservable> _classes;
 
-        public ObservableCollectionEx<ClassData> Classes
+        public ObservableCollectionEx<ClassDataObservable> Classes
         {
             get { return _classes; }
             set { SetProperty(ref _classes, value); }
         }
 
-        private ClassData _selectedClass;
-        public ClassData SelectedClass
+        private ClassDataObservable _selectedClass;
+        public ClassDataObservable SelectedClass
         {
             get { return _selectedClass; }
             set
@@ -110,12 +119,9 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
 
         private void New()
         {
-            ClassData @class = new ClassData
-            {
-                Name = "Class" + (Classes.Count + 1)
-            };
+            ClassDataObservable @class = _classDataFactory.Invoke();
+            @class.Name = "Class" + (Classes.Count + 1);
             Classes.Add(@class);
-
             _eventAggregator.GetEvent<ClassCreatedEvent>().Publish(@class);
             RaiseValidityChangedEvent();
         }
@@ -137,8 +143,5 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
         }
         
         public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
-
-        private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new ClassEditorViewModelValidator());
     }
 }

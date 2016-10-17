@@ -1,33 +1,12 @@
-﻿using Ceriyo.Core.Validation;
-using Ceriyo.Core.Validation.Data;
-using FluentValidation;
+﻿using System;
 
 namespace Ceriyo.Core.Data
 {
-    public class LocalDoubleData: BaseValidatable
+    public class LocalDoubleData
     {
-        private string _key;
-        private double _value;
+        public string Key { get; set; }
 
-        public string Key
-        {
-            get { return _key; }
-            set
-            {
-                _key = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public double Value
-        {
-            get { return _value; }
-            set
-            {
-                _value = value;
-                OnPropertyChanged();
-            }
-        }
+        public double Value { get; set; }
 
         public LocalDoubleData()
         {
@@ -40,8 +19,5 @@ namespace Ceriyo.Core.Data
             Key = key;
             Value = value;
         }
-
-        private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new LocalDoubleDataValidator());
     }
 }

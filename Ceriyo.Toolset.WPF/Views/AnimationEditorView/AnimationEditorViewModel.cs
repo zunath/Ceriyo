@@ -1,16 +1,14 @@
-﻿using Ceriyo.Infrastructure.WPF.BindableBases;
-using FluentValidation;
+﻿using Ceriyo.Core.Contracts;
+using Ceriyo.Infrastructure.WPF.BindableBases;
 
 namespace Ceriyo.Toolset.WPF.Views.AnimationEditorView
 {
-    public class AnimationEditorViewModel : ValidatableBindableBase
+    public class AnimationEditorViewModel : ValidatableBindableBase<AnimationEditorViewModel>
     {
-        public AnimationEditorViewModel()
+        public AnimationEditorViewModel(IObjectMapper objectMapper, AnimationEditorViewModelValidator validator)
+            : base(objectMapper, validator)
         {
 
         }
-
-        private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new AnimationEditorViewModelValidator());
     }
 }

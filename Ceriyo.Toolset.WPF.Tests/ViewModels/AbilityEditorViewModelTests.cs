@@ -1,7 +1,12 @@
-﻿using Ceriyo.Core.Contracts;
+﻿using System;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Services;
+using Ceriyo.Infrastructure.WPF.Observables;
+using Ceriyo.Infrastructure.WPF.Validation.Validators;
 using Ceriyo.Toolset.WPF.Events.Ability;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -17,9 +22,14 @@ namespace Ceriyo.Toolset.WPF.Tests.ViewModels
         private readonly Mock<IEventAggregator> _mockAggregator;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
+        private readonly IObjectMapper _objectMapper;
+        private readonly AbilityDataObservable.Factory _abilityFactory;
+        private readonly AbilityEditorViewModelValidator _validator;
 
         public AbilityEditorViewModelTests()
         {
+            _objectMapper = new ObjectMapper();
+            _validator = new AbilityEditorViewModelValidator();
             var mockLogger = new Mock<ILogger>();
             _dataService = new DataService(mockLogger.Object);
             _pathService = new PathService();
@@ -37,6 +47,8 @@ namespace Ceriyo.Toolset.WPF.Tests.ViewModels
             _mockAggregator.Setup(x => x.GetEvent<DataEditorClosedEvent>()).Returns(mockDataEditorClosedEvent.Object);
             _mockAggregator.Setup(x => x.GetEvent<ModuleLoadedEvent>()).Returns(mockModuleLoadedEvent.Object);
             _mockAggregator.Setup(x => x.GetEvent<ModuleClosedEvent>()).Returns(mockModuleClosedEvent.Object);
+            
+            _abilityFactory = ability => new AbilityDataObservable(new AbilityDataObservableValidator(), _objectMapper, ability);
         }
 
         [SetUp]
@@ -53,7 +65,13 @@ namespace Ceriyo.Toolset.WPF.Tests.ViewModels
         [Test]
         public void NewCommand_Execute_ShouldBeOneAbility()
         {
-            AbilityEditorViewModel model = new AbilityEditorViewModel(_mockAggregator.Object, _dataService, _pathService);
+            AbilityEditorViewModel model = new AbilityEditorViewModel(
+                _objectMapper,
+                _mockAggregator.Object,
+                _dataService, 
+                _pathService,
+                _validator,
+                _abilityFactory);
             model.NewCommand.Execute();
 
             Assert.AreEqual(1, model.Abilities.Count);
@@ -62,7 +80,13 @@ namespace Ceriyo.Toolset.WPF.Tests.ViewModels
         [Test]
         public void NewCommand_ExecuteMultiple_NamesShouldMatch()
         {
-            AbilityEditorViewModel model = new AbilityEditorViewModel(_mockAggregator.Object, _dataService, _pathService);
+            AbilityEditorViewModel model = new AbilityEditorViewModel(
+                _objectMapper,
+                _mockAggregator.Object, 
+                _dataService, 
+                _pathService,
+                _validator, 
+                _abilityFactory);
             model.NewCommand.Execute();
             model.NewCommand.Execute();
             model.NewCommand.Execute();

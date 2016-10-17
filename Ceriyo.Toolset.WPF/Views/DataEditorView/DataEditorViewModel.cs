@@ -64,37 +64,37 @@ namespace Ceriyo.Toolset.WPF.Views.DataEditorView
         }
         private void OnAnimationEditorValidityChanged(bool isValid)
         {
-            IsAbilityEditorValid = isValid;
+            IsAnimationEditorValid = isValid;
             OkCommand.RaiseCanExecuteChanged();
         }
         private void OnClassEditorValidityChanged(bool isValid)
         {
-            IsAbilityEditorValid = isValid;
+            IsClassEditorValid = isValid;
             OkCommand.RaiseCanExecuteChanged();
         }
         private void OnCreatureEditorValidityChanged(bool isValid)
         {
-            IsAbilityEditorValid = isValid;
+            IsCreatureEditorValid = isValid;
             OkCommand.RaiseCanExecuteChanged();
         }
         private void OnItemEditorValidityChanged(bool isValid)
         {
-            IsAbilityEditorValid = isValid;
+            IsItemEditorValid = isValid;
             OkCommand.RaiseCanExecuteChanged();
         }
         private void OnPlaceableEditorValidityChanged(bool isValid)
         {
-            IsAbilityEditorValid = isValid;
+            IsPlaceableEditorValid = isValid;
             OkCommand.RaiseCanExecuteChanged();
         }
         private void OnSkillEditorValidityChanged(bool isValid)
         {
-            IsAbilityEditorValid = isValid;
+            IsSkillEditorValid = isValid;
             OkCommand.RaiseCanExecuteChanged();
         }
         private void OnTilesetEditorValidityChanged(bool isValid)
         {
-            IsAbilityEditorValid = isValid;
+            IsTilesetEditorValid = isValid;
             OkCommand.RaiseCanExecuteChanged();
         }
 

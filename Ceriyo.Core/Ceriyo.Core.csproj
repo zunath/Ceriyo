@@ -51,10 +51,6 @@
     <Reference Include="artemis">
       <HintPath>..\Ceriyo.Content\Libraries\artemis.dll</HintPath>
     </Reference>
-    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
@@ -116,7 +112,6 @@
     <Compile Include="Data\LocalDoubleData.cs" />
     <Compile Include="Data\LocalStringData.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
-    <Compile Include="Validation\BaseValidatable.cs" />
     <Compile Include="Data\SerializedFileData.cs" />
     <Compile Include="Data\ResourceItemData.cs" />
     <Compile Include="Data\SerializedManifestData.cs" />
@@ -204,31 +199,9 @@
     <Compile Include="UI\SampleDesktop.cs" />
     <Compile Include="UI\SquidRenderer.cs" />
     <Compile Include="Services\UIService.cs" />
-    <Compile Include="Validation\Data\AbilityDataValidator.cs" />
-    <Compile Include="Validation\Data\AnimationDataValidator.cs" />
-    <Compile Include="Validation\Data\AreaDataValidator.cs" />
-    <Compile Include="Validation\Data\ClassDataValidator.cs" />
-    <Compile Include="Validation\Data\ClassLevelDataValidator.cs" />
-    <Compile Include="Validation\Data\ClassRequirementDataValidator.cs" />
-    <Compile Include="Validation\Data\CreatureDataValidator.cs" />
-    <Compile Include="Validation\Data\DialogDataValidator.cs" />
-    <Compile Include="Validation\Data\FrameDataValidator.cs" />
-    <Compile Include="Validation\Data\ItemDataValidator.cs" />
-    <Compile Include="Validation\Data\ItemPropertyDataValidator.cs" />
-    <Compile Include="Validation\Data\ItemTypeDataValidator.cs" />
-    <Compile Include="Validation\Data\LocalDoubleDataValidator.cs" />
-    <Compile Include="Validation\Data\LocalStringDataValidator.cs" />
-    <Compile Include="Validation\Data\LocalVariableDataValidator.cs" />
-    <Compile Include="Validation\Data\ModuleDataValidator.cs" />
-    <Compile Include="Validation\Data\PlaceableDataValidator.cs" />
-    <Compile Include="Validation\Data\ScriptDataValidator.cs" />
-    <Compile Include="Validation\Data\SkillDataValidator.cs" />
-    <Compile Include="Validation\Data\TilesetDataValidator.cs" />
-    <Compile Include="Validation\ValidationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Systems\" />
-    <Folder Include="Validation\Components\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">

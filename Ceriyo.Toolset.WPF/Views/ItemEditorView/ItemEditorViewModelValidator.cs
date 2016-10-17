@@ -1,23 +1,23 @@
-﻿using Ceriyo.Core.Validation;
-using Ceriyo.Core.Validation.Data;
+﻿using Ceriyo.Infrastructure.WPF.Validation;
+using Ceriyo.Infrastructure.WPF.Validation.Validators;
 using FluentValidation;
 
 namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
 {
     public class ItemEditorViewModelValidator: AbstractValidator<ItemEditorViewModel>
     {
-        public ItemEditorViewModelValidator()
+        public ItemEditorViewModelValidator(ItemDataObservableValidator itemValidator)
         {
             RuleForEach(x => x.Items)
-                .SetValidator(new ItemDataValidator());
+                .SetValidator(itemValidator);
 
-            RuleFor(x => x.Items)
-                .Must((x) => !ValidationHelper.IsDuplicate(x, "Tag", "Tag must be unique."))
-                .WithMessage("Tag must be unique.");
+            //RuleFor(x => x.Items)
+            //    .Must((x) => !ValidationHelper.IsDuplicate(x, "Tag", "Tag must be unique."))
+            //    .WithMessage("Tag must be unique.");
 
-            RuleFor(x => x.Items)
-                .Must((x) => !ValidationHelper.IsDuplicate(x, "Resref", "Resref must be unique."))
-                .WithMessage("Resref must be unique.");
+            //RuleFor(x => x.Items)
+            //    .Must((x) => !ValidationHelper.IsDuplicate(x, "Resref", "Resref must be unique."))
+            //    .WithMessage("Resref must be unique.");
         }
     }
 }

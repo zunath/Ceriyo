@@ -19,6 +19,9 @@ using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Services;
+using Ceriyo.Infrastructure.WPF.Observables;
+using Ceriyo.Infrastructure.WPF.Validation;
+using Ceriyo.Infrastructure.WPF.Validation.Contracts;
 using FluentValidation;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -73,8 +76,11 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<DataEditorDomainService>().As<IDataEditorDomainService>();
             builder.RegisterType<ResourceEditorDomainService>().As<IResourceEditorDomainService>();
 
-            // Validators
+
+            // Validation
+            builder.RegisterType<ValidationHelper>().As<IValidationHelper>();
             RegisterValidators(builder);
+            builder.RegisterType<ClassLevelDataObservable>();
 
         }
 

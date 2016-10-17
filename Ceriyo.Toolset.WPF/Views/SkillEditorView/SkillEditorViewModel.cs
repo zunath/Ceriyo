@@ -6,6 +6,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Ceriyo.Toolset.WPF.Events.Skill;
@@ -16,25 +17,32 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
 {
-    public class SkillEditorViewModel : ValidatableBindableBase
+    public class SkillEditorViewModel : ValidatableBindableBase<SkillEditorViewModel>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
+        private readonly SkillDataObservable.Factory _skillFactory;
 
-        public SkillEditorViewModel(IEventAggregator eventAggregator,
+        public SkillEditorViewModel(
+            IObjectMapper objectMapper,
+            IEventAggregator eventAggregator,
             IDataService dataService,
-            IPathService pathService)
+            IPathService pathService,
+            SkillEditorViewModelValidator validator,
+            SkillDataObservable.Factory skillFactory)
+            :base(objectMapper, validator)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _pathService = pathService;
+            _skillFactory = skillFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
 
-            Skills = new ObservableCollectionEx<SkillData>();
-            Scripts = new Dictionary<string, ScriptData>();
+            Skills = new ObservableCollectionEx<SkillDataObservable>();
+            Scripts = new Dictionary<string, ScriptDataObservable>();
 
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
             
@@ -67,7 +75,9 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
 
             foreach (var file in files)
             {
-                Skills.Add(_dataService.Load<SkillData>(file));
+                SkillData loaded = _dataService.Load<SkillData>(file);
+                SkillDataObservable skill = _skillFactory.Invoke(loaded);
+                Skills.Add(skill);
             }
         }
 
@@ -78,21 +88,21 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
 
         private void SkillsOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            SkillData skillChanged = sender as SkillData;
-            _eventAggregator.GetEvent<SkillChangedEvent>().Publish(skillChanged);
+            SkillDataObservable skill = (SkillDataObservable) sender;
+            _eventAggregator.GetEvent<SkillChangedEvent>().Publish(skill);
             RaiseValidityChangedEvent();
         }
 
-        private ObservableCollectionEx<SkillData> _skills;
+        private ObservableCollectionEx<SkillDataObservable> _skills;
 
-        public ObservableCollectionEx<SkillData> Skills
+        public ObservableCollectionEx<SkillDataObservable> Skills
         {
             get { return _skills; }
             set { SetProperty(ref _skills, value); }
         }
 
-        private SkillData _selectedSkill;
-        public SkillData SelectedSkill
+        private SkillDataObservable _selectedSkill;
+        public SkillDataObservable SelectedSkill
         {
             get { return _selectedSkill; }
             set
@@ -102,9 +112,9 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
             }
         }
 
-        private Dictionary<string, ScriptData> _scripts;
+        private Dictionary<string, ScriptDataObservable> _scripts;
 
-        public Dictionary<string, ScriptData> Scripts
+        public Dictionary<string, ScriptDataObservable> Scripts
         {
             get { return _scripts; }
             set { SetProperty(ref _scripts, value); }
@@ -119,12 +129,9 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
 
         private void New()
         {
-            SkillData skill = new SkillData
-            {
-                Name = "Skill" + (Skills.Count + 1)
-            };
+            var skill = _skillFactory.Invoke();
+            skill.Name = "Skill" + (Skills.Count + 1);
             Skills.Add(skill);
-
             _eventAggregator.GetEvent<SkillCreatedEvent>().Publish(skill);
             RaiseValidityChangedEvent();
         }
@@ -146,8 +153,5 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
         }
         
         public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
-
-        private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new SkillEditorViewModelValidator());
     }
 }

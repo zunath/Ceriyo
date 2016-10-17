@@ -4,6 +4,7 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Domain.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
+using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.EventArgs;
 using Ceriyo.Toolset.WPF.Events.Ability;
 using Ceriyo.Toolset.WPF.Events.Class;
@@ -133,64 +134,64 @@ namespace Ceriyo.Toolset.WPF
         }
 
         // Ability Events
-        private void AbilityCreatedOrChanged(AbilityData data)
+        private void AbilityCreatedOrChanged(AbilityDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data);
+            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
         }
-        private void AbilityDeleted(AbilityData data)
+        private void AbilityDeleted(AbilityDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data);
+            _dataEditorDomainService.MarkForDeletion(data.Observable);
         }
 
         // Class Events
-        private void ClassCreatedOrChanged(ClassData data)
+        private void ClassCreatedOrChanged(ClassDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data);
+            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
         }
-        private void ClassDeleted(ClassData data)
+        private void ClassDeleted(ClassDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data);
+            _dataEditorDomainService.MarkForDeletion(data.Observable);
         }
 
         // Creature Events
-        private void CreatureCreatedOrChanged(CreatureData data)
+        private void CreatureCreatedOrChanged(CreatureDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data);
+            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
         }
-        private void CreatureDeleted(CreatureData data)
+        private void CreatureDeleted(CreatureDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data);
+            _dataEditorDomainService.MarkForDeletion(data.Observable);
         }
 
         // Item Events
-        private void ItemCreatedOrChanged(ItemData data)
+        private void ItemCreatedOrChanged(ItemDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data);
+            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
         }
-        private void ItemDeleted(ItemData data)
+        private void ItemDeleted(ItemDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data);
+            _dataEditorDomainService.MarkForDeletion(data.Observable);
         }
 
 
         // Placeable Events
-        private void PlaceableCreatedOrChanged(PlaceableData data)
+        private void PlaceableCreatedOrChanged(PlaceableDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data);
+            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
         }
-        private void PlaceableDeleted(PlaceableData data)
+        private void PlaceableDeleted(PlaceableDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data);
+            _dataEditorDomainService.MarkForDeletion(data.Observable);
         }
 
         // Skill Events
-        private void SkillCreatedOrChanged(SkillData data)
+        private void SkillCreatedOrChanged(SkillDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data);
+            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
         }
-        private void SkillDeleted(SkillData data)
+        private void SkillDeleted(SkillDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data);
+            _dataEditorDomainService.MarkForDeletion(data.Observable);
         }
 
         #endregion

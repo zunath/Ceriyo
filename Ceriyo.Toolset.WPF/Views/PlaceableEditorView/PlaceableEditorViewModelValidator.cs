@@ -1,23 +1,23 @@
-﻿using Ceriyo.Core.Validation;
-using Ceriyo.Core.Validation.Data;
+﻿using Ceriyo.Infrastructure.WPF.Validation;
+using Ceriyo.Infrastructure.WPF.Validation.Validators;
 using FluentValidation;
 
 namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 {
     public class PlaceableEditorViewModelValidator: AbstractValidator<PlaceableEditorViewModel>
     {
-        public PlaceableEditorViewModelValidator()
+        public PlaceableEditorViewModelValidator(PlaceableDataObservableValidator placeableValidator)
         {
             RuleForEach(x => x.Placeables)
-                .SetValidator(new PlaceableDataValidator());
+                .SetValidator(placeableValidator);
 
-            RuleFor(x => x.Placeables)
-                .Must((x) => !ValidationHelper.IsDuplicate(x, "Tag", "Tag must be unique."))
-                .WithMessage("Tag must be unique.");
+            //RuleFor(x => x.Placeables)
+            //    .Must((x) => !ValidationHelper.IsDuplicate(x, "Tag", "Tag must be unique."))
+            //    .WithMessage("Tag must be unique.");
 
-            RuleFor(x => x.Placeables)
-                .Must((x) => !ValidationHelper.IsDuplicate(x, "Resref", "Resref must be unique."))
-                .WithMessage("Resref must be unique.");
+            //RuleFor(x => x.Placeables)
+            //    .Must((x) => !ValidationHelper.IsDuplicate(x, "Resref", "Resref must be unique."))
+            //    .WithMessage("Resref must be unique.");
         }
     }
 }

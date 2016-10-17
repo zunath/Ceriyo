@@ -1,9 +1,9 @@
-﻿using Ceriyo.Core.Data;
+﻿using Ceriyo.Infrastructure.WPF.Observables;
 using Prism.Events;
 
 namespace Ceriyo.Toolset.WPF.Events.Class
 {
-    public class ClassChangedEvent: PubSubEvent<ClassData>
+    public class ClassChangedEvent: PubSubEvent<ClassDataObservable>
     {
     }
 }

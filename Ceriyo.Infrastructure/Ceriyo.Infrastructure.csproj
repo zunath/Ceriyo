@@ -63,8 +63,8 @@
       <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Jint, Version=2.9.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\jint.2.10\lib\net45\jint.dll</HintPath>
+    <Reference Include="jint, Version=2.10.1.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\jint.2.10.1\lib\net45\jint.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="KeraLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=04d04586786c6f34, processorArchitecture=MSIL">
@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contract\" />
+    <Folder Include="WPF\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
@@ -129,6 +130,10 @@
     <ProjectReference Include="..\Ceriyo.Domain.Services\Ceriyo.Domain.Services.csproj">
       <Project>{019a2ba4-5373-4003-986b-ef85c0df3bba}</Project>
       <Name>Ceriyo.Domain.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ceriyo.Infrastructure.WPF\Ceriyo.Infrastructure.WPF.csproj">
+      <Project>{13aa8344-a9a0-4e9c-ba97-3441a85ad8c4}</Project>
+      <Name>Ceriyo.Infrastructure.WPF</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

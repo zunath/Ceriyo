@@ -1,57 +1,21 @@
 ﻿using System;
-using System.ComponentModel;
-using Ceriyo.Core.Validation;
-using Ceriyo.Core.Validation.Data;
-using FluentValidation;
+using System.Collections.Generic;
 
 namespace Ceriyo.Core.Data
 {
-    public class LocalVariableData: BaseValidatable
+    public class LocalVariableData
     {
-        private BindingList<LocalDoubleData> _localDoubles;
-        private BindingList<LocalStringData> _localStrings;
-        private string _globalID;
+        public string GlobalID { get; set; }
 
-        public string GlobalID
-        {
-            get { return _globalID; }
-            set
-            {
-                if (value == _globalID) return;
-                _globalID = value;
-                OnPropertyChanged();
-            }
-        }
+        public List<LocalStringData> LocalStrings { get; set; }
 
-        public BindingList<LocalStringData> LocalStrings
-        {
-            get { return _localStrings; }
-            set
-            {
-                _localStrings = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public BindingList<LocalDoubleData> LocalDoubles
-        {
-            get { return _localDoubles; }
-            set
-            {
-                _localDoubles = value;
-                OnPropertyChanged();
-            }
-        }
+        public List<LocalDoubleData> LocalDoubles { get; set; }
 
         public LocalVariableData()
         {
             GlobalID = Guid.NewGuid().ToString();
-            LocalStrings = new BindingList<LocalStringData>();
-            LocalDoubles = new BindingList<LocalDoubleData>();
+            LocalStrings = new List<LocalStringData>();
+            LocalDoubles = new List<LocalDoubleData>();
         }
-
-
-        private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new LocalVariableDataValidator());
     }
 }

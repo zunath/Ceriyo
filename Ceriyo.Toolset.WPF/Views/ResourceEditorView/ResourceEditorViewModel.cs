@@ -153,6 +153,7 @@ namespace Ceriyo.Toolset.WPF.Views.ResourceEditorView
                 _loadedResourcePackFileName = notification.Content as string;
                 if (_loadedResourcePackFileName == null) return;
 
+                ClearLoadedData();
                 var resources = _domainService.LoadResourcePack(_loadedResourcePackFileName).ToList();
                 BGMResources.AddRange(resources.Where(x => x.ResourceType == ResourceType.BGM));
                 SFXResources.AddRange(resources.Where(x => x.ResourceType == ResourceType.SFX));

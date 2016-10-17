@@ -1,107 +1,29 @@
 ﻿using System;
-using System.ComponentModel;
-using Ceriyo.Core.Validation;
-using Ceriyo.Core.Validation.Data;
-using FluentValidation;
+using System.Collections.Generic;
 
 namespace Ceriyo.Core.Data
 {
-    public class AnimationData: BaseValidatable
+    public class AnimationData
     {
-        private BindingList<FrameData> _frames;
-        private string _comment;
-        private string _description;
-        private string _resref;
-        private string _tag;
-        private string _name;
-        private string _globalID;
+        public string GlobalID { get; set; }
 
-        public string GlobalID
-        {
-            get { return _globalID; }
-            set
-            {
-                if (value == _globalID) return;
-                _globalID = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Name { get; set; }
 
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (value == _name) return;
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Tag { get; set; }
 
-        public string Tag
-        {
-            get { return _tag; }
-            set
-            {
-                if (value == _tag) return;
-                _tag = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Resref { get; set; }
 
-        public string Resref
-        {
-            get { return _resref; }
-            set
-            {
-                if (value == _resref) return;
-                _resref = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Description { get; set; }
 
-        public string Description
-        {
-            get { return _description; }
-            set
-            {
-                if (value == _description) return;
-                _description = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Comment { get; set; }
 
-        public string Comment
-        {
-            get { return _comment; }
-            set
-            {
-                if (value == _comment) return;
-                _comment = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public BindingList<FrameData> Frames
-        {
-            get { return _frames; }
-            set
-            {
-                if (Equals(value, _frames)) return;
-                _frames = value;
-                OnPropertyChanged();
-            }
-        }
+        public IEnumerable<FrameData> Frames { get; set; }
 
 
         public AnimationData()
         {
             GlobalID = Guid.NewGuid().ToString();
-            Frames = new BindingList<FrameData>();
+            Frames = new List<FrameData>();
         }
-
-
-        private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new AnimationDataValidator());
     }
 }

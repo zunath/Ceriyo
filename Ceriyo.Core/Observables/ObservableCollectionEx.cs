@@ -11,7 +11,7 @@ using System.Windows.Threading;
 namespace Ceriyo.Core.Observables
 {
     public class ObservableCollectionEx<T>
-        : IList<T>, IList
+        : IList<T>
         , INotifyCollectionChanged
         , INotifyPropertyChanged
     {
@@ -141,25 +141,7 @@ namespace Ceriyo.Core.Observables
 
             return index;
         }
-
-        public int Add(object item)
-        {
-            if (Thread.CurrentThread == _dispatcher.Thread)
-                return DoAdd((T)item);
-            else
-            {
-                var op = _dispatcher.BeginInvoke(new Func<T, int>(DoAdd), item);
-                if (op == null || op.Result == null)
-                    return -1;
-                return (int)op.Result;
-            }
-        }
-
-        public bool Contains(object value)
-        {
-            return Contains((T)value);
-        }
-
+        
         public void Clear()
         {
             if (Thread.CurrentThread == _dispatcher.Thread)
@@ -167,21 +149,7 @@ namespace Ceriyo.Core.Observables
             else
                 _dispatcher.BeginInvoke((Action)(DoClear));
         }
-
-        public int IndexOf(object value)
-        {
-            return IndexOf((T)value);
-        }
-
-        public void Insert(int index, object value)
-        {
-            Insert(index, (T)value);
-        }
-
-        public void Remove(object value)
-        {
-            Remove((T)value);
-        }
+        
 
         private void DoClear()
         {
@@ -375,13 +343,7 @@ namespace Ceriyo.Core.Observables
             else
                 _dispatcher.BeginInvoke((Action)(() => DoRemoveAt(index)));
         }
-
-        object IList.this[int index]
-        {
-            get { return this[index]; }
-            set { this[index] = (T)value; }
-        }
-
+        
         private void DoRemoveAt(int index)
         {
             _sync.AcquireWriterLock(Timeout.Infinite);

@@ -1,9 +1,9 @@
-﻿using Ceriyo.Core.Data;
+﻿using Ceriyo.Infrastructure.WPF.Observables;
 using Prism.Events;
 
 namespace Ceriyo.Toolset.WPF.Events.Placeable
 {
-    public class PlaceableChangedEvent: PubSubEvent<PlaceableData>
+    public class PlaceableChangedEvent: PubSubEvent<PlaceableDataObservable>
     {
     }
 }

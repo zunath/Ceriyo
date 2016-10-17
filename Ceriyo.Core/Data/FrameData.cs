@@ -1,104 +1,26 @@
 ﻿using System;
-using Ceriyo.Core.Validation;
-using Ceriyo.Core.Validation.Data;
-using FluentValidation;
 
 namespace Ceriyo.Core.Data
 {
-    public class FrameData: BaseValidatable
+    public class FrameData
     {
-        private int _textureCellY;
-        private int _textureCellX;
-        private float _frameLength;
-        private bool _flipVertical;
-        private bool _flipHorizontal;
-        private string _name;
-        private string _globalID;
+        public string GlobalID { get; set; }
 
-        public string GlobalID
-        {
-            get { return _globalID; }
-            set
-            {
-                if (value == _globalID) return;
-                _globalID = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Name { get; set; }
 
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (value == _name) return;
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
+        public bool FlipHorizontal { get; set; }
 
-        public bool FlipHorizontal
-        {
-            get { return _flipHorizontal; }
-            set
-            {
-                if (value == _flipHorizontal) return;
-                _flipHorizontal = value;
-                OnPropertyChanged();
-            }
-        }
+        public bool FlipVertical { get; set; }
 
-        public bool FlipVertical
-        {
-            get { return _flipVertical; }
-            set
-            {
-                if (value == _flipVertical) return;
-                _flipVertical = value;
-                OnPropertyChanged();
-            }
-        }
+        public float FrameLength { get; set; }
 
-        public float FrameLength
-        {
-            get { return _frameLength; }
-            set
-            {
-                if (value.Equals(_frameLength)) return;
-                _frameLength = value;
-                OnPropertyChanged();
-            }
-        }
+        public int TextureCellX { get; set; }
 
-        public int TextureCellX
-        {
-            get { return _textureCellX; }
-            set
-            {
-                if (value == _textureCellX) return;
-                _textureCellX = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int TextureCellY
-        {
-            get { return _textureCellY; }
-            set
-            {
-                if (value == _textureCellY) return;
-                _textureCellY = value;
-                OnPropertyChanged();
-            }
-        }
+        public int TextureCellY { get; set; }
 
         public FrameData()
         {
             GlobalID = Guid.NewGuid().ToString();
         }
-
-
-        private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new FrameDataValidator());
     }
 }

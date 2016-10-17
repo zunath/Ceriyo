@@ -6,8 +6,8 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Core.Validation;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Ceriyo.Toolset.WPF.Events.Placeable;
@@ -18,25 +18,43 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 {
-    public class PlaceableEditorViewModel : ValidatableBindableBase
+    public class PlaceableEditorViewModel : ValidatableBindableBase<PlaceableEditorViewModel>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
+        private readonly PlaceableDataObservable.Factory _placeableFactory;
+        private readonly LocalStringDataObservable.Factory _localStringFactory;
+        private readonly LocalDoubleDataObservable.Factory _localDoubleFactory;
 
-        public PlaceableEditorViewModel(IEventAggregator eventAggregator,
+        public PlaceableEditorViewModel(
+            IObjectMapper objectMapper,
+            IEventAggregator eventAggregator,
             IDataService dataService,
-            IPathService pathService)
+            IPathService pathService,
+            PlaceableEditorViewModelValidator validator,
+            PlaceableDataObservable.Factory placeableFactory,
+            LocalStringDataObservable.Factory localStringFactory,
+            LocalDoubleDataObservable.Factory localDoubleFactory)
+            :base(objectMapper, validator)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _pathService = pathService;
+            _placeableFactory = placeableFactory;
+            _localStringFactory = localStringFactory;
+            _localDoubleFactory = localDoubleFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
 
-            Placeables = new ObservableCollectionEx<PlaceableData>();
-            Scripts = new Dictionary<string, ScriptData>();
+            AddLocalStringCommand = new DelegateCommand(AddLocalString);
+            AddLocalDoubleCommand = new DelegateCommand(AddLocalDouble);
+            DeleteLocalStringCommand = new DelegateCommand<LocalStringDataObservable>(DeleteLocalString);
+            DeleteLocalDoubleCommand = new DelegateCommand<LocalDoubleDataObservable>(DeleteLocalDouble);
+
+            Placeables = new ObservableCollectionEx<PlaceableDataObservable>();
+            Scripts = new Dictionary<string, ScriptDataObservable>();
 
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
             
@@ -69,7 +87,9 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 
             foreach (var file in files)
             {
-                Placeables.Add(_dataService.Load<PlaceableData>(file));
+                PlaceableData loaded = _dataService.Load<PlaceableData>(file);
+                PlaceableDataObservable placeable = _placeableFactory.Invoke(loaded);
+                Placeables.Add(placeable);
             }
         }
 
@@ -80,56 +100,33 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 
         private void PlaceablesOnItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            PlaceableData placeableChanged = sender as PlaceableData;
+            PlaceableDataObservable placeableChanged = (PlaceableDataObservable)sender;
             _eventAggregator.GetEvent<PlaceableChangedEvent>().Publish(placeableChanged);
             RaiseValidityChangedEvent();
         }
 
-        private ObservableCollectionEx<PlaceableData> _placeables;
+        private ObservableCollectionEx<PlaceableDataObservable> _placeables;
 
-        public ObservableCollectionEx<PlaceableData> Placeables
+        public ObservableCollectionEx<PlaceableDataObservable> Placeables
         {
             get { return _placeables; }
             set { SetProperty(ref _placeables, value); }
         }
 
-        private PlaceableData _selectedPlaceable;
-        public PlaceableData SelectedPlaceable
+        private PlaceableDataObservable _selectedPlaceable;
+        public PlaceableDataObservable SelectedPlaceable
         {
             get { return _selectedPlaceable; }
             set
             {
-                if (_selectedPlaceable != null)
-                {
-                    _selectedPlaceable.LocalVariables.LocalStrings.ListChanged -= LocalVariableListChanged;
-                    _selectedPlaceable.LocalVariables.LocalDoubles.ListChanged -= LocalVariableListChanged;
-                }
-
                 SetProperty(ref _selectedPlaceable, value);
-
-                if (_selectedPlaceable != null)
-                {
-                    _selectedPlaceable.LocalVariables.LocalStrings.ListChanged += LocalVariableListChanged;
-                    _selectedPlaceable.LocalVariables.LocalDoubles.ListChanged += LocalVariableListChanged;
-                }
-
                 OnPropertyChanged("IsPlaceableSelected");
             }
         }
 
-        private void LocalVariableListChanged(object sender, ListChangedEventArgs e)
-        {
-            RaiseValidityChangedEvent();
+        private Dictionary<string, ScriptDataObservable> _scripts;
 
-            foreach (var obj in (IEnumerable)sender)
-            {
-                ((BaseValidatable)obj).RaiseErrorsChanged(e.PropertyDescriptor?.Name);
-            }
-        }
-
-        private Dictionary<string, ScriptData> _scripts;
-
-        public Dictionary<string, ScriptData> Scripts
+        public Dictionary<string, ScriptDataObservable> Scripts
         {
             get { return _scripts; }
             set { SetProperty(ref _scripts, value); }
@@ -144,10 +141,8 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 
         private void New()
         {
-            PlaceableData placeable = new PlaceableData
-            {
-                Name = "Placeable" + (Placeables.Count + 1)
-            };
+            var placeable = _placeableFactory.Invoke();
+            placeable.Name = "Placeable" + (Placeables.Count + 1);
             Placeables.Add(placeable);
 
             _eventAggregator.GetEvent<PlaceableCreatedEvent>().Publish(placeable);
@@ -170,9 +165,33 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
                 });
         }
 
-        public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
+        public DelegateCommand AddLocalStringCommand { get; }
 
-        private IValidator _validator;
-        protected override IValidator Validator => _validator ?? (_validator = new PlaceableEditorViewModelValidator());
+        private void AddLocalString()
+        {
+            SelectedPlaceable.LocalVariables.LocalStrings.Add(_localStringFactory.Invoke());
+        }
+
+        public DelegateCommand<LocalStringDataObservable> DeleteLocalStringCommand { get; }
+
+        private void DeleteLocalString(LocalStringDataObservable localString)
+        {
+            SelectedPlaceable.LocalVariables.LocalStrings.Remove(localString);
+        }
+
+        public DelegateCommand AddLocalDoubleCommand { get; }
+
+        private void AddLocalDouble()
+        {
+            SelectedPlaceable.LocalVariables.LocalDoubles.Add(_localDoubleFactory.Invoke());
+        }
+
+        public DelegateCommand<LocalDoubleDataObservable> DeleteLocalDoubleCommand { get; }
+
+        private void DeleteLocalDouble(LocalDoubleDataObservable localDouble)
+        {
+            SelectedPlaceable.LocalVariables.LocalDoubles.Remove(localDouble);
+        }
+        public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
     }
 }
