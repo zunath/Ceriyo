@@ -115,7 +115,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contract\" />
-    <Folder Include="WPF\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
