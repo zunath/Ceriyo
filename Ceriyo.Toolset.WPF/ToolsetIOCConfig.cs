@@ -17,11 +17,11 @@ using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
-using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Services;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Infrastructure.WPF.Validation;
 using Ceriyo.Infrastructure.WPF.Validation.Contracts;
+using Ceriyo.Toolset.WPF.Mapping;
 using FluentValidation;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -68,7 +68,7 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<SceneMethods>().As<ISceneMethods>().SingleInstance();
 
             // Mapping
-            builder.RegisterType<ObjectMapper>().As<IObjectMapper>();
+            builder.RegisterType<ToolsetObjectMapper>().As<IObjectMapper>();
 
             // Domain Services
             builder.RegisterType<DomainServiceNotifier>().As<IDomainServiceNotifier>().SingleInstance();

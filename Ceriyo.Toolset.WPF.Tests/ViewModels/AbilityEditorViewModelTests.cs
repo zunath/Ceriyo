@@ -3,13 +3,13 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Services;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 using Ceriyo.Toolset.WPF.Events.Ability;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
+using Ceriyo.Toolset.WPF.Mapping;
 using Ceriyo.Toolset.WPF.Views.AbilityEditorView;
 using Moq;
 using NUnit.Framework;
@@ -28,7 +28,7 @@ namespace Ceriyo.Toolset.WPF.Tests.ViewModels
 
         public AbilityEditorViewModelTests()
         {
-            _objectMapper = new ObjectMapper();
+            _objectMapper = new ToolsetObjectMapper();
             _validator = new AbilityEditorViewModelValidator();
             var mockLogger = new Mock<ILogger>();
             _dataService = new DataService(mockLogger.Object);

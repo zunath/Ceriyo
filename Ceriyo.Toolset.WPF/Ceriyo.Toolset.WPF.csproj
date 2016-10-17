@@ -62,6 +62,10 @@
       <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
@@ -192,6 +196,7 @@
     <Compile Include="Events\Tileset\TilesetEditorValidityChangedEvent.cs" />
     <Compile Include="ToolsetGame.cs" />
     <Compile Include="ToolsetIOCConfig.cs" />
+    <Compile Include="Mapping\ToolsetObjectMapper.cs" />
     <Compile Include="Views\AbilityEditorView\AbilityEditorViewModelValidator.cs" />
     <Compile Include="Views\AnimationEditorView\AnimationEditorViewModelValidator.cs" />
     <Compile Include="Views\ApplicationRootView\ApplicationRootViewModel.cs" />

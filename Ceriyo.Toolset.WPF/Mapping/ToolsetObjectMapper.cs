@@ -2,9 +2,9 @@
 using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.Observables;
 
-namespace Ceriyo.Infrastructure.Mapping
+namespace Ceriyo.Toolset.WPF.Mapping
 {
-    public class ObjectMapper: IObjectMapper
+    public class ToolsetObjectMapper: IObjectMapper
     {
         public void Initialize()
         {

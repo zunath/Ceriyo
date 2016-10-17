@@ -5,8 +5,8 @@ using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
-using Ceriyo.Infrastructure.Mapping;
 using Ceriyo.Infrastructure.Services;
+using Ceriyo.Toolset.WPF.Mapping;
 using Moq;
 using NUnit.Framework;
 
@@ -25,7 +25,7 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
         {
             _mockLogger = new Mock<ILogger>();
             _dataService = new DataService(_mockLogger.Object);
-            _objectMapper = new ObjectMapper();
+            _objectMapper = new ToolsetObjectMapper();
             _objectMapper.Initialize();
             _pathService = new PathService();
             _moduleDomainService = new ModuleDomainService(_dataService, _objectMapper, _pathService);
