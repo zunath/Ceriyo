@@ -92,15 +92,38 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Attributes\ColorTypeAttributeTests.cs" />
+    <Compile Include="Attributes\FilePathAttributeTests.cs" />
+    <Compile Include="Data\AbilityDataTests.cs" />
+    <Compile Include="Data\AnimationDataTests.cs" />
+    <Compile Include="Data\AreaDataTests.cs" />
+    <Compile Include="Data\ClassDataTests.cs" />
+    <Compile Include="Data\CreatureDataTests.cs" />
+    <Compile Include="Data\DialogDataTests.cs" />
+    <Compile Include="Data\FrameDataTests.cs" />
+    <Compile Include="Data\ItemDataTests.cs" />
+    <Compile Include="Data\ItemPropertyDataTests.cs" />
+    <Compile Include="Data\ItemTypeDataTests.cs" />
+    <Compile Include="Data\LocalVariableDataTests.cs" />
+    <Compile Include="Data\ModuleDataTests.cs" />
+    <Compile Include="Data\PlaceableDataTests.cs" />
+    <Compile Include="Data\ScriptDataTests.cs" />
+    <Compile Include="Data\SkillDataTests.cs" />
+    <Compile Include="Data\TilesetDataTests.cs" />
+    <Compile Include="Extensions\EnumerationExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripting\Client\ControlMethodsTests.cs" />
     <Compile Include="Scripting\Client\SceneMethodsTests.cs" />
     <Compile Include="Scripting\Client\StyleMethodsTests.cs" />
     <Compile Include="Scripting\Common\LoggingMethodsTests.cs" />
+    <Compile Include="Scripting\ScriptQueueObjectTests.cs" />
     <Compile Include="Scripting\Server\EntityMethodsTests.cs" />
     <Compile Include="Scripting\Server\LocalDataMethodsTests.cs" />
     <Compile Include="Scripting\Server\ScriptingMethodsTests.cs" />
     <Compile Include="Scripting\Server\PhysicsMethodsTests.cs" />
+    <Compile Include="Services\AppServiceTests.cs" />
+    <Compile Include="Settings\GameSettingsTests.cs" />
+    <Compile Include="Settings\ServerSettingsTests.cs" />
+    <Compile Include="Settings\ToolsetSettingsTests.cs" />
     <Compile Include="TestSetUp.cs" />
   </ItemGroup>
   <ItemGroup>
