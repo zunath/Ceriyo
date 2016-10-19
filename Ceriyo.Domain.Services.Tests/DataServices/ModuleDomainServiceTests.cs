@@ -6,6 +6,8 @@ using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.Services;
+using Ceriyo.Infrastructure.WPF.Observables;
+using Ceriyo.Infrastructure.WPF.Validation.Validators;
 using Ceriyo.Toolset.WPF.Mapping;
 using Moq;
 using NUnit.Framework;
@@ -25,7 +27,10 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
         {
             _mockLogger = new Mock<ILogger>();
             _dataService = new DataService(_mockLogger.Object);
-            _objectMapper = new ToolsetObjectMapper();
+
+            _objectMapper = new ToolsetObjectMapper(new Mock<LocalVariableDataObservable.Factory>().Object,
+                new LocalStringDataObservableValidator(),
+                new LocalDoubleDataObservableValidator());
             _objectMapper.Initialize();
             _pathService = new PathService();
             _moduleDomainService = new ModuleDomainService(_dataService, _objectMapper, _pathService);

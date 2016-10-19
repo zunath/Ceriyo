@@ -28,7 +28,9 @@ namespace Ceriyo.Toolset.WPF.Tests.ViewModels
 
         public AbilityEditorViewModelTests()
         {
-            _objectMapper = new ToolsetObjectMapper();
+            _objectMapper = new ToolsetObjectMapper(new Mock<LocalVariableDataObservable.Factory>().Object, 
+                new LocalStringDataObservableValidator(), 
+                new LocalDoubleDataObservableValidator());
             _validator = new AbilityEditorViewModelValidator();
             var mockLogger = new Mock<ILogger>();
             _dataService = new DataService(mockLogger.Object);

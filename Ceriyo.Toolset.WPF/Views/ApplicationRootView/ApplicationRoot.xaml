@@ -11,6 +11,9 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:areaSelectorView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaSelectorView"
+        xmlns:dialogSelectorView="clr-namespace:Ceriyo.Toolset.WPF.Views.DialogSelectorView"
+        xmlns:scriptSelectorView="clr-namespace:Ceriyo.Toolset.WPF.Views.ScriptSelectorView"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding WindowTitle}" 
         Height="350" 
@@ -54,14 +57,15 @@
                 Grid.Column="0"
                 Grid.Row="0">
                 <TabItem Header="Areas" controls:ControlsHelper.HeaderFontSize="14">
-                    
+                    <areaSelectorView:AreaSelector></areaSelectorView:AreaSelector>
                 </TabItem>
 
                 <TabItem Header="Dialogs" controls:ControlsHelper.HeaderFontSize="14">
+                    <dialogSelectorView:DialogSelector></dialogSelectorView:DialogSelector>
                 </TabItem>
                 
                 <TabItem Header="Scripts" controls:ControlsHelper.HeaderFontSize="14">
-                    
+                    <scriptSelectorView:ScriptSelector></scriptSelectorView:ScriptSelector>
                 </TabItem>
                 
             </TabControl>
