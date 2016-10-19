@@ -10,10 +10,24 @@
              d:DesignWidth="300"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-        <ListBox
-            ItemsSource="{Binding Areas}"
-            SelectedItem="{Binding SelectedArea}">
+        <TreeView IsEnabled="{Binding IsModuleLoaded}">
+            <TreeView.Resources>
+                <ContextMenu x:Key="RootContextMenu">
+                    <MenuItem Header="New Area">
+                    </MenuItem>
+                </ContextMenu>
+            </TreeView.Resources>
 
-        </ListBox>
+            <TreeViewItem
+                ItemsSource="{Binding Areas}"
+                DisplayMemberPath="Name"
+                Header="Areas"
+                ContextMenu="{StaticResource RootContextMenu}">
+
+            </TreeViewItem>
+            
+        </TreeView>
+        
+        
     </Grid>
 </UserControl>

@@ -132,6 +132,7 @@ namespace Ceriyo.Domain.Services.DataServices
 
         private void CreateModuleDirectories()
         {
+            CreateDirectoryIfNotExist("Area");
             CreateDirectoryIfNotExist("Ability");
             CreateDirectoryIfNotExist("Animation");
             CreateDirectoryIfNotExist("Class");

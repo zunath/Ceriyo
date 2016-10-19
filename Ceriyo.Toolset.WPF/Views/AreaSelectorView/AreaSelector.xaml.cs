@@ -1,11 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
+﻿namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
 {
-    /// <summary>
-    /// Interaction logic for AreaSelector
-    /// </summary>
-    public partial class AreaSelector : UserControl
+    public partial class AreaSelector
     {
         public AreaSelector()
         {

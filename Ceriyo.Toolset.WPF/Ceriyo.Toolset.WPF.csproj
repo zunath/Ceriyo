@@ -260,6 +260,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewAreaView\NewArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewModuleView\NewModule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -382,6 +386,11 @@
     </Compile>
     <Compile Include="Views\ModulePropertiesView\ModulePropertiesViewModel.cs" />
     <Compile Include="Views\ModulePropertiesView\ModulePropertiesViewModelValidator.cs" />
+    <Compile Include="Views\NewAreaView\NewArea.xaml.cs">
+      <DependentUpon>NewArea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewAreaView\NewAreaViewModel.cs" />
+    <Compile Include="Views\NewAreaView\NewAreaViewModelValidator.cs" />
     <Compile Include="Views\NewModuleView\NewModule.xaml.cs">
       <DependentUpon>NewModule.xaml</DependentUpon>
     </Compile>
