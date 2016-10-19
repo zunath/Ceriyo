@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Ceriyo.Core.Data
+﻿namespace Ceriyo.Core.Data
 {
     public class LocalStringData
     {

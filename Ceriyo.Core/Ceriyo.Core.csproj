@@ -111,6 +111,7 @@
     <Compile Include="Data\LevelChartData.cs" />
     <Compile Include="Data\LocalDoubleData.cs" />
     <Compile Include="Data\LocalStringData.cs" />
+    <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
     <Compile Include="Data\SerializedFileData.cs" />
     <Compile Include="Data\ResourceItemData.cs" />

@@ -1,5 +1,4 @@
-﻿using System;
-using Ceriyo.Core.Extensions;
+﻿using Ceriyo.Core.Extensions;
 using NUnit.Framework;
 using q = System.ComponentModel;
 

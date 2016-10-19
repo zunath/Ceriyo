@@ -1,6 +1,4 @@
-﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
+﻿using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Services;

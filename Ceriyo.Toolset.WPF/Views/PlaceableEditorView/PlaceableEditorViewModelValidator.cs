@@ -1,5 +1,4 @@
-﻿using Ceriyo.Infrastructure.WPF.Validation;
-using Ceriyo.Infrastructure.WPF.Validation.Validators;
+﻿using Ceriyo.Infrastructure.WPF.Validation.Validators;
 using FluentValidation;
 
 namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView

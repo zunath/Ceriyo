@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;

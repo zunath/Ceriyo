@@ -1,6 +1,5 @@
 ﻿using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
-using FluentValidation;
 
 namespace Ceriyo.Toolset.WPF.Views.TilesetEditorView
 {

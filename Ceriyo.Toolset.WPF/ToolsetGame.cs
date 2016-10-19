@@ -1,7 +1,7 @@
 ﻿using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.WPF.MonoGameWpfInterop;
+using Ceriyo.Infrastructure.WPF.MonoGameWpfInterop.Input;
 using Microsoft.Xna.Framework;
-using MonoGame.Framework.WpfInterop;
-using MonoGame.Framework.WpfInterop.Input;
 
 namespace Ceriyo.Toolset.WPF
 {

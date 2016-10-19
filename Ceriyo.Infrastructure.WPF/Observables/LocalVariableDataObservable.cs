@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Extensions;
 using Ceriyo.Core.Observables;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
@@ -66,17 +67,17 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 
         private void VariableCollectionItemPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            VariablesItemPropertyChanged?.Invoke(sender, propertyChangedEventArgs);
+            VariablesItemPropertyChanged.RaiseEvent(sender, propertyChangedEventArgs);
         }
 
         private void VariableCollectionPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            VariablesPropertyChanged?.Invoke(sender, propertyChangedEventArgs);
+            VariablesPropertyChanged.RaiseEvent(sender, propertyChangedEventArgs);
         }
 
         private void VariableCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
-            VariablesCollectionChanged?.Invoke(sender, notifyCollectionChangedEventArgs);
+            VariablesCollectionChanged.RaiseEvent(sender, notifyCollectionChangedEventArgs);
         }
     }
 }
