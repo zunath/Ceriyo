@@ -8,7 +8,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 {
     public class AreaDataObservable: ValidatableBindableBase<AreaData>
     {
-        public delegate AreaDataObservable Factory();
+        public delegate AreaDataObservable Factory(AreaData data = null);
 
         private string _globalID;
         private string _name;
@@ -19,6 +19,8 @@ namespace Ceriyo.Infrastructure.WPF.Observables
         private string _onAreaEnter;
         private string _onAreaExit;
         private string _onAreaHeartbeat;
+
+        private LocalVariableDataObservable _localVariables;
         
 
         public string OnAreaHeartbeat
@@ -74,12 +76,41 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _globalID; }
             set { SetProperty(ref _globalID, value); }
         }
-        
-        public AreaDataObservable(AreaDataObservableValidator validator,
-            IObjectMapper objectMapper)
-            :base(objectMapper, validator)
+
+        public LocalVariableDataObservable LocalVariables
         {
-            GlobalID = Guid.NewGuid().ToString();
+            get { return _localVariables; }
+            set { SetProperty(ref _localVariables, value); }
+        }
+
+        public AreaDataObservable()
+        {
+            
+        }
+        public AreaDataObservable(AreaDataObservableValidator validator,
+            IObjectMapper objectMapper, 
+            LocalVariableDataObservable.Factory localVariableFactory,
+            AreaData data = null)
+            :base(objectMapper, validator, data)
+        {
+            if (data == null)
+            {
+                GlobalID = Guid.NewGuid().ToString();
+                Name = string.Empty;
+                Tag = string.Empty;
+                Resref = string.Empty;
+                Description = string.Empty;
+                Comment = string.Empty;
+                OnAreaEnter = string.Empty;
+                OnAreaExit = string.Empty;
+                OnAreaHeartbeat = string.Empty;
+
+                LocalVariables = localVariableFactory.Invoke();
+            }
+
+            LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();
         }
     }
 }

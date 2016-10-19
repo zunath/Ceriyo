@@ -137,17 +137,44 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _itemPropertyResrefs; }
             set { SetProperty(ref _itemPropertyResrefs, value); }
         }
-        
+
+        public ItemDataObservable()
+        {
+            
+        }
         public ItemDataObservable(ItemDataObservableValidator validator,
             IObjectMapper objectMapper,
             LocalVariableDataObservable.Factory localVariableFactory,
             ItemData data = null)
             :base(objectMapper, validator, data)
         {
-            GlobalID = Guid.NewGuid().ToString();
-            _localVariables = localVariableFactory.Invoke();
-            _classRequirements = new ObservableCollectionEx<ClassRequirementDataObservable>();
-            _itemPropertyResrefs = new ObservableCollectionEx<string>();
+            if (data == null)
+            {
+                GlobalID = Guid.NewGuid().ToString();
+                Name = string.Empty;
+                Tag = string.Empty;
+                Resref = string.Empty;
+                Description = string.Empty;
+                Comment = string.Empty;
+                ItemTypeResref = string.Empty;
+                IsUndroppable = false;
+                IsPlot = false;
+                IsStolen = false;
+                OnActivated = string.Empty;
+                OnAcquired = string.Empty;
+                OnEquipped = string.Empty;
+                OnUnacquired = string.Empty;
+                OnUnequipped = string.Empty;
+
+                ClassRequirements = new ObservableCollectionEx<ClassRequirementDataObservable>();
+                ItemPropertyResrefs = new ObservableCollectionEx<string>();
+
+                LocalVariables = localVariableFactory.Invoke();
+            }
+
+            LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();
         }
     }
 }

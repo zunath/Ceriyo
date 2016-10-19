@@ -7,7 +7,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 {
     public class ClassLevelDataObservable: ValidatableBindableBase<ClassLevelData>
     {
-        public delegate ClassLevelDataObservable Factory(ClassLevelData @class = null);
+        public delegate ClassLevelDataObservable Factory(ClassLevelData data = null);
 
         private int _level;
         private int _experienceRequired;
@@ -23,12 +23,19 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _experienceRequired; }
             set { SetProperty(ref _experienceRequired, value); }
         }
-        
+
+        public ClassLevelDataObservable()
+        {
+            
+        }
         public ClassLevelDataObservable(ClassLevelDataObservableValidator validator,
             IObjectMapper objectMapper,
-            ClassLevelData @class = null)
-            :base(objectMapper, validator, @class)
+            ClassLevelData data = null)
+            :base(objectMapper, validator, data)
         {
+            if (data != null) return;
+            Level = 0;
+            ExperienceRequired = 0;
         }
     }
 }

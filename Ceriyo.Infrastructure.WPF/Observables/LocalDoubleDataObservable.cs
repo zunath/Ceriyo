@@ -24,13 +24,18 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             set { SetProperty(ref _value, value); }
         }
 
+        public LocalDoubleDataObservable()
+        {
+            
+        }
         public LocalDoubleDataObservable(LocalDoubleDataObservableValidator validator,
             IObjectMapper objectMapper,
             LocalDoubleData data = null)
             :base(objectMapper, validator, data)
         {
-            _key = string.Empty;
-            _value = 0.0;
+            if (data != null) return;
+            Key = string.Empty;
+            Value = 0.0;
         }
     }
 }

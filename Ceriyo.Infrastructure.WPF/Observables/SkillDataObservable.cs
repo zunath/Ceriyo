@@ -67,16 +67,25 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _onActivated; }
             set { SetProperty(ref _onActivated, value); }
         }
-        
+
+        public SkillDataObservable()
+        {
+            
+        }
         public SkillDataObservable(SkillDataObservableValidator validator,
             IObjectMapper objectMapper,
             SkillData data)
             :base(objectMapper, validator, data)
         {
-            if (data == null)
-            {
-                GlobalID = Guid.NewGuid().ToString();
-            }
+            if (data != null) return;
+            GlobalID = Guid.NewGuid().ToString();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comment = string.Empty;
+            IsPassive = false;
+            OnActivated = string.Empty;
         }
     }
 }

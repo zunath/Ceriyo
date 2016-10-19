@@ -61,7 +61,7 @@ namespace Ceriyo.Infrastructure.WPF.BindableBases
             ErrorsContainer.SetErrors(propertyName, errors);
         }
 
-        private IValidator Validator { get; }
+        public IValidator Validator { get; set; }
         
         public IEnumerable GetErrors(string propertyName)
         {

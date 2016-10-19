@@ -7,7 +7,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 {
     public class ClassRequirementDataObservable: ValidatableBindableBase<ClassRequirementData>
     {
-        public delegate ClassRequirementDataObservable Factory();
+        public delegate ClassRequirementDataObservable Factory(ClassRequirementData data = null);
         private string _classResref;
 
         public string ClassResref
@@ -24,12 +24,19 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _levelRequired; }
             set { SetProperty(ref _levelRequired, value); }
         }
-        
-        public ClassRequirementDataObservable(ClassRequirementDataObservableValidator validator,
-            IObjectMapper objectMapper)
-            :base(objectMapper, validator)
-        {
 
+        public ClassRequirementDataObservable()
+        {
+            
+        }
+        public ClassRequirementDataObservable(ClassRequirementDataObservableValidator validator,
+            IObjectMapper objectMapper,
+            ClassRequirementData data = null)
+            :base(objectMapper, validator, data)
+        {
+            if (data != null) return;
+            ClassResref = string.Empty;
+            LevelRequired = 0;
         }
     }
 }

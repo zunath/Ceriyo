@@ -8,7 +8,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 {
     public class AbilityDataObservable: ValidatableBindableBase<AbilityData>
     {
-        public delegate AbilityDataObservable Factory(AbilityData ability = null);
+        public delegate AbilityDataObservable Factory(AbilityData data = null);
 
         private string _globalID;
 
@@ -68,13 +68,26 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _onActivated; }
             set { SetProperty(ref _onActivated, value); }
         }
-        
+
+        public AbilityDataObservable()
+        {
+            
+        }
+
         public AbilityDataObservable(AbilityDataObservableValidator validator, 
             IObjectMapper objectMapper,
-            AbilityData ability = null) 
-            : base(objectMapper, validator, ability)
+            AbilityData data = null) 
+            : base(objectMapper, validator, data)
         {
+            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comment = string.Empty;
+            IsPassive = false;
+            OnActivated = string.Empty;
         }
 
     }

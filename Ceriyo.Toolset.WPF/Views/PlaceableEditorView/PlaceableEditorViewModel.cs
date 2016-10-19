@@ -55,7 +55,7 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 
             Placeables = new ObservableCollectionEx<PlaceableDataObservable>();
             Scripts = new Dictionary<string, ScriptDataObservable>();
-
+            
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
             
             Placeables.ItemPropertyChanged += PlaceablesOnItemPropertyChanged;

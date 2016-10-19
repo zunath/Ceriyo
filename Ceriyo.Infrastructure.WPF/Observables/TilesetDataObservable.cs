@@ -8,7 +8,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 {
     public class TilesetDataObservable: ValidatableBindableBase<TilesetData>
     {
-        public delegate TilesetDataObservable Factory();
+        public delegate TilesetDataObservable Factory(TilesetData data = null);
 
         private string _globalID;
         private string _name;
@@ -53,11 +53,22 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             set { SetProperty(ref _comment, value); }
         }
 
-        public TilesetDataObservable(TilesetDataObservableValidator validator,
-            IObjectMapper objectMapper)
-            : base(objectMapper, validator)
+        public TilesetDataObservable()
         {
+            
+        }
+        public TilesetDataObservable(TilesetDataObservableValidator validator,
+            IObjectMapper objectMapper,
+            TilesetData data = null)
+            : base(objectMapper, validator, data)
+        {
+            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comment = string.Empty;
         }
     }
 }

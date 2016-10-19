@@ -9,7 +9,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 {
     public class AnimationDataObservable: ValidatableBindableBase<AnimationData>
     {
-        public delegate AnimationDataObservable Factory();
+        public delegate AnimationDataObservable Factory(AnimationData data = null);
 
         private string _globalID;
 
@@ -67,13 +67,24 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             set { SetProperty(ref _frames, value); }
         }
 
+        public AnimationDataObservable()
+        {
+            
+        }
 
         public AnimationDataObservable(AnimationDataObservableValidator validator, 
-            IObjectMapper objectMapper)
-            :base(objectMapper, validator)
+            IObjectMapper objectMapper,
+            AnimationData data = null)
+            :base(objectMapper, validator, data)
         {
+            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
-            _frames = new ObservableCollectionEx<FrameDataObservable>();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comment = string.Empty;
+            Frames = new ObservableCollectionEx<FrameDataObservable>();
         }
     }
 }

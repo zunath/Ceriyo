@@ -11,7 +11,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 {
     public class LocalVariableDataObservable: ValidatableBindableBase<LocalVariableData>
     {
-        public delegate LocalVariableDataObservable Factory();
+        public delegate LocalVariableDataObservable Factory(LocalVariableData data = null);
 
         private ObservableCollectionEx<LocalDoubleDataObservable> _localDoubles;
         private ObservableCollectionEx<LocalStringDataObservable> _localStrings;
@@ -39,12 +39,17 @@ namespace Ceriyo.Infrastructure.WPF.Observables
         public event EventHandler<PropertyChangedEventArgs> VariablesPropertyChanged;
         public event EventHandler<PropertyChangedEventArgs> VariablesItemPropertyChanged;
 
-        public LocalVariableDataObservable() { }
+        public LocalVariableDataObservable()
+        {
+            
+        }
 
         public LocalVariableDataObservable(LocalVariableDataObservableValidator validator,
-            IObjectMapper objectMapper)
-            :base(objectMapper, validator)
+            IObjectMapper objectMapper,
+            LocalVariableData data = null)
+            :base(objectMapper, validator, data)
         {
+            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
             _localStrings = new ObservableCollectionEx<LocalStringDataObservable>();
             _localDoubles = new ObservableCollectionEx<LocalDoubleDataObservable>();

@@ -22,9 +22,12 @@ namespace Ceriyo.Core.Data
 
         public string OnAreaHeartbeat { get; set; }
 
+        public LocalVariableData LocalVariables { get; set; }
+
         public AreaData()
         {
             GlobalID = Guid.NewGuid().ToString();
+            LocalVariables = new LocalVariableData();
         }
     }
 }

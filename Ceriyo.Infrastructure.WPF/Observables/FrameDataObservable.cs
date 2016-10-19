@@ -8,7 +8,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 {
     public class FrameDataObservable: ValidatableBindableBase<FrameData>
     {
-        public delegate FrameDataObservable Factory();
+        public delegate FrameDataObservable Factory(FrameData data = null);
 
         private int _textureCellY;
         private int _textureCellX;
@@ -60,11 +60,23 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             set { SetProperty(ref _textureCellY, value); }
         }
 
-        public FrameDataObservable(FrameDataObservableValidator validator,
-            IObjectMapper objectMapper)
-            : base(objectMapper, validator)
+        public FrameDataObservable()
         {
+            
+        }
+        public FrameDataObservable(FrameDataObservableValidator validator,
+            IObjectMapper objectMapper,
+            FrameData data = null)
+            : base(objectMapper, validator, data)
+        {
+            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
+            Name = string.Empty;
+            FlipHorizontal = false;
+            FlipVertical = false;
+            FrameLength = 0.0f;
+            TextureCellX = 0;
+            TextureCellY = 0;
         }
     }
 }

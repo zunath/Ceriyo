@@ -129,15 +129,41 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _comment; }
             set { SetProperty(ref _comment, value); }
         }
-        
+
+        public CreatureDataObservable()
+        {
+            
+        }
         public CreatureDataObservable(CreatureDataObservableValidator validator,
             IObjectMapper objectMapper,
             LocalVariableDataObservable.Factory localVariableFactory,
-            CreatureData creatureData = null)
-            :base(objectMapper, validator, creatureData)
+            CreatureData data = null)
+            :base(objectMapper, validator, data)
         {
-            GlobalID = Guid.NewGuid().ToString();
-            _localVariables = localVariableFactory.Invoke();
+            if (data == null)
+            {
+                GlobalID = Guid.NewGuid().ToString();
+                Name = string.Empty;
+                Tag = string.Empty;
+                Resref = string.Empty;
+                Description = string.Empty;
+                Comment = string.Empty;
+                OnAttacked = string.Empty;
+                OnConversation = string.Empty;
+                OnDamaged = string.Empty;
+                OnDeath = string.Empty;
+                OnDisturbed = string.Empty;
+                OnHeartbeat = string.Empty;
+                OnSpawned = string.Empty;
+                Level = 0;
+                ClassResref = string.Empty;
+                DialogResref = string.Empty;
+                LocalVariables = localVariableFactory.Invoke();
+            }
+
+            LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();
         }
     }
 }

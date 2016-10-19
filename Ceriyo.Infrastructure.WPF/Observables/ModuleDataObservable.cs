@@ -10,7 +10,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 {
     public class ModuleDataObservable: ValidatableBindableBase<ModuleData>
     {
-        public delegate ModuleDataObservable Factory();
+        public delegate ModuleDataObservable Factory(ModuleData data = null);
 
         private string _name;
         private string _tag;
@@ -209,24 +209,52 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _globalID; }
             set { SetProperty(ref _globalID, value); }
         }
-        
+
+        public ModuleDataObservable()
+        {
+            
+        }
         public ModuleDataObservable(ModuleDataObservableValidator validator,
             IObjectMapper objectMapper,
-            LocalVariableDataObservable.Factory localVariableFactory)
-            :base(objectMapper, validator)
+            LocalVariableDataObservable.Factory localVariableFactory,
+            ModuleData data = null)
+            :base(objectMapper, validator, data)
         {
-            GlobalID = Guid.NewGuid().ToString();
-            _localVariables = localVariableFactory.Invoke();
-            _levelChart = new LevelChartDataObservable();
-            _abilityIDs = new ObservableCollectionEx<string>();
-            _classIDs = new ObservableCollectionEx<string>();
-            _creatureIDs = new ObservableCollectionEx<string>();
-            _itemIDs = new ObservableCollectionEx<string>();
-            _itemPropertyIDs = new ObservableCollectionEx<string>();
-            _placeableIDs = new ObservableCollectionEx<string>();
-            _scriptIDs = new ObservableCollectionEx<string>();
-            _skillIDs = new ObservableCollectionEx<string>();
-            _tilesetIDs = new ObservableCollectionEx<string>();
+            if (data == null)
+            {
+                GlobalID = Guid.NewGuid().ToString();
+                Name = string.Empty;
+                Tag = string.Empty;
+                Resref = string.Empty;
+                Description = string.Empty;
+                Comment = string.Empty;
+
+                OnHeartbeat = string.Empty;
+                OnModuleLoad = string.Empty;
+                OnPlayerDeath = string.Empty;
+                OnPlayerDying = string.Empty;
+                OnPlayerEnter = string.Empty;
+                OnPlayerLeaving = string.Empty;
+                OnPlayerLeft = string.Empty;
+                OnPlayerLevelUp = string.Empty;
+                OnPlayerRespawn = string.Empty;
+
+                LocalVariables = localVariableFactory.Invoke();
+                LevelChart = new LevelChartDataObservable();
+                AbilityIDs = new ObservableCollectionEx<string>();
+                ClassIDs = new ObservableCollectionEx<string>();
+                CreatureIDs = new ObservableCollectionEx<string>();
+                ItemIDs = new ObservableCollectionEx<string>();
+                ItemPropertyIDs = new ObservableCollectionEx<string>();
+                PlaceableIDs = new ObservableCollectionEx<string>();
+                ScriptIDs = new ObservableCollectionEx<string>();
+                SkillIDs = new ObservableCollectionEx<string>();
+                TilesetIDs = new ObservableCollectionEx<string>();
+            }
+
+            LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();
         }
     }
 }

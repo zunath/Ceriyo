@@ -8,7 +8,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
 {
     public class ItemTypeDataObservable: ValidatableBindableBase<ItemTypeData>
     {
-        public delegate ItemTypeDataObservable Factory();
+        public delegate ItemTypeDataObservable Factory(ItemTypeData data = null);
 
         private string _globalID;
 
@@ -41,13 +41,21 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _resref; }
             set { SetProperty(ref _resref, value); }
         }
-        
 
-        public ItemTypeDataObservable(ItemTypeDataObservableValidator validator,
-            IObjectMapper objectMapper)
-            :base(objectMapper, validator)
+        public ItemTypeDataObservable()
         {
+            
+        }
+        public ItemTypeDataObservable(ItemTypeDataObservableValidator validator,
+            IObjectMapper objectMapper,
+            ItemTypeData data = null)
+            :base(objectMapper, validator, data)
+        {
+            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
         }
     }
 }

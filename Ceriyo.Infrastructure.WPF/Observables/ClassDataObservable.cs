@@ -38,13 +38,21 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _resref; }
             set { SetProperty(ref _resref, value); }
         }
-        
+
+        public ClassDataObservable()
+        {
+            
+        }
         public ClassDataObservable(ClassDataObservableValidator validator,
             IObjectMapper objectMapper,
             ClassData data)
             :base(objectMapper, validator, data)
         {
+            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
         }
     }
 }

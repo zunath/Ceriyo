@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;
@@ -179,14 +180,50 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             set { SetProperty(ref _localVariables, value); }
         }
         
+        public PlaceableDataObservable()
+        {
+            
+        }
         public PlaceableDataObservable(PlaceableDataObservableValidator validator,
             IObjectMapper objectMapper,
             LocalVariableDataObservable.Factory localVariableFactory,
             PlaceableData data = null)
             : base(objectMapper, validator, data)
         {
-            GlobalID = Guid.NewGuid().ToString();
-            LocalVariables = localVariableFactory.Invoke();
+            if (data == null)
+            {
+                GlobalID = Guid.NewGuid().ToString();
+
+                Name = string.Empty;
+                Tag = string.Empty;
+                Resref = string.Empty;
+                Description = string.Empty;
+                Comment = string.Empty;
+
+                IsPlot = false;
+                IsKeyRequired = false;
+                IsLocked = false;
+                IsStatic = false;
+                IsUseable = false;
+                AutoRemoveKey = false;
+
+                OnAttacked = string.Empty;
+                OnClosed = string.Empty;
+                OnDamaged = string.Empty;
+                OnDeath = string.Empty;
+                OnDisturbed = string.Empty;
+                OnHeartbeat = string.Empty;
+                OnLocked = string.Empty;
+                OnOpened = string.Empty;
+                OnUnlocked = string.Empty;
+                OnUsed = string.Empty;
+
+                LocalVariables = localVariableFactory.Invoke();
+            }
+            
+            LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();
         }
     }
 }
