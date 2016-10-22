@@ -121,7 +121,7 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
             set
             {
                 SetProperty(ref _selectedItem, value);
-                OnPropertyChanged("IsItemSelected");
+                OnPropertyChanged(nameof(IsItemSelected));
             }
         }
         

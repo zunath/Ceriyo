@@ -10,6 +10,7 @@ namespace Ceriyo.Domain.Services.DataServices.Contracts
         void AddOrUpdateDirty(ItemData data);
         void AddOrUpdateDirty(PlaceableData data);
         void AddOrUpdateDirty(SkillData data);
+        void AddOrUpdateDirty(TilesetData data);
 
         void MarkForDeletion(AbilityData data);
         void MarkForDeletion(ClassData data);
@@ -17,6 +18,7 @@ namespace Ceriyo.Domain.Services.DataServices.Contracts
         void MarkForDeletion(ItemData data);
         void MarkForDeletion(PlaceableData data);
         void MarkForDeletion(SkillData data);
+        void MarkForDeletion(TilesetData data);
 
         void ClearQueuedChanges();
         void SaveChanges();

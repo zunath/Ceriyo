@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Ceriyo.Core.Constants;
 using Ceriyo.Core.Data;
 
 namespace Ceriyo.Domain.Services.DataServices.Contracts
@@ -8,5 +9,7 @@ namespace Ceriyo.Domain.Services.DataServices.Contracts
         void SaveResourcePack(IEnumerable<ResourceItemData> resources, string resourcePackName);
 
         IEnumerable<ResourceItemData> LoadResourcePack(string resourcePackName);
+
+        
     }
 }

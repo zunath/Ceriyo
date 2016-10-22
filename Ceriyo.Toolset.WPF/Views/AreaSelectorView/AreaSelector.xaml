@@ -4,26 +4,49 @@
              xmlns:prism="http://prismlibrary.com/"             
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              Background="White"
              d:DesignHeight="400"
              d:DesignWidth="300"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
+        
+        
+        
         <TreeView IsEnabled="{Binding IsModuleLoaded}">
             <TreeView.Resources>
                 <ContextMenu x:Key="RootContextMenu">
                     <MenuItem Header="New Area">
                     </MenuItem>
                 </ContextMenu>
+                <ContextMenu x:Key="AreaContextMenu">
+                    <MenuItem Header="Rename" 
+                              IsEnabled="{Binding IsAreaSelected}" >
+                    </MenuItem>
+                    <MenuItem Header="Properties"
+                              IsEnabled="{Binding IsAreaSelected}">
+                    </MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Delete"
+                              IsEnabled="{Binding IsAreaSelected}">
+                    </MenuItem>
+                </ContextMenu>
             </TreeView.Resources>
 
             <TreeViewItem
                 ItemsSource="{Binding Areas}"
-                DisplayMemberPath="Name"
                 Header="Areas"
                 ContextMenu="{StaticResource RootContextMenu}">
 
+                <TreeViewItem.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock ContextMenu="{StaticResource AreaContextMenu}" 
+                            Text="{Binding Name}">
+                        </TextBlock>
+                    </DataTemplate>
+                </TreeViewItem.ItemTemplate>
+                
             </TreeViewItem>
             
         </TreeView>

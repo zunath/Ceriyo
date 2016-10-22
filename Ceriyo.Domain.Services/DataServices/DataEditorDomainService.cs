@@ -26,13 +26,14 @@ namespace Ceriyo.Domain.Services.DataServices
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
 
-        private DirtyGroup<AbilityData> DirtyAbilities { get; set; }
-        private DirtyGroup<ClassData> DirtyClasses { get; set; }
-        private DirtyGroup<CreatureData> DirtyCreatures { get; set; }
-        private DirtyGroup<ItemData> DirtyItems { get; set; }
-        private DirtyGroup<PlaceableData> DirtyPlaceables { get; set; }
-        private DirtyGroup<SkillData> DirtySkills { get; set; }
+        private DirtyGroup<AbilityData> DirtyAbilities { get; }
+        private DirtyGroup<ClassData> DirtyClasses { get; }
+        private DirtyGroup<CreatureData> DirtyCreatures { get; }
+        private DirtyGroup<ItemData> DirtyItems { get; }
+        private DirtyGroup<PlaceableData> DirtyPlaceables { get; }
+        private DirtyGroup<SkillData> DirtySkills { get; }
 
+        private DirtyGroup<TilesetData> DirtyTilesets { get; }
         public DataEditorDomainService(IDataService dataService,
             IPathService pathService)
         {
@@ -44,6 +45,7 @@ namespace Ceriyo.Domain.Services.DataServices
             DirtyItems = new DirtyGroup<ItemData>();
             DirtyPlaceables = new DirtyGroup<PlaceableData>();
             DirtySkills = new DirtyGroup<SkillData>();
+            DirtyTilesets = new DirtyGroup<TilesetData>();
         }
 
         public void AddOrUpdateDirty(AbilityData data)
@@ -82,6 +84,12 @@ namespace Ceriyo.Domain.Services.DataServices
             DirtySkills.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
+        public void AddOrUpdateDirty(TilesetData data)
+        {
+            DirtyTilesets.Remove(data.GlobalID);
+            DirtyTilesets.Add(data.GlobalID, data, ActionType.AddOrChanged);
+        }
+
         public void MarkForDeletion(AbilityData data)
         {
             DirtyAbilities.Remove(data.GlobalID);
@@ -114,6 +122,12 @@ namespace Ceriyo.Domain.Services.DataServices
             DirtySkills.Add(data.GlobalID, data, ActionType.Delete);
         }
 
+        public void MarkForDeletion(TilesetData data)
+        {
+            DirtyTilesets.Remove(data.GlobalID);
+            DirtyTilesets.Add(data.GlobalID, data, ActionType.Delete);
+        }
+
         public void ClearQueuedChanges()
         {
             DirtyAbilities.Clear();
@@ -128,33 +142,37 @@ namespace Ceriyo.Domain.Services.DataServices
         {
             foreach (var record in DirtyAbilities)
             {
-                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Ability");
+                SaveOrDeleteFile(record.Value.Item1, record.Key, record.Value.Item2, "Ability");
             }
             foreach (var record in DirtyClasses)
             {
-                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Class");
+                SaveOrDeleteFile(record.Value.Item1, record.Key, record.Value.Item2, "Class");
             }
             foreach (var record in DirtyCreatures)
             {
-                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Creature");
+                SaveOrDeleteFile(record.Value.Item1, record.Key, record.Value.Item2, "Creature");
             }
             foreach (var record in DirtyItems)
             {
-                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Item");
+                SaveOrDeleteFile(record.Value.Item1, record.Key, record.Value.Item2, "Item");
             }
             foreach (var record in DirtyPlaceables)
             {
-                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Placeable");
+                SaveOrDeleteFile(record.Value.Item1, record.Key, record.Value.Item2, "Placeable");
             }
             foreach (var record in DirtySkills)
             {
-                SaveFile(record.Value.Item1, record.Key, record.Value.Item2, "Skill");
+                SaveOrDeleteFile(record.Value.Item1, record.Key, record.Value.Item2, "Skill");
+            }
+            foreach (var record in DirtyTilesets)
+            {
+                SaveOrDeleteFile(record.Value.Item1, record.Key, record.Value.Item2, "Tileset");
             }
             
             ClearQueuedChanges();
         }
 
-        private void SaveFile(object obj, string globalID, ActionType action, string directoryName)
+        private void SaveOrDeleteFile(object obj, string globalID, ActionType action, string directoryName)
         {
             if (action == ActionType.AddOrChanged)
                 _dataService.Save(obj, $"{_pathService.ModulesTempDirectory}{directoryName}/{globalID}.dat");

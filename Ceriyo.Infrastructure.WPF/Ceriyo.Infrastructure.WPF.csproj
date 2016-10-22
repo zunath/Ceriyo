@@ -125,6 +125,7 @@
     <Compile Include="Controls\DoubleUpDownEx.cs" />
     <Compile Include="Controls\IntegerUpDownEx.cs" />
     <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
+    <Compile Include="Helpers\BitmapImageHelpers.cs" />
     <Compile Include="MonoGameWpfInterop\D3D11Host.cs" />
     <Compile Include="MonoGameWpfInterop\D3D11Image.cs" />
     <Compile Include="MonoGameWpfInterop\D3D9.cs" />

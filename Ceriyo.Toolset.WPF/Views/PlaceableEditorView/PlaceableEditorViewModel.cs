@@ -118,7 +118,7 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
             set
             {
                 SetProperty(ref _selectedPlaceable, value);
-                OnPropertyChanged("IsPlaceableSelected");
+                OnPropertyChanged(nameof(IsPlaceableSelected));
             }
         }
 

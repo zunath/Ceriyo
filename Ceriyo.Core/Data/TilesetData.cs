@@ -16,6 +16,8 @@ namespace Ceriyo.Core.Data
 
         public string Comment { get; set; }
 
+        public string ResourceName { get; set; }
+
         public TilesetData()
         {
             GlobalID = Guid.NewGuid().ToString();

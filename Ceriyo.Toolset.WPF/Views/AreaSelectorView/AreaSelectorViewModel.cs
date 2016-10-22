@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Windows.Controls;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
@@ -29,7 +31,9 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
             _areaFactory = areaFactory;
 
             Areas = new ObservableCollectionEx<AreaDataObservable>();
-            
+            RootContextMenuItems = new List<MenuItem>();
+            AreaContextMenuItems = new List<MenuItem>();
+
             CreateAreaCommand = new DelegateCommand(CreateArea);
 
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
@@ -59,23 +63,6 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
                 AreaDataObservable area = _areaFactory.Invoke(loaded);
                 Areas.Add(area);
             }
-
-            AreaDataObservable obs1 = _areaFactory.Invoke();
-            obs1.Name = "area 1";
-            AreaDataObservable obs2 = _areaFactory.Invoke();
-            obs2.Name = "area 2";
-            AreaDataObservable obs3 = _areaFactory.Invoke();
-            obs3.Name = "area 3";
-            AreaDataObservable obs4 = _areaFactory.Invoke();
-            obs4.Name = "area 4";
-            AreaDataObservable obs5 = _areaFactory.Invoke();
-            obs5.Name = "area 5";
-
-            Areas.Add(obs1);
-            Areas.Add(obs2);
-            Areas.Add(obs3);
-            Areas.Add(obs4);
-            Areas.Add(obs5);
         }
 
         private bool _isModuleLoaded;
@@ -91,8 +78,14 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
         public AreaDataObservable SelectedArea
         {
             get { return _selectedArea; }
-            set { SetProperty(ref _selectedArea, value); }
+            set
+            {
+                SetProperty(ref _selectedArea, value);
+                OnPropertyChanged();
+            }
         }
+
+        public bool IsAreaSelected => SelectedArea != null;
 
         private ObservableCollectionEx<AreaDataObservable> _areas;
 
@@ -105,6 +98,57 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
         public DelegateCommand CreateAreaCommand { get; }
 
         private void CreateArea()
+        {
+            
+        }
+
+        public List<MenuItem> RootContextMenuItems { get; set; }
+        public List<MenuItem> AreaContextMenuItems { get; set; }
+
+        private void BuildContextMenuItems()
+        {
+            RootContextMenuItems.Add(new MenuItem
+            {
+                Header = "New Area",
+                Command = new DelegateCommand(NewArea)
+            });
+
+            AreaContextMenuItems.Add(new MenuItem
+            {
+                Header = "Rename",
+                Command = new DelegateCommand(RenameArea)
+            });
+
+            AreaContextMenuItems.Add(new MenuItem
+            {
+                Header = "Properties",
+                Command = new DelegateCommand(OpenAreaProperties)
+            });
+
+            AreaContextMenuItems.Add(new MenuItem
+            {
+                Header = "Delete",
+                Command = new DelegateCommand(DeleteArea)
+            });
+
+        }
+
+        private void NewArea()
+        {
+            
+        }
+
+        private void RenameArea()
+        {
+            
+        }
+
+        private void OpenAreaProperties()
+        {
+            
+        }
+
+        private void DeleteArea()
         {
             
         }

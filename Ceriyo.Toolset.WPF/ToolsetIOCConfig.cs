@@ -75,7 +75,7 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<ModuleDomainService>().As<IModuleDomainService>().SingleInstance();
             builder.RegisterType<DataEditorDomainService>().As<IDataEditorDomainService>();
             builder.RegisterType<ResourceEditorDomainService>().As<IResourceEditorDomainService>();
-
+            builder.RegisterType<ModuleResourceDomainService>().As<IModuleResourceDomainService>();
 
             // Validation
             builder.RegisterType<ValidationHelper>().As<IValidationHelper>();

@@ -189,6 +189,9 @@
     <Compile Include="Events\Skill\SkillCreatedEvent.cs" />
     <Compile Include="Events\Skill\SkillDeletedEvent.cs" />
     <Compile Include="Events\Skill\SkillEditorValidityChangedEvent.cs" />
+    <Compile Include="Events\Tileset\TilesetChangedEvent.cs" />
+    <Compile Include="Events\Tileset\TilesetCreatedEvent.cs" />
+    <Compile Include="Events\Tileset\TilesetDeletedEvent.cs" />
     <Compile Include="Events\Tileset\TilesetEditorValidityChangedEvent.cs" />
     <Compile Include="ToolsetGame.cs" />
     <Compile Include="ToolsetIOCConfig.cs" />

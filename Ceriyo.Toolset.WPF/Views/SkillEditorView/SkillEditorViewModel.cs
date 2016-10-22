@@ -107,7 +107,7 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
             set
             {
                 SetProperty(ref _selectedSkill, value);
-                OnPropertyChanged("IsSkillSelected");
+                OnPropertyChanged(nameof(IsSkillSelected));
             }
         }
 

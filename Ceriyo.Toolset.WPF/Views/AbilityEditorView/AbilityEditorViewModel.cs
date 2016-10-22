@@ -106,7 +106,7 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
             set
             {
                 SetProperty(ref _selectedAbility, value);
-                OnPropertyChanged("IsAbilitySelected");
+                OnPropertyChanged(nameof(IsAbilitySelected));
             }
         }
 

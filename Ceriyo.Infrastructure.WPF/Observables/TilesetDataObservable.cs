@@ -16,6 +16,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
         private string _resref;
         private string _description;
         private string _comment;
+        private string _resourceName;
 
         public string GlobalID
         {
@@ -53,6 +54,12 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             set { SetProperty(ref _comment, value); }
         }
 
+        public string ResourceName
+        {
+            get { return _resourceName; }
+            set { SetProperty(ref _resourceName, value); }
+        }
+
         public TilesetDataObservable()
         {
             
@@ -69,6 +76,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             Resref = string.Empty;
             Description = string.Empty;
             Comment = string.Empty;
+            ResourceName = string.Empty;
         }
     }
 }

@@ -14,6 +14,7 @@ using Ceriyo.Toolset.WPF.Events.Module;
 using Ceriyo.Toolset.WPF.Events.Placeable;
 using Ceriyo.Toolset.WPF.Events.ResourceEditor;
 using Ceriyo.Toolset.WPF.Events.Skill;
+using Ceriyo.Toolset.WPF.Events.Tileset;
 using Prism.Events;
 
 namespace Ceriyo.Toolset.WPF
@@ -77,6 +78,10 @@ namespace Ceriyo.Toolset.WPF
             _eventAggregator.GetEvent<SkillCreatedEvent>().Subscribe(SkillCreatedOrChanged);
             _eventAggregator.GetEvent<SkillChangedEvent>().Subscribe(SkillCreatedOrChanged);
             _eventAggregator.GetEvent<SkillDeletedEvent>().Subscribe(SkillDeleted);
+
+            _eventAggregator.GetEvent<TilesetCreatedEvent>().Subscribe(TilesetCreatedOrChanged);
+            _eventAggregator.GetEvent<TilesetChangedEvent>().Subscribe(TilesetCreatedOrChanged);
+            _eventAggregator.GetEvent<TilesetDeletedEvent>().Subscribe(TilesetDeleted);
 
             // Resource Editor Events
             _eventAggregator.GetEvent<ResourceEditorClosedEvent>().Subscribe(ResourceEditorClosed);
@@ -189,6 +194,17 @@ namespace Ceriyo.Toolset.WPF
             _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
         }
         private void SkillDeleted(SkillDataObservable data)
+        {
+            _dataEditorDomainService.MarkForDeletion(data.Observable);
+        }
+
+        // Tileset Events
+        private void TilesetCreatedOrChanged(TilesetDataObservable data)
+        {
+            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
+        }
+
+        private void TilesetDeleted(TilesetDataObservable data)
         {
             _dataEditorDomainService.MarkForDeletion(data.Observable);
         }
