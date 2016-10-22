@@ -124,7 +124,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\MetroPopupWindowAction.cs" />
+    <Compile Include="Behaviors\BindableSelectedItemBehavior.cs" />
     <Compile Include="Behaviors\RepositionPopupBehavior.cs" />
+    <Compile Include="Binding\BindingProxy.cs" />
     <Compile Include="Observables\Contracts\IDataObservable.cs" />
     <Compile Include="BindableBases\ValidatableBindableBase.cs" />
     <Compile Include="Controls\DoubleUpDownEx.cs" />

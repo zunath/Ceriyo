@@ -6,6 +6,7 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.Area;
@@ -23,16 +24,22 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
         private readonly IPathService _pathService;
         private readonly IDataService _dataService;
         private readonly IObservableDataFactory _observableDataFactory;
+        private readonly IAreaDomainService _areaDomainService;
+        private readonly IObjectMapper _objectMapper;
 
         public AreaSelectorViewModel(IEventAggregator eventAggregator,
             IPathService pathService,
             IDataService dataService,
-            IObservableDataFactory observableDataFactory)
+            IObservableDataFactory observableDataFactory,
+            IAreaDomainService areaDomainService,
+            IObjectMapper objectMapper)
         {
             _eventAggregator = eventAggregator;
             _pathService = pathService;
             _dataService = dataService;
             _observableDataFactory = observableDataFactory;
+            _areaDomainService = areaDomainService;
+            _objectMapper = objectMapper;
 
             Areas = new ObservableCollectionEx<AreaDataObservable>();
             RootContextMenuItems = new List<MenuItem>();
@@ -49,7 +56,6 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
             _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ModuleClosed);
             _eventAggregator.GetEvent<AreaCreatedEvent>().Subscribe(AreaCreated);
-            _eventAggregator.GetEvent<AreaDeletedEvent>().Subscribe(AreaDeleted);
             _eventAggregator.GetEvent<AreaPropertiesChangedEvent>().Subscribe(AreaPropertiesChanged);
         }
 
@@ -57,12 +63,6 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
         {
             var existing = Areas.Single(x => x.GlobalID == area.GlobalID);
             existing.Name = area.Name;
-        }
-
-        private void AreaDeleted(AreaDataObservable area)
-        {
-            var existing = Areas.Single(x => x.GlobalID == area.GlobalID);
-            Areas.Remove(existing);
         }
 
         private void AreaCreated(AreaDataObservable area)
@@ -104,15 +104,28 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
             set { SetProperty(ref _isModuleLoaded, value); }
         }
 
-        private AreaDataObservable _selectedArea;
+        private object _selectedTreeItem;
+
+        public object SelectedTreeItem
+        {
+            get { return _selectedTreeItem; }
+            set
+            {
+                SetProperty(ref _selectedTreeItem, value);
+                OnPropertyChanged(nameof(IsAreaSelected));
+            }
+        }
 
         public AreaDataObservable SelectedArea
         {
-            get { return _selectedArea; }
-            set
+            get
             {
-                SetProperty(ref _selectedArea, value);
-                OnPropertyChanged();
+                if (SelectedTreeItem.GetType() == typeof(AreaDataObservable))
+                {
+                    return (AreaDataObservable) SelectedTreeItem;
+                }
+
+                return null;
             }
         }
 
@@ -173,8 +186,12 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
                 }, c =>
                 {
                     if (!c.Confirmed) return;
-                    _eventAggregator.GetEvent<AreaDeletedEvent>().Publish(SelectedArea);
+
+                    AreaData domainObject = _objectMapper.Map<AreaData>(SelectedArea);
+                    _areaDomainService.DeleteArea(domainObject);
                     Areas.Remove(SelectedArea);
+                    _eventAggregator.GetEvent<AreaDeletedEvent>().Publish(SelectedArea);
+                    
                 });
         }
 

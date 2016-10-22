@@ -4,19 +4,32 @@
              xmlns:prism="http://prismlibrary.com/"             
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:actions="clr-namespace:Ceriyo.Infrastructure.WPF.Actions;assembly=Ceriyo.Infrastructure.WPF"
-             xmlns:newModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.NewModuleView"
              xmlns:newAreaView="clr-namespace:Ceriyo.Toolset.WPF.Views.NewAreaView"
              xmlns:areaPropertiesView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaPropertiesView"
+             xmlns:behaviors="clr-namespace:Ceriyo.Infrastructure.WPF.Behaviors;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:binding="clr-namespace:Ceriyo.Infrastructure.WPF.Binding;assembly=Ceriyo.Infrastructure.WPF"
              mc:Ignorable="d"
              Background="White"
              d:DesignHeight="400"
              d:DesignWidth="300"
              prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <binding:BindingProxy
+            x:Key="DataContextProxy"
+            Data="{Binding}">
+        </binding:BindingProxy>
+    </UserControl.Resources>
+    
     <Grid>
         <TreeView IsEnabled="{Binding IsModuleLoaded}">
+            <i:Interaction.Behaviors>
+                <behaviors:BindableSelectedItemBehavior
+                    SelectedItem="{Binding SelectedTreeItem, 
+                                           Mode=TwoWay}">
+                </behaviors:BindableSelectedItemBehavior>
+            </i:Interaction.Behaviors>
             <TreeView.Resources>
                 <ContextMenu x:Key="RootContextMenu">
                     <MenuItem Header="New Area"
@@ -25,17 +38,14 @@
                 </ContextMenu>
                 <ContextMenu x:Key="AreaContextMenu">
                     <MenuItem Header="Rename" 
-                              IsEnabled="{Binding IsAreaSelected}"
-                              Command="{Binding RenameAreaCommand}">
+                              Command="{Binding Path=Data.RenameAreaCommand, Source={StaticResource DataContextProxy}}">
                     </MenuItem>
                     <MenuItem Header="Properties"
-                              IsEnabled="{Binding IsAreaSelected}"
-                              Command="{Binding OpenAreaPropertiesCommand}">
+                              Command="{Binding Path=Data.OpenAreaPropertiesCommand, Source={StaticResource DataContextProxy}}">
                     </MenuItem>
                     <Separator></Separator>
                     <MenuItem Header="Delete"
-                              IsEnabled="{Binding IsAreaSelected}"
-                              Command="{Binding DeleteAreaCommand}">
+                              Command="{Binding Path=Data.DeleteAreaCommand, Source={StaticResource DataContextProxy}}">
                     </MenuItem>
                 </ContextMenu>
             </TreeView.Resources>
@@ -45,13 +55,13 @@
                 Header="Areas"
                 ContextMenu="{StaticResource RootContextMenu}"
                 IsExpanded="{Binding IsAreaListExpanded}">
-
                 <TreeViewItem.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock ContextMenu="{StaticResource AreaContextMenu}" 
-                            Text="{Binding Name}">
+                    <HierarchicalDataTemplate>
+                        <TextBlock Text="{Binding Name}"
+                                   ContextMenu="{StaticResource AreaContextMenu}">
+                            
                         </TextBlock>
-                    </DataTemplate>
+                    </HierarchicalDataTemplate>
                 </TreeViewItem.ItemTemplate>
                 
             </TreeViewItem>
@@ -94,7 +104,11 @@
                     </prism:PopupWindowAction.WindowContent>
                 </actions:MetroPopupWindowAction>
             </prism:InteractionRequestTrigger>
+            
+            <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmDeleteRequest, Mode=OneWay}">
+                <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            </prism:InteractionRequestTrigger>
         </i:Interaction.Triggers>
-        
+
     </Grid>
 </UserControl>
