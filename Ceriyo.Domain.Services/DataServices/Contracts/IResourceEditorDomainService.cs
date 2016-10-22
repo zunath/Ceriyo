@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Ceriyo.Core.Constants;
 using Ceriyo.Core.Data;
 
 namespace Ceriyo.Domain.Services.DataServices.Contracts

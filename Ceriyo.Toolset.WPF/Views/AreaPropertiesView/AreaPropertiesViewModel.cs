@@ -1,54 +1,36 @@
 ﻿using System;
-using System.ComponentModel;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Observables;
-using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Interactivity.InteractionRequest;
 
-namespace Ceriyo.Toolset.WPF.Views.NewAreaView
+namespace Ceriyo.Toolset.WPF.Views.AreaPropertiesView
 {
-    public class NewAreaViewModel : ValidatableBindableBase<NewAreaViewModel>, IInteractionRequestAware
+    public class AreaPropertiesViewModel : ValidatableBindableBase<AreaPropertiesViewModel>, IInteractionRequestAware
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IModuleResourceDomainService _moduleResourceDomainService;
-        private readonly IDataService _dataService;
 
-        public NewAreaViewModel(
+        public AreaPropertiesViewModel(
             IEventAggregator eventAggregator,
             IObjectMapper mapper,
-            IModuleResourceDomainService moduleResourceDomainService,
-            NewAreaViewModelValidator validator)
+            AreaPropertiesViewModelValidator validator)
             : base(mapper, validator)
         {
             _eventAggregator = eventAggregator;
-            _moduleResourceDomainService = moduleResourceDomainService;
 
             Tilesets = new ObservableCollectionEx<TilesetDataObservable>();
             OpenInAreaViewer = true;
-            Width = 8;
-            Height = 8;
-            
+            AreaWidth = 8;
+            AreaHeight = 8;
 
-            CreateAreaCommand = new DelegateCommand(CreateArea, CanCreateArea);
+            CreateAreaCommand = new DelegateCommand(CreateArea);
             CancelCommand = new DelegateCommand(Cancel);
 
-            PropertyChanged += OnPropertyChanged;
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            CreateAreaCommand.RaiseCanExecuteChanged();
-        }
-
-        private bool CanCreateArea()
-        {
-            return !HasErrors;
-        }
-        
         private string _name;
 
         public string Name
@@ -89,20 +71,20 @@ namespace Ceriyo.Toolset.WPF.Views.NewAreaView
             set { SetProperty(ref _selectedTileset, value); }
         }
 
-        private int _width;
+        private int _areaWidth;
 
-        public int Width
+        public int AreaWidth
         {
-            get { return _width; }
-            set { SetProperty(ref _width, value); }
+            get { return _areaWidth; }
+            set { SetProperty(ref _areaWidth, value); }
         }
 
-        private int _height;
+        private int _areaHeight;
 
-        public int Height
+        public int AreaHeight
         {
-            get { return _height; }
-            set { SetProperty(ref _height, value); }
+            get { return _areaHeight; }
+            set { SetProperty(ref _areaHeight, value); }
         }
 
         private bool _launchAreaProperties;
@@ -125,15 +107,14 @@ namespace Ceriyo.Toolset.WPF.Views.NewAreaView
 
         private void CreateArea()
         {
-            if (HasErrors) return;
-
+            
         }
 
         public DelegateCommand CancelCommand { get; }
 
         private void Cancel()
         {
-            FinishInteraction();
+            
         }
 
         public INotification Notification { get; set; }

@@ -6,9 +6,11 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
+using Ceriyo.Toolset.WPF.Events.Area;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
 
 namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
@@ -35,6 +37,12 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
             AreaContextMenuItems = new List<MenuItem>();
 
             CreateAreaCommand = new DelegateCommand(CreateArea);
+            RenameAreaCommand = new DelegateCommand(RenameArea);
+            DeleteAreaCommand = new DelegateCommand(DeleteArea);
+            OpenAreaPropertiesCommand = new DelegateCommand(OpenAreaProperties);
+            CreateAreaRequest = new InteractionRequest<INotification>();
+            OpenAreaPropertiesRequest = new InteractionRequest<INotification>();
+            ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
 
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
             _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ModuleClosed);
@@ -96,61 +104,55 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
         }
 
         public DelegateCommand CreateAreaCommand { get; }
+        public InteractionRequest<INotification> CreateAreaRequest { get; }
 
         private void CreateArea()
         {
-            
+            CreateAreaRequest.Raise(new Notification
+            {
+                Content = "Create Area",
+                Title = "Create Area"
+            });
         }
 
         public List<MenuItem> RootContextMenuItems { get; set; }
         public List<MenuItem> AreaContextMenuItems { get; set; }
 
-        private void BuildContextMenuItems()
-        {
-            RootContextMenuItems.Add(new MenuItem
-            {
-                Header = "New Area",
-                Command = new DelegateCommand(NewArea)
-            });
-
-            AreaContextMenuItems.Add(new MenuItem
-            {
-                Header = "Rename",
-                Command = new DelegateCommand(RenameArea)
-            });
-
-            AreaContextMenuItems.Add(new MenuItem
-            {
-                Header = "Properties",
-                Command = new DelegateCommand(OpenAreaProperties)
-            });
-
-            AreaContextMenuItems.Add(new MenuItem
-            {
-                Header = "Delete",
-                Command = new DelegateCommand(DeleteArea)
-            });
-
-        }
-
-        private void NewArea()
-        {
-            
-        }
+        public DelegateCommand RenameAreaCommand { get; }
 
         private void RenameArea()
         {
             
         }
 
+        public DelegateCommand OpenAreaPropertiesCommand { get; }
+        public InteractionRequest<INotification> OpenAreaPropertiesRequest { get; }
+
         private void OpenAreaProperties()
         {
-            
+            OpenAreaPropertiesRequest.Raise(new Notification
+            {
+                Content = "Area Properties",
+                Title = "Area Properties"
+            });
         }
+
+        public DelegateCommand DeleteAreaCommand { get; }
+        public InteractionRequest<IConfirmation> ConfirmDeleteRequest { get; }
 
         private void DeleteArea()
         {
-            
+            ConfirmDeleteRequest.Raise(
+                new Confirmation
+                {
+                    Title = "Delete Area?",
+                    Content = "Are you sure you want to delete this area?"
+                }, c =>
+                {
+                    if (!c.Confirmed) return;
+                    _eventAggregator.GetEvent<AreaDeletedEvent>().Publish(SelectedArea);
+                    Areas.Remove(SelectedArea);
+                });
         }
 
     }

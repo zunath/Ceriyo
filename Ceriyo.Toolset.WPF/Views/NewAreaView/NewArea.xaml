@@ -5,8 +5,206 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d">
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:controls="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
+             mc:Ignorable="d"
+             d:DesignWidth="300"
+             d:DesignHeight="300"
+             Background="White">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Label
+            Grid.Column="0"
+            Grid.Row="0">
+            Name:
+        </Label>
+        
+        <TextBox
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Grid.Row="0"
+            Margin="2,2,2,2"
+            Text="{Binding Name,
+                           Mode=TwoWay, 
+                           ValidatesOnDataErrors=True, 
+                           NotifyOnValidationError=True,
+                           UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+            MaxLength="256">
             
+        </TextBox>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="1">
+            Tag:
+        </Label>
+        
+        <TextBox
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Grid.Row="1"
+            Margin="2,2,2,2"
+            Text="{Binding Tag,
+                           Mode=TwoWay, 
+                           ValidatesOnDataErrors=True, 
+                           NotifyOnValidationError=True,
+                           UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+            
+        </TextBox>
+        
+        <Label
+            Grid.Column="0"
+            Grid.Row="2">
+            Resref:
+        </Label>
+        
+        <TextBox
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Grid.Row="2"
+            Margin="2,2,2,2"
+            Text="{Binding Resref,
+                           Mode=TwoWay, 
+                           ValidatesOnDataErrors=True, 
+                           NotifyOnValidationError=True,
+                           UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+            
+        </TextBox>
+        
+        <Label
+            Grid.Row="3"
+            Grid.Column="0">
+            Tileset:
+        </Label>
+        
+        <ComboBox
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Grid.Row="3"
+            Margin="2,2,2,2"
+            ItemsSource="{Binding Tilesets}"
+            SelectedItem="{Binding SelectedTileset,
+                                   Mode=TwoWay, 
+                                   ValidatesOnDataErrors=True, 
+                                   NotifyOnValidationError=True,
+                                   UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTemplate}">
+            
+        </ComboBox>
+        
+        <Label
+            Grid.Column="0"
+            Grid.Row="4"
+            Margin="4,6,0,0">
+            Width:
+        </Label>
+        
+        <Label
+            Grid.Column="2"
+            Grid.Row="4"
+            Margin="4,6,0,0">
+            Height:
+        </Label>
+
+        <controls:IntegerUpDownEx
+            Grid.Column="0"
+            Grid.Row="5"
+            Margin="2,2,2,2"
+            Value="{Binding Width,
+                            Mode=TwoWay, 
+                            ValidatesOnDataErrors=True, 
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+            Minimum="1"
+            Maximum="32">
+        </controls:IntegerUpDownEx>
+        
+        <controls:IntegerUpDownEx
+            Grid.Column="2"
+            Grid.Row="5"
+            Margin="2,2,2,2"
+            Value="{Binding Height,
+                            Mode=TwoWay, 
+                            ValidatesOnDataErrors=True, 
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+            Minimum="1"
+            Maximum="32">
+            
+        </controls:IntegerUpDownEx>
+        
+        <StackPanel
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Grid.Row="6"
+            Grid.RowSpan="2">
+            <CheckBox
+                IsChecked="{Binding LaunchAreaProperties,
+                                    Mode=TwoWay, 
+                                    ValidatesOnDataErrors=True, 
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                Margin="5,5,5,5">
+                Launch Area Properties
+            </CheckBox>
+            
+            <CheckBox
+                IsChecked="{Binding OpenInAreaViewer,
+                                    Mode=TwoWay, 
+                                    ValidatesOnDataErrors=True, 
+                                    NotifyOnValidationError=True,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                Margin="5,5,5,5">
+                Open in Area Viewer
+            </CheckBox>
+            
+        </StackPanel>
+        
+        <StackPanel
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Grid.Row="8"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+
+            <Button
+                MinWidth="92"    
+                Margin="2,2,2,2"
+                Command="{Binding CreateAreaCommand}">
+                Create Area
+            </Button>
+            <Button
+                MinWidth="92"    
+                Margin="2,2,2,2"
+                Command="{Binding CancelCommand}">
+                Cancel
+            </Button>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -157,6 +157,10 @@
     <Compile Include="Events\Ability\AbilityEditorValidityChangedEvent.cs" />
     <Compile Include="Events\Animation\AnimationEditorValidityChangedEvent.cs" />
     <Compile Include="Events\Application\ApplicationLoadedEvent.cs" />
+    <Compile Include="Events\Area\AreaCreatedEvent.cs" />
+    <Compile Include="Events\Area\AreaDeletedEvent.cs" />
+    <Compile Include="Events\Area\AreaPropertiesChangedEvent.cs" />
+    <Compile Include="Events\Area\AreaRenamedEvent.cs" />
     <Compile Include="Events\Class\ClassChangedEvent.cs" />
     <Compile Include="Events\Class\ClassCreatedEvent.cs" />
     <Compile Include="Events\Class\ClassDeletedEvent.cs" />
@@ -256,6 +260,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModulePropertiesView\ModuleProperties.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AreaPropertiesView\AreaProperties.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -385,6 +393,11 @@
     </Compile>
     <Compile Include="Views\ModulePropertiesView\ModulePropertiesViewModel.cs" />
     <Compile Include="Views\ModulePropertiesView\ModulePropertiesViewModelValidator.cs" />
+    <Compile Include="Views\AreaPropertiesView\AreaProperties.xaml.cs">
+      <DependentUpon>AreaProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AreaPropertiesView\AreaPropertiesViewModel.cs" />
+    <Compile Include="Views\AreaPropertiesView\AreaPropertiesViewModelValidator.cs" />
     <Compile Include="Views\NewAreaView\NewArea.xaml.cs">
       <DependentUpon>NewArea.xaml</DependentUpon>
     </Compile>

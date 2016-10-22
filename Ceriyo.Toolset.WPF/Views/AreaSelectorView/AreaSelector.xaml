@@ -5,31 +5,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:actions="clr-namespace:Ceriyo.Infrastructure.WPF.Actions;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:newModuleView="clr-namespace:Ceriyo.Toolset.WPF.Views.NewModuleView"
+             xmlns:newAreaView="clr-namespace:Ceriyo.Toolset.WPF.Views.NewAreaView"
+             xmlns:areaPropertiesView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaPropertiesView"
              mc:Ignorable="d"
              Background="White"
              d:DesignHeight="400"
              d:DesignWidth="300"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-        
-        
-        
         <TreeView IsEnabled="{Binding IsModuleLoaded}">
             <TreeView.Resources>
                 <ContextMenu x:Key="RootContextMenu">
-                    <MenuItem Header="New Area">
+                    <MenuItem Header="New Area"
+                              Command="{Binding CreateAreaCommand}">
                     </MenuItem>
                 </ContextMenu>
                 <ContextMenu x:Key="AreaContextMenu">
                     <MenuItem Header="Rename" 
-                              IsEnabled="{Binding IsAreaSelected}" >
+                              IsEnabled="{Binding IsAreaSelected}"
+                              Command="{Binding RenameAreaCommand}">
                     </MenuItem>
                     <MenuItem Header="Properties"
-                              IsEnabled="{Binding IsAreaSelected}">
+                              IsEnabled="{Binding IsAreaSelected}"
+                              Command="{Binding OpenAreaPropertiesCommand}">
                     </MenuItem>
                     <Separator></Separator>
                     <MenuItem Header="Delete"
-                              IsEnabled="{Binding IsAreaSelected}">
+                              IsEnabled="{Binding IsAreaSelected}"
+                              Command="{Binding DeleteAreaCommand}">
                     </MenuItem>
                 </ContextMenu>
             </TreeView.Resources>
@@ -50,7 +56,44 @@
             </TreeViewItem>
             
         </TreeView>
-        
+
+
+
+
+        <i:Interaction.Triggers>
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding CreateAreaRequest, Mode=OneWay}">
+                <actions:MetroPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
+                    <prism:PopupWindowAction.WindowContent>
+                        <newAreaView:NewArea
+                                MinWidth="350"
+                                MinHeight="350"
+                                Width="300"
+                                Height="300"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    </prism:PopupWindowAction.WindowContent>
+                </actions:MetroPopupWindowAction>
+            </prism:InteractionRequestTrigger>
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding OpenAreaPropertiesRequest, Mode=OneWay}">
+                <actions:MetroPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
+                    <prism:PopupWindowAction.WindowContent>
+                        <areaPropertiesView:AreaProperties
+                                MinWidth="223"
+                                MinHeight="128"
+                                Width="223"
+                                Height="128"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    </prism:PopupWindowAction.WindowContent>
+                </actions:MetroPopupWindowAction>
+            </prism:InteractionRequestTrigger>
+        </i:Interaction.Triggers>
         
     </Grid>
 </UserControl>
