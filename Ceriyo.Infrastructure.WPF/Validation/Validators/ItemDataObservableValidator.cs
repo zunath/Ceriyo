@@ -5,7 +5,7 @@ namespace Ceriyo.Infrastructure.WPF.Validation.Validators
 {
     public class ItemDataObservableValidator: AbstractValidator<ItemDataObservable>
     {
-        public ItemDataObservableValidator(LocalVariableDataObservableValidator localValidator)
+        public ItemDataObservableValidator()
         {
 
             RuleFor(x => x.GlobalID)
@@ -55,7 +55,7 @@ namespace Ceriyo.Infrastructure.WPF.Validation.Validators
                 .Length(1, 32);
 
             RuleFor(x => x.LocalVariables)
-                .SetValidator(localValidator);
+                .SetValidator(new LocalVariableDataObservableValidator());
         }
     }
 }

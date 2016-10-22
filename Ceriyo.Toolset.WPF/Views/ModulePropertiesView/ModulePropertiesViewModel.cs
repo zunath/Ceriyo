@@ -6,6 +6,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
@@ -14,33 +15,26 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 {
-    public class ModulePropertiesViewModel : ValidatableBindableBase<ModulePropertiesViewModel>, IInteractionRequestAware
+    public class ModulePropertiesViewModel : ValidatableBindableBase<ModulePropertiesViewModelValidator>, IInteractionRequestAware
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IModuleDomainService _domainService;
-        private readonly ClassLevelDataObservable.Factory _classLevelFactory;
-        private readonly LocalStringDataObservable.Factory _localStringFactory;
-        private readonly LocalDoubleDataObservable.Factory _localDoubleFactory;
+        private readonly IObservableDataFactory _observableDataFactory;
+        private readonly IObjectMapper _objectMapper;
 
         public ModulePropertiesViewModel(
             IObjectMapper objectMapper,
             IEventAggregator eventAggregator,
             IModuleDomainService domainService,
-            ModulePropertiesViewModelValidator validator,
-            LocalVariableDataObservable.Factory localVariableFactory,
-            ClassLevelDataObservable.Factory classLevelFactory,
-            LocalStringDataObservable.Factory localStringFactory,
-            LocalDoubleDataObservable.Factory localDoubleFactory)
-            :base(objectMapper, validator)
+            IObservableDataFactory observableDataFactory)
         {
+            _objectMapper = objectMapper;
             _eventAggregator = eventAggregator;
             _domainService = domainService;
-            _classLevelFactory = classLevelFactory;
-            _localStringFactory = localStringFactory;
-            _localDoubleFactory = localDoubleFactory;
+            _observableDataFactory = observableDataFactory;
 
             Scripts = new ObservableCollectionEx<ScriptDataObservable>();
-            LocalVariables = localVariableFactory.Invoke();
+            LocalVariables = _observableDataFactory.Create<LocalVariableDataObservable>();
             LevelChart = new ObservableCollectionEx<ClassLevelDataObservable>();
 
             
@@ -287,18 +281,18 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             moduleData.LocalVariables.LocalStrings.Clear();
             foreach (var localString in LocalVariables.LocalStrings)
             {
-                moduleData.LocalVariables.LocalStrings.Add(localString.Observable);
+                moduleData.LocalVariables.LocalStrings.Add(_objectMapper.Map<LocalStringData>(localString));
             }
             moduleData.LocalVariables.LocalDoubles.Clear();
-            foreach (var localFloat in LocalVariables.LocalDoubles)
+            foreach (var localDouble in LocalVariables.LocalDoubles)
             {
-                moduleData.LocalVariables.LocalDoubles.Add(localFloat.Observable);
+                moduleData.LocalVariables.LocalDoubles.Add(_objectMapper.Map<LocalDoubleData>(localDouble));
             }
 
             moduleData.LevelChart.Clear();
             foreach (var level in LevelChart)
             {
-                moduleData.LevelChart.Add(level.Observable);
+                moduleData.LevelChart.Add(_objectMapper.Map<ClassLevelData>(level));
             }
 
             _domainService.UpdateLoadedModuleData(moduleData);
@@ -340,21 +334,21 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
             LocalVariables.LocalStrings.Clear();
             foreach (var data in moduleData.LocalVariables.LocalStrings)
             {
-                var localString = _localStringFactory.Invoke(data);
+                var localString = _observableDataFactory.CreateAndMap<LocalStringDataObservable, LocalStringData>(data);
                 LocalVariables.LocalStrings.Add(localString);
             }
 
             LocalVariables.LocalDoubles.Clear();
             foreach (var data in moduleData.LocalVariables.LocalDoubles)
             {
-                var localDouble = _localDoubleFactory.Invoke(data);
+                var localDouble = _observableDataFactory.CreateAndMap<LocalDoubleDataObservable, LocalDoubleData>(data);
                 LocalVariables.LocalDoubles.Add(localDouble);
             }
             
             LevelChart.Clear();
             foreach (var level in moduleData.LevelChart)
             {
-                LevelChart.Add(_classLevelFactory.Invoke(level));
+                LevelChart.Add(_observableDataFactory.CreateAndMap<ClassLevelDataObservable, ClassLevelData>(level));
             }
 
         }
@@ -369,7 +363,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 
         private void AddLocalString()
         {
-            LocalVariables.LocalStrings.Add(_localStringFactory.Invoke());
+            LocalVariables.LocalStrings.Add(_observableDataFactory.Create<LocalStringDataObservable>());
         }
 
         public DelegateCommand<LocalStringDataObservable> DeleteLocalStringCommand { get; }
@@ -383,7 +377,7 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
 
         private void AddLocalDouble()
         {
-            LocalVariables.LocalDoubles.Add(_localDoubleFactory.Invoke());
+            LocalVariables.LocalDoubles.Add(_observableDataFactory.Create<LocalDoubleDataObservable>());
         }
 
         public DelegateCommand<LocalDoubleDataObservable> DeleteLocalDoubleCommand { get; }

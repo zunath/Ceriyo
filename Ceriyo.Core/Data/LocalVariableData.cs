@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class LocalVariableData
+    public class LocalVariableData : IDataDomainObject
     {
         public string GlobalID { get; set; }
 

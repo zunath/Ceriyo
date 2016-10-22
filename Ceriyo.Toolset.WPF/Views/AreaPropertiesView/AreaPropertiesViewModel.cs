@@ -1,5 +1,4 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Observables;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Infrastructure.WPF.Observables;
@@ -9,15 +8,12 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.AreaPropertiesView
 {
-    public class AreaPropertiesViewModel : ValidatableBindableBase<AreaPropertiesViewModel>, IInteractionRequestAware
+    public class AreaPropertiesViewModel : ValidatableBindableBase<AreaPropertiesViewModelValidator>, IInteractionRequestAware
     {
         private readonly IEventAggregator _eventAggregator;
 
         public AreaPropertiesViewModel(
-            IEventAggregator eventAggregator,
-            IObjectMapper mapper,
-            AreaPropertiesViewModelValidator validator)
-            : base(mapper, validator)
+            IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
 

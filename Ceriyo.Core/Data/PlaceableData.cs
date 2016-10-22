@@ -1,8 +1,9 @@
 ﻿using System;
+using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class PlaceableData
+    public class PlaceableData : IDataDomainObject
     {
         public string GlobalID { get; set; }
 

@@ -1,8 +1,9 @@
 ﻿using Ceriyo.Core.Constants;
+using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class ResourceItemData
+    public class ResourceItemData : IDataDomainObject
     {
         public string FilePath { get; set; }
         public string FileName { get; set; }

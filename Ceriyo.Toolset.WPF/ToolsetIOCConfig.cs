@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Artemis;
+﻿using Artemis;
 using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Scripting.Client;
@@ -18,11 +16,11 @@ using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Services;
-using Ceriyo.Infrastructure.WPF.Observables;
+using Ceriyo.Infrastructure.WPF.Factory;
+using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation;
 using Ceriyo.Infrastructure.WPF.Validation.Contracts;
 using Ceriyo.Toolset.WPF.Mapping;
-using FluentValidation;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Toolset.WPF
@@ -56,6 +54,7 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<EntityFactory>().As<IEntityFactory>().SingleInstance();
             builder.RegisterType<ComponentFactory>().As<IComponentFactory>().SingleInstance();
             builder.RegisterType<ScreenFactory>().As<IScreenFactory>();
+            builder.RegisterType<ObservableDataFactory>().As<IObservableDataFactory>();
 
             // Scripting
             builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();
@@ -76,30 +75,11 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<DataEditorDomainService>().As<IDataEditorDomainService>();
             builder.RegisterType<ResourceEditorDomainService>().As<IResourceEditorDomainService>();
             builder.RegisterType<ModuleResourceDomainService>().As<IModuleResourceDomainService>();
+            builder.RegisterType<AreaDomainService>().As<IAreaDomainService>().SingleInstance();
 
             // Validation
             builder.RegisterType<ValidationHelper>().As<IValidationHelper>();
-            RegisterValidators(builder);
-            builder.RegisterType<ClassLevelDataObservable>();
-
+            
         }
-
-        private static void RegisterValidators(ContainerBuilder builder)
-        {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var validators = assemblies
-                .SelectMany(x => x.GetTypes())
-                .Where(p =>
-                    p.BaseType != null &&
-                    p.BaseType.IsGenericType &&
-                    p.BaseType.GetGenericTypeDefinition() == typeof(AbstractValidator<>));
-
-            foreach (var validator in validators)
-            {
-                if (validator.BaseType == null) continue;
-                builder.RegisterType(validator).SingleInstance();
-            }
-        }
-
     }
 }

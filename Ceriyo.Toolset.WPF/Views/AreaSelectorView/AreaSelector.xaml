@@ -43,7 +43,8 @@
             <TreeViewItem
                 ItemsSource="{Binding Areas}"
                 Header="Areas"
-                ContextMenu="{StaticResource RootContextMenu}">
+                ContextMenu="{StaticResource RootContextMenu}"
+                IsExpanded="{Binding IsAreaListExpanded}">
 
                 <TreeViewItem.ItemTemplate>
                     <DataTemplate>

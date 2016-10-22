@@ -51,6 +51,10 @@
     <Reference Include="artemis">
       <HintPath>..\Ceriyo.Content\Libraries\artemis.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
@@ -121,10 +125,13 @@
   <ItemGroup>
     <Compile Include="Actions\MetroPopupWindowAction.cs" />
     <Compile Include="Behaviors\RepositionPopupBehavior.cs" />
+    <Compile Include="Observables\Contracts\IDataObservable.cs" />
     <Compile Include="BindableBases\ValidatableBindableBase.cs" />
     <Compile Include="Controls\DoubleUpDownEx.cs" />
     <Compile Include="Controls\IntegerUpDownEx.cs" />
     <Compile Include="Extensions\EnumBindingSourceExtension.cs" />
+    <Compile Include="Factory\Contracts\IObservableDataFactory.cs" />
+    <Compile Include="Factory\ObservableDataFactory.cs" />
     <Compile Include="Helpers\BitmapImageHelpers.cs" />
     <Compile Include="MonoGameWpfInterop\D3D11Host.cs" />
     <Compile Include="MonoGameWpfInterop\D3D11Image.cs" />
@@ -157,6 +164,7 @@
     <Compile Include="Observables\SkillDataObservable.cs" />
     <Compile Include="Observables\TilesetDataObservable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\ValidationExtensions.cs" />
     <Compile Include="Validation\Validators\AbilityDataObservableValidator.cs" />
     <Compile Include="Observables\AnimationDataObservable.cs" />
     <Compile Include="Validation\Validators\AnimationDataObservableValidator.cs" />
@@ -187,9 +195,7 @@
       <DependentUpon>MetroNotificationWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

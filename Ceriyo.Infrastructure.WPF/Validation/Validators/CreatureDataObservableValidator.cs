@@ -5,7 +5,7 @@ namespace Ceriyo.Infrastructure.WPF.Validation.Validators
 {
     public class CreatureDataObservableValidator: AbstractValidator<CreatureDataObservable>
     {
-        public CreatureDataObservableValidator(LocalVariableDataObservableValidator localValidator)
+        public CreatureDataObservableValidator()
         {
             RuleFor(x => x.GlobalID)
                 .NotNull()
@@ -39,7 +39,7 @@ namespace Ceriyo.Infrastructure.WPF.Validation.Validators
 
             RuleFor(x => x.LocalVariables)
                 .NotNull()
-                .SetValidator(localValidator);
+                .SetValidator(new LocalVariableDataObservableValidator());
 
         }
     }

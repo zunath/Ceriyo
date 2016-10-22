@@ -1,8 +1,9 @@
 ﻿using System;
+using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class SkillData
+    public class SkillData : IDataDomainObject
     {
         public string GlobalID { get; set; }
 

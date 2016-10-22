@@ -1,15 +1,12 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class CreatureDataObservable: ValidatableBindableBase<CreatureData>
+    public class CreatureDataObservable: ValidatableBindableBase<CreatureDataObservableValidator>, IDataObservable
     {
-        public delegate CreatureDataObservable Factory(CreatureData data = null);
-
         private string _comment;
         private string _description;
         private LocalVariableDataObservable _localVariables;
@@ -129,41 +126,31 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _comment; }
             set { SetProperty(ref _comment, value); }
         }
-
+        
         public CreatureDataObservable()
         {
-            
-        }
-        public CreatureDataObservable(CreatureDataObservableValidator validator,
-            IObjectMapper objectMapper,
-            LocalVariableDataObservable.Factory localVariableFactory,
-            CreatureData data = null)
-            :base(objectMapper, validator, data)
-        {
-            if (data == null)
-            {
-                GlobalID = Guid.NewGuid().ToString();
-                Name = string.Empty;
-                Tag = string.Empty;
-                Resref = string.Empty;
-                Description = string.Empty;
-                Comment = string.Empty;
-                OnAttacked = string.Empty;
-                OnConversation = string.Empty;
-                OnDamaged = string.Empty;
-                OnDeath = string.Empty;
-                OnDisturbed = string.Empty;
-                OnHeartbeat = string.Empty;
-                OnSpawned = string.Empty;
-                Level = 0;
-                ClassResref = string.Empty;
-                DialogResref = string.Empty;
-                LocalVariables = localVariableFactory.Invoke();
-            }
+            GlobalID = Guid.NewGuid().ToString();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comment = string.Empty;
+            OnAttacked = string.Empty;
+            OnConversation = string.Empty;
+            OnDamaged = string.Empty;
+            OnDeath = string.Empty;
+            OnDisturbed = string.Empty;
+            OnHeartbeat = string.Empty;
+            OnSpawned = string.Empty;
+            Level = 0;
+            ClassResref = string.Empty;
+            DialogResref = string.Empty;
+            LocalVariables = new LocalVariableDataObservable();
 
             LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
             LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
             LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();
         }
+        
     }
 }

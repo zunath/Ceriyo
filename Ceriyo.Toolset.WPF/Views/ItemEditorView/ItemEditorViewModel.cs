@@ -6,6 +6,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Item;
@@ -16,32 +17,23 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
 {
-    public class ItemEditorViewModel : ValidatableBindableBase<ItemEditorViewModel>
+    public class ItemEditorViewModel : ValidatableBindableBase<ItemEditorViewModelValidator>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
-        private readonly ItemDataObservable.Factory _itemFactory;
-        private readonly LocalStringDataObservable.Factory _localStringFactory;
-        private readonly LocalDoubleDataObservable.Factory _localDoubleFactory;
+        private readonly IObservableDataFactory _observableDataFactory;
 
         public ItemEditorViewModel(
-            IObjectMapper objectMapper,
-            ItemEditorViewModelValidator validator,
             IEventAggregator eventAggregator,
             IDataService dataService,
             IPathService pathService,
-            ItemDataObservable.Factory itemFactory,
-            LocalStringDataObservable.Factory localStringFactory,
-            LocalDoubleDataObservable.Factory localDoubleFactory)
-            :base(objectMapper, validator)
+            IObservableDataFactory observableDataFactory)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _pathService = pathService;
-            _itemFactory = itemFactory;
-            _localStringFactory = localStringFactory;
-            _localDoubleFactory = localDoubleFactory;
+            _observableDataFactory = observableDataFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -89,13 +81,14 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
             foreach (var file in files)
             {
                 ItemData loaded = _dataService.Load<ItemData>(file);
-                ItemDataObservable item = _itemFactory.Invoke(loaded);
+                ItemDataObservable item = _observableDataFactory.CreateAndMap<ItemDataObservable, ItemData>(loaded);
                 Items.Add(item);
             }
         }
 
         private void RaiseValidityChangedEvent()
         {
+            ValidateObject();
             _eventAggregator.GetEvent<ItemEditorValidityChangedEvent>().Publish(!HasErrors);
         }
 
@@ -158,7 +151,7 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
 
         private void New()
         {
-            var item = _itemFactory.Invoke();
+            var item = _observableDataFactory.Create<ItemDataObservable>();
             item.Name = "Item" + (Items.Count + 1);
             Items.Add(item);
 
@@ -186,7 +179,7 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
 
         private void AddLocalString()
         {
-            SelectedItem.LocalVariables.LocalStrings.Add(_localStringFactory.Invoke());
+            SelectedItem.LocalVariables.LocalStrings.Add(_observableDataFactory.Create<LocalStringDataObservable>());
         }
 
         public DelegateCommand<LocalStringDataObservable> DeleteLocalStringCommand { get; }
@@ -200,7 +193,7 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
 
         private void AddLocalDouble()
         {
-            SelectedItem.LocalVariables.LocalDoubles.Add(_localDoubleFactory.Invoke());
+            SelectedItem.LocalVariables.LocalDoubles.Add(_observableDataFactory.Create<LocalDoubleDataObservable>());
         }
 
         public DelegateCommand<LocalDoubleDataObservable> DeleteLocalDoubleCommand { get; }

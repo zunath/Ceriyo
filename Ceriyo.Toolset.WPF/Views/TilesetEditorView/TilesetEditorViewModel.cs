@@ -9,6 +9,7 @@ using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Helpers;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
@@ -21,28 +22,26 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.TilesetEditorView
 {
-    public class TilesetEditorViewModel : ValidatableBindableBase<TilesetEditorViewModel>
+    public class TilesetEditorViewModel : ValidatableBindableBase<TilesetEditorViewModelValidator>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
         private readonly IModuleResourceDomainService _resourceDomainService;
-        private readonly TilesetDataObservable.Factory _tilesetFactory;
+        private readonly IObservableDataFactory _observableDataFactory;
 
-        public TilesetEditorViewModel(IObjectMapper objectMapper,
-            TilesetEditorViewModelValidator validator,
+        public TilesetEditorViewModel(
             IEventAggregator eventAggregator,
             IDataService dataService,
             IPathService pathService,
             IModuleResourceDomainService resourceDomainService,
-            TilesetDataObservable.Factory tilesetFactory)
-            :base(objectMapper, validator)
+            IObservableDataFactory observableDataFactory)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _pathService = pathService;
             _resourceDomainService = resourceDomainService;
-            _tilesetFactory = tilesetFactory;
+            _observableDataFactory = observableDataFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -87,7 +86,7 @@ namespace Ceriyo.Toolset.WPF.Views.TilesetEditorView
             foreach (var file in files)
             {
                 var loaded = _dataService.Load<TilesetData>(file);
-                var tileset = _tilesetFactory.Invoke(loaded);
+                var tileset = _observableDataFactory.CreateAndMap<TilesetDataObservable, TilesetData>(loaded);
                 Tilesets.Add(tileset);
             }
         }
@@ -106,6 +105,7 @@ namespace Ceriyo.Toolset.WPF.Views.TilesetEditorView
 
         private void RaiseValidityChangedEvent()
         {
+            ValidateObject();
             _eventAggregator.GetEvent<TilesetEditorValidityChangedEvent>().Publish(!HasErrors);
         }
 
@@ -154,7 +154,7 @@ namespace Ceriyo.Toolset.WPF.Views.TilesetEditorView
 
         private void New()
         {
-            TilesetDataObservable tileset = _tilesetFactory.Invoke();
+            TilesetDataObservable tileset = _observableDataFactory.Create<TilesetDataObservable>();
             tileset.Name = "Tileset" + (Tilesets.Count + 1);
             Tilesets.Add(tileset);
 

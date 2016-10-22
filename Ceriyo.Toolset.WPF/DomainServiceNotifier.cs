@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
 using Ceriyo.Domain.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
@@ -25,13 +26,16 @@ namespace Ceriyo.Toolset.WPF
         private readonly IEventAggregator _eventAggregator;
         private readonly IModuleDomainService _moduleDomainService;
         private readonly IDataEditorDomainService _dataEditorDomainService;
+        private readonly IObjectMapper _objectMapper;
 
         public DomainServiceNotifier(
+            IObjectMapper objectMapper,
             ILogger logger,
             IEventAggregator eventAggregator,
             IModuleDomainService moduleDomainService,
             IDataEditorDomainService dataEditorDomainService)
         {
+            _objectMapper = objectMapper;
             _logger = logger;
             _eventAggregator = eventAggregator;
             _moduleDomainService = moduleDomainService;
@@ -140,73 +144,73 @@ namespace Ceriyo.Toolset.WPF
         // Ability Events
         private void AbilityCreatedOrChanged(AbilityDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
+            _dataEditorDomainService.AddOrUpdateDirty(_objectMapper.Map<AbilityData>(data));
         }
         private void AbilityDeleted(AbilityDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data.Observable);
+            _dataEditorDomainService.MarkForDeletion(_objectMapper.Map<AbilityData>(data));
         }
 
         // Class Events
         private void ClassCreatedOrChanged(ClassDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
+            _dataEditorDomainService.AddOrUpdateDirty(_objectMapper.Map<ClassData>(data));
         }
         private void ClassDeleted(ClassDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data.Observable);
+            _dataEditorDomainService.MarkForDeletion(_objectMapper.Map<ClassData>(data));
         }
 
         // Creature Events
         private void CreatureCreatedOrChanged(CreatureDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
+            _dataEditorDomainService.AddOrUpdateDirty(_objectMapper.Map<CreatureData>(data));
         }
         private void CreatureDeleted(CreatureDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data.Observable);
+            _dataEditorDomainService.MarkForDeletion(_objectMapper.Map<CreatureData>(data));
         }
 
         // Item Events
         private void ItemCreatedOrChanged(ItemDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
+            _dataEditorDomainService.AddOrUpdateDirty(_objectMapper.Map<ItemData>(data));
         }
         private void ItemDeleted(ItemDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data.Observable);
+            _dataEditorDomainService.MarkForDeletion(_objectMapper.Map<ItemData>(data));
         }
 
 
         // Placeable Events
         private void PlaceableCreatedOrChanged(PlaceableDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
+            _dataEditorDomainService.AddOrUpdateDirty(_objectMapper.Map<PlaceableData>(data));
         }
         private void PlaceableDeleted(PlaceableDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data.Observable);
+            _dataEditorDomainService.MarkForDeletion(_objectMapper.Map<PlaceableData>(data));
         }
 
         // Skill Events
         private void SkillCreatedOrChanged(SkillDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
+            _dataEditorDomainService.AddOrUpdateDirty(_objectMapper.Map<SkillData>(data));
         }
         private void SkillDeleted(SkillDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data.Observable);
+            _dataEditorDomainService.MarkForDeletion(_objectMapper.Map<SkillData>(data));
         }
 
         // Tileset Events
         private void TilesetCreatedOrChanged(TilesetDataObservable data)
         {
-            _dataEditorDomainService.AddOrUpdateDirty(data.Observable);
+            _dataEditorDomainService.AddOrUpdateDirty(_objectMapper.Map<TilesetData>(data));
         }
 
         private void TilesetDeleted(TilesetDataObservable data)
         {
-            _dataEditorDomainService.MarkForDeletion(data.Observable);
+            _dataEditorDomainService.MarkForDeletion(_objectMapper.Map<TilesetData>(data));
         }
 
         #endregion

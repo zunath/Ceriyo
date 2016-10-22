@@ -1,16 +1,13 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class AnimationDataObservable: ValidatableBindableBase<AnimationData>
+    public class AnimationDataObservable: ValidatableBindableBase<AnimationDataObservableValidator>, IDataObservable
     {
-        public delegate AnimationDataObservable Factory(AnimationData data = null);
-
         private string _globalID;
 
         public string GlobalID
@@ -66,18 +63,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _frames; }
             set { SetProperty(ref _frames, value); }
         }
-
+        
         public AnimationDataObservable()
         {
-            
-        }
-
-        public AnimationDataObservable(AnimationDataObservableValidator validator, 
-            IObjectMapper objectMapper,
-            AnimationData data = null)
-            :base(objectMapper, validator, data)
-        {
-            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
             Name = string.Empty;
             Tag = string.Empty;

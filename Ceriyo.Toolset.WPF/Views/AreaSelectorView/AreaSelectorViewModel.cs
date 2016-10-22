@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Controls;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.Area;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -20,17 +22,17 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
         private readonly IEventAggregator _eventAggregator;
         private readonly IPathService _pathService;
         private readonly IDataService _dataService;
-        private readonly AreaDataObservable.Factory _areaFactory;
+        private readonly IObservableDataFactory _observableDataFactory;
 
         public AreaSelectorViewModel(IEventAggregator eventAggregator,
             IPathService pathService,
             IDataService dataService,
-            AreaDataObservable.Factory areaFactory)
+            IObservableDataFactory observableDataFactory)
         {
             _eventAggregator = eventAggregator;
             _pathService = pathService;
             _dataService = dataService;
-            _areaFactory = areaFactory;
+            _observableDataFactory = observableDataFactory;
 
             Areas = new ObservableCollectionEx<AreaDataObservable>();
             RootContextMenuItems = new List<MenuItem>();
@@ -46,6 +48,27 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
 
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
             _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ModuleClosed);
+            _eventAggregator.GetEvent<AreaCreatedEvent>().Subscribe(AreaCreated);
+            _eventAggregator.GetEvent<AreaDeletedEvent>().Subscribe(AreaDeleted);
+            _eventAggregator.GetEvent<AreaPropertiesChangedEvent>().Subscribe(AreaPropertiesChanged);
+        }
+
+        private void AreaPropertiesChanged(AreaDataObservable area)
+        {
+            var existing = Areas.Single(x => x.GlobalID == area.GlobalID);
+            existing.Name = area.Name;
+        }
+
+        private void AreaDeleted(AreaDataObservable area)
+        {
+            var existing = Areas.Single(x => x.GlobalID == area.GlobalID);
+            Areas.Remove(existing);
+        }
+
+        private void AreaCreated(AreaDataObservable area)
+        {
+            Areas.Add(area);
+            IsAreaListExpanded = true;
         }
 
         private void ModuleClosed()
@@ -68,7 +91,7 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
             foreach (var file in files)
             {
                 AreaData loaded = _dataService.Load<AreaData>(file);
-                AreaDataObservable area = _areaFactory.Invoke(loaded);
+                AreaDataObservable area = _observableDataFactory.CreateAndMap<AreaDataObservable, AreaData>(loaded);
                 Areas.Add(area);
             }
         }
@@ -153,6 +176,14 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
                     _eventAggregator.GetEvent<AreaDeletedEvent>().Publish(SelectedArea);
                     Areas.Remove(SelectedArea);
                 });
+        }
+
+        private bool _isAreaListExpanded;
+
+        public bool IsAreaListExpanded
+        {
+            get { return _isAreaListExpanded; }
+            set { SetProperty(ref _isAreaListExpanded, value); }
         }
 
     }

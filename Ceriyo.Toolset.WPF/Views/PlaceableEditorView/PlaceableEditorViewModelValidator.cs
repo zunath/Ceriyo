@@ -5,10 +5,10 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 {
     public class PlaceableEditorViewModelValidator: AbstractValidator<PlaceableEditorViewModel>
     {
-        public PlaceableEditorViewModelValidator(PlaceableDataObservableValidator placeableValidator)
+        public PlaceableEditorViewModelValidator()
         {
             RuleForEach(x => x.Placeables)
-                .SetValidator(placeableValidator);
+                .SetValidator(new PlaceableDataObservableValidator());
 
             //RuleFor(x => x.Placeables)
             //    .Must((x) => !ValidationHelper.IsDuplicate(x, "Tag", "Tag must be unique."))

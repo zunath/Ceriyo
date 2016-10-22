@@ -1,15 +1,12 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class ItemTypeDataObservable: ValidatableBindableBase<ItemTypeData>
+    public class ItemTypeDataObservable: ValidatableBindableBase<ItemTypeDataObservableValidator>, IDataObservable
     {
-        public delegate ItemTypeDataObservable Factory(ItemTypeData data = null);
-
         private string _globalID;
 
         public string GlobalID
@@ -41,17 +38,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _resref; }
             set { SetProperty(ref _resref, value); }
         }
-
+        
         public ItemTypeDataObservable()
         {
-            
-        }
-        public ItemTypeDataObservable(ItemTypeDataObservableValidator validator,
-            IObjectMapper objectMapper,
-            ItemTypeData data = null)
-            :base(objectMapper, validator, data)
-        {
-            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
             Name = string.Empty;
             Tag = string.Empty;

@@ -1,15 +1,12 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class AbilityDataObservable: ValidatableBindableBase<AbilityData>
+    public class AbilityDataObservable: ValidatableBindableBase<AbilityDataObservableValidator>, IDataObservable
     {
-        public delegate AbilityDataObservable Factory(AbilityData data = null);
-
         private string _globalID;
 
         public string GlobalID
@@ -68,18 +65,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _onActivated; }
             set { SetProperty(ref _onActivated, value); }
         }
-
+        
         public AbilityDataObservable()
         {
-            
-        }
-
-        public AbilityDataObservable(AbilityDataObservableValidator validator, 
-            IObjectMapper objectMapper,
-            AbilityData data = null) 
-            : base(objectMapper, validator, data)
-        {
-            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
             Name = string.Empty;
             Tag = string.Empty;
@@ -89,6 +77,5 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             IsPassive = false;
             OnActivated = string.Empty;
         }
-
     }
 }

@@ -1,15 +1,12 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class FrameDataObservable: ValidatableBindableBase<FrameData>
+    public class FrameDataObservable: ValidatableBindableBase<FrameDataObservableValidator>, IDataObservable
     {
-        public delegate FrameDataObservable Factory(FrameData data = null);
-
         private int _textureCellY;
         private int _textureCellX;
         private float _frameLength;
@@ -59,17 +56,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _textureCellY; }
             set { SetProperty(ref _textureCellY, value); }
         }
-
+        
         public FrameDataObservable()
         {
-            
-        }
-        public FrameDataObservable(FrameDataObservableValidator validator,
-            IObjectMapper objectMapper,
-            FrameData data = null)
-            : base(objectMapper, validator, data)
-        {
-            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
             Name = string.Empty;
             FlipHorizontal = false;

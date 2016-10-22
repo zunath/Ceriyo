@@ -1,15 +1,12 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class ScriptDataObservable: ValidatableBindableBase<ScriptData>
+    public class ScriptDataObservable: ValidatableBindableBase<ScriptDataObservableValidator>, IDataObservable
     {
-        public delegate ScriptDataObservable Factory(ScriptData data = null);
-
         private string _globalID;
         private string _name;
         private string _resref;
@@ -31,17 +28,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _resref; }
             set { SetProperty(ref _resref, value); }
         }
-
+        
         public ScriptDataObservable()
         {
-            
-        }
-        public ScriptDataObservable(ScriptDataObservableValidator validator,
-            IObjectMapper objectMapper,
-            ScriptData data = null)
-            :base(objectMapper, validator, data)
-        {
-            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
             Name = string.Empty;
             Resref = string.Empty;

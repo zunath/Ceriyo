@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class ModuleData
+    public class ModuleData : IDataDomainObject
     {
         public List<string> ResourcePacks { get; set; }
 

@@ -29,6 +29,7 @@ namespace Ceriyo.Infrastructure.Services
             // Data
             Map<AbilityData>();
             Map<AnimationData>();
+            Map<AreaData>();
             Map<ClassData>();
             Map<ClassRequirementData>();
             Map<ClassLevelData>();

@@ -1,15 +1,13 @@
 ﻿using System;
 using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class AreaDataObservable: ValidatableBindableBase<AreaData>
+    public class AreaDataObservable: ValidatableBindableBase<AreaDataObservableValidator>, IDataObservable
     {
-        public delegate AreaDataObservable Factory(AreaData data = null);
-
         private string _globalID;
         private string _name;
         private string _tag;
@@ -19,6 +17,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
         private string _onAreaEnter;
         private string _onAreaExit;
         private string _onAreaHeartbeat;
+        private int _width;
+        private int _height;
+        private string _tilesetResref;
 
         private LocalVariableDataObservable _localVariables;
         
@@ -83,30 +84,39 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             set { SetProperty(ref _localVariables, value); }
         }
 
+        public int Width
+        {
+            get { return _width; }
+            set { SetProperty(ref _width, value); }
+        }
+
+        public int Height
+        {
+            get { return _height; }
+            set { SetProperty(ref _height, value); }
+        }
+
+        public string TilesetResref
+        {
+            get { return _tilesetResref; }
+            set { SetProperty(ref _tilesetResref, value); }
+        }
+
         public AreaDataObservable()
         {
-            
-        }
-        public AreaDataObservable(AreaDataObservableValidator validator,
-            IObjectMapper objectMapper, 
-            LocalVariableDataObservable.Factory localVariableFactory,
-            AreaData data = null)
-            :base(objectMapper, validator, data)
-        {
-            if (data == null)
-            {
-                GlobalID = Guid.NewGuid().ToString();
-                Name = string.Empty;
-                Tag = string.Empty;
-                Resref = string.Empty;
-                Description = string.Empty;
-                Comment = string.Empty;
-                OnAreaEnter = string.Empty;
-                OnAreaExit = string.Empty;
-                OnAreaHeartbeat = string.Empty;
-
-                LocalVariables = localVariableFactory.Invoke();
-            }
+            GlobalID = Guid.NewGuid().ToString();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comment = string.Empty;
+            OnAreaEnter = string.Empty;
+            OnAreaExit = string.Empty;
+            OnAreaHeartbeat = string.Empty;
+            LocalVariables = new LocalVariableDataObservable();
+            Width = 8;
+            Height = 8;
+            TilesetResref = string.Empty;
 
             LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
             LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();

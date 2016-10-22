@@ -1,8 +1,9 @@
 ﻿using System;
+using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class TilesetData
+    public class TilesetData : IDataDomainObject
     {
         public string GlobalID { get; set; }
 

@@ -1,82 +1,89 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using Ceriyo.Core.Attributes;
-using Ceriyo.Core.Contracts;
+using Ceriyo.Infrastructure.WPF.Validation;
 using FluentValidation;
-using FluentValidation.Internal;
 using Prism.Mvvm;
 
 namespace Ceriyo.Infrastructure.WPF.BindableBases
 {
-    public abstract class ValidatableBindableBase<TObservable>: BindableBase, INotifyDataErrorInfo
+    public abstract class ValidatableBindableBase<T>: BindableBase, INotifyDataErrorInfo
+        where T: IValidator
     {
-        private readonly bool _serializationOnly;
-
-        public TObservable Observable => _objectMapper.Map<TObservable>(this);
-
-        private readonly IObjectMapper _objectMapper;
-        protected ValidatableBindableBase(IObjectMapper objectMapper,
-            IValidator validator,
-            TObservable mapObservable = default(TObservable))
-        {
-            _objectMapper = objectMapper;
-            Validator = validator;
-
-            if (mapObservable != null)
-            {
-                _objectMapper.Map(mapObservable, this);
-            }
-
-            Validator.Validate(this);
-        }
+        private List<string> _propertyNames;
+        private readonly IValidator _validator;
 
         protected ValidatableBindableBase()
         {
-            _serializationOnly = true;
+            _validator = (IValidator)Activator.CreateInstance(typeof(T));
+            LoadPropertyNames();
+            ErrorsContainer = new ErrorsContainer<string>(RaiseErrorsChanged);
+            DoValidate();
+        }
+
+        private void LoadPropertyNames()
+        {
+            _propertyNames = new List<string>();
+            foreach (var propertyInfo in GetType().GetProperties())
+            {
+                _propertyNames.Add(propertyInfo.Name);
+            }
+        }
+
+        private void DoValidate(string propertyName = null)
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+            {
+                foreach (var prop in _propertyNames)
+                {
+                    IEnumerable<string> errors = ValidateProperty(prop);
+                    ErrorsContainer.SetErrors(prop, errors);
+                }
+            }
+            else
+            {
+                IEnumerable<string> errors = ValidateProperty(propertyName);
+                ErrorsContainer.SetErrors(propertyName, errors);
+            }
         }
 
         protected override bool SetProperty<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
         {
             var result = base.SetProperty(ref storage, value, propertyName);
-
-            if (_serializationOnly) return true;
-
             if (result && !string.IsNullOrWhiteSpace(propertyName))
             {
-                ValidateProperty(propertyName);
+                DoValidate(propertyName);
             }
 
             return result;
         }
 
-        private void ValidateProperty(string propertyName)
+        public void ValidateObject()
         {
-            var context = new ValidationContext(this, new PropertyChain(),
-                new MemberNameValidatorSelector(new[] { propertyName }));
-            var result = Validator.Validate(context);
-            string[] errors = result.Errors.Select(error => error.ErrorMessage).ToArray();
-            ErrorsContainer.SetErrors(propertyName, errors);
+            DoValidate();
         }
 
-        public IValidator Validator { get; set; }
-        
+        public IEnumerable<string> ValidateProperty(string propertyName)
+        {
+            return _validator.ValidatePropertyAndReturnErrors(this, propertyName);
+        }
+
+
         public IEnumerable GetErrors(string propertyName)
         {
             return ErrorsContainer.GetErrors(propertyName);
         }
 
         [SerializationIgnore]
-        public bool HasErrors => !Validator.Validate(this).IsValid;
+        public bool HasErrors => ErrorsContainer.HasErrors;
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged = delegate { };
 
 
-        private ErrorsContainer<string> _errorsContainer;
-
-        protected ErrorsContainer<string> ErrorsContainer => _errorsContainer ?? (_errorsContainer = new ErrorsContainer<string>(RaiseErrorsChanged));
+        private ErrorsContainer<string> ErrorsContainer { get; }
 
         private void RaiseErrorsChanged(string propertyName)
         {

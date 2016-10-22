@@ -1,8 +1,9 @@
 ﻿using System;
+using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class AreaData
+    public class AreaData : IDataDomainObject
     {
         public string GlobalID { get; set; }
 
@@ -22,7 +23,11 @@ namespace Ceriyo.Core.Data
 
         public string OnAreaHeartbeat { get; set; }
 
+        public int Width { get; set; }
+        public int Height { get; set; }
         public LocalVariableData LocalVariables { get; set; }
+        public string GraphicResource { get; set; }
+
 
         public AreaData()
         {

@@ -5,10 +5,10 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
 {
     public class ItemEditorViewModelValidator: AbstractValidator<ItemEditorViewModel>
     {
-        public ItemEditorViewModelValidator(ItemDataObservableValidator itemValidator)
+        public ItemEditorViewModelValidator()
         {
             RuleForEach(x => x.Items)
-                .SetValidator(itemValidator);
+                .SetValidator(new ItemDataObservableValidator());
 
             //RuleFor(x => x.Items)
             //    .Must((x) => !ValidationHelper.IsDuplicate(x, "Tag", "Tag must be unique."))

@@ -6,6 +6,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -16,32 +17,23 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 {
-    public class PlaceableEditorViewModel : ValidatableBindableBase<PlaceableEditorViewModel>
+    public class PlaceableEditorViewModel : ValidatableBindableBase<PlaceableEditorViewModelValidator>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
-        private readonly PlaceableDataObservable.Factory _placeableFactory;
-        private readonly LocalStringDataObservable.Factory _localStringFactory;
-        private readonly LocalDoubleDataObservable.Factory _localDoubleFactory;
+        private readonly IObservableDataFactory _observableDataFactory;
 
         public PlaceableEditorViewModel(
-            IObjectMapper objectMapper,
             IEventAggregator eventAggregator,
             IDataService dataService,
             IPathService pathService,
-            PlaceableEditorViewModelValidator validator,
-            PlaceableDataObservable.Factory placeableFactory,
-            LocalStringDataObservable.Factory localStringFactory,
-            LocalDoubleDataObservable.Factory localDoubleFactory)
-            :base(objectMapper, validator)
+            IObservableDataFactory observableDataFactory)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _pathService = pathService;
-            _placeableFactory = placeableFactory;
-            _localStringFactory = localStringFactory;
-            _localDoubleFactory = localDoubleFactory;
+            _observableDataFactory = observableDataFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -86,13 +78,14 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
             foreach (var file in files)
             {
                 PlaceableData loaded = _dataService.Load<PlaceableData>(file);
-                PlaceableDataObservable placeable = _placeableFactory.Invoke(loaded);
+                PlaceableDataObservable placeable = _observableDataFactory.CreateAndMap<PlaceableDataObservable, PlaceableData>(loaded);
                 Placeables.Add(placeable);
             }
         }
 
         private void RaiseValidityChangedEvent()
         {
+            ValidateObject();
             _eventAggregator.GetEvent<PlaceableEditorValidityChangedEvent>().Publish(!HasErrors);
         }
 
@@ -139,7 +132,7 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 
         private void New()
         {
-            var placeable = _placeableFactory.Invoke();
+            var placeable = _observableDataFactory.Create<PlaceableDataObservable>();
             placeable.Name = "Placeable" + (Placeables.Count + 1);
             Placeables.Add(placeable);
 
@@ -167,7 +160,7 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 
         private void AddLocalString()
         {
-            SelectedPlaceable.LocalVariables.LocalStrings.Add(_localStringFactory.Invoke());
+            SelectedPlaceable.LocalVariables.LocalStrings.Add(_observableDataFactory.Create<LocalStringDataObservable>());
         }
 
         public DelegateCommand<LocalStringDataObservable> DeleteLocalStringCommand { get; }
@@ -181,7 +174,7 @@ namespace Ceriyo.Toolset.WPF.Views.PlaceableEditorView
 
         private void AddLocalDouble()
         {
-            SelectedPlaceable.LocalVariables.LocalDoubles.Add(_localDoubleFactory.Invoke());
+            SelectedPlaceable.LocalVariables.LocalDoubles.Add(_observableDataFactory.Create<LocalDoubleDataObservable>());
         }
 
         public DelegateCommand<LocalDoubleDataObservable> DeleteLocalDoubleCommand { get; }

@@ -5,10 +5,10 @@ namespace Ceriyo.Toolset.WPF.Views.SkillEditorView
 {
     public class SkillEditorViewModelValidator: AbstractValidator<SkillEditorViewModel>
     {
-        public SkillEditorViewModelValidator(SkillDataObservableValidator skillValidator)
+        public SkillEditorViewModelValidator()
         {
             RuleForEach(x => x.Skills)
-                .SetValidator(skillValidator);
+                .SetValidator(new SkillDataObservableValidator());
 
             //RuleFor(x => x.Skills)
             //    .Must((x) => !ValidationHelper.IsDuplicate(x, "Tag", "Tag must be unique."))

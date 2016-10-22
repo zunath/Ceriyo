@@ -1,14 +1,11 @@
-﻿using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
-using Ceriyo.Infrastructure.WPF.BindableBases;
+﻿using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class LocalDoubleDataObservable: ValidatableBindableBase<LocalDoubleData>
+    public class LocalDoubleDataObservable: ValidatableBindableBase<LocalDoubleDataObservableValidator>, IDataObservable
     {
-        public delegate LocalDoubleDataObservable Factory(LocalDoubleData data = null);
-        
         private string _key;
         private double _value;
         
@@ -23,17 +20,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _value; }
             set { SetProperty(ref _value, value); }
         }
-
+        
         public LocalDoubleDataObservable()
         {
-            
-        }
-        public LocalDoubleDataObservable(LocalDoubleDataObservableValidator validator,
-            IObjectMapper objectMapper,
-            LocalDoubleData data = null)
-            :base(objectMapper, validator, data)
-        {
-            if (data != null) return;
             Key = string.Empty;
             Value = 0.0;
         }

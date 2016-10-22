@@ -5,8 +5,7 @@ namespace Ceriyo.Infrastructure.WPF.Validation.Validators
 {
     public class ModuleDataObservableValidator: AbstractValidator<ModuleDataObservable>
     {
-        public ModuleDataObservableValidator(LocalVariableDataObservableValidator localValidator,
-            ClassLevelDataObservableValidator classLevelValidator)
+        public ModuleDataObservableValidator()
         {
 
             RuleFor(x => x.GlobalID)
@@ -68,10 +67,10 @@ namespace Ceriyo.Infrastructure.WPF.Validation.Validators
                 .NotNull();
 
             RuleFor(x => x.LocalVariables)
-                .SetValidator(localValidator);
+                .SetValidator(new LocalVariableDataObservableValidator());
 
             RuleForEach(x => x.LevelChart)
-                .SetValidator(classLevelValidator);
+                .SetValidator(new ClassLevelDataObservableValidator());
 
             RuleForEach(x => x.ResourcePacks)
                 .NotNull()

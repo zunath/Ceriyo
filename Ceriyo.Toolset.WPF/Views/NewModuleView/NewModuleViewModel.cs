@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Toolset.WPF.EventArgs;
 using Ceriyo.Toolset.WPF.Events.Module;
@@ -10,15 +9,11 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.NewModuleView
 {
-    public class NewModuleViewModel : ValidatableBindableBase<NewModuleViewModel>, IInteractionRequestAware
+    public class NewModuleViewModel : ValidatableBindableBase<NewModuleViewModelValidator>, IInteractionRequestAware
     {
         private readonly IEventAggregator _eventAggregator;
         
-        public NewModuleViewModel(
-            IObjectMapper objectMapper,
-            NewModuleViewModelValidator validator,
-            IEventAggregator eventAggregator)
-            :base(objectMapper, validator)
+        public NewModuleViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             CreateModuleCommand = new DelegateCommand(CreateModule, CanCreateModule);

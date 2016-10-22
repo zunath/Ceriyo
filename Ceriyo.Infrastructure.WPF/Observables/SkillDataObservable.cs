@@ -1,16 +1,12 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class SkillDataObservable: ValidatableBindableBase<SkillData>
+    public class SkillDataObservable: ValidatableBindableBase<SkillDataObservableValidator>, IDataObservable
     {
-        public delegate SkillDataObservable Factory(SkillData data = null);
-
-
         private string _globalID;
         private string _name;
         private string _tag;
@@ -67,17 +63,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _onActivated; }
             set { SetProperty(ref _onActivated, value); }
         }
-
+        
         public SkillDataObservable()
         {
-            
-        }
-        public SkillDataObservable(SkillDataObservableValidator validator,
-            IObjectMapper objectMapper,
-            SkillData data)
-            :base(objectMapper, validator, data)
-        {
-            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
             Name = string.Empty;
             Tag = string.Empty;

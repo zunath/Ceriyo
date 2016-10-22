@@ -1,15 +1,12 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class TilesetDataObservable: ValidatableBindableBase<TilesetData>
+    public class TilesetDataObservable: ValidatableBindableBase<TilesetDataObservableValidator>, IDataObservable
     {
-        public delegate TilesetDataObservable Factory(TilesetData data = null);
-
         private string _globalID;
         private string _name;
         private string _tag;
@@ -59,17 +56,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _resourceName; }
             set { SetProperty(ref _resourceName, value); }
         }
-
+        
         public TilesetDataObservable()
         {
-            
-        }
-        public TilesetDataObservable(TilesetDataObservableValidator validator,
-            IObjectMapper objectMapper,
-            TilesetData data = null)
-            : base(objectMapper, validator, data)
-        {
-            if (data != null) return;
             GlobalID = Guid.NewGuid().ToString();
             Name = string.Empty;
             Tag = string.Empty;

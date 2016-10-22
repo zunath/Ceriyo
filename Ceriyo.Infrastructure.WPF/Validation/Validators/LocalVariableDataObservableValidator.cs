@@ -1,14 +1,11 @@
 ﻿using Ceriyo.Infrastructure.WPF.Observables;
-using Ceriyo.Infrastructure.WPF.Validation.Contracts;
 using FluentValidation;
 
 namespace Ceriyo.Infrastructure.WPF.Validation.Validators
 {
     public class LocalVariableDataObservableValidator: AbstractValidator<LocalVariableDataObservable>
     {
-        public LocalVariableDataObservableValidator(IValidationHelper validationHelper, 
-            LocalStringDataObservableValidator localStringValidator,
-            LocalDoubleDataObservableValidator localDoubleValidator)
+        public LocalVariableDataObservableValidator()
         {
             RuleFor(x => x.GlobalID)
                 .NotNull()
@@ -23,10 +20,10 @@ namespace Ceriyo.Infrastructure.WPF.Validation.Validators
             //    .WithMessage("Keys must be unique.");
 
             RuleForEach(x => x.LocalStrings)
-                .SetValidator(localStringValidator);
+                .SetValidator(new LocalStringDataObservableValidator());
 
             RuleForEach(x => x.LocalDoubles)
-                .SetValidator(localDoubleValidator);
+                .SetValidator(new LocalDoubleDataObservableValidator());
         }
     }
 }

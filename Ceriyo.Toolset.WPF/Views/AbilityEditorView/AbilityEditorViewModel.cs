@@ -6,6 +6,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.Ability;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
@@ -16,26 +17,23 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
 {
-    public class AbilityEditorViewModel : ValidatableBindableBase<AbilityEditorViewModel>
+    public class AbilityEditorViewModel : ValidatableBindableBase<AbilityEditorViewModelValidator>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
-        private readonly AbilityDataObservable.Factory _abilityFactory;
+        private readonly IObservableDataFactory _observableDataFactory;
 
         public AbilityEditorViewModel(
-            IObjectMapper objectMapper,
             IEventAggregator eventAggregator,
             IDataService dataService,
             IPathService pathService,
-            AbilityEditorViewModelValidator validator,
-            AbilityDataObservable.Factory abilityFactory)
-            : base(objectMapper, validator)
+            IObservableDataFactory observableDataFactory)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _pathService = pathService;
-            _abilityFactory = abilityFactory;
+            _observableDataFactory = observableDataFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -74,13 +72,14 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
             foreach (var file in files)
             {
                 var loaded = _dataService.Load<AbilityData>(file);
-                var ability = _abilityFactory.Invoke(loaded);
+                var ability = _observableDataFactory.CreateAndMap<AbilityDataObservable, AbilityData>(loaded);
                 Abilities.Add(ability);
             }
         }
 
         private void RaiseValidityChangedEvent()
         {
+            ValidateObject();
             _eventAggregator.GetEvent<AbilityEditorValidityChangedEvent>().Publish(!HasErrors);
         }
 
@@ -127,7 +126,7 @@ namespace Ceriyo.Toolset.WPF.Views.AbilityEditorView
 
         private void New()
         {
-            AbilityDataObservable ability = _abilityFactory.Invoke();
+            AbilityDataObservable ability = _observableDataFactory.Create<AbilityDataObservable>();
             ability.Name = "Ability" + (Abilities.Count + 1);
             Abilities.Add(ability);
             

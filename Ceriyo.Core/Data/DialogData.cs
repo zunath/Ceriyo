@@ -1,8 +1,9 @@
 ﻿using System;
+using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class DialogData
+    public class DialogData : IDataDomainObject
     {
         public string GlobalID { get; set; }
         public string Name { get; set; }

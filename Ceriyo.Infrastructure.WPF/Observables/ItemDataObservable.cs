@@ -1,16 +1,13 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class ItemDataObservable: ValidatableBindableBase<ItemData>
+    public class ItemDataObservable: ValidatableBindableBase<ItemDataObservableValidator>, IDataObservable
     {
-        public delegate ItemDataObservable Factory(ItemData data = null);
-
         private ObservableCollectionEx<string> _itemPropertyResrefs;
         private ObservableCollectionEx<ClassRequirementDataObservable> _classRequirements;
         private LocalVariableDataObservable _localVariables;
@@ -137,41 +134,29 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _itemPropertyResrefs; }
             set { SetProperty(ref _itemPropertyResrefs, value); }
         }
-
+        
         public ItemDataObservable()
         {
-            
-        }
-        public ItemDataObservable(ItemDataObservableValidator validator,
-            IObjectMapper objectMapper,
-            LocalVariableDataObservable.Factory localVariableFactory,
-            ItemData data = null)
-            :base(objectMapper, validator, data)
-        {
-            if (data == null)
-            {
-                GlobalID = Guid.NewGuid().ToString();
-                Name = string.Empty;
-                Tag = string.Empty;
-                Resref = string.Empty;
-                Description = string.Empty;
-                Comment = string.Empty;
-                ItemTypeResref = string.Empty;
-                IsUndroppable = false;
-                IsPlot = false;
-                IsStolen = false;
-                OnActivated = string.Empty;
-                OnAcquired = string.Empty;
-                OnEquipped = string.Empty;
-                OnUnacquired = string.Empty;
-                OnUnequipped = string.Empty;
+            GlobalID = Guid.NewGuid().ToString();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comment = string.Empty;
+            ItemTypeResref = string.Empty;
+            IsUndroppable = false;
+            IsPlot = false;
+            IsStolen = false;
+            OnActivated = string.Empty;
+            OnAcquired = string.Empty;
+            OnEquipped = string.Empty;
+            OnUnacquired = string.Empty;
+            OnUnequipped = string.Empty;
 
-                ClassRequirements = new ObservableCollectionEx<ClassRequirementDataObservable>();
-                ItemPropertyResrefs = new ObservableCollectionEx<string>();
+            ClassRequirements = new ObservableCollectionEx<ClassRequirementDataObservable>();
+            ItemPropertyResrefs = new ObservableCollectionEx<string>();
 
-                LocalVariables = localVariableFactory.Invoke();
-            }
-
+            LocalVariables = new LocalVariableDataObservable();
             LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
             LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
             LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();

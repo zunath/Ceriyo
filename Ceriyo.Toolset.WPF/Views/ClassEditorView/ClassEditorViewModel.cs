@@ -5,6 +5,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.Class;
 using Ceriyo.Toolset.WPF.Events.DataEditor;
@@ -15,26 +16,23 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
 {
-    public class ClassEditorViewModel : ValidatableBindableBase<ClassEditorViewModel>
+    public class ClassEditorViewModel : ValidatableBindableBase<ClassEditorViewModelValidator>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
-        private readonly ClassDataObservable.Factory _classDataFactory;
+        private readonly IObservableDataFactory _observableDataFactory;
 
         public ClassEditorViewModel(
-            IObjectMapper objectMapper, 
             IEventAggregator eventAggregator,
             IDataService dataService,
             IPathService pathService,
-            ClassEditorViewModelValidator validator,
-            ClassDataObservable.Factory classDataFactory)
-            :base(objectMapper, validator)
+            IObservableDataFactory observableDataFactory)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
             _pathService = pathService;
-            _classDataFactory = classDataFactory;
+            _observableDataFactory = observableDataFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -74,13 +72,14 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
             foreach (var file in files)
             {
                 ClassData loaded = _dataService.Load<ClassData>(file);
-                ClassDataObservable @class = _classDataFactory.Invoke(loaded);
+                ClassDataObservable @class = _observableDataFactory.CreateAndMap<ClassDataObservable, ClassData>(loaded);
                 Classes.Add(@class);
             }
         }
 
         private void RaiseValidityChangedEvent()
         {
+            ValidateObject();
             _eventAggregator.GetEvent<ClassEditorValidityChangedEvent>().Publish(!HasErrors);
         }
 
@@ -118,7 +117,7 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
 
         private void New()
         {
-            ClassDataObservable @class = _classDataFactory.Invoke();
+            ClassDataObservable @class = _observableDataFactory.Create<ClassDataObservable>();
             @class.Name = "Class" + (Classes.Count + 1);
             Classes.Add(@class);
             _eventAggregator.GetEvent<ClassCreatedEvent>().Publish(@class);

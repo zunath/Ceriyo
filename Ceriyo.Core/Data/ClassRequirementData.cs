@@ -1,6 +1,8 @@
-﻿namespace Ceriyo.Core.Data
+﻿using Ceriyo.Core.Data.Contracts;
+
+namespace Ceriyo.Core.Data
 {
-    public class ClassRequirementData
+    public class ClassRequirementData : IDataDomainObject
     {
         public string ClassResref { get; set; }
 

@@ -5,7 +5,7 @@ namespace Ceriyo.Infrastructure.WPF.Validation.Validators
 {
     public class PlaceableDataObservableValidator: AbstractValidator<PlaceableDataObservable>
     {
-        public PlaceableDataObservableValidator(LocalVariableDataObservableValidator localValidator)
+        public PlaceableDataObservableValidator()
         {
             RuleFor(x => x.GlobalID)
                 .NotNull()
@@ -30,7 +30,7 @@ namespace Ceriyo.Infrastructure.WPF.Validation.Validators
                 .Length(0, 2000);
 
             RuleFor(x => x.LocalVariables)
-                .SetValidator(localValidator);
+                .SetValidator(new LocalVariableDataObservableValidator());
 
         }
     }

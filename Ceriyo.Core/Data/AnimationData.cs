@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class AnimationData
+    public class AnimationData : IDataDomainObject
     {
         public string GlobalID { get; set; }
 

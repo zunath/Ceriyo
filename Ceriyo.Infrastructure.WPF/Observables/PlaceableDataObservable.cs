@@ -1,15 +1,12 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class PlaceableDataObservable: ValidatableBindableBase<PlaceableData>
+    public class PlaceableDataObservable: ValidatableBindableBase<PlaceableDataObservableValidator>, IDataObservable
     {
-        public delegate PlaceableDataObservable Factory(PlaceableData data = null);
-
         private LocalVariableDataObservable _localVariables;
         private string _onUsed;
         private string _onAttacked;
@@ -181,44 +178,33 @@ namespace Ceriyo.Infrastructure.WPF.Observables
         
         public PlaceableDataObservable()
         {
-            
-        }
-        public PlaceableDataObservable(PlaceableDataObservableValidator validator,
-            IObjectMapper objectMapper,
-            LocalVariableDataObservable.Factory localVariableFactory,
-            PlaceableData data = null)
-            : base(objectMapper, validator, data)
-        {
-            if (data == null)
-            {
-                GlobalID = Guid.NewGuid().ToString();
+            GlobalID = Guid.NewGuid().ToString();
 
-                Name = string.Empty;
-                Tag = string.Empty;
-                Resref = string.Empty;
-                Description = string.Empty;
-                Comment = string.Empty;
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comment = string.Empty;
 
-                IsPlot = false;
-                IsKeyRequired = false;
-                IsLocked = false;
-                IsStatic = false;
-                IsUseable = false;
-                AutoRemoveKey = false;
+            IsPlot = false;
+            IsKeyRequired = false;
+            IsLocked = false;
+            IsStatic = false;
+            IsUseable = false;
+            AutoRemoveKey = false;
 
-                OnAttacked = string.Empty;
-                OnClosed = string.Empty;
-                OnDamaged = string.Empty;
-                OnDeath = string.Empty;
-                OnDisturbed = string.Empty;
-                OnHeartbeat = string.Empty;
-                OnLocked = string.Empty;
-                OnOpened = string.Empty;
-                OnUnlocked = string.Empty;
-                OnUsed = string.Empty;
+            OnAttacked = string.Empty;
+            OnClosed = string.Empty;
+            OnDamaged = string.Empty;
+            OnDeath = string.Empty;
+            OnDisturbed = string.Empty;
+            OnHeartbeat = string.Empty;
+            OnLocked = string.Empty;
+            OnOpened = string.Empty;
+            OnUnlocked = string.Empty;
+            OnUsed = string.Empty;
 
-                LocalVariables = localVariableFactory.Invoke();
-            }
+            LocalVariables = new LocalVariableDataObservable();
             
             LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
             LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();

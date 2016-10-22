@@ -1,17 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;
 
 namespace Ceriyo.Infrastructure.WPF.Observables
 {
-    public class ModuleDataObservable: ValidatableBindableBase<ModuleData>
+    public class ModuleDataObservable: ValidatableBindableBase<ModuleDataObservableValidator>, IDataObservable
     {
-        public delegate ModuleDataObservable Factory(ModuleData data = null);
-
         private string _name;
         private string _tag;
         private string _resref;
@@ -209,49 +206,38 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             get { return _globalID; }
             set { SetProperty(ref _globalID, value); }
         }
-
+        
         public ModuleDataObservable()
         {
-            
-        }
-        public ModuleDataObservable(ModuleDataObservableValidator validator,
-            IObjectMapper objectMapper,
-            LocalVariableDataObservable.Factory localVariableFactory,
-            ModuleData data = null)
-            :base(objectMapper, validator, data)
-        {
-            if (data == null)
-            {
-                GlobalID = Guid.NewGuid().ToString();
-                Name = string.Empty;
-                Tag = string.Empty;
-                Resref = string.Empty;
-                Description = string.Empty;
-                Comment = string.Empty;
+            GlobalID = Guid.NewGuid().ToString();
+            Name = string.Empty;
+            Tag = string.Empty;
+            Resref = string.Empty;
+            Description = string.Empty;
+            Comment = string.Empty;
 
-                OnHeartbeat = string.Empty;
-                OnModuleLoad = string.Empty;
-                OnPlayerDeath = string.Empty;
-                OnPlayerDying = string.Empty;
-                OnPlayerEnter = string.Empty;
-                OnPlayerLeaving = string.Empty;
-                OnPlayerLeft = string.Empty;
-                OnPlayerLevelUp = string.Empty;
-                OnPlayerRespawn = string.Empty;
+            OnHeartbeat = string.Empty;
+            OnModuleLoad = string.Empty;
+            OnPlayerDeath = string.Empty;
+            OnPlayerDying = string.Empty;
+            OnPlayerEnter = string.Empty;
+            OnPlayerLeaving = string.Empty;
+            OnPlayerLeft = string.Empty;
+            OnPlayerLevelUp = string.Empty;
+            OnPlayerRespawn = string.Empty;
 
-                LocalVariables = localVariableFactory.Invoke();
-                LevelChart = new LevelChartDataObservable();
-                AbilityIDs = new ObservableCollectionEx<string>();
-                ClassIDs = new ObservableCollectionEx<string>();
-                CreatureIDs = new ObservableCollectionEx<string>();
-                ItemIDs = new ObservableCollectionEx<string>();
-                ItemPropertyIDs = new ObservableCollectionEx<string>();
-                PlaceableIDs = new ObservableCollectionEx<string>();
-                ScriptIDs = new ObservableCollectionEx<string>();
-                SkillIDs = new ObservableCollectionEx<string>();
-                TilesetIDs = new ObservableCollectionEx<string>();
-            }
-
+            LocalVariables = new LocalVariableDataObservable();
+            LevelChart = new LevelChartDataObservable();
+            AbilityIDs = new ObservableCollectionEx<string>();
+            ClassIDs = new ObservableCollectionEx<string>();
+            CreatureIDs = new ObservableCollectionEx<string>();
+            ItemIDs = new ObservableCollectionEx<string>();
+            ItemPropertyIDs = new ObservableCollectionEx<string>();
+            PlaceableIDs = new ObservableCollectionEx<string>();
+            ScriptIDs = new ObservableCollectionEx<string>();
+            SkillIDs = new ObservableCollectionEx<string>();
+            TilesetIDs = new ObservableCollectionEx<string>();
+        
             LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
             LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
             LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();

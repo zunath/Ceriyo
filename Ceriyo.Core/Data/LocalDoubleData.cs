@@ -1,6 +1,8 @@
-﻿namespace Ceriyo.Core.Data
+﻿using Ceriyo.Core.Data.Contracts;
+
+namespace Ceriyo.Core.Data
 {
-    public class LocalDoubleData
+    public class LocalDoubleData : IDataDomainObject
     {
         public string Key { get; set; }
 

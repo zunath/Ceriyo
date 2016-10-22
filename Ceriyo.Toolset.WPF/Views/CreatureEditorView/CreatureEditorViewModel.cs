@@ -7,6 +7,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
+using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.Class;
 using Ceriyo.Toolset.WPF.Events.Creature;
@@ -18,37 +19,23 @@ using Prism.Interactivity.InteractionRequest;
 
 namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
 {
-    public class CreatureEditorViewModel : ValidatableBindableBase<CreatureEditorViewModel>
+    public class CreatureEditorViewModel : ValidatableBindableBase<CreatureEditorViewModelValidator>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
-        private readonly IObjectMapper _objectMapper;
         private readonly IPathService _pathService;
-        private readonly CreatureDataObservable.Factory _creatureFactory;
-        private readonly ClassDataObservable.Factory _classFactory;
-        private readonly LocalStringDataObservable.Factory _localStringFactory;
-        private readonly LocalDoubleDataObservable.Factory _localDoubleFactory;
+        private readonly IObservableDataFactory _observableDataFactory;
 
         public CreatureEditorViewModel(
-            CreatureEditorViewModelValidator validator,
             IEventAggregator eventAggregator,
             IDataService dataService,
-            IObjectMapper objectMapper,
             IPathService pathService,
-            CreatureDataObservable.Factory creatureFactory,
-            ClassDataObservable.Factory classFactory,
-            LocalStringDataObservable.Factory localStringFactory,
-            LocalDoubleDataObservable.Factory localDoubleFactory)
-            :base(objectMapper, validator)
+            IObservableDataFactory observableDataFactory)
         {
             _eventAggregator = eventAggregator;
             _dataService = dataService;
-            _objectMapper = objectMapper;
             _pathService = pathService;
-            _creatureFactory = creatureFactory;
-            _classFactory = classFactory;
-            _localStringFactory = localStringFactory;
-            _localDoubleFactory = localDoubleFactory;
+            _observableDataFactory = observableDataFactory;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -102,22 +89,23 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             string[] files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Creature/", "*.dat");
             foreach (var file in files)
             {
-                CreatureData data = _dataService.Load<CreatureData>(file);
-                CreatureDataObservable creature = _creatureFactory.Invoke(data);
+                CreatureData loaded = _dataService.Load<CreatureData>(file);
+                CreatureDataObservable creature = _observableDataFactory.CreateAndMap<CreatureDataObservable, CreatureData>(loaded);
                 Creatures.Add(creature);
             }
 
             files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Class/", "*.dat");
             foreach (var file in files)
             {
-                ClassData data = _dataService.Load<ClassData>(file);
-                ClassDataObservable @class = _classFactory.Invoke(data);
+                ClassData loaded = _dataService.Load<ClassData>(file);
+                ClassDataObservable @class = _observableDataFactory.CreateAndMap<ClassDataObservable, ClassData>(loaded);
                 Classes.Add(@class);
             }
         }
 
         private void RaiseValidityChangedEvent()
         {
+            ValidateObject();
             _eventAggregator.GetEvent<CreatureEditorValidityChangedEvent>().Publish(!HasErrors);
         }
         
@@ -199,7 +187,7 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
 
         private void New()
         {
-            var creature = _creatureFactory.Invoke();
+            var creature = _observableDataFactory.Create<CreatureDataObservable>();
             creature.Name = "Creature" + (Creatures.Count + 1);
             Creatures.Add(creature);
 
@@ -227,7 +215,7 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
 
         private void AddLocalString()
         {
-            SelectedCreature.LocalVariables.LocalStrings.Add(_localStringFactory.Invoke());
+            SelectedCreature.LocalVariables.LocalStrings.Add(_observableDataFactory.Create<LocalStringDataObservable>());
         }
 
         public DelegateCommand<LocalStringDataObservable> DeleteLocalStringCommand { get; }
@@ -241,7 +229,7 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
 
         private void AddLocalDouble()
         {
-            SelectedCreature.LocalVariables.LocalDoubles.Add(_localDoubleFactory.Invoke());
+            SelectedCreature.LocalVariables.LocalDoubles.Add(_observableDataFactory.Create<LocalDoubleDataObservable>());
         }
 
         public DelegateCommand<LocalDoubleDataObservable> DeleteLocalDoubleCommand { get; }
