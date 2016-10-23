@@ -108,6 +108,7 @@
     <Compile Include="Data\PlaceableDataTests.cs" />
     <Compile Include="Data\ScriptDataTests.cs" />
     <Compile Include="Data\SkillDataTests.cs" />
+    <Compile Include="Data\TileAtlasDataTests.cs" />
     <Compile Include="Data\TilesetDataTests.cs" />
     <Compile Include="Extensions\EnumerationExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

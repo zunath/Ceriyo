@@ -62,6 +62,23 @@ namespace Ceriyo.Core.Entities
 
             map.Width = data.Width;
             map.Height = data.Height;
+            map.Tiles = new Tile[data.Width, data.Height];
+
+            for (int x = 0; x < map.Tiles.GetLength(0); x++)
+            {
+                for (int y = 0; y < map.Tiles.GetLength(1); y++)
+                {
+                    TileData tileData = data.TileAtlas.GetTile(x, y);
+                    if (tileData != null)
+                    {
+                        map.Tiles[x, y] = new Tile
+                        {
+                            SourceX = tileData.SourceX,
+                            SourceY = tileData.SourceY
+                        };
+                    }
+                }
+            }
 
             entity.AddComponent(name);
             entity.AddComponent(tag);

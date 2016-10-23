@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Artemis;
-using Artemis.System;
 using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Entities.Contracts;

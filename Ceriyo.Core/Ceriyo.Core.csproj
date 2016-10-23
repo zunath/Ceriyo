@@ -96,6 +96,7 @@
     <Compile Include="Components\Resref.cs" />
     <Compile Include="Components\ScriptGroup.cs" />
     <Compile Include="Components\Tag.cs" />
+    <Compile Include="Components\Tile.cs" />
     <Compile Include="Components\Velocity.cs" />
     <Compile Include="Constants\ColorType.cs" />
     <Compile Include="Constants\CursorType.cs" />
@@ -114,6 +115,8 @@
     <Compile Include="Data\LevelChartData.cs" />
     <Compile Include="Data\LocalDoubleData.cs" />
     <Compile Include="Data\LocalStringData.cs" />
+    <Compile Include="Data\TileAtlasData.cs" />
+    <Compile Include="Data\TileData.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
     <Compile Include="Data\SerializedFileData.cs" />

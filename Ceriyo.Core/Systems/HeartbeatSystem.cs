@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Artemis;
+﻿using Artemis;
 using Artemis.Attributes;
 using Artemis.Manager;
 using Artemis.System;

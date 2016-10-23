@@ -79,7 +79,7 @@ namespace Ceriyo.Core.Services.Module
                 }
             }
 
-            throw new FileNotFoundException($"Resource could not be found in any attached resource packs. Name: {resourceName}");
+            return null;
         }
 
         public Texture2D LoadTexture2D(ResourceType resourceType, string resourceName)
@@ -90,9 +90,29 @@ namespace Ceriyo.Core.Services.Module
 
             if(string.IsNullOrWhiteSpace(resourceName))
                 throw new ArgumentException($"{nameof(resourceName)} cannot be blank or null.");
-
+            
+            // Search for the resource in attached packages first.
             ResourceItemData data = GetResourceByName(resourceType, resourceName);
             
+            // Couldn't find in attached resource packages. Look for an engine resource.
+            if (data == null)
+            {
+                string path = _pathService.EngineGraphicsDirectory + GetResourceTypePrefix(resourceType) + "/" + resourceName;
+                if (File.Exists(path))
+                {
+                    using (FileStream stream = File.OpenRead(path))
+                    {
+                        return Texture2D.FromStream(_graphicsDevice, stream);
+                    }
+                }
+            }
+
+            // Still couldn't find it. Throw exception.
+            if (data == null)
+            {
+                throw new FileNotFoundException($"Couldn't find resource in attached resource packages or engine resources. Resource name: {resourceName}");
+            }
+
             using (MemoryStream stream = new MemoryStream(data.Data))
             {
                 return Texture2D.FromStream(_graphicsDevice, stream);

@@ -49,6 +49,8 @@ namespace Ceriyo.Infrastructure.Services
             Map<ResourceItemData>();
             Map<ScriptData>();
             Map<SkillData>();
+            Map<TileAtlasData>();
+            Map<TileData>();
             Map<TilesetData>();
         }
 

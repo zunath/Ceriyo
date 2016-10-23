@@ -3,6 +3,7 @@ using Artemis.Attributes;
 using Artemis.Manager;
 using Artemis.System;
 using Ceriyo.Core.Components;
+using Ceriyo.Core.Constants;
 using Ceriyo.Core.Services.Contracts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,37 +19,34 @@ namespace Ceriyo.Core.Systems
         private readonly SpriteBatch _spriteBatch;
         private readonly IEngineService _engineService;
         private readonly Vector2 _origin;
-
-        private const int TileStepX = 64;
-        private const int TileStepY = 16;
-        private const int OddRowXOffset = 32;
-        private const int HeightTileOffset = 32;
-
+        private Texture2D _emptyCell;
+        private readonly IModuleResourceService _resourceService;
 
         public AreaRenderSystem(SpriteBatch spriteBatch,
-            IEngineService engineService) 
+            IEngineService engineService,
+            IModuleResourceService resourceService) 
             : base(Aspect.All(typeof(Renderable),
                               typeof(Map)))
         {
             _spriteBatch = spriteBatch;
             _engineService = engineService;
             _origin = Vector2.Zero;
+            _resourceService = resourceService;
         }
 
         public override void Process(Entity entity)
         {
+            LoadEmptyTileset();
+
             Renderable renderable = entity.GetComponent<Renderable>();
             Map map = entity.GetComponent<Map>();
 
             int tileWidth = _engineService.TileWidth;
             int tileHeight = _engineService.TileHeight;
-
-            int sourceX = (tileWidth*0);   
-            int sourceY = (tileHeight*1); 
-
+            
             for (int y = 0; y < map.Height; y++)
             {
-                for (int x = map.Width; x >= 0; x--)
+                for (int x = map.Width; x > 0; x--)
                 {
                     float positionX = (x * tileWidth / 2) + (y * tileWidth / 2);
                     float positionY = (y * tileHeight / 2) - (x * tileHeight / 2);
@@ -56,7 +54,19 @@ namespace Ceriyo.Core.Systems
                     Vector2 position = new Vector2(
                         positionX,
                         positionY);
+                    
+                    Tile tile = map.Tiles[x-1, y];
+                    int sourceX = 0;
+                    int sourceY = 0;
+                    Texture2D renderTexture = _emptyCell;
 
+                    if (tile != null)
+                    {
+                        sourceX = tileWidth * tile.SourceX;
+                        sourceY = tileHeight * tile.SourceY;
+                        renderTexture = renderable.Texture;
+                    }
+                    
                     Rectangle source = new Rectangle(
                         sourceX,
                         sourceY,
@@ -64,7 +74,7 @@ namespace Ceriyo.Core.Systems
                         tileHeight);
 
                     _spriteBatch.Draw(
-                        renderable.Texture,
+                        renderTexture,
                         position,
                         source,
                         Color.White,
@@ -77,6 +87,15 @@ namespace Ceriyo.Core.Systems
                 }
             }
 
+
+        }
+
+        private void LoadEmptyTileset()
+        {
+            if (_emptyCell == null)
+            {
+                _emptyCell = _resourceService.LoadTexture2D(ResourceType.Tileset, "Empty-Tileset.png");
+            }
         }
     }
 }

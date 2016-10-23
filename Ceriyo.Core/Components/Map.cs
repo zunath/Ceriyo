@@ -6,5 +6,7 @@ namespace Ceriyo.Core.Components
     {
         public int Width { get; set; }
         public int Height { get; set; }
+        public Tile[,] Tiles { get; set; }
+        
     }
 }

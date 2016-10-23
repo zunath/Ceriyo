@@ -1,7 +1,5 @@
-﻿using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Services.Contracts;
+﻿using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.MonoGameWpfInterop;
-using Ceriyo.Infrastructure.WPF.MonoGameWpfInterop.Input;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

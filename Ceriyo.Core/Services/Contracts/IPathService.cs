@@ -6,5 +6,6 @@
         string ModuleDirectory { get; }
         string ResourcePackDirectory { get; }
         string ServerVaultDirectory { get; }
+        string EngineGraphicsDirectory { get; }
     }
 }

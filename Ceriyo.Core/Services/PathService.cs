@@ -8,5 +8,6 @@ namespace Ceriyo.Core.Services
         public string ModuleDirectory => "./Modules/";
         public string ResourcePackDirectory => "./ResourcePacks/";
         public string ServerVaultDirectory => "./ServerVault/";
+        public string EngineGraphicsDirectory => "./Graphics/";
     }
 }

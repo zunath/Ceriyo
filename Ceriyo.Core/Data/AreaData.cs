@@ -27,12 +27,13 @@ namespace Ceriyo.Core.Data
         public int Height { get; set; }
         public LocalVariableData LocalVariables { get; set; }
         public string TilesetGlobalID { get; set; }
-
+        public TileAtlasData TileAtlas { get; set; }
 
         public AreaData()
         {
             GlobalID = Guid.NewGuid().ToString();
             LocalVariables = new LocalVariableData();
+            TileAtlas = new TileAtlasData();
         }
     }
 }

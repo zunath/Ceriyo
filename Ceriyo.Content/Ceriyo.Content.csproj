@@ -61,9 +61,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Audio\BGM\" />
+    <Folder Include="Audio\SFX\" />
     <Folder Include="Data\" />
+    <Folder Include="Graphics\Creature\" />
+    <Folder Include="Graphics\Icon\" />
+    <Folder Include="Graphics\Item\" />
+    <Folder Include="Graphics\Portrait\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Graphics\Tileset\Empty-Tileset.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Graphics\UI\Cursors\Arrow.png" />
     <Content Include="Graphics\UI\Cursors\Link.png" />
     <Content Include="Graphics\UI\Cursors\Move.png" />
