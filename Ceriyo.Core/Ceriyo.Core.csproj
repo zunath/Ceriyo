@@ -89,11 +89,12 @@
     <Compile Include="Components\Description.cs" />
     <Compile Include="Components\Heartbeat.cs" />
     <Compile Include="Components\LocalData.cs" />
+    <Compile Include="Components\Map.cs" />
     <Compile Include="Components\Nameable.cs" />
     <Compile Include="Components\Position.cs" />
     <Compile Include="Components\Renderable.cs" />
     <Compile Include="Components\Resref.cs" />
-    <Compile Include="Components\Script.cs" />
+    <Compile Include="Components\ScriptGroup.cs" />
     <Compile Include="Components\Tag.cs" />
     <Compile Include="Components\Velocity.cs" />
     <Compile Include="Constants\ColorType.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />
     <Compile Include="Systems\AreaRenderSystem.cs" />
+    <Compile Include="Systems\HeartbeatSystem.cs" />
     <Compile Include="UI\Controls\ChatBox.cs" />
     <Compile Include="UI\Controls\FileDialog.cs" />
     <Compile Include="UI\Controls\GridColumn.cs" />

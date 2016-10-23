@@ -2,6 +2,7 @@
 using Artemis.Attributes;
 using Artemis.Manager;
 using Artemis.System;
+using Ceriyo.Core.Components;
 
 namespace Ceriyo.Core.Systems
 {
@@ -11,8 +12,9 @@ namespace Ceriyo.Core.Systems
         Layer = 1)]
     public class AreaRenderSystem: EntityProcessingSystem
     {
-        public AreaRenderSystem(Aspect aspect) 
-            : base(aspect)
+        public AreaRenderSystem() 
+            : base(Aspect.All(typeof(Renderable),
+                              typeof(Map)))
         {
         }
 

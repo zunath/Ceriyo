@@ -33,26 +33,20 @@ namespace Ceriyo.Core.Entities
             var tag = _factory.Create<Tag>();
             var resref = _factory.Create<Resref>();
             var description = _factory.Create<Description>();
-            var onAreaEnter = _factory.Create<Script>();
-            var onAreaExit = _factory.Create<Script>();
-            var onAreaHeartbeat = _factory.Create<Script>();
+            var scriptGroup = _factory.Create<ScriptGroup>();
             var localData = _factory.Create<LocalData>();
             var renderable = _factory.Create<Renderable>();
+            var map = _factory.Create<Map>();
 
             name.Value = data.Name;
             tag.Value = data.Tag;
             resref.Value = data.Resref;
             description.Value = data.Description;
 
-            onAreaEnter.Name = data.OnAreaEnter;
-            onAreaEnter.Event = ScriptEvent.OnAreaEnter;
-
-            onAreaExit.Name = data.OnAreaExit;
-            onAreaExit.Event = ScriptEvent.OnAreaExit;
-
-            onAreaHeartbeat.Name = data.OnAreaHeartbeat;
-            onAreaHeartbeat.Event = ScriptEvent.OnAreaHeartbeat;
-
+            scriptGroup.Add(ScriptEvent.OnAreaEnter, data.OnAreaEnter);
+            scriptGroup.Add(ScriptEvent.OnAreaExit, data.OnAreaExit);
+            scriptGroup.Add(ScriptEvent.OnHeartbeat, data.OnAreaHeartbeat);
+            
             foreach (var @string in data.LocalVariables.LocalStrings)
             {
                 localData.LocalStrings.Add(@string.Key, @string.Value);
@@ -66,15 +60,17 @@ namespace Ceriyo.Core.Entities
             TilesetData tileset = _moduleDataService.Load<TilesetData>(data.TilesetGlobalID);
             renderable.Texture = _resourceService.LoadTexture2D(ResourceType.Tileset, tileset.ResourceName);
 
+            map.Width = data.Width;
+            map.Height = data.Height;
+
             entity.AddComponent(name);
             entity.AddComponent(tag);
             entity.AddComponent(resref);
             entity.AddComponent(description);
-            entity.AddComponent(onAreaEnter);
-            entity.AddComponent(onAreaExit);
-            entity.AddComponent(onAreaHeartbeat);
+            entity.AddComponent(scriptGroup);
             entity.AddComponent(localData);
             entity.AddComponent(renderable);
+            entity.AddComponent(map);
         }
     }
 }

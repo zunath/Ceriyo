@@ -1,5 +1,6 @@
 ﻿using Artemis;
 using Ceriyo.Core.Components;
+using Ceriyo.Core.Constants;
 using Ceriyo.Core.Scripting.Server;
 using Ceriyo.Testing.Shared;
 using NUnit.Framework;
@@ -22,12 +23,11 @@ namespace Ceriyo.Core.Tests.Scripting.Server
         {
             EntityWorld world = TestHelpers.CreateEntityWorld();
             Entity entity = world.CreateEntity();
-            Script scriptComponent = new Script()
-            {
-                Name = "TestScriptName"
-            };
-            entity.AddComponent(scriptComponent);
-            string result = _scriptingMethods.GetScriptName(entity);
+            ScriptGroup scriptGroup = new ScriptGroup();
+            scriptGroup.Add(ScriptEvent.OnAreaEnter, "TestScriptName");
+
+            entity.AddComponent(scriptGroup);
+            string result = _scriptingMethods.GetScriptName(entity, ScriptEvent.OnAreaEnter);
             Assert.AreEqual(result, "TestScriptName");
         }
 
@@ -36,7 +36,7 @@ namespace Ceriyo.Core.Tests.Scripting.Server
         {
             EntityWorld world = TestHelpers.CreateEntityWorld();
             Entity entity = world.CreateEntity();
-            string result = _scriptingMethods.GetScriptName(entity);
+            string result = _scriptingMethods.GetScriptName(entity, ScriptEvent.OnAreaEnter);
             Assert.AreEqual(result, string.Empty);
         }
     }

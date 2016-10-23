@@ -22,10 +22,10 @@ namespace Ceriyo.Core.Entities
             entity.AddComponent(_componentFactory.Create<Resref>());
             entity.AddComponent(_componentFactory.Create<Description>());
 
-            Script script = _componentFactory.Create<Script>();
-            script.Event = ScriptEvent.OnAbilityActivated;
+            ScriptGroup scriptGroup = _componentFactory.Create<ScriptGroup>();
+            scriptGroup.Add(ScriptEvent.OnAbilityActivated, string.Empty);
 
-            entity.AddComponent(script);
+            entity.AddComponent(scriptGroup);
             
         }
     }

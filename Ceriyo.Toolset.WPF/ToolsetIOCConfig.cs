@@ -62,6 +62,7 @@ namespace Ceriyo.Toolset.WPF
 
             // Artemis
             builder.RegisterType<EntityWorld>().SingleInstance();
+            IOCHelpers.RegisterSystems(builder);
 
             // Factory
             builder.RegisterType<EntityFactory>().As<IEntityFactory>().SingleInstance();

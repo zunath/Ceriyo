@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Artemis.Interface;
+using Artemis.System;
 using Autofac;
 using Ceriyo.Core.Contracts;
 
@@ -31,5 +32,18 @@ namespace Ceriyo.Infrastructure.Helpers
                 builder.RegisterType(type).As<IComponent>().Named<IComponent>(type.ToString());
             }
         }
+
+        public static void RegisterSystems(ContainerBuilder builder)
+        {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var systems = assemblies
+                .SelectMany(s => s.GetTypes())
+                .Where(p => typeof(EntitySystem).IsAssignableFrom(p) && !p.ToString().StartsWith("Artemis"));
+            foreach (Type type in systems)
+            {
+                builder.RegisterType(type).As<EntitySystem>().Named<EntitySystem>(type.ToString());
+            }
+        }
+
     }
 }

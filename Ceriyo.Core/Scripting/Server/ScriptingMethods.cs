@@ -1,6 +1,7 @@
 ﻿using System;
 using Artemis;
 using Ceriyo.Core.Components;
+using Ceriyo.Core.Constants;
 using Ceriyo.Core.Scripting.Server.Contracts;
 
 namespace Ceriyo.Core.Scripting.Server
@@ -8,11 +9,12 @@ namespace Ceriyo.Core.Scripting.Server
     public class ScriptingMethods: IScriptingMethods
     {
 
-        public string GetScriptName(Entity entity)
+        public string GetScriptName(Entity entity, ScriptEvent @event)
         {
             try
             {
-                return entity.GetComponent<Script>().Name;
+                var scriptGroup = entity.GetComponent<ScriptGroup>();
+                return scriptGroup[@event];
             }
             catch (Exception)
             {

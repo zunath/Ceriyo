@@ -95,10 +95,8 @@ namespace Ceriyo.Core.Services.Module
             
             using (MemoryStream stream = new MemoryStream(data.Data))
             {
-                // TODO: Currently throwing exceptions on my machine.
-                //var texture = Texture2D.FromStream(_graphicsDevice, stream);
-
-                return null;
+                var texture = Texture2D.FromStream(_graphicsDevice, stream);
+                return texture;
             }
 
         }
