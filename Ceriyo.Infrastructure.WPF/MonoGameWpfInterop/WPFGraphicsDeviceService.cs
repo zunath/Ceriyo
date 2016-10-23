@@ -10,10 +10,8 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
     /// </summary>
     public class WpfGraphicsDeviceService : IGraphicsDeviceService
     {
-        #region Constructors
-
         /// <summary>
-        /// Create a new instance of the dummy. The constructor will autom. add the instance itself to the <see cref="D3D11Host.Services"/> container of <see cref="host"/>.
+        /// Create a new instance of the dummy. The constructor will automatically add the instance itself to the <see cref="D3D11Host.Services"/> container of <see cref="host"/>.
         /// </summary>
         /// <param name="host"></param>
         public WpfGraphicsDeviceService(D3D11Host host)
@@ -28,10 +26,7 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
             host.Services.AddService(typeof(IGraphicsDeviceService), this);
         }
 
-        #endregion
-
-        #region Events
-
+        
         [Obsolete("Dummy implementation will never call DeviceCreated")]
         public event EventHandler<EventArgs> DeviceCreated;
 
@@ -43,13 +38,9 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
 
         [Obsolete("Dummy implementation will never call DeviceResetting")]
         public event EventHandler<EventArgs> DeviceResetting;
-
-        #endregion
-
-        #region Properties
+        
 
         public GraphicsDevice GraphicsDevice { get; }
-
-        #endregion
+        
     }
 }

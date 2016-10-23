@@ -200,6 +200,7 @@
     <Compile Include="Events\Tileset\TilesetDeletedEvent.cs" />
     <Compile Include="Events\Tileset\TilesetEditorValidityChangedEvent.cs" />
     <Compile Include="ToolsetGame.cs" />
+    <Compile Include="ToolsetGameService.cs" />
     <Compile Include="ToolsetIOCConfig.cs" />
     <Compile Include="Mapping\ToolsetObjectMapper.cs" />
     <Compile Include="Views\AbilityEditorView\AbilityEditorViewModelValidator.cs" />

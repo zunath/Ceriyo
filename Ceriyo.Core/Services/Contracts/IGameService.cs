@@ -4,7 +4,7 @@ namespace Ceriyo.Core.Services.Contracts
 {
     public interface IGameService
     {
-        void Initialize(GraphicsDeviceManager graphics);
+        void Initialize(IGraphicsDeviceManager graphics);
         void Update(GameTime gameTime);
         void Draw(GameTime gameTime);
         void Exit();

@@ -46,5 +46,12 @@ namespace Ceriyo.Toolset.WPF
             base.ConfigureContainerBuilder(builder);
             ToolsetIOCConfig.Initialize(builder);
         }
+
+        protected override IContainer CreateContainer(ContainerBuilder containerBuilder)
+        {
+            var container = base.CreateContainer(containerBuilder);
+            ToolsetIOCConfig.SetContainer(container);
+            return container;
+        }
     }
 }

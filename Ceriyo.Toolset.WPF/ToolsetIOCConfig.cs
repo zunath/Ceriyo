@@ -25,8 +25,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Toolset.WPF
 {
-    public class ToolsetIOCConfig
+    public static class ToolsetIOCConfig
     {
+        private static IContainer _container;
+
         public static void Initialize(ContainerBuilder builder)
         {
             // Instances
@@ -36,13 +38,18 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
 
             // MonoGame
+            var game = new ToolsetGame();
+            builder.RegisterInstance(game);
             builder.RegisterType<Texture2D>();
-
+            //builder.RegisterInstance(new SpriteBatch(game.GraphicsDevice)).AsSelf();
+            builder.RegisterInstance(game.Content).AsSelf();
+            //builder.RegisterInstance(game.GraphicsDevice).AsSelf();
+                
             // Services
             builder.RegisterType<AppService>().As<IAppService>();
             builder.RegisterType<CameraService>().As<ICameraService>();
             builder.RegisterType<DataService>().As<IDataService>();
-            builder.RegisterType<GameService>().As<IGameService>();
+            builder.RegisterType<ToolsetGameService>().As<IGameService>();
             builder.RegisterType<ScreenService>().As<IScreenService>();
             builder.RegisterType<GraphicsService>().As<IGraphicsService>();
             builder.RegisterType<PathService>().As<IPathService>();
@@ -55,7 +62,7 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<ComponentFactory>().As<IComponentFactory>().SingleInstance();
             builder.RegisterType<ScreenFactory>().As<IScreenFactory>();
             builder.RegisterType<ObservableDataFactory>().As<IObservableDataFactory>();
-
+            
             // Scripting
             builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();
             builder.RegisterType<EntityMethods>().As<IEntityMethods>().SingleInstance();
@@ -78,8 +85,21 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<AreaDomainService>().As<IAreaDomainService>().SingleInstance();
 
             // Validation
-            builder.RegisterType<ValidationHelper>().As<IValidationHelper>();
-            
+            builder.RegisterType<ValidationHelper>().As<IValidationHelper>();   
         }
+
+        public static void SetContainer(IContainer container)
+        {
+            _container = container;
+        }
+
+        public static void RegisterGraphicsDevice(GraphicsDevice device)
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(device).AsSelf();
+            builder.RegisterInstance(new SpriteBatch(device)).AsSelf();
+            builder.Update(_container);
+        }
+        
     }
 }

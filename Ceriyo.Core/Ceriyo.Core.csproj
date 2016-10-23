@@ -117,6 +117,7 @@
     <Compile Include="Data\SerializedFileData.cs" />
     <Compile Include="Data\ResourceItemData.cs" />
     <Compile Include="Data\SerializedManifestData.cs" />
+    <Compile Include="Screens\AreaEditorScreen.cs" />
     <Compile Include="Scripting\Client\Contracts\ISceneMethods.cs" />
     <Compile Include="Scripting\Client\SceneMethods.cs" />
     <Compile Include="Services\AppService.cs" />

@@ -1,6 +1,7 @@
 ﻿using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.MonoGameWpfInterop;
 using Ceriyo.Infrastructure.WPF.MonoGameWpfInterop.Input;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Toolset.WPF
@@ -15,17 +16,17 @@ namespace Ceriyo.Toolset.WPF
         public ToolsetGame()
         {
             _graphics = new WpfGraphicsDeviceService(this);
+            Content.RootDirectory = "Compiled";
         }
 
         protected override void Initialize()
         {
-
-            // wpf and keyboard need reference to the host control in order to receive input
-            // this means every WpfGame control will have it's own keyboard & mouse manager which will only react if the mouse is in the control
+            ToolsetIOCConfig.RegisterGraphicsDevice(GraphicsDevice);
+            _gameService = ServiceLocator.Current.TryResolve<IGameService>();
             _keyboard = new WpfKeyboard(this);
             _mouse = new WpfMouse(this);
+            _gameService.Initialize(null);
 
-            // must be called after the WpfGraphicsDeviceService instance was created
             base.Initialize();
         }
 
@@ -34,12 +35,13 @@ namespace Ceriyo.Toolset.WPF
             // every update we can now query the keyboard & mouse for our WpfGame
             var mouseState = _mouse.GetState();
             var keyboardState = _keyboard.GetState();
+            _gameService.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            GraphicsDevice.Clear(Color.LightGray);
+            _gameService.Draw(gameTime);
             base.Draw(gameTime);
         }
     }

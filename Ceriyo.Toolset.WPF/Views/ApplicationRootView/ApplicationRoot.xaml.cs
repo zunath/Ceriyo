@@ -15,9 +15,12 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
             InitializeComponent();
         }
 
-        public ApplicationRoot(IEventAggregator eventAggregator)
+        public ApplicationRoot(IEventAggregator eventAggregator,
+            ToolsetGame game)
         {
             InitializeComponent();
+
+            GameGrid.Children.Add(game);
 
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<ApplicationClosedEvent>().Subscribe(CloseApplication);

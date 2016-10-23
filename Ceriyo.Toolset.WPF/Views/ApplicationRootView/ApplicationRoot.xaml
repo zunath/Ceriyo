@@ -76,11 +76,13 @@
                 HorizontalAlignment="Center">
             </GridSplitter>
 
-            <areaEditorView:AreaEditor
+            <Grid
+                x:Name="GameGrid"
                 Grid.Row="0"
                 Grid.Column="2">
-            </areaEditorView:AreaEditor>
-
+                
+            </Grid>
+            
             <GridSplitter
                 Grid.Column="3"
                 Width="5"

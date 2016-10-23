@@ -41,11 +41,11 @@ namespace Ceriyo.Core.Services
             _appService = appService;
         }
 
-        public void Initialize(GraphicsDeviceManager graphics)
+        public void Initialize(IGraphicsDeviceManager graphics)
         {
             _appService.CreateAppDirectoryStructure();
             _dataService.Initialize();
-            _graphicsService.Initialize(graphics);
+            _graphicsService.Initialize((GraphicsDeviceManager)graphics);
             _uiService.Initialize();
             _screenService.ChangeScreen<GameScreen>();
 
