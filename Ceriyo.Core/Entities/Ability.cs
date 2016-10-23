@@ -15,7 +15,7 @@ namespace Ceriyo.Core.Entities
             _componentFactory = componentFactory;
         }
 
-        public void BuildEntity(Entity entity, params object[] args)
+        public void BuildEntity(Entity entity)
         {
             entity.AddComponent(_componentFactory.Create<Nameable>());
             entity.AddComponent(_componentFactory.Create<Tag>());

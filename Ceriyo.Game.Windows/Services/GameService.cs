@@ -1,11 +1,11 @@
 ﻿using Artemis;
 using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Screens;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Game.Windows.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Core.Services
+namespace Ceriyo.Game.Windows.Services
 {
     public class GameService: IGameService
     {
@@ -18,6 +18,7 @@ namespace Ceriyo.Core.Services
         private readonly IUIService _uiService;
         private readonly IDataService _dataService;
         private readonly IAppService _appService;
+        private readonly IInputService _inputService;
 
         public GameService(
             EntityWorld world,
@@ -28,7 +29,8 @@ namespace Ceriyo.Core.Services
             IScreenService screenService,
             IUIService uiService,
             IDataService dataService,
-            IAppService appService)
+            IAppService appService,
+            IInputService inputService)
         {
             _world = world;
             _spriteBatch = spriteBatch;
@@ -39,6 +41,7 @@ namespace Ceriyo.Core.Services
             _uiService = uiService;
             _dataService = dataService;
             _appService = appService;
+            _inputService = inputService;
         }
 
         public void Initialize(IGraphicsDeviceManager graphics)
@@ -55,6 +58,7 @@ namespace Ceriyo.Core.Services
 
         public void Update(GameTime gameTime)
         {
+            _inputService.Update();
             _world.Update();
             _screenService.Update();
             _cameraService.Update();

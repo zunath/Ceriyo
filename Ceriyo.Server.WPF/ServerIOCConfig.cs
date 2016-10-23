@@ -34,7 +34,6 @@ namespace Ceriyo.Server.WPF
             builder.RegisterType<AppService>().As<IAppService>();
             builder.RegisterType<CameraService>().As<ICameraService>();
             builder.RegisterType<DataService>().As<IDataService>();
-            builder.RegisterType<GameService>().As<IGameService>();
             builder.RegisterType<ScreenService>().As<IScreenService>();
             builder.RegisterType<GraphicsService>().As<IGraphicsService>();
             builder.RegisterType<PathService>().As<IPathService>();

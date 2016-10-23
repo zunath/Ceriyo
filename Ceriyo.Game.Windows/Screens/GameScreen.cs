@@ -1,6 +1,6 @@
 ﻿using Ceriyo.Core.Contracts;
 
-namespace Ceriyo.Core.Screens
+namespace Ceriyo.Game.Windows.Screens
 {
     public class GameScreen: IScreen
     {

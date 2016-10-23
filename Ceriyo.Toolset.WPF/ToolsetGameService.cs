@@ -1,6 +1,6 @@
 ﻿using Artemis;
-using Ceriyo.Core.Screens;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Toolset.WPF.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,18 +12,20 @@ namespace Ceriyo.Toolset.WPF
         private readonly SpriteBatch _spriteBatch;
         private readonly ICameraService _cameraService;
         private readonly IScreenService _screenService;
+        private readonly IInputService _inputService;
 
         public ToolsetGameService(
             EntityWorld world,
             ICameraService cameraService,
             IScreenService screenService,
-            SpriteBatch spriteBatch
-            )
+            SpriteBatch spriteBatch,
+            IInputService inputService)
         {
             _world = world;
             _cameraService = cameraService;
             _screenService = screenService;
             _spriteBatch = spriteBatch;
+            _inputService = inputService;
         }
 
         public void Initialize(IGraphicsDeviceManager graphics)
@@ -33,6 +35,7 @@ namespace Ceriyo.Toolset.WPF
 
         public void Update(GameTime gameTime)
         {
+            _inputService.Update();
             _world.Update();
             _screenService.Update();
             _cameraService.Update();

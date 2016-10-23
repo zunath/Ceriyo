@@ -117,7 +117,6 @@
     <Compile Include="Data\SerializedFileData.cs" />
     <Compile Include="Data\ResourceItemData.cs" />
     <Compile Include="Data\SerializedManifestData.cs" />
-    <Compile Include="Screens\AreaEditorScreen.cs" />
     <Compile Include="Scripting\Client\Contracts\ISceneMethods.cs" />
     <Compile Include="Scripting\Client\SceneMethods.cs" />
     <Compile Include="Services\AppService.cs" />
@@ -138,6 +137,7 @@
     <Compile Include="Contracts\IObjectMapper.cs" />
     <Compile Include="Scripting\Server\Contracts\IPhysicsMethods.cs" />
     <Compile Include="Contracts\IScreenFactory.cs" />
+    <Compile Include="Services\Contracts\IInputService.cs" />
     <Compile Include="Services\Contracts\IPathService.cs" />
     <Compile Include="Services\Contracts\IScreenService.cs" />
     <Compile Include="Scripting\Server\Contracts\IScriptingMethods.cs" />
@@ -173,7 +173,6 @@
     <Compile Include="Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Contracts\IScreen.cs" />
     <Compile Include="Scripting\Client\ControlMethods.cs" />
     <Compile Include="Scripting\Client\StyleMethods.cs" />
@@ -186,7 +185,6 @@
     <Compile Include="Services\PathService.cs" />
     <Compile Include="Services\ScreenService.cs" />
     <Compile Include="Services\CameraService.cs" />
-    <Compile Include="Services\GameService.cs" />
     <Compile Include="Services\GraphicsService.cs" />
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />
@@ -204,6 +202,7 @@
     <Compile Include="Services\UIService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Screens\" />
     <Folder Include="Systems\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Artemis;
-using Artemis.Interface;
 using Artemis.System;
 using Autofac;
 using Ceriyo.Core.Contracts;
@@ -16,7 +15,9 @@ using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Settings;
 using Ceriyo.Core.UI;
+using Ceriyo.Game.Windows.Services;
 using Ceriyo.Infrastructure.Factory;
+using Ceriyo.Infrastructure.Helpers;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Services;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,13 +52,14 @@ namespace Ceriyo.Game.Windows
             builder.RegisterType<Texture2D>();
 
             // Services
-            builder.RegisterType<AppService>().As<IAppService>();
-            builder.RegisterType<CameraService>().As<ICameraService>();
-            builder.RegisterType<DataService>().As<IDataService>();
-            builder.RegisterType<GameService>().As<IGameService>();
-            builder.RegisterType<ScreenService>().As<IScreenService>();
-            builder.RegisterType<GraphicsService>().As<IGraphicsService>();
-            builder.RegisterType<PathService>().As<IPathService>();
+            builder.RegisterType<AppService>().As<IAppService>().SingleInstance();
+            builder.RegisterType<CameraService>().As<ICameraService>().SingleInstance();
+            builder.RegisterType<DataService>().As<IDataService>().SingleInstance();
+            builder.RegisterType<GameService>().As<IGameService>().SingleInstance();
+            builder.RegisterType<ScreenService>().As<IScreenService>().SingleInstance();
+            builder.RegisterType<GraphicsService>().As<IGraphicsService>().SingleInstance();
+            builder.RegisterType<PathService>().As<IPathService>().SingleInstance();
+            builder.RegisterType<GameInputService>().As<IInputService>().SingleInstance();
 
             // Artemis
             builder.RegisterType<EntityWorld>().SingleInstance();
@@ -76,21 +78,20 @@ namespace Ceriyo.Game.Windows
             builder.RegisterType<ControlMethods>().As<IControlMethods>().SingleInstance();
             builder.RegisterType<StyleMethods>().As<IStyleMethods>().SingleInstance();
             builder.RegisterType<SceneMethods>().As<ISceneMethods>().SingleInstance();
-            
-            RegisterGameEntities(builder);
-            RegisterComponents(builder);
-            RegisterSystems(builder);
-
-            // UI
-            builder.RegisterType<SquidRenderer>().As<ISquidRenderer>();
-            builder.RegisterType<UIService>().As<IUIService>().SingleInstance();
-
-            // Scripting
             builder.RegisterType<ScriptService>().As<IScriptService>()
                 .WithParameter("isServer", false)
                 .SingleInstance();
 
+            // Game components
+            RegisterGameEntities(builder);
+            IOCHelpers.RegisterComponents(builder);
+            RegisterSystems(builder);
+            IOCHelpers.RegisterScreens(builder);
 
+            // UI
+            builder.RegisterType<SquidRenderer>().As<ISquidRenderer>();
+            builder.RegisterType<UIService>().As<IUIService>().SingleInstance();
+            
             _container = builder.Build();
         }
 
@@ -107,19 +108,7 @@ namespace Ceriyo.Game.Windows
             }
 
         }
-
-        private static void RegisterComponents(ContainerBuilder builder)
-        {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var components = assemblies
-                .SelectMany(s => s.GetTypes())
-                .Where(p => typeof(IComponent).IsAssignableFrom(p) && p.IsClass);
-            foreach (Type type in components)
-            {
-                builder.RegisterType(type).As<IComponent>().Named<IComponent>(type.ToString());
-            }
-        }
-
+        
         private static void RegisterSystems(ContainerBuilder builder)
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -131,6 +120,6 @@ namespace Ceriyo.Game.Windows
                 builder.RegisterType(type).As<EntitySystem>().Named<EntitySystem>(type.ToString());
             }
         }
-
+        
     }
 }

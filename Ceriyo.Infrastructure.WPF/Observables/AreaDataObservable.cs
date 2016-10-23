@@ -1,5 +1,4 @@
 ﻿using System;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Infrastructure.WPF.Observables.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation.Validators;

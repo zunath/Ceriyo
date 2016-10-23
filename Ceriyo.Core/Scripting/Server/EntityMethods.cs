@@ -11,7 +11,7 @@ namespace Ceriyo.Core.Scripting.Server
         {
             try
             {
-                return entity.GetComponent<Nameable>().Name;
+                return entity.GetComponent<Nameable>().Value;
             }
             catch (Exception)
             {

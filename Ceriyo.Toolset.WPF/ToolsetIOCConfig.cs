@@ -1,6 +1,9 @@
 ﻿using Artemis;
 using Autofac;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
+using Ceriyo.Core.Entities;
+using Ceriyo.Core.Entities.Contracts;
 using Ceriyo.Core.Scripting.Client;
 using Ceriyo.Core.Scripting.Client.Contracts;
 using Ceriyo.Core.Scripting.Common;
@@ -14,6 +17,7 @@ using Ceriyo.Domain.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.Factory;
+using Ceriyo.Infrastructure.Helpers;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Services;
 using Ceriyo.Infrastructure.WPF.Factory;
@@ -41,18 +45,17 @@ namespace Ceriyo.Toolset.WPF
             var game = new ToolsetGame();
             builder.RegisterInstance(game);
             builder.RegisterType<Texture2D>();
-            //builder.RegisterInstance(new SpriteBatch(game.GraphicsDevice)).AsSelf();
             builder.RegisterInstance(game.Content).AsSelf();
-            //builder.RegisterInstance(game.GraphicsDevice).AsSelf();
                 
             // Services
-            builder.RegisterType<AppService>().As<IAppService>();
-            builder.RegisterType<CameraService>().As<ICameraService>();
-            builder.RegisterType<DataService>().As<IDataService>();
-            builder.RegisterType<ToolsetGameService>().As<IGameService>();
-            builder.RegisterType<ScreenService>().As<IScreenService>();
-            builder.RegisterType<GraphicsService>().As<IGraphicsService>();
-            builder.RegisterType<PathService>().As<IPathService>();
+            builder.RegisterType<AppService>().As<IAppService>().SingleInstance();
+            builder.RegisterType<CameraService>().As<ICameraService>().SingleInstance();
+            builder.RegisterType<DataService>().As<IDataService>().SingleInstance();
+            builder.RegisterType<ToolsetGameService>().As<IGameService>().SingleInstance();
+            builder.RegisterType<ScreenService>().As<IScreenService>().SingleInstance();
+            builder.RegisterType<GraphicsService>().As<IGraphicsService>().SingleInstance();
+            builder.RegisterType<PathService>().As<IPathService>().SingleInstance();
+            builder.RegisterType<ToolsetInputService>().As<IInputService>().SingleInstance();
 
             // Artemis
             builder.RegisterType<EntityWorld>().SingleInstance();
@@ -86,6 +89,13 @@ namespace Ceriyo.Toolset.WPF
 
             // Validation
             builder.RegisterType<ValidationHelper>().As<IValidationHelper>();   
+
+            // Game components
+            IOCHelpers.RegisterScreens(builder);
+            IOCHelpers.RegisterComponents(builder);
+
+            // Entities
+            builder.RegisterType<Area>().As<IGameEntity<AreaData>>();
         }
 
         public static void SetContainer(IContainer container)
@@ -100,6 +110,5 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterInstance(new SpriteBatch(device)).AsSelf();
             builder.Update(_container);
         }
-        
     }
 }

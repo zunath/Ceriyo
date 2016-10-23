@@ -157,6 +157,7 @@
     <Compile Include="Events\Ability\AbilityEditorValidityChangedEvent.cs" />
     <Compile Include="Events\Animation\AnimationEditorValidityChangedEvent.cs" />
     <Compile Include="Events\Application\ApplicationLoadedEvent.cs" />
+    <Compile Include="Events\Area\AreaClosedEvent.cs" />
     <Compile Include="Events\Area\AreaCreatedEvent.cs" />
     <Compile Include="Events\Area\AreaDeletedEvent.cs" />
     <Compile Include="Events\Area\AreaOpenedEvent.cs" />
@@ -199,8 +200,10 @@
     <Compile Include="Events\Tileset\TilesetCreatedEvent.cs" />
     <Compile Include="Events\Tileset\TilesetDeletedEvent.cs" />
     <Compile Include="Events\Tileset\TilesetEditorValidityChangedEvent.cs" />
+    <Compile Include="Screens\AreaEditorScreen.cs" />
     <Compile Include="ToolsetGame.cs" />
     <Compile Include="ToolsetGameService.cs" />
+    <Compile Include="ToolsetInputService.cs" />
     <Compile Include="ToolsetIOCConfig.cs" />
     <Compile Include="Mapping\ToolsetObjectMapper.cs" />
     <Compile Include="Views\AbilityEditorView\AbilityEditorViewModelValidator.cs" />

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Controls;
+﻿using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
@@ -66,6 +63,7 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
 
         private void ModuleClosed()
         {
+            CloseArea();
             Areas.Clear();
             IsModuleLoaded = false;
             IsAreaListExpanded = false;
@@ -88,6 +86,14 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
                 AreaData loaded = _dataService.Load<AreaData>(file);
                 AreaDataObservable area = _observableDataFactory.CreateAndMap<AreaDataObservable, AreaData>(loaded);
                 Areas.Add(area);
+            }
+        }
+
+        private void CloseArea()
+        {
+            if (SelectedArea != null && SelectedArea.IsOpenedInAreaEditor)
+            {
+                _eventAggregator.GetEvent<AreaClosedEvent>().Publish(SelectedArea);
             }
         }
 

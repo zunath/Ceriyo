@@ -24,7 +24,7 @@ namespace Ceriyo.Core.Tests.Scripting.Server
             Entity entity = world.CreateEntity();
             Nameable nameableComponent = new Nameable
             {
-                Name = "MyName"
+                Value = "MyName"
             };
             entity.AddComponent(nameableComponent);
             string name = _entityMethods.GetName(entity);
