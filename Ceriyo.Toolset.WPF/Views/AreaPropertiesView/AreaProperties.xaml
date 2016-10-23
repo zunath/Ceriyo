@@ -5,8 +5,495 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d">
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:controls="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:observables="clr-namespace:Ceriyo.Infrastructure.WPF.Observables;assembly=Ceriyo.Infrastructure.WPF"
+             mc:Ignorable="d"
+             d:DesignWidth="500"
+             d:DesignHeight="400"
+             Background="White">
     <Grid>
-            
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <TabControl
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            Grid.Row="0">
+            <TabItem Header="Details"
+                     mah:ControlsHelper.HeaderFontSize="14">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0">
+                        Name:
+                    </Label>
+
+                    <TextBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Margin="2,2,2,2"
+                        Text="{Binding Name}">
+                        
+                    </TextBox>
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0">
+                        Tag:
+                    </Label>
+
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Margin="2,2,2,2"
+                        Text="{Binding Tag}">
+
+                    </TextBox>
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0">
+                        Resref:
+                    </Label>
+
+                    <TextBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Margin="2,2,2,2"
+                        Text="{Binding Resref}">
+
+                    </TextBox>
+
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="0">
+                        Tileset:
+                    </Label>
+
+                    <ComboBox
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        Margin="2,2,2,2"
+                        DisplayMemberPath="Name"
+                        SelectedItem="{Binding SelectedTileset}"
+                        ItemsSource="{Binding Tilesets}">
+                    </ComboBox>
+                    
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="4"
+                        Margin="4,6,0,0">
+                        Width:
+                    </Label>
+                    
+                    <Label
+                        Grid.Column="2"
+                        Grid.Row="4"
+                        Margin="4,6,0,0">
+                        Height:
+                    </Label>
+
+                    <controls:IntegerUpDownEx
+                        Grid.Column="0"
+                        Grid.Row="5"
+                        Margin="2,2,2,2"
+                        Value="{Binding Width,
+                                        Mode=TwoWay,
+                                        ValidatesOnDataErrors=True,
+                                        NotifyOnValidationError=True,
+                                        UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                        Minimum="1"
+                        Maximum="32">
+                    </controls:IntegerUpDownEx>
+
+                    <controls:IntegerUpDownEx
+                        Grid.Column="2"
+                        Grid.Row="5"
+                        Margin="2,2,2,2"
+                        Value="{Binding Height,
+                                        Mode=TwoWay,
+                                        ValidatesOnDataErrors=True,
+                                        NotifyOnValidationError=True,
+                                        UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}"
+                        Minimum="1"
+                        Maximum="32">
+                    </controls:IntegerUpDownEx>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Scripts"
+                     mah:ControlsHelper.HeaderFontSize="14">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="0">
+                        OnAreaEnter:
+                    </Label>
+
+                    <ComboBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="2,2,2,2"
+                        ItemsSource="{Binding Scripts}"
+                        SelectedItem="{Binding OnAreaEnter,
+                                               Mode=TwoWay,
+                                               ValidatesOnDataErrors=True,
+                                               NotifyOnValidationError=True,
+                                               UpdateSourceTrigger=PropertyChanged}">
+
+                    </ComboBox>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="1">
+                        OnAreaExit:
+                    </Label>
+
+                    <ComboBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="2,2,2,2"
+                        ItemsSource="{Binding Scripts}"
+                        SelectedItem="{Binding OnAreaExit,
+                                               Mode=TwoWay,
+                                               ValidatesOnDataErrors=True,
+                                               NotifyOnValidationError=True,
+                                               UpdateSourceTrigger=PropertyChanged}">
+
+                    </ComboBox>
+
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="2">
+                        OnAreaHeartbeat:
+                    </Label>
+
+                    <ComboBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="2,2,2,2"
+                        ItemsSource="{Binding Scripts}"
+                        SelectedItem="{Binding OnAreaHeartbeat,
+                                               Mode=TwoWay,
+                                               ValidatesOnDataErrors=True,
+                                               NotifyOnValidationError=True,
+                                               UpdateSourceTrigger=PropertyChanged}">
+
+                    </ComboBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Variables"
+                     mah:ControlsHelper.HeaderFontSize="14">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label
+                        Grid.Row="0">
+                        Local Strings:
+                    </Label>
+
+
+                    <ScrollViewer
+                        Grid.Row="1">
+
+                        <ListView 
+                            ItemsSource="{Binding Path=LocalVariables.LocalStrings}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected"
+                             Value="True">
+                                            <Setter Property="Background"
+                                Value="{x:Null}" />
+                                            <Setter Property="BorderBrush"
+                                Value="{x:Null}" />
+                                        </Trigger>
+
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.View>
+
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Header="Key" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Content="{Binding}">
+                                                    <ContentControl.Resources>
+                                                        <DataTemplate DataType="{x:Type observables:LocalStringDataObservable}">
+                                                            <TextBox Text="{Binding Path=Key,
+                                                                        Mode=TwoWay,
+                                                                        ValidatesOnDataErrors=True,
+                                                                        NotifyOnValidationError=True,
+                                                                        UpdateSourceTrigger=PropertyChanged}"
+                                                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"></TextBox>
+                                                        </DataTemplate>
+                                                    </ContentControl.Resources>
+                                                </ContentControl>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Value" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Content="{Binding}">
+                                                    <ContentControl.Resources>
+                                                        <DataTemplate DataType="{x:Type observables:LocalStringDataObservable}">
+                                                            <TextBox Text="{Binding Path=Value,
+                                                                        Mode=TwoWay,
+                                                                        ValidatesOnDataErrors=True,
+                                                                        NotifyOnValidationError=True,
+                                                                        UpdateSourceTrigger=PropertyChanged}"
+                                                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"></TextBox>
+                                                        </DataTemplate>
+                                                    </ContentControl.Resources>
+                                                </ContentControl>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Action" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Width="Auto" 
+                                                        Command="{Binding Path=DataContext.DeleteLocalStringCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}">
+                                                    Delete
+                                                </Button>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+
+                                </GridView>
+
+
+
+                            </ListView.View>
+
+                        </ListView>
+
+                    </ScrollViewer>
+
+                    <Button
+                        Grid.Row="2"
+                        Command="{Binding AddLocalStringCommand}"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+                        Add
+                    </Button>
+
+                    <Label
+                        Grid.Row="3">
+                        Local Numbers:
+                    </Label>
+
+                    <ScrollViewer
+                        Grid.Row="4">
+                        <ListView x:Name="ItemsListView"
+                      ItemsSource="{Binding Path=LocalVariables.LocalDoubles}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected"
+                             Value="True">
+                                            <Setter Property="Background"
+                                Value="{x:Null}" />
+                                            <Setter Property="BorderBrush"
+                                Value="{x:Null}" />
+                                        </Trigger>
+
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+
+                            <ListView.View>
+
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Header="Key" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Content="{Binding}">
+                                                    <ContentControl.Resources>
+                                                        <DataTemplate DataType="{x:Type observables:LocalDoubleDataObservable}">
+                                                            <TextBox Text="{Binding Path=Key,
+                                                                        Mode=TwoWay,
+                                                                        ValidatesOnDataErrors=True,
+                                                                        NotifyOnValidationError=True,
+                                                                        UpdateSourceTrigger=PropertyChanged}"
+                                                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"></TextBox>
+                                                        </DataTemplate>
+                                                    </ContentControl.Resources>
+                                                </ContentControl>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Value" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Content="{Binding}">
+                                                    <ContentControl.Resources>
+                                                        <DataTemplate DataType="{x:Type observables:LocalDoubleDataObservable}">
+                                                            <controls:DoubleUpDownEx Text="{Binding Path=Value,
+                                                                        Mode=TwoWay,
+                                                                        ValidatesOnDataErrors=True,
+                                                                        NotifyOnValidationError=True,
+                                                                        UpdateSourceTrigger=PropertyChanged}"
+                                                         Validation.ErrorTemplate="{StaticResource ErrorTemplate}"></controls:DoubleUpDownEx>
+                                                        </DataTemplate>
+                                                    </ContentControl.Resources>
+                                                </ContentControl>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Action" Width="75">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Width="Auto" 
+                                                        
+                                                        Command="{Binding Path=DataContext.DeleteLocalDoubleCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}">
+                                                    Delete
+                                                </Button>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+
+                                </GridView>
+
+
+
+                            </ListView.View>
+
+                        </ListView>
+
+                    </ScrollViewer>
+
+                    <Button
+                        Grid.Row="5"
+                        Command="{Binding AddLocalDoubleCommand}"
+                        Style="{StaticResource AccentedSquareButtonStyle}">
+                        Add
+                    </Button>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Description"
+                     mah:ControlsHelper.HeaderFontSize="14">
+                <TextBox TextWrapping="Wrap"
+						 AcceptsReturn="True"
+						 HorizontalAlignment="Stretch" 
+						 VerticalAlignment="Stretch"
+                         MaxLength="2000"
+						 Text="{Binding Path=Description,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+            </TabItem>
+            <TabItem Header="Comments"
+                     mah:ControlsHelper.HeaderFontSize="14">
+                <TextBox TextWrapping="Wrap"
+						 AcceptsReturn="True"
+						 HorizontalAlignment="Stretch" 
+						 VerticalAlignment="Stretch"
+                         MaxLength="5000"
+						 Text="{Binding Path=Comments,
+                            Mode=TwoWay,
+                            ValidatesOnDataErrors=True,
+                            NotifyOnValidationError=True,
+                            UpdateSourceTrigger=PropertyChanged}"
+                        Validation.ErrorTemplate="{StaticResource ErrorTemplate}"/>
+            </TabItem>
+        </TabControl>
+
+
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="5"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+
+            <Button
+                MinWidth="92"    
+                Margin="2,2,2,2"
+                Command="{Binding SaveCommand}">
+                Save Changes
+            </Button>
+            <Button
+                MinWidth="92"    
+                Margin="2,2,2,2"
+                Command="{Binding CancelCommand}">
+                Cancel
+            </Button>
+
+        </StackPanel>
     </Grid>
 </UserControl>

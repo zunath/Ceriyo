@@ -42,11 +42,8 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
             _objectMapper = objectMapper;
 
             Areas = new ObservableCollectionEx<AreaDataObservable>();
-            RootContextMenuItems = new List<MenuItem>();
-            AreaContextMenuItems = new List<MenuItem>();
-
+            
             CreateAreaCommand = new DelegateCommand(CreateArea);
-            RenameAreaCommand = new DelegateCommand(RenameArea);
             DeleteAreaCommand = new DelegateCommand(DeleteArea);
             OpenAreaPropertiesCommand = new DelegateCommand(OpenAreaProperties);
             CreateAreaRequest = new InteractionRequest<INotification>();
@@ -56,13 +53,6 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
             _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ModuleClosed);
             _eventAggregator.GetEvent<AreaCreatedEvent>().Subscribe(AreaCreated);
-            _eventAggregator.GetEvent<AreaPropertiesChangedEvent>().Subscribe(AreaPropertiesChanged);
-        }
-
-        private void AreaPropertiesChanged(AreaDataObservable area)
-        {
-            var existing = Areas.Single(x => x.GlobalID == area.GlobalID);
-            existing.Name = area.Name;
         }
 
         private void AreaCreated(AreaDataObservable area)
@@ -150,22 +140,13 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
                 Title = "Create Area"
             });
         }
-
-        public List<MenuItem> RootContextMenuItems { get; set; }
-        public List<MenuItem> AreaContextMenuItems { get; set; }
-
-        public DelegateCommand RenameAreaCommand { get; }
-
-        private void RenameArea()
-        {
-            
-        }
-
+        
         public DelegateCommand OpenAreaPropertiesCommand { get; }
         public InteractionRequest<INotification> OpenAreaPropertiesRequest { get; }
 
         private void OpenAreaProperties()
         {
+            _eventAggregator.GetEvent<AreaPropertiesOpenedEvent>().Publish(SelectedArea);
             OpenAreaPropertiesRequest.Raise(new Notification
             {
                 Content = "Area Properties",

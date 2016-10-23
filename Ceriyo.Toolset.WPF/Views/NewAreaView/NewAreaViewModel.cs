@@ -193,7 +193,7 @@ namespace Ceriyo.Toolset.WPF.Views.NewAreaView
             area.Resref = Resref;
             area.Width = Width;
             area.Height = Height;
-            area.TilesetResref = SelectedTileset.Resref;
+            area.TilesetGlobalID = SelectedTileset.GlobalID;
 
             var areaDomain = _objectMapper.Map<AreaData>(area);
             _areaDomainService.SaveArea(areaDomain);

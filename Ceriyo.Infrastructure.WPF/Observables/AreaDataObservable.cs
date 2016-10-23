@@ -12,14 +12,14 @@ namespace Ceriyo.Infrastructure.WPF.Observables
         private string _name;
         private string _tag;
         private string _resref;
-        private string _comment;
+        private string _comments;
         private string _description;
         private string _onAreaEnter;
         private string _onAreaExit;
         private string _onAreaHeartbeat;
         private int _width;
         private int _height;
-        private string _tilesetResref;
+        private string _tilesetGlobalID;
 
         private LocalVariableDataObservable _localVariables;
         
@@ -48,10 +48,10 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             set { SetProperty(ref _description, value); }
         }
 
-        public string Comment
+        public string Comments
         {
-            get { return _comment; }
-            set { SetProperty(ref _comment, value); }
+            get { return _comments; }
+            set { SetProperty(ref _comments, value); }
         }
 
         public string Resref
@@ -96,10 +96,10 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             set { SetProperty(ref _height, value); }
         }
 
-        public string TilesetResref
+        public string TilesetGlobalID
         {
-            get { return _tilesetResref; }
-            set { SetProperty(ref _tilesetResref, value); }
+            get { return _tilesetGlobalID; }
+            set { SetProperty(ref _tilesetGlobalID, value); }
         }
 
         public AreaDataObservable()
@@ -109,14 +109,14 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             Tag = string.Empty;
             Resref = string.Empty;
             Description = string.Empty;
-            Comment = string.Empty;
+            Comments = string.Empty;
             OnAreaEnter = string.Empty;
             OnAreaExit = string.Empty;
             OnAreaHeartbeat = string.Empty;
             LocalVariables = new LocalVariableDataObservable();
             Width = 8;
             Height = 8;
-            TilesetResref = string.Empty;
+            TilesetGlobalID = string.Empty;
 
             LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
             LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();

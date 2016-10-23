@@ -26,7 +26,7 @@ namespace Ceriyo.Core.Data
         public int Width { get; set; }
         public int Height { get; set; }
         public LocalVariableData LocalVariables { get; set; }
-        public string GraphicResource { get; set; }
+        public string TilesetGlobalID { get; set; }
 
 
         public AreaData()

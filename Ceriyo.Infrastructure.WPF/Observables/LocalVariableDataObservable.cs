@@ -67,5 +67,11 @@ namespace Ceriyo.Infrastructure.WPF.Observables
         {
             VariablesCollectionChanged.RaiseEvent(sender, notifyCollectionChangedEventArgs);
         }
+
+        public void Clear()
+        {
+            LocalStrings.Clear();
+            LocalDoubles.Clear();
+        }
     }
 }
