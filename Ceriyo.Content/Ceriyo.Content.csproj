@@ -83,6 +83,9 @@
     <Content Include="Scripts\Client\LoadUIStyles.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="ResourcePacks\Default-Resources.rpk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Scripts\TestJS.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
