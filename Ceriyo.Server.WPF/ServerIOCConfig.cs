@@ -9,6 +9,7 @@ using Ceriyo.Core.Scripting.Server;
 using Ceriyo.Core.Scripting.Server.Contracts;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Core.Services.Game;
 using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;

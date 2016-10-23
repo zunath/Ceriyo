@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
@@ -20,20 +18,17 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
     public class ItemEditorViewModel : ValidatableBindableBase<ItemEditorViewModelValidator>
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IDataService _dataService;
-        private readonly IPathService _pathService;
         private readonly IObservableDataFactory _observableDataFactory;
+        private readonly IModuleDataService _moduleDataService;
 
         public ItemEditorViewModel(
             IEventAggregator eventAggregator,
-            IDataService dataService,
-            IPathService pathService,
-            IObservableDataFactory observableDataFactory)
+            IObservableDataFactory observableDataFactory,
+            IModuleDataService moduleDataService)
         {
             _eventAggregator = eventAggregator;
-            _dataService = dataService;
-            _pathService = pathService;
             _observableDataFactory = observableDataFactory;
+            _moduleDataService = moduleDataService;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -76,11 +71,8 @@ namespace Ceriyo.Toolset.WPF.Views.ItemEditorView
         private void LoadExistingData()
         {
             Items.Clear();
-            string[] files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Item/", "*.dat");
-
-            foreach (var file in files)
+            foreach (var loaded in _moduleDataService.LoadAll<ItemData>())
             {
-                ItemData loaded = _dataService.Load<ItemData>(file);
                 ItemDataObservable item = _observableDataFactory.CreateAndMap<ItemDataObservable, ItemData>(loaded);
                 Items.Add(item);
             }

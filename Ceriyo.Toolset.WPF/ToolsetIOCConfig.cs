@@ -1,4 +1,5 @@
-﻿using Artemis;
+﻿using System;
+using Artemis;
 using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
@@ -12,8 +13,9 @@ using Ceriyo.Core.Scripting.Server;
 using Ceriyo.Core.Scripting.Server.Contracts;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Core.Services.Game;
+using Ceriyo.Core.Services.Module;
 using Ceriyo.Core.Settings;
-using Ceriyo.Domain.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.Factory;
@@ -24,6 +26,7 @@ using Ceriyo.Infrastructure.WPF.Factory;
 using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation;
 using Ceriyo.Infrastructure.WPF.Validation.Contracts;
+using Ceriyo.Toolset.WPF.Contracts;
 using Ceriyo.Toolset.WPF.Mapping;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -42,10 +45,7 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
 
             // MonoGame
-            var game = new ToolsetGame();
-            builder.RegisterInstance(game);
-            builder.RegisterType<Texture2D>();
-            builder.RegisterInstance(game.Content).AsSelf();
+            RegisterMonogame(builder);
                 
             // Services
             builder.RegisterType<AppService>().As<IAppService>().SingleInstance();
@@ -56,6 +56,9 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<GraphicsService>().As<IGraphicsService>().SingleInstance();
             builder.RegisterType<PathService>().As<IPathService>().SingleInstance();
             builder.RegisterType<ToolsetInputService>().As<IInputService>().SingleInstance();
+            builder.RegisterType<ModuleDataService>().As<IModuleDataService>().SingleInstance();
+            builder.RegisterType<ModuleResourceService>().As<IModuleResourceService>();
+            builder.RegisterType<ModuleService>().As<IModuleService>().SingleInstance();
 
             // Artemis
             builder.RegisterType<EntityWorld>().SingleInstance();
@@ -81,10 +84,8 @@ namespace Ceriyo.Toolset.WPF
 
             // Domain Services
             builder.RegisterType<DomainServiceNotifier>().As<IDomainServiceNotifier>().SingleInstance();
-            builder.RegisterType<ModuleDomainService>().As<IModuleDomainService>().SingleInstance();
             builder.RegisterType<DataEditorDomainService>().As<IDataEditorDomainService>();
             builder.RegisterType<ResourceEditorDomainService>().As<IResourceEditorDomainService>();
-            builder.RegisterType<ModuleResourceDomainService>().As<IModuleResourceDomainService>();
             builder.RegisterType<AreaDomainService>().As<IAreaDomainService>().SingleInstance();
 
             // Validation
@@ -109,6 +110,26 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterInstance(device).AsSelf();
             builder.RegisterInstance(new SpriteBatch(device)).AsSelf();
             builder.Update(_container);
+        }
+
+        private static void RegisterMonogame(ContainerBuilder builder)
+        {
+
+            // Create Direct3D 11 device.
+            var presentationParameters = new PresentationParameters
+            {
+                // Do not associate graphics device with window.
+                DeviceWindowHandle = IntPtr.Zero,
+            };
+            var device = new GraphicsDevice(GraphicsAdapter.DefaultAdapter, GraphicsProfile.HiDef, presentationParameters);
+
+            builder.RegisterInstance(device).AsSelf();
+            builder.RegisterInstance(new SpriteBatch(device)).AsSelf();
+            
+            var game = new ToolsetGame(device);
+            builder.RegisterInstance(game);
+            builder.RegisterType<Texture2D>();
+            builder.RegisterInstance(game.Content).AsSelf();
         }
     }
 }

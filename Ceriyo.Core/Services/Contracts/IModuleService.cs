@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Ceriyo.Core.Data;
 
-namespace Ceriyo.Domain.Services.DataServices.Contracts
+namespace Ceriyo.Core.Services.Contracts
 {
-    public interface IModuleDomainService
+    public interface IModuleService
     {
         void CreateModule(string name, string tag, string resref);
         void SaveModuleProperties();

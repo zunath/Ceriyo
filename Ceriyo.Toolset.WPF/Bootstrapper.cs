@@ -4,9 +4,10 @@ using System.Windows;
 using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Domain.Services.Contracts;
+using Ceriyo.Toolset.WPF.Contracts;
 using Ceriyo.Toolset.WPF.Views.ApplicationRootView;
 using Microsoft.Practices.ServiceLocation;
+using Microsoft.Xna.Framework.Graphics;
 using Prism.Autofac;
 using Prism.Mvvm;
 

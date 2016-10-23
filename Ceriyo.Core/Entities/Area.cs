@@ -5,15 +5,23 @@ using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities.Contracts;
+using Ceriyo.Core.Services.Contracts;
 
 namespace Ceriyo.Core.Entities
 {
     public class Area: IGameEntity<AreaData>
     {
         private readonly IComponentFactory _factory;
-        public Area(IComponentFactory factory)
+        private readonly IModuleDataService _moduleDataService;
+        private readonly IModuleResourceService _resourceService;
+
+        public Area(IComponentFactory factory,
+            IModuleDataService moduleDataService,
+            IModuleResourceService resourceService)
         {
             _factory = factory;
+            _moduleDataService = moduleDataService;
+            _resourceService = resourceService;
         }
 
         public void BuildEntity(Entity entity, AreaData data) 
@@ -29,6 +37,7 @@ namespace Ceriyo.Core.Entities
             var onAreaExit = _factory.Create<Script>();
             var onAreaHeartbeat = _factory.Create<Script>();
             var localData = _factory.Create<LocalData>();
+            var renderable = _factory.Create<Renderable>();
 
             name.Value = data.Name;
             tag.Value = data.Tag;
@@ -54,6 +63,9 @@ namespace Ceriyo.Core.Entities
                 localData.LocalDoubles.Add(@double.Key, @double.Value);
             }
 
+            TilesetData tileset = _moduleDataService.Load<TilesetData>(data.TilesetGlobalID);
+            renderable.Texture = _resourceService.LoadTexture2D(ResourceType.Tileset, tileset.ResourceName);
+
             entity.AddComponent(name);
             entity.AddComponent(tag);
             entity.AddComponent(resref);
@@ -62,6 +74,7 @@ namespace Ceriyo.Core.Entities
             entity.AddComponent(onAreaExit);
             entity.AddComponent(onAreaHeartbeat);
             entity.AddComponent(localData);
+            entity.AddComponent(renderable);
         }
     }
 }

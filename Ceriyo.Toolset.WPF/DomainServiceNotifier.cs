@@ -2,9 +2,10 @@
 using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
-using Ceriyo.Domain.Services.Contracts;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
+using Ceriyo.Toolset.WPF.Contracts;
 using Ceriyo.Toolset.WPF.EventArgs;
 using Ceriyo.Toolset.WPF.Events.Ability;
 using Ceriyo.Toolset.WPF.Events.Class;
@@ -24,7 +25,7 @@ namespace Ceriyo.Toolset.WPF
     {
         private readonly ILogger _logger;
         private readonly IEventAggregator _eventAggregator;
-        private readonly IModuleDomainService _moduleDomainService;
+        private readonly IModuleService _moduleDomainService;
         private readonly IDataEditorDomainService _dataEditorDomainService;
         private readonly IObjectMapper _objectMapper;
 
@@ -32,7 +33,7 @@ namespace Ceriyo.Toolset.WPF
             IObjectMapper objectMapper,
             ILogger logger,
             IEventAggregator eventAggregator,
-            IModuleDomainService moduleDomainService,
+            IModuleService moduleDomainService,
             IDataEditorDomainService dataEditorDomainService)
         {
             _objectMapper = objectMapper;

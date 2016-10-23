@@ -1,4 +1,4 @@
-﻿namespace Ceriyo.Domain.Services.Contracts
+﻿namespace Ceriyo.Toolset.WPF.Contracts
 {
     public interface IDomainServiceNotifier
     {

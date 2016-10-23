@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
@@ -21,26 +20,23 @@ namespace Ceriyo.Toolset.WPF.Views.NewAreaView
     public class NewAreaViewModel : ValidatableBindableBase<NewAreaViewModelValidator>, IInteractionRequestAware
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IDataService _dataService;
         private readonly IObservableDataFactory _observableDataFactory;
-        private readonly IPathService _pathService;
         private readonly IAreaDomainService _areaDomainService;
         private readonly IObjectMapper _objectMapper;
+        private readonly IModuleDataService _moduleDataService;
 
         public NewAreaViewModel(
             IEventAggregator eventAggregator,
             IObservableDataFactory observableDataFactory,
-            IPathService pathService,
-            IDataService dataService,
             IAreaDomainService areaDomainService,
-            IObjectMapper objectMapper)
+            IObjectMapper objectMapper,
+            IModuleDataService moduleDataService)
         {
             _eventAggregator = eventAggregator;
             _observableDataFactory = observableDataFactory;
-            _pathService = pathService;
-            _dataService = dataService;
             _areaDomainService = areaDomainService;
             _objectMapper = objectMapper;
+            _moduleDataService = moduleDataService;
 
             Tilesets = new ObservableCollectionEx<TilesetDataObservable>();
             OpenInAreaViewer = true;
@@ -89,11 +85,8 @@ namespace Ceriyo.Toolset.WPF.Views.NewAreaView
         private void LoadTilesets()
         {
             Tilesets.Clear();
-            string[] files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Tileset/", "*.dat");
-
-            foreach (var file in files)
+            foreach (var loaded in _moduleDataService.LoadAll<TilesetData>())
             {
-                var loaded = _dataService.Load<TilesetData>(file);
                 var tileset = _observableDataFactory.CreateAndMap<TilesetDataObservable, TilesetData>(loaded);
                 Tilesets.Add(tileset);
             }

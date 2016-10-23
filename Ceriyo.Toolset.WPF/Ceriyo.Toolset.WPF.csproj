@@ -150,6 +150,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Contracts\IDomainServiceNotifier.cs" />
     <Compile Include="DomainServiceNotifier.cs" />
     <Compile Include="EventArgs\ModuleEventArgs.cs" />
     <Compile Include="Events\Ability\AbilityChangedEvent.cs" />

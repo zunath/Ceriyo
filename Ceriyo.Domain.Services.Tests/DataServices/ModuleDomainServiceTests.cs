@@ -3,8 +3,7 @@ using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Domain.Services.DataServices;
-using Ceriyo.Domain.Services.DataServices.Contracts;
+using Ceriyo.Core.Services.Module;
 using Ceriyo.Infrastructure.Services;
 using Ceriyo.Toolset.WPF.Mapping;
 using Moq;
@@ -16,7 +15,7 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
     {
         private IDataService _dataService;
         private Mock<ILogger> _mockLogger;
-        private IModuleDomainService _moduleDomainService;
+        private IModuleService _moduleDomainService;
         private IObjectMapper _objectMapper;
         private IPathService _pathService;
 
@@ -29,7 +28,7 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
             _objectMapper = new ToolsetObjectMapper();
             _objectMapper.Initialize();
             _pathService = new PathService();
-            _moduleDomainService = new ModuleDomainService(_dataService, _objectMapper, _pathService);
+            _moduleDomainService = new ModuleService(_dataService, _objectMapper, _pathService);
 
             _dataService.Initialize();
         }

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
@@ -22,20 +20,17 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
     public class CreatureEditorViewModel : ValidatableBindableBase<CreatureEditorViewModelValidator>
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IDataService _dataService;
-        private readonly IPathService _pathService;
         private readonly IObservableDataFactory _observableDataFactory;
+        private readonly IModuleDataService _moduleDataService;
 
         public CreatureEditorViewModel(
             IEventAggregator eventAggregator,
-            IDataService dataService,
-            IPathService pathService,
-            IObservableDataFactory observableDataFactory)
+            IObservableDataFactory observableDataFactory,
+            IModuleDataService moduleDataService)
         {
             _eventAggregator = eventAggregator;
-            _dataService = dataService;
-            _pathService = pathService;
             _observableDataFactory = observableDataFactory;
+            _moduleDataService = moduleDataService;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -85,19 +80,14 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
         {
             Creatures.Clear();
             Classes.Clear();
-
-            string[] files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Creature/", "*.dat");
-            foreach (var file in files)
+            
+            foreach (var loaded in _moduleDataService.LoadAll<CreatureData>())
             {
-                CreatureData loaded = _dataService.Load<CreatureData>(file);
                 CreatureDataObservable creature = _observableDataFactory.CreateAndMap<CreatureDataObservable, CreatureData>(loaded);
                 Creatures.Add(creature);
             }
-
-            files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Class/", "*.dat");
-            foreach (var file in files)
+            foreach (var loaded in _moduleDataService.LoadAll<ClassData>())
             {
-                ClassData loaded = _dataService.Load<ClassData>(file);
                 ClassDataObservable @class = _observableDataFactory.CreateAndMap<ClassDataObservable, ClassData>(loaded);
                 Classes.Add(@class);
             }

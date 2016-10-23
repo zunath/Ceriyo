@@ -9,7 +9,7 @@ using Squid;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 
-namespace Ceriyo.Core.Services
+namespace Ceriyo.Core.Services.Game
 {
     public class UIService: IUIService
     {
@@ -31,12 +31,12 @@ namespace Ceriyo.Core.Services
 
         private readonly ISquidRenderer _renderer;
         private readonly GraphicsDevice _graphicsDevice;
-        private readonly Game _game;
+        private readonly Microsoft.Xna.Framework.Game _game;
         private Desktop _activeDesktop;
 
         public UIService(ISquidRenderer renderer,
             GraphicsDevice graphicsDevice,
-            Game game)
+            Microsoft.Xna.Framework.Game game)
         {
             _game = game;
             _renderer = renderer;

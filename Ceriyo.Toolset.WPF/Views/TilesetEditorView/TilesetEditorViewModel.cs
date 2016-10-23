@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Windows.Media.Imaging;
 using Ceriyo.Core.Constants;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Helpers;
@@ -25,23 +22,20 @@ namespace Ceriyo.Toolset.WPF.Views.TilesetEditorView
     public class TilesetEditorViewModel : ValidatableBindableBase<TilesetEditorViewModelValidator>
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IDataService _dataService;
-        private readonly IPathService _pathService;
-        private readonly IModuleResourceDomainService _resourceDomainService;
+        private readonly IModuleResourceService _resourceDomainService;
         private readonly IObservableDataFactory _observableDataFactory;
+        private readonly IModuleDataService _moduleDataService;
 
         public TilesetEditorViewModel(
             IEventAggregator eventAggregator,
-            IDataService dataService,
-            IPathService pathService,
-            IModuleResourceDomainService resourceDomainService,
-            IObservableDataFactory observableDataFactory)
+            IModuleResourceService resourceDomainService,
+            IObservableDataFactory observableDataFactory,
+            IModuleDataService moduleDataService)
         {
             _eventAggregator = eventAggregator;
-            _dataService = dataService;
-            _pathService = pathService;
             _resourceDomainService = resourceDomainService;
             _observableDataFactory = observableDataFactory;
+            _moduleDataService = moduleDataService;
 
             NewCommand = new DelegateCommand(New);
             DeleteCommand = new DelegateCommand(Delete);
@@ -81,11 +75,8 @@ namespace Ceriyo.Toolset.WPF.Views.TilesetEditorView
         private void LoadExistingData()
         {
             Tilesets.Clear();
-            string[] files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Tileset/", "*.dat");
-
-            foreach (var file in files)
+            foreach (var loaded in _moduleDataService.LoadAll<TilesetData>())
             {
-                var loaded = _dataService.Load<TilesetData>(file);
                 var tileset = _observableDataFactory.CreateAndMap<TilesetDataObservable, TilesetData>(loaded);
                 Tilesets.Add(tileset);
             }

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Ceriyo.Core.Contracts;
+﻿using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
@@ -18,25 +17,24 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
     public class AreaSelectorViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IPathService _pathService;
-        private readonly IDataService _dataService;
         private readonly IObservableDataFactory _observableDataFactory;
         private readonly IAreaDomainService _areaDomainService;
         private readonly IObjectMapper _objectMapper;
+        private readonly IModuleDataService _moduleDataService;
 
         public AreaSelectorViewModel(IEventAggregator eventAggregator,
             IPathService pathService,
             IDataService dataService,
             IObservableDataFactory observableDataFactory,
             IAreaDomainService areaDomainService,
-            IObjectMapper objectMapper)
+            IObjectMapper objectMapper,
+            IModuleDataService moduleDataService)
         {
             _eventAggregator = eventAggregator;
-            _pathService = pathService;
-            _dataService = dataService;
             _observableDataFactory = observableDataFactory;
             _areaDomainService = areaDomainService;
             _objectMapper = objectMapper;
+            _moduleDataService = moduleDataService;
 
             Areas = new ObservableCollectionEx<AreaDataObservable>();
             
@@ -79,11 +77,8 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
         private void LoadExistingData()
         {
             Areas.Clear();
-            string[] files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Area/", "*.dat");
-
-            foreach (var file in files)
+            foreach (var loaded in _moduleDataService.LoadAll<AreaData>())
             {
-                AreaData loaded = _dataService.Load<AreaData>(file);
                 AreaDataObservable area = _observableDataFactory.CreateAndMap<AreaDataObservable, AreaData>(loaded);
                 Areas.Add(area);
             }

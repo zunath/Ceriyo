@@ -62,16 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IDomainServiceNotifier.cs" />
     <Compile Include="DataServices\AreaDomainService.cs" />
     <Compile Include="DataServices\Contracts\IAreaDomainService.cs" />
     <Compile Include="DataServices\Contracts\IDataEditorDomainService.cs" />
-    <Compile Include="DataServices\Contracts\IModuleDomainService.cs" />
-    <Compile Include="DataServices\Contracts\IModuleResourceDomainService.cs" />
     <Compile Include="DataServices\Contracts\IResourceEditorDomainService.cs" />
     <Compile Include="DataServices\DataEditorDomainService.cs" />
-    <Compile Include="DataServices\ModuleDomainService.cs" />
-    <Compile Include="DataServices\ModuleResourceDomainService.cs" />
     <Compile Include="DataServices\ResourceEditorDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

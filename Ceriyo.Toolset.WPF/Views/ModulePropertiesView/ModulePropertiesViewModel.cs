@@ -4,7 +4,7 @@ using System.ComponentModel;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
-using Ceriyo.Domain.Services.DataServices.Contracts;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.BindableBases;
 using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
@@ -18,14 +18,14 @@ namespace Ceriyo.Toolset.WPF.Views.ModulePropertiesView
     public class ModulePropertiesViewModel : ValidatableBindableBase<ModulePropertiesViewModelValidator>, IInteractionRequestAware
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IModuleDomainService _domainService;
+        private readonly IModuleService _domainService;
         private readonly IObservableDataFactory _observableDataFactory;
         private readonly IObjectMapper _objectMapper;
 
         public ModulePropertiesViewModel(
             IObjectMapper objectMapper,
             IEventAggregator eventAggregator,
-            IModuleDomainService domainService,
+            IModuleService domainService,
             IObservableDataFactory observableDataFactory)
         {
             _objectMapper = objectMapper;

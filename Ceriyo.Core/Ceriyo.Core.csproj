@@ -138,6 +138,9 @@
     <Compile Include="Scripting\Server\Contracts\IPhysicsMethods.cs" />
     <Compile Include="Contracts\IScreenFactory.cs" />
     <Compile Include="Services\Contracts\IInputService.cs" />
+    <Compile Include="Services\Contracts\IModuleDataService.cs" />
+    <Compile Include="Services\Contracts\IModuleService.cs" />
+    <Compile Include="Services\Contracts\IModuleResourceService.cs" />
     <Compile Include="Services\Contracts\IPathService.cs" />
     <Compile Include="Services\Contracts\IScreenService.cs" />
     <Compile Include="Scripting\Server\Contracts\IScriptingMethods.cs" />
@@ -182,13 +185,17 @@
     <Compile Include="Scripting\Server\LocalDataMethods.cs" />
     <Compile Include="Scripting\Server\ScriptingMethods.cs" />
     <Compile Include="Scripting\Server\PhysicsMethods.cs" />
+    <Compile Include="Services\Module\ModuleDataService.cs" />
+    <Compile Include="Services\Module\ModuleService.cs" />
+    <Compile Include="Services\Module\ModuleResourceService.cs" />
     <Compile Include="Services\PathService.cs" />
-    <Compile Include="Services\ScreenService.cs" />
-    <Compile Include="Services\CameraService.cs" />
-    <Compile Include="Services\GraphicsService.cs" />
+    <Compile Include="Services\Game\ScreenService.cs" />
+    <Compile Include="Services\Game\CameraService.cs" />
+    <Compile Include="Services\Game\GraphicsService.cs" />
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />
+    <Compile Include="Systems\AreaRenderSystem.cs" />
     <Compile Include="UI\Controls\ChatBox.cs" />
     <Compile Include="UI\Controls\FileDialog.cs" />
     <Compile Include="UI\Controls\GridColumn.cs" />
@@ -199,12 +206,9 @@
     <Compile Include="UI\Controls\TitleBar.cs" />
     <Compile Include="UI\SampleDesktop.cs" />
     <Compile Include="UI\SquidRenderer.cs" />
-    <Compile Include="Services\UIService.cs" />
+    <Compile Include="Services\Game\UIService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Screens\" />
-    <Folder Include="Systems\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
       <Project>{a59bd6d2-8e98-4a48-9528-dec1139994a1}</Project>

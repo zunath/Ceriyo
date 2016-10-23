@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
-using Ceriyo.Domain.Services.DataServices.Contracts;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Toolset.WPF.Events.Application;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Events;
@@ -15,7 +15,7 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
     public class ApplicationRootViewModel : BindableBase
     {
         private readonly ILogger _logger;
-        private readonly IModuleDomainService _moduleDomainService;
+        private readonly IModuleService _moduleDomainService;
 
         public ApplicationRootViewModel()
         {
@@ -25,7 +25,7 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
         public ApplicationRootViewModel(
             ILogger logger,
             IEventAggregator eventAggregator,
-            IModuleDomainService moduleDomainService)
+            IModuleService moduleDomainService)
         {
             _logger = logger;
             _moduleDomainService = moduleDomainService;

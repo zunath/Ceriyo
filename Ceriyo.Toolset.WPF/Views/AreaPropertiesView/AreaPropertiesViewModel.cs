@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
@@ -24,23 +23,20 @@ namespace Ceriyo.Toolset.WPF.Views.AreaPropertiesView
         private readonly IObservableDataFactory _observableDataFactory;
         private readonly IAreaDomainService _areaDomainService;
         private readonly IObjectMapper _objectMapper;
-        private readonly IPathService _pathService;
-        private readonly IDataService _dataService;
+        private readonly IModuleDataService _moduleDataService;
 
         public AreaPropertiesViewModel(
             IEventAggregator eventAggregator,
             IObservableDataFactory observableDataFactory,
             IAreaDomainService areaDomainService,
             IObjectMapper objectMapper,
-            IPathService pathService,
-            IDataService dataService)
+            IModuleDataService moduleDataService)
         {
             _eventAggregator = eventAggregator;
             _observableDataFactory = observableDataFactory;
             _areaDomainService = areaDomainService;
             _objectMapper = objectMapper;
-            _pathService = pathService;
-            _dataService = dataService;
+            _moduleDataService = moduleDataService;
 
             Tilesets = new ObservableCollectionEx<TilesetDataObservable>();
             LocalVariables = new LocalVariableDataObservable();
@@ -113,11 +109,8 @@ namespace Ceriyo.Toolset.WPF.Views.AreaPropertiesView
         private void LoadTilesets()
         {
             Tilesets.Clear();
-            string[] files = Directory.GetFiles($"{_pathService.ModulesTempDirectory}Tileset/", "*.dat");
-
-            foreach (var file in files)
+            foreach (var loaded in _moduleDataService.LoadAll<TilesetData>())
             {
-                var loaded = _dataService.Load<TilesetData>(file);
                 var tileset = _observableDataFactory.CreateAndMap<TilesetDataObservable, TilesetData>(loaded);
                 Tilesets.Add(tileset);
             }

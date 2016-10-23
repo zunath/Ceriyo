@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Toolset.WPF.Events.ManageResources;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Prism.Commands;
@@ -19,11 +18,11 @@ namespace Ceriyo.Toolset.WPF.Views.ManageResourcesView
     {
         private readonly FileSystemWatcher _fileSystemWatcher;
         private readonly IEventAggregator _eventAggregator;
-        private readonly IModuleDomainService _domainService;
+        private readonly IModuleService _domainService;
         private readonly IPathService _pathService;
 
         public ManageResourcesViewModel(IEventAggregator eventAggregator,
-            IModuleDomainService domainService,
+            IModuleService domainService,
             IPathService pathService)
         {
             _eventAggregator = eventAggregator;

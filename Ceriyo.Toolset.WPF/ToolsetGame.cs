@@ -3,6 +3,7 @@ using Ceriyo.Infrastructure.WPF.MonoGameWpfInterop;
 using Ceriyo.Infrastructure.WPF.MonoGameWpfInterop.Input;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Toolset.WPF
 {
@@ -13,7 +14,8 @@ namespace Ceriyo.Toolset.WPF
         private WpfKeyboard _keyboard;
         private WpfMouse _mouse;
 
-        public ToolsetGame()
+        public ToolsetGame(GraphicsDevice graphics)
+            :base(graphics)
         {
             _graphics = new WpfGraphicsDeviceService(this);
             Content.RootDirectory = "Compiled";

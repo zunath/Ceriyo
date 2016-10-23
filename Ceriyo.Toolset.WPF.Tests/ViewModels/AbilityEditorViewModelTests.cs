@@ -1,8 +1,5 @@
 ﻿using System.Threading;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Infrastructure.Services;
 using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Views.AbilityEditorView;
@@ -15,21 +12,17 @@ namespace Ceriyo.Toolset.WPF.Tests.ViewModels
     public class AbilityEditorViewModelTests
     {
         private readonly EventAggregator _eventAggregator;
-        private readonly IDataService _dataService;
-        private readonly IPathService _pathService;
         private readonly Mock<IObservableDataFactory> _mockObservableFactory;
+        private readonly Mock<IModuleDataService> _mockModuleDataService;
 
         public AbilityEditorViewModelTests()
         {
             _eventAggregator = new EventAggregator();
-
-            var mockLogger = new Mock<ILogger>();
-            _dataService = new DataService(mockLogger.Object);
-            _pathService = new PathService();
             
             _mockObservableFactory = new Mock<IObservableDataFactory>();
             _mockObservableFactory.Setup(x => x.Create<AbilityDataObservable>()).Returns(() => new AbilityDataObservable());
 
+            _mockModuleDataService = new Mock<IModuleDataService>();
         }
 
         [SetUp]
@@ -48,9 +41,8 @@ namespace Ceriyo.Toolset.WPF.Tests.ViewModels
         {
             AbilityEditorViewModel model = new AbilityEditorViewModel(
                 _eventAggregator,
-                _dataService, 
-                _pathService,
-                _mockObservableFactory.Object);
+                _mockObservableFactory.Object,
+                _mockModuleDataService.Object);
             model.NewCommand.Execute();
 
             Assert.AreEqual(1, model.Abilities.Count);
@@ -62,9 +54,8 @@ namespace Ceriyo.Toolset.WPF.Tests.ViewModels
         {
             AbilityEditorViewModel model = new AbilityEditorViewModel(
                 _eventAggregator, 
-                _dataService, 
-                _pathService,
-                _mockObservableFactory.Object);
+                _mockObservableFactory.Object,
+                _mockModuleDataService.Object);
             model.NewCommand.Execute();
             model.NewCommand.Execute();
             model.NewCommand.Execute();

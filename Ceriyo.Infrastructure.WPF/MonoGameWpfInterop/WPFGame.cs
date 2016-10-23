@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
 {
@@ -23,7 +24,9 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
         /// <summary>
         /// Creates a new instance of a game host panel.
         /// </summary>
-        protected WpfGame(string contentDir = "Content")
+        protected WpfGame(GraphicsDevice graphics, 
+            string contentDir = "Content")
+            : base(graphics)
         {
             if (string.IsNullOrEmpty(contentDir))
                 throw new ArgumentNullException(nameof(contentDir));

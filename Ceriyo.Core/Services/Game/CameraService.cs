@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Core.Services
+namespace Ceriyo.Core.Services.Game
 {
     public class CameraService: ICameraService
     {

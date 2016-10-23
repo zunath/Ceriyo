@@ -2,7 +2,7 @@
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
 
-namespace Ceriyo.Core.Services
+namespace Ceriyo.Core.Services.Game
 {
     public class ScreenService: IScreenService
     {

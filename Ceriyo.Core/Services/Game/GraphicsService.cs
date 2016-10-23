@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using XnaGraphicsDeviceManager = Microsoft.Xna.Framework.GraphicsDeviceManager;
 
-namespace Ceriyo.Core.Services
+namespace Ceriyo.Core.Services.Game
 {
     public class GraphicsService: IGraphicsService
     {

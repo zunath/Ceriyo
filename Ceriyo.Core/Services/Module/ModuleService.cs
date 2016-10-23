@@ -4,18 +4,17 @@ using System.IO;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Domain.Services.DataServices.Contracts;
 
-namespace Ceriyo.Domain.Services.DataServices
+namespace Ceriyo.Core.Services.Module
 {
-    public class ModuleDomainService : IModuleDomainService
+    public class ModuleService : IModuleService
     {
         private ModuleData _moduleData;
         private readonly IDataService _dataService;
         private readonly IObjectMapper _objectMapper;
         private readonly IPathService _pathService;
 
-        public ModuleDomainService(IDataService dataService,
+        public ModuleService(IDataService dataService,
             IObjectMapper objectMapper,
             IPathService pathService)
         {

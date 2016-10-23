@@ -14,9 +14,7 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
     /// </summary>
     public abstract class D3D11Host : Image, IDisposable
     {
-        #region Fields
-
-        private static readonly object _graphicsDeviceLock = new object();
+        private static readonly object GraphicsDeviceLock = new object();
 
         // Render timing:
         private readonly Stopwatch _timer;
@@ -35,16 +33,14 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
         private RenderTarget2D _renderTarget;
         private bool _resetBackBuffer;
         private TimeSpan _timeSinceStart = TimeSpan.Zero;
-
-        #endregion
-
-        #region Constructors
-
+        
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="D3D11Host"/> class.
         /// </summary>
-        protected D3D11Host()
+        protected D3D11Host(GraphicsDevice graphicsDevice)
         {
+            _graphicsDevice = graphicsDevice;
             // defaulting to fill as that's what's needed in most cases
             Stretch = Stretch.Fill;
 
@@ -52,11 +48,7 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
         }
-
-        #endregion
-
-        #region Properties
-
+        
         /// <summary>
         /// Gets a value indicating whether the controls runs in the context of a designer (e.g.
         /// Visual Studio Designer or Expression Blend).
@@ -86,10 +78,7 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
         /// Default services collection.
         /// </summary>
         public GameServiceContainer Services { get; } = new GameServiceContainer();
-
-        #endregion
-
-        #region Methods
+        
 
         public void Dispose()
         {
@@ -123,7 +112,7 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
 
         private static void InitializeGraphicsDevice()
         {
-            lock (_graphicsDeviceLock)
+            lock (GraphicsDeviceLock)
             {
                 _referenceCount++;
                 if (_referenceCount == 1)
@@ -141,7 +130,7 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
 
         private static void UninitializeGraphicsDevice()
         {
-            lock (_graphicsDeviceLock)
+            lock (GraphicsDeviceLock)
             {
                 _referenceCount--;
                 if (_referenceCount == 0)
@@ -194,7 +183,7 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
                 return;
 
             _loaded = true;
-            InitializeGraphicsDevice();
+            //InitializeGraphicsDevice();
             InitializeImageSource();
             Initialize();
             StartRendering();
@@ -274,7 +263,6 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
                 _renderTarget = null;
             }
         }
-
-        #endregion
+        
     }
 }
