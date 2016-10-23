@@ -37,7 +37,7 @@ namespace Ceriyo.Game.Windows
         public static void Initialize(Microsoft.Xna.Framework.Game game)
         {
             var builder = new ContainerBuilder();
-            game.Content.RootDirectory = "Content";
+            game.Content.RootDirectory = "Compiled";
 
             // Monogame 
             builder.RegisterInstance(game);
