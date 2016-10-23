@@ -127,6 +127,7 @@
     <Compile Include="Behaviors\BindableSelectedItemBehavior.cs" />
     <Compile Include="Behaviors\RepositionPopupBehavior.cs" />
     <Compile Include="Binding\BindingProxy.cs" />
+    <Compile Include="Converters\BoolToFontWeightConverter.cs" />
     <Compile Include="Helpers\TreeViewHelpers.cs" />
     <Compile Include="Observables\Contracts\IDataObservable.cs" />
     <Compile Include="BindableBases\ValidatableBindableBase.cs" />

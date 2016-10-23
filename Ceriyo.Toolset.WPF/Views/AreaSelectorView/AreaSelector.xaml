@@ -10,6 +10,7 @@
              xmlns:areaPropertiesView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaPropertiesView"
              xmlns:behaviors="clr-namespace:Ceriyo.Infrastructure.WPF.Behaviors;assembly=Ceriyo.Infrastructure.WPF"
              xmlns:binding="clr-namespace:Ceriyo.Infrastructure.WPF.Binding;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:converters="clr-namespace:Ceriyo.Infrastructure.WPF.Converters;assembly=Ceriyo.Infrastructure.WPF"
              mc:Ignorable="d"
              Background="White"
              d:DesignHeight="400"
@@ -20,6 +21,9 @@
             x:Key="DataContextProxy"
             Data="{Binding}">
         </binding:BindingProxy>
+        <converters:BoolToFontWeightConverter x:Key="BoolToFontWeightConverter">
+            
+        </converters:BoolToFontWeightConverter>
     </UserControl.Resources>
     
     <Grid>
@@ -39,6 +43,9 @@
                     </MenuItem>
                 </ContextMenu>
                 <ContextMenu x:Key="AreaContextMenu">
+                    <MenuItem Header="Open"
+                              Command="{Binding Path=Data.OpenAreaCommand, Source={StaticResource DataContextProxy}}">
+                    </MenuItem>
                     <MenuItem Header="Properties"
                               Command="{Binding Path=Data.OpenAreaPropertiesCommand, Source={StaticResource DataContextProxy}}">
                     </MenuItem>
@@ -59,7 +66,9 @@
                 <TreeViewItem.ItemTemplate>
                     <HierarchicalDataTemplate>
                         <TextBlock Text="{Binding Name}"
-                                   ContextMenu="{StaticResource AreaContextMenu}">
+                                   ContextMenu="{StaticResource AreaContextMenu}"
+                                   FontWeight="{Binding IsOpenedInAreaEditor,
+                                                        Converter={StaticResource BoolToFontWeightConverter}}">
                             
                         </TextBlock>
                     </HierarchicalDataTemplate>

@@ -159,6 +159,7 @@
     <Compile Include="Events\Application\ApplicationLoadedEvent.cs" />
     <Compile Include="Events\Area\AreaCreatedEvent.cs" />
     <Compile Include="Events\Area\AreaDeletedEvent.cs" />
+    <Compile Include="Events\Area\AreaOpenedEvent.cs" />
     <Compile Include="Events\Area\AreaPropertiesChangedEvent.cs" />
     <Compile Include="Events\Area\AreaPropertiesOpenedEvent.cs" />
     <Compile Include="Events\Area\AreaRenamedEvent.cs" />

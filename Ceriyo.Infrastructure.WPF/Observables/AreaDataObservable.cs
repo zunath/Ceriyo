@@ -20,6 +20,7 @@ namespace Ceriyo.Infrastructure.WPF.Observables
         private int _width;
         private int _height;
         private string _tilesetGlobalID;
+        private bool _isOpenedInAreaEditor;
 
         private LocalVariableDataObservable _localVariables;
         
@@ -100,6 +101,12 @@ namespace Ceriyo.Infrastructure.WPF.Observables
         {
             get { return _tilesetGlobalID; }
             set { SetProperty(ref _tilesetGlobalID, value); }
+        }
+
+        public bool IsOpenedInAreaEditor
+        {
+            get { return _isOpenedInAreaEditor; }
+            set { SetProperty(ref _isOpenedInAreaEditor, value); }
         }
 
         public AreaDataObservable()

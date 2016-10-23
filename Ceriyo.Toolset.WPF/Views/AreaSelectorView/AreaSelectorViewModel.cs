@@ -46,9 +46,12 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
             CreateAreaCommand = new DelegateCommand(CreateArea);
             DeleteAreaCommand = new DelegateCommand(DeleteArea);
             OpenAreaPropertiesCommand = new DelegateCommand(OpenAreaProperties);
+            OpenAreaCommand = new DelegateCommand(OpenArea);
+
             CreateAreaRequest = new InteractionRequest<INotification>();
             OpenAreaPropertiesRequest = new InteractionRequest<INotification>();
             ConfirmDeleteRequest = new InteractionRequest<IConfirmation>();
+            
 
             _eventAggregator.GetEvent<ModuleLoadedEvent>().Subscribe(ModuleLoaded);
             _eventAggregator.GetEvent<ModuleClosedEvent>().Subscribe(ModuleClosed);
@@ -65,12 +68,14 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
         {
             Areas.Clear();
             IsModuleLoaded = false;
+            IsAreaListExpanded = false;
         }
 
         private void ModuleLoaded(string s)
         {
             LoadExistingData();
             IsModuleLoaded = true;
+            IsAreaListExpanded = true;
         }
 
         private void LoadExistingData()
@@ -183,6 +188,18 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
             get { return _isAreaListExpanded; }
             set { SetProperty(ref _isAreaListExpanded, value); }
         }
+        
+        public DelegateCommand OpenAreaCommand { get; }
 
+        private void OpenArea()
+        {
+            foreach (var area in Areas)
+            {
+                area.IsOpenedInAreaEditor = false;
+            }
+
+            SelectedArea.IsOpenedInAreaEditor = true;
+            _eventAggregator.GetEvent<AreaOpenedEvent>().Publish(SelectedArea);
+        }
     }
 }
