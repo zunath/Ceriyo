@@ -116,7 +116,7 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
         {
             get
             {
-                if (SelectedTreeItem.GetType() == typeof(AreaDataObservable))
+                if (SelectedTreeItem != null && SelectedTreeItem.GetType() == typeof(AreaDataObservable))
                 {
                     return (AreaDataObservable) SelectedTreeItem;
                 }
