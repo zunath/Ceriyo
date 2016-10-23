@@ -95,8 +95,7 @@ namespace Ceriyo.Core.Services.Module
             
             using (MemoryStream stream = new MemoryStream(data.Data))
             {
-                var texture = Texture2D.FromStream(_graphicsDevice, stream);
-                return texture;
+                return Texture2D.FromStream(_graphicsDevice, stream);
             }
 
         }

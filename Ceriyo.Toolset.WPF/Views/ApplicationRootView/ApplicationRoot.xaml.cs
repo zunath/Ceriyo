@@ -2,6 +2,7 @@
 using System.Windows;
 using Ceriyo.Toolset.WPF.Events.Application;
 using Ceriyo.Toolset.WPF.Events.Module;
+using Ceriyo.Toolset.WPF.GameWorld;
 using Prism.Events;
 
 namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView

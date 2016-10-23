@@ -26,6 +26,7 @@ namespace Ceriyo.Toolset.WPF
             ServiceLocator.Current.TryResolve<IObjectMapper>().Initialize();
             ServiceLocator.Current.TryResolve<IDataService>().Initialize();
             ServiceLocator.Current.TryResolve<IDomainServiceNotifier>().Initialize();
+            ServiceLocator.Current.TryResolve<ISystemLoader>().LoadSystems();
             Application.Current.MainWindow = (Window)Shell;
             Application.Current.MainWindow.Show();
         }
@@ -46,13 +47,6 @@ namespace Ceriyo.Toolset.WPF
         {
             base.ConfigureContainerBuilder(builder);
             ToolsetIOCConfig.Initialize(builder);
-        }
-
-        protected override IContainer CreateContainer(ContainerBuilder containerBuilder)
-        {
-            var container = base.CreateContainer(containerBuilder);
-            ToolsetIOCConfig.SetContainer(container);
-            return container;
         }
     }
 }

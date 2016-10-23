@@ -41,7 +41,7 @@ namespace Ceriyo.Infrastructure.Helpers
                 .Where(p => typeof(EntitySystem).IsAssignableFrom(p) && !p.ToString().StartsWith("Artemis"));
             foreach (Type type in systems)
             {
-                builder.RegisterType(type).As<EntitySystem>().Named<EntitySystem>(type.ToString());
+                builder.RegisterType(type);
             }
         }
 

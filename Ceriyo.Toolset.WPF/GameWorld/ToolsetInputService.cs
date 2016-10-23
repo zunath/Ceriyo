@@ -1,7 +1,7 @@
 ﻿using Ceriyo.Core.Services.Contracts;
 using Microsoft.Xna.Framework.Input;
 
-namespace Ceriyo.Toolset.WPF
+namespace Ceriyo.Toolset.WPF.GameWorld
 {
     public class ToolsetInputService: IInputService
     {

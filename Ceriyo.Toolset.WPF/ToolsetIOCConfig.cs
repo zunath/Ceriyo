@@ -27,6 +27,7 @@ using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Validation;
 using Ceriyo.Infrastructure.WPF.Validation.Contracts;
 using Ceriyo.Toolset.WPF.Contracts;
+using Ceriyo.Toolset.WPF.GameWorld;
 using Ceriyo.Toolset.WPF.Mapping;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -34,8 +35,6 @@ namespace Ceriyo.Toolset.WPF
 {
     public static class ToolsetIOCConfig
     {
-        private static IContainer _container;
-
         public static void Initialize(ContainerBuilder builder)
         {
             // Instances
@@ -44,9 +43,11 @@ namespace Ceriyo.Toolset.WPF
             // Logging
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
 
-            // MonoGame
-            RegisterMonogame(builder);
-                
+            // Artemis
+            builder.RegisterType<EntityWorld>().SingleInstance();
+            IOCHelpers.RegisterSystems(builder);
+            builder.RegisterType<ToolsetSystemLoader>().As<ISystemLoader>().SingleInstance();
+    
             // Services
             builder.RegisterType<AppService>().As<IAppService>().SingleInstance();
             builder.RegisterType<CameraService>().As<ICameraService>().SingleInstance();
@@ -59,10 +60,7 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<ModuleDataService>().As<IModuleDataService>().SingleInstance();
             builder.RegisterType<ModuleResourceService>().As<IModuleResourceService>();
             builder.RegisterType<ModuleService>().As<IModuleService>().SingleInstance();
-
-            // Artemis
-            builder.RegisterType<EntityWorld>().SingleInstance();
-            IOCHelpers.RegisterSystems(builder);
+            builder.RegisterType<EngineService>().As<IEngineService>().SingleInstance();
 
             // Factory
             builder.RegisterType<EntityFactory>().As<IEntityFactory>().SingleInstance();
@@ -98,21 +96,11 @@ namespace Ceriyo.Toolset.WPF
 
             // Entities
             builder.RegisterType<Area>().As<IGameEntity<AreaData>>();
+            
+            // MonoGame
+            RegisterMonogame(builder);
         }
-
-        public static void SetContainer(IContainer container)
-        {
-            _container = container;
-        }
-
-        public static void RegisterGraphicsDevice(GraphicsDevice device)
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterInstance(device).AsSelf();
-            builder.RegisterInstance(new SpriteBatch(device)).AsSelf();
-            builder.Update(_container);
-        }
-
+        
         private static void RegisterMonogame(ContainerBuilder builder)
         {
 

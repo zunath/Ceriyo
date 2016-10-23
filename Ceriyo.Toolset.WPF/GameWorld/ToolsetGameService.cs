@@ -4,7 +4,7 @@ using Ceriyo.Toolset.WPF.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Toolset.WPF
+namespace Ceriyo.Toolset.WPF.GameWorld
 {
     public class ToolsetGameService: IGameService
     {

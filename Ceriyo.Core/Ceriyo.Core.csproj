@@ -107,6 +107,7 @@
     <Compile Include="Constants\ResourceType.cs" />
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
+    <Compile Include="Contracts\ISystemLoader.cs" />
     <Compile Include="Data\AreaData.cs" />
     <Compile Include="Data\ClassLevelData.cs" />
     <Compile Include="Data\Contracts\IDataDomainObject.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Scripting\Common\Contracts\ILoggingMethods.cs" />
     <Compile Include="Scripting\Server\Contracts\IEntityMethods.cs" />
     <Compile Include="Entities\Contracts\IGameEntity.cs" />
+    <Compile Include="Services\Contracts\IEngineService.cs" />
     <Compile Include="Services\Contracts\IGameService.cs" />
     <Compile Include="Services\Contracts\IGraphicsService.cs" />
     <Compile Include="Scripting\Server\Contracts\ILocalDataMethods.cs" />
@@ -186,6 +188,7 @@
     <Compile Include="Scripting\Server\LocalDataMethods.cs" />
     <Compile Include="Scripting\Server\ScriptingMethods.cs" />
     <Compile Include="Scripting\Server\PhysicsMethods.cs" />
+    <Compile Include="Services\EngineService.cs" />
     <Compile Include="Services\Module\ModuleDataService.cs" />
     <Compile Include="Services\Module\ModuleService.cs" />
     <Compile Include="Services\Module\ModuleResourceService.cs" />

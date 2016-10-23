@@ -1,32 +1,30 @@
-﻿using Ceriyo.Core.Services.Contracts;
+﻿using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.MonoGameWpfInterop;
 using Ceriyo.Infrastructure.WPF.MonoGameWpfInterop.Input;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Toolset.WPF
+namespace Ceriyo.Toolset.WPF.GameWorld
 {
     public class ToolsetGame: WpfGame
     {
         private readonly WpfGraphicsDeviceService _graphics;
         private IGameService _gameService;
-        private WpfKeyboard _keyboard;
-        private WpfMouse _mouse;
+        
 
         public ToolsetGame(GraphicsDevice graphics)
             :base(graphics)
         {
             _graphics = new WpfGraphicsDeviceService(this);
+
             Content.RootDirectory = "Compiled";
         }
 
         protected override void Initialize()
         {
-            ToolsetIOCConfig.RegisterGraphicsDevice(GraphicsDevice);
             _gameService = ServiceLocator.Current.TryResolve<IGameService>();
-            _keyboard = new WpfKeyboard(this);
-            _mouse = new WpfMouse(this);
             _gameService.Initialize(null);
 
             base.Initialize();
@@ -34,9 +32,6 @@ namespace Ceriyo.Toolset.WPF
 
         protected override void Update(GameTime gameTime)
         {
-            // every update we can now query the keyboard & mouse for our WpfGame
-            var mouseState = _mouse.GetState();
-            var keyboardState = _keyboard.GetState();
             _gameService.Update(gameTime);
         }
 

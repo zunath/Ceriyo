@@ -202,11 +202,12 @@
     <Compile Include="Events\Tileset\TilesetDeletedEvent.cs" />
     <Compile Include="Events\Tileset\TilesetEditorValidityChangedEvent.cs" />
     <Compile Include="Screens\AreaEditorScreen.cs" />
-    <Compile Include="ToolsetGame.cs" />
-    <Compile Include="ToolsetGameService.cs" />
-    <Compile Include="ToolsetInputService.cs" />
+    <Compile Include="GameWorld\ToolsetGame.cs" />
+    <Compile Include="GameWorld\ToolsetGameService.cs" />
+    <Compile Include="GameWorld\ToolsetInputService.cs" />
     <Compile Include="ToolsetIOCConfig.cs" />
     <Compile Include="Mapping\ToolsetObjectMapper.cs" />
+    <Compile Include="GameWorld\ToolsetSystemLoader.cs" />
     <Compile Include="Views\AbilityEditorView\AbilityEditorViewModelValidator.cs" />
     <Compile Include="Views\AnimationEditorView\AnimationEditorViewModelValidator.cs" />
     <Compile Include="Views\ApplicationRootView\ApplicationRootViewModel.cs" />
