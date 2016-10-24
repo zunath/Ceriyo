@@ -22,6 +22,7 @@ namespace Ceriyo.Toolset.WPF.Views.AreaNavigationView
             MoveCameraDownCommand = new DelegateCommand(MoveCameraDown);
             ZoomInCameraCommand = new DelegateCommand(ZoomInCamera);
             ZoomOutCameraCommand = new DelegateCommand(ZoomOutCamera);
+            ResetCameraCommand = new DelegateCommand(ResetCamera);
 
             _eventAggregator.GetEvent<AreaOpenedEvent>().Subscribe(AreaOpened);
             _eventAggregator.GetEvent<AreaClosedEvent>().Subscribe(AreaClosed);
@@ -85,6 +86,13 @@ namespace Ceriyo.Toolset.WPF.Views.AreaNavigationView
         private void ZoomOutCamera()
         {
             _eventAggregator.GetEvent<CameraZoomedEvent>().Publish(Zoom.Out);
+        }
+
+        public DelegateCommand ResetCameraCommand { get; }
+
+        private void ResetCamera()
+        {
+            _eventAggregator.GetEvent<CameraResetEvent>().Publish();
         }
 
     }

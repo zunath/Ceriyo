@@ -166,6 +166,7 @@
     <Compile Include="Events\Area\AreaPropertiesOpenedEvent.cs" />
     <Compile Include="Events\Area\AreaRenamedEvent.cs" />
     <Compile Include="Events\Camera\CameraMovedEvent.cs" />
+    <Compile Include="Events\Camera\CameraResetEvent.cs" />
     <Compile Include="Events\Camera\CameraZoomedEvent.cs" />
     <Compile Include="Events\Class\ClassChangedEvent.cs" />
     <Compile Include="Events\Class\ClassCreatedEvent.cs" />

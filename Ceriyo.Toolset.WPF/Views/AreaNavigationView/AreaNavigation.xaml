@@ -14,6 +14,7 @@
             HorizontalAlignment="Stretch">
 
             <RepeatButton
+                Margin="0,0,2,0"
                 IsEnabled="{Binding IsAreaOpened}"
                 Command="{Binding MoveCameraLeftCommand}"
                 Interval="20"
@@ -30,6 +31,7 @@
                 </Rectangle>
             </RepeatButton>
             <RepeatButton
+                Margin="0,0,2,0"
                 IsEnabled="{Binding IsAreaOpened}"
                 Command="{Binding MoveCameraRightCommand}"
                 Interval="20"
@@ -46,6 +48,7 @@
                 </Rectangle>
             </RepeatButton>
             <RepeatButton
+                Margin="0,0,2,0"
                 IsEnabled="{Binding IsAreaOpened}"
                 Command="{Binding MoveCameraUpCommand}"
                 Interval="20"
@@ -78,9 +81,9 @@
                 </Rectangle>
             </RepeatButton>
 
-            <Separator Width="5"></Separator>
 
             <Button
+                Margin="20,0,2,0"
                 IsEnabled="{Binding IsAreaOpened}"
                 Command="{Binding ZoomInCameraCommand}"
                 ToolTip="Zoom In">
@@ -111,6 +114,24 @@
                     </Rectangle.Fill>
                 </Rectangle>
             </Button>
+
+            <Button
+                Margin="2,0,0,0"
+                IsEnabled="{Binding IsAreaOpened}"
+                Command="{Binding ResetCameraCommand}"
+                ToolTip="Reset Camera">
+                <Rectangle
+                    Width="20"
+                    Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_reset}">
+
+                        </VisualBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+
 
 
         </StackPanel>

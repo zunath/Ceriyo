@@ -3,7 +3,6 @@ using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
-using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
 using Ceriyo.Toolset.WPF.Events.Area;
 using Ceriyo.Toolset.WPF.Events.Camera;
@@ -35,6 +34,13 @@ namespace Ceriyo.Toolset.WPF.Screens
             _eventAggregator.GetEvent<AreaClosedEvent>().Subscribe(AreaClosed);
             _eventAggregator.GetEvent<CameraMovedEvent>().Subscribe(CameraMoved);
             _eventAggregator.GetEvent<CameraZoomedEvent>().Subscribe(CameraZoomed);
+            _eventAggregator.GetEvent<CameraResetEvent>().Subscribe(CameraReset);
+        }
+
+        private void CameraReset()
+        {
+            _camera.Zoom = 1.0f;
+            _camera.Position = Vector2.Zero;
         }
 
         private void CameraZoomed(Zoom zoom)
@@ -71,11 +77,13 @@ namespace Ceriyo.Toolset.WPF.Screens
 
         private void AreaClosed(AreaDataObservable area)
         {
+            CameraReset();
             _loadedArea.Delete();
         }
 
         private void AreaOpened(AreaDataObservable area)
         {
+            CameraReset();
             AreaData data = _objectMapper.Map<AreaData>(area);
             _loadedArea = _entityFactory.Create<Area, AreaData>(data);
         }
@@ -84,6 +92,7 @@ namespace Ceriyo.Toolset.WPF.Screens
         {
             _camera.MaximumZoom = 3.0f;
             _camera.MinimumZoom = 1.0f;
+            _camera.Zoom = 1.0f;
         }
 
         public void Update()
