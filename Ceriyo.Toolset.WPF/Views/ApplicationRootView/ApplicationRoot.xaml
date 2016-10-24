@@ -3,9 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Ceriyo.Toolset.WPF"
         xmlns:menuBarView="clr-namespace:Ceriyo.Toolset.WPF.Views.MenuBarView"
-        xmlns:areaEditorView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaEditorView"
         xmlns:toolbarView="clr-namespace:Ceriyo.Toolset.WPF.Views.ToolbarView"
         mc:Ignorable="d"
         xmlns:prism="http://prismlibrary.com/"
@@ -14,6 +12,8 @@
         xmlns:areaSelectorView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaSelectorView"
         xmlns:dialogSelectorView="clr-namespace:Ceriyo.Toolset.WPF.Views.DialogSelectorView"
         xmlns:scriptSelectorView="clr-namespace:Ceriyo.Toolset.WPF.Views.ScriptSelectorView"
+        xmlns:areaNavigationView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaNavigationView"
+        xmlns:blueprintSelectorView="clr-namespace:Ceriyo.Toolset.WPF.Views.BlueprintSelectorView"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding WindowTitle}" 
         Height="350" 
@@ -77,9 +77,26 @@
             </GridSplitter>
 
             <Grid
-                x:Name="GameGrid"
                 Grid.Row="0"
                 Grid.Column="2">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="5"></RowDefinition>
+                    <RowDefinition Height="32"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Grid x:Name="GameGrid"
+                      Grid.Row="0">
+                </Grid>
+
+                <GridSplitter
+                    Grid.Row="1">
+                </GridSplitter>
+
+                <areaNavigationView:AreaNavigation
+                    Grid.Row="2">
+                </areaNavigationView:AreaNavigation>
                 
             </Grid>
             
@@ -88,6 +105,11 @@
                 Width="5"
                 HorizontalAlignment="Center">
             </GridSplitter>
+
+            <blueprintSelectorView:BlueprintSelector
+                Grid.Column="4">
+            </blueprintSelectorView:BlueprintSelector>
+            
         </Grid>
 
 

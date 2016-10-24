@@ -19,20 +19,24 @@
         prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
         <TabControl>
-            <TabItem Header="Details">
+            <TabItem Header="Details"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <DockPanel
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
                     <detailsView:Details></detailsView:Details>
                 </DockPanel>
             </TabItem>
-            <TabItem Header="Description">
+            <TabItem Header="Description"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <descriptionView:Description></descriptionView:Description>
             </TabItem>
-            <TabItem Header="Player Blacklist">
+            <TabItem Header="Player Blacklist"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <playerBlacklistView:PlayerBlacklist></playerBlacklistView:PlayerBlacklist>
             </TabItem>
-            <TabItem Header="Log">
+            <TabItem Header="Log"
+                     controls:ControlsHelper.HeaderFontSize="14">
                 <logView:Log></logView:Log>
             </TabItem>
         </TabControl>

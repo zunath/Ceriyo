@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="Ceriyo.Toolset.WPF.Views.AreaNavigationView.AreaNavigation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="300"
+             d:DesignHeight="64">
+    <Grid>
+        <StackPanel
+            Orientation="Horizontal"
+            HorizontalAlignment="Stretch">
+
+            <Button
+                IsEnabled="{Binding IsAreaOpened}"
+                Command="{Binding MoveCameraLeftCommand}"
+                ToolTip="Camera Left">
+                <Rectangle
+                    Width="20"
+                    Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_arrow_left}">
+
+                        </VisualBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button
+                IsEnabled="{Binding IsAreaOpened}"
+                Command="{Binding MoveCameraRightCommand}"
+                ToolTip="Camera Right">
+                <Rectangle
+                    Width="20"
+                    Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_arrow_right}">
+
+                        </VisualBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button
+                IsEnabled="{Binding IsAreaOpened}"
+                Command="{Binding MoveCameraUpCommand}"
+                ToolTip="Camera Up">
+                <Rectangle
+                    Width="20"
+                    Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_arrow_up}">
+
+                        </VisualBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+            <Button
+                IsEnabled="{Binding IsAreaOpened}"
+                Command="{Binding MoveCameraDownCommand}"
+                ToolTip="Camera Down">
+                <Rectangle
+                    Width="20"
+                    Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_arrow_down}">
+
+                        </VisualBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+
+            <Separator Width="5"></Separator>
+
+            <Button
+                IsEnabled="{Binding IsAreaOpened}"
+                Command="{Binding ZoomInCameraCommand}"
+                ToolTip="Zoom In">
+                <Rectangle
+                    Width="20"
+                    Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="Fill"
+                                     Visual="{StaticResource appbar_add}">
+
+                        </VisualBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+
+            <Button
+                IsEnabled="{Binding IsAreaOpened}"
+                Command="{Binding ZoomOutCameraCommand}"
+                ToolTip="Zoom Out">
+                <Rectangle
+                    Width="20"
+                    Height="20">
+                    <Rectangle.Fill>
+                        <VisualBrush Stretch="None"
+                                     Visual="{StaticResource appbar_minus}">
+
+                        </VisualBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Button>
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>

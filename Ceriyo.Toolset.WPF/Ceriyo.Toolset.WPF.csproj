@@ -165,6 +165,8 @@
     <Compile Include="Events\Area\AreaPropertiesChangedEvent.cs" />
     <Compile Include="Events\Area\AreaPropertiesOpenedEvent.cs" />
     <Compile Include="Events\Area\AreaRenamedEvent.cs" />
+    <Compile Include="Events\Camera\CameraMovedEvent.cs" />
+    <Compile Include="Events\Camera\CameraZoomedEvent.cs" />
     <Compile Include="Events\Class\ClassChangedEvent.cs" />
     <Compile Include="Events\Class\ClassCreatedEvent.cs" />
     <Compile Include="Events\Class\ClassDeletedEvent.cs" />
@@ -211,6 +213,14 @@
     <Compile Include="Views\AbilityEditorView\AbilityEditorViewModelValidator.cs" />
     <Compile Include="Views\AnimationEditorView\AnimationEditorViewModelValidator.cs" />
     <Compile Include="Views\ApplicationRootView\ApplicationRootViewModel.cs" />
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\IconsNonShared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\AbilityEditorView\AbilityEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,11 +233,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AreaEditorView\AreaEditor.xaml">
+    <Page Include="Views\AreaNavigationView\AreaNavigation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AreaSelectorView\AreaSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BlueprintSelectorView\BlueprintSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -349,14 +363,18 @@
       <DependentUpon>AnimationEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AnimationEditorView\AnimationEditorViewModel.cs" />
-    <Compile Include="Views\AreaEditorView\AreaEditor.xaml.cs">
-      <DependentUpon>AreaEditor.xaml</DependentUpon>
+    <Compile Include="Views\AreaNavigationView\AreaNavigation.xaml.cs">
+      <DependentUpon>AreaNavigation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AreaEditorView\AreaEditorViewModel.cs" />
+    <Compile Include="Views\AreaNavigationView\AreaNavigationViewModel.cs" />
     <Compile Include="Views\AreaSelectorView\AreaSelector.xaml.cs">
       <DependentUpon>AreaSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AreaSelectorView\AreaSelectorViewModel.cs" />
+    <Compile Include="Views\BlueprintSelectorView\BlueprintSelector.xaml.cs">
+      <DependentUpon>BlueprintSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BlueprintSelectorView\BlueprintSelectorViewModel.cs" />
     <Compile Include="Views\BuildModuleView\BuildModule.xaml.cs">
       <DependentUpon>BuildModule.xaml</DependentUpon>
     </Compile>
@@ -492,6 +510,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -518,7 +537,12 @@
       <Name>Ceriyo.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\WindowsIcons-license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Entypo-license.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

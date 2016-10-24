@@ -3,6 +3,7 @@ using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Toolset.WPF.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace Ceriyo.Toolset.WPF.GameWorld
 {
@@ -10,19 +11,19 @@ namespace Ceriyo.Toolset.WPF.GameWorld
     {
         private readonly EntityWorld _world;
         private readonly SpriteBatch _spriteBatch;
-        private readonly ICameraService _cameraService;
+        private readonly Camera2D _camera;
         private readonly IScreenService _screenService;
         private readonly IInputService _inputService;
 
         public ToolsetGameService(
             EntityWorld world,
-            ICameraService cameraService,
-            IScreenService screenService,
             SpriteBatch spriteBatch,
+            Camera2D camera,
+            IScreenService screenService,
             IInputService inputService)
         {
             _world = world;
-            _cameraService = cameraService;
+            _camera = camera;
             _screenService = screenService;
             _spriteBatch = spriteBatch;
             _inputService = inputService;
@@ -38,7 +39,6 @@ namespace Ceriyo.Toolset.WPF.GameWorld
             _inputService.Update();
             _world.Update();
             _screenService.Update();
-            _cameraService.Update();
         }
 
         public void Draw(GameTime gameTime)
@@ -49,7 +49,7 @@ namespace Ceriyo.Toolset.WPF.GameWorld
                 null,
                 null,
                 null,
-                _cameraService.Transform);
+                _camera.GetViewMatrix());
             _screenService.Draw();
             _world.Draw();
 

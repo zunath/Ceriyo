@@ -21,6 +21,7 @@ using Ceriyo.Infrastructure.Helpers;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Services;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using Squid;
 
 namespace Ceriyo.Game.Windows
@@ -44,16 +45,14 @@ namespace Ceriyo.Game.Windows
             builder.RegisterInstance(game.Content).AsSelf();
             builder.RegisterInstance(game.GraphicsDevice).AsSelf();
             builder.RegisterInstance(new GameSettings());
-            
+            builder.RegisterType<Texture2D>();
+            builder.RegisterInstance(new Camera2D(game.GraphicsDevice)).AsSelf();
+
             // Logging
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
-
-            // MonoGame
-            builder.RegisterType<Texture2D>();
-
+            
             // Services
             builder.RegisterType<AppService>().As<IAppService>().SingleInstance();
-            builder.RegisterType<CameraService>().As<ICameraService>().SingleInstance();
             builder.RegisterType<DataService>().As<IDataService>().SingleInstance();
             builder.RegisterType<GameService>().As<IGameService>().SingleInstance();
             builder.RegisterType<ScreenService>().As<IScreenService>().SingleInstance();

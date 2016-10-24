@@ -30,6 +30,7 @@ using Ceriyo.Toolset.WPF.Contracts;
 using Ceriyo.Toolset.WPF.GameWorld;
 using Ceriyo.Toolset.WPF.Mapping;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace Ceriyo.Toolset.WPF
 {
@@ -50,7 +51,6 @@ namespace Ceriyo.Toolset.WPF
     
             // Services
             builder.RegisterType<AppService>().As<IAppService>().SingleInstance();
-            builder.RegisterType<CameraService>().As<ICameraService>().SingleInstance();
             builder.RegisterType<DataService>().As<IDataService>().SingleInstance();
             builder.RegisterType<ToolsetGameService>().As<IGameService>().SingleInstance();
             builder.RegisterType<ScreenService>().As<IScreenService>().SingleInstance();
@@ -103,7 +103,6 @@ namespace Ceriyo.Toolset.WPF
         
         private static void RegisterMonogame(ContainerBuilder builder)
         {
-
             // Create Direct3D 11 device.
             var presentationParameters = new PresentationParameters
             {
@@ -114,7 +113,8 @@ namespace Ceriyo.Toolset.WPF
 
             builder.RegisterInstance(device).AsSelf();
             builder.RegisterInstance(new SpriteBatch(device)).AsSelf();
-            
+            builder.RegisterInstance(new Camera2D(device)).AsSelf();
+               
             var game = new ToolsetGame(device);
             builder.RegisterInstance(game);
             builder.RegisterType<Texture2D>();

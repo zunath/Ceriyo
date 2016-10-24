@@ -108,6 +108,7 @@
     <Compile Include="Constants\ResourceType.cs" />
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
+    <Compile Include="Constants\Zoom.cs" />
     <Compile Include="Contracts\ISystemLoader.cs" />
     <Compile Include="Data\AreaData.cs" />
     <Compile Include="Data\ClassLevelData.cs" />
@@ -126,7 +127,6 @@
     <Compile Include="Scripting\Client\SceneMethods.cs" />
     <Compile Include="Services\AppService.cs" />
     <Compile Include="Services\Contracts\IAppService.cs" />
-    <Compile Include="Services\Contracts\ICameraService.cs" />
     <Compile Include="Contracts\IComponentFactory.cs" />
     <Compile Include="Contracts\IDataService.cs" />
     <Compile Include="Contracts\IEntityFactory.cs" />
@@ -197,7 +197,6 @@
     <Compile Include="Services\Module\ModuleResourceService.cs" />
     <Compile Include="Services\PathService.cs" />
     <Compile Include="Services\Game\ScreenService.cs" />
-    <Compile Include="Services\Game\CameraService.cs" />
     <Compile Include="Services\Game\GraphicsService.cs" />
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />

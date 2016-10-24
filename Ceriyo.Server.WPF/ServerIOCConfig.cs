@@ -33,7 +33,6 @@ namespace Ceriyo.Server.WPF
 
             // Services
             builder.RegisterType<AppService>().As<IAppService>();
-            builder.RegisterType<CameraService>().As<ICameraService>();
             builder.RegisterType<DataService>().As<IDataService>();
             builder.RegisterType<ScreenService>().As<IScreenService>();
             builder.RegisterType<GraphicsService>().As<IGraphicsService>();

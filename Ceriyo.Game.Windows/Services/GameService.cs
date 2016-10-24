@@ -4,6 +4,7 @@ using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Game.Windows.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace Ceriyo.Game.Windows.Services
 {
@@ -11,8 +12,8 @@ namespace Ceriyo.Game.Windows.Services
     {
         private readonly EntityWorld _world;
         private readonly SpriteBatch _spriteBatch;
+        private readonly Camera2D _camera;
         private readonly IGraphicsService _graphicsService;
-        private readonly ICameraService _cameraService;
         private readonly IScriptService _scriptService;
         private readonly IScreenService _screenService;
         private readonly IUIService _uiService;
@@ -23,8 +24,8 @@ namespace Ceriyo.Game.Windows.Services
         public GameService(
             EntityWorld world,
             SpriteBatch spriteBatch,
+            Camera2D camera,
             IGraphicsService graphicsService,
-            ICameraService cameraService,
             IScriptService scriptService,
             IScreenService screenService,
             IUIService uiService,
@@ -34,8 +35,8 @@ namespace Ceriyo.Game.Windows.Services
         {
             _world = world;
             _spriteBatch = spriteBatch;
+            _camera = camera;
             _graphicsService = graphicsService;
-            _cameraService = cameraService;
             _scriptService = scriptService;
             _screenService = screenService;
             _uiService = uiService;
@@ -61,7 +62,6 @@ namespace Ceriyo.Game.Windows.Services
             _inputService.Update();
             _world.Update();
             _screenService.Update();
-            _cameraService.Update();
             _scriptService.ExecuteQueuedScripts();
             _uiService.Update(gameTime);
         }
@@ -74,7 +74,7 @@ namespace Ceriyo.Game.Windows.Services
                 null,
                 null,
                 null,
-                _cameraService.Transform);
+                _camera.GetViewMatrix());
             _screenService.Draw();
             _world.Draw();
             _uiService.Draw(gameTime);
