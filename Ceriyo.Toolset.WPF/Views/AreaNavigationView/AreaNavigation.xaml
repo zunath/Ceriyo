@@ -13,9 +13,10 @@
             Orientation="Horizontal"
             HorizontalAlignment="Stretch">
 
-            <Button
+            <RepeatButton
                 IsEnabled="{Binding IsAreaOpened}"
                 Command="{Binding MoveCameraLeftCommand}"
+                Interval="20"
                 ToolTip="Camera Left">
                 <Rectangle
                     Width="20"
@@ -27,10 +28,11 @@
                         </VisualBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-            </Button>
-            <Button
+            </RepeatButton>
+            <RepeatButton
                 IsEnabled="{Binding IsAreaOpened}"
                 Command="{Binding MoveCameraRightCommand}"
+                Interval="20"
                 ToolTip="Camera Right">
                 <Rectangle
                     Width="20"
@@ -42,10 +44,11 @@
                         </VisualBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-            </Button>
-            <Button
+            </RepeatButton>
+            <RepeatButton
                 IsEnabled="{Binding IsAreaOpened}"
                 Command="{Binding MoveCameraUpCommand}"
+                Interval="20"
                 ToolTip="Camera Up">
                 <Rectangle
                     Width="20"
@@ -57,10 +60,11 @@
                         </VisualBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-            </Button>
-            <Button
+            </RepeatButton>
+            <RepeatButton
                 IsEnabled="{Binding IsAreaOpened}"
                 Command="{Binding MoveCameraDownCommand}"
+                Interval="20"
                 ToolTip="Camera Down">
                 <Rectangle
                     Width="20"
@@ -72,7 +76,7 @@
                         </VisualBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-            </Button>
+            </RepeatButton>
 
             <Separator Width="5"></Separator>
 
