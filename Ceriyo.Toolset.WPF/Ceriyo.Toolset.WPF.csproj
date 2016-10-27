@@ -258,6 +258,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CreatureSelectorView\CreatureSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DataEditorView\DataEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -271,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ItemEditorView\ItemEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ItemSelectorView\ItemSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,6 +318,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PlaceableSelectorView\PlaceableSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ResourceEditorView\ResourceEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -331,6 +343,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SkillEditorView\SkillEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TileSelectorView\TileSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -390,6 +406,10 @@
     </Compile>
     <Compile Include="Views\CreatureEditorView\CreatureEditorViewModel.cs" />
     <Compile Include="Views\CreatureEditorView\CreatureEditorViewModelValidator.cs" />
+    <Compile Include="Views\CreatureSelectorView\CreatureSelector.xaml.cs">
+      <DependentUpon>CreatureSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreatureSelectorView\CreatureSelectorViewModel.cs" />
     <Compile Include="Views\DataEditorView\DataEditor.xaml.cs">
       <DependentUpon>DataEditor.xaml</DependentUpon>
     </Compile>
@@ -407,6 +427,10 @@
     </Compile>
     <Compile Include="Views\ItemEditorView\ItemEditorViewModel.cs" />
     <Compile Include="Views\ItemEditorView\ItemEditorViewModelValidator.cs" />
+    <Compile Include="Views\ItemSelectorView\ItemSelector.xaml.cs">
+      <DependentUpon>ItemSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ItemSelectorView\ItemSelectorViewModel.cs" />
     <Compile Include="Views\ManageResourcesView\ManageResources.xaml.cs">
       <DependentUpon>ManageResources.xaml</DependentUpon>
     </Compile>
@@ -448,6 +472,10 @@
     </Compile>
     <Compile Include="Views\PlaceableEditorView\PlaceableEditorViewModel.cs" />
     <Compile Include="Views\PlaceableEditorView\PlaceableEditorViewModelValidator.cs" />
+    <Compile Include="Views\PlaceableSelectorView\PlaceableSelector.xaml.cs">
+      <DependentUpon>PlaceableSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlaceableSelectorView\PlaceableSelectorViewModel.cs" />
     <Compile Include="Views\ResourceEditorView\ResourceEditor.xaml.cs">
       <DependentUpon>ResourceEditor.xaml</DependentUpon>
     </Compile>
@@ -473,6 +501,10 @@
       <DependentUpon>SkillEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SkillEditorView\SkillEditorViewModelValidator.cs" />
+    <Compile Include="Views\TileSelectorView\TileSelector.xaml.cs">
+      <DependentUpon>TileSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TileSelectorView\TileSelectorViewModel.cs" />
     <Compile Include="Views\TilesetEditorView\TilesetEditor.xaml.cs">
       <DependentUpon>TilesetEditor.xaml</DependentUpon>
     </Compile>

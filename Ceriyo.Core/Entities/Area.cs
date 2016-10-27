@@ -59,9 +59,7 @@ namespace Ceriyo.Core.Entities
 
             TilesetData tileset = _moduleDataService.Load<TilesetData>(data.TilesetGlobalID);
             renderable.Texture = _resourceService.LoadTexture2D(ResourceType.Tileset, tileset.ResourceName);
-
-            map.Width = data.Width;
-            map.Height = data.Height;
+            
             map.Tiles = new Tile[data.Width, data.Height];
 
             for (int x = 0; x < map.Tiles.GetLength(0); x++)

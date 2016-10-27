@@ -1,4 +1,5 @@
 ﻿using Artemis;
+using Ceriyo.Core.Components;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
@@ -19,6 +20,7 @@ namespace Ceriyo.Toolset.WPF.Screens
         private readonly IEntityFactory _entityFactory;
         private readonly IObjectMapper _objectMapper;
         private readonly Camera2D _camera;
+        private AreaData _loadedAreaData;
 
         public AreaEditorScreen(IEventAggregator eventAggregator,
             IEntityFactory entityFactory,
@@ -35,6 +37,20 @@ namespace Ceriyo.Toolset.WPF.Screens
             _eventAggregator.GetEvent<CameraMovedEvent>().Subscribe(CameraMoved);
             _eventAggregator.GetEvent<CameraZoomedEvent>().Subscribe(CameraZoomed);
             _eventAggregator.GetEvent<CameraResetEvent>().Subscribe(CameraReset);
+            _eventAggregator.GetEvent<AreaPropertiesChangedEvent>().Subscribe(AreaPropertiesChanged);
+        }
+
+        private void AreaPropertiesChanged(AreaDataObservable area)
+        {
+            AreaData updatedArea = _objectMapper.Map<AreaData>(area);
+
+            if (updatedArea.Width != _loadedAreaData.Width ||
+                updatedArea.Height != _loadedAreaData.Height)
+            {
+                var map = _loadedArea.GetComponent<Map>();
+                map.Resize(updatedArea.Width, updatedArea.Height);
+                _loadedAreaData = updatedArea;
+            }
         }
 
         private void CameraReset()
@@ -79,13 +95,14 @@ namespace Ceriyo.Toolset.WPF.Screens
         {
             CameraReset();
             _loadedArea.Delete();
+            _loadedAreaData = null;
         }
 
         private void AreaOpened(AreaDataObservable area)
         {
             CameraReset();
-            AreaData data = _objectMapper.Map<AreaData>(area);
-            _loadedArea = _entityFactory.Create<Area, AreaData>(data);
+            _loadedAreaData = _objectMapper.Map<AreaData>(area);
+            _loadedArea = _entityFactory.Create<Area, AreaData>(_loadedAreaData);
         }
 
         public void Initialize()
