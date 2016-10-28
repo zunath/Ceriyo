@@ -50,6 +50,19 @@
                                 </DrawingBrush.Drawing>
                             </DrawingBrush>
                         </Canvas.Background>
+
+                        <Rectangle
+                            Stroke="Black"
+                            Fill="{Binding SelectedTileBrush}"
+                            Opacity="0.5"
+                            Height="{Binding SelectedTileHeight}"
+                            Width="{Binding SelectedTileWidth}"
+                            Visibility="{Binding SelectedTileVisibility}"
+                            Canvas.Left="{Binding SelectedTileX}"
+                            Canvas.Top="{Binding SelectedTileY}">
+                            
+                        </Rectangle>
+                        
                     </Canvas>
 
                 </Grid>

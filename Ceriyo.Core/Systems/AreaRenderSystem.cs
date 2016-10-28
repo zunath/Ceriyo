@@ -42,7 +42,7 @@ namespace Ceriyo.Core.Systems
             Map map = entity.GetComponent<Map>();
 
             int tileWidth = _engineService.TileWidth;
-            int tileHeight = _engineService.TileHeight;
+            int tileHeight = _engineService.GroundTileHeight;
             
             for (int y = 0; y < map.Height; y++)
             {
