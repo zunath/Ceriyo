@@ -96,6 +96,7 @@ namespace Ceriyo.Toolset.WPF
 
             // Entities
             builder.RegisterType<Area>().As<IGameEntity<AreaData>>();
+            builder.RegisterType<ObjectPainter>().As<IGameEntity<Texture2D>>();
             
             // MonoGame
             RegisterMonogame(builder);

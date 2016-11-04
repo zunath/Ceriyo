@@ -1,4 +1,5 @@
 ﻿using Ceriyo.Core.Services.Contracts;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace Ceriyo.Game.Windows
@@ -50,6 +51,11 @@ namespace Ceriyo.Game.Windows
         {
             return _currentMouseState.RightButton == ButtonState.Released &&
                    _lastMouseState.RightButton == ButtonState.Pressed;
+        }
+
+        public Vector2 GetMousePosition()
+        {
+            return _currentMouseState.Position.ToVector2();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Ceriyo.Core.Services.Contracts
+﻿using Microsoft.Xna.Framework;
+
+namespace Ceriyo.Core.Services.Contracts
 {
     public interface IInputService
     {
@@ -9,5 +11,7 @@
         bool IsRightMouseUp();
         bool IsLeftMousePressed();
         bool IsRightMousePressed();
+
+        Vector2 GetMousePosition();
     }
 }

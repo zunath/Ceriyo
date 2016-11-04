@@ -91,6 +91,7 @@
     <Compile Include="Components\LocalData.cs" />
     <Compile Include="Components\Map.cs" />
     <Compile Include="Components\Nameable.cs" />
+    <Compile Include="Components\Paintable.cs" />
     <Compile Include="Components\Position.cs" />
     <Compile Include="Components\Renderable.cs" />
     <Compile Include="Components\Resref.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Data\LocalStringData.cs" />
     <Compile Include="Data\TileAtlasData.cs" />
     <Compile Include="Data\TileData.cs" />
+    <Compile Include="Entities\ObjectPainter.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
     <Compile Include="Data\SerializedFileData.cs" />
@@ -201,8 +203,10 @@
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />
-    <Compile Include="Systems\AreaRenderSystem.cs" />
-    <Compile Include="Systems\HeartbeatSystem.cs" />
+    <Compile Include="Systems\Draw\AreaRenderSystem.cs" />
+    <Compile Include="Systems\Draw\RenderSystem.cs" />
+    <Compile Include="Systems\Update\HeartbeatSystem.cs" />
+    <Compile Include="Systems\Update\PainterSystem.cs" />
     <Compile Include="UI\Controls\ChatBox.cs" />
     <Compile Include="UI\Controls\FileDialog.cs" />
     <Compile Include="UI\Controls\GridColumn.cs" />

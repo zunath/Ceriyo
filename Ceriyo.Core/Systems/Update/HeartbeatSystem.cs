@@ -7,7 +7,7 @@ using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Extensions;
 
-namespace Ceriyo.Core.Systems
+namespace Ceriyo.Core.Systems.Update
 {
     [ArtemisEntitySystem(
         ExecutionType = ExecutionType.Synchronous,

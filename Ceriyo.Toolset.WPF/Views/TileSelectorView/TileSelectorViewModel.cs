@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -7,7 +9,10 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.Helpers;
 using Ceriyo.Infrastructure.WPF.Observables;
+using Ceriyo.Toolset.WPF.EventArgs;
 using Ceriyo.Toolset.WPF.Events.Area;
+using Ceriyo.Toolset.WPF.Events.ObjectSelector;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 
@@ -37,6 +42,8 @@ namespace Ceriyo.Toolset.WPF.Views.TileSelectorView
             SelectedTileVisibility = Visibility.Visible;
             SelectedTileX = 0;
             SelectedTileY = 0;
+
+            CellSelectedCommand = new DelegateCommand<MouseButtonEventArgs>(CellSelected);
 
             _eventAggregator.GetEvent<AreaOpenedEvent>().Subscribe(AreaOpened);
             _eventAggregator.GetEvent<AreaClosedEvent>().Subscribe(AreaClosed);
@@ -144,6 +151,35 @@ namespace Ceriyo.Toolset.WPF.Views.TileSelectorView
             get { return _selectedTileY; }
             set { SetProperty(ref _selectedTileY, value); }
         }
+
+        private Point _lastClickPoint;
+
+        public DelegateCommand<MouseButtonEventArgs> CellSelectedCommand { get; }
+
+        private void CellSelected(MouseButtonEventArgs e)
+        {
+            Canvas canvas;
+            Rectangle source = e.Source as Rectangle;
+            if (source != null)
+            {
+                canvas = (Canvas) source.Parent;
+            }
+            else
+            {
+                canvas = (Canvas) e.Source;
+            }
+
+            _lastClickPoint = e.GetPosition(canvas);
+
+            SelectedTileX = (int) (_lastClickPoint.X/_engineService.TileWidth);
+            SelectedTileY = (int) (_lastClickPoint.Y/_engineService.TileHeight);
+
+            _eventAggregator.GetEvent<TileSelectedEvent>().Publish(new TileSelectedEventArgs(SelectedTileX, SelectedTileY));
+
+            SelectedTileX *= _engineService.TileWidth;
+            SelectedTileY *= _engineService.TileHeight;
+        }
+
 
     }
 }

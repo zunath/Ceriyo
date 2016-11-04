@@ -8,7 +8,7 @@ using Ceriyo.Core.Services.Contracts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Core.Systems
+namespace Ceriyo.Core.Systems.Draw
 {
     [ArtemisEntitySystem(
         ExecutionType = ExecutionType.Synchronous,

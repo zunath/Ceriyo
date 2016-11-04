@@ -4,10 +4,14 @@ using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
+using Ceriyo.Toolset.WPF.EventArgs;
 using Ceriyo.Toolset.WPF.Events.Area;
 using Ceriyo.Toolset.WPF.Events.Camera;
+using Ceriyo.Toolset.WPF.Events.ObjectSelector;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Prism.Events;
 
@@ -16,21 +20,28 @@ namespace Ceriyo.Toolset.WPF.Screens
     public class AreaEditorScreen: IScreen
     {
         private Entity _loadedArea;
+        private Entity _objectPainter;
         private readonly IEventAggregator _eventAggregator;
         private readonly IEntityFactory _entityFactory;
         private readonly IObjectMapper _objectMapper;
+        private readonly IModuleDataService _moduleDataService;
+        private readonly IEngineService _engineService;
         private readonly Camera2D _camera;
         private AreaData _loadedAreaData;
 
         public AreaEditorScreen(IEventAggregator eventAggregator,
             IEntityFactory entityFactory,
             IObjectMapper objectMapper,
+            IModuleDataService moduleDataService,
+            IEngineService engineService,
             Camera2D camera)
         {
             _eventAggregator = eventAggregator;
             _entityFactory = entityFactory;
             _objectMapper = objectMapper;
             _camera = camera;
+            _moduleDataService = moduleDataService;
+            _engineService = engineService;
 
             _eventAggregator.GetEvent<AreaOpenedEvent>().Subscribe(AreaOpened);
             _eventAggregator.GetEvent<AreaClosedEvent>().Subscribe(AreaClosed);
@@ -38,10 +49,22 @@ namespace Ceriyo.Toolset.WPF.Screens
             _eventAggregator.GetEvent<CameraZoomedEvent>().Subscribe(CameraZoomed);
             _eventAggregator.GetEvent<CameraResetEvent>().Subscribe(CameraReset);
             _eventAggregator.GetEvent<AreaPropertiesChangedEvent>().Subscribe(AreaPropertiesChanged);
+            _eventAggregator.GetEvent<TileSelectedEvent>().Subscribe(TileSelected);
+        }
+
+        private void TileSelected(TileSelectedEventArgs e)
+        {
+            var renderable = _objectPainter.GetComponent<Renderable>();
+            renderable.Source = new Rectangle(
+                e.CellX * _engineService.TileWidth,
+                e.CellY * _engineService.TileHeight,
+                _engineService.TileWidth,
+                _engineService.TileHeight);
         }
 
         private void AreaPropertiesChanged(AreaDataObservable area)
         {
+            bool changed = false;
             AreaData updatedArea = _objectMapper.Map<AreaData>(area);
 
             if (updatedArea.Width != _loadedAreaData.Width ||
@@ -49,6 +72,17 @@ namespace Ceriyo.Toolset.WPF.Screens
             {
                 var map = _loadedArea.GetComponent<Map>();
                 map.Resize(updatedArea.Width, updatedArea.Height);
+                changed = true;
+            }
+
+            if (updatedArea.TilesetGlobalID != _loadedAreaData.TilesetGlobalID)
+            {
+                // TODO: Blank out existing tiles and load new tileset spritesheet.
+                changed = true;
+            }
+
+            if (changed)
+            {
                 _loadedAreaData = updatedArea;
             }
         }
@@ -96,6 +130,8 @@ namespace Ceriyo.Toolset.WPF.Screens
             CameraReset();
             _loadedArea.Delete();
             _loadedAreaData = null;
+            _objectPainter.Delete();
+            _objectPainter = null;
         }
 
         private void AreaOpened(AreaDataObservable area)
@@ -103,6 +139,9 @@ namespace Ceriyo.Toolset.WPF.Screens
             CameraReset();
             _loadedAreaData = _objectMapper.Map<AreaData>(area);
             _loadedArea = _entityFactory.Create<Area, AreaData>(_loadedAreaData);
+
+            Texture2D texture = _loadedArea.GetComponent<Renderable>().Texture;
+            _objectPainter = _entityFactory.Create<ObjectPainter, Texture2D>(texture);
         }
 
         public void Initialize()

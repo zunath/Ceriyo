@@ -5,12 +5,20 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:binding="clr-namespace:Ceriyo.Infrastructure.WPF.Binding;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:converters="clr-namespace:Ceriyo.Infrastructure.WPF.Converters;assembly=Ceriyo.Infrastructure.WPF"
              mc:Ignorable="d"
              d:DesignWidth="300"
              d:DesignHeight="300"
              Background="White">
+    <UserControl.Resources>
+        <binding:BindingProxy
+            x:Key="DataContextProxy"
+            Data="{Binding}">
+        </binding:BindingProxy>
+    </UserControl.Resources>
     <Grid>
-
         <DockPanel>
 
             <ScrollViewer
@@ -51,6 +59,20 @@
                             </DrawingBrush>
                         </Canvas.Background>
 
+                        <!--<Canvas.InputBindings>
+                            <MouseBinding 
+                                MouseAction="LeftClick"
+                                Command="{Binding Data.CellSelectedCommand, Source={StaticResource DataContextProxy}}">
+                            </MouseBinding>
+                        </Canvas.InputBindings>-->
+                        
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDown">
+                                <prism:InvokeCommandAction Command="{Binding CellSelectedCommand}"></prism:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        
+                        
                         <Rectangle
                             Stroke="Black"
                             Fill="{Binding SelectedTileBrush}"

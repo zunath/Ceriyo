@@ -153,6 +153,7 @@
     <Compile Include="Contracts\IDomainServiceNotifier.cs" />
     <Compile Include="DomainServiceNotifier.cs" />
     <Compile Include="EventArgs\ModuleEventArgs.cs" />
+    <Compile Include="EventArgs\TileSelectedEventArgs.cs" />
     <Compile Include="Events\Ability\AbilityChangedEvent.cs" />
     <Compile Include="Events\Ability\AbilityDeletedEvent.cs" />
     <Compile Include="Events\Ability\AbilityEditorValidityChangedEvent.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Events\Module\ModulePropertiesChangedEvent.cs" />
     <Compile Include="Events\Module\ModulePropertiesClosedEvent.cs" />
     <Compile Include="Events\Module\ModuleSavedEvent.cs" />
+    <Compile Include="Events\ObjectSelector\TileSelectedEvent.cs" />
     <Compile Include="Events\Placeable\PlaceableChangedEvent.cs" />
     <Compile Include="Events\Placeable\PlaceableCreatedEvent.cs" />
     <Compile Include="Events\Placeable\PlaceableDeletedEvent.cs" />
