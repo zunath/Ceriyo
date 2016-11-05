@@ -14,7 +14,7 @@ namespace Ceriyo.Core.Systems.Draw
         ExecutionType = ExecutionType.Synchronous,
         GameLoopType = GameLoopType.Draw,
         Layer = 1)]
-    public class AreaRenderSystem: EntityProcessingSystem
+    public class AreaRenderSystem : EntityProcessingSystem
     {
         private readonly SpriteBatch _spriteBatch;
         private readonly IEngineService _engineService;
@@ -24,7 +24,7 @@ namespace Ceriyo.Core.Systems.Draw
 
         public AreaRenderSystem(SpriteBatch spriteBatch,
             IEngineService engineService,
-            IModuleResourceService resourceService) 
+            IModuleResourceService resourceService)
             : base(Aspect.All(typeof(Renderable),
                               typeof(Map)))
         {
@@ -42,11 +42,11 @@ namespace Ceriyo.Core.Systems.Draw
             Map map = entity.GetComponent<Map>();
 
             int tileWidth = _engineService.TileWidth;
-            int tileHeight = _engineService.GroundTileHeight;
-            
+            int tileHeight = _engineService.TileHeight;
+
             for (int y = 0; y < map.Height; y++)
             {
-                for (int x = map.Width; x > 0; x--)
+                for (int x = map.Width - 1; x >= 0; x--)
                 {
                     float positionX = (x * tileWidth / 2) + (y * tileWidth / 2);
                     float positionY = (y * tileHeight / 2) - (x * tileHeight / 2);
@@ -54,8 +54,8 @@ namespace Ceriyo.Core.Systems.Draw
                     Vector2 position = new Vector2(
                         positionX,
                         positionY);
-                    
-                    Tile tile = map.Tiles[x-1, y];
+
+                    Tile tile = map.Tiles[x, y];
                     int sourceX = 0;
                     int sourceY = 0;
                     Texture2D renderTexture = _emptyCell;
@@ -66,7 +66,7 @@ namespace Ceriyo.Core.Systems.Draw
                         sourceY = tileHeight * tile.SourceY;
                         renderTexture = renderable.Texture;
                     }
-                    
+
                     Rectangle source = new Rectangle(
                         sourceX,
                         sourceY,
@@ -81,8 +81,10 @@ namespace Ceriyo.Core.Systems.Draw
                         0.0f,
                         _origin,
                         1.0f,
-                        SpriteEffects.None, 
+                        SpriteEffects.None,
                         0.0f);
+
+
 
                 }
             }

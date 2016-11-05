@@ -3,7 +3,6 @@ using Artemis;
 using Artemis.Attributes;
 using Artemis.System;
 using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Systems;
 using Ceriyo.Core.Systems.Draw;
 using Ceriyo.Core.Systems.Update;
 

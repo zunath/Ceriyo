@@ -27,7 +27,11 @@ namespace Ceriyo.Core.Entities
             var paintable = _factory.Create<Paintable>();
 
             renderable.Texture = texture;
-            renderable.Source = new Rectangle(0, 0, _engineService.TileWidth, _engineService.TileHeight);
+            renderable.Source = new Rectangle(
+                0, 
+                0, 
+                _engineService.TileWidth, 
+                _engineService.TileHeight);
 
             entity.AddComponent(renderable);
             entity.AddComponent(position);

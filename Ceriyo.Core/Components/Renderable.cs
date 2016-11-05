@@ -9,5 +9,11 @@ namespace Ceriyo.Core.Components
         public Texture2D Texture { get; set; }
         public Rectangle Source { get; set; }
         public Color? ColorOverride { get; set; }
+        public Vector2 Origin { get; set; }
+
+        public Renderable()
+        {
+            Origin = Vector2.Zero;
+        }
     }
 }

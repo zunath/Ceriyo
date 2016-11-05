@@ -104,12 +104,12 @@
 
                                 <Canvas>
                                     <Canvas.Background>
-                                        <DrawingBrush Viewport="0,0,64,64" ViewportUnits="Absolute" TileMode="Tile">
+                                        <DrawingBrush Viewport="0,0,64,32" ViewportUnits="Absolute" TileMode="Tile">
                                             <DrawingBrush.Drawing>
                                                 <DrawingGroup>
                                                     <GeometryDrawing Brush="Transparent">
                                                         <GeometryDrawing.Geometry>
-                                                            <RectangleGeometry Rect="0,0,1,1"></RectangleGeometry>
+                                                            <RectangleGeometry Rect="0,0,1,0.5"></RectangleGeometry>
                                                         </GeometryDrawing.Geometry>
                                                     </GeometryDrawing>
                                                     <GeometryDrawing Geometry="M0,0 L1,0 1,0.05, 0,0.05Z " Brush="Black">

@@ -194,6 +194,12 @@ namespace Ceriyo.Toolset.WPF.Views.TilesetEditorView
             }
 
             var resource = _resourceDomainService.GetResourceByName(ResourceType.Tileset, SelectedTileset.ResourceName);
+            if (resource == null)
+            {
+                ClearActiveTilesetImage();
+                return;
+            }
+
             ActiveTilesetImage = BitmapImageHelpers.LoadFromBytes(resource.Data);
             ActiveTilesetImageWidth = ActiveTilesetImage.Width;
             ActiveTilesetImageHeight = ActiveTilesetImage.Height;

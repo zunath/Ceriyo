@@ -72,6 +72,10 @@ namespace Ceriyo.Toolset.WPF.Screens
             {
                 var map = _loadedArea.GetComponent<Map>();
                 map.Resize(updatedArea.Width, updatedArea.Height);
+                var paintable = _objectPainter.GetComponent<Paintable>();
+                paintable.AreaHeight = updatedArea.Height;
+                paintable.AreaWidth = updatedArea.Width;
+
                 changed = true;
             }
 
@@ -142,6 +146,9 @@ namespace Ceriyo.Toolset.WPF.Screens
 
             Texture2D texture = _loadedArea.GetComponent<Renderable>().Texture;
             _objectPainter = _entityFactory.Create<ObjectPainter, Texture2D>(texture);
+            Paintable paintable = _objectPainter.GetComponent<Paintable>();
+            paintable.AreaHeight = _loadedAreaData.Height;
+            paintable.AreaWidth = _loadedAreaData.Width;
         }
 
         public void Initialize()
