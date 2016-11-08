@@ -2,6 +2,7 @@
 using Ceriyo.Core.Scripting.Client;
 using Ceriyo.Core.Scripting.Common;
 using Ceriyo.Core.Scripting.Server;
+using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Services;
@@ -18,14 +19,16 @@ namespace Ceriyo.Infrastructure.Tests.Scripting
         [SetUp]
         public void Setup()
         {
+            var engineService = new EngineService();
             var mockUIService = new Mock<IUIService>();
+
 
             _service = new ScriptService(false, 
                 new Logger(),
                 new LoggingMethods(), 
                 new ControlMethods(),
                 new StyleMethods(), 
-                new EntityMethods(), 
+                new EntityMethods(engineService), 
                 new LocalDataMethods(), 
                 new PhysicsMethods(), 
                 new ScriptingMethods(),
