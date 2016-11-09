@@ -3,7 +3,6 @@ using Ceriyo.Core.Systems.Draw;
 using Ceriyo.Core.Systems.Update;
 using Ceriyo.Testing.Shared;
 using Ceriyo.Toolset.WPF.GameWorld;
-using Moq;
 using NUnit.Framework;
 
 namespace Ceriyo.Toolset.WPF.Tests.GameWorld

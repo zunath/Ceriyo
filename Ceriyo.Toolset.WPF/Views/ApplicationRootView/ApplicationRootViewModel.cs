@@ -17,11 +17,6 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
         private readonly ILogger _logger;
         private readonly IModuleService _moduleDomainService;
 
-        public ApplicationRootViewModel()
-        {
-
-        }
-
         public ApplicationRootViewModel(
             ILogger logger,
             IEventAggregator eventAggregator,
@@ -94,6 +89,5 @@ namespace Ceriyo.Toolset.WPF.Views.ApplicationRootView
                 WindowTitle = "Ceriyo Toolset - " + moduleData.Name;
             }
         }
-
     }
 }

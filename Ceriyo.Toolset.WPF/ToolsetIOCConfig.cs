@@ -38,9 +38,6 @@ namespace Ceriyo.Toolset.WPF
     {
         public static void Initialize(ContainerBuilder builder)
         {
-            // Instances
-            builder.RegisterInstance(new ToolsetSettings());
-
             // Logging
             builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
 

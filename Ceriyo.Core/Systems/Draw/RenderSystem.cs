@@ -5,7 +5,6 @@ using Artemis.System;
 using Ceriyo.Core.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
 
 namespace Ceriyo.Core.Systems.Draw
 {
