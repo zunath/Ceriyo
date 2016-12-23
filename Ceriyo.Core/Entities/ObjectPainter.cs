@@ -32,6 +32,9 @@ namespace Ceriyo.Core.Entities
                 0, 
                 _engineService.TileWidth, 
                 _engineService.TileHeight);
+            //renderable.Origin = new Vector2(
+            //    _engineService.TileWidth / 2.0f,
+            //    _engineService.TileHeight / 2.0f);
 
             entity.AddComponent(renderable);
             entity.AddComponent(position);

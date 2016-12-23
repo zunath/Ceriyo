@@ -35,20 +35,38 @@ namespace Ceriyo.Core.Systems.Update
             Paintable paintable = entity.GetComponent<Paintable>();
             Vector2 mousePosition = _inputService.GetMousePosition();
             Position position = entity.GetComponent<Position>();
-            
+
             int tileWidth = _engineService.TileWidth;
             int tileHeight = _engineService.TileHeight;
+            
+            
+            position.X = mousePosition.X / tileWidth * tileWidth;
+            position.Y = mousePosition.Y / tileHeight * tileHeight;
 
-            //mousePosition = _camera.ScreenToWorld(mousePosition);
-            int x = (int)mousePosition.X / tileWidth;
-            int y = (int)mousePosition.Y / tileHeight;
 
-            float positionX = (x * tileWidth / 2) + (y * tileWidth / 2);
-            float positionY = (y * tileHeight / 2) - (x * tileHeight / 2);
 
-            position.X = positionX;
-            position.Y = positionY;
+            //float mouseConvertedX = mousePosition.X/2 + mousePosition.Y/2;
+            //float mouseConvertedY = mousePosition.Y/2 - mousePosition.X/2;
 
+            //int positionX = (int)mouseConvertedX/tileWidth;
+            //int positionY = (int)mouseConvertedY/tileHeight;
+
+            //position.X = positionX * tileWidth;
+            //position.Y = positionY * tileHeight;
+
+
+            //float x = mousePosition.X / tileWidth;
+            //float y = mousePosition.Y / tileHeight;
+
+            //float positionX = (x * tileWidth / 2) + (y * tileWidth / 2);
+            //float positionY = (y * tileHeight / 2) - (x * tileHeight / 2);
+
+            //position.X = positionX / tileWidth;
+            //position.Y = positionY / tileHeight;
+
+            //Console.WriteLine($"Mouse: {mousePosition.X}, {mousePosition.Y}\t" +
+            //                  $"Tile: {positionX}, {positionY}\t" + 
+            //                  $"Final: {position.X}, {position.Y}");
         }
     }
 }
