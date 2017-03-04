@@ -59,6 +59,7 @@ namespace Ceriyo.Game.Windows
             builder.RegisterType<GraphicsService>().As<IGraphicsService>().SingleInstance();
             builder.RegisterType<PathService>().As<IPathService>().SingleInstance();
             builder.RegisterType<GameInputService>().As<IInputService>().SingleInstance();
+            builder.RegisterType<EngineService>().As<IEngineService>().SingleInstance();
 
             // Artemis
             builder.RegisterType<EntityWorld>().SingleInstance();
