@@ -22,6 +22,7 @@ namespace Ceriyo.Game.Windows
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += WindowOnClientSizeChanged;
             Content.RootDirectory = "Compiled";
+            IsMouseVisible = true;
         }
 
         private void WindowOnClientSizeChanged(object sender, EventArgs eventArgs)

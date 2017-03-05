@@ -7,13 +7,11 @@ using Artemis;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Scripting;
-using Ceriyo.Core.Scripting.Client.Contracts;
 using Ceriyo.Core.Scripting.Common.Contracts;
 using Ceriyo.Core.Scripting.Server.Contracts;
 using Jint;
 using Jint.Runtime.Descriptors;
 using NLua;
-using Squid;
 
 namespace Ceriyo.Infrastructure.Services
 {
@@ -26,12 +24,7 @@ namespace Ceriyo.Infrastructure.Services
 
         // Common Methods
         private readonly ILoggingMethods _loggingMethods;
-
-        // Client Methods
-        private readonly IControlMethods _controlMethods;
-        private readonly IStyleMethods _styleMethods;
-        private readonly ISceneMethods _sceneMethods;
-
+        
         // Server Methods
         private readonly IEntityMethods _entityMethods;
         private readonly ILocalDataMethods _localDataMethods;
@@ -41,24 +34,18 @@ namespace Ceriyo.Infrastructure.Services
         public ScriptService(bool isServer,
             ILogger logger,
             ILoggingMethods loggingMethods,
-            IControlMethods controlMethods,
-            IStyleMethods styleMethods,
             IEntityMethods entityMethods,
             ILocalDataMethods localDataMethods,
             IPhysicsMethods physicsMethods,
-            IScriptingMethods scriptingMethods,
-            ISceneMethods sceneMethods)
+            IScriptingMethods scriptingMethods)
         {
             _logger = logger;
 
             _loggingMethods = loggingMethods;
-            _controlMethods = controlMethods;
-            _styleMethods = styleMethods;
             _entityMethods = entityMethods;
             _localDataMethods = localDataMethods;
             _physicsMethods = physicsMethods;
             _scriptingMethods = scriptingMethods;
-            _sceneMethods = sceneMethods;
 
             _javaScriptEngine = new Engine();
             _luaEngine = new Lua();
@@ -189,15 +176,15 @@ namespace Ceriyo.Infrastructure.Services
 
         private void RegisterClientMethods()
         {
-            // Lua
-            _luaEngine["Control"] = _controlMethods;
-            _luaEngine["Style"] = _styleMethods;
-            _luaEngine["Scene"] = _sceneMethods;
+            //// Lua
+            //_luaEngine["Control"] = _controlMethods;
+            //_luaEngine["Style"] = _styleMethods;
+            //_luaEngine["Scene"] = _sceneMethods;
 
-            // JavaScript
-            _javaScriptEngine.SetValue("Control", _controlMethods);
-            _javaScriptEngine.SetValue("Style", _styleMethods);
-            _javaScriptEngine.SetValue("Scene", _sceneMethods);
+            //// JavaScript
+            //_javaScriptEngine.SetValue("Control", _controlMethods);
+            //_javaScriptEngine.SetValue("Style", _styleMethods);
+            //_javaScriptEngine.SetValue("Scene", _sceneMethods);
         }
 
         private void RegisterServerEnumerations()
@@ -207,8 +194,8 @@ namespace Ceriyo.Infrastructure.Services
 
         private void RegisterClientEnumerations()
         {
-            RegisterEnumeration("TextureMode", typeof(TextureMode));
-            RegisterEnumeration("Alignment", typeof(Alignment));
+            //RegisterEnumeration("TextureMode", typeof(TextureMode));
+            //RegisterEnumeration("Alignment", typeof(Alignment));
             RegisterEnumeration("Cursor", typeof(CursorType));
         }
 

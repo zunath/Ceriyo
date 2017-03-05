@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{019A2BA4-5373-4003-986B-EF85C0DF3BBA}</ProjectGuid>
+    <ProjectGuid>{2038979D-E700-4B17-AFD1-8ED4DAFF14B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ceriyo.Domain.Services</RootNamespace>
-    <AssemblyName>Ceriyo.Domain.Services</AssemblyName>
+    <RootNamespace>Ceriyo.Tools.UIGenerator</RootNamespace>
+    <AssemblyName>Ceriyo.Tools.UIGenerator</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -31,10 +32,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="artemis, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Ceriyo.Content\Libraries\artemis.dll</HintPath>
+    <Reference Include="EmptyKeys.UserInterface.Designer, Version=2.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmptyKeysUI_Generator.2.6.0\lib\net45\EmptyKeys.UserInterface.Designer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,28 +46,29 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataServices\AreaDomainService.cs" />
-    <Compile Include="DataServices\Contracts\IAreaDomainService.cs" />
-    <Compile Include="DataServices\Contracts\IDataEditorDomainService.cs" />
-    <Compile Include="DataServices\Contracts\IResourceEditorDomainService.cs" />
-    <Compile Include="DataServices\DataEditorDomainService.cs" />
-    <Compile Include="DataServices\ResourceEditorDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
-      <Project>{a59bd6d2-8e98-4a48-9528-dec1139994a1}</Project>
-      <Name>Ceriyo.Content</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ceriyo.Core\Ceriyo.Core.csproj">
-      <Project>{552b7fd3-def9-433e-a069-771ccdbc3c58}</Project>
-      <Name>Ceriyo.Core</Name>
-    </ProjectReference>
+    <Page Include="Views\MainMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\CeriyoLogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>CD "$(SolutionDir)packages\EmptyKeysUI_Generator*\tools"
+
+ekUIGen.exe -i="$(ProjectDir)\Views" -o="$(ProjectDir)\..\Ceriyo.Core\GeneratedUI" -oa="$(ProjectDir)\..\Ceriyo.Content\UI" -bd="$(TargetDir)\" -rm=MonoGame</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

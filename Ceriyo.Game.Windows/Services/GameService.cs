@@ -16,10 +16,10 @@ namespace Ceriyo.Game.Windows.Services
         private readonly IGraphicsService _graphicsService;
         private readonly IScriptService _scriptService;
         private readonly IScreenService _screenService;
-        private readonly IUIService _uiService;
         private readonly IDataService _dataService;
         private readonly IAppService _appService;
         private readonly IInputService _inputService;
+        private readonly IUIService _uiService;
 
         public GameService(
             EntityWorld world,
@@ -28,10 +28,10 @@ namespace Ceriyo.Game.Windows.Services
             IGraphicsService graphicsService,
             IScriptService scriptService,
             IScreenService screenService,
-            IUIService uiService,
             IDataService dataService,
             IAppService appService,
-            IInputService inputService)
+            IInputService inputService,
+            IUIService uiService)
         {
             _world = world;
             _spriteBatch = spriteBatch;
@@ -39,10 +39,10 @@ namespace Ceriyo.Game.Windows.Services
             _graphicsService = graphicsService;
             _scriptService = scriptService;
             _screenService = screenService;
-            _uiService = uiService;
             _dataService = dataService;
             _appService = appService;
             _inputService = inputService;
+            _uiService = uiService;
         }
 
         public void Initialize(IGraphicsDeviceManager graphics)
@@ -50,8 +50,8 @@ namespace Ceriyo.Game.Windows.Services
             _appService.CreateAppDirectoryStructure();
             _dataService.Initialize();
             _graphicsService.Initialize((GraphicsDeviceManager)graphics);
-            _uiService.Initialize();
             _screenService.ChangeScreen<GameScreen>();
+            _uiService.Initialize((GraphicsDeviceManager)graphics);
 
             _scriptService.QueueScript("Client/LoadUIStyles.js", null);
             _scriptService.QueueScript("TestJS.js", null);
@@ -62,8 +62,8 @@ namespace Ceriyo.Game.Windows.Services
             _inputService.Update();
             _world.Update();
             _screenService.Update();
-            _scriptService.ExecuteQueuedScripts();
             _uiService.Update(gameTime);
+            _scriptService.ExecuteQueuedScripts();
         }
 
         public void Draw(GameTime gameTime)

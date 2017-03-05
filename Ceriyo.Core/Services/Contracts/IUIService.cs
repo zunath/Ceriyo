@@ -1,15 +1,15 @@
-﻿using Microsoft.Xna.Framework;
-using Squid;
+﻿using EmptyKeys.UserInterface.Controls;
+using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Core.Services.Contracts
 {
     public interface IUIService
     {
-        void Initialize();
+        void Initialize(IGraphicsDeviceManager graphics);
         void Update(GameTime gameTime);
         void Draw(GameTime gameTime);
-        void ChangeDesktop<T>()
-            where T: Desktop;
-        void ChangeDesktop(Desktop desktop);
+        void Exit();
+        void ChangeUIRoot<T>()
+            where T: UIRoot;
     }
 }

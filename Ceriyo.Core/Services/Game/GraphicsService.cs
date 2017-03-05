@@ -1,4 +1,5 @@
-﻿using Ceriyo.Core.Services.Contracts;
+﻿using System;
+using Ceriyo.Core.Services.Contracts;
 using Microsoft.Xna.Framework.Graphics;
 using XnaGraphicsDeviceManager = Microsoft.Xna.Framework.GraphicsDeviceManager;
 
@@ -7,7 +8,7 @@ namespace Ceriyo.Core.Services.Game
     public class GraphicsService: IGraphicsService
     {
         private XnaGraphicsDeviceManager _graphics;
-
+        
         // Initialize all graphics properties.
         public void Initialize(XnaGraphicsDeviceManager xnaGraphics)
         {
@@ -15,8 +16,9 @@ namespace Ceriyo.Core.Services.Game
             {
                 return;
             }
-
+    
             _graphics = xnaGraphics;
+            
             _graphics.PreferredBackBufferWidth = 800;
             _graphics.PreferredBackBufferHeight = 600;
             _graphics.IsFullScreen = false;
@@ -25,7 +27,7 @@ namespace Ceriyo.Core.Services.Game
             GraphicsDevice = _graphics.GraphicsDevice;
             SpriteBatch = new SpriteBatch(GraphicsDevice);
         }
-
+        
         public GraphicsDevice GraphicsDevice { get; private set; }
         public float AspectRatio => GraphicsDevice.Viewport.AspectRatio;
         public SpriteBatch SpriteBatch { get; private set; }

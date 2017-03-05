@@ -12,23 +12,6 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\x86\Debug\Content\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -68,6 +51,7 @@
     <Folder Include="Graphics\Icon\" />
     <Folder Include="Graphics\Item\" />
     <Folder Include="Graphics\Portrait\" />
+    <Folder Include="UI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Graphics\Tileset\Empty-Tileset.png">
@@ -88,7 +72,6 @@
     <Content Include="Graphics\UI\weapon-icons.png" />
     <Content Include="Graphics\UI\xna_logo.png" />
     <Content Include="Libraries\artemis.dll" />
-    <Content Include="Libraries\Squid.dll" />
     <Content Include="Scripts\Client\LoadUIStyles.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

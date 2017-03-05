@@ -4,8 +4,6 @@ using Artemis;
 using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Entities.Contracts;
-using Ceriyo.Core.Scripting.Client;
-using Ceriyo.Core.Scripting.Client.Contracts;
 using Ceriyo.Core.Scripting.Common;
 using Ceriyo.Core.Scripting.Common.Contracts;
 using Ceriyo.Core.Scripting.Server;
@@ -14,15 +12,14 @@ using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Services.Game;
 using Ceriyo.Core.Settings;
-using Ceriyo.Core.UI;
 using Ceriyo.Game.Windows.Services;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Helpers;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Services;
+using EmptyKeys.UserInterface;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using Squid;
 
 namespace Ceriyo.Game.Windows
 {
@@ -60,6 +57,7 @@ namespace Ceriyo.Game.Windows
             builder.RegisterType<PathService>().As<IPathService>().SingleInstance();
             builder.RegisterType<GameInputService>().As<IInputService>().SingleInstance();
             builder.RegisterType<EngineService>().As<IEngineService>().SingleInstance();
+            builder.RegisterType<UIService>().As<IUIService>().SingleInstance();
 
             // Artemis
             builder.RegisterType<EntityWorld>().SingleInstance();
@@ -75,22 +73,16 @@ namespace Ceriyo.Game.Windows
             builder.RegisterType<LocalDataMethods>().As<ILocalDataMethods>().SingleInstance();
             builder.RegisterType<PhysicsMethods>().As<IPhysicsMethods>().SingleInstance();
             builder.RegisterType<ScriptingMethods>().As<IScriptingMethods>().SingleInstance();
-            builder.RegisterType<ControlMethods>().As<IControlMethods>().SingleInstance();
-            builder.RegisterType<StyleMethods>().As<IStyleMethods>().SingleInstance();
-            builder.RegisterType<SceneMethods>().As<ISceneMethods>().SingleInstance();
             builder.RegisterType<ScriptService>().As<IScriptService>()
                 .WithParameter("isServer", false)
                 .SingleInstance();
-
+            
             // Game components
             RegisterGameEntities(builder);
             IOCHelpers.RegisterComponents(builder);
             IOCHelpers.RegisterSystems(builder);
             IOCHelpers.RegisterScreens(builder);
-
-            // UI
-            builder.RegisterType<SquidRenderer>().As<ISquidRenderer>();
-            builder.RegisterType<UIService>().As<IUIService>().SingleInstance();
+            
             
             _container = builder.Build();
         }

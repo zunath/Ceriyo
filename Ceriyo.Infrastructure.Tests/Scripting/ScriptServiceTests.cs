@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Ceriyo.Core.Scripting.Client;
 using Ceriyo.Core.Scripting.Common;
 using Ceriyo.Core.Scripting.Server;
 using Ceriyo.Core.Services;
@@ -20,19 +19,15 @@ namespace Ceriyo.Infrastructure.Tests.Scripting
         public void Setup()
         {
             var engineService = new EngineService();
-            var mockUIService = new Mock<IUIService>();
 
 
             _service = new ScriptService(false, 
                 new Logger(),
                 new LoggingMethods(), 
-                new ControlMethods(),
-                new StyleMethods(), 
                 new EntityMethods(engineService), 
                 new LocalDataMethods(), 
                 new PhysicsMethods(), 
-                new ScriptingMethods(),
-                new SceneMethods(mockUIService.Object));
+                new ScriptingMethods());
         }
 
         [Test]

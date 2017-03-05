@@ -5,8 +5,6 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Entities;
 using Ceriyo.Core.Entities.Contracts;
-using Ceriyo.Core.Scripting.Client;
-using Ceriyo.Core.Scripting.Client.Contracts;
 using Ceriyo.Core.Scripting.Common;
 using Ceriyo.Core.Scripting.Common.Contracts;
 using Ceriyo.Core.Scripting.Server;
@@ -15,7 +13,6 @@ using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Services.Game;
 using Ceriyo.Core.Services.Module;
-using Ceriyo.Core.Settings;
 using Ceriyo.Domain.Services.DataServices;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.Factory;
@@ -71,9 +68,6 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<LocalDataMethods>().As<ILocalDataMethods>().SingleInstance();
             builder.RegisterType<PhysicsMethods>().As<IPhysicsMethods>().SingleInstance();
             builder.RegisterType<ScriptingMethods>().As<IScriptingMethods>().SingleInstance();
-            builder.RegisterType<ControlMethods>().As<IControlMethods>().SingleInstance();
-            builder.RegisterType<StyleMethods>().As<IStyleMethods>().SingleInstance();
-            builder.RegisterType<SceneMethods>().As<ISceneMethods>().SingleInstance();
 
             // Mapping
             builder.RegisterType<ToolsetObjectMapper>().As<IObjectMapper>();
