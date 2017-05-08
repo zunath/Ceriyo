@@ -53,7 +53,9 @@
     <Compile Include="DataServices\ResourceEditorDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
       <Project>{a59bd6d2-8e98-4a48-9528-dec1139994a1}</Project>
