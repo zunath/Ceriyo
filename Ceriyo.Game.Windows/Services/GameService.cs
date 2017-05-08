@@ -50,11 +50,8 @@ namespace Ceriyo.Game.Windows.Services
             _appService.CreateAppDirectoryStructure();
             _dataService.Initialize();
             _graphicsService.Initialize((GraphicsDeviceManager)graphics);
-            _screenService.ChangeScreen<GameScreen>();
             _uiService.Initialize((GraphicsDeviceManager)graphics);
-
-            _scriptService.QueueScript("Client/LoadUIStyles.js", null);
-            _scriptService.QueueScript("TestJS.js", null);
+            _screenService.ChangeScreen<MainMenuScreen>();
         }
 
         public void Update(GameTime gameTime)

@@ -9,7 +9,8 @@ namespace Ceriyo.Core.Services.Contracts
         void Update(GameTime gameTime);
         void Draw(GameTime gameTime);
         void Exit();
-        void ChangeUIRoot<T>()
-            where T: UIRoot;
+
+        void ChangeUIRoot<T>(object viewModel)
+            where T : UIRoot;
     }
 }

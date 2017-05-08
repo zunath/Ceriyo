@@ -34,7 +34,7 @@
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Margin="4,4,4,4"
-            Content="Join Server">
+            Content="{Binding JoinServerText}">
 
         </Button>
         <Button
@@ -42,7 +42,8 @@
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Margin="4,4,4,4"
-            Content="Exit">
+            Content="{Binding ExitApplicationText}"
+            Command="{Binding ExitButtonCommand}">
 
         </Button>
 

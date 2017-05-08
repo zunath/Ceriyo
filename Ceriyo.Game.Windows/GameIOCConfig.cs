@@ -66,6 +66,7 @@ namespace Ceriyo.Game.Windows
             builder.RegisterType<EntityFactory>().As<IEntityFactory>().SingleInstance();
             builder.RegisterType<ComponentFactory>().As<IComponentFactory>().SingleInstance();
             builder.RegisterType<ScreenFactory>().As<IScreenFactory>();
+            builder.RegisterType<UIViewModelFactory>().As<IUIViewModelFactory>();
 
             // Scripting
             builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();
@@ -79,6 +80,7 @@ namespace Ceriyo.Game.Windows
             
             // Game components
             RegisterGameEntities(builder);
+            RegisterUIViewModels(builder);
             IOCHelpers.RegisterComponents(builder);
             IOCHelpers.RegisterSystems(builder);
             IOCHelpers.RegisterScreens(builder);
@@ -98,7 +100,18 @@ namespace Ceriyo.Game.Windows
             {
                 builder.RegisterType(type).As<IGameEntity>().Named<IGameEntity>(type.ToString());
             }
+        }
 
+        private static void RegisterUIViewModels(ContainerBuilder builder)
+        {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var uiViewModels = assemblies
+                .SelectMany(s => s.GetTypes())
+                .Where(p => typeof(IUIViewModel).IsAssignableFrom(p) && p.IsClass).ToArray();
+            foreach (Type type in uiViewModels)
+            {
+                builder.RegisterType(type).As<IUIViewModel>().Named<IUIViewModel>(type.ToString());
+            }
         }
         
         

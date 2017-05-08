@@ -1,4 +1,0 @@
-﻿function x()
-
-
-end x

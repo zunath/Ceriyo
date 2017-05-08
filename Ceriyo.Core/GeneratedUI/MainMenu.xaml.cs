@@ -94,19 +94,23 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_0.Children.Add(this.e_2);
             this.e_2.Name = "e_2";
             this.e_2.Margin = new Thickness(4F, 4F, 4F, 4F);
-            this.e_2.Content = "Join Server";
             Grid.SetColumn(this.e_2, 1);
             Grid.SetRow(this.e_2, 1);
             Grid.SetColumnSpan(this.e_2, 2);
+            Binding binding_e_2_Content = new Binding("JoinServerText");
+            this.e_2.SetBinding(Button.ContentProperty, binding_e_2_Content);
             // e_3 element
             this.e_3 = new Button();
             this.e_0.Children.Add(this.e_3);
             this.e_3.Name = "e_3";
             this.e_3.Margin = new Thickness(4F, 4F, 4F, 4F);
-            this.e_3.Content = "Exit";
             Grid.SetColumn(this.e_3, 1);
             Grid.SetRow(this.e_3, 2);
             Grid.SetColumnSpan(this.e_3, 2);
+            Binding binding_e_3_Content = new Binding("ExitApplicationText");
+            this.e_3.SetBinding(Button.ContentProperty, binding_e_3_Content);
+            Binding binding_e_3_Command = new Binding("ExitButtonCommand");
+            this.e_3.SetBinding(Button.CommandProperty, binding_e_3_Command);
         }
     }
 }

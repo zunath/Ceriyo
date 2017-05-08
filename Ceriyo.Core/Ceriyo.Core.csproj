@@ -106,6 +106,8 @@
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Constants\Zoom.cs" />
     <Compile Include="Contracts\ISystemLoader.cs" />
+    <Compile Include="Contracts\IUIViewModel.cs" />
+    <Compile Include="Contracts\IUIViewModelFactory.cs" />
     <Compile Include="Data\AreaData.cs" />
     <Compile Include="Data\ClassLevelData.cs" />
     <Compile Include="Data\Contracts\IDataDomainObject.cs" />
@@ -198,6 +200,7 @@
     <Compile Include="Systems\Draw\RenderSystem.cs" />
     <Compile Include="Systems\Update\HeartbeatSystem.cs" />
     <Compile Include="Systems\Update\PainterSystem.cs" />
+    <Compile Include="UIViewModels\MainMenuUIViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">

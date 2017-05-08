@@ -2,8 +2,11 @@
 using Ceriyo.Core.Services.Contracts;
 using EmptyKeys.UserInterface;
 using EmptyKeys.UserInterface.Controls;
-using EmptyKeys.UserInterface.Generated;
+using EmptyKeys.UserInterface.Media;
+using EmptyKeys.UserInterface.Media.Effects;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Core.Services.Game
 {
@@ -13,6 +16,9 @@ namespace Ceriyo.Core.Services.Game
         private MonoGameEngine _uiEngine;
         private UIRoot _activeRoot;
         private readonly Microsoft.Xna.Framework.Game _game;
+        private readonly ContentManager _contentManager;
+        
+        public object ActiveViewModel { get; private set; }
 
         public UIService(
             Microsoft.Xna.Framework.Game game,
@@ -20,6 +26,7 @@ namespace Ceriyo.Core.Services.Game
         {
             _game = game;
             _graphicsService = graphicsService;
+            _contentManager = game.Content;
         }
 
         public void Initialize(IGraphicsDeviceManager graphics)
@@ -29,13 +36,16 @@ namespace Ceriyo.Core.Services.Game
                 _graphicsService.GraphicsDevice.Viewport.Width,
                 _graphicsService.GraphicsDevice.Viewport.Height);
 
+            SpriteFont font = _contentManager.Load<SpriteFont>("Spritefonts/Arial10"); // TODO: Change font type
+            FontManager.DefaultFont = _uiEngine.Renderer.CreateFont(font); 
+
+            FontManager.Instance.LoadFonts(_contentManager);
+            ImageManager.Instance.LoadImages(_contentManager);
+            SoundManager.Instance.LoadSounds(_contentManager);
+            EffectManager.Instance.LoadEffects(_contentManager);
+
             _game.Window.ClientSizeChanged += WindowOnClientSizeChanged;
-
-            // DEBUGGING
-
-            ChangeUIRoot<MainMenu>();
-
-            // END DEBUGGING
+            
         }
 
         private void WindowOnClientSizeChanged(object sender, EventArgs eventArgs)
@@ -61,11 +71,14 @@ namespace Ceriyo.Core.Services.Game
         {
         }
 
-        public void ChangeUIRoot<T>() 
+        public void ChangeUIRoot<T>(object viewModel) 
             where T : UIRoot
         {
             UIRoot root = Activator.CreateInstance<T>();
             _activeRoot = root;
+            
+            ActiveViewModel = viewModel;
+            _activeRoot.DataContext = viewModel;
         }
     }
 }

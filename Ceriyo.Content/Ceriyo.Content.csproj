@@ -51,20 +51,17 @@
     <Folder Include="Graphics\Icon\" />
     <Folder Include="Graphics\Item\" />
     <Folder Include="Graphics\Portrait\" />
-    <Folder Include="UI\" />
+    <Folder Include="Scripts\Client\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Graphics\Tileset\Empty-Tileset.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Libraries\artemis.dll" />
-    <Content Include="Scripts\Client\LoadUIStyles.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="ResourcePacks\Default-Resources.rpk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Scripts\TestJS.js">
+    <None Include="Spritefonts\Segoe_UI_10_Regular.spritefont">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -94,9 +91,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Compiled\Spritefonts\Arial10.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Scripts\TestLua.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Spritefonts\Arial10.spritefont" />
