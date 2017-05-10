@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
+using System.Windows.Threading;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Entities;
 using Ceriyo.Core.Settings;
 using Ceriyo.Server.WPF.Actions;
 using Ceriyo.Server.WPF.Contracts;
-using Microsoft.Xna.Framework;
 using Prism.Commands;
 using Prism.Mvvm;
 
@@ -18,6 +19,9 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
     {
         private readonly IDataService _dataService;
         private readonly IServerActionFactory _serverActionFactory;
+        private readonly ConcurrentQueue<IServerAction> _actionQueue;
+        private readonly Timer _queueTimer;
+        
         public DetailsViewModel()
         {
             
@@ -31,8 +35,13 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             _serverActionFactory = serverActionFactory;
             _settings = settings;
             Modules = new BindingList<Module>();
+            Players = new BindingList<string>();
             MaximumPortNumber = short.MaxValue;
             MaximumPlayers = 50;
+
+            _actionQueue = new ConcurrentQueue<IServerAction>();
+            _queueTimer = new Timer(2000);
+            _queueTimer.Elapsed += ProcessServerActionsQueue;
 
             StartStopServerButtonText = "Start Server";
 
@@ -42,7 +51,44 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             SaveSettingsCommand = new DelegateCommand(SaveSettings);
             ToggleServerCommand = new DelegateCommand(ToggleServer);
         }
-        
+
+        private void ProcessServerActionsQueue(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            while (!_actionQueue.IsEmpty)
+            {
+                IServerAction action;
+                if (_actionQueue.TryDequeue(out action))
+                {
+                    if (action.GetType() == typeof(PlayerConnectedAction))
+                    {
+                        var convertedAction = (PlayerConnectedAction) action;
+                        if (!Players.Contains(convertedAction.Username))
+                        {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                Players.Add(convertedAction.Username);
+                            });
+                        }
+                    }
+                    else if (action.GetType() == typeof(PlayerDisconnectedAction))
+                    {
+                        var convertedAction = (PlayerDisconnectedAction) action;
+                        if (Players.Contains(convertedAction.Username))
+                        {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                Players.Remove(convertedAction.Username);
+                            });
+                        }
+                    }
+                    else
+                    {
+                        action.Process();
+                    }
+                }
+            }
+        }
+
         private ServerSettings _settings;
         public ServerSettings Settings
         {
@@ -182,6 +228,8 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
                     MessageBox.Show(ex.Message);
                     StartStopServerButtonText = "Start Server";
                     _isServerRunning = false;
+                    _queueTimer.Enabled = false;
+                    Players.Clear();
                 }
             }
             
@@ -192,16 +240,26 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             await Task.Run(() =>
             {
                 _isServerRunning = true;
-                using (_serverGame = new ServerGame())
+                _queueTimer.Enabled = true;
+                using (_serverGame = new ServerGame(this))
                 {
                     _serverGame.Run();
                 }
-
-                _serverGame.Dispose();
                 StartStopServerButtonText = "Start Server";
+                _queueTimer.Enabled = false;
                 _isServerRunning = false;
-                _serverGame = null;
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Players.Clear();
+                });
             });
         }
+
+        public void QueueAction(IServerAction action)
+        {
+            _actionQueue.Enqueue(action);
+        }
+
     }
 }

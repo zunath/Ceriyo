@@ -49,7 +49,7 @@ namespace Ceriyo.Core.Services.Game
             
         }
 
-        private void WindowOnClientSizeChanged(object sender, EventArgs eventArgs)
+        private void WindowOnClientSizeChanged(object sender, System.EventArgs eventArgs)
         {
             _activeRoot?.Resize(
                 _graphicsService.GraphicsDevice.Viewport.Width,

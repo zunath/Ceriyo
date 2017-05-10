@@ -150,6 +150,8 @@
     </Page>
     <Compile Include="Actions\BanAccountAction.cs" />
     <Compile Include="Actions\BootPlayerAction.cs" />
+    <Compile Include="Actions\PlayerConnectedAction.cs" />
+    <Compile Include="Actions\PlayerDisconnectedAction.cs" />
     <Compile Include="Actions\SendMessageAction.cs" />
     <Compile Include="Actions\StopServerAction.cs" />
     <Compile Include="App.xaml.cs">

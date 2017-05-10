@@ -121,6 +121,7 @@
     <Compile Include="Data\TileAtlasData.cs" />
     <Compile Include="Data\TileData.cs" />
     <Compile Include="Entities\ObjectPainter.cs" />
+    <Compile Include="EventArgs\NetworkConnectionEventArgs.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="Packets\ConnectionRequestPacket.cs" />
     <Compile Include="UI\Generated\Dictionary.xaml.cs" />

@@ -47,8 +47,7 @@ namespace Ceriyo.Server.WPF
             builder.RegisterType<Texture2D>();
 
             // Server logic specific services
-            builder.RegisterType<ServerActionService>().As<IServerActionService>().SingleInstance();
-            builder.RegisterType<ServerNetworkService>().As<IServerNetworkService>();
+            builder.RegisterType<ServerNetworkService>().As<IServerNetworkService>().SingleInstance();
 
             // Common builds between GUI and server logic
             Initialize(builder);
@@ -79,6 +78,8 @@ namespace Ceriyo.Server.WPF
             builder.RegisterType<PathService>().As<IPathService>();
             builder.RegisterType<ServerGameService>().As<IGameService>();
             builder.RegisterType<EngineService>().As<IEngineService>();
+            builder.RegisterType<ServerActionService>().As<IServerActionService>().SingleInstance();
+
 
             // Artemis
             builder.RegisterType<EntityWorld>().SingleInstance();

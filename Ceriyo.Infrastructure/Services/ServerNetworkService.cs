@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.EventArgs;
 using Ceriyo.Core.Packets;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Settings;
@@ -90,25 +91,31 @@ namespace Ceriyo.Infrastructure.Services
         {
             MemoryStream stream = new MemoryStream(message.Data);
             var packet = Serializer.Deserialize<ConnectionRequestPacket>(stream);
-            if (!string.IsNullOrWhiteSpace(_serverSettings.PlayerPassword))
+            if (packet.Password != _serverSettings.PlayerPassword)
             {
-                if (packet.Password == _serverSettings.PlayerPassword)
-                {
-                    message.SenderConnection.Approve();
-                    _connections.Add(packet.Username, message.SenderConnection);
-                }
-                else
-                {
-                    message.SenderConnection.Deny("Invalid password.");
-                }
-            }
-            else
-            {
-                message.SenderConnection.Approve();
-                _connections.Add(packet.Username, message.SenderConnection);
+                message.SenderConnection.Deny("Invalid password.");
+                _logger.Info($"User {packet.Username} entered an invalid password.");
+                return;
             }
 
+            if (_connections.ContainsKey(packet.Username))
+            {
+                message.SenderConnection.Deny("User is already connected.");
+                _logger.Info($"User {packet.Username} is already connected to the server.");
+                return;
+            }
+
+            if (_connections.Count >= _serverSettings.MaxPlayers)
+            {
+                message.SenderConnection.Deny("Server is full.");
+                _logger.Info($"User {packet.Username} tried to connect but the server was already full.");
+                return;
+            }
+
+            message.SenderConnection.Approve();
+            OnPlayerConnected?.Invoke(this, new NetworkConnectionEventArgs(packet.Username));
         }
+        
 
         public void SendMessage(PacketDeliveryMethod method, INetworkPacket packet, string accountName)
         {
@@ -146,5 +153,8 @@ namespace Ceriyo.Infrastructure.Services
 
             _server.SendMessage(message, recipient, deliveryMethod);
         }
+
+        public event EventHandler<NetworkConnectionEventArgs> OnPlayerConnected;
+        public event EventHandler<NetworkConnectionEventArgs> OnPlayerDisconnected;
     }
 }

@@ -61,5 +61,6 @@ namespace Ceriyo.Server.WPF.Services
         {
             _networkService.StopServer();
         }
+
     }
 }
