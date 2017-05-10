@@ -3,49 +3,84 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ek="clr-namespace:EmptyKeys.UserInterface.Designer;assembly=EmptyKeys.UserInterface.Designer"
-             Background="Transparent"
+             Background="DarkGray"
              xmlns:c="clr-namespace:EmptyKeys.UserInterface.Designer.Charts;assembly=EmptyKeys.UserInterface.Designer"
-             mc:Ignorable="d" Height="800" Width="600">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
+             mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="600"
+             OwnedWindowsContent="{Binding Windows}">
 
-        <Image
+    <ek:UIRoot.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Ceriyo.Tools.UIGenerator;component/Views/Dictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ek:UIRoot.Resources>
+
+    <DockPanel>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Image
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="4"
-            Source="../Images/CeriyoLogo.png">
-            
-        </Image>
-        
-        <Button
+            Grid.ColumnSpan="4">
+                <Image.Source>
+                    <BitmapImage UriSource="/Images/CeriyoLogo.png"></BitmapImage>
+                </Image.Source>
+            </Image>
+
+            <Button
             Grid.Row="1"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Margin="4,4,4,4"
-            Content="{Binding JoinServerText}">
+            Content="{Binding JoinServerText}"
+            Command="{Binding JoinServerCommand}">
 
-        </Button>
-        <Button
+            </Button>
+            <Button
             Grid.Row="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="4,4,4,4"
+            Content="{Binding DirectConnectText}"
+            Command="{Binding DirectConnectCommand}">
+
+            </Button>
+            <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="4,4,4,4"
+            Content="{Binding SettingsText}"
+            Command="{Binding SettingsCommand}">
+
+            </Button>
+            <Button
+            Grid.Row="4"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Margin="4,4,4,4"
             Content="{Binding ExitApplicationText}"
             Command="{Binding ExitButtonCommand}">
 
-        </Button>
+            </Button>
 
-    </Grid>
+        </Grid>
+    </DockPanel>
+    
 </ek:UIRoot>

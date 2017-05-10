@@ -1,4 +1,5 @@
 ﻿using EmptyKeys.UserInterface.Controls;
+using EmptyKeys.UserInterface.Mvvm;
 using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Core.Services.Contracts
@@ -10,7 +11,7 @@ namespace Ceriyo.Core.Services.Contracts
         void Draw(GameTime gameTime);
         void Exit();
 
-        void ChangeUIRoot<T>(object viewModel)
+        void ChangeUIRoot<T>(ViewModelBase viewModel)
             where T : UIRoot;
     }
 }

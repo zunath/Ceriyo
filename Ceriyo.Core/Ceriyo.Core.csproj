@@ -118,7 +118,11 @@
     <Compile Include="Data\TileData.cs" />
     <Compile Include="Entities\ObjectPainter.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
-    <Compile Include="GeneratedUI\MainMenu.xaml.cs" />
+    <Compile Include="UI\Generated\Dictionary.xaml.cs" />
+    <Compile Include="UI\Generated\DirectConnect.xaml.cs" />
+    <Compile Include="UI\Generated\DirectConnect.xaml_bindings.cs" />
+    <Compile Include="UI\Generated\MainMenu.xaml.cs" />
+    <Compile Include="UI\Generated\MainMenu.xaml_bindings.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
     <Compile Include="Data\SerializedFileData.cs" />
     <Compile Include="Data\ResourceItemData.cs" />
@@ -200,7 +204,8 @@
     <Compile Include="Systems\Draw\RenderSystem.cs" />
     <Compile Include="Systems\Update\HeartbeatSystem.cs" />
     <Compile Include="Systems\Update\PainterSystem.cs" />
-    <Compile Include="UIViewModels\MainMenuUIViewModel.cs" />
+    <Compile Include="UI\ViewModels\DirectConnectUIViewModel.cs" />
+    <Compile Include="UI\ViewModels\MainMenuUIViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
@@ -217,7 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BehaviorsLicense.txt" />
-    <Content Include="GeneratedUI\GeneratedUI Readme.txt" />
+    <Content Include="UI\Generated\GeneratedUI Readme.txt" />
     <Content Include="license.txt" />
     <Content Include="shaders\DirectionalBlurShader.fx" />
   </ItemGroup>

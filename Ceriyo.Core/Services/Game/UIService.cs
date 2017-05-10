@@ -4,6 +4,7 @@ using EmptyKeys.UserInterface;
 using EmptyKeys.UserInterface.Controls;
 using EmptyKeys.UserInterface.Media;
 using EmptyKeys.UserInterface.Media.Effects;
+using EmptyKeys.UserInterface.Mvvm;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -71,7 +72,7 @@ namespace Ceriyo.Core.Services.Game
         {
         }
 
-        public void ChangeUIRoot<T>(object viewModel) 
+        public void ChangeUIRoot<T>(ViewModelBase viewModel) 
             where T : UIRoot
         {
             UIRoot root = Activator.CreateInstance<T>();
