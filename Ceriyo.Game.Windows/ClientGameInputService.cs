@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Ceriyo.Game.Windows
 {
-    public class GameInputService: IInputService
+    public class ClientGameInputService: IInputService
     {
         private MouseState _lastMouseState;
         private MouseState _currentMouseState;

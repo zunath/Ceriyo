@@ -58,7 +58,6 @@ namespace Ceriyo.Toolset.WPF.GameWorld
 
         public void Exit()
         {
-
         }
     }
 }

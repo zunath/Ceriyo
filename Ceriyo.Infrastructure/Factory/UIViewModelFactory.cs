@@ -1,5 +1,4 @@
-﻿using Artemis.Interface;
-using Autofac;
+﻿using Autofac;
 using Ceriyo.Core.Contracts;
 
 namespace Ceriyo.Infrastructure.Factory
@@ -16,7 +15,6 @@ namespace Ceriyo.Infrastructure.Factory
         public T Create<T>() where T : IUIViewModel
         {
             return (T)_context.ResolveNamed<IUIViewModel>(typeof(T).ToString());
-
         }
     }
 }

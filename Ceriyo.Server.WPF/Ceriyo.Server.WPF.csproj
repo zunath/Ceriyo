@@ -148,12 +148,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Actions\BanAccountAction.cs" />
+    <Compile Include="Actions\BootPlayerAction.cs" />
+    <Compile Include="Actions\SendMessageAction.cs" />
+    <Compile Include="Actions\StopServerAction.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Contracts\IServerAction.cs" />
+    <Compile Include="Contracts\IServerActionFactory.cs" />
+    <Compile Include="Contracts\IServerActionService.cs" />
+    <Compile Include="Factory\ServerActionFactory.cs" />
+    <Compile Include="Factory\ServerGameFactory.cs" />
+    <Compile Include="ServerGame.cs" />
     <Compile Include="ServerIOCConfig.cs" />
+    <Compile Include="Services\ServerActionService.cs" />
+    <Compile Include="Services\ServerGameService.cs" />
     <Compile Include="Views\ApplicationRootView\ApplicationRootViewModel.cs" />
     <Compile Include="Views\DescriptionView\Description.xaml.cs">
       <DependentUpon>Description.xaml</DependentUpon>

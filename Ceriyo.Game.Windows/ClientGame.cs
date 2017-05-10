@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Game.Windows
 {
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class ClientGame : Microsoft.Xna.Framework.Game
     {
         private readonly GraphicsDeviceManager _graphics;
         private IGameService _gameService;
@@ -13,7 +13,7 @@ namespace Ceriyo.Game.Windows
         private int _backupWidth;
         private int _backupHeight;
 
-        public Game1()
+        public ClientGame()
         {
             _graphics = new GraphicsDeviceManager(this)
             {
@@ -44,8 +44,8 @@ namespace Ceriyo.Game.Windows
 
         protected override void Initialize()
         {
-            GameIOCConfig.Initialize(this);
-            _gameService = GameFactory.GetGameService();
+            ClientGameIOCConfig.Initialize(this);
+            _gameService = ClientGameFactory.GetClientGameService();
             _gameService.Initialize(_graphics);
 
             base.Initialize();
@@ -75,6 +75,12 @@ namespace Ceriyo.Game.Windows
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _gameService.Draw(gameTime);
             base.Draw(gameTime);
+        }
+
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            _gameService.Exit();
+            base.OnExiting(sender, args);
         }
     }
 }

@@ -273,8 +273,9 @@
             Margin="10,4,5,4"
             Grid.Column="5"
             Grid.Row="10"
-            Command="{Binding StartServerCommand}">
-            Start Server
+            Command="{Binding ToggleServerCommand}"
+            Content="{Binding StartStopServerButtonText}">
+            
         </Button>
 
 

@@ -1,7 +1,14 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Timers;
+using System.Windows;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Entities;
 using Ceriyo.Core.Settings;
+using Ceriyo.Server.WPF.Actions;
+using Ceriyo.Server.WPF.Contracts;
+using Microsoft.Xna.Framework;
 using Prism.Commands;
 using Prism.Mvvm;
 
@@ -10,27 +17,32 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
     public class DetailsViewModel : BindableBase
     {
         private readonly IDataService _dataService;
+        private readonly IServerActionFactory _serverActionFactory;
         public DetailsViewModel()
         {
             
         }
 
         public DetailsViewModel(IDataService dataService, 
+            IServerActionFactory serverActionFactory,
             ServerSettings settings)
         {
             _dataService = dataService;
+            _serverActionFactory = serverActionFactory;
             _settings = settings;
             Modules = new BindingList<Module>();
             MaximumPortNumber = short.MaxValue;
             MaximumPlayers = 50;
 
+            StartStopServerButtonText = "Start Server";
+
             BanAccountCommand = new DelegateCommand(BanAccount);
             BootPlayerCommand = new DelegateCommand(BootPlayer);
             SendMessageCommand = new DelegateCommand(SendMessage);
             SaveSettingsCommand = new DelegateCommand(SaveSettings);
-            StartServerCommand = new DelegateCommand(StartServer);
+            ToggleServerCommand = new DelegateCommand(ToggleServer);
         }
-
+        
         private ServerSettings _settings;
         public ServerSettings Settings
         {
@@ -110,25 +122,40 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             set { SetProperty(ref _serverStatus, value); }
         }
 
+        private string _startStopServerButtonText;
+
+        public string StartStopServerButtonText
+        {
+            get { return _startStopServerButtonText; }
+            set { SetProperty(ref _startStopServerButtonText, value); }
+        }
+
+        private bool _isServerRunning;
+        private ServerGame _serverGame;
+
+
         public DelegateCommand BanAccountCommand { get; set; }
         public DelegateCommand BootPlayerCommand { get; set; }
         public DelegateCommand SendMessageCommand { get; set; }
         public DelegateCommand SaveSettingsCommand { get; set; }
-        public DelegateCommand StartServerCommand { get; set; }
+        public DelegateCommand ToggleServerCommand { get; set; }
 
         private void BanAccount()
         {
-            
+            var action = _serverActionFactory.Create<BanAccountAction>();
+            _serverGame.QueueAction(action);
         }
 
         private void BootPlayer()
         {
-            
+            var action = _serverActionFactory.Create<BootPlayerAction>();
+            _serverGame.QueueAction(action);
         }
 
         private void SendMessage()
         {
-            
+            var action = _serverActionFactory.Create<SendMessageAction>();
+            _serverGame.QueueAction(action);
         }
 
         private void SaveSettings()
@@ -136,12 +163,45 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             _dataService.Save(_settings);
         }
 
-        private void StartServer()
+        private void ToggleServer()
         {
+            if (_isServerRunning)
+            {
+                StopServerAction action = _serverActionFactory.Create<StopServerAction>();
+                _serverGame.QueueAction(action);
+            }
+            else
+            {
+                try
+                {
+                    StartStopServerButtonText = "Stop Server";
+                    StartServerAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    StartStopServerButtonText = "Start Server";
+                    _isServerRunning = false;
+                }
+            }
             
         }
-        
 
+        private async void StartServerAsync()
+        {
+            await Task.Run(() =>
+            {
+                _isServerRunning = true;
+                using (_serverGame = new ServerGame())
+                {
+                    _serverGame.Run();
+                }
 
+                _serverGame.Dispose();
+                StartStopServerButtonText = "Start Server";
+                _isServerRunning = false;
+                _serverGame = null;
+            });
+        }
     }
 }

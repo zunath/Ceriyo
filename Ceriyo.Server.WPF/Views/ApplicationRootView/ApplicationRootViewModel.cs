@@ -44,9 +44,6 @@ namespace Ceriyo.Server.WPF.Views.ApplicationRootView
             _settings.PlayerPassword = loadedSettings.PlayerPassword;
             _settings.Port = loadedSettings.Port;
             _settings.ServerName = loadedSettings.ServerName;
-
-
-            _settings.Description = "this is set from app loaded";
         }
         
     }

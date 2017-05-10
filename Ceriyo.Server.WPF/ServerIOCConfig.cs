@@ -1,4 +1,6 @@
-﻿using Artemis;
+﻿using System;
+using System.Linq;
+using Artemis;
 using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Scripting.Common;
@@ -12,12 +14,51 @@ using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Services;
+using Ceriyo.Server.WPF.Contracts;
+using Ceriyo.Server.WPF.Factory;
+using Ceriyo.Server.WPF.Services;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Server.WPF
 {
     public class ServerIOCConfig
     {
+        private static IContainer _container;
+
+        public static T Resolve<T>()
+        {
+            return _container.Resolve<T>();
+        }
+
+        /// <summary>
+        /// Initialize the IOC configuration for use with the ServerGame (server logic)
+        /// </summary>
+        /// <param name="game"></param>
+        public static void Initialize(Game game)
+        {
+            var builder = new ContainerBuilder();
+            game.Content.RootDirectory = "Compiled";
+
+            // Monogame
+            builder.RegisterInstance(game).SingleInstance();
+            builder.RegisterInstance(game.Content).AsSelf();
+            builder.RegisterInstance(game.GraphicsDevice).AsSelf();
+            builder.RegisterType<Texture2D>();
+
+            // Server logic specific services
+            builder.RegisterType<ServerActionService>().As<IServerActionService>().SingleInstance();
+
+            // Common builds between GUI and server logic
+            Initialize(builder);
+
+            _container = builder.Build();
+        }
+
+        /// <summary>
+        /// Initialize the IOC configuration for use with the server GUI
+        /// </summary>
+        /// <param name="builder"></param>
         public static void Initialize(ContainerBuilder builder)
         {
             // Instances
@@ -35,6 +76,8 @@ namespace Ceriyo.Server.WPF
             builder.RegisterType<ScreenService>().As<IScreenService>();
             builder.RegisterType<GraphicsService>().As<IGraphicsService>();
             builder.RegisterType<PathService>().As<IPathService>();
+            builder.RegisterType<ServerGameService>().As<IGameService>();
+            builder.RegisterType<EngineService>().As<IEngineService>();
 
             // Artemis
             builder.RegisterType<EntityWorld>().SingleInstance();
@@ -42,7 +85,8 @@ namespace Ceriyo.Server.WPF
             // Factory
             builder.RegisterType<EntityFactory>().As<IEntityFactory>().SingleInstance();
             builder.RegisterType<ComponentFactory>().As<IComponentFactory>().SingleInstance();
-            builder.RegisterType<ScreenFactory>().As<IScreenFactory>();
+            builder.RegisterType<ScreenFactory>().As<IScreenFactory>().SingleInstance();
+            builder.RegisterType<ServerActionFactory>().As<IServerActionFactory>().SingleInstance();
 
             // Scripting
             builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();
@@ -53,6 +97,22 @@ namespace Ceriyo.Server.WPF
             builder.RegisterType<ScriptService>().As<IScriptService>()
                 .WithParameter("isServer", true)
                 .SingleInstance();
+
+            // Server Actions
+            RegisterServerActions(builder);
         }
+
+        private static void RegisterServerActions(ContainerBuilder builder)
+        {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var uiViewModels = assemblies
+                .SelectMany(s => s.GetTypes())
+                .Where(p => typeof(IServerAction).IsAssignableFrom(p) && p.IsClass).ToArray();
+            foreach (Type type in uiViewModels)
+            {
+                builder.RegisterType(type).As<IServerAction>().Named<IServerAction>(type.ToString());
+            }
+        }
+
     }
 }

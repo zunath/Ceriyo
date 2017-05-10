@@ -8,7 +8,7 @@ using MonoGame.Extended;
 
 namespace Ceriyo.Game.Windows.Services
 {
-    public class GameService: IGameService
+    public class ClientGameService: IGameService
     {
         private readonly EntityWorld _world;
         private readonly SpriteBatch _spriteBatch;
@@ -21,7 +21,7 @@ namespace Ceriyo.Game.Windows.Services
         private readonly IInputService _inputService;
         private readonly IUIService _uiService;
 
-        public GameService(
+        public ClientGameService(
             EntityWorld world,
             SpriteBatch spriteBatch,
             Camera2D camera,
@@ -81,6 +81,7 @@ namespace Ceriyo.Game.Windows.Services
 
         public void Exit()
         {
+
         }
     }
 }

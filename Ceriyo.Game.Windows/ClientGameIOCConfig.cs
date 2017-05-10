@@ -23,7 +23,7 @@ using MonoGame.Extended;
 
 namespace Ceriyo.Game.Windows
 {
-    public class GameIOCConfig
+    public class ClientGameIOCConfig
     {
         private static IContainer _container;
 
@@ -51,11 +51,11 @@ namespace Ceriyo.Game.Windows
             // Services
             builder.RegisterType<AppService>().As<IAppService>().SingleInstance();
             builder.RegisterType<DataService>().As<IDataService>().SingleInstance();
-            builder.RegisterType<GameService>().As<IGameService>().SingleInstance();
+            builder.RegisterType<ClientGameService>().As<IGameService>().SingleInstance();
             builder.RegisterType<ScreenService>().As<IScreenService>().SingleInstance();
             builder.RegisterType<GraphicsService>().As<IGraphicsService>().SingleInstance();
             builder.RegisterType<PathService>().As<IPathService>().SingleInstance();
-            builder.RegisterType<GameInputService>().As<IInputService>().SingleInstance();
+            builder.RegisterType<ClientGameInputService>().As<IInputService>().SingleInstance();
             builder.RegisterType<EngineService>().As<IEngineService>().SingleInstance();
             builder.RegisterType<UIService>().As<IUIService>().SingleInstance();
 
