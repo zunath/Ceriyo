@@ -2,6 +2,7 @@
 {
     public interface IEngineService
     {
+        string ApplicationIdentifier { get; }
         int TileWidth { get; }
         int TileHeight { get; }
         int MaxAreaWidth { get; }

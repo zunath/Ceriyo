@@ -100,11 +100,15 @@
     <Compile Include="Constants\GameCategory.cs" />
     <Compile Include="Constants\Gender.cs" />
     <Compile Include="Constants\InventorySlot.cs" />
+    <Compile Include="Constants\PacketDeliveryMethod.cs" />
     <Compile Include="Constants\PVPType.cs" />
     <Compile Include="Constants\ResourceType.cs" />
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Constants\Zoom.cs" />
+    <Compile Include="Contracts\IClientNetworkService.cs" />
+    <Compile Include="Contracts\INetworkPacket.cs" />
+    <Compile Include="Contracts\IServerNetworkService.cs" />
     <Compile Include="Contracts\ISystemLoader.cs" />
     <Compile Include="Contracts\IUIViewModel.cs" />
     <Compile Include="Contracts\IUIViewModelFactory.cs" />
@@ -118,6 +122,7 @@
     <Compile Include="Data\TileData.cs" />
     <Compile Include="Entities\ObjectPainter.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
+    <Compile Include="Packets\ConnectionRequestPacket.cs" />
     <Compile Include="UI\Generated\Dictionary.xaml.cs" />
     <Compile Include="UI\Generated\DirectConnect.xaml.cs" />
     <Compile Include="UI\Generated\DirectConnect.xaml_bindings.cs" />

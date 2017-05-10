@@ -48,6 +48,7 @@ namespace Ceriyo.Server.WPF
 
             // Server logic specific services
             builder.RegisterType<ServerActionService>().As<IServerActionService>().SingleInstance();
+            builder.RegisterType<ServerNetworkService>().As<IServerNetworkService>();
 
             // Common builds between GUI and server logic
             Initialize(builder);

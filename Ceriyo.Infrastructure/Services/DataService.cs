@@ -4,6 +4,7 @@ using System.Linq;
 using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Packets;
 using Ceriyo.Core.Settings;
 using ProtoBuf;
 using ProtoBuf.Meta;
@@ -52,6 +53,9 @@ namespace Ceriyo.Infrastructure.Services
             Map<TileAtlasData>();
             Map<TileData>();
             Map<TilesetData>();
+
+            // Packets
+            Map<ConnectionRequestPacket>();
         }
 
         private static void Map<T>()

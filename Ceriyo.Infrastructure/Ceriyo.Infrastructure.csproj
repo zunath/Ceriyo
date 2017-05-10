@@ -92,12 +92,12 @@
     <Compile Include="Helpers\IOCHelpers.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ClientNetworkService.cs" />
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\ServerNetworkService.cs" />
     <Compile Include="Services\ScriptService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contract\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
       <Project>{a59bd6d2-8e98-4a48-9528-dec1139994a1}</Project>

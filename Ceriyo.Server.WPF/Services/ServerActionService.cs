@@ -7,12 +7,10 @@ namespace Ceriyo.Server.WPF.Services
 {
     public class ServerActionService: IServerActionService
     {
-        private Guid _id;
         private ConcurrentQueue<IServerAction> _actionQueue;
 
         public ServerActionService()
         {
-            _id = Guid.NewGuid();
             _actionQueue = new ConcurrentQueue<IServerAction>();
             OnExitRequestReceived += ExitRequestReceived;
         }

@@ -10,16 +10,19 @@ namespace Ceriyo.Core.UI.ViewModels
     {
         private readonly IUIService _uiService;
         private readonly IUIViewModelFactory _vmFactory;
+        private readonly IClientNetworkService _networkService;
 
         public string IPAddress { get; set; }
         public string Password { get; set; }
 
 
         public DirectConnectUIViewModel(IUIService uiService,
-            IUIViewModelFactory vmFactory)
+            IUIViewModelFactory vmFactory,
+            IClientNetworkService networkService)
         {
             _uiService = uiService;
             _vmFactory = vmFactory;
+            _networkService = networkService;
 
             BackCommand = new RelayCommand(Back);
             ConnectCommand = new RelayCommand(Connect);
@@ -44,7 +47,7 @@ namespace Ceriyo.Core.UI.ViewModels
 
         private void Connect(object obj)
         {
-            
+            _networkService.ConnectToServer(IPAddress, 5121, "zunath", Password);
         }
 
     }
