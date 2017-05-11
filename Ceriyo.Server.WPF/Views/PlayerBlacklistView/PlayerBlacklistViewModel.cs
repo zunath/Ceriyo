@@ -49,7 +49,7 @@ namespace Ceriyo.Server.WPF.Views.PlayerBlacklistView
         {
             if (string.IsNullOrWhiteSpace(BlacklistUsername)) return;
 
-            _settings.Blacklist.Add(BlacklistUsername);
+            _settings.Blacklist.Add(BlacklistUsername.ToLower());
             BlacklistUsername = string.Empty;
         }
 

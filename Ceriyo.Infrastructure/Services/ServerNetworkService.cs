@@ -136,7 +136,7 @@ namespace Ceriyo.Infrastructure.Services
                 return;
             }
 
-            if (_settingsService.BlackList.Contains(packet.Username))
+            if (_settingsService.BlackList.Contains(packet.Username.ToLower()))
             {
                 message.SenderConnection.Deny("You are banned from this server.");
                 _logger.Info($"User {packet.Username} tried to connect but this user is banned from the server.");
