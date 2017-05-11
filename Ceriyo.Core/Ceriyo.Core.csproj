@@ -109,6 +109,7 @@
     <Compile Include="Contracts\IClientNetworkService.cs" />
     <Compile Include="Contracts\INetworkPacket.cs" />
     <Compile Include="Contracts\IServerNetworkService.cs" />
+    <Compile Include="Contracts\IServerSettingsService.cs" />
     <Compile Include="Contracts\ISystemLoader.cs" />
     <Compile Include="Contracts\IUIViewModel.cs" />
     <Compile Include="Contracts\IUIViewModelFactory.cs" />

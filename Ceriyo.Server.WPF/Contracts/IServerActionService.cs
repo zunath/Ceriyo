@@ -6,7 +6,5 @@ namespace Ceriyo.Server.WPF.Contracts
     {
         void QueueAction(IServerAction action);
         void ProcessActions();
-
-        event EventHandler OnExitRequestReceived;
     }
 }

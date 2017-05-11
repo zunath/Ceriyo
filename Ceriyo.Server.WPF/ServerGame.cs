@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.EventArgs;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Core.Settings;
 using Ceriyo.Server.WPF.Actions;
 using Ceriyo.Server.WPF.Contracts;
 using Ceriyo.Server.WPF.Factory;
@@ -17,10 +19,13 @@ namespace Ceriyo.Server.WPF
         private IServerActionService _actionService;
         private readonly DetailsViewModel _ownerThreadObject;
         private IServerNetworkService _networkService;
+        private readonly ServerSettings _initialSettings;
+        private IServerSettingsService _settingsService;
         
-        public ServerGame(DetailsViewModel ownerThread)
+        public ServerGame(DetailsViewModel ownerThread, ServerSettings initialSettings)
         {
             _ownerThreadObject = ownerThread;
+            _initialSettings = initialSettings;
 
             _graphics = new GraphicsDeviceManager(this)
             {
@@ -31,13 +36,22 @@ namespace Ceriyo.Server.WPF
         protected override void Initialize()
         {
             ServerIOCConfig.Initialize(this);
+
+            // Any data from the GUI thread needed for the logic thread 
+            // needs to be copied here.
+            _settingsService = ServerIOCConfig.Resolve<IServerSettingsService>();
+            _settingsService.CopySettings(_initialSettings);
+
             _gameService = ServerGameFactory.GetServerGameService();
             _gameService.Initialize(_graphics);
+
             _actionService = ServerIOCConfig.Resolve<IServerActionService>();
-            _actionService.OnExitRequestReceived += (sender, args) => Exit();
+            
+
             _networkService = ServerIOCConfig.Resolve<IServerNetworkService>();
             _networkService.OnPlayerConnected += OnPlayerConnected;
             _networkService.OnPlayerDisconnected += OnPlayerDisconnected;
+
 
             base.Initialize();
         }
@@ -71,10 +85,29 @@ namespace Ceriyo.Server.WPF
             
             base.OnExiting(sender, args);
         }
-
-        public void QueueAction(IServerAction action)
+        
+        public void BanUsername(string username)
         {
-            _actionService.QueueAction(action);
+            _networkService.BootUsername(username);
+
+            if (_settingsService.BlackList.Contains(username)) return;
+
+            _settingsService.BlackList.Add(username);
+        }
+        
+        public void BootUsername(string username)
+        {
+            _networkService.BootUsername(username);
+        }
+
+        public void SendServerMessage(string message)
+        {
+            
+        }
+
+        public void RefreshSettings(ServerSettings settings)
+        {
+            _settingsService.CopySettings(settings);
         }
 
         private void OnPlayerConnected(object sender, NetworkConnectionEventArgs e)

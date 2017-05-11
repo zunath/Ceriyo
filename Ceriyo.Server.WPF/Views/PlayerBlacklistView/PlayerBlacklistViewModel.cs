@@ -47,12 +47,17 @@ namespace Ceriyo.Server.WPF.Views.PlayerBlacklistView
 
         private void AddToBlacklist()
         {
-            
+            if (string.IsNullOrWhiteSpace(BlacklistUsername)) return;
+
+            _settings.Blacklist.Add(BlacklistUsername);
+            BlacklistUsername = string.Empty;
         }
 
         private void RemoveSelected()
         {
-            
+            if (!_settings.Blacklist.Contains(SelectedPlayer)) return;
+
+            _settings.Blacklist.Remove(SelectedPlayer);
         }
     }
 }

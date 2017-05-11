@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.EventArgs;
@@ -17,15 +18,17 @@ namespace Ceriyo.Infrastructure.Services
         private NetServer _server;
         private readonly ILogger _logger;
         private readonly IEngineService _engineService;
+        private readonly IServerSettingsService _settingsService;
         private readonly Dictionary<string, NetConnection> _usernameToConnection;
         private readonly Dictionary<NetConnection, string> _connectionToUsername;
-        private readonly ServerSettings _serverSettings;
 
-        public ServerNetworkService(ILogger logger, IEngineService engineService, ServerSettings serverSettings)
+        public ServerNetworkService(ILogger logger, 
+            IEngineService engineService,
+            IServerSettingsService settingsService)
         {
             _logger = logger;
             _engineService = engineService;
-            _serverSettings = serverSettings;
+            _settingsService = settingsService;
             _usernameToConnection = new Dictionary<string, NetConnection>();
             _connectionToUsername = new Dictionary<NetConnection, string>();
         }
@@ -111,7 +114,7 @@ namespace Ceriyo.Infrastructure.Services
         {
             MemoryStream stream = new MemoryStream(message.Data);
             var packet = Serializer.DeserializeWithLengthPrefix<ConnectionRequestPacket>(stream, PrefixStyle.Base128);
-            if (packet.Password != _serverSettings.PlayerPassword)
+            if (packet.Password != _settingsService.PlayerPassword)
             {
                 message.SenderConnection.Deny("Invalid password.");
                 _logger.Info($"User {packet.Username} entered an invalid password.");
@@ -126,14 +129,14 @@ namespace Ceriyo.Infrastructure.Services
                 return;
             }
 
-            if (_usernameToConnection.Count >= _serverSettings.MaxPlayers)
+            if (_usernameToConnection.Count >= _settingsService.MaxPlayers)
             {
                 message.SenderConnection.Deny("Server is full.");
                 _logger.Info($"User {packet.Username} tried to connect but the server was already full.");
                 return;
             }
 
-            if (_serverSettings.Blacklist.Contains(packet.Username))
+            if (_settingsService.BlackList.Contains(packet.Username))
             {
                 message.SenderConnection.Deny("You are banned from this server.");
                 _logger.Info($"User {packet.Username} tried to connect but this user is banned from the server.");

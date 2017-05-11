@@ -11,7 +11,7 @@ namespace Ceriyo.Server.WPF.Services
     public class ServerGameService: IGameService
     {
         private readonly EntityWorld _world;
-        private readonly ServerSettings _settings;
+        private readonly IServerSettingsService _settingsService;
         private readonly IScriptService _scriptService;
         private readonly IDataService _dataService;
         private readonly IAppService _appService;
@@ -20,7 +20,7 @@ namespace Ceriyo.Server.WPF.Services
 
         public ServerGameService(
             EntityWorld world,
-            ServerSettings serverSettings,
+            IServerSettingsService settingsService,
             IScriptService scriptService,
             IDataService dataService,
             IAppService appService,
@@ -28,7 +28,7 @@ namespace Ceriyo.Server.WPF.Services
             IServerNetworkService networkService)
         {
             _world = world;
-            _settings = serverSettings;
+            _settingsService = settingsService;
             _scriptService = scriptService;
             _dataService = dataService;
             _appService = appService;
@@ -40,7 +40,7 @@ namespace Ceriyo.Server.WPF.Services
         {
             _appService.CreateAppDirectoryStructure();
             _dataService.Initialize();
-            _networkService.StartServer(_settings.Port);
+            _networkService.StartServer(_settingsService.Port);
         }
 
         public void Update(GameTime gameTime)

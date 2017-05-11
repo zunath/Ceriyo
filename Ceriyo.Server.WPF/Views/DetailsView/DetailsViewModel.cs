@@ -18,7 +18,6 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
     public class DetailsViewModel : BindableBase
     {
         private readonly IDataService _dataService;
-        private readonly IServerActionFactory _serverActionFactory;
         private readonly ConcurrentQueue<IServerAction> _actionQueue;
         private readonly Timer _queueTimer;
         
@@ -28,11 +27,9 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
         }
 
         public DetailsViewModel(IDataService dataService, 
-            IServerActionFactory serverActionFactory,
             ServerSettings settings)
         {
             _dataService = dataService;
-            _serverActionFactory = serverActionFactory;
             _settings = settings;
             Modules = new BindingList<Module>();
             Players = new BindingList<string>();
@@ -45,7 +42,7 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
 
             StartStopServerButtonText = "Start Server";
 
-            BanAccountCommand = new DelegateCommand(BanAccount);
+            BanAccountCommand = new DelegateCommand(BanUsername);
             BootPlayerCommand = new DelegateCommand(BootPlayer);
             SendMessageCommand = new DelegateCommand(SendMessage);
             SaveSettingsCommand = new DelegateCommand(SaveSettings);
@@ -87,6 +84,8 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
                     }
                 }
             }
+
+            _serverGame.RefreshSettings(Settings);
         }
 
         private ServerSettings _settings;
@@ -186,24 +185,29 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
         public DelegateCommand SaveSettingsCommand { get; set; }
         public DelegateCommand ToggleServerCommand { get; set; }
 
-        private void BanAccount()
+        private void BanUsername()
         {
-            var action = _serverActionFactory.Create<BanAccountAction>();
-            action.Username = SelectedPlayer;
-            _serverGame.QueueAction(action);
-        }
+            if (string.IsNullOrWhiteSpace(SelectedPlayer)) return;
 
+            _serverGame.BanUsername(SelectedPlayer);
+
+            if (_settings.Blacklist.Contains(SelectedPlayer)) return;
+
+            _settings.Blacklist.Add(SelectedPlayer);
+        }
+        
         private void BootPlayer()
         {
-            var action = _serverActionFactory.Create<BootPlayerAction>();
-            action.Username = SelectedPlayer;
-            _serverGame.QueueAction(action);
+            if (string.IsNullOrWhiteSpace(SelectedPlayer)) return;
+
+            _serverGame.BootUsername(SelectedPlayer);
         }
 
         private void SendMessage()
         {
-            var action = _serverActionFactory.Create<SendMessageAction>();
-            _serverGame.QueueAction(action);
+            if (string.IsNullOrWhiteSpace(ServerMessage)) return;
+
+            _serverGame.SendServerMessage(ServerMessage);
         }
 
         private void SaveSettings()
@@ -215,8 +219,7 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
         {
             if (_isServerRunning)
             {
-                StopServerAction action = _serverActionFactory.Create<StopServerAction>();
-                _serverGame.QueueAction(action);
+                _serverGame.Exit();
             }
             else
             {
@@ -243,7 +246,7 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             {
                 _isServerRunning = true;
                 _queueTimer.Enabled = true;
-                using (_serverGame = new ServerGame(this))
+                using (_serverGame = new ServerGame(this, _settings))
                 {
                     _serverGame.Run();
                 }

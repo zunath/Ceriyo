@@ -7,12 +7,11 @@ namespace Ceriyo.Server.WPF.Services
 {
     public class ServerActionService: IServerActionService
     {
-        private ConcurrentQueue<IServerAction> _actionQueue;
+        private readonly ConcurrentQueue<IServerAction> _actionQueue;
 
         public ServerActionService()
         {
             _actionQueue = new ConcurrentQueue<IServerAction>();
-            OnExitRequestReceived += ExitRequestReceived;
         }
 
         public void QueueAction(IServerAction action)
@@ -27,24 +26,9 @@ namespace Ceriyo.Server.WPF.Services
                 IServerAction action;
                 if (_actionQueue.TryDequeue(out action))
                 {
-                    if (action.GetType() == typeof(StopServerAction))
-                    {
-                        OnExitRequestReceived?.Invoke(this, new EventArgs());
-                    }
-                    else
-                    {
-                        action.Process();
-                    }
-
+                    action.Process();
                 }
             }
         }
-
-        private void ExitRequestReceived(object sender, EventArgs e)
-        {
-            _actionQueue = new ConcurrentQueue<IServerAction>();
-        }
-        
-        public event EventHandler OnExitRequestReceived;
     }
 }
