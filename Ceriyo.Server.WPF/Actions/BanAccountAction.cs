@@ -1,4 +1,5 @@
-﻿using Ceriyo.Core.Settings;
+﻿using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Settings;
 using Ceriyo.Server.WPF.Contracts;
 
 namespace Ceriyo.Server.WPF.Actions
@@ -18,18 +19,20 @@ namespace Ceriyo.Server.WPF.Actions
             _actionFactory = actionFactory;
         }
 
-        public string AccountName { get; set; }
+        public string Username { get; set; }
 
         public void Process()
         {
-            if (string.IsNullOrWhiteSpace(AccountName)) return;
+            if (string.IsNullOrWhiteSpace(Username)) return;
 
             var action = _actionFactory.Create<BootPlayerAction>();
-            action.AccountName = AccountName;
+            action.Username = Username;
             _actionService.QueueAction(action);
 
-            if (_settings.Blacklist.Contains(AccountName)) return;
-            _settings.Blacklist.Add(AccountName);
+            if (_settings.Blacklist.Contains(Username)) return;
+
+            // TODO: BindingList is not threadsafe
+            _settings.Blacklist.Add(Username);
         }
     }
 }

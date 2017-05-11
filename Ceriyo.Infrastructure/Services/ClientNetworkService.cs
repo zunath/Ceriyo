@@ -31,7 +31,7 @@ namespace Ceriyo.Infrastructure.Services
             _client = new NetClient(config);
             NetOutgoingMessage message = _client.CreateMessage();
             MemoryStream stream = new MemoryStream();
-            Serializer.Serialize(stream, packet);
+            Serializer.SerializeWithLengthPrefix(stream, packet, PrefixStyle.Base128);
             message.Write(stream.ToArray());
 
             _client.Start();

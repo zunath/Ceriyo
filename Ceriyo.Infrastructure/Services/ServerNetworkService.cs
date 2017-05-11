@@ -17,7 +17,8 @@ namespace Ceriyo.Infrastructure.Services
         private NetServer _server;
         private readonly ILogger _logger;
         private readonly IEngineService _engineService;
-        private readonly Dictionary<string, NetConnection> _connections;
+        private readonly Dictionary<string, NetConnection> _usernameToConnection;
+        private readonly Dictionary<NetConnection, string> _connectionToUsername;
         private readonly ServerSettings _serverSettings;
 
         public ServerNetworkService(ILogger logger, IEngineService engineService, ServerSettings serverSettings)
@@ -25,7 +26,8 @@ namespace Ceriyo.Infrastructure.Services
             _logger = logger;
             _engineService = engineService;
             _serverSettings = serverSettings;
-            _connections = new Dictionary<string, NetConnection>();
+            _usernameToConnection = new Dictionary<string, NetConnection>();
+            _connectionToUsername = new Dictionary<NetConnection, string>();
         }
 
         public void StartServer(int port)
@@ -38,7 +40,7 @@ namespace Ceriyo.Infrastructure.Services
 
             _server = new NetServer(config);
             _server.Start();
-            _connections.Clear();
+            _usernameToConnection.Clear();
         }
 
         public void StopServer()
@@ -51,7 +53,7 @@ namespace Ceriyo.Infrastructure.Services
             }
 
             _server.Shutdown("Server shutting down.");
-            _connections.Clear();
+            _usernameToConnection.Clear();
         }
 
         public void ProcessMessages()
@@ -78,6 +80,24 @@ namespace Ceriyo.Infrastructure.Services
                         HandleConnectionApproval(message);
                         break;
 
+                    case NetIncomingMessageType.StatusChanged:
+                        NetConnectionStatus status = (NetConnectionStatus)message.ReadByte();
+
+                        if (status == NetConnectionStatus.Connected)
+                        {
+                            string username = _connectionToUsername[message.SenderConnection];
+                            OnPlayerConnected?.Invoke(this, new NetworkConnectionEventArgs(username));
+                        }
+                        else if (status == NetConnectionStatus.Disconnected)
+                        {
+                            string username = _connectionToUsername[message.SenderConnection];
+                            OnPlayerDisconnected?.Invoke(this, new NetworkConnectionEventArgs(username));
+                            _usernameToConnection.Remove(username);
+                            _connectionToUsername.Remove(message.SenderConnection);
+                        }
+
+                        break;
+
                     default:
                         _logger.Error("Message type unhandled.");
                         break;
@@ -90,7 +110,7 @@ namespace Ceriyo.Infrastructure.Services
         private void HandleConnectionApproval(NetIncomingMessage message)
         {
             MemoryStream stream = new MemoryStream(message.Data);
-            var packet = Serializer.Deserialize<ConnectionRequestPacket>(stream);
+            var packet = Serializer.DeserializeWithLengthPrefix<ConnectionRequestPacket>(stream, PrefixStyle.Base128);
             if (packet.Password != _serverSettings.PlayerPassword)
             {
                 message.SenderConnection.Deny("Invalid password.");
@@ -98,29 +118,39 @@ namespace Ceriyo.Infrastructure.Services
                 return;
             }
 
-            if (_connections.ContainsKey(packet.Username))
+            if (_usernameToConnection.ContainsKey(packet.Username) || 
+                _connectionToUsername.ContainsKey(message.SenderConnection))
             {
                 message.SenderConnection.Deny("User is already connected.");
                 _logger.Info($"User {packet.Username} is already connected to the server.");
                 return;
             }
 
-            if (_connections.Count >= _serverSettings.MaxPlayers)
+            if (_usernameToConnection.Count >= _serverSettings.MaxPlayers)
             {
                 message.SenderConnection.Deny("Server is full.");
                 _logger.Info($"User {packet.Username} tried to connect but the server was already full.");
                 return;
             }
 
+            if (_serverSettings.Blacklist.Contains(packet.Username))
+            {
+                message.SenderConnection.Deny("You are banned from this server.");
+                _logger.Info($"User {packet.Username} tried to connect but this user is banned from the server.");
+                return;
+            }
+
+
             message.SenderConnection.Approve();
-            OnPlayerConnected?.Invoke(this, new NetworkConnectionEventArgs(packet.Username));
+            _usernameToConnection.Add(packet.Username, message.SenderConnection);
+            _connectionToUsername.Add(message.SenderConnection, packet.Username);
         }
         
 
         public void SendMessage(PacketDeliveryMethod method, INetworkPacket packet, string accountName)
         {
-            if (!_connections.ContainsKey(accountName)) return;
-            NetConnection recipient = _connections[accountName];
+            if (!_usernameToConnection.ContainsKey(accountName)) return;
+            NetConnection recipient = _usernameToConnection[accountName];
 
             NetOutgoingMessage message = _server.CreateMessage();
             MemoryStream stream = new MemoryStream();
@@ -152,6 +182,14 @@ namespace Ceriyo.Infrastructure.Services
 
 
             _server.SendMessage(message, recipient, deliveryMethod);
+        }
+
+        public void BootUsername(string username)
+        {
+            if (!_usernameToConnection.ContainsKey(username)) return;
+
+            NetConnection connection = _usernameToConnection[username];
+            connection.Disconnect("You have been booted from the server.");
         }
 
         public event EventHandler<NetworkConnectionEventArgs> OnPlayerConnected;

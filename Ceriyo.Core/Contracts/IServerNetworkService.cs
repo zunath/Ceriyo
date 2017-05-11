@@ -11,6 +11,8 @@ namespace Ceriyo.Core.Contracts
         void ProcessMessages();
         void SendMessage(PacketDeliveryMethod method, INetworkPacket packet, string accountName);
 
+        void BootUsername(string username);
+
         event EventHandler<NetworkConnectionEventArgs> OnPlayerConnected;
         event EventHandler<NetworkConnectionEventArgs> OnPlayerDisconnected;
 

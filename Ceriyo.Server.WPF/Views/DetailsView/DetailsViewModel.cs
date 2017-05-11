@@ -189,12 +189,14 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
         private void BanAccount()
         {
             var action = _serverActionFactory.Create<BanAccountAction>();
+            action.Username = SelectedPlayer;
             _serverGame.QueueAction(action);
         }
 
         private void BootPlayer()
         {
             var action = _serverActionFactory.Create<BootPlayerAction>();
+            action.Username = SelectedPlayer;
             _serverGame.QueueAction(action);
         }
 
