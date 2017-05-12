@@ -6,86 +6,99 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ceriyo.Tools.UIGenerator.Views"
              mc:Ignorable="d" 
-             Background="DarkGray"
              d:DesignHeight="300" d:DesignWidth="300">
-    
-    <StackPanel>
-        
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="24"></RowDefinition>
-                <RowDefinition Height="24"></RowDefinition>
-                <RowDefinition Height="50"></RowDefinition>
-            </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
 
-            <TextBlock
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock
                 Grid.ColumnSpan="4"
                 Grid.Column="0"
                 Grid.Row="0"
                 HorizontalAlignment="Center"
                 Text="Direct Connect"
                 Margin="4,25,4,4">
-            
-            </TextBlock>
-        
-            <TextBlock
+
+        </TextBlock>
+
+        <TextBlock
                 Text="IP Address: "
                 Grid.Column="0"
                 Grid.Row="1"
                 Margin="12,4,4,4">
-            
-            </TextBlock>
-        
-            <TextBox
+
+        </TextBlock>
+
+        <TextBox
                 Grid.Column="1"
                 Grid.Row="1"
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="2"
                 Text="{Binding IPAddress}">
-            
-            </TextBox>
 
-            <TextBlock
+        </TextBox>
+
+
+        <TextBlock
+                Text="Port: "
+                Grid.Column="3"
+                Grid.Row="1"
+                Margin="12,4,4,4">
+
+        </TextBlock>
+
+        <ek:NumericTextBox
+                Grid.Column="4"
+                Grid.Row="1"
+                Value="{Binding Port}">
+
+        </ek:NumericTextBox>
+
+        <TextBlock
                 Text="Password: "
                 Grid.Column="0"
                 Grid.Row="2"
                 Margin="12,4,4,4">
-            </TextBlock>
-        
-            <ek:PasswordBox
+        </TextBlock>
+
+        <ek:PasswordBox
                 Grid.Column="1"
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="2"
                 Grid.Row="2"
                 Text="{Binding Password}">
-            
-            </ek:PasswordBox>
-        
-            <Button
+
+        </ek:PasswordBox>
+
+        <Button
                 Grid.Row="3"
-                Grid.Column="2"
+                Grid.Column="3"
                 Grid.ColumnSpan="2"
                 Content="Back"
-                Margin="4,4,4,4"
+                Margin="1,4,0,4"
                 Command="{Binding BackCommand}">
 
-            </Button>
-            <Button
+        </Button>
+        <Button
                 Grid.Row="3"
-                Grid.Column="0"
+                Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Content="Connect"
-                Margin="4,4,4,4"
+                Margin="0,4,1,4"
                 Command="{Binding ConnectCommand}">
 
-            </Button>
+        </Button>
 
-        </Grid>
-    </StackPanel>
+    </Grid>
 </ek:UIRoot>

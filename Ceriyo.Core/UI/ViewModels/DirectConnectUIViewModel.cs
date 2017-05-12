@@ -14,6 +14,7 @@ namespace Ceriyo.Core.UI.ViewModels
 
         public string IPAddress { get; set; }
         public string Password { get; set; }
+        public int Port { get; set; }
 
 
         public DirectConnectUIViewModel(IUIService uiService,
@@ -30,6 +31,7 @@ namespace Ceriyo.Core.UI.ViewModels
             // DEBUGGING
 
             IPAddress = "127.0.0.1"; // localhost for testing
+            Port = 5121; // Default Port
 
             // END DEBUGGING
 
@@ -47,7 +49,7 @@ namespace Ceriyo.Core.UI.ViewModels
 
         private void Connect(object obj)
         {
-            _networkService.ConnectToServer(IPAddress, 5121, "zunath", Password);
+            _networkService.ConnectToServer(IPAddress, Port, "zunath", Password);
         }
 
     }

@@ -3,7 +3,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ek="clr-namespace:EmptyKeys.UserInterface.Designer;assembly=EmptyKeys.UserInterface.Designer"
-             Background="DarkGray"
              xmlns:c="clr-namespace:EmptyKeys.UserInterface.Designer.Charts;assembly=EmptyKeys.UserInterface.Designer"
              mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="600"
              OwnedWindowsContent="{Binding Windows}">
@@ -39,7 +38,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="4">
                 <Image.Source>
-                    <BitmapImage UriSource="/Images/CeriyoLogo.png"></BitmapImage>
+                    <BitmapImage UriSource="/UI/Images/CeriyoLogo.png"></BitmapImage>
                 </Image.Source>
             </Image>
 

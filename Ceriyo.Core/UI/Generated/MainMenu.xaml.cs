@@ -59,7 +59,6 @@ namespace EmptyKeys.UserInterface.Generated {
         }
         
         private void InitializeComponent() {
-            this.Background = new SolidColorBrush(new ColorW(169, 169, 169, 255));
             Binding binding__OwnedWindowsContent = new Binding("Windows");
             this.SetBinding(UIRoot.OwnedWindowsContentProperty, binding__OwnedWindowsContent);
             InitializeElementResources(this);
@@ -103,7 +102,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_2);
             this.e_2.Name = "e_2";
             BitmapImage e_2_bm = new BitmapImage();
-            e_2_bm.TextureAsset = "Images/CeriyoLogo";
+            e_2_bm.TextureAsset = "UI/Images/CeriyoLogo";
             this.e_2.Source = e_2_bm;
             Grid.SetColumn(this.e_2, 0);
             Grid.SetRow(this.e_2, 0);
@@ -156,7 +155,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_6.SetBinding(Button.ContentProperty, binding_e_6_Content);
             Binding binding_e_6_Command = new Binding("ExitButtonCommand");
             this.e_6.SetBinding(Button.CommandProperty, binding_e_6_Command);
-            ImageManager.Instance.AddImage("Images/CeriyoLogo");
+            ImageManager.Instance.AddImage("UI/Images/CeriyoLogo");
         }
         
         private static void InitializeElementResources(UIElement elem) {

@@ -42,9 +42,9 @@ namespace EmptyKeys.UserInterface.Generated {
         private void InitializeResources() {
             // Resource - [Image] BitmapImage
             BitmapImage r_0_bm = new BitmapImage();
-            r_0_bm.TextureAsset = "Images/CeriyoLogo";
+            r_0_bm.TextureAsset = "UI/Images/CeriyoLogo";
             this.Add("Image", r_0_bm);
-            ImageManager.Instance.AddImage("Images/CeriyoLogo");
+            ImageManager.Instance.AddImage("UI/Images/CeriyoLogo");
         }
     }
 }

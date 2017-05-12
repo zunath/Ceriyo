@@ -59,12 +59,16 @@
     </Content>
     <Content Include="Libraries\artemis.dll" />
     <Content Include="UI\Images\CeriyoLogo.png" />
+    <None Include="Compiled\Spritefonts\Segoe_UI_10_Regular.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Compiled\UI\Images\CeriyoLogo.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="ResourcePacks\Default-Resources.rpk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Spritefonts\Segoe_UI_10_Regular.spritefont">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Spritefonts\Segoe_UI_10_Regular.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Compiled\Graphics\Cursors\Arrow.xnb">
@@ -91,10 +95,6 @@
     <None Include="Compiled\Graphics\Cursors\SizeWE.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Compiled\Spritefonts\Arial10.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Spritefonts\Arial10.spritefont" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

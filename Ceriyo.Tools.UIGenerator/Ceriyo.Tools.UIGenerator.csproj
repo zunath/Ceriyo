@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BehaviorsLicense.txt" />
-    <Content Include="Images\CeriyoLogo.png">
+    <Content Include="UI\Images\CeriyoLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="license.txt" />

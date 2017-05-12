@@ -3,6 +3,6 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:ek="clr-namespace:EmptyKeys.UserInterface.Designer;assembly=EmptyKeys.UserInterface.Designer">
 
-    <BitmapImage x:Key="Image" UriSource="/Images/CeriyoLogo.png" />
+    <BitmapImage x:Key="Image" UriSource="/UI/Images/CeriyoLogo.png" />
 
 </ResourceDictionary>

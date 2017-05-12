@@ -37,7 +37,7 @@ namespace Ceriyo.Core.Services.Game
                 _graphicsService.GraphicsDevice.Viewport.Width,
                 _graphicsService.GraphicsDevice.Viewport.Height);
 
-            SpriteFont font = _contentManager.Load<SpriteFont>("Spritefonts/Arial10"); // TODO: Change font type
+            SpriteFont font = _contentManager.Load<SpriteFont>("Spritefonts/Segoe_UI_10_Regular");
             FontManager.DefaultFont = _uiEngine.Renderer.CreateFont(font); 
 
             FontManager.Instance.LoadFonts(_contentManager);
