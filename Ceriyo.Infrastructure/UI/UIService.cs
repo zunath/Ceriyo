@@ -1,5 +1,6 @@
 ﻿using System;
 using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.UI.Contracts;
 using EmptyKeys.UserInterface;
 using EmptyKeys.UserInterface.Controls;
 using EmptyKeys.UserInterface.Media;
@@ -9,20 +10,20 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Ceriyo.Core.Services.Game
+namespace Ceriyo.Infrastructure.UI
 {
     public class UIService: IUIService
     {
         private readonly IGraphicsService _graphicsService;
         private MonoGameEngine _uiEngine;
         private UIRoot _activeRoot;
-        private readonly Microsoft.Xna.Framework.Game _game;
+        private readonly Game _game;
         private readonly ContentManager _contentManager;
         
         public object ActiveViewModel { get; private set; }
 
         public UIService(
-            Microsoft.Xna.Framework.Game game,
+            Game game,
             IGraphicsService graphicsService)
         {
             _game = game;
@@ -49,7 +50,7 @@ namespace Ceriyo.Core.Services.Game
             
         }
 
-        private void WindowOnClientSizeChanged(object sender, System.EventArgs eventArgs)
+        private void WindowOnClientSizeChanged(object sender, EventArgs eventArgs)
         {
             _activeRoot?.Resize(
                 _graphicsService.GraphicsDevice.Viewport.Width,

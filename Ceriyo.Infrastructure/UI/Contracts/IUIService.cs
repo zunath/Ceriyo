@@ -2,7 +2,7 @@
 using EmptyKeys.UserInterface.Mvvm;
 using Microsoft.Xna.Framework;
 
-namespace Ceriyo.Core.Services.Contracts
+namespace Ceriyo.Infrastructure.UI.Contracts
 {
     public interface IUIService
     {

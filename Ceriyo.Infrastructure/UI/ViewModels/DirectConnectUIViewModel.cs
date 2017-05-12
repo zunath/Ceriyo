@@ -1,10 +1,12 @@
 ﻿using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.Network.Contracts;
+using Ceriyo.Infrastructure.Network.Packets;
+using Ceriyo.Infrastructure.UI.Contracts;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;
 using EmptyKeys.UserInterface.Mvvm;
 
-namespace Ceriyo.Core.UI.ViewModels
+namespace Ceriyo.Infrastructure.UI.ViewModels
 {
     public class DirectConnectUIViewModel: ViewModelBase, IUIViewModel
     {
@@ -28,6 +30,8 @@ namespace Ceriyo.Core.UI.ViewModels
             BackCommand = new RelayCommand(Back);
             ConnectCommand = new RelayCommand(Connect);
 
+            networkService.PacketReceived += OnPacketReceived;
+
             // DEBUGGING
 
             IPAddress = "127.0.0.1"; // localhost for testing
@@ -35,6 +39,15 @@ namespace Ceriyo.Core.UI.ViewModels
 
             // END DEBUGGING
 
+        }
+
+        private void OnPacketReceived(PacketBase p)
+        {
+            if (p.GetType() == typeof(ConnectedToServerPacket))
+            {
+                ConnectedToServerPacket packet = (ConnectedToServerPacket) p;
+
+            }
         }
 
         public ICommand BackCommand { get; set; }

@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
-using System.Windows.Threading;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Entities;
 using Ceriyo.Core.Settings;

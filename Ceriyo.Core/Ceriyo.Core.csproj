@@ -34,22 +34,6 @@
     <Reference Include="artemis">
       <HintPath>..\Ceriyo.Content\Libraries\artemis.dll</HintPath>
     </Reference>
-    <Reference Include="EmptyKeys.UserInterface, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EmptyKeysUI_MonoGame.3.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Common\AnyCPU\EmptyKeys.UserInterface.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EmptyKeys.UserInterface.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EmptyKeysUI_MonoGame.3.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Common\AnyCPU\EmptyKeys.UserInterface.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EmptyKeys.UserInterface.Debug, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EmptyKeysUI_MonoGame.3.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Common\AnyCPU\EmptyKeys.UserInterface.Debug.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EmptyKeys.UserInterface.MonoGame, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EmptyKeysUI_MonoGame.3.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\MonoGame\AnyCPU\EmptyKeys.UserInterface.MonoGame.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
@@ -106,9 +90,6 @@
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Constants\Zoom.cs" />
-    <Compile Include="Contracts\IClientNetworkService.cs" />
-    <Compile Include="Contracts\INetworkPacket.cs" />
-    <Compile Include="Contracts\IServerNetworkService.cs" />
     <Compile Include="Contracts\IServerSettingsService.cs" />
     <Compile Include="Contracts\ISystemLoader.cs" />
     <Compile Include="Contracts\IUIViewModel.cs" />
@@ -124,12 +105,6 @@
     <Compile Include="Entities\ObjectPainter.cs" />
     <Compile Include="EventArgs\NetworkConnectionEventArgs.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
-    <Compile Include="Packets\ConnectionRequestPacket.cs" />
-    <Compile Include="UI\Generated\Dictionary.xaml.cs" />
-    <Compile Include="UI\Generated\DirectConnect.xaml.cs" />
-    <Compile Include="UI\Generated\DirectConnect.xaml_bindings.cs" />
-    <Compile Include="UI\Generated\MainMenu.xaml.cs" />
-    <Compile Include="UI\Generated\MainMenu.xaml_bindings.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
     <Compile Include="Data\SerializedFileData.cs" />
     <Compile Include="Data\ResourceItemData.cs" />
@@ -195,9 +170,7 @@
     <Compile Include="Scripting\Server\LocalDataMethods.cs" />
     <Compile Include="Scripting\Server\ScriptingMethods.cs" />
     <Compile Include="Scripting\Server\PhysicsMethods.cs" />
-    <Compile Include="Services\Contracts\IUIService.cs" />
     <Compile Include="Services\EngineService.cs" />
-    <Compile Include="Services\Game\UIService.cs" />
     <Compile Include="Services\Module\ModuleDataService.cs" />
     <Compile Include="Services\Module\ModuleService.cs" />
     <Compile Include="Services\Module\ModuleResourceService.cs" />
@@ -211,8 +184,6 @@
     <Compile Include="Systems\Draw\RenderSystem.cs" />
     <Compile Include="Systems\Update\HeartbeatSystem.cs" />
     <Compile Include="Systems\Update\PainterSystem.cs" />
-    <Compile Include="UI\ViewModels\DirectConnectUIViewModel.cs" />
-    <Compile Include="UI\ViewModels\MainMenuUIViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
@@ -225,13 +196,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Packets\" />
     <Folder Include="Scripting\Client\Contracts\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="BehaviorsLicense.txt" />
-    <Content Include="UI\Generated\GeneratedUI Readme.txt" />
-    <Content Include="license.txt" />
-    <Content Include="shaders\DirectionalBlurShader.fx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

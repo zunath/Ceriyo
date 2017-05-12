@@ -2,7 +2,6 @@
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Settings;
-using Ceriyo.Server.WPF.Contracts;
 
 namespace Ceriyo.Server.WPF.Services
 {

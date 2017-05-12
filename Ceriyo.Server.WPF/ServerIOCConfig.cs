@@ -13,6 +13,8 @@ using Ceriyo.Core.Services.Game;
 using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
+using Ceriyo.Infrastructure.Network;
+using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Services;
 using Ceriyo.Server.WPF.Contracts;
 using Ceriyo.Server.WPF.Factory;

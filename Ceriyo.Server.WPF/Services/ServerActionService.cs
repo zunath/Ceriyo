@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using Ceriyo.Server.WPF.Actions;
+﻿using System.Collections.Concurrent;
 using Ceriyo.Server.WPF.Contracts;
 
 namespace Ceriyo.Server.WPF.Services

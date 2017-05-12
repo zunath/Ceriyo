@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Ceriyo.Server.WPF.Contracts
+﻿namespace Ceriyo.Server.WPF.Contracts
 {
     public interface IServerActionService
     {

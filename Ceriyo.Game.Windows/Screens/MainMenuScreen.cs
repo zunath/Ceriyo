@@ -1,6 +1,6 @@
 ﻿using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Core.UI.ViewModels;
+using Ceriyo.Infrastructure.UI.Contracts;
+using Ceriyo.Infrastructure.UI.ViewModels;
 using EmptyKeys.UserInterface.Generated;
 
 namespace Ceriyo.Game.Windows.Screens

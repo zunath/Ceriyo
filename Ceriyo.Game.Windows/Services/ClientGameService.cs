@@ -2,6 +2,8 @@
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Game.Windows.Screens;
+using Ceriyo.Infrastructure.Network.Contracts;
+using Ceriyo.Infrastructure.UI.Contracts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -20,6 +22,7 @@ namespace Ceriyo.Game.Windows.Services
         private readonly IAppService _appService;
         private readonly IInputService _inputService;
         private readonly IUIService _uiService;
+        private readonly IClientNetworkService _networkService;
 
         public ClientGameService(
             EntityWorld world,
@@ -31,7 +34,8 @@ namespace Ceriyo.Game.Windows.Services
             IDataService dataService,
             IAppService appService,
             IInputService inputService,
-            IUIService uiService)
+            IUIService uiService,
+            IClientNetworkService networkService)
         {
             _world = world;
             _spriteBatch = spriteBatch;
@@ -43,6 +47,7 @@ namespace Ceriyo.Game.Windows.Services
             _appService = appService;
             _inputService = inputService;
             _uiService = uiService;
+            _networkService = networkService;
         }
 
         public void Initialize(IGraphicsDeviceManager graphics)
@@ -56,6 +61,7 @@ namespace Ceriyo.Game.Windows.Services
 
         public void Update(GameTime gameTime)
         {
+            _networkService.ProcessMessages();
             _inputService.Update();
             _world.Update();
             _screenService.Update();
@@ -81,7 +87,6 @@ namespace Ceriyo.Game.Windows.Services
 
         public void Exit()
         {
-
         }
     }
 }

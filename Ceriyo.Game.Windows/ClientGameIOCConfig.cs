@@ -16,8 +16,11 @@ using Ceriyo.Game.Windows.Services;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Helpers;
 using Ceriyo.Infrastructure.Logging;
+using Ceriyo.Infrastructure.Network;
+using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Services;
-using EmptyKeys.UserInterface;
+using Ceriyo.Infrastructure.UI;
+using Ceriyo.Infrastructure.UI.Contracts;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 

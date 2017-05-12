@@ -4,6 +4,7 @@ using Ceriyo.Core.Contracts;
 using Ceriyo.Core.EventArgs;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Settings;
+using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Server.WPF.Actions;
 using Ceriyo.Server.WPF.Contracts;
 using Ceriyo.Server.WPF.Factory;

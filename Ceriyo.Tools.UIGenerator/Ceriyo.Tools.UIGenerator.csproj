@@ -97,7 +97,7 @@
   <PropertyGroup>
     <PostBuildEvent>CD "$(SolutionDir)packages\EmptyKeysUI_Generator*\tools"
 
-ekUIGen.exe -i="$(ProjectDir)\Views" -o="$(ProjectDir)\..\Ceriyo.Core\UI\Generated" -oa="$(ProjectDir)\..\Ceriyo.Content\UI" -bd="$(TargetDir)\" -rm=MonoGame /generate-bindings</PostBuildEvent>
+ekUIGen.exe -i="$(ProjectDir)\Views" -o="$(ProjectDir)\..\Ceriyo.Infrastructure\UI\Generated" -oa="$(ProjectDir)\..\Ceriyo.Content\UI" -bd="$(TargetDir)\" -rm=MonoGame /generate-bindings</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

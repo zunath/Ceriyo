@@ -1,11 +1,11 @@
 ﻿using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.UI.Contracts;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;
 using EmptyKeys.UserInterface.Mvvm;
 using Microsoft.Xna.Framework;
 
-namespace Ceriyo.Core.UI.ViewModels
+namespace Ceriyo.Infrastructure.UI.ViewModels
 {
     public class MainMenuUIViewModel: ViewModelBase, IUIViewModel
     {

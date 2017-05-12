@@ -1,5 +1,4 @@
-﻿using System;
-using Ceriyo.Core.Services.Contracts;
+﻿using Ceriyo.Core.Services.Contracts;
 using Microsoft.Xna.Framework.Graphics;
 using XnaGraphicsDeviceManager = Microsoft.Xna.Framework.GraphicsDeviceManager;
 

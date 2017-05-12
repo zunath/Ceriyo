@@ -1,4 +1,4 @@
-﻿namespace Ceriyo.Core.Contracts
+﻿namespace Ceriyo.Infrastructure.Network.Contracts
 {
     public interface INetworkPacket
     {

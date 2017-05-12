@@ -1,8 +1,9 @@
 ﻿using System;
 using Ceriyo.Core.Constants;
+using Ceriyo.Core.Contracts;
 using Ceriyo.Core.EventArgs;
 
-namespace Ceriyo.Core.Contracts
+namespace Ceriyo.Infrastructure.Network.Contracts
 {
     public interface IServerNetworkService
     {

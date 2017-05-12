@@ -5,13 +5,13 @@ using System.Linq;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.EventArgs;
-using Ceriyo.Core.Packets;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Core.Settings;
+using Ceriyo.Infrastructure.Network.Contracts;
+using Ceriyo.Infrastructure.Network.Packets;
 using Lidgren.Network;
 using ProtoBuf;
 
-namespace Ceriyo.Infrastructure.Services
+namespace Ceriyo.Infrastructure.Network
 {
     public class ServerNetworkService: IServerNetworkService
     {
@@ -89,6 +89,10 @@ namespace Ceriyo.Infrastructure.Services
                         if (status == NetConnectionStatus.Connected)
                         {
                             string username = _connectionToUsername[message.SenderConnection];
+                            
+                            ConnectedToServerPacket response = new ConnectedToServerPacket();
+                            SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
+
                             OnPlayerConnected?.Invoke(this, new NetworkConnectionEventArgs(username));
                         }
                         else if (status == NetConnectionStatus.Disconnected)
@@ -112,8 +116,9 @@ namespace Ceriyo.Infrastructure.Services
 
         private void HandleConnectionApproval(NetIncomingMessage message)
         {
-            MemoryStream stream = new MemoryStream(message.Data);
-            var packet = Serializer.DeserializeWithLengthPrefix<ConnectionRequestPacket>(stream, PrefixStyle.Base128);
+            MemoryStream stream = new MemoryStream(message.ReadBytes(message.LengthBytes));
+            var packet = Serializer.Deserialize<ConnectionRequestPacket>(stream);
+
             if (packet.Password != _settingsService.PlayerPassword)
             {
                 message.SenderConnection.Deny("Invalid password.");

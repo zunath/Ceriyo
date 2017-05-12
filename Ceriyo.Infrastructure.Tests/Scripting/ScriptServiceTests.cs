@@ -2,10 +2,8 @@
 using Ceriyo.Core.Scripting.Common;
 using Ceriyo.Core.Scripting.Server;
 using Ceriyo.Core.Services;
-using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Services;
-using Moq;
 using NUnit.Framework;
 
 namespace Ceriyo.Infrastructure.Tests.Scripting

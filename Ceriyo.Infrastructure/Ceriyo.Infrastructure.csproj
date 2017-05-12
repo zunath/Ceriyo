@@ -42,6 +42,22 @@
       <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EmptyKeys.UserInterface, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmptyKeysUI_MonoGame.3.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Common\AnyCPU\EmptyKeys.UserInterface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EmptyKeys.UserInterface.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmptyKeysUI_MonoGame.3.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Common\AnyCPU\EmptyKeys.UserInterface.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EmptyKeys.UserInterface.Debug, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmptyKeysUI_MonoGame.3.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Common\AnyCPU\EmptyKeys.UserInterface.Debug.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EmptyKeys.UserInterface.MonoGame, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmptyKeysUI_MonoGame.3.0.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\MonoGame\AnyCPU\EmptyKeys.UserInterface.MonoGame.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentValidation, Version=6.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.6.4.1\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
@@ -91,13 +107,33 @@
     <Compile Include="Factory\UIViewModelFactory.cs" />
     <Compile Include="Helpers\IOCHelpers.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Network\Contracts\INetworkPacket.cs" />
+    <Compile Include="Network\Packets\ConnectedToServerPacket.cs" />
+    <Compile Include="Network\Packets\ConnectionRequestPacket.cs" />
+    <Compile Include="Network\Packets\PacketBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ClientNetworkService.cs" />
+    <Compile Include="Network\ClientNetworkService.cs" />
+    <Compile Include="Network\Contracts\IClientNetworkService.cs" />
+    <Compile Include="Network\Contracts\IServerNetworkService.cs" />
+    <Compile Include="UI\Contracts\IUIService.cs" />
     <Compile Include="Services\DataService.cs" />
-    <Compile Include="Services\ServerNetworkService.cs" />
+    <Compile Include="Network\ServerNetworkService.cs" />
     <Compile Include="Services\ScriptService.cs" />
+    <Compile Include="UI\UIService.cs" />
+    <Compile Include="UI\Generated\Dictionary.xaml.cs" />
+    <Compile Include="UI\Generated\DirectConnect.xaml.cs" />
+    <Compile Include="UI\Generated\DirectConnect.xaml_bindings.cs" />
+    <Compile Include="UI\Generated\MainMenu.xaml.cs" />
+    <Compile Include="UI\Generated\MainMenu.xaml_bindings.cs" />
+    <Compile Include="UI\ViewModels\DirectConnectUIViewModel.cs" />
+    <Compile Include="UI\ViewModels\MainMenuUIViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="BehaviorsLicense.txt" />
+    <Content Include="license.txt" />
+    <Content Include="shaders\DirectionalBlurShader.fx" />
+    <Content Include="UI\Generated\GeneratedUI Readme.txt" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Content\Ceriyo.Content.csproj">
       <Project>{a59bd6d2-8e98-4a48-9528-dec1139994a1}</Project>

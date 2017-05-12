@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Game.Windows", "Ceriyo.Game.Windows\Ceriyo.Game.Windows.csproj", "{73D89C4E-DA01-423E-82CA-FB3807353BA2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2038979D-E700-4B17-AFD1-8ED4DAFF14B1} = {2038979D-E700-4B17-AFD1-8ED4DAFF14B1}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "99. Content", "99. Content", "{E79413C8-2AC2-41DA-ABB3-099443EDAAD7}"
 EndProject

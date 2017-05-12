@@ -71,7 +71,7 @@ namespace Ceriyo.Infrastructure.WPF.Actions
         {
             MetroWindow wrapperWindow;
 
-            if (this.WindowContent != null)
+            if (WindowContent != null)
             {
                 wrapperWindow = new MetroWindow();
 
@@ -79,11 +79,11 @@ namespace Ceriyo.Infrastructure.WPF.Actions
                 wrapperWindow.DataContext = notification;
                 wrapperWindow.Title = notification.Title;
 
-                this.PrepareContentForWindow(notification, wrapperWindow);
+                PrepareContentForWindow(notification, wrapperWindow);
             }
             else
             {
-                wrapperWindow = this.CreateDefaultWindow(notification);
+                wrapperWindow = CreateDefaultWindow(notification);
             }
 
             return wrapperWindow;

@@ -2,7 +2,7 @@
 using Artemis;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
-using Ceriyo.Core.Settings;
+using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Server.WPF.Contracts;
 using Microsoft.Xna.Framework;
 

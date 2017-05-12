@@ -1,6 +1,4 @@
-﻿using Autofac;
-
-namespace Ceriyo.Server.WPF.Contracts
+﻿namespace Ceriyo.Server.WPF.Contracts
 {
     public interface IServerActionFactory
     {
