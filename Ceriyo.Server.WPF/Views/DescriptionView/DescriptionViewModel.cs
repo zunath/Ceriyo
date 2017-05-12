@@ -15,7 +15,6 @@ namespace Ceriyo.Server.WPF.Views.DescriptionView
         public DescriptionViewModel(ServerSettings settings)
         {
             _settings = settings;
-            TestCommand = new DelegateCommand(Test);
         }
 
         public ServerSettings Settings
@@ -23,13 +22,5 @@ namespace Ceriyo.Server.WPF.Views.DescriptionView
             get { return _settings; }
             set { SetProperty(ref _settings, value); }
         }
-        
-        public DelegateCommand TestCommand { get; set; }
-
-        private void Test()
-        {
-            
-        }
-
     }
 }
