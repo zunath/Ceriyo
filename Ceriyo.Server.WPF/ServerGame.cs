@@ -17,6 +17,8 @@ namespace Ceriyo.Server.WPF
         private IServerNetworkService _networkService;
         private readonly ServerSettings _initialSettings;
         private IServerSettingsService _settingsService;
+        private readonly string _moduleName;
+        private IModuleService _moduleService;
 
         public event Action<string> OnPlayerConnected;
         public event Action<string> OnPlayerDisconnected;
@@ -24,6 +26,7 @@ namespace Ceriyo.Server.WPF
         public ServerGame(ServerSettings initialSettings, string moduleName)
         {
             _initialSettings = initialSettings;
+            _moduleName = moduleName;
 
             _graphics = new GraphicsDeviceManager(this)
             {
@@ -48,6 +51,8 @@ namespace Ceriyo.Server.WPF
             _networkService.OnPlayerConnected += PlayerConnected;
             _networkService.OnPlayerDisconnected += PlayerDisconnected;
 
+            _moduleService = ServerIOCConfig.Resolve<IModuleService>();
+            _moduleService.OpenModule(_moduleName);
 
             base.Initialize();
         }
@@ -78,6 +83,7 @@ namespace Ceriyo.Server.WPF
         protected override void OnExiting(object sender, EventArgs args)
         {
             _gameService.Exit();
+            _moduleService.CloseModule();
             
             base.OnExiting(sender, args);
         }

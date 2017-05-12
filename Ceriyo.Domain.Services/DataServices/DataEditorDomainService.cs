@@ -175,9 +175,9 @@ namespace Ceriyo.Domain.Services.DataServices
         private void SaveOrDeleteFile(object obj, string globalID, ActionType action, string directoryName)
         {
             if (action == ActionType.AddOrChanged)
-                _dataService.Save(obj, $"{_pathService.ModulesTempDirectory}{directoryName}/{globalID}.dat");
+                _dataService.Save(obj, $"{_pathService.ModulesToolsetTempDirectory}{directoryName}/{globalID}.dat");
             else
-                _dataService.Delete($"{_pathService.ModulesTempDirectory}{directoryName}/{globalID}.dat");
+                _dataService.Delete($"{_pathService.ModulesToolsetTempDirectory}{directoryName}/{globalID}.dat");
         }
 
     }

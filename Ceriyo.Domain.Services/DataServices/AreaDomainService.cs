@@ -19,13 +19,13 @@ namespace Ceriyo.Domain.Services.DataServices
 
         public void SaveArea(AreaData data)
         {
-            string path = $"{_pathService.ModulesTempDirectory}Area/{data.GlobalID}.dat";
+            string path = $"{_pathService.ModulesToolsetTempDirectory}Area/{data.GlobalID}.dat";
             _dataService.Save(data, path);
         }
 
         public void DeleteArea(AreaData data)
         {
-            string path = $"{_pathService.ModulesTempDirectory}Area/{data.GlobalID}.dat";
+            string path = $"{_pathService.ModulesToolsetTempDirectory}Area/{data.GlobalID}.dat";
             _dataService.Delete(path);
         }
     }

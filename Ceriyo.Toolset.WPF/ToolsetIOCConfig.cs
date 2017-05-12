@@ -51,9 +51,13 @@ namespace Ceriyo.Toolset.WPF
             builder.RegisterType<GraphicsService>().As<IGraphicsService>().SingleInstance();
             builder.RegisterType<PathService>().As<IPathService>().SingleInstance();
             builder.RegisterType<ToolsetInputService>().As<IInputService>().SingleInstance();
-            builder.RegisterType<ModuleDataService>().As<IModuleDataService>().SingleInstance();
+            builder.RegisterType<ModuleDataService>().As<IModuleDataService>()
+                .WithParameter("isRunningAsServer", false)
+                .SingleInstance();
             builder.RegisterType<ModuleResourceService>().As<IModuleResourceService>();
-            builder.RegisterType<ModuleService>().As<IModuleService>().SingleInstance();
+            builder.RegisterType<ModuleService>().As<IModuleService>()
+                .WithParameter("isRunningAsServer", false)
+                .SingleInstance();
             builder.RegisterType<EngineService>().As<IEngineService>().SingleInstance();
 
             // Factory

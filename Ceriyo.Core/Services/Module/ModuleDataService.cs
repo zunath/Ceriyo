@@ -9,15 +9,19 @@ namespace Ceriyo.Core.Services.Module
 {
     public class ModuleDataService: IModuleDataService
     {
-        private readonly IPathService _pathService;
         private readonly IDataService _dataService;
+        private readonly string _moduleDirectory;
 
         public ModuleDataService(
             IPathService pathService,
-            IDataService dataService)
+            IDataService dataService,
+            bool isRunningAsServer)
         {
-            _pathService = pathService;
             _dataService = dataService;
+
+            _moduleDirectory = isRunningAsServer ? 
+                pathService.ModulesServerTempDirectory : 
+                pathService.ModulesToolsetTempDirectory;
         }
 
         private static string GetFolderName(Type type)
@@ -34,7 +38,7 @@ namespace Ceriyo.Core.Services.Module
             where T : class, IDataDomainObject
         {
             string folder = GetFolderName(typeof(T));
-            string path = $"{_pathService.ModulesTempDirectory}{folder}/{globalID}.dat";
+            string path = $"{_moduleDirectory}{folder}/{globalID}.dat";
 
             return _dataService.Load<T>(path);
         }
@@ -43,7 +47,7 @@ namespace Ceriyo.Core.Services.Module
             where T: class, IDataDomainObject
         {
             string folder = GetFolderName(typeof(T));
-            string path = $"{_pathService.ModulesTempDirectory}{folder}/";
+            string path = $"{_moduleDirectory}{folder}/";
             string[] files = Directory.GetFiles(path, "*.dat");
 
             foreach (var file in files)

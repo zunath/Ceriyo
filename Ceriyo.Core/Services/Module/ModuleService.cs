@@ -13,20 +13,31 @@ namespace Ceriyo.Core.Services.Module
         private readonly IDataService _dataService;
         private readonly IObjectMapper _objectMapper;
         private readonly IPathService _pathService;
+        private readonly bool _isRunningAsServer;
+        private readonly string _modulesDirectory;
 
         public ModuleService(IDataService dataService,
             IObjectMapper objectMapper,
-            IPathService pathService)
+            IPathService pathService,
+            bool isRunningAsServer)
         {
             _objectMapper = objectMapper;
             _dataService = dataService;
             _pathService = pathService;
+            _isRunningAsServer = isRunningAsServer;
+
+            _modulesDirectory = isRunningAsServer ? 
+                _pathService.ModulesServerTempDirectory : 
+                _pathService.ModulesToolsetTempDirectory;
         }
 
         public void CreateModule(string name,
             string tag,
             string resref)
         {
+            if(_isRunningAsServer)
+                throw new NotSupportedException("Cannot create module when running in server mode.");
+
             _moduleData = new ModuleData
             {
                 Name = name,
@@ -50,12 +61,12 @@ namespace Ceriyo.Core.Services.Module
 
         private void CreateProjectStructure()
         {
-            if (Directory.Exists(_pathService.ModulesTempDirectory))
+            if (Directory.Exists(_modulesDirectory))
             {
                 throw new Exception("An unsaved module already exists.");
             }
 
-            Directory.CreateDirectory(_pathService.ModulesTempDirectory);
+            Directory.CreateDirectory(_modulesDirectory);
             CreateModuleDirectories();
 
             SaveModuleProperties();
@@ -63,19 +74,19 @@ namespace Ceriyo.Core.Services.Module
 
         private void LoadModuleProperties()
         {
-            _moduleData = _dataService.Load<ModuleData>($"{_pathService.ModulesTempDirectory}Module.dat");
+            _moduleData = _dataService.Load<ModuleData>($"{_modulesDirectory}Module.dat");
         }
 
         public void SaveModuleProperties()
         {
-            _dataService.Save(_moduleData, $"{_pathService.ModulesTempDirectory}Module.dat");
+            _dataService.Save(_moduleData, $"{_modulesDirectory}Module.dat");
         }
 
         public void CloseModule()
         {
-            if (Directory.Exists(_pathService.ModulesTempDirectory))
+            if (Directory.Exists(_modulesDirectory))
             {
-                Directory.Delete(_pathService.ModulesTempDirectory, true);
+                Directory.Delete(_modulesDirectory, true);
             }
 
             _moduleData = new ModuleData();
@@ -85,18 +96,24 @@ namespace Ceriyo.Core.Services.Module
         {
             CloseModule();
             string filePath = $"{_pathService.ModuleDirectory}{fileName}.mod";
-            _dataService.UnpackageDirectory(_pathService.ModulesTempDirectory, filePath);
+            _dataService.UnpackageDirectory(_modulesDirectory, filePath);
             CreateModuleDirectories();
             LoadModuleProperties();
         }
 
         public void PackModule(string fileName)
         {
-            _dataService.PackageDirectory(_pathService.ModulesTempDirectory, $"{_pathService.ModuleDirectory}{fileName}.mod");
+            if(_isRunningAsServer)
+                throw new NotSupportedException("Cannot pack module when running in server mode.");
+
+            _dataService.PackageDirectory(_modulesDirectory, $"{_pathService.ModuleDirectory}{fileName}.mod");
         }
 
         public void ReplaceResourcePacks(IEnumerable<string> resourcePacks)
         {
+            if(_isRunningAsServer)
+                throw new NotSupportedException("Cannot replace resource packs when running in server mode.");
+
             _moduleData.ResourcePacks.Clear();
 
             foreach (var pack in resourcePacks)
@@ -148,8 +165,8 @@ namespace Ceriyo.Core.Services.Module
 
         private void CreateDirectoryIfNotExist(string directory)
         {
-            if (Directory.Exists($"{_pathService.ModulesTempDirectory}{directory}")) return;
-            Directory.CreateDirectory($"{_pathService.ModulesTempDirectory}{directory}");
+            if (Directory.Exists($"{_modulesDirectory}{directory}")) return;
+            Directory.CreateDirectory($"{_modulesDirectory}{directory}");
         }
     }
 }

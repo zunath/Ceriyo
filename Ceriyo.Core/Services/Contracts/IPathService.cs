@@ -2,7 +2,8 @@
 {
     public interface IPathService
     {
-        string ModulesTempDirectory { get; }
+        string ModulesToolsetTempDirectory { get; }
+        string ModulesServerTempDirectory { get; }
         string ModuleDirectory { get; }
         string ResourcePackDirectory { get; }
         string ServerVaultDirectory { get; }

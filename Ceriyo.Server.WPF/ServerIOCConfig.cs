@@ -8,12 +8,14 @@ using Ceriyo.Core.Scripting.Server.Contracts;
 using Ceriyo.Core.Services;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Services.Game;
+using Ceriyo.Core.Services.Module;
 using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Factory;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Network;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Services;
+using Ceriyo.Server.WPF.Mapping;
 using Ceriyo.Server.WPF.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -47,6 +49,16 @@ namespace Ceriyo.Server.WPF
             // Server logic specific services
             builder.RegisterType<ServerNetworkService>().As<IServerNetworkService>().SingleInstance();
             builder.RegisterType<ServerSettingsService>().As<IServerSettingsService>().SingleInstance();
+            builder.RegisterType<ModuleService>().As<IModuleService>()
+                .WithParameter("isRunningAsServer", true)
+                .SingleInstance();
+
+            builder.RegisterType<ModuleDataService>().As<IModuleDataService>()
+                .WithParameter("isRunningAsServer", true)
+                .SingleInstance();
+
+            // Mapping
+            builder.RegisterType<ServerObjectMapper>().As<IObjectMapper>().SingleInstance();
 
             // Common builds between GUI and server logic
             Initialize(builder);

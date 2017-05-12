@@ -44,6 +44,10 @@
       <HintPath>..\packages\Autofac.4.5.0\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -154,6 +158,7 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Factory\ServerGameFactory.cs" />
+    <Compile Include="Mapping\ServerObjectMapper.cs" />
     <Compile Include="ServerGame.cs" />
     <Compile Include="ServerIOCConfig.cs" />
     <Compile Include="Services\ServerGameService.cs" />
