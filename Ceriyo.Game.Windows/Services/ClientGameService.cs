@@ -12,6 +12,7 @@ namespace Ceriyo.Game.Windows.Services
 {
     public class ClientGameService: IGameService
     {
+        private readonly Microsoft.Xna.Framework.Game _game;
         private readonly EntityWorld _world;
         private readonly SpriteBatch _spriteBatch;
         private readonly Camera2D _camera;
@@ -25,6 +26,7 @@ namespace Ceriyo.Game.Windows.Services
         private readonly IClientNetworkService _networkService;
 
         public ClientGameService(
+            Microsoft.Xna.Framework.Game game,
             EntityWorld world,
             SpriteBatch spriteBatch,
             Camera2D camera,
@@ -37,6 +39,7 @@ namespace Ceriyo.Game.Windows.Services
             IUIService uiService,
             IClientNetworkService networkService)
         {
+            _game = game;
             _world = world;
             _spriteBatch = spriteBatch;
             _camera = camera;
@@ -55,7 +58,7 @@ namespace Ceriyo.Game.Windows.Services
             _appService.CreateAppDirectoryStructure();
             _dataService.Initialize();
             _graphicsService.Initialize((GraphicsDeviceManager)graphics);
-            _uiService.Initialize((GraphicsDeviceManager)graphics);
+             _uiService.Initialize((GraphicsDeviceManager)graphics);
             _screenService.ChangeScreen<MainMenuScreen>();
         }
 
@@ -65,7 +68,11 @@ namespace Ceriyo.Game.Windows.Services
             _inputService.Update();
             _world.Update();
             _screenService.Update();
-            _uiService.Update(gameTime);
+
+            // Do an IsActive check to make sure mouse clicks aren't captured when game isn't in focus.
+            if (_game.IsActive)
+                _uiService.Update(gameTime);
+
             _scriptService.ExecuteQueuedScripts();
         }
 

@@ -3,7 +3,6 @@ using Artemis;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
-using Ceriyo.Server.WPF.Contracts;
 using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Server.WPF.Services
@@ -15,7 +14,6 @@ namespace Ceriyo.Server.WPF.Services
         private readonly IScriptService _scriptService;
         private readonly IDataService _dataService;
         private readonly IAppService _appService;
-        private readonly IServerActionService _actionService;
         private readonly IServerNetworkService _networkService;
 
         public ServerGameService(
@@ -24,7 +22,6 @@ namespace Ceriyo.Server.WPF.Services
             IScriptService scriptService,
             IDataService dataService,
             IAppService appService,
-            IServerActionService actionService,
             IServerNetworkService networkService)
         {
             _world = world;
@@ -32,7 +29,6 @@ namespace Ceriyo.Server.WPF.Services
             _scriptService = scriptService;
             _dataService = dataService;
             _appService = appService;
-            _actionService = actionService;
             _networkService = networkService;
         }
 
@@ -45,7 +41,6 @@ namespace Ceriyo.Server.WPF.Services
 
         public void Update(GameTime gameTime)
         {
-            _actionService.ProcessActions();
             _networkService.ProcessMessages();
             _world.Update();
             _scriptService.ExecuteQueuedScripts();

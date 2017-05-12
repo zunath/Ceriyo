@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Artemis;
+﻿using Artemis;
 using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Scripting.Common;
@@ -16,8 +14,6 @@ using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Network;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Services;
-using Ceriyo.Server.WPF.Contracts;
-using Ceriyo.Server.WPF.Factory;
 using Ceriyo.Server.WPF.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -81,7 +77,6 @@ namespace Ceriyo.Server.WPF
             builder.RegisterType<PathService>().As<IPathService>();
             builder.RegisterType<ServerGameService>().As<IGameService>();
             builder.RegisterType<EngineService>().As<IEngineService>();
-            builder.RegisterType<ServerActionService>().As<IServerActionService>().SingleInstance();
 
 
             // Artemis
@@ -91,8 +86,7 @@ namespace Ceriyo.Server.WPF
             builder.RegisterType<EntityFactory>().As<IEntityFactory>().SingleInstance();
             builder.RegisterType<ComponentFactory>().As<IComponentFactory>().SingleInstance();
             builder.RegisterType<ScreenFactory>().As<IScreenFactory>().SingleInstance();
-            builder.RegisterType<ServerActionFactory>().As<IServerActionFactory>().SingleInstance();
-
+            
             // Scripting
             builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();
             builder.RegisterType<EntityMethods>().As<IEntityMethods>().SingleInstance();
@@ -102,22 +96,8 @@ namespace Ceriyo.Server.WPF
             builder.RegisterType<ScriptService>().As<IScriptService>()
                 .WithParameter("isServer", true)
                 .SingleInstance();
-
-            // Server Actions
-            RegisterServerActions(builder);
         }
-
-        private static void RegisterServerActions(ContainerBuilder builder)
-        {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var uiViewModels = assemblies
-                .SelectMany(s => s.GetTypes())
-                .Where(p => typeof(IServerAction).IsAssignableFrom(p) && p.IsClass).ToArray();
-            foreach (Type type in uiViewModels)
-            {
-                builder.RegisterType(type).As<IServerAction>().Named<IServerAction>(type.ToString());
-            }
-        }
+        
 
     }
 }

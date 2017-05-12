@@ -5,10 +5,7 @@ using Ceriyo.Core.EventArgs;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Network.Contracts;
-using Ceriyo.Server.WPF.Actions;
-using Ceriyo.Server.WPF.Contracts;
 using Ceriyo.Server.WPF.Factory;
-using Ceriyo.Server.WPF.Views.DetailsView;
 using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Server.WPF
@@ -17,15 +14,15 @@ namespace Ceriyo.Server.WPF
     {
         private readonly GraphicsDeviceManager _graphics;
         private IGameService _gameService;
-        private IServerActionService _actionService;
-        private readonly DetailsViewModel _ownerThreadObject;
         private IServerNetworkService _networkService;
         private readonly ServerSettings _initialSettings;
         private IServerSettingsService _settingsService;
-        
-        public ServerGame(DetailsViewModel ownerThread, ServerSettings initialSettings)
+
+        public event Action<string> OnPlayerConnected;
+        public event Action<string> OnPlayerDisconnected;
+
+        public ServerGame(ServerSettings initialSettings, string moduleName)
         {
-            _ownerThreadObject = ownerThread;
             _initialSettings = initialSettings;
 
             _graphics = new GraphicsDeviceManager(this)
@@ -33,7 +30,8 @@ namespace Ceriyo.Server.WPF
                 IsFullScreen = false
             };
         }
-        
+
+
         protected override void Initialize()
         {
             ServerIOCConfig.Initialize(this);
@@ -45,13 +43,10 @@ namespace Ceriyo.Server.WPF
 
             _gameService = ServerGameFactory.GetServerGameService();
             _gameService.Initialize(_graphics);
-
-            _actionService = ServerIOCConfig.Resolve<IServerActionService>();
             
-
             _networkService = ServerIOCConfig.Resolve<IServerNetworkService>();
-            _networkService.OnPlayerConnected += OnPlayerConnected;
-            _networkService.OnPlayerDisconnected += OnPlayerDisconnected;
+            _networkService.OnPlayerConnected += PlayerConnected;
+            _networkService.OnPlayerDisconnected += PlayerDisconnected;
 
 
             base.Initialize();
@@ -110,22 +105,14 @@ namespace Ceriyo.Server.WPF
         {
             _settingsService.CopySettings(settings);
         }
-
-        private void OnPlayerConnected(object sender, NetworkConnectionEventArgs e)
+        
+        private void PlayerConnected(object sender, NetworkConnectionEventArgs e)
         {
-            PlayerConnectedAction action = new PlayerConnectedAction
-            {
-                Username = e.Username
-            };
-            _ownerThreadObject.QueueAction(action);
+            OnPlayerConnected?.Invoke(e.Username);
         }
-        private void OnPlayerDisconnected(object sender, NetworkConnectionEventArgs e)
+        private void PlayerDisconnected(object sender, NetworkConnectionEventArgs e)
         {
-            PlayerDisconnectedAction action = new PlayerDisconnectedAction
-            {
-                Username = e.Username
-            };
-            _ownerThreadObject.QueueAction(action);
+            OnPlayerDisconnected?.Invoke(e.Username);
         }
 
     }

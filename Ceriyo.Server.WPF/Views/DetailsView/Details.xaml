@@ -8,11 +8,26 @@
              xmlns:extension="clr-namespace:Ceriyo.Infrastructure.WPF.Extensions;assembly=Ceriyo.Infrastructure.WPF"
              xmlns:constants="clr-namespace:Ceriyo.Core.Constants;assembly=Ceriyo.Core"
              xmlns:controls="clr-namespace:Ceriyo.Infrastructure.WPF.Controls;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:converters="clr-namespace:Ceriyo.Infrastructure.WPF.Converters;assembly=Ceriyo.Infrastructure.WPF"
              mc:Ignorable="d"
              d:DesignHeight="370"
              d:DesignWidth="600"
              Background="LightGray"
              prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <converters:InverseBooleanConverter x:Key="inverse" />
+
+    </UserControl.Resources>
+    
+
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding NoModuleNotification, Mode=OneWay}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"></ColumnDefinition>
@@ -68,6 +83,7 @@
             Grid.Column="2"
             Grid.Row="1"
             Grid.ColumnSpan="2"
+            IsEnabled="{Binding IsServerRunning, Converter={StaticResource inverse}}"
             ItemsSource="{Binding Modules}"
             SelectedItem="{Binding SelectedModule}">
         </ComboBox>
@@ -84,7 +100,8 @@
             Grid.Row="1"
             Minimum="0"
             Maximum="{Binding MaximumPortNumber}"
-            Value="{Binding Settings.Port}">
+            Value="{Binding Settings.Port}"
+            IsEnabled="{Binding IsServerRunning, Converter={StaticResource inverse}}">
         </controls:IntegerUpDownEx>
 
         <Label
@@ -175,7 +192,8 @@
             Margin="3,3,3,3"
             Grid.Row="7"
             Grid.Column="1"
-            Command="{Binding BanAccountCommand}">
+            Command="{Binding BanAccountCommand}"
+            IsEnabled="{Binding IsServerRunning}">
             Ban Account
         </Button>
 
@@ -183,7 +201,8 @@
             Margin="3,3,3,3"
             Grid.Row="7"
             Grid.Column="2"
-            Command="{Binding BootPlayerCommand}">
+            Command="{Binding BootPlayerCommand}"
+            IsEnabled="{Binding IsServerRunning}">
             Boot Player
         </Button>
 
@@ -232,7 +251,8 @@
             Grid.Column="2"
             Grid.Row="9"
             Grid.ColumnSpan="3"
-            Text="{Binding ServerMessage}">
+            Text="{Binding ServerMessage}"
+            IsEnabled="{Binding IsServerRunning}">
             
         </TextBox>
 
@@ -240,7 +260,8 @@
             Margin="10,4,5,4"
             Grid.Column="5"
             Grid.Row="9"
-            Command="{Binding SendMessageCommand}">
+            Command="{Binding SendMessageCommand}"
+            IsEnabled="{Binding IsServerRunning}">
             Send Message
         </Button>
 

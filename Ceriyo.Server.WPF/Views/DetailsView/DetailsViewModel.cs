@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.IO;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using Ceriyo.Core.Contracts;
-using Ceriyo.Core.Entities;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Settings;
-using Ceriyo.Server.WPF.Actions;
-using Ceriyo.Server.WPF.Contracts;
 using Prism.Commands;
+using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
 
 namespace Ceriyo.Server.WPF.Views.DetailsView
@@ -17,27 +16,29 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
     public class DetailsViewModel : BindableBase
     {
         private readonly IDataService _dataService;
-        private readonly ConcurrentQueue<IServerAction> _actionQueue;
+        private readonly IPathService _pathService;
         private readonly Timer _queueTimer;
-        
+
         public DetailsViewModel()
         {
             
         }
-
-        public DetailsViewModel(IDataService dataService, 
+        
+        public DetailsViewModel(IDataService dataService,
+            IPathService pathService, 
             ServerSettings settings)
         {
             _dataService = dataService;
+            _pathService = pathService;
             _settings = settings;
-            Modules = new BindingList<Module>();
+
+            Modules = new BindingList<string>();
             Players = new BindingList<string>();
             MaximumPortNumber = short.MaxValue;
             MaximumPlayers = 50;
-
-            _actionQueue = new ConcurrentQueue<IServerAction>();
+            
             _queueTimer = new Timer(2000);
-            _queueTimer.Elapsed += ProcessServerActionsQueue;
+            _queueTimer.Elapsed += ProcessServerActions;
 
             StartStopServerButtonText = "Start Server";
 
@@ -46,46 +47,28 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             SendMessageCommand = new DelegateCommand(SendMessage);
             SaveSettingsCommand = new DelegateCommand(SaveSettings);
             ToggleServerCommand = new DelegateCommand(ToggleServer);
+
+            NoModuleNotification = new InteractionRequest<INotification>();
+            LoadModules();
+            
         }
 
-        private void ProcessServerActionsQueue(object sender, ElapsedEventArgs elapsedEventArgs)
+        private void LoadModules()
         {
-            while (!_actionQueue.IsEmpty)
-            {
-                IServerAction action;
-                if (_actionQueue.TryDequeue(out action))
-                {
-                    if (action.GetType() == typeof(PlayerConnectedAction))
-                    {
-                        var convertedAction = (PlayerConnectedAction) action;
-                        if (!Players.Contains(convertedAction.Username))
-                        {
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                Players.Add(convertedAction.Username);
-                            });
-                        }
-                    }
-                    else if (action.GetType() == typeof(PlayerDisconnectedAction))
-                    {
-                        var convertedAction = (PlayerDisconnectedAction) action;
-                        if (Players.Contains(convertedAction.Username))
-                        {
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                Players.Remove(convertedAction.Username);
-                            });
-                        }
-                    }
-                    else
-                    {
-                        action.Process();
-                    }
-                }
-            }
+            Modules.Clear();
 
+            foreach (var file in Directory.GetFiles(_pathService.ModuleDirectory, "*.mod"))
+            {
+                Modules.Add(Path.GetFileNameWithoutExtension(file));
+            }
+        }
+
+        private void ProcessServerActions(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
             _serverGame.RefreshSettings(Settings);
         }
+
+        public InteractionRequest<INotification> NoModuleNotification { get; }
 
         private ServerSettings _settings;
         public ServerSettings Settings
@@ -102,17 +85,17 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             set { SetProperty(ref _ipAddress, value); }
         }
         
-        private BindingList<Module> _modules;
+        private BindingList<string> _modules;
 
-        public BindingList<Module> Modules
+        public BindingList<string> Modules
         {
             get { return _modules; }
             set { SetProperty(ref _modules, value); }
         }
 
-        private Module _selectedModule;
+        private string _selectedModule;
 
-        public Module SelectedModule
+        public string SelectedModule
         {
             get { return _selectedModule; }
             set { SetProperty(ref _selectedModule, value); }
@@ -175,6 +158,13 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
         }
 
         private bool _isServerRunning;
+
+        public bool IsServerRunning
+        {
+            get { return _isServerRunning; }
+            set { SetProperty(ref _isServerRunning, value); }
+        }
+
         private ServerGame _serverGame;
 
 
@@ -216,12 +206,22 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
 
         private void ToggleServer()
         {
-            if (_isServerRunning)
+            if (IsServerRunning)
             {
                 _serverGame.Exit();
             }
             else
             {
+                if (string.IsNullOrWhiteSpace(SelectedModule))
+                {
+                    NoModuleNotification.Raise(new Notification
+                    {
+                        Title = "No Module Selected",
+                        Content = "No module was selected. Please select a module and click 'Start Server' again."
+                    });
+                    return;
+                }
+
                 try
                 {
                     StartStopServerButtonText = "Stop Server";
@@ -231,7 +231,7 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
                 {
                     MessageBox.Show(ex.Message);
                     StartStopServerButtonText = "Start Server";
-                    _isServerRunning = false;
+                    IsServerRunning = false;
                     _queueTimer.Enabled = false;
                     Players.Clear();
                 }
@@ -243,15 +243,17 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
         {
             await Task.Run(() =>
             {
-                _isServerRunning = true;
+                IsServerRunning = true;
                 _queueTimer.Enabled = true;
-                using (_serverGame = new ServerGame(this, _settings))
+                using (_serverGame = new ServerGame(_settings, SelectedModule))
                 {
+                    _serverGame.OnPlayerConnected += PlayerConnected;
+                    _serverGame.OnPlayerDisconnected += PlayerDisconnected;
                     _serverGame.Run();
                 }
                 StartStopServerButtonText = "Start Server";
                 _queueTimer.Enabled = false;
-                _isServerRunning = false;
+                IsServerRunning = false;
 
                 Application.Current.Dispatcher.Invoke(() =>
                 {
@@ -260,9 +262,25 @@ namespace Ceriyo.Server.WPF.Views.DetailsView
             });
         }
 
-        public void QueueAction(IServerAction action)
+        private void PlayerConnected(string username)
         {
-            _actionQueue.Enqueue(action);
+            if (!Players.Contains(username))
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Players.Add(username);
+                });
+            }
+        }
+        private void PlayerDisconnected(string username)
+        {
+            if (Players.Contains(username))
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Players.Remove(username);
+                });
+            }
         }
 
     }
