@@ -43,7 +43,8 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         private void JoinServer(object obj)
         {
-            
+            JoinServerUIViewModel vm = _vmFactory.Create<JoinServerUIViewModel>();
+            _uiService.ChangeUIRoot<JoinServerView>(vm);
         }
 
         public ICommand DirectConnectCommand { get; set; }
@@ -51,14 +52,15 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         private void DirectConnect(object obj)
         {
             DirectConnectUIViewModel vm = _vmFactory.Create<DirectConnectUIViewModel>();
-            _uiService.ChangeUIRoot<DirectConnect>(vm);
+            _uiService.ChangeUIRoot<DirectConnectView>(vm);
         }
 
         public ICommand SettingsCommand { get; set; }
 
         private void Settings(object obj)
         {
-            
+            SettingsUIViewModel vm = _vmFactory.Create<SettingsUIViewModel>();
+            _uiService.ChangeUIRoot<SettingsView>(vm);
         }
 
         public ICommand ExitButtonCommand { get; set; }

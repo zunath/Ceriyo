@@ -20,7 +20,7 @@ namespace Ceriyo.Game.Windows.Screens
         public void Initialize()
         {
             MainMenuUIViewModel vm = _uiViewModelFactory.Create<MainMenuUIViewModel>();
-            _uiService.ChangeUIRoot<MainMenu>(vm);
+            _uiService.ChangeUIRoot<MainMenuView>(vm);
         }
 
         public void Update()

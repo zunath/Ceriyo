@@ -3,7 +3,7 @@
 //  This file was generated, please do not modify.
 //  
 // -----------------------------------------------------------
-namespace EmptyKeys.UserInterface.Generated {
+namespace EmptyKeys.UserInterface.Generated.JoinServerView_Bindings {
     using System;
     using System.CodeDom.Compiler;
     using System.Collections.ObjectModel;
@@ -16,30 +16,10 @@ namespace EmptyKeys.UserInterface.Generated {
     using EmptyKeys.UserInterface.Interactions.Core;
     using EmptyKeys.UserInterface.Interactivity;
     using EmptyKeys.UserInterface.Media;
-    using EmptyKeys.UserInterface.Media.Effects;
     using EmptyKeys.UserInterface.Media.Animation;
     using EmptyKeys.UserInterface.Media.Imaging;
     using EmptyKeys.UserInterface.Shapes;
     using EmptyKeys.UserInterface.Renderers;
     using EmptyKeys.UserInterface.Themes;
     
-    
-    [GeneratedCodeAttribute("Empty Keys UI Generator", "3.0.0.0")]
-    public sealed class Dictionary : ResourceDictionary {
-        
-        private static Dictionary singleton = new Dictionary();
-        
-        public Dictionary() {
-            this.InitializeResources();
-        }
-        
-        public static Dictionary Instance {
-            get {
-                return singleton;
-            }
-        }
-        
-        private void InitializeResources() {
-        }
-    }
 }

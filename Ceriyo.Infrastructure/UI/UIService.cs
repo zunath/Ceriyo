@@ -40,12 +40,7 @@ namespace Ceriyo.Infrastructure.UI
 
             SpriteFont font = _contentManager.Load<SpriteFont>("Spritefonts/Segoe_UI_10_Regular");
             FontManager.DefaultFont = _uiEngine.Renderer.CreateFont(font); 
-
-            FontManager.Instance.LoadFonts(_contentManager);
-            ImageManager.Instance.LoadImages(_contentManager);
-            SoundManager.Instance.LoadSounds(_contentManager);
-            EffectManager.Instance.LoadEffects(_contentManager);
-
+            
             _game.Window.ClientSizeChanged += WindowOnClientSizeChanged;
             
         }
@@ -81,6 +76,11 @@ namespace Ceriyo.Infrastructure.UI
             
             ActiveViewModel = viewModel;
             _activeRoot.DataContext = viewModel;
+            
+            FontManager.Instance.LoadFonts(_contentManager);
+            ImageManager.Instance.LoadImages(_contentManager);
+            SoundManager.Instance.LoadSounds(_contentManager);
+            EffectManager.Instance.LoadEffects(_contentManager);
         }
     }
 }

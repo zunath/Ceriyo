@@ -92,7 +92,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Diagnostics.Contracts" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -119,14 +118,21 @@
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Network\ServerNetworkService.cs" />
     <Compile Include="Services\ScriptService.cs" />
-    <Compile Include="UI\UIService.cs" />
     <Compile Include="UI\Generated\Dictionary.xaml.cs" />
-    <Compile Include="UI\Generated\DirectConnect.xaml.cs" />
-    <Compile Include="UI\Generated\DirectConnect.xaml_bindings.cs" />
-    <Compile Include="UI\Generated\MainMenu.xaml.cs" />
-    <Compile Include="UI\Generated\MainMenu.xaml_bindings.cs" />
+    <Compile Include="UI\Generated\Dictionary.xaml_bindings.cs" />
+    <Compile Include="UI\Generated\DirectConnectView.xaml.cs" />
+    <Compile Include="UI\Generated\DirectConnectView.xaml_bindings.cs" />
+    <Compile Include="UI\Generated\JoinServerView.xaml.cs" />
+    <Compile Include="UI\Generated\JoinServerView.xaml_bindings.cs" />
+    <Compile Include="UI\Generated\MainMenuView.xaml.cs" />
+    <Compile Include="UI\Generated\MainMenuView.xaml_bindings.cs" />
+    <Compile Include="UI\Generated\SettingsView.xaml.cs" />
+    <Compile Include="UI\Generated\SettingsView.xaml_bindings.cs" />
+    <Compile Include="UI\UIService.cs" />
     <Compile Include="UI\ViewModels\DirectConnectUIViewModel.cs" />
+    <Compile Include="UI\ViewModels\JoinServerUIViewModel.cs" />
     <Compile Include="UI\ViewModels\MainMenuUIViewModel.cs" />
+    <Compile Include="UI\ViewModels\SettingsUIViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BehaviorsLicense.txt" />

@@ -25,7 +25,7 @@ namespace EmptyKeys.UserInterface.Generated {
     
     
     [GeneratedCodeAttribute("Empty Keys UI Generator", "3.0.0.0")]
-    public partial class MainMenu : UIRoot {
+    public partial class MainMenuView : UIRoot {
         
         private DockPanel e_0;
         
@@ -41,12 +41,12 @@ namespace EmptyKeys.UserInterface.Generated {
         
         private Button e_6;
         
-        public MainMenu() : 
+        public MainMenuView() : 
                 base() {
             this.Initialize();
         }
         
-        public MainMenu(int width, int height) : 
+        public MainMenuView(int width, int height) : 
                 base(width, height) {
             this.Initialize();
         }
@@ -71,7 +71,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_0.Children.Add(this.e_1);
             this.e_1.Name = "e_1";
             RowDefinition row_e_1_0 = new RowDefinition();
-            row_e_1_0.Height = new GridLength(150F, GridUnitType.Pixel);
+            row_e_1_0.Height = new GridLength(100F, GridUnitType.Pixel);
             this.e_1.RowDefinitions.Add(row_e_1_0);
             RowDefinition row_e_1_1 = new RowDefinition();
             row_e_1_1.Height = new GridLength(50F, GridUnitType.Pixel);
@@ -104,9 +104,9 @@ namespace EmptyKeys.UserInterface.Generated {
             BitmapImage e_2_bm = new BitmapImage();
             e_2_bm.TextureAsset = "UI/Images/CeriyoLogo";
             this.e_2.Source = e_2_bm;
-            Grid.SetColumn(this.e_2, 0);
+            Grid.SetColumn(this.e_2, 1);
             Grid.SetRow(this.e_2, 0);
-            Grid.SetColumnSpan(this.e_2, 4);
+            Grid.SetColumnSpan(this.e_2, 2);
             // e_3 element
             this.e_3 = new Button();
             this.e_1.Children.Add(this.e_3);

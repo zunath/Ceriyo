@@ -3,7 +3,7 @@
 //  This file was generated, please do not modify.
 //  
 // -----------------------------------------------------------
-namespace EmptyKeys.UserInterface.Generated.MainMenu_Bindings {
+namespace EmptyKeys.UserInterface.Generated.DirectConnectView_Bindings {
     using System;
     using System.CodeDom.Compiler;
     using System.Collections.ObjectModel;

@@ -26,7 +26,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
@@ -34,9 +34,9 @@
             </Grid.RowDefinitions>
 
             <Image
-            Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="4">
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.ColumnSpan="2">
                 <Image.Source>
                     <BitmapImage UriSource="/UI/Images/CeriyoLogo.png"></BitmapImage>
                 </Image.Source>

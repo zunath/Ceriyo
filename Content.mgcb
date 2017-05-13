@@ -25,13 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:Ceriyo.Content/Graphics/Tileset/Empty-Tileset.png
 
-#begin Ceriyo.Content/Spritefonts/Arial10.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Ceriyo.Content/Spritefonts/Arial10.spritefont
-
 #begin Ceriyo.Content/Spritefonts/Segoe_UI_10_Regular.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -50,4 +43,40 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Ceriyo.Content/UI/Images/CeriyoLogo.png
+
+#begin Ceriyo.Content/UI/Images/DirectConnect.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Ceriyo.Content/UI/Images/DirectConnect.png
+
+#begin Ceriyo.Content/UI/Images/JoinServer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Ceriyo.Content/UI/Images/JoinServer.png
+
+#begin Ceriyo.Content/UI/Images/Settings.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Ceriyo.Content/UI/Images/Settings.png
 

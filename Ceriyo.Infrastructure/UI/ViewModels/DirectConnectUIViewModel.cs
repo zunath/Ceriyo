@@ -55,7 +55,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         private void Back(object obj)
         {
             MainMenuUIViewModel vm = _vmFactory.Create<MainMenuUIViewModel>();
-            _uiService.ChangeUIRoot<MainMenu>(vm);
+            _uiService.ChangeUIRoot<MainMenuView>(vm);
         }
 
         public ICommand ConnectCommand { get; set; }
