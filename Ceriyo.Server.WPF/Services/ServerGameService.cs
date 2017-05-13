@@ -3,10 +3,16 @@ using Artemis;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
+using Ceriyo.Server.WPF.Screens;
 using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Server.WPF.Services
 {
+    /// <summary>
+    /// ServerGameService is responsible for initializing and cleaning up
+    /// all app-wide services. It should not handle game specific logic. 
+    /// That should be handled in the ServerScreen class.
+    /// </summary>
     public class ServerGameService: IGameService
     {
         private readonly EntityWorld _world;
@@ -15,6 +21,9 @@ namespace Ceriyo.Server.WPF.Services
         private readonly IDataService _dataService;
         private readonly IAppService _appService;
         private readonly IServerNetworkService _networkService;
+        private readonly IScreenService _screenService;
+        private readonly IObjectMapper _objectMapper;
+        private readonly ISystemLoader _systemLoader;
 
         public ServerGameService(
             EntityWorld world,
@@ -22,7 +31,10 @@ namespace Ceriyo.Server.WPF.Services
             IScriptService scriptService,
             IDataService dataService,
             IAppService appService,
-            IServerNetworkService networkService)
+            IServerNetworkService networkService,
+            IScreenService screenService,
+            IObjectMapper objectMapper,
+            ISystemLoader systemLoader)
         {
             _world = world;
             _settingsService = settingsService;
@@ -30,13 +42,19 @@ namespace Ceriyo.Server.WPF.Services
             _dataService = dataService;
             _appService = appService;
             _networkService = networkService;
+            _screenService = screenService;
+            _objectMapper = objectMapper;
+            _systemLoader = systemLoader;
         }
 
         public void Initialize(IGraphicsDeviceManager graphics)
         {
+            _objectMapper.Initialize();
             _appService.CreateAppDirectoryStructure();
             _dataService.Initialize();
             _networkService.StartServer(_settingsService.Port);
+            _screenService.ChangeScreen<ServerScreen>();
+            _systemLoader.LoadSystems();
         }
 
         public void Update(GameTime gameTime)

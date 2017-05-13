@@ -82,6 +82,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_0.Children.Add(this.e_1);
             this.e_1.Name = "e_1";
             this.e_1.IsReadOnly = true;
+            this.e_1.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
             Grid.SetColumn(this.e_1, 0);
             Grid.SetRow(this.e_1, 0);
             Grid.SetColumnSpan(this.e_1, 3);

@@ -159,8 +159,10 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Factory\ServerGameFactory.cs" />
     <Compile Include="Mapping\ServerObjectMapper.cs" />
+    <Compile Include="Screens\ServerScreen.cs" />
     <Compile Include="ServerGame.cs" />
     <Compile Include="ServerIOCConfig.cs" />
+    <Compile Include="ServerSystemLoader.cs" />
     <Compile Include="Services\ServerGameService.cs" />
     <Compile Include="Services\ServerSettingsService.cs" />
     <Compile Include="Views\ApplicationRootView\ApplicationRootViewModel.cs" />

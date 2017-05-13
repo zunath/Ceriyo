@@ -30,7 +30,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             BackCommand = new RelayCommand(Back);
             ConnectCommand = new RelayCommand(Connect);
 
-            networkService.PacketReceived += OnPacketReceived;
+            networkService.OnPacketReceived += PacketReceived;
 
             // DEBUGGING
 
@@ -41,7 +41,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         }
 
-        private void OnPacketReceived(PacketBase p)
+        private void PacketReceived(PacketBase p)
         {
             if (p.GetType() == typeof(ConnectedToServerPacket))
             {

@@ -136,11 +136,6 @@ namespace Ceriyo.Core.Services.Module
             return _objectMapper.Map<ModuleData>(_moduleData);
         }
         
-        public string GetLoadedModuleName()
-        {
-            return _moduleData.Name;
-        }
-
         private void BuildModule()
         {
             

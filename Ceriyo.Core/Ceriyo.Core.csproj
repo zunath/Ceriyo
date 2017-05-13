@@ -103,7 +103,6 @@
     <Compile Include="Data\TileAtlasData.cs" />
     <Compile Include="Data\TileData.cs" />
     <Compile Include="Entities\ObjectPainter.cs" />
-    <Compile Include="EventArgs\NetworkConnectionEventArgs.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
     <Compile Include="Data\SerializedFileData.cs" />

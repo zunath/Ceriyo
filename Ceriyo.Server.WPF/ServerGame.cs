@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Ceriyo.Core.Contracts;
-using Ceriyo.Core.EventArgs;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Network.Contracts;
@@ -10,6 +9,10 @@ using Microsoft.Xna.Framework;
 
 namespace Ceriyo.Server.WPF
 {
+    /// <summary>
+    /// ServerGame is responsible for hooking all services up using IOC
+    /// and handling communication between the GUI thread and the logic thread.
+    /// </summary>
     public class ServerGame: Game
     {
         private readonly GraphicsDeviceManager _graphics;
@@ -44,6 +47,9 @@ namespace Ceriyo.Server.WPF
             _settingsService = ServerIOCConfig.Resolve<IServerSettingsService>();
             _settingsService.CopySettings(_initialSettings);
 
+            _moduleService = ServerIOCConfig.Resolve<IModuleService>();
+            _moduleService.OpenModule(_moduleName);
+
             _gameService = ServerGameFactory.GetServerGameService();
             _gameService.Initialize(_graphics);
             
@@ -51,8 +57,6 @@ namespace Ceriyo.Server.WPF
             _networkService.OnPlayerConnected += PlayerConnected;
             _networkService.OnPlayerDisconnected += PlayerDisconnected;
 
-            _moduleService = ServerIOCConfig.Resolve<IModuleService>();
-            _moduleService.OpenModule(_moduleName);
 
             base.Initialize();
         }
@@ -109,16 +113,16 @@ namespace Ceriyo.Server.WPF
 
         public void RefreshSettings(ServerSettings settings)
         {
-            _settingsService.CopySettings(settings);
+            _settingsService?.CopySettings(settings);
         }
         
-        private void PlayerConnected(object sender, NetworkConnectionEventArgs e)
+        private void PlayerConnected(string username)
         {
-            OnPlayerConnected?.Invoke(e.Username);
+            OnPlayerConnected?.Invoke(username);
         }
-        private void PlayerDisconnected(object sender, NetworkConnectionEventArgs e)
+        private void PlayerDisconnected(string username)
         {
-            OnPlayerDisconnected?.Invoke(e.Username);
+            OnPlayerDisconnected?.Invoke(username);
         }
 
     }

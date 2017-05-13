@@ -24,7 +24,10 @@ namespace Ceriyo.Server.WPF.Tests.Services
                 new Mock<IScriptService>().Object,
                 new Mock<IDataService>().Object,
                 new Mock<IAppService>().Object,
-                new Mock<IServerNetworkService>().Object);
+                new Mock<IServerNetworkService>().Object,
+                new Mock<IScreenService>().Object,
+                new Mock<IObjectMapper>().Object,
+                new Mock<ISystemLoader>().Object);
 
             Assert.Throws<NotSupportedException>(() =>
             {

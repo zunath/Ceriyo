@@ -75,7 +75,7 @@ namespace Ceriyo.Infrastructure.Network
                     case NetIncomingMessageType.Data:
                         MemoryStream stream = new MemoryStream(message.ReadBytes(message.LengthBytes));
                         PacketBase packet = Serializer.Deserialize<PacketBase>(stream);
-                        PacketReceived?.Invoke(packet);
+                        OnPacketReceived?.Invoke(packet);
                         break;
                         
                     case NetIncomingMessageType.StatusChanged:
@@ -141,7 +141,7 @@ namespace Ceriyo.Infrastructure.Network
 
         public event Action OnConnected;
         public event Action OnDisconnected;
-        public event Action<PacketBase> PacketReceived;
+        public event Action<PacketBase> OnPacketReceived;
         
 
     }

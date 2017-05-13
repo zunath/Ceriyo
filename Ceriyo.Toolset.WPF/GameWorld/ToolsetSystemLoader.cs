@@ -28,6 +28,9 @@ namespace Ceriyo.Toolset.WPF.GameWorld
 
         public void LoadSystems()
         {
+            // Update Systems (Order Matters)
+
+            // Draw Systems (Order Matters)
             RegisterSystem(_areaRenderSystem);
             RegisterSystem(_renderSystem);
             RegisterSystem(_painterSystem);

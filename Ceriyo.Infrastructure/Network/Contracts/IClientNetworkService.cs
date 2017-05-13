@@ -14,6 +14,6 @@ namespace Ceriyo.Infrastructure.Network.Contracts
 
         event Action OnConnected;
         event Action OnDisconnected;
-        event Action<PacketBase> PacketReceived;
+        event Action<PacketBase> OnPacketReceived;
     }
 }

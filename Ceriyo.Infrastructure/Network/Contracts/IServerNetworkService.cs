@@ -1,7 +1,6 @@
 ﻿using System;
 using Ceriyo.Core.Constants;
-using Ceriyo.Core.Contracts;
-using Ceriyo.Core.EventArgs;
+using Ceriyo.Infrastructure.Network.Packets;
 
 namespace Ceriyo.Infrastructure.Network.Contracts
 {
@@ -14,8 +13,8 @@ namespace Ceriyo.Infrastructure.Network.Contracts
 
         void BootUsername(string username);
 
-        event EventHandler<NetworkConnectionEventArgs> OnPlayerConnected;
-        event EventHandler<NetworkConnectionEventArgs> OnPlayerDisconnected;
-
+        event Action<string> OnPlayerConnected;
+        event Action<string> OnPlayerDisconnected;
+        event Action<PacketBase> OnPacketReceived;
     }
 }

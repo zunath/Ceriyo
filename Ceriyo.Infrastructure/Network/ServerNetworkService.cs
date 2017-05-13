@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
-using Ceriyo.Core.EventArgs;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
@@ -77,6 +76,9 @@ namespace Ceriyo.Infrastructure.Network
                         break;
 
                     case NetIncomingMessageType.Data:
+                        MemoryStream stream = new MemoryStream(message.ReadBytes(message.LengthBytes));
+                        PacketBase packet = Serializer.Deserialize<PacketBase>(stream);
+                        OnPacketReceived?.Invoke(packet);
                         break;
                         
                     case NetIncomingMessageType.ConnectionApproval:
@@ -92,9 +94,9 @@ namespace Ceriyo.Infrastructure.Network
 
                             ConnectedToServerPacket response = new ConnectedToServerPacket
                             {
-                                ServerName = _settingsService.ServerName,
+                                ServerName = _settingsService.ServerName.Substring(0, 32),
                                 AllowCharacterDeletion = _settingsService.AllowCharacterDeletion,
-                                Announcement = _settingsService.Announcement,
+                                Announcement = _settingsService.Announcement.Substring(0, 255),
                                 Category = _settingsService.GameCategory,
                                 MaxPlayers = _settingsService.MaxPlayers,
                                 PVP = _settingsService.PVPType
@@ -102,12 +104,12 @@ namespace Ceriyo.Infrastructure.Network
 
                             SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
 
-                            OnPlayerConnected?.Invoke(this, new NetworkConnectionEventArgs(username));
+                            OnPlayerConnected?.Invoke(username);
                         }
                         else if (status == NetConnectionStatus.Disconnected)
                         {
                             string username = _connectionToUsername[message.SenderConnection];
-                            OnPlayerDisconnected?.Invoke(this, new NetworkConnectionEventArgs(username));
+                            OnPlayerDisconnected?.Invoke(username);
                             _usernameToConnection.Remove(username);
                             _connectionToUsername.Remove(message.SenderConnection);
                         }
@@ -209,7 +211,8 @@ namespace Ceriyo.Infrastructure.Network
             connection.Disconnect("You have been booted from the server.");
         }
 
-        public event EventHandler<NetworkConnectionEventArgs> OnPlayerConnected;
-        public event EventHandler<NetworkConnectionEventArgs> OnPlayerDisconnected;
+        public event Action<string> OnPlayerConnected;
+        public event Action<string> OnPlayerDisconnected;
+        public event Action<PacketBase> OnPacketReceived;
     }
 }

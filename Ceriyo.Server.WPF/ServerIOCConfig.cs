@@ -1,6 +1,8 @@
 ﻿using Artemis;
 using Autofac;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
+using Ceriyo.Core.Entities.Contracts;
 using Ceriyo.Core.Scripting.Common;
 using Ceriyo.Core.Scripting.Common.Contracts;
 using Ceriyo.Core.Scripting.Server;
@@ -11,6 +13,7 @@ using Ceriyo.Core.Services.Game;
 using Ceriyo.Core.Services.Module;
 using Ceriyo.Core.Settings;
 using Ceriyo.Infrastructure.Factory;
+using Ceriyo.Infrastructure.Helpers;
 using Ceriyo.Infrastructure.Logging;
 using Ceriyo.Infrastructure.Network;
 using Ceriyo.Infrastructure.Network.Contracts;
@@ -19,6 +22,7 @@ using Ceriyo.Server.WPF.Mapping;
 using Ceriyo.Server.WPF.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Module = Ceriyo.Core.Entities.Module;
 
 namespace Ceriyo.Server.WPF
 {
@@ -57,8 +61,30 @@ namespace Ceriyo.Server.WPF
                 .WithParameter("isRunningAsServer", true)
                 .SingleInstance();
 
+            builder.RegisterType<ScreenService>().As<IScreenService>();
+            builder.RegisterType<ComponentFactory>().As<IComponentFactory>();
+
             // Mapping
             builder.RegisterType<ServerObjectMapper>().As<IObjectMapper>().SingleInstance();
+
+            // Screens, Components, and Systems
+            IOCHelpers.RegisterScreens(builder);
+            IOCHelpers.RegisterComponents(builder);
+            IOCHelpers.RegisterSystems(builder);
+            builder.RegisterType<ServerSystemLoader>().As<ISystemLoader>().SingleInstance();
+
+            // Entities
+            builder.RegisterType<Module>().As<IGameEntity<ModuleData>>();
+            
+            // Scripting
+            builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();
+            builder.RegisterType<EntityMethods>().As<IEntityMethods>().SingleInstance();
+            builder.RegisterType<LocalDataMethods>().As<ILocalDataMethods>().SingleInstance();
+            builder.RegisterType<PhysicsMethods>().As<IPhysicsMethods>().SingleInstance();
+            builder.RegisterType<ScriptingMethods>().As<IScriptingMethods>().SingleInstance();
+            builder.RegisterType<ScriptService>().As<IScriptService>()
+                .WithParameter("isServer", true)
+                .SingleInstance();
 
             // Common builds between GUI and server logic
             Initialize(builder);
@@ -99,15 +125,6 @@ namespace Ceriyo.Server.WPF
             builder.RegisterType<ComponentFactory>().As<IComponentFactory>().SingleInstance();
             builder.RegisterType<ScreenFactory>().As<IScreenFactory>().SingleInstance();
             
-            // Scripting
-            builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();
-            builder.RegisterType<EntityMethods>().As<IEntityMethods>().SingleInstance();
-            builder.RegisterType<LocalDataMethods>().As<ILocalDataMethods>().SingleInstance();
-            builder.RegisterType<PhysicsMethods>().As<IPhysicsMethods>().SingleInstance();
-            builder.RegisterType<ScriptingMethods>().As<IScriptingMethods>().SingleInstance();
-            builder.RegisterType<ScriptService>().As<IScriptService>()
-                .WithParameter("isServer", true)
-                .SingleInstance();
         }
         
 

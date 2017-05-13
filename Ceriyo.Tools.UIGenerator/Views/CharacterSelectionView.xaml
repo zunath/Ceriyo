@@ -27,6 +27,7 @@
             TextWrapping="Wrap"
             IsReadOnly="True"
             IsReadOnlyCaretVisible="False"
+            VerticalScrollBarVisibility="Auto"
             Text="{Binding ServerInformationDetails}">
             
         </TextBox>

@@ -33,6 +33,7 @@
         OnCreatureDisturbed = 29,
         OnCreatureAttacked = 31,
         OnCreatureSpawned = 32,
-        OnAbilityActivated = 33
+        OnAbilityActivated = 33,
+        OnModulePlayerLevelUp = 34
     }
 }

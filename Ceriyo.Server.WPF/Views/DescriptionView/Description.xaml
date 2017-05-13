@@ -40,7 +40,8 @@
             Grid.Row="1"
             Grid.ColumnSpan="3"
             TextWrapping="Wrap"
-            Text="{Binding Settings.Description}">
+            Text="{Binding Settings.Description}"
+            MaxLength="255">
             
         </TextBox>
         
@@ -49,7 +50,8 @@
             Grid.Row="3"
             Grid.ColumnSpan="3"
             TextWrapping="Wrap"
-            Text="{Binding Settings.Announcement}">
+            Text="{Binding Settings.Announcement}"
+            MaxLength="255">
             
         </TextBox>
         
