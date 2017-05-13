@@ -45,8 +45,20 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         {
             if (p.GetType() == typeof(ConnectedToServerPacket))
             {
-                ConnectedToServerPacket packet = (ConnectedToServerPacket) p;
+                var packet = (ConnectedToServerPacket) p;
+                var vm = _vmFactory.Create<CharacterSelectionUIViewModel>();
+                vm.IsCharacterDeletionEnabled = packet.AllowCharacterDeletion;
+                vm.ServerName = packet.ServerName;
+                vm.Announcement = packet.Announcement;
+                vm.Category = packet.Category;
+                vm.PVP = packet.PVP;
+                vm.CurrentPlayers = packet.CurrentPlayers;
+                vm.MaxPlayers = packet.MaxPlayers;
+                vm.IPAddress = packet.IPAddress;
 
+                vm.BuildServerInformationDetails();
+
+                _uiService.ChangeUIRoot<CharacterSelectionView>(vm);
             }
         }
 

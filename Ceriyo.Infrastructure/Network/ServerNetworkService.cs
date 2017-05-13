@@ -89,8 +89,17 @@ namespace Ceriyo.Infrastructure.Network
                         if (status == NetConnectionStatus.Connected)
                         {
                             string username = _connectionToUsername[message.SenderConnection];
-                            
-                            ConnectedToServerPacket response = new ConnectedToServerPacket();
+
+                            ConnectedToServerPacket response = new ConnectedToServerPacket
+                            {
+                                ServerName = _settingsService.ServerName,
+                                AllowCharacterDeletion = _settingsService.AllowCharacterDeletion,
+                                Announcement = _settingsService.Announcement,
+                                Category = _settingsService.GameCategory,
+                                MaxPlayers = _settingsService.MaxPlayers,
+                                PVP = _settingsService.PVPType
+                            };
+
                             SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
 
                             OnPlayerConnected?.Invoke(this, new NetworkConnectionEventArgs(username));
