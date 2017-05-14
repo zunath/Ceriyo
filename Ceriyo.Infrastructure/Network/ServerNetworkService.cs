@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
@@ -21,16 +22,22 @@ namespace Ceriyo.Infrastructure.Network
         private readonly Dictionary<string, NetConnection> _usernameToConnection;
         private readonly Dictionary<NetConnection, string> _connectionToUsername;
         private readonly IModuleService _moduleService;
+        private readonly IPathService _pathService;
+        private readonly IDataService _dataService;
 
         public ServerNetworkService(ILogger logger, 
             IEngineService engineService,
             IServerSettingsService settingsService,
-            IModuleService moduleService)
+            IModuleService moduleService,
+            IPathService pathService,
+            IDataService dataService)
         {
             _logger = logger;
             _engineService = engineService;
             _settingsService = settingsService;
             _moduleService = moduleService;
+            _pathService = pathService;
+            _dataService = dataService;
             _usernameToConnection = new Dictionary<string, NetConnection>();
             _connectionToUsername = new Dictionary<NetConnection, string>();
         }
@@ -93,31 +100,11 @@ namespace Ceriyo.Infrastructure.Network
 
                         if (status == NetConnectionStatus.Connected)
                         {
-                            string username = _connectionToUsername[message.SenderConnection];
-
-                            int serverNameLength = _settingsService.ServerName.Length > 32 ? 32 : _settingsService.ServerName.Length;
-                            int announcementLength = _settingsService.Announcement.Length > 255 ? 255 : _settingsService.Announcement.Length;
-                            ConnectedToServerPacket response = new ConnectedToServerPacket
-                            {
-                                ServerName = _settingsService.ServerName.Substring(0, serverNameLength),
-                                AllowCharacterDeletion = _settingsService.AllowCharacterDeletion,
-                                Announcement = _settingsService.Announcement.Substring(0, announcementLength),
-                                Category = _settingsService.GameCategory,
-                                MaxPlayers = _settingsService.MaxPlayers,
-                                PVP = _settingsService.PVPType,
-                                RequiredResourcePacks = _moduleService.GetLoadedModuleData().ResourcePacks
-                            };
-                            
-                            SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
-
-                            OnPlayerConnected?.Invoke(username);
+                            HandleConnected(message);
                         }
                         else if (status == NetConnectionStatus.Disconnected)
                         {
-                            string username = _connectionToUsername[message.SenderConnection];
-                            OnPlayerDisconnected?.Invoke(username);
-                            _usernameToConnection.Remove(username);
-                            _connectionToUsername.Remove(message.SenderConnection);
+                            HandleDisconnected(message);
                         }
 
                         break;
@@ -170,7 +157,50 @@ namespace Ceriyo.Infrastructure.Network
             _usernameToConnection.Add(packet.Username, message.SenderConnection);
             _connectionToUsername.Add(message.SenderConnection, packet.Username);
         }
-        
+
+        private void HandleConnected(NetIncomingMessage message)
+        {
+            string username = _connectionToUsername[message.SenderConnection];
+
+            int serverNameLength = _settingsService.ServerName.Length > 32 ? 32 : _settingsService.ServerName.Length;
+            int announcementLength = _settingsService.Announcement.Length > 255 ? 255 : _settingsService.Announcement.Length;
+            ConnectedToServerPacket response = new ConnectedToServerPacket
+            {
+                ServerName = _settingsService.ServerName.Substring(0, serverNameLength),
+                AllowCharacterDeletion = _settingsService.AllowCharacterDeletion,
+                Announcement = _settingsService.Announcement.Substring(0, announcementLength),
+                Category = _settingsService.GameCategory,
+                MaxPlayers = _settingsService.MaxPlayers,
+                PVP = _settingsService.PVPType,
+                RequiredResourcePacks = _moduleService.GetLoadedModuleData().ResourcePacks
+            };
+
+            string directoryPath = _pathService.ServerVaultDirectory + "/" + username + "/";
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            string[] files = Directory.GetFiles(_pathService.ServerVaultDirectory + "/" + username + "/", "*.pcf");
+            foreach (string pcFile in files)
+            {
+                PCData pc = _dataService.Load<PCData>(pcFile);
+                response.PCs.Add(pc);
+            }
+            
+            SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
+
+            OnPlayerConnected?.Invoke(username);
+        }
+
+        private void HandleDisconnected(NetIncomingMessage message)
+        {
+            string username = _connectionToUsername[message.SenderConnection];
+            OnPlayerDisconnected?.Invoke(username);
+            _usernameToConnection.Remove(username);
+            _connectionToUsername.Remove(message.SenderConnection);
+        }
+
 
         public void SendMessage(PacketDeliveryMethod method, INetworkPacket packet, string accountName)
         {

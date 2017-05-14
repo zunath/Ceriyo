@@ -37,6 +37,12 @@ namespace EmptyKeys.UserInterface.Generated {
         
         private Button e_4;
         
+        private ScrollViewer e_5;
+        
+        private ListBox e_6;
+        
+        private DockPanel e_10;
+        
         public CharacterSelectionView() : 
                 base() {
             this.Initialize();
@@ -120,6 +126,46 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetRow(this.e_4, 2);
             Binding binding_e_4_Command = new Binding("DisconnectCommand");
             this.e_4.SetBinding(Button.CommandProperty, binding_e_4_Command);
+            // e_5 element
+            this.e_5 = new ScrollViewer();
+            this.e_0.Children.Add(this.e_5);
+            this.e_5.Name = "e_5";
+            Grid.SetColumn(this.e_5, 0);
+            Grid.SetRow(this.e_5, 1);
+            // e_6 element
+            this.e_6 = new ListBox();
+            this.e_5.Content = this.e_6;
+            this.e_6.Name = "e_6";
+            Func<UIElement, UIElement> e_6_dtFunc = e_6_dtMethod;
+            this.e_6.ItemTemplate = new DataTemplate(e_6_dtFunc);
+            Binding binding_e_6_ItemsSource = new Binding("PCs");
+            this.e_6.SetBinding(ListBox.ItemsSourceProperty, binding_e_6_ItemsSource);
+            // e_10 element
+            this.e_10 = new DockPanel();
+            this.e_0.Children.Add(this.e_10);
+            this.e_10.Name = "e_10";
+            Grid.SetColumn(this.e_10, 1);
+            Grid.SetRow(this.e_10, 1);
+            Grid.SetColumnSpan(this.e_10, 2);
+        }
+        
+        private static UIElement e_6_dtMethod(UIElement parent) {
+            // e_7 element
+            StackPanel e_7 = new StackPanel();
+            e_7.Parent = parent;
+            e_7.Name = "e_7";
+            e_7.Orientation = Orientation.Horizontal;
+            // e_8 element
+            Image e_8 = new Image();
+            e_7.Children.Add(e_8);
+            e_8.Name = "e_8";
+            // e_9 element
+            TextBlock e_9 = new TextBlock();
+            e_7.Children.Add(e_9);
+            e_9.Name = "e_9";
+            Binding binding_e_9_Text = new Binding("Name");
+            e_9.SetBinding(TextBlock.TextProperty, binding_e_9_Text);
+            return e_7;
         }
     }
 }

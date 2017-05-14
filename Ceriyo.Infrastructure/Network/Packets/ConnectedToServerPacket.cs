@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Ceriyo.Core.Constants;
+using Ceriyo.Core.Data;
 using ProtoBuf;
 
 namespace Ceriyo.Infrastructure.Network.Packets
@@ -25,10 +26,13 @@ namespace Ceriyo.Infrastructure.Network.Packets
         public bool AllowCharacterDeletion { get; set; }
         [ProtoMember(9)]
         public List<string> RequiredResourcePacks { get; set; }
+        [ProtoMember(10)]
+        public List<PCData> PCs { get; set; }
 
         public ConnectedToServerPacket()
         {
             RequiredResourcePacks = new List<string>();
+            PCs = new List<PCData>();
         }
 
         public override void Process()

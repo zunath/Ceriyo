@@ -73,6 +73,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
                 vm.CurrentPlayers = packet.CurrentPlayers;
                 vm.MaxPlayers = packet.MaxPlayers;
                 vm.IPAddress = packet.IPAddress;
+                vm.PCs = packet.PCs;
 
                 vm.BuildServerInformationDetails();
 

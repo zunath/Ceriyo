@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.UI.Contracts;
 using EmptyKeys.UserInterface.Generated;
@@ -36,6 +38,8 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         public int MaxPlayers { get; set; }
         public string IPAddress { get; set; }
         public bool IsCharacterDeletionEnabled { get; set; }
+
+        public List<PCData> PCs { get; set; }
         public ICommand CreateCharacterCommand { get; set; }
 
         public string ServerInformationDetails { get; set; }

@@ -62,6 +62,31 @@
         </Button>
 
 
+        <ScrollViewer
+            Grid.Column="0"
+            Grid.Row="1">
+            
+            <ListBox
+                ItemsSource="{Binding PCs}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" CanVerticallyScroll="False">
+                            <Image></Image>
+                            <TextBlock Text="{Binding Path=Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+        </ScrollViewer>
+        
+        <DockPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="2">
+            
+        </DockPanel>
+        
     </Grid>
 </ek:UIRoot>
 

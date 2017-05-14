@@ -46,6 +46,7 @@ namespace Ceriyo.Infrastructure.Services
             Map<SerializedFileData>();
             Map<SerializedManifestData>();
             Map<PlaceableData>();
+            Map<PCData>();
             Map<ResourceItemData>();
             Map<ScriptData>();
             Map<SkillData>();

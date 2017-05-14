@@ -7,7 +7,7 @@ namespace Ceriyo.Core.Data
     {
         public string GlobalID { get; set; }
 
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         public string Tag { get; set; }
 
