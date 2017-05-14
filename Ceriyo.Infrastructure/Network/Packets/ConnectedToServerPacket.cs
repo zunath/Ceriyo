@@ -1,4 +1,5 @@
-﻿using Ceriyo.Core.Constants;
+﻿using System.Collections.Generic;
+using Ceriyo.Core.Constants;
 using ProtoBuf;
 
 namespace Ceriyo.Infrastructure.Network.Packets
@@ -22,6 +23,13 @@ namespace Ceriyo.Infrastructure.Network.Packets
         public string IPAddress { get; set; }
         [ProtoMember(8)]
         public bool AllowCharacterDeletion { get; set; }
+        [ProtoMember(9)]
+        public List<string> RequiredResourcePacks { get; set; }
+
+        public ConnectedToServerPacket()
+        {
+            RequiredResourcePacks = new List<string>();
+        }
 
         public override void Process()
         {

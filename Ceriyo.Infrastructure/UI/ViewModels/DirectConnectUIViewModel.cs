@@ -1,4 +1,8 @@
-﻿using Ceriyo.Core.Contracts;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
 using Ceriyo.Infrastructure.UI.Contracts;
@@ -13,6 +17,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         private readonly IUIService _uiService;
         private readonly IUIViewModelFactory _vmFactory;
         private readonly IClientNetworkService _networkService;
+        private readonly IPathService _pathService;
 
         public string IPAddress { get; set; }
         public string Password { get; set; }
@@ -21,11 +26,13 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         public DirectConnectUIViewModel(IUIService uiService,
             IUIViewModelFactory vmFactory,
-            IClientNetworkService networkService)
+            IClientNetworkService networkService,
+            IPathService pathService)
         {
             _uiService = uiService;
             _vmFactory = vmFactory;
             _networkService = networkService;
+            _pathService = pathService;
 
             BackCommand = new RelayCommand(Back);
             ConnectCommand = new RelayCommand(Connect);
@@ -46,6 +53,17 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             if (p.GetType() == typeof(ConnectedToServerPacket))
             {
                 var packet = (ConnectedToServerPacket) p;
+                
+                foreach (string resourcePack in packet.RequiredResourcePacks)
+                {
+                    if (!File.Exists(_pathService.ResourcePackDirectory + resourcePack + ".rpk"))
+                    {
+                        _networkService.DisconnectFromServer($"Missing required resource packs. (File: {resourcePack})");
+                        return;
+                    }
+                }
+
+
                 var vm = _vmFactory.Create<CharacterSelectionUIViewModel>();
                 vm.IsCharacterDeletionEnabled = packet.AllowCharacterDeletion;
                 vm.ServerName = packet.ServerName;

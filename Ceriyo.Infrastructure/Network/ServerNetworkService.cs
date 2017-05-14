@@ -20,14 +20,17 @@ namespace Ceriyo.Infrastructure.Network
         private readonly IServerSettingsService _settingsService;
         private readonly Dictionary<string, NetConnection> _usernameToConnection;
         private readonly Dictionary<NetConnection, string> _connectionToUsername;
+        private readonly IModuleService _moduleService;
 
         public ServerNetworkService(ILogger logger, 
             IEngineService engineService,
-            IServerSettingsService settingsService)
+            IServerSettingsService settingsService,
+            IModuleService moduleService)
         {
             _logger = logger;
             _engineService = engineService;
             _settingsService = settingsService;
+            _moduleService = moduleService;
             _usernameToConnection = new Dictionary<string, NetConnection>();
             _connectionToUsername = new Dictionary<NetConnection, string>();
         }
@@ -92,16 +95,19 @@ namespace Ceriyo.Infrastructure.Network
                         {
                             string username = _connectionToUsername[message.SenderConnection];
 
+                            int serverNameLength = _settingsService.ServerName.Length > 32 ? 32 : _settingsService.ServerName.Length;
+                            int announcementLength = _settingsService.Announcement.Length > 255 ? 255 : _settingsService.Announcement.Length;
                             ConnectedToServerPacket response = new ConnectedToServerPacket
                             {
-                                ServerName = _settingsService.ServerName.Substring(0, 32),
+                                ServerName = _settingsService.ServerName.Substring(0, serverNameLength),
                                 AllowCharacterDeletion = _settingsService.AllowCharacterDeletion,
-                                Announcement = _settingsService.Announcement.Substring(0, 255),
+                                Announcement = _settingsService.Announcement.Substring(0, announcementLength),
                                 Category = _settingsService.GameCategory,
                                 MaxPlayers = _settingsService.MaxPlayers,
-                                PVP = _settingsService.PVPType
+                                PVP = _settingsService.PVPType,
+                                RequiredResourcePacks = _moduleService.GetLoadedModuleData().ResourcePacks
                             };
-
+                            
                             SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
 
                             OnPlayerConnected?.Invoke(username);
