@@ -22,19 +22,25 @@ namespace Ceriyo.Server.WPF.Screens
         private readonly IServerNetworkService _networkService;
         private readonly IModuleService _moduleService;
         private readonly IScriptService _scriptService;
+        private readonly IDataService _dataService;
+        private readonly IPathService _pathService;
         private Entity _gameModule;
 
         public ServerScreen(EntityWorld world,
             IEntityFactory entityFactory,
             IServerNetworkService networkService,
             IModuleService moduleService,
-            IScriptService scriptService)
+            IScriptService scriptService,
+            IDataService dataService,
+            IPathService pathService)
         {
             _world = world;
             _entityFactory = entityFactory;
             _networkService = networkService;
             _moduleService = moduleService;
             _scriptService = scriptService;
+            _dataService = dataService;
+            _pathService = pathService;
         }
 
         public void Initialize()
@@ -44,9 +50,38 @@ namespace Ceriyo.Server.WPF.Screens
             LoadModule();
         }
 
-        private void PacketReceived(PacketBase packetBase)
+        private void PacketReceived(string username, PacketBase p)
         {
+            if (p.GetType() == typeof(CreateCharacterPacket))
+            {
+                var packet = (CreateCharacterPacket) p;
+                HandleCreateCharacterRequest(username, packet);
+            }
+        }
 
+        private void HandleCreateCharacterRequest(string username, CreateCharacterPacket packet)
+        {
+            // TODO: Validate + sanitize packet
+
+            PCData pcData = new PCData
+            {
+                LastName = packet.LastName,
+                FirstName = packet.FirstName
+            };
+
+            string path = _pathService.ServerVaultDirectory + username + "/" + pcData.GlobalID + ".pcf";
+            _dataService.Save(pcData, path);
+
+            CharacterCreatedPacket response = new CharacterCreatedPacket
+            {
+                Description = pcData.Description,
+                LastName = pcData.LastName,
+                FirstName = pcData.FirstName,
+                Level = pcData.Level,
+                GlobalID = pcData.GlobalID
+            };
+
+            _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
         }
 
         public void Update()

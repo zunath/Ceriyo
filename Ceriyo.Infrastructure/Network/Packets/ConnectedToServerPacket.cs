@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Data;
+using Ceriyo.Infrastructure.Network.TransferObjects;
 using ProtoBuf;
 
 namespace Ceriyo.Infrastructure.Network.Packets
@@ -27,12 +28,12 @@ namespace Ceriyo.Infrastructure.Network.Packets
         [ProtoMember(9)]
         public List<string> RequiredResourcePacks { get; set; }
         [ProtoMember(10)]
-        public List<PCData> PCs { get; set; }
+        public List<PCTransferObject> PCs { get; set; }
 
         public ConnectedToServerPacket()
         {
             RequiredResourcePacks = new List<string>();
-            PCs = new List<PCData>();
+            PCs = new List<PCTransferObject>();
         }
 
         public override void Process()

@@ -8,6 +8,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
+using Ceriyo.Infrastructure.Network.TransferObjects;
 using Lidgren.Network;
 using ProtoBuf;
 
@@ -86,9 +87,10 @@ namespace Ceriyo.Infrastructure.Network
                         break;
 
                     case NetIncomingMessageType.Data:
+                        string username = _connectionToUsername[message.SenderConnection];
                         MemoryStream stream = new MemoryStream(message.ReadBytes(message.LengthBytes));
                         PacketBase packet = Serializer.Deserialize<PacketBase>(stream);
-                        OnPacketReceived?.Invoke(packet);
+                        OnPacketReceived?.Invoke(username, packet);
                         break;
                         
                     case NetIncomingMessageType.ConnectionApproval:
@@ -185,7 +187,9 @@ namespace Ceriyo.Infrastructure.Network
             foreach (string pcFile in files)
             {
                 PCData pc = _dataService.Load<PCData>(pcFile);
-                response.PCs.Add(pc);
+                PCTransferObject pcTO = PCTransferObject.Load(pc);
+
+                response.PCs.Add(pcTO);
             }
             
             SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
@@ -249,6 +253,6 @@ namespace Ceriyo.Infrastructure.Network
 
         public event Action<string> OnPlayerConnected;
         public event Action<string> OnPlayerDisconnected;
-        public event Action<PacketBase> OnPacketReceived;
+        public event Action<string, PacketBase> OnPacketReceived;
     }
 }

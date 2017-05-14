@@ -183,7 +183,6 @@
       <DependentUpon>MetroNotificationWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

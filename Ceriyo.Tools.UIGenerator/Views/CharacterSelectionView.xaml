@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ceriyo.Tools.UIGenerator.Views"
              xmlns:ek="clr-namespace:EmptyKeys.UserInterface.Designer;assembly=EmptyKeys.UserInterface.Designer"
+             xmlns:converters="clr-namespace:Ceriyo.Infrastructure.WPF.Converters;assembly=Ceriyo.Infrastructure.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -67,7 +68,8 @@
             Grid.Row="1">
             
             <ListBox
-                ItemsSource="{Binding PCs}">
+                ItemsSource="{Binding PCs}"
+                SelectedItem="{Binding SelectedPC}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" CanVerticallyScroll="False">
@@ -83,7 +85,23 @@
         <DockPanel
             Grid.Row="1"
             Grid.Column="1"
-            Grid.ColumnSpan="2">
+            Grid.ColumnSpan="2"
+            Visibility="{Binding IsPCSelected}">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                
+            </Grid>
             
         </DockPanel>
         

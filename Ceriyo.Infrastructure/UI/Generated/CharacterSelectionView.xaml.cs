@@ -43,6 +43,8 @@ namespace EmptyKeys.UserInterface.Generated {
         
         private DockPanel e_10;
         
+        private Grid e_11;
+        
         public CharacterSelectionView() : 
                 base() {
             this.Initialize();
@@ -140,6 +142,8 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_6.ItemTemplate = new DataTemplate(e_6_dtFunc);
             Binding binding_e_6_ItemsSource = new Binding("PCs");
             this.e_6.SetBinding(ListBox.ItemsSourceProperty, binding_e_6_ItemsSource);
+            Binding binding_e_6_SelectedItem = new Binding("SelectedPC");
+            this.e_6.SetBinding(ListBox.SelectedItemProperty, binding_e_6_SelectedItem);
             // e_10 element
             this.e_10 = new DockPanel();
             this.e_0.Children.Add(this.e_10);
@@ -147,6 +151,30 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_10, 1);
             Grid.SetRow(this.e_10, 1);
             Grid.SetColumnSpan(this.e_10, 2);
+            Binding binding_e_10_Visibility = new Binding("IsPCSelected");
+            this.e_10.SetBinding(DockPanel.VisibilityProperty, binding_e_10_Visibility);
+            // e_11 element
+            this.e_11 = new Grid();
+            this.e_10.Children.Add(this.e_11);
+            this.e_11.Name = "e_11";
+            RowDefinition row_e_11_0 = new RowDefinition();
+            row_e_11_0.Height = new GridLength(1F, GridUnitType.Star);
+            this.e_11.RowDefinitions.Add(row_e_11_0);
+            RowDefinition row_e_11_1 = new RowDefinition();
+            row_e_11_1.Height = new GridLength(1F, GridUnitType.Star);
+            this.e_11.RowDefinitions.Add(row_e_11_1);
+            RowDefinition row_e_11_2 = new RowDefinition();
+            row_e_11_2.Height = new GridLength(1F, GridUnitType.Star);
+            this.e_11.RowDefinitions.Add(row_e_11_2);
+            ColumnDefinition col_e_11_0 = new ColumnDefinition();
+            col_e_11_0.Width = new GridLength(1F, GridUnitType.Star);
+            this.e_11.ColumnDefinitions.Add(col_e_11_0);
+            ColumnDefinition col_e_11_1 = new ColumnDefinition();
+            col_e_11_1.Width = new GridLength(1F, GridUnitType.Star);
+            this.e_11.ColumnDefinitions.Add(col_e_11_1);
+            ColumnDefinition col_e_11_2 = new ColumnDefinition();
+            col_e_11_2.Width = new GridLength(1F, GridUnitType.Star);
+            this.e_11.ColumnDefinitions.Add(col_e_11_2);
         }
         
         private static UIElement e_6_dtMethod(UIElement parent) {
