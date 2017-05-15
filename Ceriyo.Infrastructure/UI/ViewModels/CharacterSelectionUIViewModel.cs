@@ -31,7 +31,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             DisconnectCommand = new RelayCommand(Disconnect);
             JoinServerCommand = new RelayCommand(JoinServer);
         }
-
+        
         public string ServerName { get; set; }
         public string Announcement { get; set; }
         public GameCategory Category { get; set; }
@@ -111,6 +111,6 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             header += "Announcement: " + Announcement + Environment.NewLine;
 
             ServerInformationDetails = header;
-        }
+        }        
     }
 }

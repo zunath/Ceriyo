@@ -128,6 +128,7 @@
     <Compile Include="UI\ViewModels\CharacterCreationUIViewModel.cs" />
     <Compile Include="UI\ViewModels\CharacterSelectionUIViewModel.cs" />
     <Compile Include="UI\ViewModels\DirectConnectUIViewModel.cs" />
+    <Compile Include="UI\ViewModels\GameUIViewModel.cs" />
     <Compile Include="UI\ViewModels\JoinServerUIViewModel.cs" />
     <Compile Include="UI\ViewModels\MainMenuUIViewModel.cs" />
     <Compile Include="UI\ViewModels\SettingsUIViewModel.cs" />

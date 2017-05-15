@@ -1,4 +1,9 @@
-﻿using Ceriyo.Core.Contracts;
+﻿using System;
+using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Services.Contracts;
+using Ceriyo.Infrastructure.Network.Contracts;
+using Ceriyo.Infrastructure.Network.Packets;
+using Ceriyo.Infrastructure.Network.Packets.CharacterManagement;
 using Ceriyo.Infrastructure.UI.Contracts;
 using Ceriyo.Infrastructure.UI.ViewModels;
 using EmptyKeys.UserInterface.Generated;
@@ -9,12 +14,18 @@ namespace Ceriyo.Game.Windows.Screens
     {
         private readonly IUIViewModelFactory _uiViewModelFactory;
         private readonly IUIService _uiService;
+        private readonly IScreenService _screenService;
 
         public MainMenuScreen(IUIViewModelFactory viewModelFactory,
-            IUIService uiService)
+            IUIService uiService,
+            IClientNetworkService networkService,
+            IScreenService screenService)
         {
             _uiViewModelFactory = viewModelFactory;
             _uiService = uiService;
+            _screenService = screenService;
+
+            networkService.OnPacketReceived += PacketReceived;
         }
 
         public void Initialize()
@@ -36,6 +47,17 @@ namespace Ceriyo.Game.Windows.Screens
         public void Close()
         {
 
+        }
+
+
+        private void PacketReceived(PacketBase p)
+        {
+            Type type = p.GetType();
+
+            if (type == typeof(CharacterAddedToWorldPacket))
+            {
+                _screenService.ChangeScreen<GameScreen>();
+            }
         }
     }
 }

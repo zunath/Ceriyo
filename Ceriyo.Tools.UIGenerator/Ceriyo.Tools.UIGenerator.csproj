@@ -67,6 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\HotBarControl.xaml.cs">
+      <DependentUpon>HotBarControl.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\CharacterCreationView.xaml">
@@ -82,6 +85,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DirectConnectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HotBarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,11 +137,14 @@
       <Name>Ceriyo.Infrastructure.WPF</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserControls\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>CD "$(SolutionDir)packages\EmptyKeysUI_Generator*\tools"
 
-ekUIGen.exe -i="$(ProjectDir)\Views" -o="$(ProjectDir)\..\Ceriyo.Infrastructure\UI\Generated" -oa="$(ProjectDir)\..\Ceriyo.Content\UI" -bd="$(TargetDir)\" -rm=MonoGame /generate-bindings</PostBuildEvent>
+ekUIGen.exe -i="$(ProjectDir)\Views" -o="$(ProjectDir)\..\Ceriyo.Infrastructure\UI\Generated" -oa="$(ProjectDir)\..\Ceriyo.Content\UI" -bd="$(TargetDir)\" -rm=MonoGame /generate-bindings /da:Ceriyo.Tools.UIGenerator</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
