@@ -63,26 +63,21 @@
         </Button>
 
 
-        <ScrollViewer
-            Grid.Column="0"
-            Grid.Row="1">
-            
             <ListBox
+                Grid.Column="0"
+                Grid.Row="1"
+                SelectionMode="Single"
                 ItemsSource="{Binding PCs}"
                 SelectedItem="{Binding SelectedPC}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" CanVerticallyScroll="False">
-                            <Image></Image>
-                            <TextBlock Text="{Binding Path=Name}"></TextBlock>
-                        </StackPanel>
+                        <TextBlock Text="{Binding Path=Name}">
+                        </TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            
-        </ScrollViewer>
-        
-        <DockPanel
+
+            <DockPanel
             Grid.Row="1"
             Grid.Column="1"
             Grid.ColumnSpan="2"
@@ -98,9 +93,18 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Margin="1,1,1,1"
+                    Content="Join Server"
+                    Command="{Binding JoinServerCommand}">
+                    
+                </Button>
             </Grid>
             
         </DockPanel>

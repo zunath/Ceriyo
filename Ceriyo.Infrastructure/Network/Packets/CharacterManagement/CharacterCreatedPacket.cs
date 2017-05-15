@@ -1,7 +1,6 @@
-﻿using Ceriyo.Infrastructure.Network.Contracts;
-using ProtoBuf;
+﻿using ProtoBuf;
 
-namespace Ceriyo.Infrastructure.Network.Packets
+namespace Ceriyo.Infrastructure.Network.Packets.CharacterManagement
 {
     [ProtoContract]
     public class CharacterCreatedPacket: PacketBase

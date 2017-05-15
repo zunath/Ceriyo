@@ -2,6 +2,7 @@
 using Autofac;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
+using Ceriyo.Core.Entities;
 using Ceriyo.Core.Entities.Contracts;
 using Ceriyo.Core.Scripting.Common;
 using Ceriyo.Core.Scripting.Common.Contracts;
@@ -75,6 +76,7 @@ namespace Ceriyo.Server.WPF
 
             // Entities
             builder.RegisterType<Module>().As<IGameEntity<ModuleData>>();
+            builder.RegisterType<Player>().As<IGameEntity<PCData>>();
             
             // Scripting
             builder.RegisterType<LoggingMethods>().As<ILoggingMethods>().SingleInstance();

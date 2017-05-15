@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Artemis;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Constants;
@@ -8,6 +10,7 @@ using Ceriyo.Core.Entities;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
+using Ceriyo.Infrastructure.Network.Packets.CharacterManagement;
 
 namespace Ceriyo.Server.WPF.Screens
 {
@@ -24,7 +27,11 @@ namespace Ceriyo.Server.WPF.Screens
         private readonly IScriptService _scriptService;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
+        private readonly ILogger _logger;
         private Entity _gameModule;
+
+        private Dictionary<string, Entity> _pcs;
+
 
         public ServerScreen(EntityWorld world,
             IEntityFactory entityFactory,
@@ -32,7 +39,8 @@ namespace Ceriyo.Server.WPF.Screens
             IModuleService moduleService,
             IScriptService scriptService,
             IDataService dataService,
-            IPathService pathService)
+            IPathService pathService,
+            ILogger logger)
         {
             _world = world;
             _entityFactory = entityFactory;
@@ -41,21 +49,32 @@ namespace Ceriyo.Server.WPF.Screens
             _scriptService = scriptService;
             _dataService = dataService;
             _pathService = pathService;
+            _logger = logger;
         }
 
         public void Initialize()
         {
+            _pcs = new Dictionary<string, Entity>();
+
             _networkService.OnPacketReceived += PacketReceived;
+            _networkService.OnPlayerDisconnected += PlayerDisconnected;
 
             LoadModule();
         }
 
+
         private void PacketReceived(string username, PacketBase p)
         {
-            if (p.GetType() == typeof(CreateCharacterPacket))
+            Type type = p.GetType();
+            if (type == typeof(CreateCharacterPacket))
             {
                 var packet = (CreateCharacterPacket) p;
                 HandleCreateCharacterRequest(username, packet);
+            }
+            else if (type == typeof(CharacterSelectedPacket))
+            {
+                var packet = (CharacterSelectedPacket) p;
+                HandleSelectCharacterRequest(username, packet);
             }
         }
 
@@ -82,6 +101,52 @@ namespace Ceriyo.Server.WPF.Screens
             };
 
             _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
+        }
+
+        private void HandleSelectCharacterRequest(string username, CharacterSelectedPacket packet)
+        {
+            // If player is already added to the game world, we don't want to add another. Ignore this request.
+            if (_pcs.ContainsKey(username))
+            {
+                _logger.Info($"Player {username} is already added to the game world. Ignoring request.");
+                return;
+            }
+
+            string path = _pathService.ServerVaultDirectory + username + "/" + packet.PCGlobalID + ".pcf";
+
+            if (!File.Exists(path))
+            {
+                _logger.Error($"PC file '{packet.PCGlobalID}.pcf' does not exist. Ignoring request.");
+                return;
+            }
+
+            PCData pcData = _dataService.Load<PCData>(path);
+            Entity player = _entityFactory.Create<Player, PCData>(pcData);
+            
+            _pcs.Add(username, player);
+
+            ScriptGroup scripts = _gameModule.GetComponent<ScriptGroup>();
+            string script = scripts[ScriptEvent.OnModulePlayerEnter];
+            _scriptService.QueueScript(script, _gameModule);
+            
+            CharacterAddedToWorldPacket response = new CharacterAddedToWorldPacket();
+            _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
+        }
+
+        private void PlayerDisconnected(string username)
+        {
+            if (_pcs.ContainsKey(username))
+            {
+                ScriptGroup scripts = _gameModule.GetComponent<ScriptGroup>();
+                string script = scripts[ScriptEvent.OnModulePlayerLeaving];
+                _scriptService.QueueScript(script, _gameModule);
+                
+                _pcs[username].Delete();
+                _pcs.Remove(username);
+
+                script = scripts[ScriptEvent.OnModulePlayerLeft];
+                _scriptService.QueueScript(script, _gameModule);
+            }
         }
 
         public void Update()

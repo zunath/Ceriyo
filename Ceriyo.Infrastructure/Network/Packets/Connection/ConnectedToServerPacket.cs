@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Ceriyo.Core.Constants;
-using Ceriyo.Core.Data;
 using Ceriyo.Infrastructure.Network.TransferObjects;
 using ProtoBuf;
 
-namespace Ceriyo.Infrastructure.Network.Packets
+namespace Ceriyo.Infrastructure.Network.Packets.Connection
 {
     [ProtoContract]
     public class ConnectedToServerPacket: PacketBase

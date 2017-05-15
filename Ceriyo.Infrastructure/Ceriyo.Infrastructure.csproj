@@ -107,10 +107,12 @@
     <Compile Include="Helpers\IOCHelpers.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Network\Contracts\INetworkPacket.cs" />
-    <Compile Include="Network\Packets\CharacterCreatedPacket.cs" />
-    <Compile Include="Network\Packets\ConnectedToServerPacket.cs" />
-    <Compile Include="Network\Packets\ConnectionRequestPacket.cs" />
-    <Compile Include="Network\Packets\CreateCharacterPacket.cs" />
+    <Compile Include="Network\Packets\CharacterManagement\CharacterAddedToWorldPacket.cs" />
+    <Compile Include="Network\Packets\CharacterManagement\CharacterCreatedPacket.cs" />
+    <Compile Include="Network\Packets\CharacterManagement\CharacterSelectedPacket.cs" />
+    <Compile Include="Network\Packets\Connection\ConnectedToServerPacket.cs" />
+    <Compile Include="Network\Packets\Connection\ConnectionRequestPacket.cs" />
+    <Compile Include="Network\Packets\CharacterManagement\CreateCharacterPacket.cs" />
     <Compile Include="Network\Packets\PacketBase.cs" />
     <Compile Include="Network\TransferObjects\PCTransferObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

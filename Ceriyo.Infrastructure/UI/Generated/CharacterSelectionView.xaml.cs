@@ -37,13 +37,13 @@ namespace EmptyKeys.UserInterface.Generated {
         
         private Button e_4;
         
-        private ScrollViewer e_5;
+        private ListBox e_5;
         
-        private ListBox e_6;
+        private DockPanel e_7;
         
-        private DockPanel e_10;
+        private Grid e_8;
         
-        private Grid e_11;
+        private Button e_9;
         
         public CharacterSelectionView() : 
                 base() {
@@ -129,71 +129,73 @@ namespace EmptyKeys.UserInterface.Generated {
             Binding binding_e_4_Command = new Binding("DisconnectCommand");
             this.e_4.SetBinding(Button.CommandProperty, binding_e_4_Command);
             // e_5 element
-            this.e_5 = new ScrollViewer();
+            this.e_5 = new ListBox();
             this.e_0.Children.Add(this.e_5);
             this.e_5.Name = "e_5";
+            Func<UIElement, UIElement> e_5_dtFunc = e_5_dtMethod;
+            this.e_5.ItemTemplate = new DataTemplate(e_5_dtFunc);
+            this.e_5.SelectionMode = SelectionMode.Single;
             Grid.SetColumn(this.e_5, 0);
             Grid.SetRow(this.e_5, 1);
-            // e_6 element
-            this.e_6 = new ListBox();
-            this.e_5.Content = this.e_6;
-            this.e_6.Name = "e_6";
-            Func<UIElement, UIElement> e_6_dtFunc = e_6_dtMethod;
-            this.e_6.ItemTemplate = new DataTemplate(e_6_dtFunc);
-            Binding binding_e_6_ItemsSource = new Binding("PCs");
-            this.e_6.SetBinding(ListBox.ItemsSourceProperty, binding_e_6_ItemsSource);
-            Binding binding_e_6_SelectedItem = new Binding("SelectedPC");
-            this.e_6.SetBinding(ListBox.SelectedItemProperty, binding_e_6_SelectedItem);
-            // e_10 element
-            this.e_10 = new DockPanel();
-            this.e_0.Children.Add(this.e_10);
-            this.e_10.Name = "e_10";
-            Grid.SetColumn(this.e_10, 1);
-            Grid.SetRow(this.e_10, 1);
-            Grid.SetColumnSpan(this.e_10, 2);
-            Binding binding_e_10_Visibility = new Binding("IsPCSelected");
-            this.e_10.SetBinding(DockPanel.VisibilityProperty, binding_e_10_Visibility);
-            // e_11 element
-            this.e_11 = new Grid();
-            this.e_10.Children.Add(this.e_11);
-            this.e_11.Name = "e_11";
-            RowDefinition row_e_11_0 = new RowDefinition();
-            row_e_11_0.Height = new GridLength(1F, GridUnitType.Star);
-            this.e_11.RowDefinitions.Add(row_e_11_0);
-            RowDefinition row_e_11_1 = new RowDefinition();
-            row_e_11_1.Height = new GridLength(1F, GridUnitType.Star);
-            this.e_11.RowDefinitions.Add(row_e_11_1);
-            RowDefinition row_e_11_2 = new RowDefinition();
-            row_e_11_2.Height = new GridLength(1F, GridUnitType.Star);
-            this.e_11.RowDefinitions.Add(row_e_11_2);
-            ColumnDefinition col_e_11_0 = new ColumnDefinition();
-            col_e_11_0.Width = new GridLength(1F, GridUnitType.Star);
-            this.e_11.ColumnDefinitions.Add(col_e_11_0);
-            ColumnDefinition col_e_11_1 = new ColumnDefinition();
-            col_e_11_1.Width = new GridLength(1F, GridUnitType.Star);
-            this.e_11.ColumnDefinitions.Add(col_e_11_1);
-            ColumnDefinition col_e_11_2 = new ColumnDefinition();
-            col_e_11_2.Width = new GridLength(1F, GridUnitType.Star);
-            this.e_11.ColumnDefinitions.Add(col_e_11_2);
+            Binding binding_e_5_ItemsSource = new Binding("PCs");
+            this.e_5.SetBinding(ListBox.ItemsSourceProperty, binding_e_5_ItemsSource);
+            Binding binding_e_5_SelectedItem = new Binding("SelectedPC");
+            this.e_5.SetBinding(ListBox.SelectedItemProperty, binding_e_5_SelectedItem);
+            // e_7 element
+            this.e_7 = new DockPanel();
+            this.e_0.Children.Add(this.e_7);
+            this.e_7.Name = "e_7";
+            Grid.SetColumn(this.e_7, 1);
+            Grid.SetRow(this.e_7, 1);
+            Grid.SetColumnSpan(this.e_7, 2);
+            Binding binding_e_7_Visibility = new Binding("IsPCSelected");
+            this.e_7.SetBinding(DockPanel.VisibilityProperty, binding_e_7_Visibility);
+            // e_8 element
+            this.e_8 = new Grid();
+            this.e_7.Children.Add(this.e_8);
+            this.e_8.Name = "e_8";
+            RowDefinition row_e_8_0 = new RowDefinition();
+            row_e_8_0.Height = new GridLength(1F, GridUnitType.Star);
+            this.e_8.RowDefinitions.Add(row_e_8_0);
+            RowDefinition row_e_8_1 = new RowDefinition();
+            row_e_8_1.Height = new GridLength(1F, GridUnitType.Star);
+            this.e_8.RowDefinitions.Add(row_e_8_1);
+            RowDefinition row_e_8_2 = new RowDefinition();
+            row_e_8_2.Height = new GridLength(1F, GridUnitType.Star);
+            this.e_8.RowDefinitions.Add(row_e_8_2);
+            RowDefinition row_e_8_3 = new RowDefinition();
+            row_e_8_3.Height = new GridLength(50F, GridUnitType.Pixel);
+            this.e_8.RowDefinitions.Add(row_e_8_3);
+            ColumnDefinition col_e_8_0 = new ColumnDefinition();
+            col_e_8_0.Width = new GridLength(1F, GridUnitType.Star);
+            this.e_8.ColumnDefinitions.Add(col_e_8_0);
+            ColumnDefinition col_e_8_1 = new ColumnDefinition();
+            col_e_8_1.Width = new GridLength(1F, GridUnitType.Star);
+            this.e_8.ColumnDefinitions.Add(col_e_8_1);
+            ColumnDefinition col_e_8_2 = new ColumnDefinition();
+            col_e_8_2.Width = new GridLength(1F, GridUnitType.Star);
+            this.e_8.ColumnDefinitions.Add(col_e_8_2);
+            // e_9 element
+            this.e_9 = new Button();
+            this.e_8.Children.Add(this.e_9);
+            this.e_9.Name = "e_9";
+            this.e_9.Margin = new Thickness(1F, 1F, 1F, 1F);
+            this.e_9.Content = "Join Server";
+            Grid.SetColumn(this.e_9, 0);
+            Grid.SetRow(this.e_9, 3);
+            Grid.SetColumnSpan(this.e_9, 3);
+            Binding binding_e_9_Command = new Binding("JoinServerCommand");
+            this.e_9.SetBinding(Button.CommandProperty, binding_e_9_Command);
         }
         
-        private static UIElement e_6_dtMethod(UIElement parent) {
-            // e_7 element
-            StackPanel e_7 = new StackPanel();
-            e_7.Parent = parent;
-            e_7.Name = "e_7";
-            e_7.Orientation = Orientation.Horizontal;
-            // e_8 element
-            Image e_8 = new Image();
-            e_7.Children.Add(e_8);
-            e_8.Name = "e_8";
-            // e_9 element
-            TextBlock e_9 = new TextBlock();
-            e_7.Children.Add(e_9);
-            e_9.Name = "e_9";
-            Binding binding_e_9_Text = new Binding("Name");
-            e_9.SetBinding(TextBlock.TextProperty, binding_e_9_Text);
-            return e_7;
+        private static UIElement e_5_dtMethod(UIElement parent) {
+            // e_6 element
+            TextBlock e_6 = new TextBlock();
+            e_6.Parent = parent;
+            e_6.Name = "e_6";
+            Binding binding_e_6_Text = new Binding("Name");
+            e_6.SetBinding(TextBlock.TextProperty, binding_e_6_Text);
+            return e_6;
         }
     }
 }

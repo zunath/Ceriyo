@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
+using Ceriyo.Infrastructure.Network.Packets.CharacterManagement;
 using Ceriyo.Infrastructure.Network.TransferObjects;
 using Ceriyo.Infrastructure.UI.Contracts;
 using EmptyKeys.UserInterface.Generated;
@@ -28,6 +29,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             CreateCharacterCommand = new RelayCommand(CreateCharacter);
             DeleteCharacterCommand = new RelayCommand(DeleteCharacter);
             DisconnectCommand = new RelayCommand(Disconnect);
+            JoinServerCommand = new RelayCommand(JoinServer);
         }
 
         public string ServerName { get; set; }
@@ -41,7 +43,20 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         public List<PCTransferObject> PCs { get; set; }
 
-        public PCTransferObject SelectedPC { get; set; }
+        private PCTransferObject _selectedPC;
+
+        public PCTransferObject SelectedPC
+        {
+            get
+            {
+                return _selectedPC;
+            }
+            set
+            {
+                _selectedPC = value;
+                RaisePropertyChanged("IsPCSelected");
+            }
+        }
 
         public bool IsPCSelected => SelectedPC != null;
 
@@ -70,6 +85,18 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             _networkService.DisconnectFromServer();
             var vm = _vmFactory.Create<MainMenuUIViewModel>();
             _uiService.ChangeUIRoot<MainMenuView>(vm);
+        }
+
+        public ICommand JoinServerCommand { get; set; }
+
+        private void JoinServer(object obj)
+        {
+            CharacterSelectedPacket packet = new CharacterSelectedPacket
+            {
+                PCGlobalID = SelectedPC.GlobalID
+            };
+
+            _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, packet);
         }
 
         public void BuildServerInformationDetails()

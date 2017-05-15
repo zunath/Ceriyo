@@ -72,7 +72,7 @@ namespace Ceriyo.Game.Windows
         
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             _gameService.Draw(gameTime);
             base.Draw(gameTime);
         }

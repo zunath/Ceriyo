@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ceriyo.Core.Contracts;
+﻿using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.UI.Contracts;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;

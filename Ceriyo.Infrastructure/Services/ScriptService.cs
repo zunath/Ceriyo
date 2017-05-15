@@ -69,6 +69,8 @@ namespace Ceriyo.Infrastructure.Services
 
         public void QueueScript(string fileName, Entity entity, string methodName = "Main")
         {
+            if (string.IsNullOrWhiteSpace(fileName)) return;
+
             string filePath = "./Scripts/" + fileName;
             if (!File.Exists(filePath))
             {

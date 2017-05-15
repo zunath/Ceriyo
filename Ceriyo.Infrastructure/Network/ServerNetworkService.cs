@@ -8,6 +8,7 @@ using Ceriyo.Core.Data;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
+using Ceriyo.Infrastructure.Network.Packets.Connection;
 using Ceriyo.Infrastructure.Network.TransferObjects;
 using Lidgren.Network;
 using ProtoBuf;
