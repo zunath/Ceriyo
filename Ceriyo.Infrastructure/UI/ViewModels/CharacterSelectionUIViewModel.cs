@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
+using Ceriyo.Infrastructure.Network.Packets;
 using Ceriyo.Infrastructure.Network.Packets.CharacterManagement;
 using Ceriyo.Infrastructure.Network.TransferObjects;
 using Ceriyo.Infrastructure.UI.Contracts;
@@ -26,12 +30,17 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             _vmFactory = vmFactory;
             _networkService = networkService;
 
+            PCs = new ObservableCollection<PCTransferObject>();
+
             CreateCharacterCommand = new RelayCommand(CreateCharacter);
             DeleteCharacterCommand = new RelayCommand(DeleteCharacter);
             DisconnectCommand = new RelayCommand(Disconnect);
             JoinServerCommand = new RelayCommand(JoinServer);
+
+            _networkService.OnPacketReceived += PacketReceived;
         }
-        
+
+
         public string ServerName { get; set; }
         public string Announcement { get; set; }
         public GameCategory Category { get; set; }
@@ -40,8 +49,14 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         public int MaxPlayers { get; set; }
         public string IPAddress { get; set; }
         public bool IsCharacterDeletionEnabled { get; set; }
+        
+        private ObservableCollection<PCTransferObject> _pcs;
 
-        public List<PCTransferObject> PCs { get; set; }
+        public ObservableCollection<PCTransferObject> PCs
+        {
+            get { return _pcs; }
+            set { SetProperty(ref _pcs, value); }
+        }
 
         private PCTransferObject _selectedPC;
 
@@ -75,7 +90,14 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         private void DeleteCharacter(object obj)
         {
-            
+            if (SelectedPC == null) return;
+
+            DeleteCharacterPacket packet = new DeleteCharacterPacket
+            {
+                PCGlobalID = SelectedPC.GlobalID
+            };
+
+            _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, packet);
         }
 
         public ICommand DisconnectCommand { get; set; }
@@ -111,6 +133,21 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             header += "Announcement: " + Announcement + Environment.NewLine;
 
             ServerInformationDetails = header;
-        }        
+        }
+        
+        private void PacketReceived(PacketBase p)
+        {
+            Type type = p.GetType();
+
+            if (type == typeof(CharacterDeletedPacket))
+            {
+                CharacterDeletedPacket packet = (CharacterDeletedPacket) p;
+                PCTransferObject pc = PCs.SingleOrDefault(x => x.GlobalID == packet.PCGlobalID);
+
+                if (pc == null) return;
+
+                PCs.Remove(pc);
+            }
+        }
     }
 }

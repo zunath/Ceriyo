@@ -53,6 +53,7 @@ namespace EmptyKeys.UserInterface.Generated {
         }
         
         private void InitializeComponent() {
+            InitializeElementResources(this);
             // e_0 element
             this.e_0 = new Grid();
             this.Content = this.e_0;
@@ -117,6 +118,10 @@ namespace EmptyKeys.UserInterface.Generated {
             Binding binding_e_3_Command = new Binding("SaveCommand");
             this.e_3.SetBinding(Button.CommandProperty, binding_e_3_Command);
             ImageManager.Instance.AddImage("UI/Images/Settings");
+        }
+        
+        private static void InitializeElementResources(UIElement elem) {
+            elem.Resources.MergedDictionaries.Add(Dictionary.Instance);
         }
     }
 }

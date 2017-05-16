@@ -52,6 +52,7 @@ namespace EmptyKeys.UserInterface.Generated {
         
         private void InitializeComponent() {
             this.Background = new SolidColorBrush(new ColorW(255, 255, 255, 0));
+            InitializeElementResources(this);
             // e_0 element
             this.e_0 = new Grid();
             this.Content = this.e_0;
@@ -95,6 +96,10 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_2, 0);
             Grid.SetRow(this.e_2, 2);
             Grid.SetColumnSpan(this.e_2, 5);
+        }
+        
+        private static void InitializeElementResources(UIElement elem) {
+            elem.Resources.MergedDictionaries.Add(Dictionary.Instance);
         }
     }
 }

@@ -61,6 +61,7 @@ namespace EmptyKeys.UserInterface.Generated {
         }
         
         private void InitializeComponent() {
+            InitializeElementResources(this);
             // e_0 element
             this.e_0 = new Grid();
             this.Content = this.e_0;
@@ -152,6 +153,10 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumnSpan(this.e_7, 2);
             Binding binding_e_7_Text = new Binding("LastName");
             this.e_7.SetBinding(TextBox.TextProperty, binding_e_7_Text);
+        }
+        
+        private static void InitializeElementResources(UIElement elem) {
+            elem.Resources.MergedDictionaries.Add(Dictionary.Instance);
         }
     }
 }

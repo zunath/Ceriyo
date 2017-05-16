@@ -7,6 +7,14 @@
              xmlns:ek="clr-namespace:EmptyKeys.UserInterface.Designer;assembly=EmptyKeys.UserInterface.Designer"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
+    <ek:UIRoot.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Ceriyo.Tools.UIGenerator;component/Views/Dictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ek:UIRoot.Resources>
     <Grid>
 
         <Grid.ColumnDefinitions>

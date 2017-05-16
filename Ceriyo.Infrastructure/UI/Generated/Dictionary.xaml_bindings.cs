@@ -22,4 +22,34 @@ namespace EmptyKeys.UserInterface.Generated.Dictionary_Bindings {
     using EmptyKeys.UserInterface.Renderers;
     using EmptyKeys.UserInterface.Themes;
     
+    
+    [GeneratedCodeAttribute("Empty Keys UI Generator", "3.0.0.0")]
+    public class PCTransferObject_Name_PropertyInfo : IPropertyInfo {
+        
+        public System.Type PropertyType {
+            get {
+                return typeof(string);
+            }
+        }
+        
+        public bool IsResolved {
+            get {
+                return true;
+            }
+        }
+        
+        public object GetValue(object obj) {
+            return ((Ceriyo.Infrastructure.Network.TransferObjects.PCTransferObject)(obj)).Name;
+        }
+        
+        public object GetValue(object obj, object[] index) {
+            return null;
+        }
+        
+        public void SetValue(object obj, object value) {
+        }
+        
+        public void SetValue(object obj, object value, object[] index) {
+        }
+    }
 }

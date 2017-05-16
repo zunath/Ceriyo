@@ -8,6 +8,14 @@
            mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              Background="Transparent">
+
+    <ek:UIRoot.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Ceriyo.Tools.UIGenerator;component/Views/Dictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ek:UIRoot.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32"></RowDefinition>

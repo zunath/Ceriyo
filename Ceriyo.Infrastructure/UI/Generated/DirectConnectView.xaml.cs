@@ -65,6 +65,7 @@ namespace EmptyKeys.UserInterface.Generated {
         }
         
         private void InitializeComponent() {
+            InitializeElementResources(this);
             // e_0 element
             this.e_0 = new Grid();
             this.Content = this.e_0;
@@ -179,6 +180,10 @@ namespace EmptyKeys.UserInterface.Generated {
             Binding binding_e_9_Command = new Binding("ConnectCommand");
             this.e_9.SetBinding(Button.CommandProperty, binding_e_9_Command);
             ImageManager.Instance.AddImage("UI/Images/DirectConnect");
+        }
+        
+        private static void InitializeElementResources(UIElement elem) {
+            elem.Resources.MergedDictionaries.Add(Dictionary.Instance);
         }
     }
 }

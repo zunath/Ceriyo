@@ -76,6 +76,11 @@ namespace Ceriyo.Server.WPF.Screens
                 var packet = (CharacterSelectedPacket) p;
                 HandleSelectCharacterRequest(username, packet);
             }
+            else if (type == typeof(DeleteCharacterPacket))
+            {
+                var packet = (DeleteCharacterPacket) p;
+                HandleDeleteCharacterRequest(username, packet);
+            }
         }
 
         private void HandleCreateCharacterRequest(string username, CreateCharacterPacket packet)
@@ -116,7 +121,7 @@ namespace Ceriyo.Server.WPF.Screens
 
             if (!File.Exists(path))
             {
-                _logger.Error($"PC file '{packet.PCGlobalID}.pcf' does not exist. Ignoring request.");
+                _logger.Error($"PC file '{packet.PCGlobalID}.pcf' does not exist for username {username}. Cannot select character. Ignoring request.");
                 return;
             }
 
@@ -130,6 +135,27 @@ namespace Ceriyo.Server.WPF.Screens
             _scriptService.QueueScript(script, _gameModule);
             
             CharacterAddedToWorldPacket response = new CharacterAddedToWorldPacket();
+            _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
+        }
+
+        private void HandleDeleteCharacterRequest(string username, DeleteCharacterPacket packet)
+        {
+            string path = _pathService.ServerVaultDirectory + username + "/" + packet.PCGlobalID;
+
+            if (!File.Exists(path + ".pcf"))
+            {
+                _logger.Error($"PC file '{packet.PCGlobalID}' does not exist for username '{username}'. Cannot delete character. Ignoring request.");
+                return;
+            }
+
+            // No hard deletes. Just rename the extension so it's not picked up by the engine.
+            File.Move(path + ".pcf", path + ".dpcf");
+
+            CharacterDeletedPacket response = new CharacterDeletedPacket
+            {
+                PCGlobalID = packet.PCGlobalID
+            };
+
             _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
         }
 

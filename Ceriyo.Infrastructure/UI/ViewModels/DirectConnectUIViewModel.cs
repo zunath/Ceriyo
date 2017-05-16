@@ -4,6 +4,7 @@ using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
 using Ceriyo.Infrastructure.Network.Packets.Connection;
+using Ceriyo.Infrastructure.Network.TransferObjects;
 using Ceriyo.Infrastructure.UI.Contracts;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;
@@ -72,7 +73,11 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
                 vm.CurrentPlayers = packet.CurrentPlayers;
                 vm.MaxPlayers = packet.MaxPlayers;
                 vm.IPAddress = packet.IPAddress;
-                vm.PCs = packet.PCs;
+
+                foreach (var pc in packet.PCs)
+                {
+                    vm.PCs.Add(pc);
+                }
 
                 vm.BuildServerInformationDetails();
 
