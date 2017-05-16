@@ -129,8 +129,6 @@
     <Compile Include="UI\Generated\CharacterCreationView.xaml_bindings.cs" />
     <Compile Include="UI\Generated\CharacterSelectionView.xaml.cs" />
     <Compile Include="UI\Generated\CharacterSelectionView.xaml_bindings.cs" />
-    <Compile Include="UI\Generated\ConfirmationWindow.xaml.cs" />
-    <Compile Include="UI\Generated\ConfirmationWindow.xaml_bindings.cs" />
     <Compile Include="UI\Generated\Dictionary.xaml.cs" />
     <Compile Include="UI\Generated\Dictionary.xaml_bindings.cs" />
     <Compile Include="UI\Generated\DirectConnectView.xaml.cs" />
