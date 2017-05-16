@@ -38,6 +38,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             DisconnectCommand = new RelayCommand(Disconnect);
             JoinServerCommand = new RelayCommand(JoinServer);
             ConfirmDeleteCharacterCommand = new RelayCommand(ConfirmDeleteCharacter);
+            DeleteFailureCommand = new RelayCommand(DeleteFailure);
 
             _characterCreationVM = _vmFactory.Create<CharacterCreationUIViewModel>();
             _characterCreationVM.CharacterSelectionVM = this;
@@ -161,9 +162,29 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
                 if (pc == null) return;
 
-                PCs.Remove(pc);
-                SelectedPC = null;
+                switch (packet.FailureType)
+                {
+                    case DeleteCharacterFailureType.ServerDoesNotAllowDeletion:
+                        MessageBox.Show("Unable to delete character. This server doesn't allow character deletion.", "Deletion Failure!", DeleteFailureCommand, false);
+                        break;
+                    case DeleteCharacterFailureType.Success:
+                        PCs.Remove(pc);
+                        SelectedPC = null;
+                        MessageBox.Show("Character deleted successfully!", "Success!", DeleteFailureCommand, false);
+                        break;
+                    default:
+                        MessageBox.Show("Unable to delete character. Please try again later.", "Deletion Failure!", DeleteFailureCommand, false);
+                        break;
+                }
+
             }
+        }
+
+        public ICommand DeleteFailureCommand { get; set; }
+
+        private void DeleteFailure(object obj)
+        {
+            
         }
     }
 }

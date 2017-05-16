@@ -28,6 +28,7 @@ namespace Ceriyo.Server.WPF.Screens
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
         private readonly ILogger _logger;
+        private readonly IServerSettingsService _settingsService;
         private Entity _gameModule;
 
         private Dictionary<string, Entity> _pcs;
@@ -40,7 +41,8 @@ namespace Ceriyo.Server.WPF.Screens
             IScriptService scriptService,
             IDataService dataService,
             IPathService pathService,
-            ILogger logger)
+            ILogger logger,
+            IServerSettingsService settingsService)
         {
             _world = world;
             _entityFactory = entityFactory;
@@ -50,6 +52,7 @@ namespace Ceriyo.Server.WPF.Screens
             _dataService = dataService;
             _pathService = pathService;
             _logger = logger;
+            _settingsService = settingsService;
         }
 
         public void Initialize()
@@ -140,20 +143,30 @@ namespace Ceriyo.Server.WPF.Screens
 
         private void HandleDeleteCharacterRequest(string username, DeleteCharacterPacket packet)
         {
+            DeleteCharacterFailureType failureType = DeleteCharacterFailureType.Success;
             string path = _pathService.ServerVaultDirectory + username + "/" + packet.PCGlobalID;
 
             if (!File.Exists(path + ".pcf"))
             {
                 _logger.Error($"PC file '{packet.PCGlobalID}' does not exist for username '{username}'. Cannot delete character. Ignoring request.");
-                return;
+                failureType = DeleteCharacterFailureType.FileDoesNotExist;
             }
 
-            // No hard deletes. Just rename the extension so it's not picked up by the engine.
-            File.Move(path + ".pcf", path + ".dpcf");
+            if (!_settingsService.AllowCharacterDeletion)
+            {
+                failureType = DeleteCharacterFailureType.ServerDoesNotAllowDeletion;
+            }
+
+            if (failureType == DeleteCharacterFailureType.Success)
+            {
+                // No hard deletes. Just rename the extension so it's not picked up by the engine.
+                File.Move(path + ".pcf", path + ".dpcf");
+            }
 
             CharacterDeletedPacket response = new CharacterDeletedPacket
             {
-                PCGlobalID = packet.PCGlobalID
+                PCGlobalID = packet.PCGlobalID,
+                FailureType = failureType
             };
 
             _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
