@@ -13,6 +13,7 @@ namespace Ceriyo.Infrastructure.Network.Contracts
 
         void BootUsername(string username);
 
+
         event Action<string> OnPlayerConnected;
         event Action<string> OnPlayerDisconnected;
         event Action<string, PacketBase> OnPacketReceived;

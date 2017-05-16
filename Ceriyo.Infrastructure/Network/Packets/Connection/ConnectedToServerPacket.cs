@@ -21,12 +21,10 @@ namespace Ceriyo.Infrastructure.Network.Packets.Connection
         [ProtoMember(6)]
         public int MaxPlayers { get; set; }
         [ProtoMember(7)]
-        public string IPAddress { get; set; }
-        [ProtoMember(8)]
         public bool AllowCharacterDeletion { get; set; }
-        [ProtoMember(9)]
+        [ProtoMember(8)]
         public List<string> RequiredResourcePacks { get; set; }
-        [ProtoMember(10)]
+        [ProtoMember(9)]
         public List<PCTransferObject> PCs { get; set; }
 
         public ConnectedToServerPacket()

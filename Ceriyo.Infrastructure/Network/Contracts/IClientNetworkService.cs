@@ -11,6 +11,7 @@ namespace Ceriyo.Infrastructure.Network.Contracts
         void DisconnectFromServer(string disconnectMessage = "");
         void ProcessMessages();
         void SendMessage(PacketDeliveryMethod method, INetworkPacket packet);
+        string GetServerIPAddress();
 
         event Action OnConnected;
         event Action OnDisconnected;

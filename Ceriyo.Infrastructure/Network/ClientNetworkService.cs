@@ -140,6 +140,14 @@ namespace Ceriyo.Infrastructure.Network
             _client.SendMessage(message, deliveryMethod);
         }
 
+        public string GetServerIPAddress()
+        {
+            if(_serverConnection == null || _serverConnection.Status != NetConnectionStatus.Connected)
+                throw new Exception("No server connection established.");
+
+            return _serverConnection.RemoteEndPoint.Address + ":" + _serverConnection.RemoteEndPoint.Port;
+        }
+
         public event Action OnConnected;
         public event Action OnDisconnected;
         public event Action<PacketBase> OnPacketReceived;

@@ -173,6 +173,7 @@ namespace Ceriyo.Infrastructure.Network
                 AllowCharacterDeletion = _settingsService.AllowCharacterDeletion,
                 Announcement = _settingsService.Announcement.Substring(0, announcementLength),
                 Category = _settingsService.GameCategory,
+                CurrentPlayers = _usernameToConnection.Count,
                 MaxPlayers = _settingsService.MaxPlayers,
                 PVP = _settingsService.PVPType,
                 RequiredResourcePacks = _moduleService.GetLoadedModuleData().ResourcePacks
@@ -251,7 +252,7 @@ namespace Ceriyo.Infrastructure.Network
             NetConnection connection = _usernameToConnection[username];
             connection.Disconnect("You have been booted from the server.");
         }
-
+        
         public event Action<string> OnPlayerConnected;
         public event Action<string> OnPlayerDisconnected;
         public event Action<string, PacketBase> OnPacketReceived;

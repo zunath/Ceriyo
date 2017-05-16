@@ -72,7 +72,6 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
                 vm.PVP = packet.PVP;
                 vm.CurrentPlayers = packet.CurrentPlayers;
                 vm.MaxPlayers = packet.MaxPlayers;
-                vm.IPAddress = packet.IPAddress;
 
                 foreach (var pc in packet.PCs)
                 {

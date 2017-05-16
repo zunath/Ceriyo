@@ -53,7 +53,6 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         public PVPType PVP { get; set; }
         public int CurrentPlayers { get; set; }
         public int MaxPlayers { get; set; }
-        public string IPAddress { get; set; }
         public bool IsCharacterDeletionEnabled { get; set; }
         
         private ObservableCollection<PCTransferObject> _pcs;
@@ -141,7 +140,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         {
             string header = string.Empty;
             header += "Server Name: " + ServerName + Environment.NewLine;
-            header += "IP Address: " + IPAddress + Environment.NewLine;
+            header += "IP Address: " + _networkService.GetServerIPAddress() + Environment.NewLine;
             header += "Category: " + Category + Environment.NewLine;
             header += "PVP: " + PVP + Environment.NewLine;
             header += "Players: " + CurrentPlayers + " / " + MaxPlayers + Environment.NewLine;
