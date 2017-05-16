@@ -10,6 +10,7 @@ using Ceriyo.Infrastructure.Network.Packets;
 using Ceriyo.Infrastructure.Network.Packets.CharacterManagement;
 using Ceriyo.Infrastructure.Network.TransferObjects;
 using Ceriyo.Infrastructure.UI.Contracts;
+using EmptyKeys.UserInterface;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;
 using EmptyKeys.UserInterface.Mvvm;
@@ -36,13 +37,14 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             DeleteCharacterCommand = new RelayCommand(DeleteCharacter);
             DisconnectCommand = new RelayCommand(Disconnect);
             JoinServerCommand = new RelayCommand(JoinServer);
+            ConfirmDeleteCharacterCommand = new RelayCommand(ConfirmDeleteCharacter);
 
             _characterCreationVM = _vmFactory.Create<CharacterCreationUIViewModel>();
             _characterCreationVM.CharacterSelectionVM = this;
             _networkService.OnPacketReceived += PacketReceived;
         }
 
-        private CharacterCreationUIViewModel _characterCreationVM;
+        private readonly CharacterCreationUIViewModel _characterCreationVM;
 
         public string ServerName { get; set; }
         public string Announcement { get; set; }
@@ -71,11 +73,11 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             }
             set
             {
-                _selectedPC = value;
+                SetProperty(ref _selectedPC, value);
                 RaisePropertyChanged("IsPCSelected");
             }
         }
-
+        
         public bool IsPCSelected => SelectedPC != null;
 
         public ICommand CreateCharacterCommand { get; set; }
@@ -92,13 +94,25 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         private void DeleteCharacter(object obj)
         {
             if (SelectedPC == null) return;
+            
+            MessageBox.Show("Are you sure you want to delete this character?", "Delete Character?", MessageBoxButton.YesNo, ConfirmDeleteCharacterCommand, false);
+        }
 
-            DeleteCharacterPacket packet = new DeleteCharacterPacket
+        public ICommand ConfirmDeleteCharacterCommand;
+
+        private void ConfirmDeleteCharacter(object obj)
+        {
+            MessageBoxResult result = (MessageBoxResult) obj;
+
+            if (result == MessageBoxResult.Yes)
             {
-                PCGlobalID = SelectedPC.GlobalID
-            };
+                DeleteCharacterPacket packet = new DeleteCharacterPacket
+                {
+                    PCGlobalID = SelectedPC.GlobalID
+                };
 
-            _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, packet);
+                _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, packet);
+            }
         }
 
         public ICommand DisconnectCommand { get; set; }
@@ -148,6 +162,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
                 if (pc == null) return;
 
                 PCs.Remove(pc);
+                SelectedPC = null;
             }
         }
     }
