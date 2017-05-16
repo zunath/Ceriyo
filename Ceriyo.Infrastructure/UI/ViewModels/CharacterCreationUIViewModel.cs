@@ -56,6 +56,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         private void Back(object obj)
         {
+            ClearData();
             _uiService.ChangeUIRoot<CharacterSelectionView>(CharacterSelectionVM);
         }
 
@@ -73,6 +74,11 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             return true;
         }
 
+        private void ClearData()
+        {
+            FirstName = string.Empty;
+            LastName = string.Empty;
+        }
 
         private void PacketReceived(PacketBase p)
         {
@@ -91,6 +97,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
                 CharacterSelectionVM.PCs.Add(pcTO);
 
+                ClearData();
                 _uiService.ChangeUIRoot<CharacterSelectionView>(CharacterSelectionVM);
             }
         }

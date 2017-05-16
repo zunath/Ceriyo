@@ -37,9 +37,12 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             DisconnectCommand = new RelayCommand(Disconnect);
             JoinServerCommand = new RelayCommand(JoinServer);
 
+            _characterCreationVM = _vmFactory.Create<CharacterCreationUIViewModel>();
+            _characterCreationVM.CharacterSelectionVM = this;
             _networkService.OnPacketReceived += PacketReceived;
         }
 
+        private CharacterCreationUIViewModel _characterCreationVM;
 
         public string ServerName { get; set; }
         public string Announcement { get; set; }
@@ -81,9 +84,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         private void CreateCharacter(object obj)
         {
-            var vm = _vmFactory.Create<CharacterCreationUIViewModel>();
-            vm.CharacterSelectionVM = this;
-            _uiService.ChangeUIRoot<CharacterCreationView>(vm);
+            _uiService.ChangeUIRoot<CharacterCreationView>(_characterCreationVM);
         }
 
         public ICommand DeleteCharacterCommand { get; set; }
