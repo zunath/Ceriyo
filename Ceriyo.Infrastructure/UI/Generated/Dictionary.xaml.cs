@@ -40,22 +40,6 @@ namespace EmptyKeys.UserInterface.Generated {
         }
         
         private void InitializeResources() {
-            // Resource - [DataTemplateKey(Ceriyo.Infrastructure.Network.TransferObjects.PCTransferObject)] DataTemplate
-            Func<UIElement, UIElement> r_0_dtFunc = r_0_dtMethod;
-            this.Add(typeof(Ceriyo.Infrastructure.Network.TransferObjects.PCTransferObject), new DataTemplate(typeof(Ceriyo.Infrastructure.Network.TransferObjects.PCTransferObject), r_0_dtFunc));
-            GeneratedPropertyInfo.RegisterGeneratedProperty(typeof(Ceriyo.Infrastructure.Network.TransferObjects.PCTransferObject), "Name", typeof(EmptyKeys.UserInterface.Generated.Dictionary_Bindings.PCTransferObject_Name_PropertyInfo));
-        }
-        
-        private static UIElement r_0_dtMethod(UIElement parent) {
-            // e_0 element
-            TextBlock e_0 = new TextBlock();
-            e_0.Parent = parent;
-            e_0.Name = "e_0";
-            e_0.Margin = new Thickness(5F, 5F, 5F, 5F);
-            Binding binding_e_0_Text = new Binding("Name");
-            binding_e_0_Text.UseGeneratedBindings = true;
-            e_0.SetBinding(TextBlock.TextProperty, binding_e_0_Text);
-            return e_0;
         }
     }
 }

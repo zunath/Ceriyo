@@ -5,7 +5,5 @@
                     xmlns:data="clr-namespace:Ceriyo.Infrastructure.Network.TransferObjects;assembly=Ceriyo.Infrastructure">
 
     <!-- Data Objects -->
-    <DataTemplate DataType="{x:Type data:PCTransferObject}">
-        <TextBlock Margin="5" Text="{Binding Name}" />
-    </DataTemplate>
+    
 </ResourceDictionary>
