@@ -53,7 +53,14 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         public PVPType PVP { get; set; }
         public int CurrentPlayers { get; set; }
         public int MaxPlayers { get; set; }
-        public bool IsCharacterDeletionEnabled { get; set; }
+
+        private bool _isCharacterDeletionEnabled;
+
+        public bool IsCharacterDeletionEnabled
+        {
+            get => _isCharacterDeletionEnabled;
+            set => SetProperty(ref _isCharacterDeletionEnabled, value);
+        }
         
         private ObservableCollection<PCTransferObject> _pcs;
 
@@ -161,6 +168,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
                 switch (packet.FailureType)
                 {
                     case DeleteCharacterFailureType.ServerDoesNotAllowDeletion:
+                        IsCharacterDeletionEnabled = false;
                         MessageBox.Show("Unable to delete character. This server doesn't allow character deletion.", "Deletion Failure!", DeleteFailureCommand, false);
                         break;
                     case DeleteCharacterFailureType.Success:

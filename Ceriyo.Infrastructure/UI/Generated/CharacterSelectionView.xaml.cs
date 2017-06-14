@@ -37,13 +37,13 @@ namespace EmptyKeys.UserInterface.Generated {
         
         private ListBox e_4;
         
-        private DockPanel e_5;
+        private DockPanel e_6;
         
-        private Grid e_6;
-        
-        private Button e_7;
+        private Grid e_7;
         
         private Button e_8;
+        
+        private Button e_9;
         
         public CharacterSelectionView() : 
                 base() {
@@ -121,6 +121,8 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_4 = new ListBox();
             this.e_0.Children.Add(this.e_4);
             this.e_4.Name = "e_4";
+            Func<UIElement, UIElement> e_4_dtFunc = e_4_dtMethod;
+            this.e_4.ItemTemplate = new DataTemplate(e_4_dtFunc);
             this.e_4.SelectionMode = SelectionMode.Single;
             Grid.SetColumn(this.e_4, 0);
             Grid.SetRow(this.e_4, 1);
@@ -129,71 +131,81 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_4.SetBinding(ListBox.ItemsSourceProperty, binding_e_4_ItemsSource);
             Binding binding_e_4_SelectedItem = new Binding("SelectedPC");
             this.e_4.SetBinding(ListBox.SelectedItemProperty, binding_e_4_SelectedItem);
-            // e_5 element
-            this.e_5 = new DockPanel();
-            this.e_0.Children.Add(this.e_5);
-            this.e_5.Name = "e_5";
-            Grid.SetColumn(this.e_5, 1);
-            Grid.SetRow(this.e_5, 1);
-            Grid.SetColumnSpan(this.e_5, 2);
-            Binding binding_e_5_Visibility = new Binding("IsPCSelected");
-            this.e_5.SetBinding(DockPanel.VisibilityProperty, binding_e_5_Visibility);
             // e_6 element
-            this.e_6 = new Grid();
-            this.e_5.Children.Add(this.e_6);
+            this.e_6 = new DockPanel();
+            this.e_0.Children.Add(this.e_6);
             this.e_6.Name = "e_6";
-            RowDefinition row_e_6_0 = new RowDefinition();
-            row_e_6_0.Height = new GridLength(1F, GridUnitType.Star);
-            this.e_6.RowDefinitions.Add(row_e_6_0);
-            RowDefinition row_e_6_1 = new RowDefinition();
-            row_e_6_1.Height = new GridLength(1F, GridUnitType.Star);
-            this.e_6.RowDefinitions.Add(row_e_6_1);
-            RowDefinition row_e_6_2 = new RowDefinition();
-            row_e_6_2.Height = new GridLength(1F, GridUnitType.Star);
-            this.e_6.RowDefinitions.Add(row_e_6_2);
-            RowDefinition row_e_6_3 = new RowDefinition();
-            row_e_6_3.Height = new GridLength(50F, GridUnitType.Pixel);
-            this.e_6.RowDefinitions.Add(row_e_6_3);
-            ColumnDefinition col_e_6_0 = new ColumnDefinition();
-            col_e_6_0.Width = new GridLength(1F, GridUnitType.Star);
-            this.e_6.ColumnDefinitions.Add(col_e_6_0);
-            ColumnDefinition col_e_6_1 = new ColumnDefinition();
-            col_e_6_1.Width = new GridLength(1F, GridUnitType.Star);
-            this.e_6.ColumnDefinitions.Add(col_e_6_1);
-            ColumnDefinition col_e_6_2 = new ColumnDefinition();
-            col_e_6_2.Width = new GridLength(1F, GridUnitType.Star);
-            this.e_6.ColumnDefinitions.Add(col_e_6_2);
-            ColumnDefinition col_e_6_3 = new ColumnDefinition();
-            col_e_6_3.Width = new GridLength(1F, GridUnitType.Star);
-            this.e_6.ColumnDefinitions.Add(col_e_6_3);
+            Grid.SetColumn(this.e_6, 1);
+            Grid.SetRow(this.e_6, 1);
+            Grid.SetColumnSpan(this.e_6, 2);
+            Binding binding_e_6_Visibility = new Binding("IsPCSelected");
+            this.e_6.SetBinding(DockPanel.VisibilityProperty, binding_e_6_Visibility);
             // e_7 element
-            this.e_7 = new Button();
+            this.e_7 = new Grid();
             this.e_6.Children.Add(this.e_7);
             this.e_7.Name = "e_7";
-            this.e_7.Margin = new Thickness(1F, 1F, 1F, 1F);
-            this.e_7.Content = "Join Server";
-            Grid.SetColumn(this.e_7, 0);
-            Grid.SetRow(this.e_7, 3);
-            Grid.SetColumnSpan(this.e_7, 2);
-            Binding binding_e_7_Command = new Binding("JoinServerCommand");
-            this.e_7.SetBinding(Button.CommandProperty, binding_e_7_Command);
+            RowDefinition row_e_7_0 = new RowDefinition();
+            row_e_7_0.Height = new GridLength(1F, GridUnitType.Star);
+            this.e_7.RowDefinitions.Add(row_e_7_0);
+            RowDefinition row_e_7_1 = new RowDefinition();
+            row_e_7_1.Height = new GridLength(1F, GridUnitType.Star);
+            this.e_7.RowDefinitions.Add(row_e_7_1);
+            RowDefinition row_e_7_2 = new RowDefinition();
+            row_e_7_2.Height = new GridLength(1F, GridUnitType.Star);
+            this.e_7.RowDefinitions.Add(row_e_7_2);
+            RowDefinition row_e_7_3 = new RowDefinition();
+            row_e_7_3.Height = new GridLength(50F, GridUnitType.Pixel);
+            this.e_7.RowDefinitions.Add(row_e_7_3);
+            ColumnDefinition col_e_7_0 = new ColumnDefinition();
+            col_e_7_0.Width = new GridLength(1F, GridUnitType.Star);
+            this.e_7.ColumnDefinitions.Add(col_e_7_0);
+            ColumnDefinition col_e_7_1 = new ColumnDefinition();
+            col_e_7_1.Width = new GridLength(1F, GridUnitType.Star);
+            this.e_7.ColumnDefinitions.Add(col_e_7_1);
+            ColumnDefinition col_e_7_2 = new ColumnDefinition();
+            col_e_7_2.Width = new GridLength(1F, GridUnitType.Star);
+            this.e_7.ColumnDefinitions.Add(col_e_7_2);
+            ColumnDefinition col_e_7_3 = new ColumnDefinition();
+            col_e_7_3.Width = new GridLength(1F, GridUnitType.Star);
+            this.e_7.ColumnDefinitions.Add(col_e_7_3);
             // e_8 element
             this.e_8 = new Button();
-            this.e_6.Children.Add(this.e_8);
+            this.e_7.Children.Add(this.e_8);
             this.e_8.Name = "e_8";
             this.e_8.Margin = new Thickness(1F, 1F, 1F, 1F);
-            this.e_8.Content = "Delete Character";
-            Grid.SetColumn(this.e_8, 2);
+            this.e_8.Content = "Join Server";
+            Grid.SetColumn(this.e_8, 0);
             Grid.SetRow(this.e_8, 3);
             Grid.SetColumnSpan(this.e_8, 2);
-            Binding binding_e_8_IsEnabled = new Binding("IsCharacterDeletionEnabled");
-            this.e_8.SetBinding(Button.IsEnabledProperty, binding_e_8_IsEnabled);
-            Binding binding_e_8_Command = new Binding("DeleteCharacterCommand");
+            Binding binding_e_8_Command = new Binding("JoinServerCommand");
             this.e_8.SetBinding(Button.CommandProperty, binding_e_8_Command);
+            // e_9 element
+            this.e_9 = new Button();
+            this.e_7.Children.Add(this.e_9);
+            this.e_9.Name = "e_9";
+            this.e_9.Margin = new Thickness(1F, 1F, 1F, 1F);
+            this.e_9.Content = "Delete Character";
+            Grid.SetColumn(this.e_9, 2);
+            Grid.SetRow(this.e_9, 3);
+            Grid.SetColumnSpan(this.e_9, 2);
+            Binding binding_e_9_IsEnabled = new Binding("IsCharacterDeletionEnabled");
+            this.e_9.SetBinding(Button.IsEnabledProperty, binding_e_9_IsEnabled);
+            Binding binding_e_9_Command = new Binding("DeleteCharacterCommand");
+            this.e_9.SetBinding(Button.CommandProperty, binding_e_9_Command);
         }
         
         private static void InitializeElementResources(UIElement elem) {
             elem.Resources.MergedDictionaries.Add(Dictionary.Instance);
+        }
+        
+        private static UIElement e_4_dtMethod(UIElement parent) {
+            // e_5 element
+            TextBlock e_5 = new TextBlock();
+            e_5.Parent = parent;
+            e_5.Name = "e_5";
+            Binding binding_e_5_Text = new Binding("Name");
+            e_5.SetBinding(TextBlock.TextProperty, binding_e_5_Text);
+            return e_5;
         }
     }
 }
