@@ -70,12 +70,6 @@
                 SelectionMode="Single"
                 ItemsSource="{Binding PCs}"
                 SelectedItem="{Binding SelectedPC}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=Name}">
-                    </TextBlock>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
         </ListBox>
 
         
