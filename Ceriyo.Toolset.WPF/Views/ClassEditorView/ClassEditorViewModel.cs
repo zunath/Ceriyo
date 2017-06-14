@@ -97,7 +97,7 @@ namespace Ceriyo.Toolset.WPF.Views.ClassEditorView
             set
             {
                 SetProperty(ref _selectedClass, value);
-                OnPropertyChanged(nameof(IsClassSelected));
+                RaisePropertyChanged(nameof(IsClassSelected));
             }
         }
         

@@ -123,7 +123,7 @@ namespace Ceriyo.Toolset.WPF.Views.TilesetEditorView
             set
             {
                 SetProperty(ref _selectedTileset, value);
-                OnPropertyChanged(nameof(IsTilesetSelected));
+                RaisePropertyChanged(nameof(IsTilesetSelected));
                 LoadActiveTilesetImage();
             }
         }

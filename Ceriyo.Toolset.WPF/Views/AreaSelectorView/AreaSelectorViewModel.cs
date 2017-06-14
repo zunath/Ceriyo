@@ -108,7 +108,7 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
             set
             {
                 SetProperty(ref _selectedTreeItem, value);
-                OnPropertyChanged(nameof(IsAreaSelected));
+                RaisePropertyChanged(nameof(IsAreaSelected));
             }
         }
 

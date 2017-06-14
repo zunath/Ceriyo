@@ -238,9 +238,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             SkillIDs = new ObservableCollectionEx<string>();
             TilesetIDs = new ObservableCollectionEx<string>();
         
-            LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
-            LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
-            LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesPropertyChanged += (sender, args) => RaisePropertyChanged();
+            LocalVariables.VariablesCollectionChanged += (sender, args) => RaisePropertyChanged();
+            LocalVariables.VariablesItemPropertyChanged += (sender, args) => RaisePropertyChanged();
         }
     }
 }

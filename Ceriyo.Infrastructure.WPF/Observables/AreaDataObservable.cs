@@ -124,9 +124,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             Height = 8;
             TilesetGlobalID = string.Empty;
 
-            LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
-            LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
-            LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesPropertyChanged += (sender, args) => RaisePropertyChanged();
+            LocalVariables.VariablesCollectionChanged += (sender, args) => RaisePropertyChanged();
+            LocalVariables.VariablesItemPropertyChanged += (sender, args) => RaisePropertyChanged();
         }
     }
 }

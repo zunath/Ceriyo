@@ -26,10 +26,11 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
             host.Services.AddService(typeof(IGraphicsDeviceService), this);
         }
 
-        
+
+        #pragma warning disable 0067
         [Obsolete("Dummy implementation will never call DeviceCreated")]
         public event EventHandler<EventArgs> DeviceCreated;
-
+        
         [Obsolete("Dummy implementation will never call DeviceDisposing")]
         public event EventHandler<EventArgs> DeviceDisposing;
 
@@ -38,7 +39,7 @@ namespace Ceriyo.Infrastructure.WPF.MonoGameWpfInterop
 
         [Obsolete("Dummy implementation will never call DeviceResetting")]
         public event EventHandler<EventArgs> DeviceResetting;
-        
+        #pragma warning restore 0067
 
         public GraphicsDevice GraphicsDevice { get; }
         

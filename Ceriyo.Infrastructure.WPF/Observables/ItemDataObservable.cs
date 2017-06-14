@@ -157,9 +157,9 @@ namespace Ceriyo.Infrastructure.WPF.Observables
             ItemPropertyResrefs = new ObservableCollectionEx<string>();
 
             LocalVariables = new LocalVariableDataObservable();
-            LocalVariables.VariablesPropertyChanged += (sender, args) => OnPropertyChanged();
-            LocalVariables.VariablesCollectionChanged += (sender, args) => OnPropertyChanged();
-            LocalVariables.VariablesItemPropertyChanged += (sender, args) => OnPropertyChanged();
+            LocalVariables.VariablesPropertyChanged += (sender, args) => RaisePropertyChanged();
+            LocalVariables.VariablesCollectionChanged += (sender, args) => RaisePropertyChanged();
+            LocalVariables.VariablesItemPropertyChanged += (sender, args) => RaisePropertyChanged();
         }
     }
 }

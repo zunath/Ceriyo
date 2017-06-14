@@ -132,7 +132,7 @@ namespace Ceriyo.Toolset.WPF.Views.CreatureEditorView
             set
             {
                 SetProperty(ref _selectedCreature, value);
-                OnPropertyChanged(nameof(IsCreatureSelected));
+                RaisePropertyChanged(nameof(IsCreatureSelected));
             }
         }
 

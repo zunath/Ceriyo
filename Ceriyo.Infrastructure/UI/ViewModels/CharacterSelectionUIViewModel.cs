@@ -59,18 +59,15 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         public ObservableCollection<PCTransferObject> PCs
         {
-            get { return _pcs; }
-            set { SetProperty(ref _pcs, value); }
+            get => _pcs;
+            set => SetProperty(ref _pcs, value);
         }
 
         private PCTransferObject _selectedPC;
 
         public PCTransferObject SelectedPC
         {
-            get
-            {
-                return _selectedPC;
-            }
+            get => _selectedPC;
             set
             {
                 SetProperty(ref _selectedPC, value);
