@@ -52,13 +52,17 @@ namespace Ceriyo.Infrastructure.WPF.BindableBases
 
         protected override bool SetProperty<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
         {
-            var result = base.SetProperty(ref storage, value, propertyName);
-            if (result && !string.IsNullOrWhiteSpace(propertyName))
+            if(Equals(storage, value))
+                return false;
+
+            storage = value;
+            if (!string.IsNullOrWhiteSpace(propertyName))
             {
                 DoValidate(propertyName);
             }
 
-            return result;
+            RaisePropertyChanged(propertyName);
+            return true;
         }
 
         public void ValidateObject()
