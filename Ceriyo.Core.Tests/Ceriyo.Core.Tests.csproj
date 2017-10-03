@@ -118,6 +118,7 @@
     <Compile Include="Scripting\Server\ScriptingMethodsTests.cs" />
     <Compile Include="Scripting\Server\PhysicsMethodsTests.cs" />
     <Compile Include="Services\AppServiceTests.cs" />
+    <Compile Include="Services\IsoMathServiceTests.cs" />
     <Compile Include="Settings\GameSettingsTests.cs" />
     <Compile Include="Settings\ServerSettingsTests.cs" />
     <Compile Include="Settings\ToolsetSettingsTests.cs" />

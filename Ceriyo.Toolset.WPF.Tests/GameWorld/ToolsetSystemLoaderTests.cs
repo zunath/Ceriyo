@@ -21,9 +21,9 @@ namespace Ceriyo.Toolset.WPF.Tests.GameWorld
         public void SetUp()
         {
             _world = TestHelpers.CreateEntityWorld();
-            _areaRenderSystem = new AreaRenderSystem(null, null, null);
+            _areaRenderSystem = new AreaRenderSystem(null, null, null, null, null);
             _renderSystem = new RenderSystem(null);
-            _painterSystem = new PainterSystem(null, null, null);
+            _painterSystem = new PainterSystem(null, null, null, null);
             _loader = new ToolsetSystemLoader(
                 _world,
                 _areaRenderSystem,

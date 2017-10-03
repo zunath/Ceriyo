@@ -88,6 +88,7 @@
     <Compile Include="Constants\ScriptEngine.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
     <Compile Include="Constants\Zoom.cs" />
+    <Compile Include="Contracts\IIsoMathService.cs" />
     <Compile Include="Contracts\IServerSettingsService.cs" />
     <Compile Include="Contracts\ISystemLoader.cs" />
     <Compile Include="Contracts\IUIViewModel.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Data\TileData.cs" />
     <Compile Include="Entities\ObjectPainter.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
+    <Compile Include="Services\IsoMathService.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
     <Compile Include="Data\SerializedFileData.cs" />
     <Compile Include="Data\ResourceItemData.cs" />

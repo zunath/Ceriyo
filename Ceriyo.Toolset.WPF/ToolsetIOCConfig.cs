@@ -59,6 +59,7 @@ namespace Ceriyo.Toolset.WPF
                 .WithParameter("isRunningAsServer", false)
                 .SingleInstance();
             builder.RegisterType<EngineService>().As<IEngineService>().SingleInstance();
+            builder.RegisterType<IsoMathService>().As<IIsoMathService>().SingleInstance();
 
             // Factory
             builder.RegisterType<EntityFactory>().As<IEntityFactory>().SingleInstance();

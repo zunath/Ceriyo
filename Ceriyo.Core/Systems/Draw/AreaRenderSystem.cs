@@ -5,6 +5,7 @@ using Artemis.Manager;
 using Artemis.System;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Constants;
+using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,11 +25,13 @@ namespace Ceriyo.Core.Systems.Draw
         private Texture2D _emptyCell;
         private readonly IModuleResourceService _resourceService;
         private readonly Camera2D _camera;
+        private readonly IIsoMathService _isoMathService;
 
         public AreaRenderSystem(SpriteBatch spriteBatch,
             IEngineService engineService,
             IModuleResourceService resourceService,
-            Camera2D camera)
+            Camera2D camera,
+            IIsoMathService isoMathService)
             : base(Aspect.All(typeof(Renderable),
                               typeof(Map)))
         {
@@ -37,6 +40,7 @@ namespace Ceriyo.Core.Systems.Draw
             _origin = Vector2.Zero;
             _resourceService = resourceService;
             _camera = camera;
+            _isoMathService = isoMathService;
         }
 
         private bool _renderedOnce;
@@ -54,12 +58,11 @@ namespace Ceriyo.Core.Systems.Draw
             {
                 for (int y = map.Height - 1; y >= 0; y--)
                 {
-                    float positionX = (x - y) * tileWidth / 2.0f;
-                    float positionY = (x + y) * tileHeight / 2.0f;
+                    Vector2 screenPosition = _isoMathService.MapTileToScreenPosition(x, y);
                     
                     Vector2 position = new Vector2(
-                        positionX,
-                        positionY);
+                        screenPosition.X,
+                        screenPosition.Y);
 
                     Tile tile = map.Tiles[x, y];
                     int sourceX = 0;
