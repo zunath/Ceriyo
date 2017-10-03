@@ -1,4 +1,5 @@
-﻿using Artemis;
+﻿using System;
+using Artemis;
 using Artemis.Attributes;
 using Artemis.Manager;
 using Artemis.System;
@@ -7,6 +8,7 @@ using Ceriyo.Core.Constants;
 using Ceriyo.Core.Services.Contracts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace Ceriyo.Core.Systems.Draw
 {
@@ -21,10 +23,12 @@ namespace Ceriyo.Core.Systems.Draw
         private readonly Vector2 _origin;
         private Texture2D _emptyCell;
         private readonly IModuleResourceService _resourceService;
+        private readonly Camera2D _camera;
 
         public AreaRenderSystem(SpriteBatch spriteBatch,
             IEngineService engineService,
-            IModuleResourceService resourceService)
+            IModuleResourceService resourceService,
+            Camera2D camera)
             : base(Aspect.All(typeof(Renderable),
                               typeof(Map)))
         {
@@ -32,8 +36,10 @@ namespace Ceriyo.Core.Systems.Draw
             _engineService = engineService;
             _origin = Vector2.Zero;
             _resourceService = resourceService;
+            _camera = camera;
         }
 
+        private bool _renderedOnce;
         public override void Process(Entity entity)
         {
             LoadEmptyTileset();
@@ -44,13 +50,13 @@ namespace Ceriyo.Core.Systems.Draw
             int tileWidth = _engineService.TileWidth;
             int tileHeight = _engineService.TileHeight;
 
-            for (int y = 0; y < map.Height; y++)
+            for (int x = 0; x < map.Width; x++)
             {
-                for (int x = map.Width - 1; x >= 0; x--)
+                for (int y = map.Height - 1; y >= 0; y--)
                 {
-                    float positionX = (x * tileWidth / 2) + (y * tileWidth / 2);
-                    float positionY = (y * tileHeight / 2) - (x * tileHeight / 2);
-
+                    float positionX = (x - y) * tileWidth / 2.0f;
+                    float positionY = (x + y) * tileHeight / 2.0f;
+                    
                     Vector2 position = new Vector2(
                         positionX,
                         positionY);
@@ -83,13 +89,20 @@ namespace Ceriyo.Core.Systems.Draw
                         1.0f,
                         SpriteEffects.None,
                         0.0f);
-
-
-
                 }
             }
+            
+            // Move camera to focus more on the area for the first run time.
+            if (!_renderedOnce)
+            {
+                _camera.Position = new Vector2(
+                    _camera.Position.X - _camera.BoundingRectangle.Width / 2.0f,
+                    _camera.Position.Y - 50
+                );
 
+            }
 
+            _renderedOnce = true;
         }
 
         private void LoadEmptyTileset()
