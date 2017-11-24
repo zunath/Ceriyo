@@ -19,7 +19,7 @@ namespace Ceriyo.Domain.Services.Tests.DataServices
         private IObjectMapper _objectMapper;
         private IPathService _pathService;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
             _mockLogger = new Mock<ILogger>();
