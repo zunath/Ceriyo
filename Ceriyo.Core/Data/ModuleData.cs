@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
@@ -61,6 +62,8 @@ namespace Ceriyo.Core.Data
         public LevelChartData LevelChart { get; set; }
 
         public string GlobalID { get; set; }
+        [SerializationIgnore]
+        public string DirectoryName => "Module";
 
         public ModuleData()
         {

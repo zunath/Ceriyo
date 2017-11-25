@@ -51,6 +51,12 @@
     <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.7.2.1\lib\net45\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -131,6 +137,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\AvalonEditBehavior.cs" />
     <Compile Include="Contracts\IDomainServiceNotifier.cs" />
     <Compile Include="DomainServiceNotifier.cs" />
     <Compile Include="EventArgs\ModuleEventArgs.cs" />
@@ -179,6 +186,8 @@
     <Compile Include="Events\Placeable\PlaceableDeletedEvent.cs" />
     <Compile Include="Events\Placeable\PlaceableEditorValidityChangedEvent.cs" />
     <Compile Include="Events\ResourceEditor\ResourceEditorClosedEvent.cs" />
+    <Compile Include="Events\Script\ScriptCreatedEvent.cs" />
+    <Compile Include="Events\Script\ScriptDeletedEvent.cs" />
     <Compile Include="Events\Skill\SkillChangedEvent.cs" />
     <Compile Include="Events\Skill\SkillCreatedEvent.cs" />
     <Compile Include="Events\Skill\SkillDeletedEvent.cs" />
@@ -520,6 +529,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="AvalonLanguageFiles\lua.xshd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

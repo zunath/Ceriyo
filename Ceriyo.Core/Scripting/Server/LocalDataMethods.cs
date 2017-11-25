@@ -1,9 +1,11 @@
 ﻿using Artemis;
+using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Scripting.Server.Contracts;
 
 namespace Ceriyo.Core.Scripting.Server
 {
+    [ScriptNamespace("LocalData")]
     public class LocalDataMethods: ILocalDataMethods
     {
         public void SetLocalValue(Entity entity, string key, string value)

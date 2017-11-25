@@ -21,20 +21,20 @@ namespace Ceriyo.Toolset.WPF.Views.AreaPropertiesView
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IObservableDataFactory _observableDataFactory;
-        private readonly IAreaDomainService _areaDomainService;
+        private readonly IDataDomainService _dataDomainService;
         private readonly IObjectMapper _objectMapper;
         private readonly IModuleDataService _moduleDataService;
 
         public AreaPropertiesViewModel(
             IEventAggregator eventAggregator,
             IObservableDataFactory observableDataFactory,
-            IAreaDomainService areaDomainService,
+            IDataDomainService dataDomainService,
             IObjectMapper objectMapper,
             IModuleDataService moduleDataService)
         {
             _eventAggregator = eventAggregator;
             _observableDataFactory = observableDataFactory;
-            _areaDomainService = areaDomainService;
+            _dataDomainService = dataDomainService;
             _objectMapper = objectMapper;
             _moduleDataService = moduleDataService;
 
@@ -282,7 +282,7 @@ namespace Ceriyo.Toolset.WPF.Views.AreaPropertiesView
                 _editingArea.LocalVariables.LocalDoubles.Add(@double);
             }
 
-            _areaDomainService.SaveArea(_objectMapper.Map<AreaData>(_editingArea));
+            _dataDomainService.SaveData(_objectMapper.Map<AreaData>(_editingArea));
             _eventAggregator.GetEvent<AreaPropertiesChangedEvent>().Publish(_editingArea);
             FinishInteraction();
             ClearForm();

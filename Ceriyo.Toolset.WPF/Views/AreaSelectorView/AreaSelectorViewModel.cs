@@ -18,21 +18,19 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IObservableDataFactory _observableDataFactory;
-        private readonly IAreaDomainService _areaDomainService;
+        private readonly IDataDomainService _dataDomainService;
         private readonly IObjectMapper _objectMapper;
         private readonly IModuleDataService _moduleDataService;
 
         public AreaSelectorViewModel(IEventAggregator eventAggregator,
-            IPathService pathService,
-            IDataService dataService,
             IObservableDataFactory observableDataFactory,
-            IAreaDomainService areaDomainService,
+            IDataDomainService dataDomainService,
             IObjectMapper objectMapper,
             IModuleDataService moduleDataService)
         {
             _eventAggregator = eventAggregator;
             _observableDataFactory = observableDataFactory;
-            _areaDomainService = areaDomainService;
+            _dataDomainService = dataDomainService;
             _objectMapper = objectMapper;
             _moduleDataService = moduleDataService;
 
@@ -96,15 +94,15 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
 
         public bool IsModuleLoaded
         {
-            get { return _isModuleLoaded; }
-            set { SetProperty(ref _isModuleLoaded, value); }
+            get => _isModuleLoaded;
+            set => SetProperty(ref _isModuleLoaded, value);
         }
 
         private object _selectedTreeItem;
 
         public object SelectedTreeItem
         {
-            get { return _selectedTreeItem; }
+            get => _selectedTreeItem;
             set
             {
                 SetProperty(ref _selectedTreeItem, value);
@@ -131,8 +129,8 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
 
         public ObservableCollectionEx<AreaDataObservable> Areas
         {
-            get { return _areas; }
-            set { SetProperty(ref _areas, value); }
+            get => _areas;
+            set => SetProperty(ref _areas, value);
         }
 
         public DelegateCommand CreateAreaCommand { get; }
@@ -175,7 +173,7 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
                     if (!c.Confirmed) return;
 
                     AreaData domainObject = _objectMapper.Map<AreaData>(SelectedArea);
-                    _areaDomainService.DeleteArea(domainObject);
+                    _dataDomainService.DeleteData(domainObject);
                     Areas.Remove(SelectedArea);
                     _eventAggregator.GetEvent<AreaDeletedEvent>().Publish(SelectedArea);
                     
@@ -186,8 +184,8 @@ namespace Ceriyo.Toolset.WPF.Views.AreaSelectorView
 
         public bool IsAreaListExpanded
         {
-            get { return _isAreaListExpanded; }
-            set { SetProperty(ref _isAreaListExpanded, value); }
+            get => _isAreaListExpanded;
+            set => SetProperty(ref _isAreaListExpanded, value);
         }
         
         public DelegateCommand OpenAreaCommand { get; }

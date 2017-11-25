@@ -1,11 +1,13 @@
 ﻿using System;
 using Artemis;
+using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Scripting.Server.Contracts;
 using Ceriyo.Core.Services.Contracts;
 
 namespace Ceriyo.Core.Scripting.Server
 {
+    [ScriptNamespace("Entity")]
     public class EntityMethods : IEntityMethods
     {
         private readonly IEngineService _engineService;

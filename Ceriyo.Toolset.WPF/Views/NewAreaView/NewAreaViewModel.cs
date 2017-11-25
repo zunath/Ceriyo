@@ -21,20 +21,20 @@ namespace Ceriyo.Toolset.WPF.Views.NewAreaView
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IObservableDataFactory _observableDataFactory;
-        private readonly IAreaDomainService _areaDomainService;
+        private readonly IDataDomainService _dataDomainService;
         private readonly IObjectMapper _objectMapper;
         private readonly IModuleDataService _moduleDataService;
 
         public NewAreaViewModel(
             IEventAggregator eventAggregator,
             IObservableDataFactory observableDataFactory,
-            IAreaDomainService areaDomainService,
+            IDataDomainService dataDomainService,
             IObjectMapper objectMapper,
             IModuleDataService moduleDataService)
         {
             _eventAggregator = eventAggregator;
             _observableDataFactory = observableDataFactory;
-            _areaDomainService = areaDomainService;
+            _dataDomainService = dataDomainService;
             _objectMapper = objectMapper;
             _moduleDataService = moduleDataService;
 
@@ -189,7 +189,7 @@ namespace Ceriyo.Toolset.WPF.Views.NewAreaView
             area.TilesetGlobalID = SelectedTileset.GlobalID;
 
             var areaDomain = _objectMapper.Map<AreaData>(area);
-            _areaDomainService.SaveArea(areaDomain);
+            _dataDomainService.SaveData(areaDomain);
 
             _eventAggregator.GetEvent<AreaCreatedEvent>().Publish(area);
 

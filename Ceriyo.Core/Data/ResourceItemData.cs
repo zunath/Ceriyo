@@ -3,7 +3,7 @@ using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class ResourceItemData : IDataDomainObject
+    public class ResourceItemData
     {
         public string FilePath { get; set; }
         public string FileName { get; set; }

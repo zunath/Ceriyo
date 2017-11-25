@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
@@ -7,6 +8,8 @@ namespace Ceriyo.Core.Data
     public class LocalVariableData : IDataDomainObject
     {
         public string GlobalID { get; set; }
+        [SerializationIgnore]
+        public string DirectoryName => null;
 
         public List<LocalStringData> LocalStrings { get; set; }
 

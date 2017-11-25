@@ -1,4 +1,5 @@
 ﻿using System;
+using Ceriyo.Core.Attributes;
 using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
@@ -6,6 +7,8 @@ namespace Ceriyo.Core.Data
     public class TilesetData : IDataDomainObject
     {
         public string GlobalID { get; set; }
+        [SerializationIgnore]
+        public string DirectoryName => "Tileset";
 
         public string Name { get; set; }
 

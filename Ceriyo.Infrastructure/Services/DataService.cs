@@ -114,12 +114,11 @@ namespace Ceriyo.Infrastructure.Services
             return Activator.CreateInstance<T>();
         }
 
-        public void Save<T>(T obj, string filePath = null)
-            where T : class
+        public void Save(object obj, string filePath = null)
         {
             if (string.IsNullOrWhiteSpace(filePath))
             {
-                var attribute = (FilePathAttribute) Attribute.GetCustomAttribute(typeof(T), typeof(FilePathAttribute));
+                var attribute = (FilePathAttribute) Attribute.GetCustomAttribute(obj.GetType(), typeof(FilePathAttribute));
                 filePath = attribute.FilePath;
             }
 

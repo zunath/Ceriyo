@@ -1,4 +1,5 @@
-﻿using Artemis;
+﻿using System.Collections.Generic;
+using Artemis;
 
 namespace Ceriyo.Core.Contracts
 {
@@ -6,5 +7,8 @@ namespace Ceriyo.Core.Contracts
     {
         void QueueScript(string fileName, Entity entity, string methodName = "Main");
         void ExecuteQueuedScripts();
+        IEnumerable<string> GetRegisteredEnumerations();
+
+        string ValidateScript(string scriptText);
     }
 }

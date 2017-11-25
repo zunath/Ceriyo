@@ -4,16 +4,118 @@
              xmlns:prism="http://prismlibrary.com/"             
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:binding="clr-namespace:Ceriyo.Infrastructure.WPF.Binding;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:converters="clr-namespace:Ceriyo.Infrastructure.WPF.Converters;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:behaviors="clr-namespace:Ceriyo.Infrastructure.WPF.Behaviors;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:actions="clr-namespace:Ceriyo.Infrastructure.WPF.Actions;assembly=Ceriyo.Infrastructure.WPF"
+             xmlns:newAreaView="clr-namespace:Ceriyo.Toolset.WPF.Views.NewAreaView"
+             xmlns:areaPropertiesView="clr-namespace:Ceriyo.Toolset.WPF.Views.AreaPropertiesView"
              mc:Ignorable="d"
              Background="White"
              d:DesignHeight="400"
              d:DesignWidth="300"
              prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <binding:BindingProxy
+            x:Key="DataContextProxy"
+            Data="{Binding}">
+        </binding:BindingProxy>
+        <converters:BoolToFontWeightConverter x:Key="BoolToFontWeightConverter">
+
+        </converters:BoolToFontWeightConverter>
+    </UserControl.Resources>
+
     <Grid>
-        <ListBox
-            ItemsSource="{Binding Scripts}"
-            SelectedItem="{Binding SelectedScript}">
-            
-        </ListBox>
+        <TreeView 
+            x:Name="ScriptTreeView"
+            IsEnabled="{Binding IsModuleLoaded}">
+            <i:Interaction.Behaviors>
+                <behaviors:BindableSelectedItemBehavior
+                    SelectedItem="{Binding SelectedTreeItem, 
+                                           Mode=TwoWay}">
+                </behaviors:BindableSelectedItemBehavior>
+            </i:Interaction.Behaviors>
+            <TreeView.Resources>
+                <ContextMenu x:Key="RootContextMenu">
+                    <MenuItem Header="New Script"
+                              Command="{Binding CreateScriptCommand}">
+                    </MenuItem>
+                </ContextMenu>
+                <ContextMenu x:Key="ScriptContextMenu">
+                    <MenuItem Header="Edit"
+                              Command="{Binding Path=Data.EditScriptCommand, Source={StaticResource DataContextProxy}}">
+                    </MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Delete"
+                              Command="{Binding Path=Data.DeleteScriptCommand, Source={StaticResource DataContextProxy}}">
+                    </MenuItem>
+                </ContextMenu>
+            </TreeView.Resources>
+
+            <TreeViewItem
+                x:Name="Root"
+                ItemsSource="{Binding Scripts}"
+                Header="Scripts"
+                ContextMenu="{StaticResource RootContextMenu}"
+                IsExpanded="{Binding IsScriptListExpanded}"
+                PreviewMouseRightButtonDown="OnPreviewMouseRightButtonDown">
+                <TreeViewItem.ItemTemplate>
+                    <HierarchicalDataTemplate>
+                        <TextBlock Text="{Binding Name}"
+                                   ContextMenu="{StaticResource ScriptContextMenu}"
+                                   FontWeight="{Binding IsOpenedInScriptEditor,
+                                                        Converter={StaticResource BoolToFontWeightConverter}}">
+
+                        </TextBlock>
+                    </HierarchicalDataTemplate>
+                </TreeViewItem.ItemTemplate>
+
+            </TreeViewItem>
+
+        </TreeView>
+
+
+
+
+        <i:Interaction.Triggers>
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding CreateAreaRequest, Mode=OneWay}">
+                <actions:MetroPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
+                    <prism:PopupWindowAction.WindowContent>
+                        <newAreaView:NewArea
+                                MinWidth="350"
+                                MinHeight="350"
+                                Width="350"
+                                Height="350"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    </prism:PopupWindowAction.WindowContent>
+                </actions:MetroPopupWindowAction>
+            </prism:InteractionRequestTrigger>
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding OpenAreaPropertiesRequest, Mode=OneWay}">
+                <actions:MetroPopupWindowAction IsModal="True" 
+                                         CenterOverAssociatedObject="True"
+                                         ResizeMode="NoResize">
+                    <prism:PopupWindowAction.WindowContent>
+                        <areaPropertiesView:AreaProperties
+                                MinWidth="500"
+                                MinHeight="400"
+                                Width="500"
+                                Height="400"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                    </prism:PopupWindowAction.WindowContent>
+                </actions:MetroPopupWindowAction>
+            </prism:InteractionRequestTrigger>
+
+            <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmDeleteRequest, Mode=OneWay}">
+                <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            </prism:InteractionRequestTrigger>
+        </i:Interaction.Triggers>
+
     </Grid>
 </UserControl>

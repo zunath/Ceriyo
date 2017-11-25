@@ -50,7 +50,9 @@ namespace Ceriyo.Infrastructure.WPF.BindableBases
             }
         }
 
+#pragma warning disable 693
         protected override bool SetProperty<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
+#pragma warning restore 693
         {
             if(Equals(storage, value))
                 return false;

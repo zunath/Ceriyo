@@ -4,7 +4,7 @@ using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {
-    public class TileAtlasData: IDataDomainObject
+    public class TileAtlasData
     {
         public Dictionary<Tuple<int, int>, TileData> Tiles { get; set; }
 

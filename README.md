@@ -3,6 +3,8 @@ Ceriyo is a 2D isometric game engine built off of the MonoGame framework.
 
 It aims to offer a range of tools which will allow end-users to create, host, and play games in a similar vein to NeverWinter Nights by Bioware.
 
+Please feel free to join us on Discord using this link: https://discord.gg/rgfTss7
+
 # Prerequisites
 
 - [MonoGame] (http://www.monogame.net/downloads/)

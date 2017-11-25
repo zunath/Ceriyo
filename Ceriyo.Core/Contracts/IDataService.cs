@@ -10,8 +10,7 @@ namespace Ceriyo.Core.Contracts
         T Load<T>(string filePath = null)
             where T: class;
 
-        void Save<T>(T obj, string filePath = null)
-            where T : class;
+        void Save(object obj, string filePath = null);
 
         void Delete(string filePath);
 
