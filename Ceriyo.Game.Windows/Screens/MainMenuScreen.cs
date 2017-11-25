@@ -25,7 +25,7 @@ namespace Ceriyo.Game.Windows.Screens
             _uiService = uiService;
             _screenService = screenService;
 
-            networkService.OnPacketReceived += PacketReceived;
+            networkService.BindPacketAction<CharacterAddedToWorldPacket>(OnCharacterAddedToWorldPacket);
         }
 
         public void Initialize()
@@ -49,15 +49,9 @@ namespace Ceriyo.Game.Windows.Screens
 
         }
 
-
-        private void PacketReceived(PacketBase p)
+        private void OnCharacterAddedToWorldPacket(PacketBase p)
         {
-            Type type = p.GetType();
-
-            if (type == typeof(CharacterAddedToWorldPacket))
-            {
-                _screenService.ChangeScreen<GameScreen>();
-            }
+            _screenService.ChangeScreen<GameScreen>();
         }
     }
 }

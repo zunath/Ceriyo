@@ -108,6 +108,7 @@
     <Compile Include="Network\Contracts\INetworkPacket.cs" />
     <Compile Include="Network\Packets\CharacterManagement\CharacterAddedToWorldPacket.cs" />
     <Compile Include="Network\Packets\CharacterManagement\CharacterCreatedPacket.cs" />
+    <Compile Include="Network\Packets\CharacterManagement\CharacterCreationDataPacket.cs" />
     <Compile Include="Network\Packets\CharacterManagement\CharacterDeletedPacket.cs" />
     <Compile Include="Network\Packets\CharacterManagement\CharacterSelectedPacket.cs" />
     <Compile Include="Network\Packets\CharacterManagement\DeleteCharacterPacket.cs" />

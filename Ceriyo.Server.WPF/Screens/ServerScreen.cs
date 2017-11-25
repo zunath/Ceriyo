@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Artemis;
 using Ceriyo.Core.Components;
 using Ceriyo.Core.Constants;
@@ -24,6 +25,7 @@ namespace Ceriyo.Server.WPF.Screens
         private readonly IEntityFactory _entityFactory;
         private readonly IServerNetworkService _networkService;
         private readonly IModuleService _moduleService;
+        private readonly IModuleDataService _moduleDataService;
         private readonly IScriptService _scriptService;
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
@@ -38,6 +40,7 @@ namespace Ceriyo.Server.WPF.Screens
             IEntityFactory entityFactory,
             IServerNetworkService networkService,
             IModuleService moduleService,
+            IModuleDataService moduleDataService,
             IScriptService scriptService,
             IDataService dataService,
             IPathService pathService,
@@ -48,6 +51,7 @@ namespace Ceriyo.Server.WPF.Screens
             _entityFactory = entityFactory;
             _networkService = networkService;
             _moduleService = moduleService;
+            _moduleDataService = moduleDataService;
             _scriptService = scriptService;
             _dataService = dataService;
             _pathService = pathService;
@@ -59,37 +63,20 @@ namespace Ceriyo.Server.WPF.Screens
         {
             _pcs = new Dictionary<string, Entity>();
 
-            _networkService.OnPacketReceived += PacketReceived;
+            _networkService.BindPacketAction<CreateCharacterPacket>(OnCreateCharacterRequest);
+            _networkService.BindPacketAction<CharacterSelectedPacket>(HandleSelectCharacterRequest);
+            _networkService.BindPacketAction<DeleteCharacterPacket>(HandleDeleteCharacterRequest);
+            _networkService.BindPacketAction<CharacterCreationDataPacket>(HandleCharacterCreationDataRequest);
             _networkService.OnPlayerDisconnected += PlayerDisconnected;
 
             LoadModule();
         }
-
-
-        private void PacketReceived(string username, PacketBase p)
-        {
-            Type type = p.GetType();
-            if (type == typeof(CreateCharacterPacket))
-            {
-                var packet = (CreateCharacterPacket) p;
-                HandleCreateCharacterRequest(username, packet);
-            }
-            else if (type == typeof(CharacterSelectedPacket))
-            {
-                var packet = (CharacterSelectedPacket) p;
-                HandleSelectCharacterRequest(username, packet);
-            }
-            else if (type == typeof(DeleteCharacterPacket))
-            {
-                var packet = (DeleteCharacterPacket) p;
-                HandleDeleteCharacterRequest(username, packet);
-            }
-        }
-
-        private void HandleCreateCharacterRequest(string username, CreateCharacterPacket packet)
+        
+        private void OnCreateCharacterRequest(string username, PacketBase p)
         {
             // TODO: Validate + sanitize packet
 
+            CreateCharacterPacket packet = (CreateCharacterPacket) p;
             PCData pcData = new PCData
             {
                 LastName = packet.LastName,
@@ -111,8 +98,10 @@ namespace Ceriyo.Server.WPF.Screens
             _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
         }
 
-        private void HandleSelectCharacterRequest(string username, CharacterSelectedPacket packet)
+        private void HandleSelectCharacterRequest(string username, PacketBase p)
         {
+            CharacterSelectedPacket packet = (CharacterSelectedPacket) p;
+
             // If player is already added to the game world, we don't want to add another. Ignore this request.
             if (_pcs.ContainsKey(username))
             {
@@ -141,8 +130,10 @@ namespace Ceriyo.Server.WPF.Screens
             _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
         }
 
-        private void HandleDeleteCharacterRequest(string username, DeleteCharacterPacket packet)
+        private void HandleDeleteCharacterRequest(string username, PacketBase p)
         {
+            DeleteCharacterPacket packet = (DeleteCharacterPacket) p;
+
             DeleteCharacterFailureType failureType = DeleteCharacterFailureType.Success;
             string path = _pathService.ServerVaultDirectory + username + "/" + packet.PCGlobalID;
 
@@ -167,6 +158,16 @@ namespace Ceriyo.Server.WPF.Screens
             {
                 PCGlobalID = packet.PCGlobalID,
                 FailureType = failureType
+            };
+
+            _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);
+        }
+
+        private void HandleCharacterCreationDataRequest(string username, PacketBase p)
+        {
+            CharacterCreationDataPacket response = new CharacterCreationDataPacket
+            {
+                Classes = _moduleDataService.LoadAll<ClassData>().ToList()
             };
 
             _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, response, username);

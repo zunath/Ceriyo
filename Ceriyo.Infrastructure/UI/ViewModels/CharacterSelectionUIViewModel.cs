@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
@@ -42,7 +40,8 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
             _characterCreationVM = _vmFactory.Create<CharacterCreationUIViewModel>();
             _characterCreationVM.CharacterSelectionVM = this;
-            _networkService.OnPacketReceived += PacketReceived;
+
+            _networkService.BindPacketAction<CharacterDeletedPacket>(OnCharacterDeletedPacket);
         }
 
         private readonly CharacterCreationUIViewModel _characterCreationVM;
@@ -153,37 +152,32 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
             ServerInformationDetails = header;
         }
-        
-        private void PacketReceived(PacketBase p)
+
+        private void OnCharacterDeletedPacket(PacketBase p)
         {
-            Type type = p.GetType();
+            CharacterDeletedPacket packet = (CharacterDeletedPacket)p;
+            PCTransferObject pc = PCs.SingleOrDefault(x => x.GlobalID == packet.PCGlobalID);
 
-            if (type == typeof(CharacterDeletedPacket))
+            if (pc == null) return;
+
+            switch (packet.FailureType)
             {
-                CharacterDeletedPacket packet = (CharacterDeletedPacket) p;
-                PCTransferObject pc = PCs.SingleOrDefault(x => x.GlobalID == packet.PCGlobalID);
-
-                if (pc == null) return;
-
-                switch (packet.FailureType)
-                {
-                    case DeleteCharacterFailureType.ServerDoesNotAllowDeletion:
-                        IsCharacterDeletionEnabled = false;
-                        MessageBox.Show("Unable to delete character. This server doesn't allow character deletion.", "Deletion Failure!", DeleteFailureCommand, false);
-                        break;
-                    case DeleteCharacterFailureType.Success:
-                        PCs.Remove(pc);
-                        SelectedPC = null;
-                        MessageBox.Show("Character deleted successfully!", "Success!", DeleteFailureCommand, false);
-                        break;
-                    default:
-                        MessageBox.Show("Unable to delete character. Please try again later.", "Deletion Failure!", DeleteFailureCommand, false);
-                        break;
-                }
-
+                case DeleteCharacterFailureType.ServerDoesNotAllowDeletion:
+                    IsCharacterDeletionEnabled = false;
+                    MessageBox.Show("Unable to delete character. This server doesn't allow character deletion.", "Deletion Failure!", DeleteFailureCommand, false);
+                    break;
+                case DeleteCharacterFailureType.Success:
+                    PCs.Remove(pc);
+                    SelectedPC = null;
+                    MessageBox.Show("Character deleted successfully!", "Success!", DeleteFailureCommand, false);
+                    break;
+                default:
+                    MessageBox.Show("Unable to delete character. Please try again later.", "Deletion Failure!", DeleteFailureCommand, false);
+                    break;
             }
-        }
 
+        }
+        
         public ICommand DeleteFailureCommand { get; set; }
 
         private void DeleteFailure(object obj)

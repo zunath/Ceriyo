@@ -37,7 +37,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             BackCommand = new RelayCommand(Back);
             ConnectCommand = new RelayCommand(Connect);
 
-            networkService.OnPacketReceived += PacketReceived;
+            _networkService.BindPacketAction<ConnectedToServerPacket>(OnConnectedToServerPacket);
 
             // DEBUGGING
 
@@ -48,41 +48,38 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         }
 
-        private void PacketReceived(PacketBase p)
+        private void OnConnectedToServerPacket(PacketBase p)
         {
-            if (p.GetType() == typeof(ConnectedToServerPacket))
+            var packet = (ConnectedToServerPacket)p;
+
+            foreach (string resourcePack in packet.RequiredResourcePacks)
             {
-                var packet = (ConnectedToServerPacket) p;
-                
-                foreach (string resourcePack in packet.RequiredResourcePacks)
+                if (!File.Exists(_pathService.ResourcePackDirectory + resourcePack + ".rpk"))
                 {
-                    if (!File.Exists(_pathService.ResourcePackDirectory + resourcePack + ".rpk"))
-                    {
-                        _networkService.DisconnectFromServer($"Missing required resource packs. (File: {resourcePack})");
-                        return;
-                    }
+                    _networkService.DisconnectFromServer($"Missing required resource packs. (File: {resourcePack})");
+                    return;
                 }
-
-
-                var vm = _vmFactory.Create<CharacterSelectionUIViewModel>();
-                vm.IsCharacterDeletionEnabled = packet.AllowCharacterDeletion;
-                vm.ServerName = packet.ServerName;
-                vm.Announcement = packet.Announcement;
-                vm.Category = packet.Category;
-                vm.PVP = packet.PVP;
-                vm.CurrentPlayers = packet.CurrentPlayers;
-                vm.MaxPlayers = packet.MaxPlayers;
-
-                foreach (var pc in packet.PCs)
-                {
-                    vm.PCs.Add(pc);
-                }
-
-                vm.BuildServerInformationDetails();
-
-                _uiService.ChangeUIRoot<CharacterSelectionView>(vm);
             }
+            
+            var vm = _vmFactory.Create<CharacterSelectionUIViewModel>();
+            vm.IsCharacterDeletionEnabled = packet.AllowCharacterDeletion;
+            vm.ServerName = packet.ServerName;
+            vm.Announcement = packet.Announcement;
+            vm.Category = packet.Category;
+            vm.PVP = packet.PVP;
+            vm.CurrentPlayers = packet.CurrentPlayers;
+            vm.MaxPlayers = packet.MaxPlayers;
+
+            foreach (var pc in packet.PCs)
+            {
+                vm.PCs.Add(pc);
+            }
+
+            vm.BuildServerInformationDetails();
+
+            _uiService.ChangeUIRoot<CharacterSelectionView>(vm);
         }
+        
 
         public ICommand BackCommand { get; set; }
 

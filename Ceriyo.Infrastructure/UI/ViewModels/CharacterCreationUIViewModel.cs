@@ -1,5 +1,8 @@
-﻿using Ceriyo.Core.Constants;
+﻿using System.Collections.Generic;
+using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
+using Ceriyo.Core.Data;
+using Ceriyo.Core.Observables;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
 using Ceriyo.Infrastructure.Network.Packets.CharacterManagement;
@@ -30,23 +33,42 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             CreateCharacterCommand = new RelayCommand(CreateCharacter);
             BackCommand = new RelayCommand(Back);
             DisconnectCommand = new RelayCommand(Disconnect);
+            
+            _networkService.BindPacketAction<CharacterCreatedPacket>(OnCharacterCreatedPacket);
+            _networkService.BindPacketAction<CharacterCreationDataPacket>(OnCharacterCreationDataPacket);
 
-            _networkService.OnPacketReceived += PacketReceived;
+            Classes = new List<ClassData>();
+
+            RequestData();
         }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public ClassData SelectedClass { get; set; }
+        public List<ClassData> Classes { get; set; }
+
         public bool IsModelValid => ValidateModel();
 
         public ICommand CreateCharacterCommand { get; set; }
+
+        private void RequestData()
+        {
+            CharacterCreationDataPacket packet = new CharacterCreationDataPacket
+            {
+                IsRequest = true
+            };
+
+            _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, packet);
+        }
 
         private void CreateCharacter(object obj)
         {
             CreateCharacterPacket packet = new CreateCharacterPacket
             {
                 FirstName = FirstName,
-                LastName = LastName
+                LastName = LastName,
+                Class = SelectedClass.Resref
             };
 
             _networkService.SendMessage(PacketDeliveryMethod.ReliableUnordered, packet);
@@ -78,27 +100,36 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         {
             FirstName = string.Empty;
             LastName = string.Empty;
+            SelectedClass = null;
         }
 
-        private void PacketReceived(PacketBase p)
+        private void OnCharacterCreatedPacket(PacketBase p)
         {
-            if (p.GetType() == typeof(CharacterCreatedPacket))
+            var packet = (CharacterCreatedPacket)p;
+
+            PCTransferObject pcTO = new PCTransferObject
             {
-                var packet = (CharacterCreatedPacket) p;
+                LastName = packet.LastName,
+                FirstName = packet.FirstName,
+                Description = packet.Description,
+                Level = packet.Level,
+                GlobalID = packet.GlobalID
+            };
 
-                PCTransferObject pcTO = new PCTransferObject
-                {
-                    LastName = packet.LastName,
-                    FirstName = packet.FirstName,
-                    Description = packet.Description,
-                    Level = packet.Level,
-                    GlobalID = packet.GlobalID
-                };
+            CharacterSelectionVM.PCs.Add(pcTO);
 
-                CharacterSelectionVM.PCs.Add(pcTO);
+            ClearData();
+            _uiService.ChangeUIRoot<CharacterSelectionView>(CharacterSelectionVM);
+        }
 
-                ClearData();
-                _uiService.ChangeUIRoot<CharacterSelectionView>(CharacterSelectionVM);
+        private void OnCharacterCreationDataPacket(PacketBase p)
+        {
+            var packet = (CharacterCreationDataPacket)p;
+
+            Classes.Clear();
+            foreach (var @class in packet.Classes)
+            {
+                Classes.Add(@class);
             }
         }
     }

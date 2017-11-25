@@ -26,6 +26,7 @@ namespace Ceriyo.Infrastructure.Network
         private readonly IModuleService _moduleService;
         private readonly IPathService _pathService;
         private readonly IDataService _dataService;
+        private readonly Dictionary<string, Tuple<Type, Action<string, PacketBase>>> _boundPacketActions;
 
         public ServerNetworkService(ILogger logger, 
             IEngineService engineService,
@@ -42,6 +43,8 @@ namespace Ceriyo.Infrastructure.Network
             _dataService = dataService;
             _usernameToConnection = new Dictionary<string, NetConnection>();
             _connectionToUsername = new Dictionary<NetConnection, string>();
+
+            _boundPacketActions = new Dictionary<string, Tuple<Type, Action<string, PacketBase>>>();
         }
 
         public void StartServer(int port)
@@ -68,6 +71,8 @@ namespace Ceriyo.Infrastructure.Network
 
             _server.Shutdown("Server shutting down.");
             _usernameToConnection.Clear();
+
+            _boundPacketActions.Clear();
         }
 
         public void ProcessMessages()
@@ -91,7 +96,7 @@ namespace Ceriyo.Infrastructure.Network
                         string username = _connectionToUsername[message.SenderConnection];
                         MemoryStream stream = new MemoryStream(message.ReadBytes(message.LengthBytes));
                         PacketBase packet = Serializer.Deserialize<PacketBase>(stream);
-                        OnPacketReceived?.Invoke(username, packet);
+                        ExecuteBoundActions(username, packet);
                         break;
                         
                     case NetIncomingMessageType.ConnectionApproval:
@@ -252,9 +257,41 @@ namespace Ceriyo.Infrastructure.Network
             NetConnection connection = _usernameToConnection[username];
             connection.Disconnect("You have been booted from the server.");
         }
-        
+
+        public string BindPacketAction<T>(Action<string, PacketBase> action)
+            where T : INetworkPacket
+        {
+            string bindingID = Guid.NewGuid().ToString();
+
+            Tuple<Type, Action<string, PacketBase>> tuple = new Tuple<Type, Action<string, PacketBase>>(typeof(T), action);
+
+            _boundPacketActions.Add(bindingID, tuple);
+
+            return bindingID;
+        }
+
+        public void UnbindPacketAction(string bindingID)
+        {
+            _boundPacketActions.Remove(bindingID);
+        }
+
+        private void ExecuteBoundActions(string username, PacketBase packet)
+        {
+            Type type = packet.GetType();
+
+            var bindings = _boundPacketActions.Values.ToList();
+            foreach (var binding in bindings)
+            {
+                if (binding.Item1 == type)
+                {
+                    binding.Item2(username, packet);
+                }
+            }
+
+
+        }
+
         public event Action<string> OnPlayerConnected;
         public event Action<string> OnPlayerDisconnected;
-        public event Action<string, PacketBase> OnPacketReceived;
     }
 }

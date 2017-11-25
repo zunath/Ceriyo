@@ -43,6 +43,10 @@ namespace EmptyKeys.UserInterface.Generated {
         
         private TextBox e_7;
         
+        private TextBlock e_8;
+        
+        private ComboBox e_9;
+        
         public CharacterCreationView() : 
                 base() {
             this.Initialize();
@@ -73,11 +77,17 @@ namespace EmptyKeys.UserInterface.Generated {
             row_e_0_1.Height = new GridLength(32F, GridUnitType.Pixel);
             this.e_0.RowDefinitions.Add(row_e_0_1);
             RowDefinition row_e_0_2 = new RowDefinition();
-            row_e_0_2.Height = new GridLength(1F, GridUnitType.Star);
+            row_e_0_2.Height = new GridLength(32F, GridUnitType.Pixel);
             this.e_0.RowDefinitions.Add(row_e_0_2);
             RowDefinition row_e_0_3 = new RowDefinition();
-            row_e_0_3.Height = new GridLength(50F, GridUnitType.Pixel);
+            row_e_0_3.Height = new GridLength(32F, GridUnitType.Pixel);
             this.e_0.RowDefinitions.Add(row_e_0_3);
+            RowDefinition row_e_0_4 = new RowDefinition();
+            row_e_0_4.Height = new GridLength(1F, GridUnitType.Star);
+            this.e_0.RowDefinitions.Add(row_e_0_4);
+            RowDefinition row_e_0_5 = new RowDefinition();
+            row_e_0_5.Height = new GridLength(50F, GridUnitType.Pixel);
+            this.e_0.RowDefinitions.Add(row_e_0_5);
             ColumnDefinition col_e_0_0 = new ColumnDefinition();
             col_e_0_0.Width = new GridLength(1F, GridUnitType.Star);
             this.e_0.ColumnDefinitions.Add(col_e_0_0);
@@ -94,7 +104,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Margin = new Thickness(1F, 1F, 1F, 1F);
             this.e_1.Content = "Create Character";
             Grid.SetColumn(this.e_1, 0);
-            Grid.SetRow(this.e_1, 3);
+            Grid.SetRow(this.e_1, 5);
             Binding binding_e_1_IsEnabled = new Binding("IsModelValid");
             this.e_1.SetBinding(Button.IsEnabledProperty, binding_e_1_IsEnabled);
             Binding binding_e_1_Command = new Binding("CreateCharacterCommand");
@@ -106,7 +116,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_2.Margin = new Thickness(1F, 1F, 1F, 1F);
             this.e_2.Content = "Back";
             Grid.SetColumn(this.e_2, 1);
-            Grid.SetRow(this.e_2, 3);
+            Grid.SetRow(this.e_2, 5);
             Binding binding_e_2_Command = new Binding("BackCommand");
             this.e_2.SetBinding(Button.CommandProperty, binding_e_2_Command);
             // e_3 element
@@ -116,7 +126,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_3.Margin = new Thickness(1F, 1F, 1F, 1F);
             this.e_3.Content = "Disconnect";
             Grid.SetColumn(this.e_3, 2);
-            Grid.SetRow(this.e_3, 3);
+            Grid.SetRow(this.e_3, 5);
             Binding binding_e_3_Command = new Binding("DisconnectCommand");
             this.e_3.SetBinding(Button.CommandProperty, binding_e_3_Command);
             // e_4 element
@@ -153,6 +163,23 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumnSpan(this.e_7, 2);
             Binding binding_e_7_Text = new Binding("LastName");
             this.e_7.SetBinding(TextBox.TextProperty, binding_e_7_Text);
+            // e_8 element
+            this.e_8 = new TextBlock();
+            this.e_0.Children.Add(this.e_8);
+            this.e_8.Name = "e_8";
+            this.e_8.Text = "Class: ";
+            Grid.SetColumn(this.e_8, 0);
+            Grid.SetRow(this.e_8, 2);
+            // e_9 element
+            this.e_9 = new ComboBox();
+            this.e_0.Children.Add(this.e_9);
+            this.e_9.Name = "e_9";
+            this.e_9.Margin = new Thickness(4F, 4F, 4F, 4F);
+            Grid.SetColumn(this.e_9, 1);
+            Grid.SetRow(this.e_9, 2);
+            Grid.SetColumnSpan(this.e_9, 2);
+            Binding binding_e_9_ItemsSource = new Binding("Classes");
+            this.e_9.SetBinding(ComboBox.ItemsSourceProperty, binding_e_9_ItemsSource);
         }
         
         private static void InitializeElementResources(UIElement elem) {

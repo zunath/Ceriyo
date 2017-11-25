@@ -1,6 +1,5 @@
 ﻿using System;
 using Ceriyo.Core.Constants;
-using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
 
 namespace Ceriyo.Infrastructure.Network.Contracts
@@ -12,9 +11,11 @@ namespace Ceriyo.Infrastructure.Network.Contracts
         void ProcessMessages();
         void SendMessage(PacketDeliveryMethod method, INetworkPacket packet);
         string GetServerIPAddress();
+        string BindPacketAction<T>(Action<PacketBase> action)
+            where T: INetworkPacket;
+        void UnbindPacketAction(string bindingID);
 
         event Action OnConnected;
         event Action OnDisconnected;
-        event Action<PacketBase> OnPacketReceived;
     }
 }

@@ -104,6 +104,7 @@
     <Compile Include="Data\TileData.cs" />
     <Compile Include="Entities\ObjectPainter.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
+    <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Services\IsoMathService.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
     <Compile Include="Data\SerializedFileData.cs" />

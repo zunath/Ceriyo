@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
 using Ceriyo.Infrastructure.Network.Packets.Connection;
+using EmptyKeys.UserInterface.Generated;
 using Lidgren.Network;
 using ProtoBuf;
 
@@ -16,6 +19,7 @@ namespace Ceriyo.Infrastructure.Network
         private readonly NetClient _client;
         private readonly ILogger _logger;
         private NetConnection _serverConnection;
+        private readonly Dictionary<string, Tuple<Type, Action<PacketBase>>> _boundPacketActions;
 
         public ClientNetworkService(ILogger logger, IEngineService engineService)
         {
@@ -23,6 +27,8 @@ namespace Ceriyo.Infrastructure.Network
             NetPeerConfiguration config = new NetPeerConfiguration(engineService.ApplicationIdentifier);
             _client = new NetClient(config);
             _client.Start();
+
+            _boundPacketActions = new Dictionary<string, Tuple<Type, Action<PacketBase>>>();
         }
 
         public void ConnectToServer(string ipAddress, int port, string username, string password)
@@ -76,7 +82,7 @@ namespace Ceriyo.Infrastructure.Network
                     case NetIncomingMessageType.Data:
                         MemoryStream stream = new MemoryStream(message.ReadBytes(message.LengthBytes));
                         PacketBase packet = Serializer.Deserialize<PacketBase>(stream);
-                        OnPacketReceived?.Invoke(packet);
+                        ExecuteBoundActions(packet);
                         break;
                         
                     case NetIncomingMessageType.StatusChanged:
@@ -148,10 +154,43 @@ namespace Ceriyo.Infrastructure.Network
             return _serverConnection.RemoteEndPoint.Address + ":" + _serverConnection.RemoteEndPoint.Port;
         }
 
+        public string BindPacketAction<T>(Action<PacketBase> action) 
+            where T : INetworkPacket
+        {
+            string bindingID = Guid.NewGuid().ToString();
+
+            Tuple<Type, Action<PacketBase>> tuple = new Tuple<Type, Action<PacketBase>>(typeof(T), action);
+
+            _boundPacketActions.Add(bindingID, tuple);
+
+            return bindingID;
+        }
+
+        public void UnbindPacketAction(string bindingID)
+        {
+            _boundPacketActions.Remove(bindingID);
+        }
+
+        private void ExecuteBoundActions(PacketBase packet)
+        {
+            Type type = packet.GetType();
+
+            var bindings = _boundPacketActions.Values.ToList();
+            foreach (var binding in bindings)
+            {
+                if (binding.Item1 == type)
+                {
+                    binding.Item2(packet);
+                }
+            }
+            
+
+        }
+
         public event Action OnConnected;
         public event Action OnDisconnected;
-        public event Action<PacketBase> OnPacketReceived;
-        
+
+
 
     }
 }

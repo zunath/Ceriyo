@@ -14,6 +14,7 @@ namespace Ceriyo.Infrastructure.Network.Packets
     [ProtoInclude(6, typeof(CharacterAddedToWorldPacket))]
     [ProtoInclude(7, typeof(DeleteCharacterPacket))]
     [ProtoInclude(8, typeof(CharacterDeletedPacket))]
+    [ProtoInclude(9, typeof(CharacterCreationDataPacket))]
     public abstract class PacketBase : INetworkPacket
     {
         public abstract void Process();

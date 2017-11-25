@@ -1,17 +1,17 @@
-﻿using Ceriyo.Core.Data;
+﻿using System.Collections.Generic;
+using Ceriyo.Core.Data;
 using ProtoBuf;
 
 namespace Ceriyo.Infrastructure.Network.Packets.CharacterManagement
 {
     [ProtoContract]
-    public class CreateCharacterPacket: PacketBase
+    public class CharacterCreationDataPacket: PacketBase
     {
         [ProtoMember(1)]
-        public string FirstName { get; set; }
+        public List<ClassData> Classes { get; set; }
+
         [ProtoMember(2)]
-        public string LastName { get; set; }
-        [ProtoMember(3)]
-        public string Class { get; set; }
+        public bool IsRequest { get; set; }
 
         public override void Process()
         {
