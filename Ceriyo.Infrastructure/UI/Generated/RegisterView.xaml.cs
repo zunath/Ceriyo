@@ -143,6 +143,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_4.Name = "e_4";
             this.e_4.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_4.TabIndex = 0;
+            this.e_4.MaxLength = 256;
             Grid.SetColumn(this.e_4, 1);
             Grid.SetRow(this.e_4, 1);
             Grid.SetColumnSpan(this.e_4, 3);
@@ -154,6 +155,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_5 = new TextBlock();
             this.e_1.Children.Add(this.e_5);
             this.e_5.Name = "e_5";
+            this.e_5.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_5.Text = "Email:";
             Grid.SetColumn(this.e_5, 0);
             Grid.SetRow(this.e_5, 2);
@@ -163,6 +165,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_6.Name = "e_6";
             this.e_6.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_6.TabIndex = 1;
+            this.e_6.MaxLength = 256;
             Grid.SetColumn(this.e_6, 1);
             Grid.SetRow(this.e_6, 2);
             Grid.SetColumnSpan(this.e_6, 3);
@@ -174,6 +177,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_7 = new TextBlock();
             this.e_1.Children.Add(this.e_7);
             this.e_7.Name = "e_7";
+            this.e_7.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_7.Text = "Password";
             Grid.SetColumn(this.e_7, 0);
             Grid.SetRow(this.e_7, 3);
@@ -183,6 +187,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_8.Name = "e_8";
             this.e_8.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_8.TabIndex = 2;
+            this.e_8.MaxLength = 100;
             Grid.SetColumn(this.e_8, 1);
             Grid.SetRow(this.e_8, 3);
             Grid.SetColumnSpan(this.e_8, 3);
@@ -194,6 +199,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_9 = new TextBlock();
             this.e_1.Children.Add(this.e_9);
             this.e_9.Name = "e_9";
+            this.e_9.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_9.Text = "Confirm Password:";
             Grid.SetColumn(this.e_9, 0);
             Grid.SetRow(this.e_9, 4);
@@ -203,6 +209,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_10.Name = "e_10";
             this.e_10.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_10.TabIndex = 3;
+            this.e_10.MaxLength = 100;
             Grid.SetColumn(this.e_10, 1);
             Grid.SetRow(this.e_10, 4);
             Grid.SetColumnSpan(this.e_10, 3);
@@ -251,7 +258,8 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_13.Child = this.e_14;
             this.e_14.Name = "e_14";
             this.e_14.Margin = new Thickness(4F, 4F, 4F, 4F);
-            this.e_14.Foreground = new SolidColorBrush(new ColorW(0, 128, 0, 255));
+            Binding binding_e_14_Foreground = new Binding("InfoTextBrush");
+            this.e_14.SetBinding(TextBlock.ForegroundProperty, binding_e_14_Foreground);
             Binding binding_e_14_Text = new Binding("InfoText");
             this.e_14.SetBinding(TextBlock.TextProperty, binding_e_14_Text);
             ImageManager.Instance.AddImage("UI/Images/CeriyoLogo");

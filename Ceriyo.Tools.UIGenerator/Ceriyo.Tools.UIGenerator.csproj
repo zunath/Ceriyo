@@ -141,6 +141,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Templates\" />
     <Folder Include="UserControls\" />
   </ItemGroup>
   <ItemGroup>

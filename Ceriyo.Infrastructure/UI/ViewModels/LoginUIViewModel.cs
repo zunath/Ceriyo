@@ -43,6 +43,14 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             set => SetProperty(ref _password, value);
         }
 
+        private string _notification;
+
+        public string Notification
+        {
+            get => _notification;
+            set => SetProperty(ref _notification, value);
+        }
+
         public ICommand LoginCommand { get; set; }
 
         private void Login(object obj)

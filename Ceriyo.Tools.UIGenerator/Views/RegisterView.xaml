@@ -57,7 +57,8 @@
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
                 TabIndex="0"
-                Text="{Binding Username}"
+                MaxLength="256"
+                Text="{Binding Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsEnabled}">
 
             </TextBox>
@@ -65,6 +66,7 @@
             <TextBlock
                 Grid.Column="0"
                 Grid.Row="2"
+                Margin="4,4,4,4"
                 Text="Email:">
                 
             </TextBlock>
@@ -74,8 +76,9 @@
                 Grid.Row="2"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
+                MaxLength="256"
                 TabIndex="1"
-                Text="{Binding Email}"
+                Text="{Binding Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsEnabled}">
                 
             </TextBox>
@@ -83,6 +86,7 @@
             <TextBlock
                 Grid.Column="0"
                 Grid.Row="3"
+                Margin="4,4,4,4"
                 Text="Password">
             </TextBlock>
 
@@ -92,8 +96,9 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
+                MaxLength="100"
                 TabIndex="2"
-                Text="{Binding Password}"
+                Text="{Binding Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsEnabled}">
 
             </ek:PasswordBox>
@@ -101,6 +106,7 @@
             <TextBlock
                 Grid.Row="4"
                 Grid.Column="0"
+                Margin="4,4,4,4"
                 Text="Confirm Password:">
                 
             </TextBlock>
@@ -110,8 +116,9 @@
                 Grid.Row="4"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
+                MaxLength="100"
                 TabIndex="3"
-                Text="{Binding ConfirmPassword}"
+                Text="{Binding ConfirmPassword, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                 IsEnabled="{Binding IsEnabled}">
                 
             </ek:PasswordBox>
@@ -148,8 +155,8 @@
                 Height="50">
                 <TextBlock
                     Margin="4,4,4,4"
-                    Foreground="Green"
-                    Text="{Binding InfoText}">
+                    Text="{Binding InfoText}"
+                    Foreground="{Binding InfoTextBrush}">
 
                 </TextBlock>
             </Border>

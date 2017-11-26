@@ -11,6 +11,8 @@ namespace Ceriyo.Master.Auth.Models.Authentication.BindingModels
 
         [Required]
         [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+        [StringLength(256)]
         public string Email { get; set; }
 
         [Required]
