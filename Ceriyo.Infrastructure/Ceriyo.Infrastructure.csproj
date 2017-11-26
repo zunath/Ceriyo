@@ -138,8 +138,12 @@
     <Compile Include="UI\Generated\HotBarView.xaml_bindings.cs" />
     <Compile Include="UI\Generated\JoinServerView.xaml.cs" />
     <Compile Include="UI\Generated\JoinServerView.xaml_bindings.cs" />
+    <Compile Include="UI\Generated\LoginView.xaml.cs" />
+    <Compile Include="UI\Generated\LoginView.xaml_bindings.cs" />
     <Compile Include="UI\Generated\MainMenuView.xaml.cs" />
     <Compile Include="UI\Generated\MainMenuView.xaml_bindings.cs" />
+    <Compile Include="UI\Generated\RegisterView.xaml.cs" />
+    <Compile Include="UI\Generated\RegisterView.xaml_bindings.cs" />
     <Compile Include="UI\Generated\SettingsView.xaml.cs" />
     <Compile Include="UI\Generated\SettingsView.xaml_bindings.cs" />
     <Compile Include="UI\UIService.cs" />
@@ -148,6 +152,8 @@
     <Compile Include="UI\ViewModels\DirectConnectUIViewModel.cs" />
     <Compile Include="UI\ViewModels\GameUIViewModel.cs" />
     <Compile Include="UI\ViewModels\JoinServerUIViewModel.cs" />
+    <Compile Include="UI\ViewModels\RegisterUIViewModel.cs" />
+    <Compile Include="UI\ViewModels\LoginUIViewModel.cs" />
     <Compile Include="UI\ViewModels\MainMenuUIViewModel.cs" />
     <Compile Include="UI\ViewModels\SettingsUIViewModel.cs" />
   </ItemGroup>

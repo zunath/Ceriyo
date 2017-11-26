@@ -100,6 +100,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RegisterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainMenuView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -132,17 +140,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="UserControls\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Ceriyo.Infrastructure.WPF\Ceriyo.Infrastructure.WPF.csproj">
-      <Project>{13AA8344-A9A0-4E9C-BA97-3441A85AD8C4}</Project>
+      <Project>{13aa8344-a9a0-4e9c-ba97-3441a85ad8c4}</Project>
       <Name>Ceriyo.Infrastructure.WPF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ceriyo.Infrastructure\Ceriyo.Infrastructure.csproj">
-      <Project>{BBC7E2F5-D48A-424A-8DF1-3633387FD137}</Project>
+      <Project>{bbc7e2f5-d48a-424a-8df1-3633387fd137}</Project>
       <Name>Ceriyo.Infrastructure</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserControls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

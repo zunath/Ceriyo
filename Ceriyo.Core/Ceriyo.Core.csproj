@@ -88,6 +88,7 @@
     <Compile Include="Constants\PVPType.cs" />
     <Compile Include="Constants\ResourceType.cs" />
     <Compile Include="Constants\ScriptEvent.cs" />
+    <Compile Include="Constants\Urls.cs" />
     <Compile Include="Constants\Zoom.cs" />
     <Compile Include="Contracts\IIsoMathService.cs" />
     <Compile Include="Contracts\IServerSettingsService.cs" />
