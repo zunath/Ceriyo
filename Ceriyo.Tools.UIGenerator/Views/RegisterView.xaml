@@ -56,6 +56,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
+                TabIndex="0"
                 Text="{Binding Username}"
                 IsEnabled="{Binding IsEnabled}">
 
@@ -73,6 +74,7 @@
                 Grid.Row="2"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
+                TabIndex="1"
                 Text="{Binding Email}"
                 IsEnabled="{Binding IsEnabled}">
                 
@@ -90,6 +92,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
+                TabIndex="2"
                 Text="{Binding Password}"
                 IsEnabled="{Binding IsEnabled}">
 
@@ -107,6 +110,7 @@
                 Grid.Row="4"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
+                TabIndex="3"
                 Text="{Binding ConfirmPassword}"
                 IsEnabled="{Binding IsEnabled}">
                 
@@ -117,6 +121,8 @@
                 Grid.Row="5"
                 Margin="4,4,4,4"
                 Content="Register"
+                TabIndex="4"
+                IsDefault="True"
                 Command="{Binding RegisterCommand}"
                 IsEnabled="{Binding IsEnabled}">
                 
@@ -127,6 +133,7 @@
                 Grid.Row="5"
                 Margin="4,4,4,4"
                 Content="Cancel"
+                TabIndex="5"
                 Command="{Binding CancelCommand}"
                 IsEnabled="{Binding IsEnabled}">
                 

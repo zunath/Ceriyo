@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 
-namespace Ceriyo.Master.Auth.Controllers
+namespace Ceriyo.Master.Auth.Controllers.Api
 {
     [Authorize]
     public class ValuesController : ApiController

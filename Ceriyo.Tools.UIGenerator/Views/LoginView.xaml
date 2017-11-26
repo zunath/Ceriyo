@@ -55,6 +55,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
+                TabIndex="0"
                 Text="{Binding Username}">
 
             </TextBox>
@@ -71,6 +72,7 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
+                TabIndex="1"
                 Text="{Binding Password}">
 
             </ek:PasswordBox>
@@ -80,6 +82,8 @@
                 Grid.Row="4"
                 Margin="4,4,4,4"
                 Content="Log In"
+                TabIndex="2"
+                IsDefault="True"
                 Command="{Binding LoginCommand}">
                 
             </Button>
@@ -88,6 +92,7 @@
                 Grid.Column="2"
                 Grid.Row="4"
                 Margin="4,4,4,4"
+                TabIndex="3"
                 Content="Create Account"
                 Command="{Binding CreateAccountCommand}">
                 
@@ -97,6 +102,7 @@
                 Grid.Column="3"
                 Grid.Row="4"
                 Margin="4,4,4,4"
+                TabIndex="4"
                 Content="Exit"
                 Command="{Binding ExitCommand}">
                 

@@ -129,6 +129,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_4);
             this.e_4.Name = "e_4";
             this.e_4.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_4.TabIndex = 0;
             Grid.SetColumn(this.e_4, 1);
             Grid.SetRow(this.e_4, 1);
             Grid.SetColumnSpan(this.e_4, 3);
@@ -146,6 +147,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_6);
             this.e_6.Name = "e_6";
             this.e_6.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_6.TabIndex = 1;
             Grid.SetColumn(this.e_6, 1);
             Grid.SetRow(this.e_6, 2);
             Grid.SetColumnSpan(this.e_6, 3);
@@ -156,6 +158,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_7);
             this.e_7.Name = "e_7";
             this.e_7.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_7.TabIndex = 2;
             this.e_7.Content = "Log In";
             Grid.SetColumn(this.e_7, 1);
             Grid.SetRow(this.e_7, 4);
@@ -166,6 +169,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_8);
             this.e_8.Name = "e_8";
             this.e_8.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_8.TabIndex = 3;
             this.e_8.Content = "Create Account";
             Grid.SetColumn(this.e_8, 2);
             Grid.SetRow(this.e_8, 4);
@@ -176,6 +180,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_9);
             this.e_9.Name = "e_9";
             this.e_9.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_9.TabIndex = 4;
             this.e_9.Content = "Exit";
             Grid.SetColumn(this.e_9, 3);
             Grid.SetRow(this.e_9, 4);

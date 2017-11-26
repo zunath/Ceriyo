@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Ceriyo.Master.Auth.Models;
 using Ceriyo.Master.Auth.Models.Authentication;
+using Ceriyo.Master.Auth.Services;
 
 namespace Ceriyo.Master.Auth
 {
@@ -34,6 +35,8 @@ namespace Ceriyo.Master.Auth
                 RequireLowercase = true,
                 RequireUppercase = true,
             };
+            manager.EmailService = new EmailService();
+
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

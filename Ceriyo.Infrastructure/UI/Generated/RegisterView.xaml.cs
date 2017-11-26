@@ -142,6 +142,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_4);
             this.e_4.Name = "e_4";
             this.e_4.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_4.TabIndex = 0;
             Grid.SetColumn(this.e_4, 1);
             Grid.SetRow(this.e_4, 1);
             Grid.SetColumnSpan(this.e_4, 3);
@@ -161,6 +162,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_6);
             this.e_6.Name = "e_6";
             this.e_6.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_6.TabIndex = 1;
             Grid.SetColumn(this.e_6, 1);
             Grid.SetRow(this.e_6, 2);
             Grid.SetColumnSpan(this.e_6, 3);
@@ -180,6 +182,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_8);
             this.e_8.Name = "e_8";
             this.e_8.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_8.TabIndex = 2;
             Grid.SetColumn(this.e_8, 1);
             Grid.SetRow(this.e_8, 3);
             Grid.SetColumnSpan(this.e_8, 3);
@@ -199,6 +202,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_10);
             this.e_10.Name = "e_10";
             this.e_10.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_10.TabIndex = 3;
             Grid.SetColumn(this.e_10, 1);
             Grid.SetRow(this.e_10, 4);
             Grid.SetColumnSpan(this.e_10, 3);
@@ -211,6 +215,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_11);
             this.e_11.Name = "e_11";
             this.e_11.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_11.TabIndex = 4;
             this.e_11.Content = "Register";
             Grid.SetColumn(this.e_11, 2);
             Grid.SetRow(this.e_11, 5);
@@ -223,6 +228,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_1.Children.Add(this.e_12);
             this.e_12.Name = "e_12";
             this.e_12.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_12.TabIndex = 5;
             this.e_12.Content = "Cancel";
             Grid.SetColumn(this.e_12, 3);
             Grid.SetRow(this.e_12, 5);

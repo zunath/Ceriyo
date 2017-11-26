@@ -1,14 +1,15 @@
-﻿using System.Configuration;
-using Ceriyo.Master.Auth.Services.Contracts;
+﻿using System;
+using System.Configuration;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
 namespace Ceriyo.Master.Auth.Services
 {
-    public class EmailService: IEmailService
+    public class EmailService: IIdentityMessageService
     {
-        public async void SendMessageAsync(IdentityMessage identityMessage)
+        private static async Task SendMessageAsync(IdentityMessage identityMessage)
         {
             string apiKey = ConfigurationManager.AppSettings["MailAPIKey"];
             var client = new SendGridClient(apiKey);
@@ -18,9 +19,13 @@ namespace Ceriyo.Master.Auth.Services
                 identityMessage.Subject,
                 identityMessage.Body,
                 identityMessage.Body);
-            
+
             await client.SendEmailAsync(email);
         }
-        
+
+        public Task SendAsync(IdentityMessage identityMessage)
+        {
+            return SendMessageAsync(identityMessage);
+        }
     }
 }

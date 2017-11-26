@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -9,16 +10,17 @@ using System.Web.Http;
 using Ceriyo.Master.Auth.Models.Authentication;
 using Ceriyo.Master.Auth.Models.Authentication.BindingModels;
 using Ceriyo.Master.Auth.Models.Authentication.ViewModels;
+using Ceriyo.Master.Auth.Providers;
+using Ceriyo.Master.Auth.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Ceriyo.Master.Auth.Providers;
-using Ceriyo.Master.Auth.Results;
+using WebGrease.Css.Extensions;
 
-namespace Ceriyo.Master.Auth.Controllers
+namespace Ceriyo.Master.Auth.Controllers.Api
 {
     [Authorize]
     [RoutePrefix("api/Account")]
@@ -329,9 +331,46 @@ namespace Ceriyo.Master.Auth.Controllers
                 Email = model.Email
             };
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            var result = await UserManager.CreateAsync(user, model.Password);
 
+            if (result.Succeeded)
+            {
+                var token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var encodedToken = HttpUtility.UrlEncode(token);
+
+                string callbackUrl = $@"{Url.Content("~/")}api/Account/ConfirmEmail?userId={user.Id}&token={encodedToken}";
+                
+                await UserManager.SendEmailAsync(
+                    user.Id,
+                    "Please confirm your account",
+                    "Please confirm your Ceriyo Game Engine account by clicking this " +
+                    "<a href=\" " + callbackUrl + " \">link</a>");
+            }
+            
             return !result.Succeeded ? GetErrorResult(result) : Ok();
+        }
+        [AllowAnonymous]
+        [Route("ConfirmEmail")]
+        [HttpGet]
+        public HttpResponseMessage ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return new HttpResponseMessage()
+                {
+                   Content = new StringContent("Invalid user ID or code. Please try registering again.")
+                }; 
+            }
+            
+            var result = UserManager.ConfirmEmailAsync(userId, token);
+            string message = result.Result.Succeeded ? 
+                "Success! Your account was created. Please log in to Ceriyo whenever you're ready." : 
+                "There was an error creating your account. Reason: " + string.Join(Environment.NewLine, result.Result.Errors);
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(message)
+            };
         }
 
         // POST api/Account/RegisterExternal
