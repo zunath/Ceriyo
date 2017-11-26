@@ -85,14 +85,6 @@ namespace Ceriyo.Core.Properties
   public sealed class ItemCanBeNullAttribute : Attribute { }
 
   /// <summary>
-  /// Implicitly apply [NotNull]/[ItemNotNull] annotation to all the of type members and parameters
-  /// in particular scope where this annotation is used (type declaration or whole assembly).
-  /// </summary>
-  [AttributeUsage(
-    AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Assembly)]
-  public sealed class ImplicitNotNullAttribute : Attribute { }
-
-  /// <summary>
   /// Indicates that the marked method builds string by format pattern and (optional) arguments.
   /// Parameter, which contains format string, should be given in constructor. The format string
   /// should be in <see cref="string.Format(IFormatProvider,string,object[])"/>-like form.
@@ -125,7 +117,9 @@ namespace Ceriyo.Core.Properties
   /// For a parameter that is expected to be one of the limited set of values.
   /// Specify fields of which type should be used as values for this parameter.
   /// </summary>
-  [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field)]
+  [AttributeUsage(
+    AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field,
+    AllowMultiple = true)]
   public sealed class ValueProviderAttribute : Attribute
   {
     public ValueProviderAttribute([NotNull] string name)
@@ -213,15 +207,16 @@ namespace Ceriyo.Core.Properties
   /// <item>Value    ::= true | false | null | notnull | canbenull</item>
   /// </list>
   /// If method has single input parameter, it's name could be omitted.<br/>
-  /// Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same)
-  /// for method output means that the methos doesn't return normally.<br/>
-  /// <c>canbenull</c> annotation is only applicable for output parameters.<br/>
-  /// You can use multiple <c>[ContractAnnotation]</c> for each FDT row,
-  /// or use single attribute with rows separated by semicolon.<br/>
+  /// Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same) for method output
+  /// means that the methos doesn't return normally (throws or terminates the process).<br/>
+  /// Value <c>canbenull</c> is only applicable for output parameters.<br/>
+  /// You can use multiple <c>[ContractAnnotation]</c> for each FDT row, or use single attribute
+  /// with rows separated by semicolon. There is no notion of order rows, all rows are checked
+  /// for applicability and applied per each program state tracked by R# analysis.<br/>
   /// </syntax>
   /// <examples><list>
   /// <item><code>
-  /// [ContractAnnotation("=> halt")]
+  /// [ContractAnnotation("=&gt; halt")]
   /// public void TerminationMethod()
   /// </code></item>
   /// <item><code>
@@ -229,17 +224,17 @@ namespace Ceriyo.Core.Properties
   /// public void Assert(bool condition, string text) // regular assertion method
   /// </code></item>
   /// <item><code>
-  /// [ContractAnnotation("s:null => true")]
+  /// [ContractAnnotation("s:null =&gt; true")]
   /// public bool IsNullOrEmpty(string s) // string.IsNullOrEmpty()
   /// </code></item>
   /// <item><code>
   /// // A method that returns null if the parameter is null,
   /// // and not null if the parameter is not null
-  /// [ContractAnnotation("null => null; notnull => notnull")]
+  /// [ContractAnnotation("null =&gt; null; notnull =&gt; notnull")]
   /// public object Transform(object data) 
   /// </code></item>
   /// <item><code>
-  /// [ContractAnnotation("s:null=>false; =>true,result:notnull; =>false, result:null")]
+  /// [ContractAnnotation("=&gt; true, result: notnull; =&gt; false, result: null")]
   /// public bool TryParse(string s, out Person result)
   /// </code></item>
   /// </list></examples>
@@ -256,6 +251,7 @@ namespace Ceriyo.Core.Properties
     }
 
     [NotNull] public string Contract { get; private set; }
+
     public bool ForceFullStates { get; private set; }
   }
 
@@ -272,6 +268,7 @@ namespace Ceriyo.Core.Properties
   public sealed class LocalizationRequiredAttribute : Attribute
   {
     public LocalizationRequiredAttribute() : this(true) { }
+
     public LocalizationRequiredAttribute(bool required)
     {
       Required = required;
@@ -349,6 +346,7 @@ namespace Ceriyo.Core.Properties
     }
 
     public ImplicitUseKindFlags UseKindFlags { get; private set; }
+
     public ImplicitUseTargetFlags TargetFlags { get; private set; }
   }
 
@@ -375,6 +373,7 @@ namespace Ceriyo.Core.Properties
     }
 
     [UsedImplicitly] public ImplicitUseKindFlags UseKindFlags { get; private set; }
+
     [UsedImplicitly] public ImplicitUseTargetFlags TargetFlags { get; private set; }
   }
 
@@ -397,7 +396,7 @@ namespace Ceriyo.Core.Properties
 
   /// <summary>
   /// Specify what is considered used implicitly when marked
-  /// with <see cref="MeansImplicitUseAttribute"/> or <see cref="UsedImplicitlyAttribute"/>.
+  /// with <see cref="Ceriyo.Core.Properties.MeansImplicitUseAttribute"/> or <see cref="Ceriyo.Core.Properties.UsedImplicitlyAttribute"/>.
   /// </summary>
   [Flags]
   public enum ImplicitUseTargetFlags
@@ -418,6 +417,7 @@ namespace Ceriyo.Core.Properties
   public sealed class PublicAPIAttribute : Attribute
   {
     public PublicAPIAttribute() { }
+
     public PublicAPIAttribute([NotNull] string comment)
     {
       Comment = comment;
@@ -455,6 +455,7 @@ namespace Ceriyo.Core.Properties
   public sealed class MustUseReturnValueAttribute : Attribute
   {
     public MustUseReturnValueAttribute() { }
+
     public MustUseReturnValueAttribute([NotNull] string justification)
     {
       Justification = justification;
@@ -491,6 +492,7 @@ namespace Ceriyo.Core.Properties
   public sealed class PathReferenceAttribute : Attribute
   {
     public PathReferenceAttribute() { }
+
     public PathReferenceAttribute([NotNull, PathReference] string basePath)
     {
       BasePath = basePath;
@@ -508,7 +510,7 @@ namespace Ceriyo.Core.Properties
   /// Template method body can contain valid source code and/or special comments starting with '$'.
   /// Text inside these comments is added as source code when the template is applied. Template parameters
   /// can be used either as additional method parameters or as identifiers wrapped in two '$' signs.
-  /// Use the <see cref="MacroAttribute"/> attribute to specify macros for parameters.
+  /// Use the <see cref="Ceriyo.Core.Properties.MacroAttribute"/> attribute to specify macros for parameters.
   /// </remarks>
   /// <example>
   /// In this example, the 'forEach' method is a source template available over all values
@@ -526,13 +528,13 @@ namespace Ceriyo.Core.Properties
   public sealed class SourceTemplateAttribute : Attribute { }
 
   /// <summary>
-  /// Allows specifying a macro for a parameter of a <see cref="SourceTemplateAttribute">source template</see>.
+  /// Allows specifying a macro for a parameter of a <see cref="Ceriyo.Core.Properties.SourceTemplateAttribute">source template</see>.
   /// </summary>
   /// <remarks>
   /// You can apply the attribute on the whole method or on any of its additional parameters. The macro expression
-  /// is defined in the <see cref="MacroAttribute.Expression"/> property. When applied on a method, the target
-  /// template parameter is defined in the <see cref="MacroAttribute.Target"/> property. To apply the macro silently
-  /// for the parameter, set the <see cref="MacroAttribute.Editable"/> property value = -1.
+  /// is defined in the <see cref="Expression"/> property. When applied on a method, the target
+  /// template parameter is defined in the <see cref="Target"/> property. To apply the macro silently
+  /// for the parameter, set the <see cref="Editable"/> property value = -1.
   /// </remarks>
   /// <example>
   /// Applying the attribute on a source template method:
@@ -557,10 +559,10 @@ namespace Ceriyo.Core.Properties
   public sealed class MacroAttribute : Attribute
   {
     /// <summary>
-    /// Allows specifying a macro that will be executed for a <see cref="SourceTemplateAttribute">source template</see>
+    /// Allows specifying a macro that will be executed for a <see cref="Ceriyo.Core.Properties.SourceTemplateAttribute">source template</see>
     /// parameter when the template is expanded.
     /// </summary>
-    public string Expression { get; set; }
+    [CanBeNull] public string Expression { get; set; }
 
     /// <summary>
     /// Allows specifying which occurrence of the target parameter becomes editable when the template is deployed.
@@ -573,13 +575,13 @@ namespace Ceriyo.Core.Properties
     public int Editable { get; set; }
 
     /// <summary>
-    /// Identifies the target parameter of a <see cref="SourceTemplateAttribute">source template</see> if the
-    /// <see cref="MacroAttribute"/> is applied on a template method.
+    /// Identifies the target parameter of a <see cref="Ceriyo.Core.Properties.SourceTemplateAttribute">source template</see> if the
+    /// <see cref="Ceriyo.Core.Properties.MacroAttribute"/> is applied on a template method.
     /// </summary>
-    public string Target { get; set; }
+    [CanBeNull] public string Target { get; set; }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
   public sealed class AspMvcAreaMasterLocationFormatAttribute : Attribute
   {
     public AspMvcAreaMasterLocationFormatAttribute([NotNull] string format)
@@ -590,7 +592,7 @@ namespace Ceriyo.Core.Properties
     [NotNull] public string Format { get; private set; }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
   public sealed class AspMvcAreaPartialViewLocationFormatAttribute : Attribute
   {
     public AspMvcAreaPartialViewLocationFormatAttribute([NotNull] string format)
@@ -601,7 +603,7 @@ namespace Ceriyo.Core.Properties
     [NotNull] public string Format { get; private set; }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
   public sealed class AspMvcAreaViewLocationFormatAttribute : Attribute
   {
     public AspMvcAreaViewLocationFormatAttribute([NotNull] string format)
@@ -612,18 +614,18 @@ namespace Ceriyo.Core.Properties
     [NotNull] public string Format { get; private set; }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
   public sealed class AspMvcMasterLocationFormatAttribute : Attribute
   {
-    public AspMvcMasterLocationFormatAttribute(string format)
+    public AspMvcMasterLocationFormatAttribute([NotNull] string format)
     {
       Format = format;
     }
 
-    public string Format { get; private set; }
+    [NotNull] public string Format { get; private set; }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
   public sealed class AspMvcPartialViewLocationFormatAttribute : Attribute
   {
     public AspMvcPartialViewLocationFormatAttribute([NotNull] string format)
@@ -634,7 +636,7 @@ namespace Ceriyo.Core.Properties
     [NotNull] public string Format { get; private set; }
   }
 
-  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
   public sealed class AspMvcViewLocationFormatAttribute : Attribute
   {
     public AspMvcViewLocationFormatAttribute([NotNull] string format)
@@ -655,6 +657,7 @@ namespace Ceriyo.Core.Properties
   public sealed class AspMvcActionAttribute : Attribute
   {
     public AspMvcActionAttribute() { }
+
     public AspMvcActionAttribute([NotNull] string anonymousProperty)
     {
       AnonymousProperty = anonymousProperty;
@@ -672,6 +675,7 @@ namespace Ceriyo.Core.Properties
   public sealed class AspMvcAreaAttribute : Attribute
   {
     public AspMvcAreaAttribute() { }
+
     public AspMvcAreaAttribute([NotNull] string anonymousProperty)
     {
       AnonymousProperty = anonymousProperty;
@@ -690,6 +694,7 @@ namespace Ceriyo.Core.Properties
   public sealed class AspMvcControllerAttribute : Attribute
   {
     public AspMvcControllerAttribute() { }
+
     public AspMvcControllerAttribute([NotNull] string anonymousProperty)
     {
       AnonymousProperty = anonymousProperty;
@@ -792,6 +797,7 @@ namespace Ceriyo.Core.Properties
   public sealed class HtmlElementAttributesAttribute : Attribute
   {
     public HtmlElementAttributesAttribute() { }
+
     public HtmlElementAttributesAttribute([NotNull] string name)
     {
       Name = name;
@@ -850,14 +856,14 @@ namespace Ceriyo.Core.Properties
   /// <summary>
   /// Indicates that the marked method is assertion method, i.e. it halts control flow if
   /// one of the conditions is satisfied. To set the condition, mark one of the parameters with 
-  /// <see cref="AssertionConditionAttribute"/> attribute.
+  /// <see cref="Ceriyo.Core.Properties.AssertionConditionAttribute"/> attribute.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method)]
   public sealed class AssertionMethodAttribute : Attribute { }
 
   /// <summary>
   /// Indicates the condition parameter of the assertion method. The method itself should be
-  /// marked by <see cref="AssertionMethodAttribute"/> attribute. The mandatory argument of
+  /// marked by <see cref="Ceriyo.Core.Properties.AssertionMethodAttribute"/> attribute. The mandatory argument of
   /// the attribute is the assertion type.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
@@ -916,6 +922,16 @@ namespace Ceriyo.Core.Properties
   public sealed class RegexPatternAttribute : Attribute { }
 
   /// <summary>
+  /// Prevents the Member Reordering feature from tossing members of the marked class.
+  /// </summary>
+  /// <remarks>
+  /// The attribute must be mentioned in your member reordering patterns
+  /// </remarks>
+  [AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum)]
+  public sealed class NoReorderAttribute : Attribute { }
+
+  /// <summary>
   /// XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated
   /// as <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolve.
   /// </summary>
@@ -929,7 +945,7 @@ namespace Ceriyo.Core.Properties
   /// </summary>
   /// <remarks>
   /// Property should have the tree ancestor of the <c>ItemsControl</c> type or
-  /// marked with the <see cref="XamlItemsControlAttribute"/> attribute.
+  /// marked with the <see cref="Ceriyo.Core.Properties.XamlItemsControlAttribute"/> attribute.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Property)]
   public sealed class XamlItemBindingOfItemsControlAttribute : Attribute { }
@@ -944,6 +960,7 @@ namespace Ceriyo.Core.Properties
     }
 
     [NotNull] public string TagName { get; private set; }
+
     [NotNull] public Type ControlType { get; private set; }
   }
 
@@ -999,6 +1016,7 @@ namespace Ceriyo.Core.Properties
     }
 
     [NotNull] public string Type { get; private set; }
+
     [NotNull] public string FieldName { get; private set; }
   }
 
@@ -1013,6 +1031,23 @@ namespace Ceriyo.Core.Properties
     [NotNull] public string Directive { get; private set; }
   }
 
+  [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+  public sealed class RazorPageBaseTypeAttribute : Attribute
+  {
+      public RazorPageBaseTypeAttribute([NotNull] string baseType)
+      {
+        BaseType = baseType;
+      }
+      public RazorPageBaseTypeAttribute([NotNull] string baseType, string pageName)
+      {
+          BaseType = baseType;
+          PageName = pageName;
+      }
+
+      [NotNull] public string BaseType { get; private set; }
+      [CanBeNull] public string PageName { get; private set; }
+  }
+    
   [AttributeUsage(AttributeTargets.Method)]
   public sealed class RazorHelperCommonAttribute : Attribute { }
 
@@ -1027,13 +1062,4 @@ namespace Ceriyo.Core.Properties
 
   [AttributeUsage(AttributeTargets.Parameter)]
   public sealed class RazorWriteMethodParameterAttribute : Attribute { }
-
-  /// <summary>
-  /// Prevents the Member Reordering feature from tossing members of the marked class.
-  /// </summary>
-  /// <remarks>
-  /// The attribute must be mentioned in your member reordering patterns
-  /// </remarks>
-  [AttributeUsage(AttributeTargets.All)]
-  public sealed class NoReorder : Attribute { }
 }

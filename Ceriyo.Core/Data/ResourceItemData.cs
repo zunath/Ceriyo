@@ -1,5 +1,4 @@
 ﻿using Ceriyo.Core.Constants;
-using Ceriyo.Core.Data.Contracts;
 
 namespace Ceriyo.Core.Data
 {

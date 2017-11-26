@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+using Ceriyo.Master.Auth.Models.Authentication;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Ceriyo.Master.Auth.Models;
 
 namespace Ceriyo.Master.Auth.Providers
 {
@@ -19,12 +16,7 @@ namespace Ceriyo.Master.Auth.Providers
 
         public ApplicationOAuthProvider(string publicClientId)
         {
-            if (publicClientId == null)
-            {
-                throw new ArgumentNullException("publicClientId");
-            }
-
-            _publicClientId = publicClientId;
+            _publicClientId = publicClientId ?? throw new ArgumentNullException(nameof(publicClientId));
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)

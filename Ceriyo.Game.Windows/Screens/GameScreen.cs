@@ -1,5 +1,6 @@
 ﻿using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.UI.Contracts;
+using Ceriyo.Infrastructure.UI.Generated;
 using Ceriyo.Infrastructure.UI.ViewModels;
 using EmptyKeys.UserInterface.Generated;
 using Microsoft.Xna.Framework;

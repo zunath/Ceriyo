@@ -6,8 +6,8 @@ using Ceriyo.Infrastructure.UI.Contracts;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;
 using EmptyKeys.UserInterface.Mvvm;
-using Microsoft.Xna.Framework;
 using System;
+using Ceriyo.Infrastructure.UI.Generated;
 
 namespace Ceriyo.Infrastructure.UI.ViewModels
 {
@@ -25,6 +25,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             RegisterCommand = new RelayCommand(Register);
             CancelCommand = new RelayCommand(Cancel);
 
+            IsEnabled = true;
         }
 
         private string _username;
@@ -59,10 +60,29 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             set => SetProperty(ref _confirmPassword, value);
         }
 
+        private bool _isEnabled;
+
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set => SetProperty(ref _isEnabled, value);
+        }
+
+        private string _infoText;
+
+        public string InfoText
+        {
+            get => _infoText;
+            set => SetProperty(ref _infoText, value);
+        }
+
         public ICommand RegisterCommand { get; set; }
 
         private async void Register(object obj)
         {
+            IsEnabled = false;
+            InfoText = "Registering account. Please wait...";
+
             HttpClient client = new HttpClient();
 
             var data = new Dictionary<string, string>
@@ -72,7 +92,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
                 {"ConfirmPassword", ConfirmPassword },
                 {"Email", Email }
             };
-
+            
             var content = new FormUrlEncodedContent(data);
 
             var response = await client.PostAsync(Urls.AuthServerUrl + "api/Account/Register", content);
@@ -81,6 +101,8 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
             Console.WriteLine("Registration response: " + responseString); // DEBUG
 
+            IsEnabled = true;
+            InfoText = string.Empty;
         }
         
         public ICommand CancelCommand { get; set; }

@@ -8,6 +8,7 @@ using Ceriyo.Infrastructure.Network.Packets;
 using Ceriyo.Infrastructure.Network.Packets.CharacterManagement;
 using Ceriyo.Infrastructure.Network.TransferObjects;
 using Ceriyo.Infrastructure.UI.Contracts;
+using Ceriyo.Infrastructure.UI.Generated;
 using EmptyKeys.UserInterface;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;

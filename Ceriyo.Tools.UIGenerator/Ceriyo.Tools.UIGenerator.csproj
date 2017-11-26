@@ -131,6 +131,7 @@
     <Content Include="UI\Images\JoinServer.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="UI\Images\Loading.gif" />
     <Content Include="UI\Images\Settings.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -1,5 +1,4 @@
-﻿using Ceriyo.Core.Data;
-using ProtoBuf;
+﻿using ProtoBuf;
 
 namespace Ceriyo.Infrastructure.Network.Packets.CharacterManagement
 {

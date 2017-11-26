@@ -56,7 +56,8 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
-                Text="{Binding Username}">
+                Text="{Binding Username}"
+                IsEnabled="{Binding IsEnabled}">
 
             </TextBox>
 
@@ -72,7 +73,8 @@
                 Grid.Row="2"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
-                Text="{Binding Email}">
+                Text="{Binding Email}"
+                IsEnabled="{Binding IsEnabled}">
                 
             </TextBox>
             
@@ -88,7 +90,8 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
-                Text="{Binding Password}">
+                Text="{Binding Password}"
+                IsEnabled="{Binding IsEnabled}">
 
             </ek:PasswordBox>
 
@@ -104,7 +107,8 @@
                 Grid.Row="4"
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
-                Text="{Binding ConfirmPassword}">
+                Text="{Binding ConfirmPassword}"
+                IsEnabled="{Binding IsEnabled}">
                 
             </ek:PasswordBox>
             
@@ -113,7 +117,8 @@
                 Grid.Row="5"
                 Margin="4,4,4,4"
                 Content="Register"
-                Command="{Binding RegisterCommand}">
+                Command="{Binding RegisterCommand}"
+                IsEnabled="{Binding IsEnabled}">
                 
             </Button>
             
@@ -122,9 +127,26 @@
                 Grid.Row="5"
                 Margin="4,4,4,4"
                 Content="Cancel"
-                Command="{Binding CancelCommand}">
+                Command="{Binding CancelCommand}"
+                IsEnabled="{Binding IsEnabled}">
                 
             </Button>
+            
+            <Border
+                Grid.Column="0"
+                Grid.Row="5"
+                Grid.ColumnSpan="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Height="50">
+                <TextBlock
+                    Margin="4,4,4,4"
+                    Foreground="Green"
+                    Text="{Binding InfoText}">
+
+                </TextBlock>
+            </Border>
+            
             
         </Grid>
     </DockPanel>

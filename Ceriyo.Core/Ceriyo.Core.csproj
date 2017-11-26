@@ -107,7 +107,7 @@
     <Compile Include="Entities\ObjectPainter.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="Extensions\XmlDocumentationExtensions.cs" />
-    <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Scripting\ScriptMethod.cs" />
     <Compile Include="Services\IsoMathService.cs" />
     <Compile Include="Observables\ObservablePair.cs" />
@@ -166,7 +166,6 @@
     <Compile Include="Extensions\EnumerationExtensions.cs" />
     <Compile Include="Observables\ObservableCollectionEx.cs" />
     <Compile Include="Extensions\SpriteBatchExtensions.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Contracts\IScreen.cs" />
     <Compile Include="Scripting\Common\LoggingMethods.cs" />

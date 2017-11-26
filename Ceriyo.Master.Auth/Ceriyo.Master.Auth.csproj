@@ -267,14 +267,22 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Data\DataContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="AuthIOCConfig.cs" />
-    <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Authentication\BindingModels\AddExternalLoginBindingModel.cs" />
+    <Compile Include="Models\Authentication\ApplicationUser.cs" />
+    <Compile Include="Models\Authentication\BindingModels\ChangePasswordBindingModel.cs" />
+    <Compile Include="Models\Authentication\BindingModels\RegisterBindingModel.cs" />
+    <Compile Include="Models\Authentication\BindingModels\RegisterExternalBindingModel.cs" />
+    <Compile Include="Models\Authentication\BindingModels\RemoveLoginBindingModel.cs" />
+    <Compile Include="Models\Authentication\BindingModels\SetPasswordBindingModel.cs" />
+    <Compile Include="Models\Authentication\ViewModels\ExternalLoginViewModel.cs" />
+    <Compile Include="Models\Authentication\ViewModels\ManageInfoViewModel.cs" />
+    <Compile Include="Models\Authentication\ViewModels\UserInfoViewModel.cs" />
+    <Compile Include="Models\Authentication\ViewModels\UserLoginInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -329,7 +337,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Data\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

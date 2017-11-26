@@ -2,12 +2,12 @@
 using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
-using Ceriyo.Core.Observables;
 using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
 using Ceriyo.Infrastructure.Network.Packets.CharacterManagement;
 using Ceriyo.Infrastructure.Network.TransferObjects;
 using Ceriyo.Infrastructure.UI.Contracts;
+using Ceriyo.Infrastructure.UI.Generated;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;
 using EmptyKeys.UserInterface.Mvvm;

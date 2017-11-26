@@ -1,15 +1,11 @@
-﻿using System;
-using Artemis;
+﻿using Artemis;
 using Artemis.Attributes;
 using Artemis.Manager;
 using Artemis.System;
 using Ceriyo.Core.Components;
-using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Services.Contracts;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
 namespace Ceriyo.Core.Systems.Update

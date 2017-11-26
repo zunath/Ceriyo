@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using Ceriyo.Core.Contracts;
+﻿using Ceriyo.Core.Contracts;
 using Ceriyo.Core.Data;
 using Ceriyo.Core.Observables;
 using Ceriyo.Core.Services.Contracts;
 using Ceriyo.Domain.Services.DataServices.Contracts;
 using Ceriyo.Infrastructure.WPF.Factory.Contracts;
 using Ceriyo.Infrastructure.WPF.Observables;
-using Ceriyo.Toolset.WPF.Events.Area;
 using Ceriyo.Toolset.WPF.Events.Module;
 using Ceriyo.Toolset.WPF.Events.Script;
 using Prism.Commands;

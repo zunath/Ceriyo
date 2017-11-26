@@ -6,14 +6,15 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
+using Ceriyo.Master.Auth.Models.Authentication;
+using Ceriyo.Master.Auth.Models.Authentication.BindingModels;
+using Ceriyo.Master.Auth.Models.Authentication.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Ceriyo.Master.Auth.Models;
 using Ceriyo.Master.Auth.Providers;
 using Ceriyo.Master.Auth.Results;
 
@@ -39,14 +40,8 @@ namespace Ceriyo.Master.Auth.Controllers
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get => _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            private set => _userManager = value;
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
@@ -62,7 +57,7 @@ namespace Ceriyo.Master.Auth.Controllers
             {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                LoginProvider = externalLogin?.LoginProvider
             };
         }
 
@@ -328,16 +323,15 @@ namespace Ceriyo.Master.Auth.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser
+            {
+                UserName = model.Username,
+                Email = model.Email
+            };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
+            return !result.Succeeded ? GetErrorResult(result) : Ok();
         }
 
         // POST api/Account/RegisterExternal

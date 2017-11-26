@@ -1,5 +1,4 @@
 ﻿using Artemis;
-using Ceriyo.Core.Constants;
 
 namespace Ceriyo.Core.Scripting
 {

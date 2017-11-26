@@ -53,6 +53,10 @@ namespace EmptyKeys.UserInterface.Generated {
         
         private Button e_12;
         
+        private Border e_13;
+        
+        private TextBlock e_14;
+        
         public RegisterView() : 
                 base() {
             this.Initialize();
@@ -141,6 +145,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_4, 1);
             Grid.SetRow(this.e_4, 1);
             Grid.SetColumnSpan(this.e_4, 3);
+            Binding binding_e_4_IsEnabled = new Binding("IsEnabled");
+            this.e_4.SetBinding(TextBox.IsEnabledProperty, binding_e_4_IsEnabled);
             Binding binding_e_4_Text = new Binding("Username");
             this.e_4.SetBinding(TextBox.TextProperty, binding_e_4_Text);
             // e_5 element
@@ -158,6 +164,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_6, 1);
             Grid.SetRow(this.e_6, 2);
             Grid.SetColumnSpan(this.e_6, 3);
+            Binding binding_e_6_IsEnabled = new Binding("IsEnabled");
+            this.e_6.SetBinding(TextBox.IsEnabledProperty, binding_e_6_IsEnabled);
             Binding binding_e_6_Text = new Binding("Email");
             this.e_6.SetBinding(TextBox.TextProperty, binding_e_6_Text);
             // e_7 element
@@ -175,6 +183,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_8, 1);
             Grid.SetRow(this.e_8, 3);
             Grid.SetColumnSpan(this.e_8, 3);
+            Binding binding_e_8_IsEnabled = new Binding("IsEnabled");
+            this.e_8.SetBinding(PasswordBox.IsEnabledProperty, binding_e_8_IsEnabled);
             Binding binding_e_8_Text = new Binding("Password");
             this.e_8.SetBinding(PasswordBox.TextProperty, binding_e_8_Text);
             // e_9 element
@@ -192,6 +202,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_10, 1);
             Grid.SetRow(this.e_10, 4);
             Grid.SetColumnSpan(this.e_10, 3);
+            Binding binding_e_10_IsEnabled = new Binding("IsEnabled");
+            this.e_10.SetBinding(PasswordBox.IsEnabledProperty, binding_e_10_IsEnabled);
             Binding binding_e_10_Text = new Binding("ConfirmPassword");
             this.e_10.SetBinding(PasswordBox.TextProperty, binding_e_10_Text);
             // e_11 element
@@ -202,6 +214,8 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_11.Content = "Register";
             Grid.SetColumn(this.e_11, 2);
             Grid.SetRow(this.e_11, 5);
+            Binding binding_e_11_IsEnabled = new Binding("IsEnabled");
+            this.e_11.SetBinding(Button.IsEnabledProperty, binding_e_11_IsEnabled);
             Binding binding_e_11_Command = new Binding("RegisterCommand");
             this.e_11.SetBinding(Button.CommandProperty, binding_e_11_Command);
             // e_12 element
@@ -212,8 +226,28 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_12.Content = "Cancel";
             Grid.SetColumn(this.e_12, 3);
             Grid.SetRow(this.e_12, 5);
+            Binding binding_e_12_IsEnabled = new Binding("IsEnabled");
+            this.e_12.SetBinding(Button.IsEnabledProperty, binding_e_12_IsEnabled);
             Binding binding_e_12_Command = new Binding("CancelCommand");
             this.e_12.SetBinding(Button.CommandProperty, binding_e_12_Command);
+            // e_13 element
+            this.e_13 = new Border();
+            this.e_1.Children.Add(this.e_13);
+            this.e_13.Name = "e_13";
+            this.e_13.Height = 50F;
+            this.e_13.HorizontalAlignment = HorizontalAlignment.Center;
+            this.e_13.VerticalAlignment = VerticalAlignment.Center;
+            Grid.SetColumn(this.e_13, 0);
+            Grid.SetRow(this.e_13, 5);
+            Grid.SetColumnSpan(this.e_13, 2);
+            // e_14 element
+            this.e_14 = new TextBlock();
+            this.e_13.Child = this.e_14;
+            this.e_14.Name = "e_14";
+            this.e_14.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_14.Foreground = new SolidColorBrush(new ColorW(0, 128, 0, 255));
+            Binding binding_e_14_Text = new Binding("InfoText");
+            this.e_14.SetBinding(TextBlock.TextProperty, binding_e_14_Text);
             ImageManager.Instance.AddImage("UI/Images/CeriyoLogo");
         }
         

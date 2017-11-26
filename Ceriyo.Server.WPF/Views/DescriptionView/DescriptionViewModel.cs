@@ -1,5 +1,4 @@
 ﻿using Ceriyo.Core.Settings;
-using Prism.Commands;
 using Prism.Mvvm;
 
 namespace Ceriyo.Server.WPF.Views.DescriptionView
