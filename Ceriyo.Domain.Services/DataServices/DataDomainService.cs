@@ -5,11 +5,13 @@ using Ceriyo.Domain.Services.DataServices.Contracts;
 
 namespace Ceriyo.Domain.Services.DataServices
 {
+    /// <inheritdoc />
     public class DataDomainService: IDataDomainService
     {
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
 
+        /// <inheritdoc />
         public DataDomainService(IDataService dataService,
             IPathService pathService)
         {
@@ -17,6 +19,7 @@ namespace Ceriyo.Domain.Services.DataServices
             _pathService = pathService;
         }
 
+        /// <inheritdoc />
         public void SaveData<T>(T data)
             where T: IDataDomainObject
         {
@@ -24,6 +27,7 @@ namespace Ceriyo.Domain.Services.DataServices
             _dataService.Save(data, path);
         }
 
+        /// <inheritdoc />
         public void DeleteData<T>(T data)
             where T: IDataDomainObject
         {

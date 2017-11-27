@@ -7,6 +7,7 @@ using Ceriyo.Domain.Services.DataServices.Contracts;
 
 namespace Ceriyo.Domain.Services.DataServices
 {
+    /// <inheritdoc />
     public class DataEditorDomainService: IDataEditorDomainService
     {
         private enum ActionType
@@ -32,8 +33,10 @@ namespace Ceriyo.Domain.Services.DataServices
         private DirtyGroup<ItemData> DirtyItems { get; }
         private DirtyGroup<PlaceableData> DirtyPlaceables { get; }
         private DirtyGroup<SkillData> DirtySkills { get; }
-
         private DirtyGroup<TilesetData> DirtyTilesets { get; }
+
+
+        /// <inheritdoc />
         public DataEditorDomainService(IDataService dataService,
             IPathService pathService)
         {
@@ -48,86 +51,105 @@ namespace Ceriyo.Domain.Services.DataServices
             DirtyTilesets = new DirtyGroup<TilesetData>();
         }
 
+        /// <inheritdoc />
         public void AddOrUpdateDirty(AbilityData data)
         {
             DirtyAbilities.Remove(data.GlobalID);
             DirtyAbilities.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
+        /// <inheritdoc />
         public void AddOrUpdateDirty(ClassData data)
         {
             DirtyClasses.Remove(data.GlobalID);
             DirtyClasses.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
+        /// <inheritdoc />
         public void AddOrUpdateDirty(CreatureData data)
         {
             DirtyCreatures.Remove(data.GlobalID);
             DirtyCreatures.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
+        /// <inheritdoc />
         public void AddOrUpdateDirty(ItemData data)
         {
             DirtyItems.Remove(data.GlobalID);
             DirtyItems.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
+        /// <inheritdoc />
         public void AddOrUpdateDirty(PlaceableData data)
         {
             DirtyPlaceables.Remove(data.GlobalID);
             DirtyPlaceables.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
+        /// <inheritdoc />
         public void AddOrUpdateDirty(SkillData data)
         {
             DirtySkills.Remove(data.GlobalID);
             DirtySkills.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
+        /// <inheritdoc />
         public void AddOrUpdateDirty(TilesetData data)
         {
             DirtyTilesets.Remove(data.GlobalID);
             DirtyTilesets.Add(data.GlobalID, data, ActionType.AddOrChanged);
         }
 
+        /// <inheritdoc />
         public void MarkForDeletion(AbilityData data)
         {
             DirtyAbilities.Remove(data.GlobalID);
             DirtyAbilities.Add(data.GlobalID, data, ActionType.Delete);
         }
 
+        /// <inheritdoc />
         public void MarkForDeletion(ClassData data)
         {
             DirtyClasses.Remove(data.GlobalID);
             DirtyClasses.Add(data.GlobalID, data, ActionType.Delete);
         }
+
+        /// <inheritdoc />
         public void MarkForDeletion(CreatureData data)
         {
             DirtyCreatures.Remove(data.GlobalID);
             DirtyCreatures.Add(data.GlobalID, data, ActionType.Delete);
         }
+
+        /// <inheritdoc />
         public void MarkForDeletion(ItemData data)
         {
             DirtyItems.Remove(data.GlobalID);
             DirtyItems.Add(data.GlobalID, data, ActionType.Delete);
         }
+
+        /// <inheritdoc />
         public void MarkForDeletion(PlaceableData data)
         {
             DirtyPlaceables.Remove(data.GlobalID);
             DirtyPlaceables.Add(data.GlobalID, data, ActionType.Delete);
         }
+
+        /// <inheritdoc />
         public void MarkForDeletion(SkillData data)
         {
             DirtySkills.Remove(data.GlobalID);
             DirtySkills.Add(data.GlobalID, data, ActionType.Delete);
         }
 
+        /// <inheritdoc />
         public void MarkForDeletion(TilesetData data)
         {
             DirtyTilesets.Remove(data.GlobalID);
             DirtyTilesets.Add(data.GlobalID, data, ActionType.Delete);
         }
 
+        /// <inheritdoc />
         public void ClearQueuedChanges()
         {
             DirtyAbilities.Clear();
@@ -138,6 +160,7 @@ namespace Ceriyo.Domain.Services.DataServices
             DirtySkills.Clear();
         }
 
+        /// <inheritdoc />
         public void SaveChanges()
         {
             foreach (var record in DirtyAbilities)

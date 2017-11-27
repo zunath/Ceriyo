@@ -10,11 +10,13 @@ using Ceriyo.Domain.Services.DataServices.Contracts;
 
 namespace Ceriyo.Domain.Services.DataServices
 {
+    /// <inheritdoc />
     public class ResourceEditorDomainService : IResourceEditorDomainService
     {
         private readonly IDataService _dataService;
         private readonly IPathService _pathService;
 
+        /// <inheritdoc />
         public ResourceEditorDomainService(IDataService dataService, 
             IPathService pathService)
         {
@@ -22,6 +24,7 @@ namespace Ceriyo.Domain.Services.DataServices
             _pathService = pathService;
         }
 
+        /// <inheritdoc />
         public void SaveResourcePack(IEnumerable<ResourceItemData> resources, string resourcePackName)
         {
             var resourceList = resources.ToList();
@@ -95,6 +98,7 @@ namespace Ceriyo.Domain.Services.DataServices
             return Enum.GetName(typeof(ResourceType), resource.ResourceType) + "/" + resource.FileName + resource.Extension;
         }
 
+        /// <inheritdoc />
         public IEnumerable<ResourceItemData> LoadResourcePack(string resourcePackName)
         {
             string filePath = _pathService.ResourcePackDirectory + resourcePackName + ".rpk";
