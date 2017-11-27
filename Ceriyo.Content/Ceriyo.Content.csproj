@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,27 +57,27 @@
     <Folder Include="Scripts\Client\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UI\Images\CeriyoLogo.png" />
-    <Content Include="UI\Images\DirectConnect.png" />
-    <Content Include="UI\Images\JoinServer.png" />
-    <Content Include="UI\Images\Settings.png" />
     <Content Include="Graphics\Tileset\Empty-Tileset.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Libraries\artemis.dll" />
+    <Content Include="UI\Images\CeriyoLogo.png" />
+    <Content Include="UI\Images\DirectConnect.png" />
+    <Content Include="UI\Images\JoinServer.png" />
+    <Content Include="UI\Images\Settings.png" />
     <None Include="Compiled\Spritefonts\Segoe_UI_10_Regular.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Compiled\UI\Images\CeriyoLogo.xnb">
+    <None Include="Compiled\Images\CeriyoLogo.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Compiled\UI\Images\DirectConnect.xnb">
+    <None Include="Compiled\Images\DirectConnect.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Compiled\UI\Images\JoinServer.xnb">
+    <None Include="Compiled\Images\JoinServer.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Compiled\UI\Images\Settings.xnb">
+    <None Include="Compiled\Images\Settings.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="ResourcePacks\Default-Resources.rpk">
@@ -109,6 +112,14 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

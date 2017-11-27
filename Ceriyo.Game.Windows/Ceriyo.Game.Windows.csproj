@@ -119,6 +119,10 @@
       <Project>{019a2ba4-5373-4003-986b-ef85c0df3bba}</Project>
       <Name>Ceriyo.Domain.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ceriyo.Infrastructure.UI\Ceriyo.Infrastructure.UI.csproj">
+      <Project>{28bbe037-15cf-4864-a920-62e55973b0ee}</Project>
+      <Name>Ceriyo.Infrastructure.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ceriyo.Infrastructure\Ceriyo.Infrastructure.csproj">
       <Project>{bbc7e2f5-d48a-424a-8df1-3633387fd137}</Project>
       <Name>Ceriyo.Infrastructure</Name>

@@ -4,7 +4,6 @@ using Ceriyo.Infrastructure.Network.Contracts;
 using Ceriyo.Infrastructure.Network.Packets;
 using Ceriyo.Infrastructure.Network.Packets.CharacterManagement;
 using Ceriyo.Infrastructure.UI.Contracts;
-using Ceriyo.Infrastructure.UI.Generated;
 using Ceriyo.Infrastructure.UI.ViewModels;
 using EmptyKeys.UserInterface.Generated;
 
