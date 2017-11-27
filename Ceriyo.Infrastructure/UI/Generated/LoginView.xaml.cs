@@ -47,6 +47,8 @@ namespace EmptyKeys.UserInterface.Generated {
         
         private Button e_9;
         
+        private Button e_10;
+        
         public LoginView() : 
                 base() {
             this.Initialize();
@@ -130,6 +132,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_4.Name = "e_4";
             this.e_4.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_4.TabIndex = 0;
+            this.e_4.MaxLength = 256;
             Grid.SetColumn(this.e_4, 1);
             Grid.SetRow(this.e_4, 1);
             Grid.SetColumnSpan(this.e_4, 3);
@@ -150,6 +153,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_6.Name = "e_6";
             this.e_6.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_6.TabIndex = 1;
+            this.e_6.MaxLength = 100;
             Grid.SetColumn(this.e_6, 1);
             Grid.SetRow(this.e_6, 2);
             Grid.SetColumnSpan(this.e_6, 3);
@@ -164,7 +168,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_7.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_7.TabIndex = 2;
             this.e_7.Content = "Log In";
-            Grid.SetColumn(this.e_7, 1);
+            Grid.SetColumn(this.e_7, 0);
             Grid.SetRow(this.e_7, 4);
             Binding binding_e_7_IsEnabled = new Binding("IsEnabled");
             this.e_7.SetBinding(Button.IsEnabledProperty, binding_e_7_IsEnabled);
@@ -177,7 +181,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_8.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_8.TabIndex = 3;
             this.e_8.Content = "Create Account";
-            Grid.SetColumn(this.e_8, 2);
+            Grid.SetColumn(this.e_8, 1);
             Grid.SetRow(this.e_8, 4);
             Binding binding_e_8_IsEnabled = new Binding("IsEnabled");
             this.e_8.SetBinding(Button.IsEnabledProperty, binding_e_8_IsEnabled);
@@ -196,6 +200,19 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_9.SetBinding(Button.IsEnabledProperty, binding_e_9_IsEnabled);
             Binding binding_e_9_Command = new Binding("ExitCommand");
             this.e_9.SetBinding(Button.CommandProperty, binding_e_9_Command);
+            // e_10 element
+            this.e_10 = new Button();
+            this.e_1.Children.Add(this.e_10);
+            this.e_10.Name = "e_10";
+            this.e_10.Margin = new Thickness(4F, 4F, 4F, 4F);
+            this.e_10.TabIndex = 4;
+            this.e_10.Content = "Account Help";
+            Grid.SetColumn(this.e_10, 2);
+            Grid.SetRow(this.e_10, 4);
+            Binding binding_e_10_IsEnabled = new Binding("IsEnabled");
+            this.e_10.SetBinding(Button.IsEnabledProperty, binding_e_10_IsEnabled);
+            Binding binding_e_10_Command = new Binding("AccountHelpCommand");
+            this.e_10.SetBinding(Button.CommandProperty, binding_e_10_Command);
             ImageManager.Instance.AddImage("UI/Images/CeriyoLogo");
         }
         

@@ -159,6 +159,7 @@
     <Compile Include="UI\ViewModels\LoginUIViewModel.cs" />
     <Compile Include="UI\ViewModels\MainMenuUIViewModel.cs" />
     <Compile Include="UI\ViewModels\SettingsUIViewModel.cs" />
+    <Compile Include="UI\ViewModels\Validation\LoginUIViewModelValidator.cs" />
     <Compile Include="UI\ViewModels\Validation\RegisterUIViewModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>

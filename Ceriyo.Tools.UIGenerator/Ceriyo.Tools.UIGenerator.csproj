@@ -156,9 +156,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>CD "$(SolutionDir)packages\EmptyKeysUI_Generator*\tools"
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>CD "$(SolutionDir)packages\EmptyKeysUI_Generator*\tools"
 
-ekUIGen.exe -i="$(ProjectDir)\Views" -o="$(ProjectDir)\..\Ceriyo.Infrastructure\UI\Generated" -oa="$(ProjectDir)\..\Ceriyo.Content\UI" -bd="$(TargetDir)\" -rm=MonoGame /generate-bindings /da:Ceriyo.Tools.UIGenerator</PostBuildEvent>
+ekUIGen.exe -i="$(ProjectDir)\Views" -o="$(ProjectDir)\..\Ceriyo.Infrastructure\UI\Generated" -oa="$(ProjectDir)\..\Ceriyo.Content\UI" -bd="$(TargetDir)\" -rm=MonoGame /generate-bindings /da:Ceriyo.Tools.UIGenerator</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

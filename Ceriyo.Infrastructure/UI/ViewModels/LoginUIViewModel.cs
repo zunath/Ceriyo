@@ -5,6 +5,7 @@ using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.UI.Contracts;
 using Ceriyo.Infrastructure.UI.Generated;
+using Ceriyo.Infrastructure.UI.ViewModels.Validation;
 using EmptyKeys.UserInterface;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;
@@ -21,6 +22,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         private readonly IUIViewModelFactory _vmFactory;
         private readonly IUserProfile _userProfile;
         private readonly ILogger _logger;
+        private readonly LoginUIViewModelValidator _validator;
 
         public LoginUIViewModel(Game game, 
             IUIService uiService, 
@@ -36,7 +38,10 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
             LoginCommand = new RelayCommand(Login);
             CreateAccountCommand = new RelayCommand(CreateAccount);
+            AccountHelpCommand = new RelayCommand(AccountHelp);
             ExitCommand = new RelayCommand(Exit);
+
+            _validator = new LoginUIViewModelValidator();
 
             IsEnabled = true;
         }
@@ -77,6 +82,12 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         private async void Login(object obj)
         {
+            if (!ValidateModel())
+            {
+                MessageBox.Show("Please enter a username and password.", "Error", MessageBoxButton.OK, null, false);
+                return;
+            }
+
             IsEnabled = false;
             HttpClient client = new HttpClient();
 
@@ -125,13 +136,24 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             _uiService.ChangeUIRoot<RegisterView>(vm);
         }
 
+        public ICommand AccountHelpCommand { get; set; }
+
+        private void AccountHelp(object obj)
+        {
+            
+        }
+
         public ICommand ExitCommand { get; set; }
 
         private void Exit(object obj)
         {
             _game.Exit();
         }
-        
+
+        private bool ValidateModel()
+        {
+            return _validator.Validate(this).IsValid;
+        }
 
     }
 }

@@ -57,7 +57,8 @@
                 Margin="4,4,4,4"
                 TabIndex="0"
                 Text="{Binding Username}"
-                IsEnabled="{Binding IsEnabled}">
+                IsEnabled="{Binding IsEnabled}"
+                MaxLength="256">
 
             </TextBox>
 
@@ -75,12 +76,13 @@
                 Margin="4,4,4,4"
                 TabIndex="1"
                 Text="{Binding Password}"
-                IsEnabled="{Binding IsEnabled}">
+                IsEnabled="{Binding IsEnabled}"
+                MaxLength="100">
 
             </ek:PasswordBox>
 
             <Button
-                Grid.Column="1"
+                Grid.Column="0"
                 Grid.Row="4"
                 Margin="4,4,4,4"
                 Content="Log In"
@@ -92,7 +94,7 @@
             </Button>
             
             <Button
-                Grid.Column="2"
+                Grid.Column="1"
                 Grid.Row="4"
                 Margin="4,4,4,4"
                 TabIndex="3"
@@ -101,7 +103,8 @@
                 IsEnabled="{Binding IsEnabled}">
                 
             </Button>
-            
+
+
             <Button
                 Grid.Column="3"
                 Grid.Row="4"
@@ -110,8 +113,22 @@
                 Content="Exit"
                 Command="{Binding ExitCommand}"
                 IsEnabled="{Binding IsEnabled}">
+
+            </Button>
+
+
+            <Button
+                Grid.Column="2"
+                Grid.Row="4"
+                Margin="4,4,4,4"
+                TabIndex="4"
+                Content="Account Help"
+                Command="{Binding AccountHelpCommand}"
+                IsEnabled="{Binding IsEnabled}">
                 
             </Button>
+            
+            
             
         </Grid>
     </DockPanel>
