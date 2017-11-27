@@ -56,7 +56,8 @@
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
                 TabIndex="0"
-                Text="{Binding Username}">
+                Text="{Binding Username}"
+                IsEnabled="{Binding IsEnabled}">
 
             </TextBox>
 
@@ -73,7 +74,8 @@
                 Grid.ColumnSpan="3"
                 Margin="4,4,4,4"
                 TabIndex="1"
-                Text="{Binding Password}">
+                Text="{Binding Password}"
+                IsEnabled="{Binding IsEnabled}">
 
             </ek:PasswordBox>
 
@@ -84,7 +86,8 @@
                 Content="Log In"
                 TabIndex="2"
                 IsDefault="True"
-                Command="{Binding LoginCommand}">
+                Command="{Binding LoginCommand}"
+                IsEnabled="{Binding IsEnabled}">
                 
             </Button>
             
@@ -94,7 +97,8 @@
                 Margin="4,4,4,4"
                 TabIndex="3"
                 Content="Create Account"
-                Command="{Binding CreateAccountCommand}">
+                Command="{Binding CreateAccountCommand}"
+                IsEnabled="{Binding IsEnabled}">
                 
             </Button>
             
@@ -104,7 +108,8 @@
                 Margin="4,4,4,4"
                 TabIndex="4"
                 Content="Exit"
-                Command="{Binding ExitCommand}">
+                Command="{Binding ExitCommand}"
+                IsEnabled="{Binding IsEnabled}">
                 
             </Button>
             

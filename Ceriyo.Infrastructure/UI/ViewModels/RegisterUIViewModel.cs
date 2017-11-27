@@ -8,6 +8,7 @@ using EmptyKeys.UserInterface.Input;
 using EmptyKeys.UserInterface.Mvvm;
 using System;
 using System.Linq;
+using Ceriyo.Infrastructure.UI.Generated;
 using Ceriyo.Infrastructure.UI.ViewModels.Validation;
 using EmptyKeys.UserInterface;
 using EmptyKeys.UserInterface.Media;

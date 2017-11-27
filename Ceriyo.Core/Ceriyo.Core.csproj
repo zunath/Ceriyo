@@ -94,6 +94,7 @@
     <Compile Include="Contracts\ISystemLoader.cs" />
     <Compile Include="Contracts\IUIViewModel.cs" />
     <Compile Include="Contracts\IUIViewModelFactory.cs" />
+    <Compile Include="Contracts\IUserProfile.cs" />
     <Compile Include="Data\AreaData.cs" />
     <Compile Include="Data\ClassLevelData.cs" />
     <Compile Include="Data\Contracts\IDataDomainObject.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Services\PathService.cs" />
     <Compile Include="Services\Game\ScreenService.cs" />
     <Compile Include="Services\Game\GraphicsService.cs" />
+    <Compile Include="Services\UserProfile.cs" />
     <Compile Include="Settings\GameSettings.cs" />
     <Compile Include="Settings\ServerSettings.cs" />
     <Compile Include="Settings\ToolsetSettings.cs" />

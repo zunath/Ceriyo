@@ -133,6 +133,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_4, 1);
             Grid.SetRow(this.e_4, 1);
             Grid.SetColumnSpan(this.e_4, 3);
+            Binding binding_e_4_IsEnabled = new Binding("IsEnabled");
+            this.e_4.SetBinding(TextBox.IsEnabledProperty, binding_e_4_IsEnabled);
             Binding binding_e_4_Text = new Binding("Username");
             this.e_4.SetBinding(TextBox.TextProperty, binding_e_4_Text);
             // e_5 element
@@ -151,6 +153,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_6, 1);
             Grid.SetRow(this.e_6, 2);
             Grid.SetColumnSpan(this.e_6, 3);
+            Binding binding_e_6_IsEnabled = new Binding("IsEnabled");
+            this.e_6.SetBinding(PasswordBox.IsEnabledProperty, binding_e_6_IsEnabled);
             Binding binding_e_6_Text = new Binding("Password");
             this.e_6.SetBinding(PasswordBox.TextProperty, binding_e_6_Text);
             // e_7 element
@@ -162,6 +166,8 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_7.Content = "Log In";
             Grid.SetColumn(this.e_7, 1);
             Grid.SetRow(this.e_7, 4);
+            Binding binding_e_7_IsEnabled = new Binding("IsEnabled");
+            this.e_7.SetBinding(Button.IsEnabledProperty, binding_e_7_IsEnabled);
             Binding binding_e_7_Command = new Binding("LoginCommand");
             this.e_7.SetBinding(Button.CommandProperty, binding_e_7_Command);
             // e_8 element
@@ -173,6 +179,8 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_8.Content = "Create Account";
             Grid.SetColumn(this.e_8, 2);
             Grid.SetRow(this.e_8, 4);
+            Binding binding_e_8_IsEnabled = new Binding("IsEnabled");
+            this.e_8.SetBinding(Button.IsEnabledProperty, binding_e_8_IsEnabled);
             Binding binding_e_8_Command = new Binding("CreateAccountCommand");
             this.e_8.SetBinding(Button.CommandProperty, binding_e_8_Command);
             // e_9 element
@@ -184,6 +192,8 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_9.Content = "Exit";
             Grid.SetColumn(this.e_9, 3);
             Grid.SetRow(this.e_9, 4);
+            Binding binding_e_9_IsEnabled = new Binding("IsEnabled");
+            this.e_9.SetBinding(Button.IsEnabledProperty, binding_e_9_IsEnabled);
             Binding binding_e_9_Command = new Binding("ExitCommand");
             this.e_9.SetBinding(Button.CommandProperty, binding_e_9_Command);
             ImageManager.Instance.AddImage("UI/Images/CeriyoLogo");

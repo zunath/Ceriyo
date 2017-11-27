@@ -59,9 +59,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Content.mgcb = Content.mgcb
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Master.Auth.Tests", "Ceriyo.Master.Auth.Tests\Ceriyo.Master.Auth.Tests.csproj", "{80324759-0193-4AAE-8CA6-1EC2E4762BEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Master.Server.Tests", "Ceriyo.Master.Server.Tests\Ceriyo.Master.Server.Tests.csproj", "{80324759-0193-4AAE-8CA6-1EC2E4762BEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Master.Auth", "Ceriyo.Master.Auth\Ceriyo.Master.Auth.csproj", "{2A30C42D-E40A-4D6B-BD1D-35724F4F9A36}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ceriyo.Master.Server", "Ceriyo.Master.Server\Ceriyo.Master.Server.csproj", "{2A30C42D-E40A-4D6B-BD1D-35724F4F9A36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,10 +1,16 @@
-﻿using Ceriyo.Core.Contracts;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using Ceriyo.Core.Constants;
+using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.UI.Contracts;
 using Ceriyo.Infrastructure.UI.Generated;
+using EmptyKeys.UserInterface;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;
 using EmptyKeys.UserInterface.Mvvm;
 using Microsoft.Xna.Framework;
+using Newtonsoft.Json.Linq;
 
 namespace Ceriyo.Infrastructure.UI.ViewModels
 {
@@ -13,18 +19,26 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         private readonly Game _game;
         private readonly IUIService _uiService;
         private readonly IUIViewModelFactory _vmFactory;
-        
+        private readonly IUserProfile _userProfile;
+        private readonly ILogger _logger;
 
-        public LoginUIViewModel(Game game, IUIService uiService, IUIViewModelFactory vmFactory)
+        public LoginUIViewModel(Game game, 
+            IUIService uiService, 
+            IUIViewModelFactory vmFactory,
+            IUserProfile userProfile,
+            ILogger logger)
         {
             _game = game;
             _uiService = uiService;
             _vmFactory = vmFactory;
-            
+            _userProfile = userProfile;
+            _logger = logger;
+
             LoginCommand = new RelayCommand(Login);
             CreateAccountCommand = new RelayCommand(CreateAccount);
             ExitCommand = new RelayCommand(Exit);
 
+            IsEnabled = true;
         }
 
         private string _username;
@@ -51,11 +65,56 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             set => SetProperty(ref _notification, value);
         }
 
+        private bool _isEnabled;
+
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set => SetProperty(ref _isEnabled, value);
+        }
+
         public ICommand LoginCommand { get; set; }
 
-        private void Login(object obj)
+        private async void Login(object obj)
         {
-            // TODO: Handle login
+            IsEnabled = false;
+            HttpClient client = new HttpClient();
+
+            var data = new Dictionary<string, string>
+            {
+                { "username", Username },
+                { "password", Password },
+                { "grant_type", "password" }
+            };
+
+            var content = new FormUrlEncodedContent(data);
+
+            try
+            {
+                var response = await client.PostAsync(Urls.AuthServerUrl + "oauth/token", content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                var json = JObject.Parse(responseString);
+                IsEnabled = true;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    _userProfile.MasterServerToken = json["access_token"].Value<string>();
+                    var model = _vmFactory.Create<MainMenuUIViewModel>();
+                    _uiService.ChangeUIRoot<MainMenuView>(model);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid username and/or password. Please try again.", "Invalid Credentials", MessageBoxButton.OK, null, false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error logging in. ({nameof(LoginUIViewModel)} -> {nameof(Login)}", ex);
+                MessageBox.Show("There was an error reaching the master server. Please check your internet connection.", "Error Connecting", MessageBoxButton.OK, null, false);
+                IsEnabled = true;
+            }
+
         }
 
         public ICommand CreateAccountCommand { get; set; }

@@ -63,6 +63,7 @@ namespace Ceriyo.Game.Windows
             builder.RegisterType<UIService>().As<IUIService>().SingleInstance();
             builder.RegisterType<ClientNetworkService>().As<IClientNetworkService>().SingleInstance();
             builder.RegisterType<IsoMathService>().As<IIsoMathService>().SingleInstance();
+            builder.RegisterType<UserProfile>().As<IUserProfile>().SingleInstance();
 
             // Artemis
             builder.RegisterType<EntityWorld>().SingleInstance();

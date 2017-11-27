@@ -8,7 +8,7 @@
         /// <summary>
         /// The URL of the master authentication server.
         /// </summary>
-        public static string AuthServerUrl => "https://ceriyo-auth.azurewebsites.net/";
+        public static string AuthServerUrl => "https://ceriyo-master-server.azurewebsites.net/";
         //public static string AuthServerUrl => "http://localhost:44335/";
     }
 }
