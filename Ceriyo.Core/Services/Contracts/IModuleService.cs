@@ -3,6 +3,9 @@ using Ceriyo.Core.Data;
 
 namespace Ceriyo.Core.Services.Contracts
 {
+    /// <summary>
+    /// Service used for managing module specific data.
+    /// </summary>
     public interface IModuleService
     {
         /// <summary>

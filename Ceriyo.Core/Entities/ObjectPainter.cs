@@ -8,11 +8,17 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Core.Entities
 {
+    /// <inheritdoc />
     public class ObjectPainter: IGameEntity<Texture2D>
     {
         private readonly IComponentFactory _factory;
         private readonly IEngineService _engineService;
 
+        /// <summary>
+        /// Constructs a new Object Painter entity.
+        /// </summary>
+        /// <param name="factory">The component factory used for creating new components.</param>
+        /// <param name="engineService">The engine service which contains necessary constants.</param>
         public ObjectPainter(IComponentFactory factory,
             IEngineService engineService)
         {
@@ -20,6 +26,7 @@ namespace Ceriyo.Core.Entities
             _engineService = engineService;
         }
 
+        /// <inheritdoc />
         public void BuildEntity(Entity entity, Texture2D texture)
         {
             var renderable = _factory.Create<Renderable>();

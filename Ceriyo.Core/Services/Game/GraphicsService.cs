@@ -4,11 +4,12 @@ using XnaGraphicsDeviceManager = Microsoft.Xna.Framework.GraphicsDeviceManager;
 
 namespace Ceriyo.Core.Services.Game
 {
+    /// <inheritdoc />
     public class GraphicsService: IGraphicsService
     {
         private XnaGraphicsDeviceManager _graphics;
-        
-        // Initialize all graphics properties.
+
+        /// <inheritdoc />
         public void Initialize(XnaGraphicsDeviceManager xnaGraphics)
         {
             if (null != _graphics)
@@ -26,9 +27,14 @@ namespace Ceriyo.Core.Services.Game
             GraphicsDevice = _graphics.GraphicsDevice;
             SpriteBatch = new SpriteBatch(GraphicsDevice);
         }
-        
+
+        /// <inheritdoc />
         public GraphicsDevice GraphicsDevice { get; private set; }
+
+        /// <inheritdoc />
         public float AspectRatio => GraphicsDevice.Viewport.AspectRatio;
+
+        /// <inheritdoc />
         public SpriteBatch SpriteBatch { get; private set; }
     }
 }

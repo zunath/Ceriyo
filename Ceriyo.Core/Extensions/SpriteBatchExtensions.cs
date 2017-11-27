@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Ceriyo.Core.Extensions
 {
     /// <summary>
+    /// Extensions for the SpriteBatch object.
     /// </summary>
     public static class SpriteBatchExtensions
     {

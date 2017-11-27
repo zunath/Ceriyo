@@ -6,15 +6,21 @@ using Ceriyo.Core.Entities.Contracts;
 
 namespace Ceriyo.Core.Entities
 {
+    /// <inheritdoc />
     public class Ability: IGameEntity
     {
         private readonly IComponentFactory _componentFactory;
 
+        /// <summary>
+        /// Constructs a new ability.
+        /// </summary>
+        /// <param name="componentFactory">The component factory used for creating components.</param>
         public Ability(IComponentFactory componentFactory)
         {
             _componentFactory = componentFactory;
         }
 
+        /// <inheritdoc />
         public void BuildEntity(Entity entity)
         {
             entity.AddComponent(_componentFactory.Create<Nameable>());

@@ -12,6 +12,9 @@ using MonoGame.Extended;
 
 namespace Ceriyo.Core.Systems.Draw
 {
+    /// <summary>
+    /// Handles the rendering of areas.
+    /// </summary>
     [ArtemisEntitySystem(
         ExecutionType = ExecutionType.Synchronous,
         GameLoopType = GameLoopType.Draw,
@@ -26,6 +29,8 @@ namespace Ceriyo.Core.Systems.Draw
         private readonly Camera2D _camera;
         private readonly IIsoMathService _isoMathService;
 
+
+        /// <inheritdoc />
         public AreaRenderSystem(SpriteBatch spriteBatch,
             IEngineService engineService,
             IModuleResourceService resourceService,
@@ -43,6 +48,8 @@ namespace Ceriyo.Core.Systems.Draw
         }
 
         private bool _renderedOnce;
+
+        /// <inheritdoc />
         public override void Process(Entity entity)
         {
             LoadEmptyTileset();

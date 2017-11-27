@@ -8,15 +8,21 @@ using Ceriyo.Core.Entities.Contracts;
 
 namespace Ceriyo.Core.Entities
 {
+    /// <inheritdoc />
     public class Module: IGameEntity<ModuleData>
     {
         private readonly IComponentFactory _factory;
 
+        /// <summary>
+        /// Constructs a new module entity.
+        /// </summary>
+        /// <param name="factory">The component factory used for creating new components.</param>
         public Module(IComponentFactory factory)
         {
             _factory = factory;
         }
 
+        /// <inheritdoc />
         public void BuildEntity(Entity entity, ModuleData data)
         {
             if(data == null)

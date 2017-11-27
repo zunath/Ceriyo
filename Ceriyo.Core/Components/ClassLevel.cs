@@ -2,6 +2,9 @@
 
 namespace Ceriyo.Core.Components
 {
+    /// <summary>
+    /// Tracks a class's level and experience required to next level.
+    /// </summary>
     public class ClassLevel: IComponent
     {
         /// <summary>

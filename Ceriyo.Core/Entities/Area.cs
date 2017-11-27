@@ -9,12 +9,19 @@ using Ceriyo.Core.Services.Contracts;
 
 namespace Ceriyo.Core.Entities
 {
+    /// <inheritdoc />
     public class Area: IGameEntity<AreaData>
     {
         private readonly IComponentFactory _factory;
         private readonly IModuleDataService _moduleDataService;
         private readonly IModuleResourceService _resourceService;
 
+        /// <summary>
+        /// Constructs a new area object.
+        /// </summary>
+        /// <param name="factory">The component factory used for creating components.</param>
+        /// <param name="moduleDataService">The module data service used for loading data from the module.</param>
+        /// <param name="resourceService">The resource service used for loading content files from resource packs.</param>
         public Area(IComponentFactory factory,
             IModuleDataService moduleDataService,
             IModuleResourceService resourceService)
@@ -24,6 +31,7 @@ namespace Ceriyo.Core.Entities
             _resourceService = resourceService;
         }
 
+        /// <inheritdoc />
         public void BuildEntity(Entity entity, AreaData data) 
         {
             if(data == null)

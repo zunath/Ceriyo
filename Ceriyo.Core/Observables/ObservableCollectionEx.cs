@@ -10,6 +10,10 @@ using System.Windows.Threading;
 
 namespace Ceriyo.Core.Observables
 {
+    /// <summary>
+    /// An extended observable collection which will fire property changed events when children properties are changed.
+    /// </summary>
+    /// <typeparam name="T">The type of observable collection this is.</typeparam>
     public class ObservableCollectionEx<T>
         : IList<T>
         , INotifyCollectionChanged
@@ -50,7 +54,7 @@ namespace Ceriyo.Core.Observables
 
         public Func<T, bool> Filter
         {
-            get { return _filter; }
+            get => _filter;
             set
             {
                 //ignore if values are equal

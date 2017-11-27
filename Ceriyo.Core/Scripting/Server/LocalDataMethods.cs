@@ -5,9 +5,11 @@ using Ceriyo.Core.Scripting.Server.Contracts;
 
 namespace Ceriyo.Core.Scripting.Server
 {
+    /// <inheritdoc />
     [ScriptNamespace("LocalData")]
     public class LocalDataMethods: ILocalDataMethods
     {
+        /// <inheritdoc />
         public void SetLocalValue(Entity entity, string key, string value)
         {
             if (!entity.HasComponent<LocalData>()) return;
@@ -15,6 +17,7 @@ namespace Ceriyo.Core.Scripting.Server
             data.LocalStrings[key] = value;
         }
 
+        /// <inheritdoc />
         public void SetLocalValue(Entity entity, string key, double value)
         {
             if (!entity.HasComponent<LocalData>()) return;
@@ -22,6 +25,7 @@ namespace Ceriyo.Core.Scripting.Server
             data.LocalDoubles[key] = value;
         }
 
+        /// <inheritdoc />
         public string GetLocalString(Entity entity, string key)
         {
             if (!entity.HasComponent<LocalData>()) return string.Empty;
@@ -29,6 +33,7 @@ namespace Ceriyo.Core.Scripting.Server
             return data.LocalStrings.ContainsKey(key) ? data.LocalStrings[key] : string.Empty;
         }
 
+        /// <inheritdoc />
         public double GetLocalNumber(Entity entity, string key)
         {
             if (!entity.HasComponent<LocalData>()) return 0.0;
@@ -36,6 +41,7 @@ namespace Ceriyo.Core.Scripting.Server
             return data.LocalDoubles.ContainsKey(key) ? data.LocalDoubles[key] : 0.0;
         }
 
+        /// <inheritdoc />
         public void DeleteLocalString(Entity entity, string key)
         {
             if (!entity.HasComponent<LocalData>()) return;
@@ -43,6 +49,8 @@ namespace Ceriyo.Core.Scripting.Server
             if (data.LocalStrings.ContainsKey(key))
                 data.LocalStrings.Remove(key);
         }
+
+        /// <inheritdoc />
         public void DeleteLocalNumber(Entity entity, string key)
         {
             if (!entity.HasComponent<LocalData>()) return;

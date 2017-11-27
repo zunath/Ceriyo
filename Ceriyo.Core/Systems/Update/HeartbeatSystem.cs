@@ -9,6 +9,9 @@ using Ceriyo.Core.Extensions;
 
 namespace Ceriyo.Core.Systems.Update
 {
+    /// <summary>
+    /// Handles executing heartbeat scripts every time their intervals have passed.
+    /// </summary>
     [ArtemisEntitySystem(
         ExecutionType = ExecutionType.Synchronous,
         GameLoopType = GameLoopType.Update)]
@@ -17,6 +20,7 @@ namespace Ceriyo.Core.Systems.Update
         private readonly EntityWorld _world;
         private readonly IScriptService _scriptService;
 
+        /// <inheritdoc />
         public HeartbeatSystem(EntityWorld world,
             IScriptService scriptService)
             : base(Aspect.All(typeof(Heartbeat),
@@ -26,6 +30,7 @@ namespace Ceriyo.Core.Systems.Update
             _scriptService = scriptService;
         }
 
+        /// <inheritdoc />
         public override void Process(Entity entity)
         {
             ScriptGroup scripts = entity.GetComponent<ScriptGroup>();

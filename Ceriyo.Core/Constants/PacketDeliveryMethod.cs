@@ -1,5 +1,8 @@
 ﻿namespace Ceriyo.Core.Constants
 {
+    /// <summary>
+    /// Packet delivery methods for the networking components.
+    /// </summary>
     public enum PacketDeliveryMethod
     {
         /// <summary>

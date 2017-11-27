@@ -3,8 +3,10 @@ using Ceriyo.Core.Services.Contracts;
 
 namespace Ceriyo.Core.Services
 {
+    /// <inheritdoc />
     public class AppService: IAppService
     {
+        /// <inheritdoc />
         public void CreateAppDirectoryStructure()
         {
             CreateDirectoryIfNotExists("Modules");

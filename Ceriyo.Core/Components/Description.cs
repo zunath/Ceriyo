@@ -2,6 +2,9 @@
 
 namespace Ceriyo.Core.Components
 {
+    /// <summary>
+    /// Tracks the description on an entity
+    /// </summary>
     public class Description: IComponent
     {
         /// <summary>
@@ -9,6 +12,9 @@ namespace Ceriyo.Core.Components
         /// </summary>
         public string Value { get; set; }
 
+        /// <summary>
+        /// Constructs a description component
+        /// </summary>
         public Description()
         {
             Value = string.Empty;

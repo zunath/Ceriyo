@@ -7,11 +7,13 @@ using Ceriyo.Core.Services.Contracts;
 
 namespace Ceriyo.Core.Services.Module
 {
+    /// <inheritdoc />
     public class ModuleDataService: IModuleDataService
     {
         private readonly IDataService _dataService;
         private readonly string _moduleDirectory;
 
+        /// <inheritdoc />
         public ModuleDataService(
             IPathService pathService,
             IDataService dataService,
@@ -34,6 +36,7 @@ namespace Ceriyo.Core.Services.Module
             return type.Name;
         }
 
+        /// <inheritdoc />
         public T Load<T>(string globalID) 
             where T : class, IDataDomainObject
         {
@@ -43,6 +46,7 @@ namespace Ceriyo.Core.Services.Module
             return _dataService.Load<T>(path);
         }
 
+        /// <inheritdoc />
         public IEnumerable<T> LoadAll<T>()
             where T: class, IDataDomainObject
         {

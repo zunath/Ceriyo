@@ -2,6 +2,9 @@
 
 namespace Ceriyo.Core.Components
 {
+    /// <summary>
+    /// Tracks whether a heartbeat is ready to fire.
+    /// </summary>
     public class Heartbeat: IComponent
     {
         /// <summary>
@@ -13,6 +16,9 @@ namespace Ceriyo.Core.Components
         /// </summary>
         public float CurrentTimer { get; set; }
 
+        /// <summary>
+        /// Constructs a heartbeat component.
+        /// </summary>
         public Heartbeat()
         {
             Interval = 6.0f;

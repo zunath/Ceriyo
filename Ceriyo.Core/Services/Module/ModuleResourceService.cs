@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Core.Services.Module
 {
+    /// <inheritdoc />
     public class ModuleResourceService: IModuleResourceService
     {
         private readonly IModuleService _moduleDomainService;
@@ -17,6 +18,7 @@ namespace Ceriyo.Core.Services.Module
         private readonly IPathService _pathService;
         private readonly GraphicsDevice _graphicsDevice;
 
+        /// <inheritdoc />
         public ModuleResourceService(IModuleService moduleDomainService,
             IDataService dataService,
             IPathService pathService,
@@ -39,6 +41,7 @@ namespace Ceriyo.Core.Services.Module
             return Enum.GetName(typeof(ResourceType), resourceType);
         }
 
+        /// <inheritdoc />
         public IEnumerable<string> GetResourceNamesByType(ResourceType resourceType)
         {
             HashSet<string> resources = new HashSet<string>();
@@ -65,6 +68,7 @@ namespace Ceriyo.Core.Services.Module
             return resources;
         }
 
+        /// <inheritdoc />
         public ResourceItemData GetResourceByName(ResourceType resourceType, string resourceName)
         {
             string fullResourceName = GetResourceTypePrefix(resourceType) + resourceName;
@@ -82,6 +86,7 @@ namespace Ceriyo.Core.Services.Module
             return null;
         }
 
+        /// <inheritdoc />
         public Texture2D LoadTexture2D(ResourceType resourceType, string resourceName)
         {
             ResourceType[] validTypes = { ResourceType.Creature, ResourceType.Icon, ResourceType.Item, ResourceType.Portrait, ResourceType.Tileset };

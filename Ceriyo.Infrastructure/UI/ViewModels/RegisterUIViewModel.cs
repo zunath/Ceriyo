@@ -8,11 +8,9 @@ using EmptyKeys.UserInterface.Input;
 using EmptyKeys.UserInterface.Mvvm;
 using System;
 using System.Linq;
-using Ceriyo.Infrastructure.UI.Generated;
 using Ceriyo.Infrastructure.UI.ViewModels.Validation;
 using EmptyKeys.UserInterface;
 using EmptyKeys.UserInterface.Media;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Ceriyo.Infrastructure.UI.ViewModels
@@ -37,6 +35,11 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             _validator = new RegisterUIViewModelValidator();
 
             IsEnabled = true;
+
+            Username = string.Empty;
+            Password = string.Empty;
+            ConfirmPassword = string.Empty;
+            Email = string.Empty;
         }
 
         private string _username;

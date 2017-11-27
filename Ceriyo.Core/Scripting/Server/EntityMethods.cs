@@ -7,16 +7,19 @@ using Ceriyo.Core.Services.Contracts;
 
 namespace Ceriyo.Core.Scripting.Server
 {
+    /// <inheritdoc />
     [ScriptNamespace("Entity")]
     public class EntityMethods : IEntityMethods
     {
         private readonly IEngineService _engineService;
 
+        /// <inheritdoc />
         public EntityMethods(IEngineService engineService)
         {
             _engineService = engineService;
         }
 
+        /// <inheritdoc />
         public string GetName(Entity entity)
         {
             try
@@ -29,6 +32,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
+        /// <inheritdoc />
         public void SetName(Entity entity, string value)
         {
             try
@@ -50,6 +54,7 @@ namespace Ceriyo.Core.Scripting.Server
         }
 
 
+        /// <inheritdoc />
         public string GetTag(Entity entity)
         {
             try
@@ -62,6 +67,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
+        /// <inheritdoc />
         public void SetTag(Entity entity, string value)
         {
             try
@@ -82,6 +88,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
+        /// <inheritdoc />
         public string GetResref(Entity entity)
         {
             try

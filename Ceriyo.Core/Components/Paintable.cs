@@ -2,6 +2,9 @@
 
 namespace Ceriyo.Core.Components
 {
+    /// <summary>
+    /// Tracks a paintable entity's area height and width.
+    /// </summary>
     public class Paintable: IComponent
     {
         /// <summary>

@@ -7,6 +7,7 @@ using Ceriyo.Core.Services.Contracts;
 
 namespace Ceriyo.Core.Services.Module
 {
+    /// <inheritdoc />
     public class ModuleService : IModuleService
     {
         private ModuleData _moduleData;
@@ -16,6 +17,7 @@ namespace Ceriyo.Core.Services.Module
         private readonly bool _isRunningAsServer;
         private readonly string _modulesDirectory;
 
+        /// <inheritdoc />
         public ModuleService(IDataService dataService,
             IObjectMapper objectMapper,
             IPathService pathService,
@@ -31,6 +33,7 @@ namespace Ceriyo.Core.Services.Module
                 _pathService.ModulesToolsetTempDirectory;
         }
 
+        /// <inheritdoc />
         public void CreateModule(string name,
             string tag,
             string resref)
@@ -77,11 +80,13 @@ namespace Ceriyo.Core.Services.Module
             _moduleData = _dataService.Load<ModuleData>($"{_modulesDirectory}Module.dat");
         }
 
+        /// <inheritdoc />
         public void SaveModuleProperties()
         {
             _dataService.Save(_moduleData, $"{_modulesDirectory}Module.dat");
         }
 
+        /// <inheritdoc />
         public void CloseModule()
         {
             if (Directory.Exists(_modulesDirectory))
@@ -92,6 +97,7 @@ namespace Ceriyo.Core.Services.Module
             _moduleData = new ModuleData();
         }
 
+        /// <inheritdoc />
         public void OpenModule(string fileName)
         {
             CloseModule();
@@ -101,6 +107,7 @@ namespace Ceriyo.Core.Services.Module
             LoadModuleProperties();
         }
 
+        /// <inheritdoc />
         public void PackModule(string fileName)
         {
             if(_isRunningAsServer)
@@ -109,6 +116,7 @@ namespace Ceriyo.Core.Services.Module
             _dataService.PackageDirectory(_modulesDirectory, $"{_pathService.ModuleDirectory}{fileName}.mod");
         }
 
+        /// <inheritdoc />
         public void ReplaceResourcePacks(IEnumerable<string> resourcePacks)
         {
             if(_isRunningAsServer)
@@ -125,12 +133,14 @@ namespace Ceriyo.Core.Services.Module
             BuildModule();
         }
 
+        /// <inheritdoc />
         public void UpdateLoadedModuleData(ModuleData moduleData)
         {
             _moduleData.LevelChart.Clear();
             _objectMapper.Map(moduleData, _moduleData);
         }
 
+        /// <inheritdoc />
         public ModuleData GetLoadedModuleData()
         {
             return _objectMapper.Map<ModuleData>(_moduleData);

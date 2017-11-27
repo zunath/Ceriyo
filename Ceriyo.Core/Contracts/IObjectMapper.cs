@@ -1,5 +1,8 @@
 ﻿namespace Ceriyo.Core.Contracts
 {
+    /// <summary>
+    /// Handles the mapping of objects from one type to another.
+    /// </summary>
     public interface IObjectMapper
     {
         /// <summary>

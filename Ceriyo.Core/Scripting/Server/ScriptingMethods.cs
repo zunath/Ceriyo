@@ -7,10 +7,12 @@ using Ceriyo.Core.Scripting.Server.Contracts;
 
 namespace Ceriyo.Core.Scripting.Server
 {
+    /// <inheritdoc />
     [ScriptNamespace("Scripting")]
     public class ScriptingMethods: IScriptingMethods
     {
 
+        /// <inheritdoc />
         public string GetScriptName(Entity entity, ScriptEvent @event)
         {
             try

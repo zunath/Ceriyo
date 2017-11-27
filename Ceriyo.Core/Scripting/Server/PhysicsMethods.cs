@@ -7,10 +7,12 @@ using Ceriyo.Core.Scripting.Server.Contracts;
 
 namespace Ceriyo.Core.Scripting.Server
 {
+    /// <inheritdoc />
     [ScriptNamespace("Physics")]
     public class PhysicsMethods: IPhysicsMethods
     {
 
+        /// <inheritdoc />
         public float GetVelocityX(Entity entity)
         {
             try
@@ -23,6 +25,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
+        /// <inheritdoc />
         public float GetVelocityY(Entity entity)
         {
             try
@@ -35,6 +38,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
+        /// <inheritdoc />
         public void SetVelocityX(Entity entity, float x)
         {
             if (entity.HasComponent<Velocity>())
@@ -43,6 +47,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
+        /// <inheritdoc />
         public void SetVelocityY(Entity entity, float y)
         {
             if (entity.HasComponent<Velocity>())
@@ -51,6 +56,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
+        /// <inheritdoc />
         public float GetPositionX(Entity entity)
         {
             try
@@ -63,6 +69,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
+        /// <inheritdoc />
         public float GetPositionY(Entity entity)
         {
             try
@@ -75,6 +82,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
+        /// <inheritdoc />
         public Direction GetFacing(Entity entity)
         {
             try
@@ -87,6 +95,7 @@ namespace Ceriyo.Core.Scripting.Server
             }
         }
 
+        /// <inheritdoc />
         public void SetFacing(Entity entity, Direction facing)
         {
             if (entity.HasComponent<Position>())

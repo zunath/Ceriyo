@@ -2,6 +2,9 @@
 
 namespace Ceriyo.Core.Components
 {
+    /// <summary>
+    /// Tracks the name of an entity.
+    /// </summary>
     public class Nameable: IComponent
     {
         /// <summary>

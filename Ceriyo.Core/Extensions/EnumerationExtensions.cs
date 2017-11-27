@@ -2,6 +2,9 @@
 
 namespace Ceriyo.Core.Extensions
 {
+    /// <summary>
+    /// Extensions for Enum objects.
+    /// </summary>
     public static class EnumerationExtensions
     {
         /// <summary>
@@ -10,7 +13,7 @@ namespace Ceriyo.Core.Extensions
         /// <typeparam name="T">The type of the attribute you want to retrieve</typeparam>
         /// <param name="enumVal">The enum value</param>
         /// <returns>The attribute of type T that exists on the enum value</returns>
-        /// <example>string desc = myEnumVariable.GetAttributeOfType<DescriptionAttribute>().Description;</example>
+        /// <example>string desc = myEnumVariable.GetAttributeOfType<DescriptionAttribute/>().Description;</example>
         public static T GetAttributeOfType<T>(this Enum enumVal) 
             where T : Attribute
         {

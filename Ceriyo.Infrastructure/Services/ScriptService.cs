@@ -155,7 +155,7 @@ namespace Ceriyo.Infrastructure.Services
 
         private void RegisterClientEnumerations()
         {
-            RegisterEnumeration("Cursor", typeof(CursorType));
+
         }
 
 

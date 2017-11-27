@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Ceriyo.Core.Systems.Draw
 {
+    /// <summary>
+    /// Handles the rendering of Renderable objects.
+    /// </summary>
     [ArtemisEntitySystem(
         ExecutionType = ExecutionType.Synchronous,
         GameLoopType = GameLoopType.Draw,
@@ -16,6 +19,7 @@ namespace Ceriyo.Core.Systems.Draw
     {
         private readonly SpriteBatch _spriteBatch;
 
+        /// <inheritdoc />
         public RenderSystem(SpriteBatch spriteBatch) 
             : base(Aspect.All(typeof(Renderable),
                 typeof(Position)))
@@ -23,6 +27,7 @@ namespace Ceriyo.Core.Systems.Draw
             _spriteBatch = spriteBatch;
         }
 
+        /// <inheritdoc />
         public override void Process(Entity entity)
         {
             Renderable renderable = entity.GetComponent<Renderable>();

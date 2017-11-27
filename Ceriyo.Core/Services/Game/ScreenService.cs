@@ -4,12 +4,14 @@ using Ceriyo.Core.Services.Contracts;
 
 namespace Ceriyo.Core.Services.Game
 {
+    /// <inheritdoc />
     public class ScreenService: IScreenService
     {
         private IScreen _screen;
         private readonly IScreenFactory _screenFactory;
         private readonly EntityWorld _world;
 
+        /// <inheritdoc />
         public ScreenService(EntityWorld world,
             IScreenFactory screenFactory)
         {
@@ -17,6 +19,7 @@ namespace Ceriyo.Core.Services.Game
             _screenFactory = screenFactory;
         }
 
+        /// <inheritdoc />
         public void ChangeScreen<T>()
             where T : IScreen
         {
@@ -29,11 +32,13 @@ namespace Ceriyo.Core.Services.Game
             _screen.Initialize();
         }
 
+        /// <inheritdoc />
         public void Update()
         {
             _screen.Update();
         }
 
+        /// <inheritdoc />
         public void Draw()
         {
             _screen.Draw();

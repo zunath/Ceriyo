@@ -10,6 +10,10 @@ using MonoGame.Extended;
 
 namespace Ceriyo.Core.Systems.Update
 {
+    /// <summary>
+    /// Handles processing of the toolset painter system.
+    /// This includes selecting tiles, selecting objects, etc.
+    /// </summary>
     [ArtemisEntitySystem(
         ExecutionType = ExecutionType.Synchronous,
         GameLoopType = GameLoopType.Update,
@@ -20,7 +24,8 @@ namespace Ceriyo.Core.Systems.Update
         private readonly IInputService _inputService;
         private readonly IEngineService _engineService;
         private readonly IIsoMathService _isoMathService;
-        
+
+        /// <inheritdoc />
         public PainterSystem(IInputService inputService,
             IEngineService engineService,
             Camera2D camera,
@@ -33,7 +38,8 @@ namespace Ceriyo.Core.Systems.Update
             _engineService = engineService;
             _isoMathService = isoMathService;
         }
-        
+
+        /// <inheritdoc />
         public override void Process(Entity entity)
         {
             Vector2 mousePosition = _inputService.GetMousePosition();

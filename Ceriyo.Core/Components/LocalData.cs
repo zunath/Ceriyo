@@ -3,6 +3,9 @@ using Artemis.Interface;
 
 namespace Ceriyo.Core.Components
 {
+    /// <summary>
+    /// Tracks local data stored on entities via scripting.
+    /// </summary>
     public class LocalData: IComponent
     {
         /// <summary>
@@ -14,6 +17,9 @@ namespace Ceriyo.Core.Components
         /// </summary>
         public Dictionary<string, double> LocalDoubles { get; set; }
 
+        /// <summary>
+        /// Constructs a LocalData component
+        /// </summary>
         public LocalData()
         {
             LocalStrings = new Dictionary<string, string>();
