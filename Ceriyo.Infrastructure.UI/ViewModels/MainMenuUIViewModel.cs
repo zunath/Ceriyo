@@ -12,31 +12,30 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
         private readonly Game _game;
         private readonly IUIService _uiService;
         private readonly IUIViewModelFactory _vmFactory;
-
-        public string JoinServerText { get; set; }
-
-        public string DirectConnectText { get; set; }
-
-        public string SettingsText { get; set; }
-
-        public string ExitApplicationText { get; set; }
-
-        public MainMenuUIViewModel(Game game, IUIService uiService, IUIViewModelFactory vmFactory)
+        
+        public MainMenuUIViewModel(Game game, 
+            IUIService uiService, 
+            IUIViewModelFactory vmFactory,
+            IUserProfile userProfile)
         {
             _game = game;
             _uiService = uiService;
             _vmFactory = vmFactory;
-
-            JoinServerText = "Join Server";
-            DirectConnectText = "Direct Connect";
-            SettingsText = "Settings";
-            ExitApplicationText = "Exit";
-
+            
             JoinServerCommand = new RelayCommand(JoinServer);
             DirectConnectCommand = new RelayCommand(DirectConnect);
-            SettingsCommand = new RelayCommand(Settings);
+            GameSettingsCommand = new RelayCommand(GameSettings);
             ExitButtonCommand = new RelayCommand(ExitApplication);
 
+            WelcomeText = "Welcome to Ceriyo, " + userProfile.Username + "!";
+        }
+
+        private string _welcomeText;
+
+        public string WelcomeText
+        {
+            get => _welcomeText;
+            set => SetProperty(ref _welcomeText, value);
         }
 
         public ICommand JoinServerCommand { get; set; }
@@ -55,9 +54,9 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
             _uiService.ChangeUIRoot<DirectConnectView>(vm);
         }
 
-        public ICommand SettingsCommand { get; set; }
+        public ICommand GameSettingsCommand { get; set; }
 
-        private void Settings(object obj)
+        private void GameSettings(object obj)
         {
             SettingsUIViewModel vm = _vmFactory.Create<SettingsUIViewModel>();
             _uiService.ChangeUIRoot<SettingsView>(vm);

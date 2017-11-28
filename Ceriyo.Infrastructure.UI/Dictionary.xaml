@@ -8,5 +8,4 @@
         <TextBlock Margin="5" Text="{Binding Name}" />
     </DataTemplate>
 
-    
 </ResourceDictionary>

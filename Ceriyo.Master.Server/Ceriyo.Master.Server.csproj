@@ -292,6 +292,7 @@
     <Compile Include="Models\Authentication\BindingModels\RegisterBindingModel.cs" />
     <Compile Include="Models\Authentication\BindingModels\RegisterExternalBindingModel.cs" />
     <Compile Include="Models\Authentication\BindingModels\RemoveLoginBindingModel.cs" />
+    <Compile Include="Models\Authentication\BindingModels\ResendVerificationBindingModel.cs" />
     <Compile Include="Models\Authentication\BindingModels\SetPasswordBindingModel.cs" />
     <Compile Include="Models\Authentication\ViewModels\ExternalLoginViewModel.cs" />
     <Compile Include="Models\Authentication\ViewModels\ManageInfoViewModel.cs" />

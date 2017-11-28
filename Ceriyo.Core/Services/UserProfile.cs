@@ -6,6 +6,9 @@ namespace Ceriyo.Core.Services
     public class UserProfile: IUserProfile
     {
         /// <inheritdoc />>
+        public string Username { get; set; }
+
+        /// <inheritdoc />>
         public string MasterServerToken { get; set; }
     }
 }

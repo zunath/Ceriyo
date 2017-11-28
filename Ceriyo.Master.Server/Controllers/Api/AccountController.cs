@@ -19,18 +19,15 @@ namespace Ceriyo.Master.Server.Controllers.Api
     public class AccountController : ApiController
     {
         private ApplicationUserManager _userManager;
-        private ApplicationSignInManager _signInManager;
 
         public AccountController()
         {
         }
 
         public AccountController(ApplicationUserManager userManager,
-            ApplicationSignInManager signInManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
-            _signInManager = signInManager;
             AccessTokenFormat = accessTokenFormat;
         }
 
@@ -63,20 +60,33 @@ namespace Ceriyo.Master.Server.Controllers.Api
 
             if (result.Succeeded)
             {
-                var token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                var encodedToken = HttpUtility.UrlEncode(token);
-
-                string callbackUrl = $@"{Url.Content("~/")}api/Account/ConfirmEmail?userId={user.Id}&token={encodedToken}";
-
-                await UserManager.SendEmailAsync(
-                    user.Id,
-                    "Please confirm your account",
-                    "Please confirm your Ceriyo Game Engine account by clicking this " +
-                    "<a href=\" " + callbackUrl + " \">link</a>");
+                await SendEmailConfirmationTokenAsync(user.Id);
             }
 
             return !result.Succeeded ? GetErrorResult(result) : Ok();
         }
+
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("ResendVerification")]
+        public async Task<IHttpActionResult> ResendVerification(ResendVerificationBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await UserManager.FindByEmailAsync(model.Email);
+
+            if (user == null || user.UserName != model.Username || user.EmailConfirmed)
+            {
+                return BadRequest("Could not find user.");
+            }
+            
+            await SendEmailConfirmationTokenAsync(user.Id);
+
+            return Ok();
+        }
+
         [System.Web.Http.AllowAnonymous]
         [System.Web.Http.Route("ConfirmEmail")]
         [System.Web.Http.HttpGet]
@@ -139,6 +149,22 @@ namespace Ceriyo.Master.Server.Controllers.Api
 
             base.Dispose(disposing);
         }
+
+
+        private async Task SendEmailConfirmationTokenAsync(string userID)
+        {
+            var token = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            var encodedToken = HttpUtility.UrlEncode(token);
+
+            string callbackUrl = $@"{Url.Content("~/")}api/Account/ConfirmEmail?userId={userID}&token={encodedToken}";
+
+            await UserManager.SendEmailAsync(
+                userID,
+                "Please confirm your account",
+                "Please confirm your Ceriyo Game Engine account by clicking this " +
+                "<a href=\" " + callbackUrl + " \">link</a>");
+        }
+
 
         #region Helpers
 

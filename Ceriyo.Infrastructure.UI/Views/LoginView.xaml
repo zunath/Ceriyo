@@ -65,7 +65,8 @@
             <TextBlock
                 Grid.Column="0"
                 Grid.Row="2"
-                Text="Password">
+                Text="Password"
+                Margin="4,4,4,4">
             </TextBlock>
 
 

@@ -5,6 +5,7 @@ using Ceriyo.Core.Constants;
 using Ceriyo.Core.Contracts;
 using Ceriyo.Infrastructure.UI.Contracts;
 using Ceriyo.Infrastructure.UI.ViewModels.Validation;
+using Ceriyo.Infrastructure.UI.Views;
 using EmptyKeys.UserInterface;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;
@@ -108,6 +109,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
                 if (response.IsSuccessStatusCode)
                 {
+                    _userProfile.Username = Username;
                     _userProfile.MasterServerToken = json["access_token"].Value<string>();
                     var model = _vmFactory.Create<MainMenuUIViewModel>();
                     _uiService.ChangeUIRoot<MainMenuView>(model);
@@ -139,7 +141,8 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
         private void AccountHelp(object obj)
         {
-            
+            AccountHelpUIViewModel vm = _vmFactory.Create<AccountHelpUIViewModel>();
+            _uiService.ChangeUIRoot<AccountHelpView>(vm);
         }
 
         public ICommand ExitCommand { get; set; }

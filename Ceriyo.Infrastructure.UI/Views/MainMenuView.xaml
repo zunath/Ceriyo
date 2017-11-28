@@ -27,6 +27,10 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
@@ -42,22 +46,22 @@
                 </Image.Source>
             </Image>
 
-            <Button
-            Grid.Row="1"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
-            Margin="4,4,4,4"
-            Content="{Binding JoinServerText}"
-            Command="{Binding JoinServerCommand}">
-
-            </Button>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Text="{Binding WelcomeText}"
+                HorizontalAlignment="Center">
+                
+            </TextBlock>
+            
             <Button
             Grid.Row="2"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Margin="4,4,4,4"
-            Content="{Binding DirectConnectText}"
-            Command="{Binding DirectConnectCommand}">
+            Content="Join Server"
+            Command="{Binding JoinServerCommand}">
 
             </Button>
             <Button
@@ -65,8 +69,8 @@
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Margin="4,4,4,4"
-            Content="{Binding SettingsText}"
-            Command="{Binding SettingsCommand}">
+            Content="Direct Connect"
+            Command="{Binding DirectConnectCommand}">
 
             </Button>
             <Button
@@ -74,7 +78,38 @@
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Margin="4,4,4,4"
-            Content="{Binding ExitApplicationText}"
+            Content="Game Settings"
+            Command="{Binding GameSettingsCommand}">
+
+            </Button>
+
+
+            <Button
+                Grid.Row="5"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="4,4,4,4"
+                Content="Manage Account"
+                Command="{Binding ManageAccountButtonCommand}">
+
+            </Button>
+
+            <Button
+                Grid.Row="6"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="4,4,4,4"
+                Content="Log Out"
+                Command="{Binding LogOutButtonCommand}">
+
+            </Button>
+
+            <Button
+            Grid.Row="7"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Margin="4,4,4,4"
+            Content="Exit"
             Command="{Binding ExitButtonCommand}">
 
             </Button>

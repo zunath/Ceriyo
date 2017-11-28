@@ -144,6 +144,7 @@ namespace EmptyKeys.UserInterface.Generated {
             this.e_5 = new TextBlock();
             this.e_1.Children.Add(this.e_5);
             this.e_5.Name = "e_5";
+            this.e_5.Margin = new Thickness(4F, 4F, 4F, 4F);
             this.e_5.Text = "Password";
             Grid.SetColumn(this.e_5, 0);
             Grid.SetRow(this.e_5, 2);
