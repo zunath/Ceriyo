@@ -134,6 +134,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_4, 0);
             Grid.SetRow(this.e_4, 2);
             Grid.SetColumnSpan(this.e_4, 4);
+            Binding binding_e_4_IsEnabled = new Binding("IsEnabled");
+            this.e_4.SetBinding(ComboBox.IsEnabledProperty, binding_e_4_IsEnabled);
             Binding binding_e_4_ItemsSource = new Binding("HelpOptions");
             this.e_4.SetBinding(ComboBox.ItemsSourceProperty, binding_e_4_ItemsSource);
             Binding binding_e_4_SelectedIndex = new Binding("SelectedHelpOptionIndex");
@@ -190,6 +192,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_8, 1);
             Grid.SetRow(this.e_8, 0);
             Grid.SetColumnSpan(this.e_8, 3);
+            Binding binding_e_8_IsEnabled = new Binding("IsEnabled");
+            this.e_8.SetBinding(TextBox.IsEnabledProperty, binding_e_8_IsEnabled);
             Binding binding_e_8_Text = new Binding("Username");
             this.e_8.SetBinding(TextBox.TextProperty, binding_e_8_Text);
             // e_9 element
@@ -209,6 +213,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_10, 1);
             Grid.SetRow(this.e_10, 1);
             Grid.SetColumnSpan(this.e_10, 3);
+            Binding binding_e_10_IsEnabled = new Binding("IsEnabled");
+            this.e_10.SetBinding(TextBox.IsEnabledProperty, binding_e_10_IsEnabled);
             Binding binding_e_10_Text = new Binding("Email");
             this.e_10.SetBinding(TextBox.TextProperty, binding_e_10_Text);
             // e_11 element
@@ -220,6 +226,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_11, 0);
             Grid.SetRow(this.e_11, 2);
             Grid.SetColumnSpan(this.e_11, 2);
+            Binding binding_e_11_IsEnabled = new Binding("IsEnabled");
+            this.e_11.SetBinding(Button.IsEnabledProperty, binding_e_11_IsEnabled);
             Binding binding_e_11_Content = new Binding("ConfirmButtonText");
             this.e_11.SetBinding(Button.ContentProperty, binding_e_11_Content);
             Binding binding_e_11_Command = new Binding("ConfirmCommand");
@@ -234,6 +242,8 @@ namespace EmptyKeys.UserInterface.Generated {
             Grid.SetColumn(this.e_12, 2);
             Grid.SetRow(this.e_12, 2);
             Grid.SetColumnSpan(this.e_12, 2);
+            Binding binding_e_12_IsEnabled = new Binding("IsEnabled");
+            this.e_12.SetBinding(Button.IsEnabledProperty, binding_e_12_IsEnabled);
             Binding binding_e_12_Command = new Binding("BackCommand");
             this.e_12.SetBinding(Button.CommandProperty, binding_e_12_Command);
             ImageManager.Instance.AddImage("Images/CeriyoLogo");

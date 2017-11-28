@@ -56,7 +56,8 @@
                 Margin="4,4,4,4"
                 TabIndex="0"
                 ItemsSource="{Binding HelpOptions}"
-                SelectedIndex="{Binding SelectedHelpOptionIndex}">
+                SelectedIndex="{Binding SelectedHelpOptionIndex}"
+                IsEnabled="{Binding IsEnabled}">
 
             </ComboBox>
 
@@ -94,7 +95,8 @@
                         Grid.ColumnSpan="3"
                         Text="{Binding Username}"
                         Margin="4,4,4,4"
-                        TabIndex="1">
+                        TabIndex="1"
+                        IsEnabled="{Binding IsEnabled}">
                         
                     </TextBox>
                     
@@ -112,7 +114,8 @@
                         Grid.ColumnSpan="3"
                         Margin="4,4,4,4"
                         TabIndex="2"
-                        Text="{Binding Email}">
+                        Text="{Binding Email}"
+                        IsEnabled="{Binding IsEnabled}">
 
                     </TextBox>
 
@@ -124,7 +127,8 @@
                         TabIndex="3"
                         IsDefault="True"
                         Content="{Binding ConfirmButtonText}"
-                        Command="{Binding ConfirmCommand}">
+                        Command="{Binding ConfirmCommand}"
+                        IsEnabled="{Binding IsEnabled}">
 
                     </Button>
 
@@ -135,7 +139,8 @@
                         Margin="4,4,4,4"
                         TabIndex="4"
                         Content="Back"
-                        Command="{Binding BackCommand}">
+                        Command="{Binding BackCommand}"
+                        IsEnabled="{Binding IsEnabled}">
 
                     </Button>
                 </Grid>

@@ -11,7 +11,6 @@ using EmptyKeys.UserInterface.Controls;
 using EmptyKeys.UserInterface.Generated;
 using EmptyKeys.UserInterface.Input;
 using EmptyKeys.UserInterface.Mvvm;
-using Newtonsoft.Json.Linq;
 
 namespace Ceriyo.Infrastructure.UI.ViewModels
 {
@@ -39,6 +38,7 @@ namespace Ceriyo.Infrastructure.UI.ViewModels
 
             _validator = new AccountHelpUIViewModelValidator();
 
+            IsEnabled = true;
             BuildHelpOptions();
         }
 
