@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace Ceriyo.Master.Auth.Areas.HelpPage.ModelDescriptions
+namespace Ceriyo.Master.Server.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

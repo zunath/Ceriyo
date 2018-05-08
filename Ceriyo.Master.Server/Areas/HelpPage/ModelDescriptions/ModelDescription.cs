@@ -1,6 +1,6 @@
 using System;
 
-namespace Ceriyo.Master.Auth.Areas.HelpPage.ModelDescriptions
+namespace Ceriyo.Master.Server.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

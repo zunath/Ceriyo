@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Ceriyo.Master.Auth.Areas.HelpPage.ModelDescriptions
+namespace Ceriyo.Master.Server.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

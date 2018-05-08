@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace Ceriyo.Master.Auth.Areas.HelpPage
+namespace Ceriyo.Master.Server.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

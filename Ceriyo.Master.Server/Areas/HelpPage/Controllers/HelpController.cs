@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using Ceriyo.Master.Auth.Areas.HelpPage.ModelDescriptions;
-using Ceriyo.Master.Auth.Areas.HelpPage.Models;
+using Ceriyo.Master.Server.Areas.HelpPage.ModelDescriptions;
+using Ceriyo.Master.Server.Areas.HelpPage.Models;
 
-namespace Ceriyo.Master.Auth.Areas.HelpPage.Controllers
+namespace Ceriyo.Master.Server.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

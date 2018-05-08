@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using Ceriyo.Master.Auth.Areas.HelpPage.ModelDescriptions;
-using Ceriyo.Master.Auth.Areas.HelpPage.Models;
+using Ceriyo.Master.Server.Areas.HelpPage.ModelDescriptions;
+using Ceriyo.Master.Server.Areas.HelpPage.Models;
 
-namespace Ceriyo.Master.Auth.Areas.HelpPage
+namespace Ceriyo.Master.Server.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

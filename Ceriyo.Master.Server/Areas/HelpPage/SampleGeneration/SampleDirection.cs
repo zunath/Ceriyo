@@ -1,4 +1,4 @@
-namespace Ceriyo.Master.Auth.Areas.HelpPage
+namespace Ceriyo.Master.Server.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

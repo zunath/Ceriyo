@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using Ceriyo.Master.Auth.Areas.HelpPage.ModelDescriptions;
+using Ceriyo.Master.Server.Areas.HelpPage.ModelDescriptions;
 
-namespace Ceriyo.Master.Auth.Areas.HelpPage
+namespace Ceriyo.Master.Server.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

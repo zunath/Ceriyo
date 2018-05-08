@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Ceriyo.Master.Auth.Areas.HelpPage.ModelDescriptions
+namespace Ceriyo.Master.Server.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterDescription
     {

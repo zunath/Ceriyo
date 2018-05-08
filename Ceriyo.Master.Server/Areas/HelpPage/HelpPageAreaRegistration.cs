@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace Ceriyo.Master.Auth.Areas.HelpPage
+namespace Ceriyo.Master.Server.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using Ceriyo.Master.Auth.Areas.HelpPage.ModelDescriptions;
+using Ceriyo.Master.Server.Areas.HelpPage.ModelDescriptions;
 
-namespace Ceriyo.Master.Auth.Areas.HelpPage.Models
+namespace Ceriyo.Master.Server.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.
